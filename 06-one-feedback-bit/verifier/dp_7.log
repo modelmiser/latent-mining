@@ -1,0 +1,16 @@
+dp n=7 t=0 distinct_sets=128 F=16 memo=2823447
+exit 0
+dp n=7 t=6 distinct_sets=128 F=16 memo=2823447
+exit 0
+dp n=7 t=7 distinct_sets=128 F=16 memo=2823447
+exit 0
+terminate called after throwing an instance of 'St9bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+/bin/bash: line 1: 2938805 Aborted                 nice -n 15 timeout 240 ./ref dp 7 $t
+exit 134
+terminate called after throwing an instance of 'St9bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+/bin/bash: line 1: 2949130 Aborted                 nice -n 15 timeout 240 ./ref dp 7 $t
+exit 134

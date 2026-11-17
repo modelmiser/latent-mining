@@ -1,0 +1,62 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. P6: the tail bound is stated as "at most n^-2"; Hoeffding at that point gives (1+o(1)) n^-2 (about
+     1.65 n^-2 at n = 9). Only o(2^n/n) is needed, so the conclusion stands.
+ Found by the referee and the review panel.
+------------------------------------------------------------------------------------------------
+Notation: S(u,a,b) = u D(a) ∪ D(u) b  (the length-(n-1) outcomes), r(x) = number of runs.
+|D(x)| = r(x) for nonempty x (deleting inside one run gives the same word, different
+runs give different words); D(empty) = empty.
+
+L1 (reduction to set packing) — COMPLETE.
+ O(u,a,b) = {ua} ∪ S(u,a,b), and ua is the only outcome of length n. So two strategies
+ have intersecting outcome sets iff (i) they have the same (u,a), or (ii) their S meet.
+ If t <= n-1 then a is nonempty, uD(a) is a nonempty subset of S, so (i) implies (ii).
+ If t = n then a = b = empty, a strategy is just u, S = D(u), and (i) means "same strategy".
+ Hence for n >= 2: F(n,t) = max number of pairwise disjoint members of the family
+ {S(u,a,b)} of subsets of {0,1}^(n-1) (each distinct set usable once; all sets nonempty).
+ Dominance: if S ⊆ S' then S' may be discarded (replace it by S in any packing).
+
+P1  F(n,0) = F(n,n) = A(n) — COMPLETE.  t=0: S = D(a).  t=n: S = D(u).  Apply L1.
+
+P2  F(n,n-1) = A(n) for n >= 2 — COMPLETE.  a, b are single bits, D(a) = {empty}, so
+ S = {u} ∪ D(u)b = D(ub) (deleting the last symbol of ub gives u; deleting earlier gives
+ D(u)b).  S does not depend on a, and ub ranges over all words of length n.  By L1 the
+ answer is the max number of words w of length n with pairwise disjoint D(w), i.e. A(n).
+
+P3  F(n,t) >= A(n) — COMPLETE.  Take a single-deletion code C of length n, write c = ua,
+ use (u,a,a).  S(u,a,a) = uD(a) ∪ D(u)a = D(ua).  Disjoint by definition of C.
+
+P4  F(n,1) = 2 A(n-1) for n >= 2 — COMPLETE.  t=1: D(u) = {empty}, S = uD(a) ∪ {b}.
+ Upper bound: S ⊇ uD(a); strategies with pairwise disjoint S and first bit u give words a
+ (length n-1) with pairwise disjoint D(a), so at most A(n-1) for each u.  Lower bound:
+ choose b = u a' with a' in D(a) (D(a) nonempty since n-1 >= 1), then S = uD(a); sets with
+ different u are disjoint (different first symbol); take an optimal code for each u.
+
+P5  For 1 <= t <= n-1: min over b of |S(u,a,b)| = r(u) + r(a) - 1, attained exactly when
+ b = u_t a' for some a' in D(a) — COMPLETE.
+ |uD(a)| = r(a), |D(u)b| = r(u).  A common element w = u a' = u' b has w[1..t-1] = u' and
+ w[1..t] = u, so u' = u[1..t-1] (the unique element of D(u) arising from the last run)
+ and then b = u_t a'; a' is determined by b.  So the intersection has at most one element,
+ and exactly one iff b is in u_t D(a).  (Also checked by brute force, p5check.py.)
+
+P6  F(n,t) <= (1+o(1)) 2^n / n uniformly in t, hence F(n) ~ 2^n/n — COMPLETE given the
+ standard binomial tail bound (so: complete argument, classical ingredient not re-proved).
+ Strategies in a packing have distinct words w = ua, and |S| >= r(u)+r(a)-1 >= r(w)-1
+ for 1<=t<=n-1 (|S| = r(w) for t in {0,n}).  r(w)-1 is Binomial(n-1,1/2) over uniform w.
+ Let m = n/2 - sqrt(n ln n).  Words with r(w)-1 < m number at most 2^n * n^(-2) (Hoeffding)
+ = o(2^n/n); the others use >= m symbols each of the 2^(n-1) short words, so there are at
+ most 2^(n-1)/m = (1+o(1)) 2^n/n of them.  Lower bound: A(n) >= 2^n/(n+1) (VT codes; the
+ classical fact, not re-proved here) and P3.  So feedback at a fixed time changes only
+ lower-order terms.  This does NOT say t=1 is optimal.
+
+HEADLINE: "F(n) = 2A(n-1) for all n >= 3" is FALSE.  Least counterexample n = 6, t = 2:
+ * F(6,2) >= 13: wit_6_2.txt (13 strategies, checked by check.py from the definition).
+ * 2A(5) = 12: A(5) >= 6 by wit_5_0.txt, A(5) <= 6 by cert_5_0.txt (LP dual weights,
+   checked by checkcert.py).  COMPLETE as a certificate-checked proof.
+ * n = 3,4,5 are not counterexamples: F(n,t) <= 2A(n-1) for every t, by cert_n_t.txt
+   (weights w on short words with weight >= 1 on every S; total < value+1) and A(2)=2,
+   A(3)=2, A(4)=4 (wit_m_0.txt / cert_m_0.txt; A(2)=2 trivial: D(00)={0}, D(11)={1},
+   and only 2 short words exist).  COMPLETE (certificate-checked).
+
+NOT PROVED (conjecture / observation only): F(n) > 2A(n-1) for every n >= 6 (computed
+ for n = 6,7,8, lower-bound witnesses for n = 9); no formula for F(n,t), 2 <= t <= n-2.

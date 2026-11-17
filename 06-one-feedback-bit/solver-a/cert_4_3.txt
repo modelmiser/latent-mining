@@ -1,0 +1,5 @@
+# n=4 t=3: weights on words of length 3; total=4 ; proves F<=4
+000 1/1
+001 1/1
+110 1/1
+111 1/1

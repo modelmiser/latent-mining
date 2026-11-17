@@ -1,0 +1,5 @@
+n=8 t=0 status=0 F=30 dualbound=-29.999999999999932 nsets=230
+n=8 t=1 status=0 F=32 dualbound=-32.0 nsets=212
+n=8 t=7 status=0 F=30 dualbound=-29.999999999999932 nsets=230
+n=8 t=6 status=0 F=34 dualbound=-34.00000000000022 nsets=328
+n=8 t=5 status=0 F=35 dualbound=-34.999999999999986 nsets=384

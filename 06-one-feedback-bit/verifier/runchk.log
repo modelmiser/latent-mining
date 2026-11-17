@@ -1,0 +1,12 @@
+checked 122 witness files; problems: 0
+broken: b changed in one strategy -> FAIL: outcome '00101' shared by ('00', '1100', '0101') and ('01', '0000', '0101')
+broken: a changed -> FAIL: outcome '11110' shared by ('11', '1100', '1100') and ('11', '1110', '1111')
+broken: 14th strategy added -> FAIL: outcome '11111' shared by ('11', '1111', '1111') and ('10', '1111', '1111')
+broken: duplicate strategy -> FAIL: outcome '00111' shared by ('00', '1111', '0111') and ('00', '1111', '0111')
+broken: wrong split lengths -> FAIL: wrong lengths in ('000', '000', '000')
+broken: only 12 (need 13) -> FAIL: only 12 strategies, need 13
+broken: b reversed 0101 -> FAIL: outcome '10101' shared by ('01', '0000', '0101') and ('01', '1100', '0101')
+solver-a/bad_wit_6_2.txt FAIL: outcome '000000' shared by ('00', '0000', '0000') and ('00', '0000', '0000')
+solver-a/bad2_wit_6_2.txt FAIL: only 8 strategies, need 13
+solver-b/BAD_wit_n6_t2.txt FAIL: outcome '10011' shared by ('01', '1111', '0011') and ('10', '1100', '0011')
+same witness set in a and b: True

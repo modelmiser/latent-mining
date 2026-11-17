@@ -1,0 +1,45 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. P6 corollary F(n,t) <= 2^t A(n-t): at t = n it uses A(0) = 1, and the stated range reaches F(1,.), both
+     outside n >= 2. Read it with those conventions, or for t <= n-1.
+ N2. P7 proves that the minimum r(u)+r(a)-1 is attained at b = u_t a'. It does not prove "only there";
+     solver-a/proofs.txt P5 does.
+ Found by the referee and the review panel.
+------------------------------------------------------------------------------------------------
+Notation: S(u,a,b) = uD(a) ∪ D(u)b  (the length-(n-1) outcomes), so O = {ua} ∪ S.  r(s) = number of runs.
+
+P1 (COMPLETE) Reduction.  For n >= 1, two distinct strategies have disjoint O iff their S are disjoint.
+  O-disjoint => S-disjoint trivially.  Conversely length-n outcomes can only collide if ua = u'a',
+  i.e. (u,a) = (u',a').  If t = n then a = b = empty and the strategies are equal.  If t < n then
+  uD(a) is a nonempty common part of both S.  So S-disjoint + distinct => O-disjoint.
+
+P2 (COMPLETE) F(n,0) = F(n,n) = A(n).  t=0: S = D(a), b irrelevant (D(empty) = {}).  t=n: S = D(u).
+
+P3 (COMPLETE) F(n,t) >= A(n) for all t.  b = a gives S = uD(a) ∪ D(u)a = D(ua); use a code C, c = ua.
+
+P4 (COMPLETE) F(n,1) = 2A(n-1), n >= 2.  t=1: D(u) = {empty}, S = uD(a) ∪ {b}.
+  <=: strategies with the same u have disjoint D(a), at most A(n-1) for each of the two u.
+  >=: for each u and each a in an optimal code of length n-1 pick b = u a', a' in D(a); S = uD(a).
+
+P5 (COMPLETE) F(n,n-1) = A(n), n >= 2.  a is one bit, D(a) = {empty}, S = {u} ∪ D(u)b = D(ub).
+  Two strategies with the same ub differ only in a and both contain u; so the strings ub are
+  distinct with disjoint D-balls: <= A(n).  >= is P3.
+
+P6 (COMPLETE) F(n,t) <= 2 F(n-1,t-1) for 1 <= t <= n, n >= 2; hence F(n,t) <= 2^t A(n-t).
+  t=1 is P4 with P2.  t >= 2: write u = c u'.  Since cD(u') ⊂ D(u),  c·S(u',a,b) ⊂ S(u,a,b).
+  The strategies with first bit c, stripped of it, are distinct (n-1,t-1)-strategies with disjoint S.
+  (Gives F(5,2) <= 2F(4,1) = 8.  For (6,2) it gives only 16, and the true value is 13.)
+
+P7 (COMPLETE) For 1 <= t <= n-1: min over b of |S(u,a,b)| = r(u)+r(a)-1, attained by b = u_t a', a' in D(a).
+  |uD(a)| = r(a), |D(u)b| = r(u).  An element of D(u)b lying in uD(a) has the form u'b with
+  u' = u_1..u_{t-1} (first t-1 symbols must equal those of u), a single element; so overlap <= 1.
+  With b = u_t a' the element u_1..u_{t-1} u_t a' = u a' is common.   (Also brute-forced n <= 8: misc.py)
+
+P8 (COMPLETE, given the computed witness) HEADLINE is NO.  wit_min_n6_t2.txt is 13 strategies for
+  (n,t) = (6,2) with pairwise disjoint outcome sets (verify.py), and A(5) <= 6 (cert_n5_t0.txt, LP-dual
+  weights checked in exact integers by certcheck.py; also the classical value), so F(6) >= 13 > 12 >= 2A(5).
+  Minimality of n = 6: F(n,t) <= 2A(n-1) for n = 3,4,5 and all t is certified by cert_n{3,4,5}_t*.txt
+  together with A(2)=2, A(3)=2, A(4)=4 lower-bound witnesses wit_min_n{2,3,4}_t0.txt.
+
+S1 (SKETCH, not proved here) F(n) = (1+o(1)) 2^n/n.  Lower bound from P3 and VT codes.  Upper bound
+  would follow from P7 by the usual Levenshtein counting (|S| >= r(ua)-2, few strings have few runs);
+  I did not write this out.  For t = 0, 1, n-1, n it follows from P2, P4, P5.

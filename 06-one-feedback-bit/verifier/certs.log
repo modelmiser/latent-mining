@@ -1,0 +1,8 @@
+certificates checked 63 problems 0
+entries n<=8 with no certificate from either solver: [(6, 2), (7, 0), (7, 3), (7, 4), (7, 6), (7, 7), (8, 1), (8, 2), (8, 4)]
+A(5)<=6 cert vs bound 5 (must fail): (False, 'total 6.0 too large')
+weight lowered (must fail): (False, "strategy ('', '00000', '00000') under-weighted")
+negative weight (must fail): (False, 'malformed')
+cert for (5,0) applied to (5,2) (must fail): (False, "strategy ('00', '110', '010') under-weighted")
+solver-a/bad_cert_6_1.txt (False, "strategy ('0', '00000', '00000') under-weighted")
+solver-b/BAD_cert_n6_t1.txt (False, "strategy ('0', '00000', '00000') under-weighted")

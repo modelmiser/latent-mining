@@ -1,0 +1,21 @@
+Setting. Fix integers n >= 2 and t with 0 <= t <= n. A sender transmits exactly n bits, one per step. An adversary who knows the message, the codebook and every bit sent may silently delete at most one of the n bits. The receiver sees only the surviving bits in order (length n or n-1): no deletion mark, no timing. The sender gets one bit of feedback at a moment fixed in advance: after sending bit t and before bit t+1 it learns whether one of the first t bits was deleted (not which one); it learns nothing about later bits. t and the codebook are public.
+
+Formal form. For a binary string s let D(s) be the set of strings obtained by deleting exactly one symbol of s (D(empty) is empty). A strategy is a triple (u, a, b), u in {0,1}^t, a, b in {0,1}^(n-t): send u, then a if told "no deletion", b if told "deletion". Its outcome set is
+
+  O(u,a,b) = { ua } ∪ { u a' : a' in D(a) } ∪ { u' b : u' in D(u) }.
+
+F(n,t) is the largest number of strategies with pairwise disjoint outcome sets; F(n) = max over 0 <= t <= n of F(n,t). Let A(m) be the largest size of a set C of binary strings of length m with D(c), c in C, pairwise disjoint (optimal single-deletion-correcting code); A(m) = F(m,0).
+
+HEADLINE (yes/no). Is F(n) = 2*A(n-1) for every n >= 3, i.e. is feedback after the very first bit always an optimal placement? Answer "yes" with a proof that F(n,t) <= 2*A(n-1) for all t, or "no" with the least n, a t, and a family of more than 2*A(n-1) strategies with pairwise disjoint outcome sets.
+
+Required small data: the full table F(n,t) for 0 <= t <= n <= 6 (n = 7 if feasible).
+
+UNVERIFIED beliefs (check them):
+- F(n,t) >= A(n) for all t (take b = a; then O = {ua} ∪ D(ua)).
+- F(n,1) = 2*A(n-1) for n >= 2: taking b = u a' for some a' in D(a) makes the length-(n-1) outcomes exactly uD(a); conversely uD(a) is always contained in O.
+- F(n,n-1) = A(n), because {u} ∪ D(u)b = D(ub).
+- For 1 <= t <= n-1 the fewest length-(n-1) outcomes of a strategy is r(u)+r(a)-1 (r = number of runs), attained by b = u_t a'; hence F(n) = (1+o(1)) 2^n/n and feedback gains only lower-order terms.
+- A(1..10) = 1, 2, 2, 4, 6, 10, 16, 30, 52, 94.
+- F(3,1) = 4 > A(3) = 2; F(4,t) = 4 for all t; F(5,2) <= 8.
+
+Guess (not a claim): yes, t = 1 is always optimal, because for interior t every strategy with small outcome set seems forced to use one of a few "constant-run" strings, as happens for n = 5, t = 2.

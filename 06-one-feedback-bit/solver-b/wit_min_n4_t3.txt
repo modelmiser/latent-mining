@@ -1,0 +1,5 @@
+# n=4 t=3 size=4 status=0 (0=proved optimal) ; lines: u a b ('-' = empty)
+000 0 0
+111 0 1
+011 0 0
+100 0 1

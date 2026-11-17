@@ -1,0 +1,8 @@
+n=7 t=0 sets=128 status=0 F=16 dualbound=16.0 time=0.3
+n=7 t=1 sets=7818 status=0 F=20 dualbound=20.0 time=0.4
+n=7 t=2 sets=3910 status=0 F=21 dualbound=21.00000000000009 time=0.4
+n=7 t=3 sets=1918 status=0 F=22 dualbound=22.0 time=0.5
+n=7 t=4 sets=872 status=0 F=20 dualbound=20.0 time=0.2
+n=7 t=5 sets=318 status=0 F=20 dualbound=20.000000000000004 time=0.2
+n=7 t=6 sets=128 status=0 F=16 dualbound=16.0 time=0.2
+n=7 t=7 sets=128 status=0 F=16 dualbound=16.0 time=0.2

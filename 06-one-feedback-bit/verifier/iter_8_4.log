@@ -1,0 +1,5 @@
+sub n=8 t=4 target=39 subproblems=203 invalid_weight_lines=0 nodes=3450203 maxnodes=30001 result=INCOMPLETE
+hard(aborted)=115
+frontier emitted=719807
+sub n=8 t=4 target=39 subproblems=115 invalid_weight_lines=0 nodes=2115649 maxnodes=204957 result=NONE
+FAILED lp round 1

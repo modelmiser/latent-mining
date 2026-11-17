@@ -1,0 +1,3 @@
+sub n=8 t=2 target=38 subproblems=1172 invalid_weight_lines=0 nodes=7561172 maxnodes=30001 result=INCOMPLETE
+hard(aborted)=252
+FAILED split round 1

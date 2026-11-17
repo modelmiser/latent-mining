@@ -1,0 +1,3 @@
+# Seed
+
+A sender must convey a k-bit message to a receiver over a channel that carries one bit per step. An adversary who sees everything may silently delete up to t of the transmitted bits: the receiver sees only the bits that survive, with no mark where a deletion happened. The sender gets feedback, but late: at each step it knows how many bits the receiver had received as of d steps ago. With d infinite this asks for a deletion-correcting code; with d = 0 the sender can simply resend. For each (k, t, d): what is the least number of transmissions N(k, t, d) with which some protocol always lets the receiver recover the message, and how does the cost of deletions fall as the feedback gets fresher?

@@ -1,0 +1,5 @@
+bb n=8 t=4 weights: total/K=39.500392  sets_all=3902 violated=0
+frontier emitted=203
+bb n=8 t=4 target=39 minimal_sets=1096 nodes=268 result=NONE
+subproblems 203 cut by LP weights at their root 88
+exit 124

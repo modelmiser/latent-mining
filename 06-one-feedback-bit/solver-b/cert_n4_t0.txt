@@ -1,0 +1,5 @@
+# upper-bound certificate: n=4 t=0 claims F<=4; K=1000000; lines: point weight; sum=4000004
+000 1000001
+001 1000001
+110 1000001
+111 1000001

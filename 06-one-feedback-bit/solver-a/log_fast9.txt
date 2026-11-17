@@ -1,0 +1,2 @@
+n=9 t=4 sets=7072 status=1 found=67 dualbound=68.0 time=601
+n=9 t=3 sets=16456 status=0 found=67 dualbound=67.0 time=18

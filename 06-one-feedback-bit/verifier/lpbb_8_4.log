@@ -1,0 +1,2 @@
+NONE n=8 t=4 target=39: no packing of 39 sets; nodes=56813 closed=28407 maxdepth=44 minimal_sets=1096 time=588s
+exit 0

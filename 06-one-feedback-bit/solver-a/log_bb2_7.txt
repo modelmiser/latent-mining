@@ -1,0 +1,8 @@
+n=7 t=0 distinct_sets=106 F=16 nodes=421076
+n=7 t=1 distinct_sets=92 F=20 nodes=38045
+n=7 t=5 distinct_sets=144 F=20 nodes=1983660
+n=7 t=6 distinct_sets=106 F=16 nodes=421076
+n=7 t=7 distinct_sets=106 F=16 nodes=421076
+n=7 t=4 distinct_sets=168 F=20 nodes=50142774
+t=3 timeout
+t=2 timeout

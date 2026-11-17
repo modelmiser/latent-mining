@@ -1,0 +1,11 @@
+Fix n >= 1. A sender transmits exactly n bits x_1, ..., x_n, one per step. An adversary who knows the message, the sender's strategy and everything sent may delete at most one of the n bits. The receiver ends with the string of surviving bits in order (length n or n-1), with no mark of where, or whether, a deletion happened, and no timing information. Feedback is one step late: before choosing x_i the sender knows, for each j <= i-2, whether x_j was delivered; it knows nothing about x_{i-1}. So a deletion of x_i with i <= n-2 is learned just in time to choose x_{i+2}, ..., x_n freely, and a deletion of x_{n-1} or x_n is never learned in time.
+
+Equivalently: a strategy for one message is a word w in {0,1}^n together with, for each i in {1, ..., n-2}, a suffix s_i in {0,1}^{n-i-1}. Its outcome set is
+
+  { w } ∪ { w with bit n-1 removed, w with bit n removed } ∪ { w_1 ... w_{i-1} w_{i+1} s_i : 1 <= i <= n-2 }.
+
+Let M(n) be the largest number of strategies whose outcome sets are pairwise disjoint (the largest message set the receiver can always decode).
+
+Determine M(n). Concretely: (1) give the exact values M(1), ..., M(7); (2) give a formula or a tight characterisation for all n; (3) decide whether M(n)/2^n tends to 0 or stays bounded below by a positive constant, and find the limit if it exists.
+
+Calibration: M(n) <= 2^(n-1) always (the adversary deletes x_n). M(2) = 2 and M(3) = 3, whereas the best one-deletion code without feedback has 2 words at length 3 and instant feedback would give 4.

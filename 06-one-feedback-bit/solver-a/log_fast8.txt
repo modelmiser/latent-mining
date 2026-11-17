@@ -1,0 +1,9 @@
+n=8 t=0 sets=230 status=0 F=30 dualbound=29.999999999999932 time=1.7
+n=8 t=1 sets=212 status=0 F=32 dualbound=32.0 time=2.0
+n=8 t=2 sets=5484 status=0 F=37 dualbound=37.00000000000001 time=12.1
+n=8 t=3 sets=2968 status=0 F=38 dualbound=38.0 time=1.1
+n=8 t=4 sets=1096 status=0 F=38 dualbound=38.0 time=2.2
+n=8 t=5 sets=384 status=0 F=35 dualbound=34.999999999999986 time=2.2
+n=8 t=6 sets=328 status=0 F=34 dualbound=34.00000000000022 time=4.3
+n=8 t=7 sets=230 status=0 F=30 dualbound=29.999999999999932 time=1.6
+n=8 t=8 sets=230 status=0 F=30 dualbound=29.999999999999932 time=1.6

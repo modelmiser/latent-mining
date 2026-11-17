@@ -1,0 +1,12 @@
+bb n=7 t=3 weights: total/K=23.000178  sets_all=1918 violated=0
+bb n=7 t=3 target=23 minimal_sets=448 nodes=1437197 result=NONE
+exit 0
+bb n=7 t=4 weights: total/K=21.000184  sets_all=872 violated=0
+bb n=7 t=4 target=21 minimal_sets=168 nodes=171182 result=NONE
+exit 0
+bb n=7 t=2 weights: total/K=21.866869  sets_all=3910 violated=0
+bb n=7 t=2 target=22 minimal_sets=988 nodes=1 result=NONE
+exit 0
+bb n=7 t=0 weights: total/K=17.150164  sets_all=128 violated=0
+bb n=7 t=0 target=17 minimal_sets=106 nodes=459 result=NONE
+exit 0

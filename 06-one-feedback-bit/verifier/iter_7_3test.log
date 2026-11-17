@@ -1,0 +1,13 @@
+sub n=7 t=3 target=23 subproblems=43 invalid_weight_lines=0 nodes=20043 maxnodes=2001 result=INCOMPLETE
+hard(aborted)=10
+frontier emitted=469
+sub n=7 t=3 target=23 subproblems=10 invalid_weight_lines=0 nodes=2138 maxnodes=346 result=NONE
+subproblems 469 cut by LP weights at their root 427
+sub n=7 t=3 target=23 subproblems=469 invalid_weight_lines=0 nodes=84469 maxnodes=2001 result=INCOMPLETE
+hard(aborted)=42
+frontier emitted=1383
+sub n=7 t=3 target=23 subproblems=42 invalid_weight_lines=0 nodes=5501 maxnodes=271 result=NONE
+subproblems 1383 cut by LP weights at their root 847
+sub n=7 t=3 target=23 subproblems=1383 invalid_weight_lines=0 nodes=133875 maxnodes=979 result=NONE
+hard(aborted)=0
+DONE: all subproblems closed, result NONE (rounds=3)

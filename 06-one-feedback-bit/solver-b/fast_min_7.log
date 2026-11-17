@@ -1,0 +1,8 @@
+n=7 t=0 status=0 F=16 dualbound=-16.000000000000675 nsets=106
+n=7 t=1 status=0 F=20 dualbound=-20.0 nsets=92
+n=7 t=2 status=0 F=21 dualbound=-21.0 nsets=988
+n=7 t=3 status=0 F=22 dualbound=-22.0 nsets=448
+n=7 t=4 status=0 F=20 dualbound=-20.000000000000117 nsets=168
+n=7 t=5 status=0 F=20 dualbound=-20.0 nsets=144
+n=7 t=6 status=0 F=16 dualbound=-16.000000000000675 nsets=106
+n=7 t=7 status=0 F=16 dualbound=-16.000000000000675 nsets=106

@@ -1,0 +1,2 @@
+n=7 t=0 F=16 (distinct sets 128, memo 0)
+dp 7 1 failed/timeout
