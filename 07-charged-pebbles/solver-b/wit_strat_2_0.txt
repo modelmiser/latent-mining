@@ -1,0 +1,4 @@
+# p=2 k=0 strategy, clean at 2
+P 1 0
+P 2 0
+R 1 0

@@ -1,0 +1,21 @@
+solver-a/cert/closed_p2_k0.txt 2 0 OK states=5 maxclean=2 formula 2
+solver-a/cert/closed_p2_k1.txt 2 1 OK states=28 maxclean=4 formula 4
+solver-a/cert/closed_p2_k2.txt 2 2 OK states=81 maxclean=6 formula 6
+solver-a/cert/closed_p2_k3.txt 2 3 OK states=176 maxclean=8 formula 8
+solver-a/cert/closed_p3_k0.txt 3 0 OK states=26 maxclean=4 formula 4
+solver-a/cert/closed_p3_k1.txt 3 1 OK states=530 maxclean=10 formula 10
+solver-a/cert/closed_p3_k2.txt 3 2 OK states=3351 maxclean=16 formula 16
+solver-a/cert/closed_p3_k3.txt 3 3 OK states=12966 maxclean=22 formula 22
+solver-a/cert/closed_p4_k0.txt 4 0 OK states=373 maxclean=8 formula 8
+solver-a/cert/closed_p4_k1.txt 4 1 OK states=28680 maxclean=24 formula 24
+solver-b/cert_2_1.txt 2 1 OK states=28 maxclean=4 formula 4
+solver-b/cert_2_2.txt 2 2 OK states=81 maxclean=6 formula 6
+solver-b/cert_3_1.txt 3 1 OK states=530 maxclean=10 formula 10
+solver-b/cert_3_2.txt 3 2 OK states=3351 maxclean=16 formula 16
+solver-b/cert_4_1.txt 4 1 OK states=28680 maxclean=24 formula 24
+A BAD: REJECT: not closed at (((2, 0), (7, 0)), (0,)) -> (((2, 0), 
+B neg: REJECT: not closed at (((1, 1), (5, 1)), (0,)) -> (((1, 1), 
+mine wrong k: REJECT: start missing
+mine drop last: REJECT: not closed at (((10, 0), (12, 0)), (0,)) -> (((10, 0
+mine drop mid: REJECT: not closed at (((5, 1), (6, 1)), (0,)) -> (((1, 0), 
+mine only clean<=9 removed: REJECT: not closed at (((8, 1), (10, 0), (11, 0)), ()) -> ((

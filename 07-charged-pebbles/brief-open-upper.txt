@@ -1,0 +1,23 @@
+You are attacking one open step of a precisely defined problem, alone. Do not search the web.
+
+THE PROBLEM
+Read chain/3-question.txt (the game "charged pebbles, clean delivery" and the conjecture C(p,k) = (pk+2)*2^(p-2)).
+
+WHAT IS ALREADY DONE (by two independent solvers; you may read their reports reports/solver-a.md and reports/solver-b.md, their proofs solver-a/proofs.txt and solver-b/proofs.txt, and reuse their programs in solver-a/ and solver-b/ read-only)
+ - Proved: C(p,k) >= (pk+2)*2^(p-2) for all p >= 2, k >= 0; equality for p = 2 (all k) and for k = 0 (all p).
+ - Computed exhaustively: equality for every (p,k) reached (p=3 k<=8, p=4 k<=6, p=5 k<=2).
+ - Solver B's RELAXED GAME: q pebbles without charges and a pooled budget of f forgetful removals (F-moves). Every play of the real game is a play of the relaxed game with q = p, f = pk. Computed: the largest clean node in the relaxed game is exactly (f+2)*2^(q-2), and the largest node ever pebbled is (f+4)*2^(q-2) - 1, for q=2 f<=100, q=3 f<=60, q=4 f<=40, q=5 f<=25, q=6 f<=6.
+ - Both solvers failed to prove the upper bound for p >= 3 and say why their inductions break (see the end of each proofs.txt).
+
+YOUR TASK
+ Prove the upper bound: in the relaxed game with q >= 2 pebbles and at most f F-moves, no configuration clean at n > (f+2)*2^(q-2) is reachable. (That implies C(p,k) <= (pk+2)*2^(p-2) and settles the headline.) If you find it false, give the counterexample.
+ Suggestions, not requirements: look for a potential function or a family of inequalities over the whole configuration (not per pebble) that holds for every reachable configuration and is inductive under P, R and F moves; test any candidate invariant mechanically on the full reachable sets for small (q,f) BEFORE trying to prove it, and test that it is inductive (holds after every legal move from every configuration satisfying it, not only from reachable ones). An invariant that is true on reachable states but not inductive is not a proof. Consider what set of configurations is reachable at all: a characterisation of the reachable set for given (q,f) would be stronger and may be easier to prove than a single inequality. Consider induction on q with the lowest pebble as a moving base, and what an F-move on the lowest pebble does.
+ If you cannot prove the full statement, prove the most you can and state it exactly: for example q = 3 for all f, or a weaker constant, or the bound on the largest node ever pebbled.
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Write only inside open-upper/ . Do not modify or delete the solvers' files.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=open-upper ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep`. Kill only your own PIDs. python3 and g++ are available. Keep output files under 300 kB.
+
+REPORT
+ Write your proofs to open-upper/proofs.txt, each statement marked COMPLETE or SKETCH (a sketch presented as a proof is worse than no proof), and your report (under 800 words) to reports/open-upper.md; return the report as your final message: what is now proved (exact statements), what was tested mechanically and how, what failed and why, what remains open, and your confidence in each proof.

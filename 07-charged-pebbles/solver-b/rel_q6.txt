@@ -1,0 +1,8 @@
+q=6 f=0 clean=32 top=63 states=1626196 formula=32 EQ
+q=6 f=1 clean=48 top=79 states=5675133 formula=48 EQ
+q=6 f=2 clean=64 top=95 states=13342144 formula=64 EQ
+q=6 f=3 clean=80 top=111 states=26347101 formula=80 EQ
+q=6 f=4 clean=96 top=127 states=46968438 formula=96 EQ
+q=6 f=5 clean=112 top=143 states=77718656 formula=112 EQ
+q=6 f=6 clean=128 top=159 states=121871315 formula=128 EQ
+71.58s 3743124kB

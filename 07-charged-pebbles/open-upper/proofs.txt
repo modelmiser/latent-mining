@@ -1,0 +1,225 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as its author wrote it)
+ N1. L4 defines T_i = S n (a_i, a_{i+1}) for i < m only. Read a_{m+1} = infinity, T_m = S n (a_m, infinity); the
+     same argument (nodes above a_m form an a_m-play with <= r elements) gives the bounds that Theorem I and the
+     Main Theorem cite from L4 for elements above a_m.
+ N2. L4 and L5 use "every configuration on a P/R path from A to S contains A". This is the sentence after L3:
+     every configuration on the path is in comp(A), and red(S) is a subset of S.
+ N3. In the definition of H_A and in Lemma N, succ_V(u) may not exist (u maximal); read it as infinity.
+ N4. "Always m <= q-1" holds for boards reachable from the empty board. Theorem I is stated for all boards; for
+     m = q (r = 0) the term 2^(r-1) is 1/2 and T_m is empty, and the inequalities still hold (tested with exact
+     rationals by the second reader). Only reachable boards are needed for the Main Theorem.
+ N5. W(iii): the nodes > b number at most c-1 because, by W(i), a nonempty set always has an element <= b.
+ N6. Lemma Step (3b): e != s because gap_V(s) = s - u > 2^phi, so s is not reducible in V.
+ N7. Main Theorem (a) with f = 0: J(0) forces A empty, so a board {n} with n > 2U cannot occur.
+ N8. Real game: P and R leave charges unchanged and each F lowers the total charge pk by one, so f <= pk.
+ N9. Case m = 1 of Theorem I lists f >= 1 as a hypothesis but does not use it.
+ Found by the second reader and the review panel (five seats, four model families). None changes a statement.
+----------------------------------------------------------------------------------------------
+PROOFS for the open upper bound of "Charged pebbles, clean delivery"        (open-upper)
+
+Setting: the RELAXED GAME of solver B.  q >= 2 uncharged pebbles.  A configuration is a set S of
+nodes >= 1 with |S| <= q.  Node 0 is virtual and always pebbled.
+  P: add i (not in S), allowed when i = 1 or i-1 in S, and |S| < q.
+  R: delete i in S, allowed when i = 1 or i-1 in S.
+  F: delete i in S (i >= 2, i-1 not in S); counted.
+U := 2^(q-2).  "f" always means the number of F-moves made so far.
+
+MAIN THEOREM (STATUS: COMPLETE, see the confidence notes at the end).
+  In the relaxed game with q >= 2 pebbles, after f F-moves:
+   (a) if the board is {n} (clean at n) then n <= (f+2)*2^(q-2);
+   (b) every pebbled node is <= (f+4)*2^(q-2) - 1.
+  Consequently C(p,k) <= (pk+2)*2^(p-2) for all p >= 2, k >= 0, and with the solvers' lower bound
+  C(p,k) = (pk+2)*2^(p-2): the headline answer is YES.
+  (The proof never uses the legality condition of F: it holds even if an "F-move" may delete ANY
+  pebble.  It only uses that P and R are the reversible-pebbling moves.)
+
+Imported, already proved (solver-b/proofs.txt, LEMMA W, re-read and re-checked by me): for a >= 0
+an "a-play" is a sequence of sets of nodes > a, starting empty, each step adding or deleting one
+node i, where for i > a+1 the step needs i-1 in the set.  If all sets have <= c elements then
+  W(i)  the lowest element is <= a + 2^(c-1)   (c >= 1);
+  W(ii) every element is <= a + 2^c - 1.
+I add:
+  W(iii) the element with exactly l-1 elements below it is <= a + 2^c - 2^(c-l)  (1 <= l <= c).
+  Proof (COMPLETE): induction on c; l = 1 is W(i).  Let l >= 2, b = a + 2^(c-1), e the l-th
+  lowest element at some time.  If e <= b done (b = a+2^c-2^(c-1)).  Otherwise, as in B's proof of
+  W(ii), the nodes > b form a b-play with <= c-1 elements at all times.  The number j of elements
+  <= b at this time satisfies 1 <= j <= l-1 (W(i)), and e is the (l-j)-th lowest node > b, so by
+  induction e <= b + 2^(c-1) - 2^(c-1-(l-j)) <= a + 2^c - 2^(c-l).  QED
+
+----------------------------------------------------------------------------------------------
+PART 1.  THE REVERSIBLE COMPONENTS ("anchor sets").                         STATUS: COMPLETE
+
+For a configuration S and x in S let pred(x) be the largest element of S+{0} below x and
+gap_S(x) = x - pred(x).  Call x REDUCIBLE in S if gap_S(x) <= 2^(q-|S|).  A REDUCTION STEP deletes
+a reducible element.  S is REDUCED if nothing is reducible.  Write S ~ S' if S' is reachable from
+S by P and R moves only (an equivalence relation: P and R are mutually inverse and have the same
+precondition, so a P/R sequence read backwards is legal).
+
+L1 (a reduction step is a P/R path).  If x is reducible in S then S ~ S - x.
+  Proof.  Reach(r): for 1 <= d <= 2^r - 1 and a base b (pebbled, or 0) with b+1..b+d empty there
+  is a P/R sequence using <= r extra pebbles, touching only nodes in (b, b+d], ending in a
+  configuration that contains b+d.  Induction on r: r = 1 is one placement.  If d <= 2^(r-1)-1 use
+  Reach(r-1).  Otherwise use Reach(r-1) to pebble b+2^(r-1)-1, place b+2^(r-1), undo the Reach
+  moves (backwards), and, if d > 2^(r-1), apply Reach(r-1) from base b+2^(r-1) with
+  d - 2^(r-1) <= 2^(r-1)-1.  Now let r = q-|S|, p = pred(x), d = x-p <= 2^r.  If d = 1 delete x by
+  R.  Else Reach(r) from base p pebbles x-1 (d-1 <= 2^r-1, nodes strictly between p and x are
+  empty); delete x by R; undo the Reach moves (they involve only nodes <= x-1 and preconditions on
+  nodes <= x-2, so the absence of x does not matter).  Never more than q pebbles.  QED
+L2 (confluence).  If x != y are both reducible in S then y is reducible in S - x.
+  Proof.  The free count rises from r to r+1.  If pred(y) != x the gap of y is unchanged.  If
+  pred(y) = x the new gap is gap(y) + gap(x) <= 2^r + 2^r.  QED
+  Hence (termination + diamond) every S has a unique reduced form red(S), reached by ANY maximal
+  sequence of reduction steps, and red(S) is a subset of S.
+L3.  S ~ S'  if and only if  red(S) = red(S').
+  Proof.  If S' = S + i by a P move then gap_{S'}(i) = 1, so S' -> S is a reduction step and
+  red(S') = red(S); same for R.  Conversely S ~ red(S) by L1.  QED
+  So the P/R-components are indexed by reduced sets ("ANCHOR SETS") A = {a_1 < ... < a_m}: sets
+  all of whose gaps (including a_1 - 0) exceed 2^(q-m).  comp(A) := {S : red(S) = A}.  Every S in
+  comp(A) contains A.  comp(empty) is the set of configurations reachable without F-moves.
+L4 (structure of comp(A)).  Let S in comp(A), m = |A|, r = q - m, a_0 = 0, and
+  T_i = S n (a_i, a_{i+1}).  Then T_i is the end of an a_i-play with <= r elements; in particular
+  T_i lies in (a_i, a_i + 2^r - 1], min T_i <= a_i + 2^(r-1), and the l-th lowest element of T_i is
+  <= a_i + 2^r - 2^(r-l).
+  Proof.  Take a P/R path from A to S.  Every configuration on it contains A, hence has <= r other
+  pebbles.  Restricted to the nodes of (a_i, a_{i+1}) it is an a_i-play (a_i is always present).
+  Apply W.  QED
+L5 (truncation).  Let A' = red(S'), b = min A'.  Every element of S' below b is <= 2^(q-1) - 1.
+  Proof.  Take a P/R path from A' to S'; every configuration contains A', so has <= q-1 pebbles
+  below b.  Restricted to nodes < b it is a 0-play starting empty.  W(ii) with c = q-1.  QED
+L6 (lifting; needs |S'| <= q-1).  Let z not in S'.  Let A'' = red_{q-1}(S') be the reduced form of
+  S' in the game with q-1 pebbles.  Then (1) S' is carried to A'' by reduction steps that are valid
+  in the q-game, so red_q(A'') = red_q(S');  (2) S' + z ~ A'' + z in the q-game.
+  Proof.  (1) 2^(q-1-|W|) <= 2^(q-|W|).  (2) By L1 (for q-1) there is a P/R path from S' to A''
+  with <= q-1 pebbles at all times.  Add z to every configuration and skip the moves made at node
+  z.  A move at a node n != z needs n-1 pebbled, which still holds; at most q pebbles.  QED
+
+Mechanical checks of Part 1: induct.py / induct2.py compare, for every anchor set in a window,
+the BFS P/R-component with the fibre of red (q = 2..5, 0 mismatches); lemmas.py checks L5 (T7) and
+L6(2) (T4) on comp(empty) and comp({a}) for q <= 6.
+
+----------------------------------------------------------------------------------------------
+PART 2.  THE NORMAL FORM OF A DELETION, AND THE SHAPE LEMMA.                STATUS: COMPLETE
+
+Fix an anchor set A.  For a configuration Q with k = |Q| <= q-1 say H_A(Q) holds if there is
+V in comp(A) with |V| = k such that either Q = V, or Q = (V - u) + u' for some u in V with
+     pred_V(u) < u' < succ_V(u)      and      |u' - u| <= 2^(q-k-1)
+("Q is a configuration of comp(A) with ONE pebble shifted, by at most half the reach of the free
+pebbles, without overtaking a neighbour").
+
+LEMMA N (normal form).  Let S in comp(A), z in S.  Then S - z is carried by valid reduction steps
+(possibly none) to a set Q0 such that  (a) Q0 = A - z and z in A,  or  (b) H_A(Q0).
+  Proof.  S' = S - z has <= q-1 elements.  Put Q0 = A'' = red_{q-1}(S') and S0 = A'' + z.  By L6
+  S' reduces validly to A'' and S0 ~ S, so S0 in comp(A).  Let c = q - |S0|.  If S0 = A we are in
+  (a).  Otherwise S0 is not reduced: some e is reducible in S0, gap_{S0}(e) <= 2^c.
+  If e = z then A'' = S0 - z in comp(A): (b) with V = Q0.
+  If e != z and pred_{S0}(e) != z then gap_{A''}(e) = gap_{S0}(e) <= 2^c = 2^((q-1)-|A''|), so e
+  is reducible in A'' in the (q-1)-game: contradiction.
+  So e = w := succ_{S0}(z) and w - z <= 2^c.  V := S0 - w is in comp(A), |V| = |A''|, and
+  A'' = (V - z) + w with pred_V(z) < w < succ_V(z) and w - z <= 2^c = 2^(q-|A''|-1): (b).  QED
+
+LEMMA STEP.  Let A = empty or A = {a}.  Suppose H_A(Q) and Q is not reduced.  Then there is a
+nonempty sequence of valid reduction steps from Q to some Q1 with Q1 = empty or H_A(Q1).
+  Proof.  If Q = V in comp(A): Q reduces to A and H_A(A) holds.  Otherwise Q = (V - u) + u' as in
+  the definition; k = |Q|, phi = q - k >= 1 is the free count of both Q and V, p = pred_V(u),
+  s = succ_V(u) (if any).  Gaps in Q and V agree except for u/u' and for s.  Let y be reducible
+  in Q.
+  (1) y not in {u', s}.  Then gap_V(y) = gap_Q(y), y is reducible in V, V - y in comp(A), and
+      Q - y = ((V - y) - u) + u' with the same shift <= 2^(phi-1) <= 2^phi.  H_A(Q - y).
+  (2) y = u'.  Then Q - u' = V - u.  Apply Lemma N to (V, u): V - u reduces to Q0 with H_A(Q0) or
+      Q0 = A - u (u in A), which for |A| <= 1 is the empty set.
+  (3) y = s, i.e. s - u' <= 2^phi.
+      (3a) s - u <= 2^phi: s is reducible in V, V - s in comp(A), Q - s = ((V - s) - u) + u'.
+      (3b) s - u > 2^phi.  Then u' > u.  V != A (V = empty is impossible, V = {a} has no s), so
+           some e is reducible in V; e != s.  If e != u then e is not in {u', s} and
+           gap_Q(e) = gap_V(e): go to (1) with y = e.  If e = u: V1 := V - u in comp(A),
+           |V1| = k-1, and Q - s = (V1 - s) + u' with pred_{V1}(s) = p < u' < succ_{V1}(s) and
+           0 < s - u' <= 2^phi = 2^(q-(k-1)-1): H_A(Q - s) (the pebble s "retreats" to u').  QED
+
+SHAPE LEMMA.  Let A = empty or {a}, S in comp(A), z in S (any element), A' = red(S - z).  Then
+A' = empty or H_A(A').
+  Proof.  Lemma N gives Q0 with red(Q0) = A' (L2), and Q0 = empty or H_A(Q0).  Apply Lemma Step
+  repeatedly; sizes strictly decrease, so the process ends in a reduced set, which is A' by L2,
+  with A' = empty or H_A(A').  QED
+
+Mechanical checks of Part 2 (lemmas.py; all pass, q = 2..5 with A = empty and all {a},
+2^(q-1) < a <= 2^q+3, and q = 6 with A = empty, {33}, {34}):
+  T2: Shape Lemma for every S in comp(A) and every z in S (q=6: 9,218,694 + 2 x 642,354 cases);
+  T3: every Q with H_A(Q) has red(Q) = empty or H_A(red(Q))  (the closure Lemma Step gives);
+  mutant: with the shift bound lowered by one, T2 and T3 FAIL (the tests can fail).
+
+----------------------------------------------------------------------------------------------
+PART 3.  THE INVARIANT.                                                      STATUS: COMPLETE
+
+INVARIANT J(f).  Let A = {a_1 < ... < a_m} = red(current configuration), r = q - m.  Either
+A = empty, or  f >= 1,  a_1 <= (f+2)U  and  a_m <= (f+3)U - 2^(r-1).
+(J(f) implies J(f+1).  Always m <= q-1, i.e. r >= 1: A changes only when an element is deleted
+from a configuration of <= q pebbles, by L3.)
+
+THEOREM I.  If the current configuration S satisfies J(f) (reachable or not) and z in S is deleted,
+then S - z satisfies J(f+1).  P and R moves do not change A (L3).  Hence J(f) holds after f F-moves.
+  Proof.  A = red(S), A' = red(S - z) = {b_1 < ... < b_m'}, r' = q - m'; assume A' nonempty.
+  To show: (i') b_1 <= (f+3)U,  (ii') b_m' <= (f+4)U - 2^(r'-1).
+
+  Case m = 0 (so J(f+1) follows from J(1)).  By the Shape Lemma A' = (V - u) + u' with
+  V = {v_1<...<v_m'} in comp(empty) and shift <= 2^(q-m'-1) (A' = V is impossible: V would be
+  reduced and in comp(empty), i.e. empty).  V is a 0-play configuration, so by W(iii)
+  v_l <= 2^q - 2^(q-l).  The shift preserves the order, so
+     b_m' <= v_m' + 2^(q-m'-1) <= 2^q - 2^(q-m') + 2^(q-m'-1) = 4U - 2^(r'-1),
+     b_1  <= v_1  + 2^(q-m'-1) <= 2^(q-1) + 2^(q-2) = 3U.
+
+  Case m = 1, A = {a}, 2U < a <= (f+2)U, f >= 1.  By the Shape Lemma A' = A (fine) or
+  A' = (V - u) + u', V in comp({a}), |V| = m', shift <= 2^(r'-1).  a is in V, so
+  b_1 <= min V + 2^(r'-1) <= a + U <= (f+3)U.  By L4 (r = q-1) the elements of V above a are
+  <= a + 2^(q-1) - 2^(q-1-l) with l <= m'-1, so max V <= a + 2U - 2^(q-m') if V has an element
+  above a, and max V = a otherwise.  Hence b_m' <= a + 2U - 2^(q-m') + 2^(q-m'-1)
+  = a + 2U - 2^(r'-1), respectively b_m' <= a + 2^(r'-1) <= a + 2U - 2^(r'-1) (as r' <= q-1);
+  either way b_m' <= (f+4)U - 2^(r'-1).
+
+  Case m >= 2 (r <= q-2, f >= 1).  By L4 every element of S is <= a_m + 2^r - 1
+  <= (f+3)U + 2^(r-1) - 1 <= (f+3)U + U/2 - 1.
+  (ii') If r' <= q-2 then (f+4)U - 2^(r'-1) >= (f+3)U + U/2: done.  If r' = q-1 then A' = {b_1} and
+        (ii') is (i').
+  (i')  If b_1 <= a_m: b_1 <= (f+3)U - 2^(r-1).  Otherwise b_1 is in T_m.  By L5 every element of
+        S - z below b_1 is <= 2U - 1.  If a_m != z: a_m <= 2U - 1 and b_1 <= a_m + 2^r - 1 < 3U.
+        If a_m = z and b_1 = min T_m: b_1 <= a_m + 2^(r-1) <= (f+3)U (L4).  If a_m = z and
+        min T_m < b_1: a_m < min T_m <= 2U - 1 and again b_1 < 3U.                          QED
+
+PROOF OF THE MAIN THEOREM.
+  (a) Let the board be {n} after f F-moves.  If n <= 2^(q-1) = 2U there is nothing to show.
+      Otherwise {n} is reduced (its gap exceeds 2^(q-1)), so A = {n}, and J(f) gives
+      n = a_1 <= (f+2)U.
+  (b) Let y be pebbled.  If A = empty, y <= 2^q - 1 = 4U - 1 (W(ii)).  Otherwise f >= 1 and by L4
+      y <= a_m + 2^r - 1 <= (f+3)U + 2^(r-1) - 1 <= (f+4)U - 1  (r <= q-1).
+  Real game: a play with p pebbles of charge k is a relaxed play with q = p and f <= pk.      QED
+
+Mechanical checks of Part 3:
+  induct2.py J2: for EVERY anchor set A in a window (reachable or not; q=2 N=16, q=3 N=26,
+   q=4 N=30, q=5 N=44: 64,272 anchor sets, 696,545 configurations, 2,597,483 F-moves) and every
+   legal F-move from every configuration of comp(A), the least f with J(f) rises by at most 1.
+   0 violations.  Mutants M1 (a_1 bound minus 1), M2 (a_m bound minus 1), M3 (a_1 bound alone)
+   are all reported as violated, so the test can fail.
+  reach_check.py: exact minimal F-cost of every configuration by 0-1 BFS (q=2..5) satisfies J and
+   (b); both bounds of J are attained with equality many times.
+
+----------------------------------------------------------------------------------------------
+STRONGER STATEMENT, NOT PROVED (STATUS: TESTED ONLY).
+  J' : after f >= 1 F-moves the j-th lowest anchor satisfies a_j <= (f+3)U - 2^(q-1-j).
+  (J' implies J.)  induct.py / induct2.py J1 find it inductive on all anchor sets in the same
+  windows for q <= 5.  I prove it only for the first F-move (case m = 0 above gives
+  b_l <= 4U - 2^(q-l) + 2^(q-m'-1) <= 4U - 2^(q-1-l)).  It is not needed for the theorem.
+
+FALSE STATEMENTS I TRIED (do not reuse):
+  - "if z is deleted, a free pebble lying in another interval, or below z, cannot become an
+    anchor": false (q=3: {4,6,7} minus 6 gives anchors {4,7}).
+  - "red(red_q(S-z) + z) = red(S)" and "red(A + A' + z) = A": false (ep.py, ep2.py, ep3.py);
+    the true exchange statement needs red_{q-1}, see L6.
+  - solver B's Conjecture J on raw configurations is true but not inductive; on anchor sets with
+    the J offsets 2^q - 2^(q-j) it is not inductive either ({3,6,x} at q=4 loses two ranks with
+    one deletion).
+
+CONFIDENCE.  Part 1: high (standard; machine-checked on windows).  Part 2: high for the statements
+(the Shape Lemma and its closure form were checked exhaustively for q <= 6 on comp(empty) and
+q <= 5/6 on comp({a})); the written case analysis of Lemma Step is short and I re-read it twice,
+but it has not been read by anyone else.  Part 3: high; every inequality is elementary and the
+inductive claim was machine-checked for q <= 5 on all anchor sets in the windows.  Nothing here
+is a sketch.  Not machine-checked: the proofs themselves for general q (no proof assistant).

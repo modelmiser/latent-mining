@@ -1,0 +1,25 @@
+q=2 f=0 clean=2 top=3 states=5 formula_clean=2 formula_top=3 EQ
+q=2 f=1 clean=3 top=4 states=8 formula_clean=3 formula_top=4 EQ
+q=2 f=30 clean=32 top=33 states=95 formula_clean=32 formula_top=33 EQ
+q=2 f<=30 ALL EQ
+J violations=0 tight=93
+q=3 f=0 clean=4 top=7 states=26 formula_clean=4 formula_top=7 EQ
+q=3 f=1 clean=6 top=9 states=58 formula_clean=6 formula_top=9 EQ
+q=3 f=40 clean=84 top=87 states=8702 formula_clean=84 formula_top=87 EQ
+q=3 f<=40 ALL EQ
+J violations=0 tight=328
+q=4 f=0 clean=8 top=15 states=373 formula_clean=8 formula_top=15 EQ
+q=4 f=1 clean=12 top=19 states=1033 formula_clean=12 formula_top=19 EQ
+q=4 f=25 clean=108 top=115 states=282384 formula_clean=108 formula_top=115 EQ
+q=4 f<=25 ALL EQ
+J violations=0 tight=884
+q=5 f=0 clean=16 top=31 states=15193 formula_clean=16 formula_top=31 EQ
+q=5 f=1 clean=24 top=39 states=48019 formula_clean=24 formula_top=39 EQ
+q=5 f=25 clean=216 top=231 states=42915367 formula_clean=216 formula_top=231 EQ
+q=5 f<=25 ALL EQ
+J violations=0 tight=10582
+
+real	1m2.874s
+user	1m1.873s
+sys	0m0.993s
+exit=0

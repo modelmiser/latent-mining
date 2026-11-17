@@ -1,0 +1,8 @@
+# p=2 k=1 clean at n=4 ; moves: P node charge | R node | F node ; 7 moves
+P 1 1
+P 2 1
+R 1
+P 3 1
+F 2
+P 4 0
+F 3

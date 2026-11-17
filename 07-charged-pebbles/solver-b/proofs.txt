@@ -1,0 +1,86 @@
+PROOFS for "Charged pebbles, clean delivery"            (solver-b)
+Notation: L(p,f) = (f+2)*2^(p-2).  The claimed value is C(p,k) = L(p,pk).
+
+RELAXED GAME.  q uncharged pebbles; moves P and R as in the problem; F (remove a pebble on
+i>=2 whose predecessor is empty) allowed whenever fewer than f F-moves were made so far.
+Every play of the real game (p pebbles, charge k) is a relaxed play with q=p, f=pk, because
+each F-move lowers the total charge pk by one.  So relaxed bounds are upper bounds for C.
+
+------------------------------------------------------------------------------------------
+THEOREM 1 (lower bound, all p>=2, k>=0).  C(p,k) >= (pk+2)*2^(p-2).          STATUS: COMPLETE
+(Also machine-checked for 14 parameter pairs: gen_strategy.py output passes check_witness.py.)
+
+Reversible subroutines.  Let b be a node that stays pebbled (or b=0), all nodes above b empty.
+ Frontier(b; r pebbles): reaches pebbles exactly on b+2^(r-1), b+2^(r-1)+2^(r-2), ..., b+2^r-1.
+ Clean(b; r pebbles, T one of them): reaches exactly one pebble, T, on b+2^(r-1).
+ Definitions by induction (r=0: Frontier does nothing):
+   Clean(b; r, T)  = Frontier(b; the other r-1) ; place T on b+2^(r-1) [its predecessor
+                     b+2^(r-1)-1 is the top of the frontier, or b itself if r=1] ;
+                     undo Frontier(b; r-1) (the same moves backwards; P and R have the same
+                     legality condition, so the reverse of a P/R sequence is legal).
+   Frontier(b; r)  = Clean(b; r, T) for some T ; Frontier(b+2^(r-1); the other r-1).
+ Only P and R are used, so charges do not change.
+Strategy.  Clean(0; p) puts one pebble on 2^(p-1).  Then repeat pk times: the board is {m}
+ with pebble A on m (m >= 2^(p-1) >= 2); let B be a hand pebble of MAXIMAL charge; do
+ Clean(m; p-1, B) using the p-1 hand pebbles, giving board {m, m+2^(p-2)} with B on top;
+ node m-1 is empty, so remove A by an F-move.  Board is {m+2^(p-2)}.
+Charge invariant: before every round there is c with all charges in {c, c-1} and the board
+ pebble A having charge c.  True at the start (c=k).  In a round, B is a maximal hand pebble:
+ if some hand pebble has charge c then B has c and after A drops to c-1 the invariant holds
+ with the same c; otherwise all hand pebbles have c-1, B has c-1, A drops to c-1, and the
+ invariant holds with c-1.  Hence while total charge > 0 we have c >= 1, the F-move on A is
+ legal, and each round uses exactly one unit: exactly pk rounds are possible.
+Result: clean at 2^(p-1) + pk*2^(p-2) = (pk+2)*2^(p-2).                                  QED
+
+------------------------------------------------------------------------------------------
+LEMMA W (reversible window lemma).                                            STATUS: COMPLETE
+Fix a node a>=0.  An "a-play" is a sequence of sets of nodes >a, starting with the empty set,
+each step adding or deleting one node i>a, where for i>a+1 the step requires i-1 to be in the
+set (no requirement for i=a+1).  If every set has at most q elements then at all times
+ (i)  the lowest element y satisfies y <= a + 2^(q-1)      (q>=1),
+ (ii) every element z satisfies   z <= a + 2^q - 1.
+Remarks used below: (r1) the reverse of an a-play segment is again a legal sequence of steps;
+(r2) deleting from every set all nodes >= some y gives an a-play (a step at i only looks at
+i-1); (r3) for b>a, keeping only the nodes >b gives a b-play provided it starts empty.
+Proof by induction on q; q=0 is trivial.  (i): let y be the lowest element at time t.  If
+y=a+1 done.  Otherwise let s<=t be the last time y was added; at time s node y-1>a is in the
+set, and y stays in the set during [s,t], so the nodes in (a,y) number at most q-1 during
+[s,t], and at time t there are none.  Restrict to nodes <y (r2) and reverse [s,t] (r1): an
+a-play with at most q-1 elements that starts empty and contains y-1 at its end.  By (ii) for
+q-1 (for q=1 this is impossible, so y=a+1), y-1 <= a+2^(q-1)-1.
+(ii): put b=a+2^(q-1).  By (i), whenever the set is non-empty it has an element <=b, so the
+nodes >b number at most q-1 at all times; by (r3) and (ii) for q-1 they are <= b+2^(q-1)-1
+= a+2^q-1.                                                                              QED
+COROLLARY (k=0).  C(p,0) = 2^(p-1) and no node beyond 2^p-1 is ever pebbled.  (With k=0 there
+are no F-moves, the play is a 0-play with q=p; the lower bound is Theorem 1.)       COMPLETE
+
+------------------------------------------------------------------------------------------
+THEOREM 2 (p=2).  C(2,k) = 2k+2 for all k>=0.                                 STATUS: COMPLETE
+Upper bound, in the relaxed game with q=2: at every time, if f_t F-moves were made so far and
+the board is non-empty, its lowest pebble y satisfies y <= 2+f_t.  Induction on time.  Let
+y>=3 be lowest at time t, s<=t the last time y was placed.  At time s node y-1>=2 is pebbled,
+so the board at s is {y-1,y} and just before s it was {y-1}; by induction y-1 <= 2+f_s.
+During [s,t] node y stays pebbled and at time t node y-1 is empty, so y-1 is removed at some
+time in (s,t].  Until its first removal both pebbles are on the board, so node y-2>=1 is
+empty, and the removal is an F-move.  Hence f_t >= f_s+1 and y <= 2+f_s+1 <= 2+f_t.
+With f <= 2k: C(2,k) <= 2k+2.  Lower bound: Theorem 1.                                  QED
+
+------------------------------------------------------------------------------------------
+UPPER BOUND FOR p>=3, k>=1:  NOT PROVED.  No sketch is offered as a proof.
+What exists instead:
+ - exhaustive computation (see report) for the listed (p,k);
+ - CONJECTURE R (relaxed game): with q>=2 pebbles and f F-moves the largest clean node is
+   exactly (f+2)*2^(q-2), and the largest node ever pebbled is (f+4)*2^(q-2)-1.  Computed
+   exhaustively for the ranges in the report.  Conjecture R implies the headline (with
+   Theorem 1).
+ - CONJECTURE J (tested exhaustively on the relaxed game for q=2 f<=5, q=3 f<=5, q=4 f<=4;
+   conj.py): after f F-moves a pebble with exactly j pebbles strictly below it sits on a node
+   <= 2^q - 2^(q-1-j) + f*2^(q-2).  (j=0 is the clean bound.)  WARNING: J is true on the data
+   but is NOT inductive by itself: e.g. q=3, board {2,6,7} satisfies J with f=0 but needs one
+   F-move.  A proof needs a finer invariant that discounts "auxiliary" low pebbles; I did not
+   find one.
+ - Where my attempt at an induction breaks: for the lowest pebble y, last placed at time s on
+   top of y-1, the nodes below y must afterwards be cleared with q-1 pebbles.  Without
+   F-moves that clearing is reversible and Lemma W bounds y.  With F-moves the clearing is
+   not reversible (its reverse contains placements with empty predecessor), and for q>=3 I
+   could not bound "reach with f1 F-moves, then clear below with g F-moves" by L(q,f1+g).

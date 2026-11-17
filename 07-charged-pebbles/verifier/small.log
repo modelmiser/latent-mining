@@ -1,0 +1,20 @@
+charges 0 0 : C=2 maxocc=3 states=5
+charges 1 1 : C=4 maxocc=5 states=28
+charges 2 2 : C=6 maxocc=7 states=81
+charges 3 3 : C=8 maxocc=9 states=176
+charges 5 5 : C=12 maxocc=13 states=540
+charges 0 0 0 : C=4 maxocc=7 states=26
+charges 1 1 1 : C=10 maxocc=13 states=530
+charges 2 2 2 : C=16 maxocc=19 states=3351
+charges 3 3 3 : C=22 maxocc=25 states=12966
+charges 0 0 0 0 : C=8 maxocc=15 states=373
+charges 1 1 1 1 : C=24 maxocc=31 states=28680
+charges 3 0 : C=3 maxocc=4 states=41
+charges 2 1 : C=5 maxocc=6 states=64
+charges 3 0 0 : C=6 maxocc=10 states=398
+charges 2 1 0 : C=10 maxocc=13 states=877
+charges 3 3 0 : C=16 maxocc=19 states=3617
+charges 3 2 1 : C=16 maxocc=19 states=5338
+charges 3 0 0 0 : C=12 maxocc=22 states=9565
+charges 2 2 0 0 : C=24 maxocc=31 states=43441
+charges 1 1 1 0 : C=20 maxocc=27 states=17841

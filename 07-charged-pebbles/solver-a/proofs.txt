@@ -1,0 +1,46 @@
+PROOFS (solver-a).  Notation: A(p,k) = (pk+2)*2^(p-2) = 2^(p-1) + pk*2^(p-2).
+
+P1. LOWER BOUND  C(p,k) >= A(p,k) for all p>=2,k>=0.            STATUS: COMPLETE
+ Lemma L(q), q>=1: from a board where node g is pebbled (or g=0) and stays pebbled, with q pebbles in hand and all
+ nodes > g empty, there is a sequence of P/R moves on nodes g+1..g+2^(q-1) only, ending with exactly one of the q
+ pebbles on board above g, at g+2^(q-1); and we may choose which pebble that is.
+  q=1: place at g+1. q>1: let h=2^(q-2). Apply L(q-1) from ground g with q-1 pebbles (keeping the chosen pebble X
+  in hand): pebble Y at g+h, moves call them a. Apply L(q-1) from ground g+h with X and the q-2 others: X at g+2h.
+  Now play a reversed (each P<->R; a legal P/R sequence reversed is legal because P and R have the same
+  precondition "predecessor pebbled", and a only touches nodes g+1..g+h, which are in the same state as at the
+  end of a; Y is on board and the q-2 other pebbles in hand, exactly the pebbles a used). Result: only X at g+2h. QED
+ Strategy: L(p) from ground 0: pebble 0 alone at m=2^(p-1), no F-move. Then for j=1..pk: the base pebble is
+ pebble b=(j-1) mod p on node m; apply L(p-1) from ground m with the other p-1 pebbles, choosing pebble b+1 mod p
+ to end at m+2^(p-2); now node m-1 is empty and m>=2, so F on m is legal iff pebble b has charge >=1; pebble b has
+ been forgotten floor((j-1)/p) <= k-1 times before, so yes. New clean position m+2^(p-2). After pk rounds:
+ clean at 2^(p-1)+pk*2^(p-2). QED.   Machine-checked instances: witness/strat_p*_k*.txt via check.py (up to p=7).
+
+P2. UPPER BOUND for p=2:  C(2,k) <= 2k+2.                          STATUS: COMPLETE
+ Let s = number of F-moves made so far (s <= 2k, since total charge 2k drops by 1 per F-move and never goes <0).
+ Invariant I: board {x}: x <= s+2.  board {x<y}: y <= s+3, and y <= s+2 if y > x+1.
+ Empty board satisfies I. Moves:
+  empty -> {1}: fine.
+  {x} -> place: new pebble goes to x+1 (pair adjacent, top x+1 <= s+3) or to node 1 with x>=2 (top x <= s+2;
+        if x=2 the pair is adjacent, bound s+3 also holds). {x} -> remove: empty.
+  {x,y} -> remove y by R: needs y-1 pebbled, so x=y-1 <= s+2 remains. OK.
+        -> remove y by F: s'=s+1, remaining x < y <= s+3 = s'+2. OK.
+        -> remove x by R: needs x-1 pebbled, x-1 is not y, so x=1. If y=2: remaining 2 <= s+2. If y>2: pair is
+           non-adjacent so y <= s+2. OK.
+        -> remove x by F: s'=s+1, remaining y <= s+3 = s'+2. OK.
+  (No third pebble exists, so these are all moves.)
+ Hence any clean n satisfies n <= s+2 <= 2k+2. With P1: C(2,k) = 2k+2 for all k>=0. QED
+
+P3. UPPER BOUND for p>=3: C(p,k) <= A(p,k).                         STATUS: NOT PROVED (not even a sketch I trust)
+ Only exhaustive computation: (p,k) in {3}x{0..6,8,15}, {4}x{0..6}, {5}x{0,1,2}, {6}x{0}.
+ Idea I could not complete: show "s F-moves give clean reach <= 2^(p-1)+s*2^(p-2)" by induction on s, via a
+ classification of reversible-move equivalence classes (immovable pebbles act as grounds). The classification
+ is the missing part. Supporting data (COMPUTED, not proved): max node ever occupied = A(p,k)+2^(p-1)-1 in every
+ case run; with UNEQUAL initial charges of total c the value is <= (c+2)*2^(p-2) and can be strictly less
+ (p=3 charges 3,0,0 gives 6; 2,1,0 gives 10; 3,3,0 gives 16), so any proof by induction must not assume the
+ value depends on total charge only.
+
+P4. Safety of the position cap in bfs2.cpp/slow.py.                 STATUS: COMPLETE
+ The cap N only suppresses placements on nodes > N. A placement on N+1 requires N pebbled. If no reached state
+ has node N pebbled (maxocc < N), no suppressed move was ever available, so the reached set is the true
+ reachable set. An unsafe (binding) cap could only LOWER the reported C; the program prints CAP-BINDING then
+ (seen on purpose: p=3,k=3,N=20 reports 20 instead of 22). cert.py uses no cap at all.

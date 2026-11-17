@@ -1,0 +1,8 @@
+p=4 k=5 N=240 C=88 maxocc=95 states=39386598 formula=88 EXACT
+exit=0
+p=5 k=2 N=240 C=96 maxocc=111 states=117951562 formula=96 EXACT
+exit=0
+p=4 k=6 N=240 C=104 maxocc=111 states=112202419 formula=104 EXACT
+exit=0
+p=3 k=3 N=240 C=22 maxocc=25 states=12966 formula=22 EXACT
+exit=0

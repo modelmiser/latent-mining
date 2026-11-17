@@ -1,0 +1,16 @@
+q 6 N 34 mut none universe 1676116 comps 664723
+  cases I 9665316
+  cases L1 1895300
+  cases L2 1527304
+  cases L3 1676116
+  cases L4 6111019
+  cases L5 886597
+  cases L6 10327740
+  cases N 9665316
+  cases SHAPE 4650708
+  cases SHAPE fails for m>=2 (not claimed) 1591239
+  cases SHAPE_m>=2(not claimed) 5014608
+  cases STEP proof-case 7488434
+  cases STEP stmt 5196309
+  cases W 1641789
+  ALL PASS

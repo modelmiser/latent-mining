@@ -1,0 +1,13 @@
+Tired pebbles. Nodes 1, 2, 3, ... lie on a line; node 0 is a virtual node that always counts as pebbled. You own p pebbles, all initially in your hand and all "fresh". A node holds at most one pebble. A move is one of:
+
+(P) Place: put a pebble from your hand (fresh or tired, your choice) on an empty node i >= 1 whose predecessor i-1 is pebbled.
+(R) Reversible removal: take the pebble on node i back into your hand, allowed when node i-1 is pebbled. The pebble keeps its status (fresh stays fresh, tired stays tired).
+(F) Forgetful removal: take a FRESH pebble on node i back into your hand while node i-1 is empty. The pebble becomes "tired", permanently. A tired pebble can never again be removed forgetfully: it leaves the board only by move (R).
+
+So each pebble can pay for forgetting exactly once in its life, and the price is paid by that pebble, not from a shared purse. There is no limit on the number of moves.
+
+Let F(p) be the largest i such that some finite sequence of moves from the empty board puts a pebble on node i. (F(p) is finite, since at most p forgetful removals ever occur. By hand, F(1) = 1 and F(2) = 4.)
+
+Also let G(p) be the same quantity in the shared-purse game: pebbles carry no status, and move (F) is allowed on any pebble whose predecessor is empty, but at most p times in total.
+
+Questions. (1) Determine F(p) exactly for every p >= 1, as a closed formula or a recurrence with proof. (2) Is F(p) = G(p) for all p? If not, find the least p with F(p) < G(p) and determine the growth of G(p) - F(p).

@@ -1,0 +1,24 @@
+Charged pebbles, clean delivery. Parameters: integers p >= 2 (pebbles) and k >= 0 (charge).
+
+Board: nodes 1, 2, 3, ... on a line. Node 0 is virtual: it always counts as pebbled and never holds one of your pebbles. Each node holds at most one pebble. You own p pebbles, all initially in your hand. Each pebble carries an integer charge, initially k; pebbles with equal charge are interchangeable.
+
+A move is exactly one of:
+(P) Place: put any pebble from your hand on an empty node i >= 1 whose predecessor i-1 is pebbled. Charge unchanged.
+(R) Reversible removal: take the pebble on node i >= 1 back into your hand; legal exactly when node i-1 is pebbled. Charge unchanged.
+(F) Forgetful removal: take the pebble on node i >= 2 back into your hand; legal exactly when node i-1 is empty AND that pebble's charge is >= 1. Its charge drops by 1. A pebble with charge 0 whose predecessor is empty cannot be removed.
+
+There is no limit on the number of moves. A configuration is CLEAN AT n if node n holds a pebble and every other node is empty (the other p-1 pebbles are in hand; charges are irrelevant). Define
+
+  C(p,k) = the largest n such that some finite sequence of legal moves from the empty board reaches a configuration clean at n.
+
+(Finite: at most pk F-moves ever occur, and between F-moves play is reversible pebbling with p pebbles above a bounded frontier.)
+
+HEADLINE (yes/no): Is C(p,k) = (pk + 2) * 2^(p-2) for all p >= 2 and all k >= 0? If no, give the smallest counterexample (p,k) (ordered by p, then k) and the exact function C(p,k).
+
+UNVERIFIED beliefs:
+- k = 0 is pure reversible pebbling, where the clean reach is 2^(p-1); the formula agrees.
+- Lower bound C(p,k) >= (pk+2) * 2^(p-2): reach clean at 2^(p-1) with no F-move; then repeat pk times: from clean at m, use the p-1 hand pebbles reversibly to reach {m, m + 2^(p-2)}, then forget the pebble on m. Rotate which pebble ends on top so the pebble left at the new base still has charge.
+- Hand values: C(2,1) = 4, C(2,k) >= 2k+2, C(3,1) >= 10.
+- The Bennett-style alternative (go to the full reversible frontier, forget p-1 pebbles) gains less per F-move.
+
+Guess (marked as a guess): I would bet YES, because every strategy I tried gains at most 2^(p-2) nodes per F-move; the risk is an end-game trick that wastes no charge on the final pebbles.

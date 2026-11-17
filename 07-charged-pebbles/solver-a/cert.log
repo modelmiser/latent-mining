@@ -1,0 +1,22 @@
+dumped 5
+CERT OK p=2 k=0: 5 states closed; max clean n = 2 ; formula 2
+dumped 28
+CERT OK p=2 k=1: 28 states closed; max clean n = 4 ; formula 4
+dumped 81
+CERT OK p=2 k=2: 81 states closed; max clean n = 6 ; formula 6
+dumped 176
+CERT OK p=2 k=3: 176 states closed; max clean n = 8 ; formula 8
+dumped 26
+CERT OK p=3 k=0: 26 states closed; max clean n = 4 ; formula 4
+dumped 530
+CERT OK p=3 k=1: 530 states closed; max clean n = 10 ; formula 10
+dumped 3351
+CERT OK p=3 k=2: 3351 states closed; max clean n = 16 ; formula 16
+dumped 12966
+CERT OK p=3 k=3: 12966 states closed; max clean n = 22 ; formula 22
+dumped 373
+CERT OK p=4 k=0: 373 states closed; max clean n = 8 ; formula 8
+dumped 28680
+CERT OK p=4 k=1: 28680 states closed; max clean n = 24 ; formula 24
+--- deliberate failure: drop one line
+REJECT: not closed: 2:0,7:0|0 -> 2:0,3:0,7:0|

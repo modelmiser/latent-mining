@@ -1,0 +1,3 @@
+# Seed
+
+Pebbles are placed on a line of nodes 1, 2, ..., n. A pebble may be placed on node i, or removed from node i, only when node i-1 holds a pebble (node 1 is always allowed). This is the reversible pebble game: with p pebbles one can reach node 2^p - 1 and no further, and reaching it takes many moves. Now allow forgetting at a price: a pebble may also be removed when its predecessor is empty, but each such removal spends one unit of an erase budget e. For each (n, p, e): what is the least number of moves that puts a pebble on node n, what is the furthest node reachable with p pebbles and e erasures, and how do the answers move from the reversible game (e = 0) to ordinary pebbling (e unlimited)?

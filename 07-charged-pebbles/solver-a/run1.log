@@ -1,0 +1,14 @@
+p=2 k=4 N=240 C=10 maxocc=11 states=325 formula=10 EXACT
+p=2 k=5 N=240 C=12 maxocc=13 states=540 formula=12 EXACT
+p=2 k=8 N=240 C=18 maxocc=19 states=1701 formula=18 EXACT
+p=2 k=15 N=240 C=32 maxocc=33 states=8960 formula=32 EXACT
+p=3 k=3 N=240 C=22 maxocc=25 states=12966 formula=22 EXACT
+p=3 k=4 N=240 C=28 maxocc=31 states=37696 formula=28 EXACT
+p=3 k=5 N=240 C=34 maxocc=37 states=91048 formula=34 EXACT
+p=3 k=6 N=240 C=40 maxocc=43 states=192905 formula=40 EXACT
+p=3 k=8 N=240 C=52 maxocc=55 states=661890 formula=52 EXACT
+p=4 k=0 N=240 C=8 maxocc=15 states=373 formula=8 EXACT
+p=4 k=1 N=240 C=24 maxocc=31 states=28680 formula=24 EXACT
+p=4 k=2 N=240 C=40 maxocc=47 states=388695 formula=40 EXACT
+p=4 k=3 N=240 C=56 maxocc=63 states=2589922 formula=56 EXACT
+p=5 k=0 N=240 C=16 maxocc=31 states=15193 formula=16 EXACT

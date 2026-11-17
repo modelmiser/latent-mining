@@ -1,0 +1,16 @@
+charges 4 4 : C=10 maxocc=11 states=325
+charges 6 6 : C=14 maxocc=15 states=833
+charges 7 7 : C=16 maxocc=17 states=1216
+charges 8 8 : C=18 maxocc=19 states=1701
+charges 9 9 : C=20 maxocc=21 states=2300
+charges 10 10 : C=22 maxocc=23 states=3025
+charges 15 15 : C=32 maxocc=33 states=8960
+charges 4 4 4 : C=28 maxocc=31 states=37696
+charges 5 5 5 : C=34 maxocc=37 states=91048
+charges 6 6 6 : C=40 maxocc=43 states=192905
+charges 7 7 7 : C=46 maxocc=49 states=370944
+charges 8 8 8 : C=52 maxocc=55 states=661890
+charges 2 2 2 2 : C=40 maxocc=47 states=388695
+charges 3 3 3 3 : C=56 maxocc=63 states=2589922
+charges 0 0 0 0 0 : C=16 maxocc=31 states=15193
+charges 1 1 1 1 1 : C=56 maxocc=71 states=4191446

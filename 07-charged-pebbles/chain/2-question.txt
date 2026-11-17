@@ -1,0 +1,17 @@
+Tired pebbles, clean delivery. Nodes 1, 2, 3, ... lie on a line; node 0 is a virtual node that always counts as pebbled and never holds one of your pebbles. You own p pebbles, all initially in your hand and all "fresh". Each pebble is permanently either fresh or tired; pebbles of the same status are interchangeable. A node holds at most one pebble. A move is exactly one of:
+
+(P) Place: put a pebble from your hand (fresh or tired, your choice) on an empty node i >= 1 whose predecessor i-1 is pebbled.
+(R) Reversible removal: take the pebble on node i >= 1 back into your hand, legal exactly when node i-1 is pebbled. The pebble keeps its status.
+(F) Forgetful removal: take a FRESH pebble on node i >= 2 back into your hand, legal exactly when node i-1 is empty. That pebble becomes tired, permanently. A tired pebble whose predecessor is empty cannot be removed at all.
+
+So each pebble can pay for forgetting once in its life. There is no limit on the number of moves.
+
+A configuration is CLEAN AT n if node n holds a pebble, every other node is empty, and the other p-1 pebbles are in your hand (their statuses, and the status of the pebble on n, do not matter).
+
+Define
+  C(p) = the largest n such that some finite sequence of legal moves from the empty board reaches a configuration clean at n;
+  F(p) = the largest n such that some finite sequence of legal moves from the empty board ever puts a pebble on node n (stranded tired pebbles may be left behind).
+
+Both are finite because at most p forgetful removals ever occur. Unverified hand values: C(1) = F(1) = 1, C(2) = 4, F(2) = 5 (for p = 2: place on 1, place on 2, remove 1 reversibly, place on 3, forget 2, place on 4, forget 3 -- now the board is clean at 4 with both pebbles tired -- then place on 5, which strands the tired pebble on 4).
+
+Questions. (1) Determine C(p) exactly for every p >= 1, as a closed formula or a recurrence, with proof. (2) Determine the stranding gap F(p) - C(p) for every p: is it bounded, linear in p, or exponential in p? (3) In an optimal clean delivery (one reaching a configuration clean at C(p)), is it always possible to have used all p forgetful removals, and is it ever necessary to use fewer than p?

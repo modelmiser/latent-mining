@@ -1,0 +1,10 @@
+# p=3 k=0 strategy, clean at 4
+P 1 0
+P 2 0
+R 1 0
+P 3 0
+P 4 0
+R 3 0
+P 1 0
+R 2 0
+R 1 0

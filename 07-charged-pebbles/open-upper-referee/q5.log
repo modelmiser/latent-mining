@@ -1,0 +1,16 @@
+q 5 N 36 mut none universe 443704 comps 267639
+  cases I 2143296
+  cases L1 318976
+  cases L2 148140
+  cases L3 443704
+  cases L4 2083980
+  cases L5 428511
+  cases L6 2276720
+  cases N 2143296
+  cases SHAPE 217311
+  cases SHAPE fails for m>=2 (not claimed) 1334911
+  cases SHAPE_m>=2(not claimed) 1925985
+  cases STEP proof-case 199380
+  cases STEP stmt 151710
+  cases W 15594
+  ALL PASS

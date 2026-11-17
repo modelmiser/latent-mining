@@ -1,0 +1,15 @@
+p=5 k=1 N=240 C=56 maxocc=71 states=4191446 formula=56 EXACT
+
+real	0m1.179s
+user	0m1.128s
+sys	0m0.051s
+p=4 k=4 N=240 C=72 maxocc=79 states=11511694 formula=72 EXACT
+
+real	0m3.857s
+user	0m3.666s
+sys	0m0.190s
+p=3 k=15 N=240 C=94 maxocc=97 states=11440760 formula=94 EXACT
+
+real	0m3.149s
+user	0m2.959s
+sys	0m0.189s

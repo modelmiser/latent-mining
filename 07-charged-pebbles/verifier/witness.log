@@ -1,0 +1,56 @@
+SKIP solver-a/witness/BAD_p2_k1_extra.txt
+SKIP solver-a/witness/BAD_p3_k1_F_as_R.txt
+solver-a/witness/bfs_p2_k1.txt 2 1 4 7 moves OK | n+1: REJECT
+solver-a/witness/bfs_p2_k2.txt 2 2 6 11 moves OK | n+1: REJECT
+solver-a/witness/bfs_p2_k3.txt 2 3 8 15 moves OK | n+1: REJECT
+solver-a/witness/bfs_p3_k1.txt 3 1 10 21 moves OK | n+1: REJECT
+solver-a/witness/bfs_p3_k2.txt 3 2 16 33 moves OK | n+1: REJECT
+solver-a/witness/bfs_p3_k3.txt 3 3 22 45 moves OK | n+1: REJECT
+solver-a/witness/bfs_p4_k1.txt 4 1 24 65 moves OK | n+1: REJECT
+solver-a/witness/bfs_p4_k2.txt 4 2 40 105 moves OK | n+1: REJECT
+solver-a/witness/bfs_p4_k3.txt 4 3 56 145 moves OK | n+1: REJECT
+solver-a/witness/bfs_p5_k1.txt 5 1 56 201 moves OK | n+1: REJECT
+solver-a/witness/strat_p2_k15.txt 2 15 32 63 moves OK | n+1: REJECT
+solver-a/witness/strat_p3_k1.txt 3 1 10 21 moves OK | n+1: REJECT
+solver-a/witness/strat_p3_k15.txt 3 15 94 189 moves OK | n+1: REJECT
+solver-a/witness/strat_p4_k4.txt 4 4 72 187 moves OK | n+1: REJECT
+solver-a/witness/strat_p4_k6.txt 4 6 104 267 moves OK | n+1: REJECT
+solver-a/witness/strat_p5_k2.txt 5 2 96 361 moves OK | n+1: REJECT
+solver-a/witness/strat_p5_k3.txt 5 3 136 501 moves OK | n+1: REJECT
+solver-a/witness/strat_p6_k1.txt 6 1 128 735 moves OK | n+1: REJECT
+solver-a/witness/strat_p6_k2.txt 6 2 224 1227 moves OK | n+1: REJECT
+solver-a/witness/strat_p7_k1.txt 7 1 288 2437 moves OK | n+1: REJECT
+solver-b/wit_bfs_2_1.txt 2 1 4 7 moves OK | n+1: REJECT
+solver-b/wit_bfs_2_2.txt 2 2 6 11 moves OK | n+1: REJECT
+solver-b/wit_bfs_3_1.txt 3 1 10 21 moves OK | n+1: REJECT
+solver-b/wit_bfs_3_2.txt 3 2 16 33 moves OK | n+1: REJECT
+solver-b/wit_bfs_4_1.txt 4 1 24 65 moves OK | n+1: REJECT
+solver-b/wit_strat_2_0.txt 2 0 2 3 moves OK | n+1: REJECT
+solver-b/wit_strat_2_1.txt 2 1 4 7 moves OK | n+1: REJECT
+solver-b/wit_strat_2_7.txt 2 7 16 31 moves OK | n+1: REJECT
+solver-b/wit_strat_3_0.txt 3 0 4 9 moves OK | n+1: REJECT
+solver-b/wit_strat_3_1.txt 3 1 10 21 moves OK | n+1: REJECT
+solver-b/wit_strat_3_5.txt 3 5 34 69 moves OK | n+1: REJECT
+solver-b/wit_strat_4_1.txt 4 1 24 67 moves OK | n+1: REJECT
+solver-b/wit_strat_4_3.txt 4 3 56 147 moves OK | n+1: REJECT
+solver-b/wit_strat_5_1.txt 5 1 56 221 moves OK | n+1: REJECT
+solver-b/wit_strat_5_3.txt 5 3 136 501 moves OK | n+1: REJECT
+solver-b/wit_strat_6_1.txt 6 1 128 735 moves OK | n+1: REJECT
+solver-b/wit_strat_6_2.txt 6 2 224 1227 moves OK | n+1: REJECT
+solver-b/wit_strat_7_1.txt 7 1 288 2437 moves OK | n+1: REJECT
+solver-b/wit_strat_8_1.txt 8 1 640 8027 moves OK | n+1: REJECT
+failures 0
+A BAD F_as_R: REJECT line 13: R with empty predecessor
+A BAD extra : REJECT line 9: F on charge 0 | claimed n=5: REJECT line 9: F on charge 0
+B neg wit_3_1_line_deleted.txt REJECT line 7: no hand pebble of charge 1
+B neg wit_3_1_charge_inflated.txt REJECT line 14: charge mismatch
+mine: unmodified OK
+mine: F->R REJECT line 13: R with empty predecessor
+mine: first R->F REJECT line 3: F with pebbled predecessor
+mine: k=0 REJECT line 1: no hand pebble of charge 1
+mine: line deleted REJECT line 6: no hand pebble of charge 1
+mine: P to node+1 (skip) REJECT line 2: predecessor empty
+mine: duplicate place REJECT line 2: node occupied
+mine: p=2 REJECT line 5: no hand pebble of charge 1
+mine: trunc before last F REJECT final board [8, 10] not clean at 10
+mine: 4 F-moves on k=1 p=3 (append P 11 0, F 10 0) REJECT line 23: F on charge 0
