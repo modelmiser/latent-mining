@@ -1,0 +1,104 @@
+d=1 B=1 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3920kB
+d=1 B=2 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+  time=0.00s mem=3760kB
+d=1 B=1 CLOCK INFEASIBLE sets_visited=4 maxdepth=4
+  time=0.00s mem=3724kB
+d=1 B=2 CLOCK FEASIBLE sets_visited=8 maxdepth=8
+  preperiod=7 period=1
+  prefix: 0-0 000 +-0 000 +-- +0- +0-
+  cycle: +0-
+  time=0.00s mem=3612kB
+d=1 B=1 HISTORY FEASIBLE beliefs_created=6
+  strategy automaton: 6 belief nodes, max belief size 3
+  time=0.00s mem=3864kB
+d=2 B=1 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3940kB
+d=2 B=2 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=2 B=3 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=2 B=4 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+  time=0.00s mem=3728kB
+d=2 B=1 CLOCK INFEASIBLE sets_visited=3 maxdepth=3
+  time=0.00s mem=3912kB
+d=2 B=2 CLOCK INFEASIBLE sets_visited=35 maxdepth=7
+  time=0.00s mem=3728kB
+d=2 B=3 CLOCK FEASIBLE sets_visited=16 maxdepth=15
+  preperiod=10 period=5
+  prefix: 0-0 0-0 0+0 0-0 +00 0-- +-- 000 +0- 00-
+  cycle: +00 +0- 000 +0- 00-
+  time=0.00s mem=3728kB
+d=2 B=1 HISTORY INFEASIBLE beliefs_created=3
+  time=0.00s mem=3728kB
+d=2 B=2 HISTORY INFEASIBLE beliefs_created=22
+  time=0.00s mem=3948kB
+d=2 B=3 HISTORY FEASIBLE beliefs_created=61
+  strategy automaton: 61 belief nodes, max belief size 11
+  time=0.00s mem=3928kB
+d=3 B=1 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=3 B=2 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3944kB
+d=3 B=3 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=3 B=4 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3736kB
+d=3 B=5 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+  time=0.00s mem=3728kB
+d=3 B=1 CLOCK INFEASIBLE sets_visited=3 maxdepth=3
+  time=0.00s mem=3728kB
+d=3 B=2 CLOCK INFEASIBLE sets_visited=28 maxdepth=6
+  time=0.00s mem=3768kB
+d=3 B=3 CLOCK INFEASIBLE sets_visited=1406 maxdepth=11
+  time=0.01s mem=3728kB
+d=3 B=4 CLOCK FEASIBLE sets_visited=99 maxdepth=24
+  preperiod=17 period=4
+  prefix: 0-0 0-0 000 000 +-0 000 +-0 000 +-- 00- +0- 000 ++0 0-- +0- 000 ++0
+  cycle: 0-- +0- 000 ++0
+  time=0.00s mem=3940kB
+d=3 B=1 HISTORY INFEASIBLE beliefs_created=3
+  time=0.00s mem=3900kB
+d=3 B=2 HISTORY INFEASIBLE beliefs_created=28
+  time=0.00s mem=3728kB
+d=3 B=3 HISTORY FEASIBLE beliefs_created=122
+  strategy automaton: 122 belief nodes, max belief size 18
+  time=0.00s mem=3940kB
+d=4 B=1 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3944kB
+d=4 B=2 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3580kB
+d=4 B=3 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3944kB
+d=4 B=4 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=4 B=5 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=4 B=6 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=4 B=7 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+  time=0.00s mem=3676kB
+d=4 B=1 CLOCK INFEASIBLE sets_visited=3 maxdepth=3
+  time=0.00s mem=3728kB
+d=4 B=2 CLOCK INFEASIBLE sets_visited=25 maxdepth=5
+  time=0.00s mem=3504kB
+d=4 B=3 CLOCK INFEASIBLE sets_visited=233 maxdepth=9
+  time=0.00s mem=3756kB
+d=4 B=4 CLOCK INFEASIBLE sets_visited=76002 maxdepth=14
+  time=0.84s mem=22580kB
+d=4 B=5 CLOCK FEASIBLE sets_visited=45 maxdepth=35
+  preperiod=28 period=7
+  prefix: 0-0 0-0 0-0 000 0+0 0-0 +00 000 +00 0-- +-- 0-- +00 000 +0- 00- +00 00- +00 +0- 000 +0- 000 +0- 00- +00 +0- 000
+  cycle: +0- 000 +0- 00- +00 +0- 000
+  time=0.00s mem=3916kB
+d=4 B=1 HISTORY INFEASIBLE beliefs_created=3
+  time=0.00s mem=3944kB
+d=4 B=2 HISTORY INFEASIBLE beliefs_created=25
+  time=0.00s mem=3500kB
+d=4 B=3 HISTORY INFEASIBLE beliefs_created=193
+  time=0.00s mem=3728kB
+d=4 B=4 HISTORY INFEASIBLE beliefs_created=660
+  time=0.00s mem=4136kB
+d=4 B=5 HISTORY FEASIBLE beliefs_created=521
+  strategy automaton: 521 belief nodes, max belief size 36
+  time=0.00s mem=4252kB

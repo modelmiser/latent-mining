@@ -1,0 +1,5 @@
+        ^^^^^^^^^^^^^^^^^^^
+  File "solver-a/game.py", line 57, in clock_step
+    return frozenset(out)
+           ^^^^^^^^^^^^^^
+MemoryError

@@ -1,0 +1,20 @@
+  d=1 B=0 INFEASIBLE beliefs=1
+  d=1 B=1 FEASIBLE beliefs=4
+H(1) = 1   2*floor(d/2)+1 = 1   strategy nodes=4
+  d=2 B=0 INFEASIBLE beliefs=1
+  d=2 B=1 INFEASIBLE beliefs=3
+  d=2 B=2 INFEASIBLE beliefs=19
+  d=2 B=3 FEASIBLE beliefs=65
+H(2) = 3   2*floor(d/2)+1 = 3   strategy nodes=25
+  d=3 B=0 INFEASIBLE beliefs=1
+  d=3 B=1 INFEASIBLE beliefs=3
+  d=3 B=2 INFEASIBLE beliefs=24
+  d=3 B=3 FEASIBLE beliefs=134
+H(3) = 3   2*floor(d/2)+1 = 3   strategy nodes=38
+  d=4 B=0 INFEASIBLE beliefs=1
+  d=4 B=1 INFEASIBLE beliefs=3
+  d=4 B=2 INFEASIBLE beliefs=25
+  d=4 B=3 INFEASIBLE beliefs=157
+  d=4 B=4 INFEASIBLE beliefs=589
+  d=4 B=5 FEASIBLE beliefs=1057
+H(4) = 5   2*floor(d/2)+1 = 5   strategy nodes=73

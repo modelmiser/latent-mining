@@ -1,0 +1,37 @@
+== A. half-duty relay: exact sup|x| over all adversaries (closure), expected d+1 ==
+  d=1: sup|x| = 2   OK
+  d=3: sup|x| = 4   OK
+  d=5: sup|x| = 6   OK
+  d=7: sup|x| = 8   OK
+  d=9: sup|x| = 10   OK
+== B. NEGATIVE CONTROL: ask the best-response adversary to breach band d+1 (i.e. force d+2) against half-duty: must NOT succeed ==
+  d=3: breach of band 4 within 120 ticks: NONE (control behaves)
+  d=5: breach of band 6 within 200 ticks: NONE (control behaves)
+  d=7: breach of band 8 within 280 ticks: NONE (control behaves)
+== C. best-response adversary breaches band d against half-duty (forces |x|>=d+1) ==
+  d=3: band 3 breached at t=8  w=+00-0-0-
+  d=5: band 5 breached at t=12  w=+0000-0-0-0-
+  d=7: band 7 breached at t=16  w=+000000-0-0-0-0-
+  d=9: band 9 breached at t=20  w=+00000000-0-0-0-0-0-
+== D. optimal clocks found by the solvers (band d+1 witnesses): exact sup must be d+1, and band d must be breached ==
+  d=1 claimed band 2 [solver-b log]: exact sup|x|=2 OK; band 1 breached at t=1
+  d=2 claimed band 3 [solver-b log]: exact sup|x|=3 OK; band 2 breached at t=2
+  d=3 claimed band 4 [solver-b log]: exact sup|x|=4 OK; band 3 breached at t=3
+  d=4 claimed band 5 [solver-b log]: exact sup|x|=5 OK; band 4 breached at t=3
+  d=5 claimed band 6 [solver-b log]: exact sup|x|=6 OK; band 5 breached at t=10
+  d=6 claimed band 7 [solver-b log]: exact sup|x|=7 OK; band 6 breached at t=12
+  d=1 claimed band 2 [feasible_d1_B2.txt]: exact sup|x|=2 OK; band 1 breached at t=1
+  d=3 claimed band 4 [feasible_d3_B4.txt]: exact sup|x|=4 OK; band 3 breached at t=3
+  d=5 claimed band 6 [feasible_d5_B6.txt]: exact sup|x|=6 OK; band 5 breached at t=4
+  d=7 claimed band 8 [feasible_d7_B8.txt]: exact sup|x|=8 OK; band 7 breached at t=5
+  d=9 claimed band 10 [feasible_d9_B10.txt]: exact sup|x|=10 OK; band 9 breached at t=7
+== E. random clocks: best-response adversary must breach band d (odd d) ==
+  d=3 uniform        : 300 clocks, unbreached within 30 ticks: 0; latest breach t=7
+  d=3 relay-ish      : 300 clocks, unbreached within 30 ticks: 0; latest breach t=9
+  d=3 halfduty+noise : 300 clocks, unbreached within 30 ticks: 0; latest breach t=10
+  d=5 uniform        : 300 clocks, unbreached within 50 ticks: 0; latest breach t=12
+  d=5 relay-ish      : 300 clocks, unbreached within 50 ticks: 0; latest breach t=12
+  d=5 halfduty+noise : 300 clocks, unbreached within 50 ticks: 0; latest breach t=16
+  d=7 uniform        : 120 clocks, unbreached within 70 ticks: 0; latest breach t=16
+  d=7 relay-ish      : 120 clocks, unbreached within 70 ticks: 0; latest breach t=16
+  d=7 halfduty+noise : 120 clocks, unbreached within 70 ticks: 0; latest breach t=18

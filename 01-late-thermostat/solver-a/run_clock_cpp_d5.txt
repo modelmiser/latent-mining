@@ -1,0 +1,1 @@
+d=5 B=5 sets=6218936 dead=6218936  => IMPOSSIBLE

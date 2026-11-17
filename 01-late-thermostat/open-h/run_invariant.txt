@@ -1,0 +1,8 @@
+d=1: invariant holds on all 11 reachable states; max|y|=1 (<= 1) max|z|=0 (<= 0) max|Omega|=1 max|x|=1
+d=3: invariant holds on all 1121 reachable states; max|y|=2 (<= 2) max|z|=1 (<= 1) max|Omega|=2 max|x|=3
+d=5: invariant holds on all 52265 reachable states; max|y|=3 (<= 3) max|z|=2 (<= 2) max|Omega|=3 max|x|=5
+d=11 long runs (200000 ticks, non-exhaustive): rand:max|x|=11 push:max|x|=6 away:max|x|=6 runs:max|x|=11
+d=13 long runs (200000 ticks, non-exhaustive): rand:max|x|=13 push:max|x|=7 away:max|x|=7 runs:max|x|=13
+d=21 long runs (200000 ticks, non-exhaustive): rand:max|x|=19 push:max|x|=11 away:max|x|=11 runs:max|x|=21
+d=51 long runs (200000 ticks, non-exhaustive): rand:max|x|=39 push:max|x|=26 away:max|x|=26 runs:max|x|=51
+d=101 long runs (200000 ticks, non-exhaustive): rand:max|x|=70 push:max|x|=51 away:max|x|=51 runs:max|x|=101

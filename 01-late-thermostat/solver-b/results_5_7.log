@@ -1,0 +1,71 @@
+d=5 B=1 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=5 B=2 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3896kB
+d=5 B=3 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3948kB
+d=5 B=4 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3912kB
+d=5 B=5 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3700kB
+d=5 B=6 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=5 B=7 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=5 B=8 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+  time=0.00s mem=3728kB
+d=5 B=1 CLOCK INFEASIBLE sets_visited=3 maxdepth=3
+  time=0.00s mem=3728kB
+d=5 B=2 CLOCK INFEASIBLE sets_visited=25 maxdepth=5
+  time=0.00s mem=3728kB
+d=5 B=3 CLOCK INFEASIBLE sets_visited=184 maxdepth=8
+  time=0.00s mem=3892kB
+d=5 B=4 CLOCK INFEASIBLE sets_visited=9349 maxdepth=12
+  time=0.12s mem=9164kB
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+Command terminated by signal 6
+  time=233.45s mem=5995832kB
+ABORT d=5 m=C B=5
+d=5 B=1 HISTORY INFEASIBLE beliefs_created=3
+  time=0.00s mem=3892kB
+d=5 B=2 HISTORY INFEASIBLE beliefs_created=25
+  time=0.00s mem=3608kB
+d=5 B=3 HISTORY INFEASIBLE beliefs_created=200
+  time=0.00s mem=3888kB
+d=5 B=4 HISTORY INFEASIBLE beliefs_created=1274
+  time=0.00s mem=5196kB
+d=5 B=5 HISTORY FEASIBLE beliefs_created=1232
+  strategy automaton: 1232 belief nodes, max belief size 57
+  time=0.00s mem=5416kB
+d=6 B=1 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=6 B=2 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3644kB
+d=6 B=3 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3756kB
+d=6 B=4 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3724kB
+d=6 B=5 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3956kB
+d=6 B=6 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3888kB
+d=6 B=7 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=6 B=8 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3728kB
+d=6 B=9 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+  time=0.00s mem=3504kB
+d=6 B=10 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+  time=0.00s mem=3912kB
+d=6 B=1 CLOCK INFEASIBLE sets_visited=3 maxdepth=3
+  time=0.00s mem=3720kB
+d=6 B=2 CLOCK INFEASIBLE sets_visited=25 maxdepth=5
+  time=0.00s mem=3728kB
+d=6 B=3 CLOCK INFEASIBLE sets_visited=167 maxdepth=7
+  time=0.00s mem=3736kB
+d=6 B=4 CLOCK INFEASIBLE sets_visited=1729 maxdepth=11
+  time=0.02s mem=6404kB
+d=6 B=5 CLOCK INFEASIBLE sets_visited=544020 maxdepth=15
+  time=20.26s mem=1114036kB

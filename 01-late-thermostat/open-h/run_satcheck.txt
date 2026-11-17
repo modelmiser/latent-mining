@@ -1,0 +1,5 @@
+d=1 K=1 cap=1 OK: sup|x|=1 reachable_states=11
+d=3 K=2 cap=3 OK: sup|x|=3 reachable_states=647
+d=5 K=3 cap=5 OK: sup|x|=5 reachable_states=17403
+d=7 K=4 cap=7 OK: sup|x|=7 reachable_states=363063
+d=9 K=5 cap=9 OK: sup|x|=9 reachable_states=7610769

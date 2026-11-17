@@ -1,0 +1,1104 @@
+clockwit 1 2 (True, 98)
+sim 1 2 clock (True, 2)
+clockwit 2 3 (True, 566)
+sim 2 3 clock (True, 3)
+clockwit 3 4 (True, 2384)
+sim 3 4 clock (True, 4)
+clockwit 4 5 (True, 15920)
+sim 4 5 clock (True, 5)
+clockwit 5 6 (True, 32416)
+sim 5 6 clock (True, 6)
+clockwit 6 7 (True, 230092)
+sim 6 7 clock (True, 7)
+histwit 1 1 (True, 12)
+sim 1 1 hist (True, 1)
+histwit 2 3 (True, 439)
+sim 2 3 hist (True, 3)
+histwit 3 3 (True, 1764)
+sim 3 3 hist (True, 3)
+histwit 4 5 (True, 20269)
+sim 4 5 hist (True, 5)
+histwit 5 5 (True, 91438)
+sim 5 5 hist (True, 5)
+histwit 6 7 (True, 589219)
+sim 6 7 hist (True, 7)
+histwit 7 7 (True, 3290540)
+sim 7 7 hist (True, 7)
+sim 1 2 relay (True, 2)
+relay 1 2 ['+0-']
+relay 1 1 []
+sim 2 4 relay (True, 4)
+relay 2 4 ['+0-']
+relay 2 3 []
+sim 3 5 relay (True, 5)
+relay 3 5 ['+0-']
+relay 3 4 []
+sim 4 7 relay (True, 7)
+relay 4 7 ['+0-']
+relay 4 6 []
+sim 5 8 relay (True, 8)
+relay 5 8 ['+0-']
+relay 5 7 []
+sim 6 10 relay (True, 10)
+relay 6 10 ['+0-']
+relay 6 9 []
+clocklb(no clock holds B?) 4 4 (True, 79702)
+clocklb(no clock holds B?) 4 5 (False, 46)
+histlb(controller dies within depth?) 5 4 80 (True, 87514)
+histlb(controller dies within depth?) 5 5 60 (False, 19382)
+Traceback (most recent call last):
+  File "solver-b/verify.py", line 165, in <module>
+    elif cmd == 'histlb': print('histlb(controller dies within depth?)', d, B, sys.argv[4], histlb(d, B, int(sys.argv[4])))
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 126, in histlb
+    return (not win(frozenset([init(d)]), depth)), len(memo)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                      ^^^^^^^^^^^^
+MemoryError
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 66, in apport_excepthook
+    import apport.report
+  File "/usr/lib/python3/dist-packages/apport/__init__.py", line 6, in <module>
+    from apport.logging import error, fatal, log, memdbg, warning
+  File "/usr/lib/python3/dist-packages/apport/logging.py", line 6, in <module>
+    import typing
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 991, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1087, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1187, in get_data
+MemoryError
+
+Original exception was:
+Traceback (most recent call last):
+  File "solver-b/verify.py", line 165, in <module>
+    elif cmd == 'histlb': print('histlb(controller dies within depth?)', d, B, sys.argv[4], histlb(d, B, int(sys.argv[4])))
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 126, in histlb
+    return (not win(frozenset([init(d)]), depth)), len(memo)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in win
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "solver-b/verify.py", line 123, in <genexpr>
+    if ok and all(win(frozenset(p), k - 1) for p in parts.values()): r = True; break
+                      ^^^^^^^^^^^^
+MemoryError

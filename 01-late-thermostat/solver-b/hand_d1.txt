@@ -1,0 +1,46 @@
+HAND DERIVATION, d = 1  (written before any code)
+
+Model: o_t = sgn(x_{t-1}); o_0 = o_1 = 0 always (x_{-1} = x_0 = 0).
+x_{t+1} = x_t + u_t + w_t; w nonzero at most every other tick.
+Claim: (R, C, H)(1) = (2, 2, 1).
+
+--- H(1) = 1 ---
+Lower bound: w_0 = +1, u_0 in {-1,0,1} -> adversary can always make |x_1| >= 1
+(if u_0 = -1 pick w_0 = -1). So H >= 1.
+Upper bound: inside the band [-1,1], sgn(x) = x, so at tick t the controller knows
+x_0..x_{t-1} exactly, hence w_0..w_{t-2}. Two belief shapes:
+  K(y): x_t = y known exactly, adversary free now   (arises when w_{t-2} != 0, so w_{t-1}=0)
+  U   : x_t in {-1 (adv must rest), 0 (adv free), +1 (adv must rest)}
+In K(y): play u = -y. x_{t+1} in {-1,0,1}, with rest flag iff nonzero -> U.
+In U: play u = 0. x_t = +-1 -> rest -> x_{t+1} = x_t; x_t = 0 -> x_{t+1} in {-1,0,1}.
+  At t+1 controller sees x_t. If x_t != 0: w_{t-1} != 0 so w_t = 0, x_{t+1} = x_t known,
+  adversary free at t+1 -> K(x_t). If x_t = 0: x_{t+1} = w_t -> U.
+Start is x_0 = 0, free: a subset of U. Invariant holds forever. H(1) = 1.
+Strategy in closed form: u_t = -o_t if u_{t-1} = 0, else 0   (u_{-1} := 0).
+
+--- C(1) >= 2 (no clock holds B = 1) ---
+t=0: o=0. f_0(0) != 0 -> adversary adds the same sign -> |x_1| = 2. So f_0(0)=0.
+     x_1 in {-1r, 0f, +1r}  (r = adversary must rest, f = free)
+t=1: o=0 for all. f_1(0)=+1 kills x_1=1 ; -1 kills x_1=-1. So f_1(0)=0.
+     states (x_1,x_2,flag): (1,1,f) (-1,-1,f) (0,0,f) (0,1,r) (0,-1,r)
+t=2: o=sgn(x_1). (1,1,f) forces f_2(+)=-1; (-1,-1,f) forces f_2(-)=+1;
+     (0,+-1,r) force f_2(0)=0.
+     states (x_2,x_3,flag) with x_2 = 1:
+        from (1,1,f), u=-1: (1,-1,r) (1,0,f) (1,1,r)
+        from (0,1,r), u=0 : (1,1,f)
+t=3: o=+ on all four. f_3(+) = -1 sends (1,-1,r) to -2.
+                      f_3(+) =  0 lets (1,1,f) go to 2 (w=+1).
+                      f_3(+) = +1 sends (1,1,r) to 2.
+     Every choice was forced, so no clock holds B=1.  C(1) >= 2.
+
+--- R(1) = 2 ---
+Lower bound: R >= C >= 2. (Direct: f(0) != 0 dies at t=0; f(0)=0 forces f(+)=-1 after
+ w_0=+1 (x_1=x_2=1, free at t=2); then w_2=+1, x_3=1; t=3 o=+, u=-1, w=0, x_4=0;
+ t=4 o=sgn(x_3)=+, u=-1, w=-1, x_5=-2.)
+Upper bound: f = (f(-),f(0),f(+)) = (+1, 0, -1). Show x never reaches 3 (symmetric for -3).
+ x_{t+1}=3 needs x_t=2 and u_t+w_t=1 (a jump of 2 from x_t=1 needs u_t=+1, i.e. x_{t-1}<0,
+ and then x_{t-1}<=-1 -> x_t=1 is a jump of 2, so w_{t-1}!=0, so w_t=0: contradiction).
+ From x_t=2: (u,w)=(0,+1): x_{t-1}=0, so the step 0->2 used w_{t-1}=+1, so w_t=0: contra.
+             (u,w)=(+1,0): x_{t-1}<0, step >=3: impossible.
+ And 2 is reached: x=-1,-1 (free) -> u=+1,w=+1 -> 1 -> (o=-) u=+1,w=0 -> 2.
+ So R(1) = 2, hence C(1) = 2.

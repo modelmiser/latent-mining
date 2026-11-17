@@ -1,0 +1,27 @@
+# ngclock3 d B - maxnodes KR   (KR=1000: exact game, no filter; KR=3: sign windows with <=3 runs only)
+KR=1000 d=1 B=1 INFEASIBLE nodes=4 nogoods=4 avg|K|=3.0 max depth=3 (root nogood id 3, size 1)
+KR=1000 d=1 B=2 FEASIBLE nodes=7 nogoods=0; clock (f(-)f(0)f(+)), prefix then cycle from index 6:
+KR=1000 d=2 B=2 INFEASIBLE nodes=21 nogoods=21 avg|K|=4.3 max depth=4 (root nogood id 20, size 1)
+KR=1000 d=2 B=3 FEASIBLE nodes=16 nogoods=1; clock (f(-)f(0)f(+)), prefix then cycle from index 10:
+KR=1000 d=3 B=3 INFEASIBLE nodes=177 nogoods=177 avg|K|=8.1 max depth=8 (root nogood id 176, size 1)
+KR=1000 d=3 B=4 FEASIBLE nodes=38 nogoods=17; clock (f(-)f(0)f(+)), prefix then cycle from index 17:
+KR=1000 d=4 B=4 INFEASIBLE nodes=721 nogoods=721 avg|K|=11.5 max depth=10 (root nogood id 720, size 1)
+KR=1000 d=4 B=5 FEASIBLE nodes=41 nogoods=6; clock (f(-)f(0)f(+)), prefix then cycle from index 28:
+KR=1000 d=5 B=5 INFEASIBLE nodes=3256 nogoods=3256 avg|K|=16.8 max depth=15 (root nogood id 3255, size 1)
+KR=1000 d=5 B=6 FEASIBLE nodes=60 nogoods=24; clock (f(-)f(0)f(+)), prefix then cycle from index 30:
+KR=1000 d=6 B=6 INFEASIBLE nodes=12338 nogoods=12338 avg|K|=25.0 max depth=16 (root nogood id 12337, size 1)
+KR=1000 d=6 B=7 FEASIBLE nodes=80 nogoods=29; clock (f(-)f(0)f(+)), prefix then cycle from index 42:
+KR=1000 d=7 B=7 INFEASIBLE nodes=43023 nogoods=43023 avg|K|=30.9 max depth=21 (root nogood id 43022, size 1)
+KR=1000 d=7 B=8 FEASIBLE nodes=150 nogoods=88; clock (f(-)f(0)f(+)), prefix then cycle from index 54:
+KR=1000 d=8 B=8 INFEASIBLE nodes=113277 nogoods=113277 avg|K|=43.0 max depth=22 (root nogood id 113276, size 1)
+KR=1000 d=8 B=9 FEASIBLE nodes=153 nogoods=77; clock (f(-)f(0)f(+)), prefix then cycle from index 65:
+KR=3 d=3 B=3 INFEASIBLE nodes=177 nogoods=177 avg|K|=8.1 max depth=8 (root nogood id 176, size 1)
+KR=3 d=5 B=5 INFEASIBLE nodes=4307 nogoods=4307 avg|K|=13.3 max depth=15 (root nogood id 4306, size 1)
+KR=3 d=7 B=7 INFEASIBLE nodes=19450 nogoods=19450 avg|K|=18.2 max depth=22 (root nogood id 19449, size 1)
+KR=3 d=9 B=9 INFEASIBLE nodes=75899 nogoods=75899 avg|K|=23.5 max depth=27 (root nogood id 75898, size 1)
+KR=3 d=11 B=11 INFEASIBLE nodes=199469 nogoods=199469 avg|K|=29.2 max depth=34 (root nogood id 199468, size 1)
+# earlier logged runs:
+d=9 B=9 INFEASIBLE nodes=384459 nogoods=384459 avg|K|=48.6 max depth=27 (root nogood id 384458, size 1)
+exit=0
+KR=3 d=9 B=9 INFEASIBLE nodes=75899 nogoods=75899 avg|K|=23.5 max depth=27 (root nogood id 75898, size 1)
+KR=3 d=11 B=11 INFEASIBLE nodes=199469 nogoods=199469 avg|K|=29.2 max depth=34 (root nogood id 199468, size 1)

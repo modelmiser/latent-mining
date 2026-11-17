@@ -1,0 +1,7 @@
+nodes=1048576 dead=1048560 depth=16
+nodes=2097152 dead=2097140 depth=12
+nodes=3145728 dead=3145714 depth=14
+nodes=4194304 dead=4194291 depth=13
+d=5 B=5 prune=0 CLOCK INFEASIBLE sets_visited=4386684 maxdepth=19
+  time=65.23s mem=4196772kB
+exit=0

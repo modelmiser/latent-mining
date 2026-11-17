@@ -1,0 +1,315 @@
+=====AGENT: Expansion chain link 1
+You are one link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one step further away from well-known territory while keeping it sharp. Reply from thought alone: do not run code, do not search the web, do not read files. Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+
+A controller must keep an integer level x inside a band [-B, B]. Time is discrete. At every tick an adversary adds a disturbance w in {-1, 0, +1} to x, and the controller adds a control u in {-1, 0, +1} (so its step is bounded). The controller observes the level only after a delay of d ticks: at tick t it is shown x as it was at tick t-d. The controller is a deterministic finite-state machine driven by those delayed observations. For each delay d: what is the narrowest band B that some controller can guarantee against every adversary, and what is the smallest number of states a controller needs to achieve that band? How do both grow with d?
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is already established about the question as given. Name results or fields only if you are confident; write "unsure" rather than inventing a citation. If you think the question as given has an easy answer, say what it is.
+
+2. SUCCESSOR QUESTION: one new question that
+   (a) would NOT be settled by a textbook or by a theorem you can name;
+   (b) is fully formal: every object is defined, and a unique correct answer exists;
+   (c) has small instances whose exact answer can be established by exhaustive computation in a few minutes on one laptop core, AND a general form whose answer would be a formula or a theorem;
+   (d) keeps the heart of the original (acting on delayed information, bounded step, finite memory) rather than changing the subject;
+   (e) is self-contained: a reader who never saw the original must be able to work on it from your text alone.
+   Make it harder and stranger than what you received, but not vaguer. Prefer a twist that makes the easy answer to the original stop working.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): your honest reasons, including your doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 100 words): what computation or proof would confirm or refute a claimed answer.
+
+Keep the whole reply under 600 words. Use exactly those four headings.
+
+=====AGENT: Expansion chain link 2
+You are one link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one step further away from well-known territory while keeping it sharp. Reply from thought alone: do not run code, do not search the web, do not read files. Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+
+Fix integers d >= 0 and k >= 1. A controller is a deterministic Mealy machine with state set Q, |Q| = k, initial state q0, input alphabet {-, 0, +}, output alphabet {-1, 0, +1}, transition delta: Q x {-,0,+} -> Q and output lambda: Q x {-,0,+} -> {-1,0,+1}.
+
+The level is an integer with x_s = 0 for all s <= 0. At each tick t = 0, 1, 2, ...:
+- the controller reads o_t = sgn(x_{t-d});
+- it emits u_t = lambda(q_t, o_t) and moves to q_{t+1} = delta(q_t, o_t);
+- an adversary who knows the machine and the whole history picks w_t in {-1, 0, +1};
+- x_{t+1} = x_t + u_t + w_t.
+
+Let B*(d,k) be the least B such that some k-state machine guarantees |x_t| <= B for all t against every adversary. Let B*(d,inf) be the same quantity over all deterministic strategies with unbounded memory (arbitrary functions of the observation history).
+
+Determine:
+1. B*(d,1) and B*(d,inf) as closed-form functions of d.
+2. The memory threshold K(d) = min{k : B*(d,k) = B*(d,inf)}, and its growth rate: constant, linear, or exponential in d.
+3. The whole staircase k -> B*(d,k). Is it strictly decreasing until K(d)? Is each extra state worth a fixed amount of band, or are there plateaus?
+4. Whether optimal machines can always be taken odd-symmetric (invariant under negating x).
+
+(The previous thinker noted: with a sign-only observation the controller cannot reconstruct individual disturbances, so it can infer magnitude only from how long a sign persists, and timing costs states. The one-state relay u = -sgn(x_{t-d}) is already bounded.)
+
+A CAUTION ABOUT THE QUESTION AS GIVEN: check whether it is well-posed before you build on it. In particular, the adversary's push is as strong as the controller's (both in {-1,0,+1}); ask yourself whether any controller can guarantee a bounded band at all under these exact rules, and if the answer is "no" or "trivially", repair the model in your successor (for example by weakening the adversary with a budget or a rate limit) and say that you did.
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is already established about the question as given, including any flaw you found. Name results or fields only if you are confident; write "unsure" rather than inventing a citation.
+
+2. SUCCESSOR QUESTION: one new question that
+   (a) would NOT be settled by a textbook or by a theorem you can name;
+   (b) is fully formal: every object is defined, and a unique correct answer exists;
+   (c) has small instances whose exact answer can be established by exhaustive computation in a few minutes on one laptop core, AND a general form whose answer would be a formula or a theorem;
+   (d) keeps the heart of the original (acting on delayed, coarse information; bounded step; counted memory) rather than changing the subject;
+   (e) is self-contained: a reader who never saw the original must be able to work on it from your text alone.
+   Make it harder and stranger than what you received, but not vaguer. Prefer ONE well-chosen twist over several; do not multiply parameters.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): your honest reasons, including your doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 100 words): what computation or proof would confirm or refute a claimed answer.
+
+Keep the whole reply under 650 words. Use exactly those four headings.
+
+=====AGENT: Expansion chain link 3
+You are the LAST link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one final step away from well-known territory and, because you are last, to leave it as ONE sharp question with ONE headline answer to find. Reply from thought alone: do not run code, do not search the web, do not read files. Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+
+Fix integers d >= 0 and k >= 1. The level x is an integer with x_s = 0 for all s <= 0. At each tick t = 0, 1, 2, ...:
+- the controller reads o_t = sgn(x_{t-d}) in {-, 0, +};
+- it emits u_t = lambda(q_t, o_t) in {-1, 0, +1} and moves to q_{t+1} = delta(q_t, o_t), where Q is its state set, |Q| = k, with a fixed initial state q_0;
+- an adversary who knows the machine, the whole history and u_t picks w_t in {-1, 0, +1}, subject to: w_t != 0 implies w_{t+1} = 0 (it must rest for one tick after every push);
+- x_{t+1} = x_t + u_t + w_t.
+
+Two machine classes:
+- Feedback F(k): delta is arbitrary.
+- Clock C(k): delta(q, o) does not depend on o. The state is a free-running, eventually periodic clock; the machine is a time-varying memoryless sign-to-action map.
+
+Let B_F(d,k) and B_C(d,k) be the least B such that some machine in the class guarantees |x_t| <= B for all t against every admissible adversary (infinity if none does). Let B_F(d,inf) be the same over arbitrary deterministic functions of the observation history. Note B_F(d,1) = B_C(d,1) =: B_1(d).
+
+Determine:
+1. The exact tables of B_F(d,k) and B_C(d,k) for d <= 3 and k <= 4, and closed forms in d for B_1(d) and B_F(d,inf).
+2. Whether a blind clock ever helps: is inf_k B_C(d,k) < B_1(d) for some d? If so give the least such d, the least period achieving it, and the limit as a function of d. If not, prove B_C(d,k) = B_1(d) for all k.
+3. The exchange rate: for each d, the least k with B_F(d,k) < inf_j B_C(d,j).
+4. Whether K(d) = min{k : B_F(d,k) = B_F(d,inf)} is constant, linear or exponential in d.
+
+(Background from earlier thinkers: the rest rule was added because an adversary exactly as strong as the controller can always keep |x| from shrinking, which made memory nearly worthless. The clock-versus-feedback split asks whether memory that ignores the observations can substitute for memory that follows them.)
+
+YOUR TASK IS DIFFERENT FROM THE EARLIER LINKS: the question has accumulated four sub-questions and two machine classes. Do not add parameters. Instead:
+- Check the model once more for a degenerate or trivial answer under these exact rules (think concretely about d = 0 and d = 1 with the one-state relay), and repair it if needed, saying what you changed.
+- Then choose the single most surprising thing that could be true in this setting, the kind of statement a specialist would not predict before computing, and make THAT the headline question. You may keep at most one supporting sub-question. You may add one twist if it makes the headline stranger and still exactly checkable; otherwise add none.
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is established or easy about the question as given, including any flaw you found. Name results only if confident; write "unsure" rather than inventing a citation.
+
+2. FINAL QUESTION: fully formal and self-contained (a reader who saw nothing else must be able to work on it from your text alone), with every object defined, a unique correct answer, small instances decidable by exhaustive computation in minutes on one laptop core, and a general form whose answer would be a formula or theorem. State the headline as a precise yes/no or "find the exact value/function" question. Say which direction you would bet on and why, in one sentence, clearly marked as a guess.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): honest reasons and doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 120 words): the exact finite game to solve for a fixed machine and band, the enumeration needed, and what proof obligations a general claim carries.
+
+Keep the whole reply under 700 words. Use exactly those four headings.
+
+=====AGENT: Solver A late thermostat
+You are solving a precisely defined combinatorial game problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE GAME
+
+Fix an integer d >= 1. The level x is an integer, with x_s = 0 for every s <= 0. At each tick t = 0, 1, 2, ...:
+ 1. the controller is shown o_t = sgn(x_{t-d}), one of {-, 0, +};
+ 2. the controller emits u_t in {-1, 0, +1};
+ 3. the adversary, who knows the controller's whole strategy, the full history and u_t, picks w_t in {-1, 0, +1}, subject to the REST RULE: if w_t != 0 then w_{t+1} = 0. (At t = 0 the adversary is free.)
+ 4. x_{t+1} = x_t + u_t + w_t.
+
+A response map is a function f: {-,0,+} -> {-1,0,+1} (27 of them). Three controller classes:
+ - RELAY: u_t = f(o_t) for one fixed f.
+ - CLOCK: u_t = f_t(o_t) for a sequence (f_t) fixed in advance, independent of everything observed.
+ - HISTORY: u_t is any deterministic function of (o_0, ..., o_t).
+
+R(d), C(d), H(d) = the least integer B such that some controller of the class guarantees |x_t| <= B for all t >= 0 against every admissible adversary. So H(d) <= C(d) <= R(d).
+
+WHAT TO FIND
+
+ A. The exact triples (R(d), C(d), H(d)) for d = 1, 2, 3, 4, 5 (go further if it is cheap; stop where it is not and say so).
+ B. Witnesses: for each value, an explicit optimal controller (the map f; the eventually periodic clock sequence; a description of the history strategy), and evidence that B-1 is impossible.
+ C. Closed-form conjectures for R(d), C(d), H(d), and the HEADLINE: is sup over d of [C(d) - H(d)] finite? Give your answer, and how strongly the data and any argument support it.
+ D. Any proof you can actually complete (an upper bound via an explicit controller family with an invariant, or a lower bound via an adversary strategy). Mark each proof as complete or as a sketch. A sketch presented as a proof is worse than no proof.
+
+An earlier hand derivation claims the triple at d = 1 is (2, 2, 1). Treat that as an unverified claim: confirm or refute it with your code, and also by hand, before trusting your code on larger d.
+
+METHOD NOTES (suggestions, not requirements)
+ - For fixed d and B the physical state is the window (x_{t-d}, ..., x_t) plus a flag for whether the adversary must rest; it is finite once clipped to [-B, B].
+ - RELAY: for each of the 27 maps, adversary reachability.
+ - CLOCK: the set S_t of physical states reachable at time t evolves deterministically given f_t; a safe clock exists iff the graph on such sets has an infinite safe path from the initial set.
+ - HISTORY: a safety game on belief sets (the set of physical states consistent with the observations so far); at each belief the controller picks its output for the observation it sees. Be careful about exactly what the controller knows and when; write the information structure down before coding it.
+ - Sanity checks that would expose a wrong model: H <= C <= R must hold; values must be non-decreasing in d; a brute-force simulation of your claimed optimal controller against random and against greedy adversaries must never leave the band.
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside solver-a/ . Write your code and outputs there. Do not read the sibling folders.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (for example `ulimit -v 6000000` in the same shell command), and wrap in `timeout 900`. No background daemons. Do not use /tmp for large files.
+ - Do not use pkill/killall. Do not install system packages; python3 is available (check for others before assuming).
+
+REPORT (final message, under 900 words)
+ 1. The table of triples, each entry tagged COMPUTED (exhaustive, with the method) or not.
+ 2. The witnesses, compactly.
+ 3. Conjectured formulas and the headline answer, with your confidence.
+ 4. Proofs: complete ones stated fully; sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.
+
+=====AGENT: Solver B late thermostat
+You are solving a precisely defined combinatorial game problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE GAME
+
+Fix an integer d >= 1. The level x is an integer, with x_s = 0 for every s <= 0. At each tick t = 0, 1, 2, ...:
+ 1. the controller is shown o_t = sgn(x_{t-d}), one of {-, 0, +};
+ 2. the controller emits u_t in {-1, 0, +1};
+ 3. the adversary, who knows the controller's whole strategy, the full history and u_t, picks w_t in {-1, 0, +1}, subject to the REST RULE: if w_t != 0 then w_{t+1} = 0. (At t = 0 the adversary is free.)
+ 4. x_{t+1} = x_t + u_t + w_t.
+
+A response map is a function f: {-,0,+} -> {-1,0,+1} (27 of them). Three controller classes:
+ - RELAY: u_t = f(o_t) for one fixed f.
+ - CLOCK: u_t = f_t(o_t) for a sequence (f_t) fixed in advance, independent of everything observed.
+ - HISTORY: u_t is any deterministic function of (o_0, ..., o_t).
+
+R(d), C(d), H(d) = the least integer B such that some controller of the class guarantees |x_t| <= B for all t >= 0 against every admissible adversary. So H(d) <= C(d) <= R(d).
+
+WHAT TO FIND
+
+ A. The exact triples (R(d), C(d), H(d)) for d = 1, 2, 3, 4, 5 (go further if it is cheap; stop where it is not and say so).
+ B. Witnesses: for each value, an explicit optimal controller (the map f; the eventually periodic clock sequence; a description of the history strategy), and evidence that B-1 is impossible.
+ C. Closed-form conjectures for R(d), C(d), H(d), and the HEADLINE: is sup over d of [C(d) - H(d)] finite? Give your answer, and how strongly the data and any argument support it.
+ D. Any proof you can actually complete (an upper bound via an explicit controller family with an invariant, or a lower bound via an adversary strategy). Mark each proof as complete or as a sketch. A sketch presented as a proof is worse than no proof.
+
+Start by working d = 1 entirely by hand, for all three classes, and write that derivation down BEFORE you write any code. Then make your code reproduce your hand result. If they disagree, find out which is wrong before going on.
+
+METHOD NOTES (suggestions, not requirements)
+ - For fixed d and B the physical state is the window (x_{t-d}, ..., x_t) plus a flag for whether the adversary must rest; it is finite once clipped to [-B, B].
+ - RELAY: for each of the 27 maps, adversary reachability.
+ - CLOCK: the set S_t of physical states reachable at time t evolves deterministically given f_t; a safe clock exists iff the graph on such sets has an infinite safe path from the initial set.
+ - HISTORY: a safety game on belief sets (the set of physical states consistent with the observations so far); at each belief the controller picks its output for the observation it sees. Be careful about exactly what the controller knows and when; write the information structure down before coding it.
+ - Sanity checks that would expose a wrong model: H <= C <= R must hold; values must be non-decreasing in d; a brute-force simulation of your claimed optimal controller against random and against greedy adversaries must never leave the band.
+ - Consider writing a second, deliberately naive implementation (for example direct game-tree search to a fixed depth for tiny d and B) and checking it agrees with your efficient one.
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside solver-b/ . Write your code and outputs there. Do not read the sibling folders.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (for example `ulimit -v 6000000` in the same shell command), and wrap in `timeout 900`. No background daemons. Do not use /tmp for large files.
+ - Do not use pkill/killall. Do not install system packages; python3 is available (check for others before assuming).
+
+REPORT (final message, under 900 words)
+ 1. The table of triples, each entry tagged COMPUTED (exhaustive, with the method) or not.
+ 2. The witnesses, compactly.
+ 3. Conjectured formulas and the headline answer, with your confidence.
+ 4. Proofs: complete ones stated fully; sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.
+
+=====AGENT: Verifier attacks claimed proofs
+You are a hostile but fair referee. Two solvers worked independently on the problem below. Their computed tables agree, but they DISAGREE about whether the central lower bound is proved. Your job is to find out who is right, by reading the actual proof text and by independent computation. You did not write any of this and have no stake in it being true. A proof with a gap must be reported as having a gap; do not repair it silently and then call it confirmed. Do not search the web.
+
+THE GAME
+
+Fix an integer d >= 1. The level x is an integer, x_s = 0 for every s <= 0. At each tick t = 0, 1, 2, ...:
+ 1. the controller is shown o_t = sgn(x_{t-d}) in {-, 0, +};
+ 2. the controller emits u_t in {-1, 0, +1};
+ 3. the adversary, who knows the controller's strategy, the full history and u_t, picks w_t in {-1, 0, +1}, subject to: w_t != 0 implies w_{t+1} = 0 (free at t = 0);
+ 4. x_{t+1} = x_t + u_t + w_t.
+A response map is f: {-,0,+} -> {-1,0,+1}. RELAY: u_t = f(o_t), one fixed f. CLOCK: u_t = f_t(o_t), sequence (f_t) fixed in advance. HISTORY: u_t any deterministic function of (o_0..o_t). R(d), C(d), H(d) = least B such that some controller of the class guarantees |x_t| <= B for all t.
+
+WHAT THE SOLVERS CLAIM
+
+Agreed computed values (R, C, H): d=1 (2,2,1); d=2 (4,3,3); d=3 (5,4,3); d=4 (7,5,5); d=5 (8,6,5); d=6 (10,7,7). Also H(7)=7, H(8)=9, H(9)=9.
+
+Claims to referee:
+ T1. R(d) = floor(3d/2) + 1 for all d. (Both solvers claim a complete proof.)
+ T2. C(d) <= d + 1 for all d, via the clock that alternates f = (f(-),f(0),f(+)) = (+1,0,-1) on even t with (0,0,0) on odd t. (Both claim a complete proof.)
+ T3. H(d) >= 2*floor(d/2) + 1 for all d. Solver A claims a COMPLETE proof. Solver B could prove only H(d) >= ceil((d + floor(d/2))/2) and explicitly calls H(d) >= d - O(1) an unproved sketch. THIS IS THE DISAGREEMENT. If T3 holds, then with T2 it follows that 0 <= C(d) - H(d) <= 1 for every d, which is the headline result.
+ T3'. Solver B's weaker bound H(d) >= ceil((d + floor(d/2))/2).
+
+The proof texts are in:
+ solver-a/proofs.txt
+ solver-b/proofs.txt
+You may read anything in those two folders (code, logs, the history automata solver-b saved as aut_d*_B*.txt). Do not modify them.
+
+YOUR TASKS, IN PRIORITY ORDER
+
+ 1. T3 (most important). Read solver A's proof of T3 line by line. For each step decide: follows / does not follow / unclear. Look especially for: a claim about what the controller "cannot know" that ignores information it does have; a switch of adversary strategy that violates the rest rule at the switching tick; parity or off-by-one slips; an argument that covers only controllers of a special shape (for example ones that never probe); use of a limit (liminf, "infinitely often") that needs the level to be bounded in a way not yet established; the even-d "phase shift" step. If you find a gap, say exactly which sentence fails and give, if you can, a concrete scenario that the argument does not cover.
+ 2. Test T3 empirically in a way that could FAIL: implement the adversary strategy the proof describes (as an actual algorithm, as far as the proof specifies one) and run it against (a) the optimal history controllers for small d, which you should compute yourself or load from solver-b's automata, and (b) a few hundred random finite-state controllers. The proof predicts the adversary always forces |x| >= 2*floor(d/2)+1. If the proof's strategy is not specified well enough to implement, say so: that is itself a finding.
+ 3. Independent recomputation: write your OWN third implementation, from the game definition above and not from their code, of H(d) for d = 1..4 (belief-set safety game) and R(d) for d = 1..6. Report whether it matches. Before trusting it, check it gives H(1) = 1 and R(1) = 2 and work out by hand why.
+ 4. T1 and T2: read one solver's proof of each and report gaps, more briefly.
+ 5. Say whether the statement "sup over d of [C(d) - H(d)] is finite and equals 1" is, on the evidence, PROVED, or PROVED ASSUMING a named unverified step, or only SUPPORTED BY DATA for d up to some bound.
+
+RULES FOR RUNNING CODE (someone's live workstation)
+ - Write only inside verifier/ .
+ - Every compute run: `nice -n 15`, at most 2 CPU cores, `ulimit -v 6000000` in the same shell command, wrapped in `timeout 900`. No background daemons, nothing large in /tmp.
+ - Never use pkill/killall, and do not use `pgrep -f` or `ps` output to look at other processes' command lines.
+ - Do not delete files.
+
+REPORT (final message, under 800 words)
+ For each of T1, T2, T3, T3': a verdict of CONFIRMED, REFUTED, or GAP (with the exact failing step), and your evidence. Then the results of tasks 2 and 3 with file names. Then the task 5 verdict in one sentence. State plainly anything you did not check.
+
+=====AGENT: Prior-art search delayed relay game
+Prior-art search. I need to know whether a specific small result is already in the published literature, or is a close corollary of something that is. Use web search. Be skeptical in both directions: do not declare it novel because a quick search found nothing, and do not declare it known because a paper sounds similar. Never invent a citation: every paper you name must come from a search result you actually saw, with its URL.
+
+THE SETTING
+
+A discrete-time pursuit/regulation game on the integers. A level x starts at 0. Each tick a controller adds u in {-1,0,+1}, then an adversary (who sees u) adds w in {-1,0,+1}, with the restriction that the adversary must play 0 on the tick after any nonzero push. The controller never sees x; at tick t it sees only sgn(x_{t-d}), the sign of the level d ticks ago. The goal is to keep |x| <= B forever; the quantity of interest is the smallest guaranteeable B as a function of the delay d, for three controller classes:
+ - RELAY: one fixed memoryless map from the observed sign to u. Claimed value: floor(3d/2) + 1.
+ - CLOCK: a time-varying memoryless map fixed in advance (knows the time, remembers no observations). Claimed: at most d + 1, achieved by a relay that is active only on every second tick.
+ - HISTORY: arbitrary function of all past observations. Claimed: d for odd d, d + 1 for even d (i.e. 2*floor(d/2) + 1).
+Headline claim: the blind clock is always within 1 of the full-history optimum; i.e. for sign-only delayed feedback against this rate-limited adversary, remembering observations is worth at most one unit of band at any delay.
+
+WHAT TO LOOK FOR
+
+ 1. This exact game or a near-identical one (integer or continuous; sign-only / binary / quantized delayed observation; bounded or rate-limited disturbance; worst-case band or limit-cycle amplitude).
+ 2. Known results that would make the claims easy corollaries. Likely areas: relay (bang-bang) feedback systems with time delay and their limit-cycle amplitude; minimax / set-membership control with delayed measurements; control under communication constraints and data-rate theorems (Wong-Brockett, Nair-Evans, Tatikonda-Mitter, Delchamps on quantized feedback); pursuit-evasion and "lion and man" / cops-and-robbers style games with delayed or imperfect information; online algorithms or load balancing with stale information (Mitzenmacher's "How useful is old information"); delayed-feedback bandits; "duty-cycle" or "dithered" relay control; value of memory / finite-state controllers in partially observed games.
+ 3. Any result stating that open-loop periodic dither or reduced duty cycle improves a delayed relay's worst-case amplitude from about 3d/2 to about d, or that memory adds only O(1) over a time-varying memoryless policy under delayed 1-bit feedback.
+
+Run at least a dozen distinct searches across these areas, and follow up on the most promising hits by reading the abstract or page (use any fetch tool or agent available to you; if none is, say that you judged from search snippets only).
+
+REPORT (under 600 words)
+ - CLOSEST PRIOR WORK: up to six items, each with title, authors, year, URL, one sentence on what it actually shows, and one sentence on how it differs from the setting above.
+ - VERDICT for each of the three formulas and for the headline, one of: FOUND (already published, cite it), LIKELY FOLKLORE (follows easily from a named known result, say which and how), or NOT FOUND (with the list of search queries you ran, so a reader can judge how hard you looked).
+ - What a specialist in which field would be the right person to ask.
+ - State plainly what you could not check.
+
+=====AGENT: Prove History upper bound
+You are attacking one open problem about a small control game. Goal: a proof, for EVERY odd d >= 1, that a history controller can guarantee |x| <= d. An honest "not proved, here is how far I got" is an acceptable result; a claimed proof with a gap is not.
+
+THE GAME (exact). Integer level x_0 = 0. Each tick t = 0,1,2,...: the controller observes o_t = sgn(x_{t-d}) (o_t = 0 for t < d), picks u_t in {-1,0,+1}; the adversary sees everything including u_t and picks w_t in {-1,0,+1}, with the rest rule: if w_{t-1} != 0 then w_t = 0. Then x_{t+1} = x_t + u_t + w_t. A HISTORY controller is any deterministic function of o_0..o_t (so it also knows its own past controls). H(d) = smallest B such that some history controller keeps |x_t| <= B for all t against every adversary.
+
+KNOWN. Proved: H(d) >= 2*floor(d/2)+1 for all d (so >= d for odd d, >= d+1 for even d), and H(d) <= d+1 for all d (a half-duty relay clock achieves it). Computed exactly: H = 1,3,3,5,5,7,7,9,9,11,11 for d = 1..11. OPEN: H(d) <= d for all odd d. That is your target.
+
+WHAT EXISTS (read these first; all under ):
+- solver-a/proofs.txt: the proved theorems, and a hand proof for d=1 (controller u_t = -(o_t + u_{t-1})).
+- solver-a/policy.py + solver-a/game.py: policy 'mid1' (u = -sgn(lo+hi), lo/hi = min/max of x_t + w_t over the belief set including the adversary's legal next move) achieves exactly d for odd d = 1..9, verified exhaustively over adversaries. It is belief-based, so it is evidence, not a proof. solver-a/run_policy.txt has the output.
+- solver-b/aut_d{d}_B{B}.txt: optimal history strategy automata from the belief game (format in solver-b/hist.cpp). solver-b/hist_family.py: a simple "budgeted relay" family that does NOT reach d (best is d+1 or worse) — ruled out.
+- solver-b/proofs.txt section S1: the change of variable y_c = x_c + (u_c + ... + u_{c+d-1}), which removes the delay but turns the observation into a threshold test.
+
+WHAT I WANT.
+1. An explicit controller, described in closed form or as a small finite-memory rule that works for every odd d (not a belief-set computation), plus a complete written proof that it keeps |x| <= d. If the natural route is to characterise the belief set of 'mid1' in closed form (e.g. as an interval plus a little extra state) and prove the invariant, that is fine.
+2. Before trusting any proof, test the controller by exhaustive reachability over all adversaries for odd d up to at least 9 (11 if cheap). Also watch the check fail on purpose: demand band d-1 and confirm it reports failure.
+3. If you get a controller that tests clean but cannot prove it, say exactly that, and state the invariant you believe holds and where the proof stops.
+
+RULES. Write everything into a NEW directory open-h/ (code, logs, and proofs.txt with each statement tagged COMPLETE or NOT PROVED). Do not modify the existing directories. This is a live machine: nice your jobs, at most 4 cores, cap memory per process at 8 GB (ulimit -v), and use TMPDIR=$TMPDIR (never /tmp, which is RAM). Never use pkill/killall; kill only your own PIDs. Do not use ps/pgrep to look at other processes: another agent is working on a sibling problem and your work must stay independent of it. No web access is needed. Do not delete anything.
+
+REPORT BACK: the controller, the status of the proof (COMPLETE / NOT PROVED), what was tested and to what d, the negative control result, and the file paths.
+
+=====AGENT: Prove Clock lower bound
+You are attacking one open problem about a small control game. Goal: decide whether, for every odd d >= 1, NO clock controller can guarantee |x| <= d — by a proof, or by a counterexample clock. An honest "not settled, here is how far I got" is an acceptable result; a claimed proof with a gap is not.
+
+THE GAME (exact). Integer level x_0 = 0. Each tick t = 0,1,2,...: the controller observes o_t = sgn(x_{t-d}) (o_t = 0 for t < d), picks u_t in {-1,0,+1}; the adversary sees everything including u_t and picks w_t in {-1,0,+1}, with the rest rule: if w_{t-1} != 0 then w_t = 0. Then x_{t+1} = x_t + u_t + w_t. A CLOCK controller is a fixed sequence of maps f_t: {-,0,+} -> {-1,0,+1} with u_t = f_t(o_t): it knows the time and the current observation, and nothing else (no memory of past observations or of its own past controls). C(d) = smallest B such that some clock keeps |x_t| <= B for all t against every adversary. A HISTORY controller may use all of o_0..o_t; H(d) is its value; H(d) <= C(d).
+
+KNOWN. Proved: C(d) <= d+1 for all d (half-duty relay: f_t = (+1,0,-1) on even t, (0,0,0) on odd t). Proved: H(d) >= 2*floor(d/2)+1, so for even d C(d) = d+1 exactly, and for odd d, d <= C(d) <= d+1. Computed exhaustively: C(1)=2, C(3)=4, C(5)=6 (so C = d+1 there), while H(1)=1, H(3)=3, H(5)=5. OPEN: C(d) >= d+1 for all odd d >= 7. That is your target. (d = 7 exhaustively was estimated at >1e8 reachable-state-sets and not attempted.)
+
+WHAT EXISTS (read these first; all under ):
+- solver-a/proofs.txt: Theorem 3 is the History lower bound. Its technique: the adversary plays +1 on alternate ticks; plays that keep x positive receive identical controls; compare with a play that deviates downward at time sigma, whose controls agree for d more ticks. For odd d and B = d this argument lands exactly on -d, i.e. it just fails to give a contradiction. A clock is much weaker than a history controller: ANY two plays with the same sign at time t-d get the same control at t, regardless of the rest of their histories — the proof should exploit that. The file also has a hand proof of C(1) >= 2, which shows the flavour: two plays indistinguishable to the clock at one tick, needing opposite controls.
+- solver-a/game.py (clock_safe: exact search over reachable-state-sets) and solver-a/clock.cpp, solver-b/clock.cpp: exhaustive clock solvers. solver-b/clock_witnesses.log: optimal clocks found for small d.
+
+WHAT I WANT.
+1. First choice: a complete written proof that for every odd d no clock achieves band d. Check each step against the exhaustive data for d = 1, 3, 5: e.g. turn the proof's adversary into code and run it against the half-duty clock, the optimal clocks in the logs, and random clocks at d = 3, 5, 7, confirming it always forces |x| >= d+1. Also watch the check fail on purpose (ask it to force d+2 against the half-duty clock; it must not succeed).
+2. Second choice, if no general proof: settle d = 7 by computation (band 7 feasible or not for a clock), with a smarter search than brute force if needed (symmetry, dominance between state-sets: a superset of a losing set is losing, a subset of a winning set is winning). Report honestly if it does not finish.
+3. If you find a clock that DOES hold band d for some odd d, that refutes the conjecture: give the clock and verify it by exhaustive reachability over all adversaries.
+
+RULES. Write everything into a NEW directory open-c/ (code, logs, and proofs.txt with each statement tagged COMPLETE or NOT PROVED). Do not modify the existing directories. This is a live machine: nice your jobs, at most 4 cores, cap memory per process at 8 GB (ulimit -v), and use TMPDIR=$TMPDIR (never /tmp, which is RAM). Never use pkill/killall; kill only your own PIDs. Do not use ps/pgrep to look at other processes: another agent is working on a sibling problem and your work must stay independent of it. No web access is needed. Do not delete anything.
+
+REPORT BACK: proof status (COMPLETE / NOT PROVED / REFUTED), what was computed and to what d, the negative control result, and the file paths.
+

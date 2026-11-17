@@ -1,0 +1,116 @@
+PROOFS (solver A).  Notation: n-tick window = n consecutive ticks; over any n-tick window
+sum(w) <= ceil(n/2) by the rest rule.  All statements symmetric under x -> -x.
+
+=====================================================================================
+THEOREM 1 (complete).  R(d) = floor(3d/2) + 1 for every d >= 1; unique optimal map f = (f(-),f(0),f(+)) = (+1,0,-1).
+-------------------------------------------------------------------------------------
+(a) Upper bound for f=(+1,0,-1), u_t = -sgn(x_{t-d}).
+Let x_T > 0 and s = last time < T with x_s <= 0 (exists, x_0 = 0).  Then x_r >= 1 for s < r <= T.
+Ticks r in [s, T-1], n = T - s.  For r >= s+d+1 the observed level x_{r-d} is > 0, so u_r = -1.
+For r in [s, s+d]: u_r <= 1, and u_r = +1 iff x_{r-d} < 0; in particular u_{s+d} = +1 iff x_s < 0.
+Let e = #{r in [s, min(s+d,T-1)] : u_r = +1} <= min(n, d+1), l = max(0, n-d-1) late ticks.
+  x_T <= x_s + e - l + ceil(n/2).
+ n <= d:   x_T <= 0 + d + ceil(d/2) <= floor(3d/2)+1.
+ n >= d+1: ceil((d+1+l)/2) - l <= ceil((d+1)/2) for all l >= 0, so x_T <= x_s + e + ceil((d+1)/2).
+           If e = d+1 then u_{s+d}=+1, so x_s <= -1; otherwise e <= d.  Either way
+           x_T <= d + ceil((d+1)/2) = floor(3d/2)+1.
+(b) Matching adversary for f=(+1,0,-1): w_0 = -1, then w = 0 through tick d.  x_1..x_{d+1} = -1
+(u = 0 while observing 0).  Ticks d+1..2d+1 observe x_1..x_{d+1} < 0, so u = +1 on d+1 ticks; adversary
+plays +1 at ticks d+1, d+3, ... (ceil((d+1)/2) pushes; tick d was a rest/zero tick so this is legal).
+x_{2d+2} = -1 + (d+1) + ceil((d+1)/2) = floor(3d/2)+1.
+(c) f = (+1,+1,-1): ticks 0..d all observe 0, u = +1; adversary +1 at even ticks:
+x_{d+1} = d+1+ceil((d+1)/2) = floor(3d/2)+2.  f=(+1,-1,-1) symmetric.
+(d) f(+) >= 0 is unbounded (f(-) <= 0 symmetric).
+ If f(0) >= 0: adversary +1 at every even tick; x_1 >= 1, all later observations are 0 or +, u >= 0, x -> infinity.
+ If f(0) = -1: adversary idle for ticks 0..d; x_1..x_{d+1} < 0, x_{d+1} = -(d+1).
+   If f(-) <= 0: adversary pushes -1 on alternate ticks; observations stay -, u <= 0, x -> -infinity.
+   If f(-) = +1: adversary idle; x rises by 1 per tick to x_{2d+1} = -1; at tick 2d+1 (observing x_{d+1} < 0) u=+1,
+   adversary +1: x_{2d+2} = +1.  From then on adversary pushes +1 on alternate ticks.  Every later observation is
+   either a stale negative (u=+1) or positive (u = f(+) >= 0): x never decreases and grows without bound.
+So only 3 maps are bounded, with values floor(3d/2)+1, +2, +2.   QED.
+(Code agreement: relay(), d = 1..8.)
+
+=====================================================================================
+THEOREM 2 (complete).  C(d) <= d+1 for every d >= 1, by the HALF-DUTY RELAY clock:
+   f_t = (+1,0,-1) for even t,  f_t = (0,0,0) for odd t.
+-------------------------------------------------------------------------------------
+Same set-up: x_T > 0, s = last time < T with x_s <= 0, n = T-s.  u_r = 0 at odd r.  At even r:
+u_r = -1 if r >= s+d+1; u_r <= 1 if r <= s+d, with u_r = +1 iff x_{r-d} < 0 (so u_{s+d} = +1 forces x_s <= -1).
+Let e = #even ticks in [s, min(s+d,T-1)] with u = +1; L = #even ticks in [s+d+1, T-1].
+   x_T <= x_s + e - L + ceil(n/2).
+(I) n <= d+1.  e <= ceil(n/2).  If n <= d: x_T <= 2 ceil(d/2) <= d+1.  If n = d+1 and d odd: x_T <= d+1.
+    If n = d+1 and d even: 2 ceil(n/2) = d+2, and e = d/2+1 only if all of s, s+2, ..., s+d are even ticks with u=+1,
+    including u_{s+d} = +1, so x_s <= -1.  Hence x_T <= d+1 in all cases.
+(II) n = d+1+l, l >= 1.
+    If s+d is even: #even ticks in [s,s+d] = floor(d/2)+1, the late phase starts on an odd tick so L = floor(l/2),
+       and ceil((d+1+l)/2) - floor(l/2) <= floor(d/2)+1.  So x_T <= x_s + e + floor(d/2)+1 with e <= floor(d/2)+1.
+       If e = floor(d/2)+1 then u_{s+d} = +1, x_s <= -1, x_T <= 2 floor(d/2)+1 <= d+1.  Else e <= floor(d/2): same bound.
+    If s+d is odd: #even ticks in [s,s+d] = ceil(d/2), L = ceil(l/2), ceil((d+1+l)/2) - ceil(l/2) <= ceil((d+1)/2).
+       x_T <= 0 + ceil(d/2) + ceil((d+1)/2) = d+1.
+QED.  (Code agreement: periodic.py, d = 1..9: this clock gives exactly d+1; no period-2 clock does better.)
+
+=====================================================================================
+THEOREM 3 (complete).  H(d) >= 2*floor(d/2) + 1 for every d >= 1  (= d for odd d, d+1 for even d).
+-------------------------------------------------------------------------------------
+Fix a deterministic history controller that guarantees |x| <= B.  Key fact (K): two adversary plays that coincide on
+ticks < sigma produce the same x up to time sigma, hence the same observations, hence the same controls, on all
+ticks <= sigma + d.  More generally, if two plays have the same sign sequence sgn(x_1..x_s) then the controls
+coincide on all ticks <= s + d.
+
+Play P: w = +1 on every even tick, 0 on odd ticks.  For a play V that pushes +1 on every even tick in a window
+[sigma, sigma+d+1) with sigma even, let V|sigma be the play equal to V before sigma and with w = -1 on even ticks
+>= sigma, 0 on odd ticks (legal: V rests on odd ticks).  By (K), for sigma <= t <= sigma+d+1:
+      (V|sigma)_t = V_t - 2*ceil((t - sigma)/2) >= -B.                                            (*)
+
+Case d odd.  Suppose B <= d-1.
+ Step 1: for t >= d+1 take the even sigma in {t-d-1, t-d}; (*) gives P_t >= (d+1) - B >= 2.
+ Step 2: all plays that equal P on ticks < tau0 := 2d+2 and keep x_r >= 1 for all r in [d+1, s] have the same
+   observation history up to tick s+d (zeros, then P's early signs, then all +), hence by (K) the same controls
+   as P up to tick s+d.  Call such a play "valid up to s".
+ Step 3: let lam = liminf P_t (an integer in [2,B], attained infinitely often), T0 even with P_t >= lam for t >= T0.
+   Q := P with the lam-1 pushes at ticks T0, T0+2, ..., T0+2(lam-2) omitted.  By induction on s, Q is valid up to s
+   and Q_t = P_t - (#omitted pushes before t) >= 1.  So Q is valid forever, Q_t = P_t - (lam-1) for
+   t >= T1 := T0 + 2(lam-1), and Q_t = 1 for infinitely many t.
+ Step 4: Q pushes on every even tick >= T1, so (*) applies to Q for even sigma >= T1: Q_t >= d+1-B >= 2 for all
+   t >= T1+d+1.  Contradiction with Q_t = 1 infinitely often.  Hence B >= d.
+
+Case d even.  Suppose B <= d.
+ Step 1: for odd t >= d+1 take sigma = t-d-1 (even): P_t >= (d+2) - B >= 2.  For even t >= d+2:
+   P_t = P_{t-1} + u_{t-1} + 0 >= 2 - 1 = 1 (P does not push on odd ticks).  So P_t >= 1 for all t >= d+1.
+ Steps 2, 3 as above (lam >= 1): Q valid forever, pushes on every even tick >= T1, Q_t = 1 infinitely often.
+ Step 4: (*) for Q with sigma = t-d-1 gives Q_t >= 2 for odd t >= T1+d+1.  So Q_t = 1 at infinitely many EVEN t.
+ Step 5 (phase shift): Q^ := Q before an even tick a >= T1+d+2, then w = +1 on odd ticks a+1, a+3, ..., 0 on even
+   ticks >= a (legal: w_{a-1} = w_a = 0).  As long as Q^ is valid, controls agree with Q's (Step 2), so
+   Q^_t = Q_t - ceil((t-a)/2) + floor((t-a)/2) = Q_t - [t odd] for t >= a; this is >= 1 since Q_odd >= 2, Q_even >= 1.
+   By induction Q^ is valid forever, and Q^_t = Q_t = 1 for infinitely many even t.
+ Step 6: pick even sigma* >= a+d+2 with Q^_{sigma*} = 1, sigma := sigma* - d - 1 (odd).  Play Q^ before sigma, then
+   w = -1 on odd ticks >= sigma (legal).  By (K) controls agree with Q^'s on ticks <= sigma + d = sigma* - 1, so
+   x_{sigma*} = Q^_{sigma*} - 2*#{odd ticks in [sigma, sigma*)} = 1 - (d+2) = -(d+1) < -B.  Contradiction.  Hence B >= d+1.
+QED.
+
+=====================================================================================
+COROLLARIES (complete, from Theorems 2 and 3)
+  even d:  H(d) = C(d) = d+1 exactly.
+  odd  d:  d <= H(d) <= C(d) <= d+1.
+  all  d:  0 <= C(d) - H(d) <= 1.   sup_d [C(d)-H(d)] <= 1, and = 1 because C(1)-H(1) = 1 (hand proof below).
+
+=====================================================================================
+d = 1 BY HAND (complete): triple (2,2,1).
+ R(1) = 2: Theorem 1.
+ H(1) <= 1: controller u_t = -(o_t + u_{t-1}) (u_{-1} := 0).  Invariant: |x_t| <= 1, so o_t = x_{t-1} exactly, and
+   m_t := x_{t-1} + u_{t-1} = w_{t-2} (induction: x_t = m_t + w_{t-1}, u_t = -m_t, x_{t+1} = w_{t-1} + w_t, which is in
+   {-1,0,1} by the rest rule; m_{t+1} = x_t + u_t = w_{t-1}).   H(1) >= 1: w_0 = +-1 not cancelling u_0.
+ C(1) >= 2: suppose B = 1.  f_0(0) = 0 (else w_0 = f_0(0) gives |x_1| = 2).  At t=1 the observation is again 0 and
+   x_1 can be -1, 0, +1, so f_1(0) = 0 (f_1(0) = +-1 sends x_1 = +-1 to +-2).  The play w_0 = 0, w_1 = +1 gives
+   x_1 = 0, x_2 = 1 with tick 2 a rest tick; the play w_0=+1 gives x_1 = x_2 = 1 with tick 2 free.
+   t=2: second play is observed as + and tick 2 is free, so f_2(+) = -1 (else x_3 = 2).  f_2(0)=0 as before.
+   Under play A: w_0=+1,w_1=0,w_2=-1: x_3 = 1-1-1 = -1, x_2 = +1, tick 3 is a rest tick.
+   Under play B: w=(0,+1,0): x_2 = 1 observed 0 at t=2 (u=0), x_3 = 1, tick 3 free, and tick 3 observes x_2 = + .
+   t=3: both plays observe sgn(x_2) = +.  Play B forces f_3(+) = -1 (else adversary +1 gives 2); then play A gives
+   x_4 = -1 - 1 = -2.  Contradiction.  So C(1) = 2 (upper bound: Theorem 2, or the plain relay).
+
+=====================================================================================
+NOT PROVED (computed only)
+  H(d) <= d for odd d: exhaustive for d = 1,3,5,7 (full belief game, game.py) and by the explicit 'mid1' policy
+     (policy.py, exhaustive over adversaries) for d = 1..9; d = 11 ran out of memory (undecided).
+  C(d) >= d+1 for odd d: exhaustive for d = 1,3,5 (game.py, clock.cpp).  d = 7 not attempted (est. >1e8 sets).

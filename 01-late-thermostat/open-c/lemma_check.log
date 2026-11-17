@@ -1,0 +1,18 @@
+== slack=0 (the lemma: every margin must be >= 0) ==
+  d=1 B=2 half-duty             : same-sign (alpha,beta) configurations tested=4, min margin=0  OK
+  d=3 B=4 half-duty             : same-sign (alpha,beta) configurations tested=8, min margin=0  OK
+  d=5 B=6 half-duty             : same-sign (alpha,beta) configurations tested=12, min margin=0  OK
+  d=7 B=8 half-duty             : same-sign (alpha,beta) configurations tested=16, min margin=0  OK
+  d=1 B=2 feasible_d1_B2.txt    : same-sign (alpha,beta) configurations tested=10, min margin=0  OK
+  d=3 B=4 feasible_d3_B4.txt    : same-sign (alpha,beta) configurations tested=60, min margin=0  OK
+  d=5 B=6 feasible_d5_B6.txt    : same-sign (alpha,beta) configurations tested=158, min margin=0  OK
+  d=7 B=8 feasible_d7_B8.txt    : same-sign (alpha,beta) configurations tested=394, min margin=0  OK
+== slack=1 (NEGATIVE CONTROL: some margin must be < 0) ==
+  d=1 B=2 half-duty             : same-sign (alpha,beta) configurations tested=4, min margin=-1  VIOLATED
+  d=3 B=4 half-duty             : same-sign (alpha,beta) configurations tested=8, min margin=-1  VIOLATED
+  d=5 B=6 half-duty             : same-sign (alpha,beta) configurations tested=12, min margin=-1  VIOLATED
+  d=7 B=8 half-duty             : same-sign (alpha,beta) configurations tested=16, min margin=-1  VIOLATED
+  d=1 B=2 feasible_d1_B2.txt    : same-sign (alpha,beta) configurations tested=10, min margin=-1  VIOLATED
+  d=3 B=4 feasible_d3_B4.txt    : same-sign (alpha,beta) configurations tested=60, min margin=-1  VIOLATED
+  d=5 B=6 feasible_d5_B6.txt    : same-sign (alpha,beta) configurations tested=158, min margin=-1  VIOLATED
+  d=7 B=8 feasible_d7_B8.txt    : same-sign (alpha,beta) configurations tested=394, min margin=-1  VIOLATED

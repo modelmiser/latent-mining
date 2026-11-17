@@ -1,0 +1,27 @@
+d=5 B=4 HISTORY INFEASIBLE beliefs_created=1274
+  time=0.00s mem=5344kB
+d=5 B=5 HISTORY FEASIBLE beliefs_created=1232
+  strategy automaton: 1232 belief nodes, max belief size 57
+  time=0.00s mem=5444kB
+d=6 B=5 HISTORY INFEASIBLE beliefs_created=5418
+  time=0.06s mem=25676kB
+d=6 B=6 HISTORY INFEASIBLE beliefs_created=9967
+  time=0.12s mem=51312kB
+d=6 B=7 HISTORY FEASIBLE beliefs_created=3299
+  strategy automaton: 3299 belief nodes, max belief size 96
+  time=0.03s mem=21932kB
+d=7 B=6 HISTORY INFEASIBLE beliefs_created=23108
+  time=0.74s mem=328620kB
+d=7 B=7 HISTORY FEASIBLE beliefs_created=9482
+  strategy automaton: 9482 belief nodes, max belief size 164
+  time=0.21s mem=157264kB
+d=8 B=7 HISTORY INFEASIBLE beliefs_created=86402
+  time=8.17s mem=4173772kB
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+Command terminated by signal 6
+  time=17.57s mem=5994976kB
+d=8 B=9 HISTORY FEASIBLE beliefs_created=22181
+  strategy automaton: 22181 belief nodes, max belief size 281
+  time=1.64s mem=1358340kB

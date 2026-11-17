@@ -1,0 +1,18 @@
+== negative control: demand band d-1 (must FAIL) ==
+d=1 K=1 cap=0 FAIL: |x| reaches 1 (states so far 1)
+d=3 K=2 cap=2 FAIL: |x| reaches 3 (states so far 58)
+d=5 K=3 cap=4 FAIL: |x| reaches 5 (states so far 92)
+d=7 K=4 cap=6 FAIL: |x| reaches 7 (states so far 551)
+d=9 K=5 cap=8 FAIL: |x| reaches 9 (states so far 860)
+== mutants: K=(d+1)/2-1 and K=(d+1)/2+1 at band d (expected to FAIL for d>=3) ==
+d=3 K=1 cap=3 FAIL: |x| reaches 4 (states so far 22)
+d=3 K=3 cap=3 FAIL: |x| reaches 4 (states so far 92)
+d=5 K=2 cap=5 FAIL: |x| reaches 6 (states so far 43)
+d=5 K=4 cap=5 FAIL: |x| reaches 6 (states so far 140)
+d=7 K=3 cap=7 FAIL: |x| reaches 8 (states so far 71)
+d=7 K=5 cap=7 FAIL: |x| reaches 8 (states so far 635)
+d=9 K=4 cap=9 FAIL: |x| reaches 10 (states so far 104)
+d=9 K=6 cap=9 FAIL: |x| reaches 10 (states so far 699)
+d=11 K=6 cap=10 FAIL: |x| reaches 11 (states so far 784)
+d=11 K=5 cap=11 FAIL: |x| reaches 12 (states so far 144)
+d=11 K=7 cap=11 FAIL: |x| reaches 12 (states so far 1517)

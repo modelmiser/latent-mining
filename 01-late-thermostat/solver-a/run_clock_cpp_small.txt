@@ -1,0 +1,17 @@
+d=1 B=1 sets=4 dead=4  => IMPOSSIBLE
+d=1 B=2 sets=139 dead=0  => SAFE CLOCK EXISTS
+witness (f(-),f(0),f(+)) prefix_len=7 cycle_len=1:
+ (0,-1,0) (0,0,0) (1,-1,0) (0,0,0) (1,-1,-1) (1,0,-1) (1,0,-1) | (1,0,-1)
+d=2 B=2 sets=35 dead=35  => IMPOSSIBLE
+d=2 B=3 sets=6171 dead=1236  => SAFE CLOCK EXISTS
+witness (f(-),f(0),f(+)) prefix_len=10 cycle_len=5:
+ (0,-1,0) (0,-1,0) (0,1,0) (0,-1,0) (1,0,0) (0,-1,-1) (1,-1,-1) (0,0,0) (1,0,-1) (0,0,-1) | (1,0,0) (1,0,-1) (0,0,0) (1,0,-1) (0,0,-1)
+d=3 B=3 sets=1208 dead=1208  => IMPOSSIBLE
+d=3 B=4 sets=899893 dead=663061  => SAFE CLOCK EXISTS
+witness (f(-),f(0),f(+)) prefix_len=12 cycle_len=2:
+ (0,-1,0) (0,-1,0) (0,0,0) (0,0,0) (1,-1,0) (0,0,0) (1,-1,0) (0,0,0) (1,-1,-1) (0,0,0) (1,0,-1) (0,0,0) | (1,0,-1) (0,0,0)
+d=4 B=4 sets=58748 dead=58748  => IMPOSSIBLE
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+/bin/bash: line 1: 2156048 Aborted                 nice -n 15 timeout 900 ./clock $a

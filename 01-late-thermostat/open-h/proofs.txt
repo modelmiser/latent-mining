@@ -1,0 +1,111 @@
+OPEN-H: H(d) <= d for every odd d  (hence H(d) = d for odd d, with the known lower bound).
+Status tags: COMPLETE = full argument written here, hand-checked (not machine-checked as a formal proof);
+             TESTED   = exhaustive computation only;  NOT PROVED = open.
+2026-11-16.  Files in this directory are listed at the bottom.
+
+=====================================================================================================
+THE CONTROLLER ("saturated sum").   d = 2r+1 odd,  K := r+1 = (d+1)/2.
+-----------------------------------------------------------------------------------------------------
+     Sigma_t := u_{t-d} + u_{t-d+1} + ... + u_{t-1}          (u_i := 0 for i < 0)
+     u_t     := - clamp( K*o_t + Sigma_t , -1, +1 )           clamp(v,-1,1) = max(-1, min(1, v))
+Spelled out:
+     o_t = +1 :  u_t = -1 if Sigma_t >= -r,   0 if Sigma_t = -r-1,   +1 if Sigma_t <= -r-2
+     o_t =  0 :  u_t = -sgn(Sigma_t)
+     o_t = -1 :  u_t = +1 if Sigma_t <= r,    0 if Sigma_t = r+1,    -1 if Sigma_t >= r+2
+Memory: the controller's own last d controls (it is a function of o_t and u_{t-d..t-1} only; no belief set).
+For d = 1 (r = 0, K = 1) this is u_t = -(o_t + u_{t-1}), the known hand controller of solver-a/proofs.txt.
+
+=====================================================================================================
+THEOREM A.  For every odd d >= 1 the saturated-sum controller keeps |x_t| <= d for all t,
+            against every adversary.  Hence H(d) <= d for all odd d.                          COMPLETE
+-----------------------------------------------------------------------------------------------------
+Conventions.  Extend to negative indices by x_i := 0 for i <= 0 and u_i := w_i := 0 for i < 0.  Then
+   (E)  x_{i+1} = x_i + u_i + w_i   for ALL integers i   (for i < 0 it reads 0 = 0),
+   (O)  o_t = sgn(x_{t-d})          for all t >= 0        (for t < d both sides are 0; for t = d, x_0 = 0),
+   (R)  no two consecutive w_i are nonzero                (rest rule; padding with zeros keeps it).
+Definitions, for t >= -1 (Sigma_{-1} = 0, u_{-1} = 0):
+   y_t := x_{t-d} + Sigma_t                  = x_{t-d} + u_{t-d} + ... + u_{t-1}
+   z_t := y_t + u_t                          = x_{t-d} + u_{t-d} + ... + u_t
+   Omega_t := w_{t-d} + w_{t-d+1} + ... + w_t          (d+1 = 2r+2 consecutive disturbances)
+
+Fact 1.  x_{t+1} = z_t + Omega_t  for t >= -1.
+   Sum (E) over i = t-d, ..., t:  x_{t+1} = x_{t-d} + sum u_i + sum w_i = z_t + Omega_t.
+Fact 2.  |Omega_t| <= r+1.
+   Split the 2r+2 consecutive indices t-d..t into r+1 adjacent pairs; by (R) each pair holds at most one
+   nonzero w, each of absolute value 1.
+Fact 3.  y_t = z_{t-1} + w_{t-d-1}  for t >= 0.
+   z_{t-1} = x_{t-d-1} + u_{t-d-1} + u_{t-d} + ... + u_{t-1}, and x_{t-d-1} + u_{t-d-1} + w_{t-d-1} = x_{t-d}
+   by (E); so z_{t-1} + w_{t-d-1} = x_{t-d} + u_{t-d} + ... + u_{t-1} = y_t.
+
+Claim.  |z_t| <= r for every t >= -1.
+Proof by strong induction on t.  Base: z_{-1} = x_{-1-d} + 0 = 0.
+Step: let t >= 0 and assume |z_s| <= r for all -1 <= s < t.  Then
+   (i)  |y_t| <= r+1                      (Fact 3, |z_{t-1}| <= r, |w| <= 1);
+   (ii) |x_{t-d}| <= d                    (if t-d <= 0 then x_{t-d} = 0; otherwise s := t-d-1 satisfies
+                                           0 <= s < t and x_{t-d} = z_s + Omega_s by Fact 1, so
+                                           |x_{t-d}| <= r + (r+1) = d by the hypothesis and Fact 2).
+ Case o_t = 0.  By (O) x_{t-d} = 0, so y_t = Sigma_t and by (i) |Sigma_t| <= r+1.  u_t = -sgn(Sigma_t), so
+   |z_t| = |Sigma_t| - 1 <= r if Sigma_t != 0, and z_t = 0 if Sigma_t = 0.
+ Case o_t = +1.  By (O) and (ii), 1 <= x_{t-d} <= d = 2r+1.  Put q := K + Sigma_t = Sigma_t + r + 1.  Then
+        y_t = x_{t-d} + Sigma_t  lies in  [Sigma_t + 1, Sigma_t + 2r + 1] = [q - r, q + r],        (a)
+        and by (i)  -r-1 <= y_t <= r+1.                                                           (b)
+   u_t = -clamp(q).
+   q = 0  : u_t = 0,  z_t = y_t in [-r, r] by (a).
+   q >= 1 : u_t = -1, z_t = y_t - 1;  z_t >= q - r - 1 >= -r by (a),  z_t <= r by (b).
+   q <= -1: u_t = +1, z_t = y_t + 1;  z_t <= q + r + 1 <= r by (a),  z_t >= -r by (b).
+ Case o_t = -1.  Mirror image (the controller is odd: replacing x, w, o, u by their negatives maps plays to
+   plays): -d <= x_{t-d} <= -1, q := Sigma_t - (r+1), y_t in [q - r, q + r], same three sub-cases.
+So |z_t| <= r.  This closes the induction.                                                         []
+
+Proof of Theorem A.  For t >= -1, |x_{t+1}| <= |z_t| + |Omega_t| <= r + (r+1) = 2r+1 = d by Fact 1, the Claim and
+Fact 2.  That covers every x_s with s >= 0.                                                       QED
+
+Where odd d is used: (1) d+1 is even, so Fact 2 gives r+1 = (d+1)/2 (for even d the same count gives d/2+1);
+(2) the set {1,...,d} of possible positive levels, recentred by K, is exactly the symmetric window [-r, r] that
+z must live in.  The two budgets add up exactly: r (window half-width) + (r+1) (disturbances in flight) = d.
+Why no belief set is needed: the only knowledge used at tick t is  "sgn(x_{t-d}) and |x_{t-d}| <= d"  (interval (a))
+together with  "|z_{t-1}| <= r"  (interval (b)); both hold for every play consistent with the history, by induction.
+
+COROLLARY.  H(d) = d for every odd d >= 1.                                                    COMPLETE
+   Upper bound: Theorem A.  Lower bound: Theorem 3 of solver-a/proofs.txt (H(d) >= 2*floor(d/2)+1), which is
+   tagged complete there and which I did NOT re-derive here.
+
+Remarks (not claims).
+ * z_t is the level x_{t+1} would have if the adversary did nothing from tick t-d on; this is the variable
+   y_c + u of solver-b/proofs.txt section S1 with one more control added.  The proof never needs the
+   "threshold test" reading: it only needs the sign and the band.
+ * solver-b/hist_family.py ("budgeted relay", ruled out) differs from this controller in exactly two places:
+   it never plays +o_t (here u_t = +1 when o_t = +1 and Sigma_t <= -r-2), and it plays 0 on o_t = 0
+   (here -sgn(Sigma_t)).
+ * Even d: not the target and nothing is claimed here for even d.
+
+=====================================================================================================
+TESTS                                                                                           TESTED
+-----------------------------------------------------------------------------------------------------
+T1. satcheck.cpp (C++, ORIGINAL coordinates: x_t, signs of x_{t-d..t-1}, rest flag, last d controls; every
+    adversary move explored; does not use the change of variable of the proof).  run_satcheck.txt, run_satcheck_d11.txt:
+        d = 1, 3, 5, 7, 9, 11:  sup|x| = d exactly; reachable states 11, 647, 17403, 363063, 7610769, 154464815.
+T2. sat_naive.py (Python, naive model: full VALUE window x_{t-d..t}; independent code).  run_naive.txt, run_naive_d7.txt:
+        d = 1, 3, 5, 7: sup|x| = d.   (d = 2, 4 with the floor'd K fail at band d, as they must since H = d+1 there.)
+T3. check_invariant.py: the proof's own invariant (|y| <= r+1, |z| <= r, x_{t+1} = z_t + Omega_t, |Omega| <= r+1) asserted
+    on every reachable state of a value-window model that also carries the w window, d = 1, 3, 5; plus long
+    NON-exhaustive runs at d = 11, 13, 21, 51, 101 (sanity only).  run_invariant.txt.
+NEGATIVE CONTROLS (the check can fail, and does).  run_negative.txt, run_naive_negative.txt:
+    N1. Demand band d-1 with the same controller: FAIL for d = 1, 3, 5, 7, 9, 11 (|x| reaches d).
+        Same with the naive Python checker: FAIL for d = 1, 3, 5.
+    N2. Mutated gain K = (d+1)/2 - 1 and K = (d+1)/2 + 1 at band d: FAIL (|x| reaches d+1) for d = 3, 5, 7, 9, 11.
+Not tested exhaustively: odd d >= 13 (the state count grows about 20x per step of 2 in d).
+
+=====================================================================================================
+EXPLORATION (how the controller was found; evidence only)
+-----------------------------------------------------------------------------------------------------
+red.py / look.py / trace.py: delay-free reduced game (belief sets over y).  The belief policy "u = -sgn(min Y + max Y)"
+keeps z in [-r, r] for d = 1..7 (and fails at band d-1), which showed the only constraint is "z in [-r, r]" and led
+to the observation that the memoryless interval (a) already has the right width.  Superseded by Theorem A.
+
+NOT PROVED / not addressed here: nothing for the stated target.  Out of scope and untouched: C(d) >= d+1 for odd d.
+
+FILES (all in open-h/)
+  proofs.txt  satcheck.cpp  satcheck  sat_naive.py  check_invariant.py  red.py  look.py  trace.py
+  run_satcheck.txt  run_satcheck_d11.txt  run_negative.txt  run_naive.txt  run_naive_d7.txt  run_naive_negative.txt
+  run_invariant.txt

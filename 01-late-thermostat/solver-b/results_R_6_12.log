@@ -1,0 +1,21 @@
+d=6 B=9 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=6 B=10 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=6 B=11 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-
+d=7 B=10 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=7 B=11 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=7 B=12 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-
+d=8 B=12 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=8 B=13 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=8 B=14 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-
+d=9 B=13 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=9 B=14 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=9 B=15 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-
+d=10 B=15 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=10 B=16 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=10 B=17 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-
+d=11 B=16 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=11 B=17 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=11 B=18 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-
+d=12 B=18 RELAY INFEASIBLE maps(f(-)f(0)f(+)):
+d=12 B=19 RELAY FEASIBLE maps(f(-)f(0)f(+)): +0-
+d=12 B=20 RELAY FEASIBLE maps(f(-)f(0)f(+)): +-- +0- ++-

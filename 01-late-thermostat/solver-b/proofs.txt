@@ -1,0 +1,97 @@
+PROOFS  (status tags: COMPLETE = full argument written here, hand-checked, not machine-checked;
+         SKETCH = not a proof)
+
+Notation. a_t in {0,1}. W(n) := max sum of n consecutive adversary moves = ceil(n/2) if the
+adversary is free at the first of them, floor(n/2) if it must rest there. Either way >= floor(n/2).
+Timing fact (TF): u_t is a function of o_0..o_t = signs of x_{-d}..x_{t-d}. Hence once x_c is on
+the board, u_c, ..., u_{c+d} are fixed whatever the adversary does from tick c on; and
+u_c..u_{c+d-1} are already fixed once x_{c-1} is on the board.
+
+------------------------------------------------------------------------------------------
+P1. R(d) = floor(3d/2)+1 for every d >= 1.                                        COMPLETE
+------------------------------------------------------------------------------------------
+(a) Upper bound, relay f = (f(-),f(0),f(+)) = (+1,0,-1), i.e. u_t = -sgn(x_{t-d}).
+Let x_t = M > 0 and let s < t be the last time with x_s <= 0 (exists: x_0 = 0). For
+tau in [s+d+1, t-1], x_{tau-d} > 0 so u_tau = -1 and u_tau + w_tau <= 0. So
+M <= max_{s+1 <= r <= s+d+1} x_r, and x_r = x_{s+1} + sum_{tau=s+1}^{r-1}(u_tau + w_tau), u <= 1.
+ Case x_s <= -1: x_{s+1} >= 1 forces x_s = -1, u_s = w_s = 1, so w_{s+1} = 0 and
+   sum_{s+1..s+d} w <= floor(d/2):  x_r <= 1 + d + floor(d/2).
+ Case x_s = 0: u_{s+d} = -sgn(x_s) = 0, so sum_{s+1..s+d} u <= d-1.
+   x_{s+1} = 2 -> w_s = 1, w_{s+1} = 0, sum w <= floor(d/2): x_r <= 2 + d-1 + floor(d/2).
+   x_{s+1} = 1 -> sum w <= ceil(d/2):                        x_r <= 1 + d-1 + ceil(d/2).
+All three are <= floor(3d/2)+1. The map is odd, so the same holds for -x.
+(b) This relay attains floor(3d/2)+1. Adversary: w_t = -1 for even t <= d, else 0, then rest.
+u_t = 0 for t <= d (o = 0); x_1 = -1; x_{d+1} = -ceil((d+1)/2); for t >= d+1, x_{t-d} < 0 so
+u_t = +1 and x climbs by 1 per tick. Let s be the first time >= d+1 with x_s = -1 and the
+adversary free (s = d+1 only when d = 1, where w_1 = 0). x_1..x_s < 0 and s-d >= 1. Now
+w_s = +1: x_{s+1} = 1; for tau = s+1..s+d, x_{tau-d} < 0 so u_tau = +1, and w = 0,+1,0,+1,...
+adds floor(d/2): x_{s+d+1} = 1 + d + floor(d/2).
+(c) Every other map is worse. f(0) = +1: o_t = 0 for t = 0..d, so u = +1 for d+1 ticks, the
+adversary adds ceil((d+1)/2): x_{d+1} = floor(3d/2)+2. f(0) = -1: mirror. f(0) = 0 and
+f(+) >= 0: w = +1,0,+1,0,...; x_1 = 1, x is non-decreasing and positive, u >= 0 for ever,
+x -> infinity. f(0) = 0 and f(-) <= 0: mirror. Only (+1,0,-1) is left.               QED
+
+------------------------------------------------------------------------------------------
+P2. C(d) <= d+1 for every d >= 1  (alternating clock).                            COMPLETE
+------------------------------------------------------------------------------------------
+Clock: f_t = (+1,0,-1) on "active" ticks, (0,0,0) on the others, active ticks = every second
+tick (either parity). a_t = 1 iff t active. u_t = -a_t sgn(x_{t-d}).
+Let x_t = M > 0, s < t the last time with x_s <= 0. For tau in [s+d+1, t-1]: u_tau = -a_tau.
+Phase 1 (tau = s+1..s+d): u_tau <= a_tau, and if x_s = 0 then u_{s+d} = 0.
+x_{s+1} >= 1 leaves these cases (A = sum of usable active ticks in s+1..s+d, Wd = sum of w there):
+ A1  s active, u_s = 1, x_s = 0, x_{s+1} = 2 (w_s = 1, w_{s+1} = 0):
+       A = floor(d/2) - [d even], Wd <= floor(d/2)                 -> x_{s+d+1} <= d+1
+ A1' s active, u_s = 1, x_s = 0, x_{s+1} = 1:
+       A = floor(d/2) - [d even], Wd <= ceil(d/2)                  -> <= d+1
+ A2  s active, u_s = 1, x_s = -1, x_{s+1} = 1 (w_s = 1, w_{s+1} = 0):
+       A = floor(d/2), Wd <= floor(d/2)                            -> <= 1 + 2 floor(d/2) <= d+1
+ B   u_s = 0 (s inactive, or active with x_{s-d} = 0), so x_s = 0, x_{s+1} = 1, w_s = 1,
+     w_{s+1} = 0, u_{s+d} = 0:  A <= floor(d/2), Wd <= floor(d/2)  -> <= d+1
+ (u_s = -1 is impossible.) The same counts bound every x_r, s+1 <= r <= s+d+1.
+Phase 2 (tau >= e := s+d+1): increments w_tau - a_tau. If e is active, pair the ticks
+(active, inactive): each pair contributes w - 1 + w' <= 0 and a lone active tick <= 0, so no
+growth. If e is inactive, the first tick contributes w_e <= 1 and then pairs contribute <= 0:
+growth <= 1, and only if w_e = 1, which forces w_{s+d} = 0. e inactive means s+d active.
+Redo phase 1 with w_{s+d} = 0 and s+d active:
+ A1  (d even): w over s+2..s+d-1 <= d/2 - 1:       2 + (d/2 - 1) + (d/2 - 1) = d
+ A1' (d even): w over s+1..s+d-1 <= d/2:           1 + (d/2 - 1) + d/2       = d
+ A2  (d even): w over s+2..s+d-1 <= d/2 - 1:       1 + d/2 + (d/2 - 1)       = d
+ B, s inactive (d odd): A = (d-1)/2, w over s+2..s+d-1 <= (d-1)/2:           = d
+ B, s active   (d even): A = d/2 - 1, w over s+2..s+d-1 <= d/2 - 1:          = d-1
+So M <= d+1 in every case; the clock is odd, so |x| <= d+1.                           QED
+(Exhaustive reachability confirms sup|x| = d+1 exactly for d = 1..9: periodic_eval.py.)
+
+------------------------------------------------------------------------------------------
+P3. H(d) >= ceil((d + floor(d/2))/2)  for every d >= 1   (about 3d/4).             COMPLETE
+------------------------------------------------------------------------------------------
+Let a history controller guarantee |x| <= B. Put S(c) := u_c + ... + u_{c+d-1}; by TF it is
+fixed once x_{c-1} is on the board, and |S(c+1) - S(c)| = |u_{c+d} - u_c| <= 2.
+(i) |x_c + S(c)| <= r := B - floor(d/2) in every play: from x_c the adversary can add
+    +floor(d/2) or -floor(d/2) over ticks c..c+d-1 without changing those d controls.
+(ii) Call c blind if |S(c)| > r. Then sgn(x_c) = -sgn(S(c)) is forced by (i) before x_c exists.
+    If c1+1, ..., c1+n are all blind (each S is determined in turn by forced signs), then at
+    tick c1 all controls u_i, i <= c1+n+d, are fixed independently of w_{c1}, w_{c1+1}, ...
+    The adversary can then add +-floor((n+d+1)/2) over ticks c1..c1+n+d, both ends must stay in
+    [-B,B], so floor((n+d+1)/2) <= B, i.e. n <= L := 2B - d.
+(iii) Let the adversary play w = +1,0,+1,0,... for ever. sum_{i<N} u_i = x_N - ceil(N/2) <=
+    B - N/2, so the average of S(c) over c = 1..N is <= -d/2 + O(d(B+d)/N).
+    By (ii) consecutive non-blind times a < b have b - a <= L+1, and between them
+    S(c) >= -r - 2 min(c-a, b-c), whose average over c = a..b-1 is >= -r - (b-a)/2 >= -r-(L+1)/2.
+    Letting N -> infinity: -d/2 >= -r - (L+1)/2 = -2B + floor(d/2) + d/2 - 1/2,
+    so B >= (2d + 2 floor(d/2) - 1)/4, and B is an integer.                           QED
+(Also elementary: H(d) >= floor(d/2)+1 from the first d+1 ticks, o_0..o_d all 0.)
+
+------------------------------------------------------------------------------------------
+S1. H(d) >= d - O(1)  (what the headline needs).                                    SKETCH
+------------------------------------------------------------------------------------------
+In the variable y_c = x_c + S(c) the game has no delay (y_{c+1} = y_c + w_c + u_{c+d}) but the
+controller sees only sgn(y_c - S(c)), a threshold test at its own last-d-moves sum. Holding y in
+a window of half-width r needs thresholds inside [-r, r]; opposing a steady push of rate 1/2
+needs S near -d/2. If r < d/2 - const the controller must alternate lax and hard stretches, and
+the adversary should be able to cross zero just before a hard stretch and dive. P3 only
+extracts 3d/4 from this. I could not close the case analysis for controllers that "probe".
+NOT A PROOF.
+
+------------------------------------------------------------------------------------------
+Hand derivation for d = 1 (all three classes): hand_d1.txt.                        COMPLETE
+------------------------------------------------------------------------------------------

@@ -1,0 +1,2 @@
+d=3 B=4 FEASIBLE nodes=38 nogoods=17; clock (f(-)f(0)f(+)), prefix then cycle from index 17:
+0-0 0-0 000 000 +-0 000 +-0 000 +-- 00- +0- 000 ++0 0-- +0- 000 ++0 | 0-- +0- 000 ++0

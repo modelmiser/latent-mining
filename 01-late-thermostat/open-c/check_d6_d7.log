@@ -1,0 +1,11 @@
+OK: d=7 band=7: 43023 nogoods verified (27 maps each); initial set is dead => no clock holds |x|<=7
+OK: d=6 band=6: 12338 nogoods verified (27 maps each); initial set is dead => no clock holds |x|<=6
+--- negative controls (each MUST fail) ---
+[a] same d=7 certificate checked against band 8 (band 8 is feasible):
+FAIL: nogood #0 (size 5) not refuted for f=(-1,0,-1)
+[b] d=7 certificate with nogood line 20001 deleted:
+FAIL: nogood #19999 (size 54) not refuted for f=(1,0,-1)
+[c] d=7 certificate with one state dropped from the nogood on line 30001:
+FAIL: nogood #29999 (size 26) not refuted for f=(0,-1,0)
+[d] python checker, d=6 cert against band 7:
+FAIL: nogood #0 (size 2) not refuted for f=(0, -1, -1)

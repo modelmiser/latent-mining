@@ -1,0 +1,38 @@
+d=1 B=1 HISTORY FEASIBLE beliefs_created=6
+  strategy automaton: 6 belief nodes, max belief size 3
+  time=0.00s mem=3908kB
+d=2 B=2 HISTORY INFEASIBLE beliefs_created=22
+  time=0.00s mem=3720kB
+d=2 B=3 HISTORY FEASIBLE beliefs_created=61
+  strategy automaton: 61 belief nodes, max belief size 11
+  time=0.00s mem=3900kB
+d=3 B=2 HISTORY INFEASIBLE beliefs_created=28
+  time=0.00s mem=3720kB
+d=3 B=3 HISTORY FEASIBLE beliefs_created=122
+  strategy automaton: 122 belief nodes, max belief size 18
+  time=0.00s mem=3868kB
+d=4 B=4 HISTORY INFEASIBLE beliefs_created=660
+  time=0.00s mem=3672kB
+d=4 B=5 HISTORY FEASIBLE beliefs_created=521
+  strategy automaton: 521 belief nodes, max belief size 36
+  time=0.00s mem=4020kB
+d=5 B=4 HISTORY INFEASIBLE beliefs_created=1274
+  time=0.00s mem=3752kB
+d=5 B=5 HISTORY FEASIBLE beliefs_created=1232
+  strategy automaton: 1232 belief nodes, max belief size 57
+  time=0.00s mem=4168kB
+d=6 B=6 HISTORY INFEASIBLE beliefs_created=9967
+  time=0.06s mem=7088kB
+d=6 B=7 HISTORY FEASIBLE beliefs_created=3299
+  strategy automaton: 3299 belief nodes, max belief size 96
+  time=0.01s mem=4908kB
+d=7 B=6 HISTORY INFEASIBLE beliefs_created=23108
+  time=0.24s mem=15000kB
+d=7 B=7 HISTORY FEASIBLE beliefs_created=9482
+  strategy automaton: 9482 belief nodes, max belief size 164
+  time=0.06s mem=8132kB
+d=8 B=8 HISTORY INFEASIBLE beliefs_created=131154
+  time=2.73s mem=103432kB
+d=8 B=9 HISTORY FEASIBLE beliefs_created=22181
+  strategy automaton: 22181 belief nodes, max belief size 281
+  time=0.18s mem=18032kB

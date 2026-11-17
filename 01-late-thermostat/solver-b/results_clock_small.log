@@ -1,0 +1,96 @@
+d=1 B=1 prune=0 CLOCK INFEASIBLE sets_visited=4 maxdepth=4
+  time=0.09s mem=265472kB
+d=1 B=1 prune=1 CLOCK INFEASIBLE sets_visited=4 maxdepth=4
+  time=0.09s mem=265344kB
+d=1 B=1 prune=2 CLOCK INFEASIBLE sets_visited=4 maxdepth=4
+  time=0.09s mem=265240kB
+d=1 B=2 prune=0 CLOCK FEASIBLE sets_visited=6 maxdepth=6
+  preperiod=5 period=1
+  prefix: 000 000 +0- +0- +0-
+  cycle: +0-
+  time=0.09s mem=265344kB
+d=1 B=2 prune=1 CLOCK CANDIDATE sets_visited=8 maxdepth=8
+  preperiod=6 period=2
+  prefix: 000 000 +0- +0- +0- +0-
+  cycle: +0- +0-
+  time=0.08s mem=265312kB
+d=1 B=2 prune=2 CLOCK CANDIDATE sets_visited=6 maxdepth=6
+  preperiod=5 period=1
+  prefix: 000 000 +0- +0- +0-
+  cycle: +0-
+  time=0.09s mem=265472kB
+d=2 B=2 prune=0 CLOCK INFEASIBLE sets_visited=22 maxdepth=7
+  time=0.09s mem=265312kB
+d=2 B=2 prune=1 CLOCK INFEASIBLE sets_visited=22 maxdepth=7
+  time=0.09s mem=265472kB
+d=2 B=2 prune=2 CLOCK INFEASIBLE sets_visited=22 maxdepth=7
+  time=0.08s mem=265472kB
+d=2 B=3 prune=0 CLOCK FEASIBLE sets_visited=9 maxdepth=9
+  preperiod=6 period=3
+  prefix: 000 000 000 +0- +0- 000
+  cycle: +0- +0- 000
+  time=0.09s mem=264992kB
+d=2 B=3 prune=1 CLOCK CANDIDATE sets_visited=14 maxdepth=14
+  preperiod=11 period=3
+  prefix: 000 000 000 +0- +0- 000 +0- +0- 000 +0- +0-
+  cycle: 000 +0- +0-
+  time=0.09s mem=265472kB
+d=2 B=3 prune=2 CLOCK CANDIDATE sets_visited=9 maxdepth=9
+  preperiod=6 period=3
+  prefix: 000 000 000 +0- +0- 000
+  cycle: +0- +0- 000
+  time=0.09s mem=265472kB
+d=3 B=3 prune=0 CLOCK INFEASIBLE sets_visited=713 maxdepth=10
+  time=0.09s mem=265472kB
+d=3 B=3 prune=1 CLOCK INFEASIBLE sets_visited=1272 maxdepth=11
+  time=0.09s mem=265472kB
+d=3 B=3 prune=2 CLOCK INFEASIBLE sets_visited=993 maxdepth=11
+  time=0.10s mem=265504kB
+d=3 B=4 prune=0 CLOCK FEASIBLE sets_visited=72 maxdepth=18
+  preperiod=8 period=4
+  prefix: 000 000 000 000 +0- +0- 000 000
+  cycle: +0- +0- 000 000
+  time=0.09s mem=265312kB
+d=3 B=4 prune=1 CLOCK CANDIDATE sets_visited=581 maxdepth=76
+  preperiod=30 period=84
+  prefix: 000 000 000 000 +0- +0- 000 -0- +0- ++0 00- +00 +0- 0-- ++0 0-- +00 +0- 0-- ++0 00- +0- ++0 0-- ++0 00- +0- ++0 0-- +00
+  cycle: +0- 0-- ++0 00- ++- 000 +0- +00 +-- 000 +0- 00- ++0 0-- ++0 0-- ++0 00- +0- ++- 0-- ++0 +0- +-- 0+0 +0- 00- ++0 +0- 0-- ++0 0-- +0- ++0 0-- ++0 +-- 000 +0- 0-- ++0 00- +0- ++0 0-- +00 +-- 000
+  time=0.09s mem=265184kB
+d=3 B=4 prune=2 CLOCK CANDIDATE sets_visited=72 maxdepth=18
+  preperiod=8 period=4
+  prefix: 000 000 000 000 +0- +0- 000 000
+  cycle: +0- +0- 000 000
+  time=0.08s mem=265504kB
+d=4 B=4 prune=0 CLOCK INFEASIBLE sets_visited=38032 maxdepth=14
+  time=0.32s mem=265248kB
+d=4 B=4 prune=1 CLOCK INFEASIBLE sets_visited=121299 maxdepth=15
+  time=0.90s mem=265484kB
+d=4 B=4 prune=2 CLOCK INFEASIBLE sets_visited=65104 maxdepth=15
+  time=0.59s mem=265312kB
+d=4 B=5 prune=0 CLOCK FEASIBLE sets_visited=45 maxdepth=20
+  preperiod=15 period=5
+  prefix: 000 000 000 000 000 +0- +0- 000 +0- 000 +0- +0- 000 +0- 000
+  cycle: +0- +0- 000 +0- 000
+  time=0.09s mem=265504kB
+d=4 B=5 prune=1 CLOCK CANDIDATE sets_visited=45 maxdepth=20
+  preperiod=15 period=5
+  prefix: 000 000 000 000 000 +0- +0- 000 +0- 000 +0- +0- 000 +0- 000
+  cycle: +0- +0- 000 +0- 000
+  time=0.09s mem=265468kB
+d=4 B=5 prune=2 CLOCK CANDIDATE sets_visited=45 maxdepth=20
+  preperiod=15 period=5
+  prefix: 000 000 000 000 000 +0- +0- 000 +0- 000 +0- +0- 000 +0- 000
+  cycle: +0- +0- 000 +0- 000
+  time=0.09s mem=265592kB
+d=5 B=4 prune=0 CLOCK INFEASIBLE sets_visited=4686 maxdepth=12
+  time=0.13s mem=265472kB
+d=5 B=4 prune=1 CLOCK INFEASIBLE sets_visited=9317 maxdepth=12
+  time=0.19s mem=265472kB
+d=5 B=4 prune=2 CLOCK INFEASIBLE sets_visited=7674 maxdepth=12
+  time=0.19s mem=265660kB
+d=6 B=5 prune=0 CLOCK INFEASIBLE sets_visited=272042 maxdepth=15
+  time=5.60s mem=265504kB
+d=6 B=5 prune=1 CLOCK INFEASIBLE sets_visited=951509 maxdepth=17
+  time=29.17s mem=265628kB
+d=6 B=5 prune=2 CLOCK INFEASIBLE sets_visited=520534 maxdepth=15
+  time=18.02s mem=265632kB

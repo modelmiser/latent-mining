@@ -1,0 +1,226 @@
+OPEN-C: is C(d) >= d+1 for every odd d?      (written 2026-11-16, directory open-c/)
+=====================================================================================================
+STATUS IN ONE PARAGRAPH
+  General statement "for every odd d no clock holds |x| <= d":            NOT PROVED.
+  d = 7, 9, 11, 13 individually (band d infeasible for clocks, so C(d) = d+1):
+                                                         COMPLETE (computer-assisted, certificate-checked).
+  No counterexample clock was found for any odd d (none exists for d <= 13).
+  Partial hand lemmas toward a general proof (Lemmas A, G, S below):      COMPLETE (hand-checked; G also
+  machine-tested).  They do NOT add up to a proof; section 4 shows exactly where the argument stops.
+
+Tags:  COMPLETE = full argument written here (hand-checked, or machine-checked where stated).
+       NOT PROVED = open; anything said under that tag is evidence or a failed attempt, not a proof.
+
+Game (as given).  x_0 = 0; tick t: o_t = sgn(x_{t-d}) (0 for t < d), u_t = f_t(o_t), adversary picks
+w_t in {-1,0,1} with w_t = 0 if w_{t-1} != 0;  x_{t+1} = x_t + u_t + w_t.  Clock = sequence of maps f_t.
+Notation: n_t = f_t(-), z_t = f_t(0), p_t = f_t(+);  N(a,b) = sum_{a<=s<b} n_s,  P(a,b) = sum_{a<=s<b} p_s.
+"free at t" = the adversary may push at tick t (w_{t-1} = 0); "rest at t" = w_{t-1} != 0.
+
+=====================================================================================================
+1. THEOREM 1 (COMPLETE, computer-assisted).   C(7) = 8,  C(9) = 10,  C(11) = 12,  C(13) = 14.
+=====================================================================================================
+Upper bounds are Theorem 2 of solver-a/proofs.txt (half-duty relay).  Lower bounds = "band d is infeasible
+for every clock", established by a search that emits a certificate, plus two independent checkers.
+(d = 1..6 and 8 were re-derived the same way and agree with everything already known, including the
+PROVED even-d values C(2)=3, C(4)=5, C(6)=7, C(8)=9: the solver says INFEASIBLE at band d and finds a
+clock at band d+1 in every case; see results.log.)
+
+1.1 Objects.  A STATE is s = (x, win, r): current level x in [-B,B], win = (sgn x_{t-d},...,sgn x_{t-1}),
+r in {free,rest}.  The observation at the current tick is win[0].  For a map f = (f(-),f(0),f(+)):
+   succ(s,f) = { (x+u+w, win[1:]+(sgn x), [w != 0]) : w in {-1,0,1}, w = 0 if r = rest },  u = f(win[0]),
+and the step VIOLATES if some |x+u+w| > B.  For a set S of states, step(S,f) = union of succ(s,f), and
+cstep(S,f) = step(S,f) together with (x',win',rest) for every (x',win',free) in step(S,f) that was
+produced with w = 0  [the "closure"].
+A set S is DEAD if for every clock (g_0,g_1,...) there is a state s in S and a legal adversary sequence
+from s that leaves the band (the dynamics are time-invariant, so deadness does not depend on the time).
+Band B is infeasible for clocks  <=>  S_0 = {(0, 0^d, free)} is dead.
+
+1.2 Soundness lemmas (hand proofs).
+ (M) Monotone: S dead and S subset S' => S' dead.  (Same clock, same state, same adversary sequence.)
+ (R) Rest-twin: if S u {(x,win,rest)} is dead and (x,win,free) is in S, then S is dead.
+     Proof: any adversary sequence legal from (x,win,rest) is legal from (x,win,free) and produces the same
+     trajectory, since the only difference is that rest forbids w != 0 at the first tick.
+ (C) cstep: if cstep(S,f) is dead (or the step violates) for EVERY one of the 27 maps f, then S is dead.
+     Proof: let (g_0,g_1,...) be any clock, f = g_0.  If step(S,f) violates, some s in S leaves the band at
+     once.  Otherwise cstep(S,f) is dead, hence by (R) (applied once per added twin) step(S,f) is dead; so
+     against the clock (g_1,g_2,...) some state s' in step(S,f) has a band-leaving continuation; s' = a
+     successor of some s in S under f and a legal w, and prepending w gives a legal band-leaving sequence
+     from s against (g_0,g_1,...).
+ (I) Certificate: a list K_0, K_1, ..., K_m of state sets ("nogoods") such that for every i and every one
+     of the 27 maps f:  step(K_i,f) violates, or cstep(K_i,f) contains some K_j with j < i.
+     Then every K_i is dead (induction on i using (C) and (M); K_0 must be refuted by violations alone).
+     If moreover some K_j is contained in {(0,0^d,free),(0,0^d,rest)}, then by (M),(R) S_0 is dead, i.e.
+     NO clock keeps |x| <= B.                                                              QED (method)
+
+1.3 The search (ngclock.cpp / ngclock2.cpp / ngclock3.cpp; same algorithm, see file headers).
+ DFS over reachable-state-sets.  When a set S is exhausted (all 27 maps refuted) it does not store S but a
+ small CORE K subset S that already suffices: for each map, one violating state, or predecessors of the
+ nogood that refuted the image.  A later set containing a stored core is refuted without search.  This is
+ the "smarter search": d=5, band 5 needs 3 256 sets instead of the 4.4-6.2 million of the plain solvers;
+ d=7 needs 43 023 (11 s) instead of the estimated >1e8.
+ Optional filter KR=3: states whose sign window has more than 3 runs are dropped (the adversary forfeits
+ those plays).  This can only shrink images, so a certificate produced under the filter is still a
+ certificate for the unfiltered game - and the checkers below never apply the filter.
+ The solver is NOT trusted: only the certificate check is.
+
+1.4 Independent checking of (I).
+   ngcheck.py   - Python, tuple-based, written separately from the solver.
+   ngcheck.cpp  - C++, decodes each state to (x, window[], rest) and re-encodes; written from the spec.
+ Results (all "OK: ... nogoods verified (27 maps each); initial set is dead"):
+   d=6  band 6    12 338 nogoods   ngcheck.cpp OK, ngcheck.py OK            (known value, sanity)
+   d=7  band 7    43 023 nogoods   ngcheck.cpp OK, ngcheck.py OK            cert_7_7.txt      (exact game)
+   d=7  band 7    19 450 nogoods   ngcheck.cpp OK                           cert_7_7_KR3.txt
+   d=9  band 9   384 459 nogoods   ngcheck.cpp OK                           cert_9_9.txt      (exact game)
+   d=9  band 9    75 899 nogoods   ngcheck.cpp OK, ngcheck.py OK            cert_9_9_KR3.txt
+   d=11 band 11  199 469 nogoods   ngcheck.cpp OK                           cert_11_11_KR3.txt
+   d=13 band 13  550 864 nogoods   ngcheck.cpp OK                           cert_13_13_KR3.txt
+ Logs: check_d6_d7.log, check_d9_KR3.log, check_d9_KR3_python.log, check_d9_full.log, check_d11_KR3.log,
+       check_d13_KR3.log.
+
+1.5 The check was watched failing (check_d6_d7.log):
+   [a] the d=7 certificate checked against band 8 (which IS feasible)        -> FAIL at nogood #0
+   [b] the d=7 certificate with one nogood line deleted                      -> FAIL at the first dependent
+   [c] the d=7 certificate with one state removed from one nogood            -> FAIL at that nogood
+   [d] ngcheck.py, d=6 certificate against band 7                            -> FAIL at nogood #0
+ And the solver itself answers FEASIBLE at band d+1 for d = 1..9 (results.log, feasible_d*_B*.txt); the
+ odd-d ones (d = 1,3,5,7,9) were verified by exhaustive reachability over all adversaries
+ (verify_clock.log part D: exact sup|x| = d+1), so the solver is not simply saying INFEASIBLE to everything.
+
+1.6 Remark (not needed for Theorem 1).  The "max depth" printed by ngclock is the depth of the pruned DFS,
+ not the longest survival time of a clock.  From the exhaustive runs without nogoods (solver-b logs,
+ explore.py) every clock is breached at band d by time 4 (d=1), 11 (d=3), 19 (d=5): the game is lost within
+ about 4d ticks from the start.
+
+=====================================================================================================
+2. Checks requested in the task (attack code against concrete clocks).              COMPLETE (computed)
+=====================================================================================================
+ There is no general proof, hence no "proof's adversary" to run.  What was run instead is the EXACT
+ best-response adversary (attack.py: BFS over all plays against a given clock) - verify_clock.log:
+  A. half-duty relay, exact closure over all adversaries: sup|x| = d+1 for d = 1,3,5,7,9.
+  B. NEGATIVE CONTROL: best response asked to breach band d+1 (i.e. force d+2) against half-duty,
+     d = 3,5,7, horizon 40d: no breach.  (A is the exact version of the same statement.)
+  C. best response breaches band d against half-duty at t = 2d+2 with the play  + 0^(d-1) (-0)^((d+1)/2) -
+     (d = 3,5,7,9).
+  D. every band-(d+1) witness clock in solver-b/clock_witnesses.log and in feasible_d*_B*.txt: exact
+     sup|x| = d+1, and band d is breached.
+  E. random clocks (uniform / relay-like / half-duty with noise), d = 3,5,7: 2 160 clocks, every one
+     breached at band d within 18 ticks.
+ These are consistent with Theorem 1 but add nothing to it logically (Theorem 1 covers all clocks).
+
+=====================================================================================================
+3. Hand lemmas toward a general proof.                                                     COMPLETE
+=====================================================================================================
+ Throughout: d odd, and a clock that keeps |x| <= B against every adversary.  (B = d is the case of
+ interest; B general is stated because it lets the lemma be tested on real clocks at B = d+1.)
+
+ LEMMA A (one play, window bound).  Let a play be positive on [tau-d, tau-1] and x_tau = a.
+   If it is free at tau:  |a + P(tau,tau+d)| <= B - (d+1)/2.
+   If it rests at tau:    |a + P(tau,tau+d)| <= B - (d-1)/2.
+   Mirror statement for plays negative on [tau-d,tau-1] with N in place of P.
+ Proof.  On ticks s in [tau, tau+d-1] the observation is sgn x_{s-d} with s-d in [tau-d,tau-1]: it is +,
+   whatever the adversary does from tau on.  So x_{tau+d} = a + P(tau,tau+d) + (sum of w).  Free at tau:
+   pushing at tau, tau+2, ..., tau+d-1 is legal ((d+1)/2 pushes), in either direction.  Rest at tau:
+   pushing at tau+1, ..., tau+d-2 ((d-1)/2 pushes).  Apply |x_{tau+d}| <= B.                         QED
+
+ LEMMA G (two plays, opposite histories, same class).  Let tau >= d.  Let play A be negative on
+   [tau-d,tau-1] with x^A_tau = alpha, play B' positive on [tau-d,tau-1] with x^B'_tau = beta, and
+   sgn(alpha) = sgn(beta).  Then
+            N(tau,tau+d) - P(tau,tau+d)  <=  2B - d - 1 + beta - alpha.
+   (alpha <= 1 and beta >= -1 necessarily, so the useful cases are (alpha,beta) = (0,0),(1,1),(-1,-1),
+   which give N - P <= 2B-d-1; for B = d that is  N - P <= d-1.)
+ Proof.  As in Lemma A, on ticks [tau,tau+d-1] A receives n_s and B' receives p_s regardless of what the
+   adversary does from tau on.  At tick tau+d both are observed through sgn(x_tau), the same symbol, so
+   they receive the same control u.  Continue A upward: if A is free at tau, push at tau, tau+2, ...,
+   tau+d-1 ((d+1)/2 pushes; A rests at tau+d): x^A_{tau+d+1} = alpha + N + (d+1)/2 + u.  If A rests at
+   tau, push at tau+1, tau+3, ..., tau+d-2 ((d-1)/2 pushes), idle at tau+d-1, push at tau+d:
+   x^A_{tau+d+1} = alpha + N + (d-1)/2 + u + 1.  Either way  alpha + N + (d+1)/2 + u <= B.
+   Mirror for B' pushing down:  beta + P - (d+1)/2 + u >= -B.  Subtract.                             QED
+   Machine test (lemma_check.py, lemma_check.log): on the half-duty clock and on the solver's band-(d+1)
+   clocks, d = 1,3,5,7, all reachable same-sign (alpha,beta) configurations satisfy the inequality, with
+   equality attained in every clock; the same test with the right-hand side lowered by 1 fails in every
+   clock (negative control).  The zero-observation map z_t never enters the lemma.
+
+ LEMMA S (average of n - p; B = d).  For t >= d+1 the play P* (w = +1 on even ticks) has x >= 1; hence for
+   2d+1 <= a <= b:  P(a,b) <= d - 1 - floor((b-a)/2),  and by symmetry  N(a,b) >= -(d-1) + floor((b-a)/2).
+   So with c_s = n_s - p_s and D(tau) = sum_{tau <= s < tau+d} c_s = N(tau,tau+d) - P(tau,tau+d):
+        sum_{a <= s < b} c_s >= 2 floor((b-a)/2) - 2(d-1),   and the average of D(tau) over long
+        windows is at least d - o(1).
+ Proof.  x(P*)_t >= 1: Theorem 3, Step 1 of solver-a/proofs.txt with B = d (deviate downward at the even
+   sigma in {t-d-1, t-d}; controls agree up to tick sigma+d; (d+1)/2 double-steps give P*_t - (d+1) >= -d).
+   So for t >= 2d+1 P* is observed positive and receives p_t; it gains #even ticks in [a,b) >= floor((b-a)/2)
+   from the adversary, starts >= 1 and must end <= d.  Averaging: sum_tau D(tau) counts each c_s exactly d
+   times except within d of the window ends (|c_s| <= 2).                                           QED
+
+ COROLLARY (necessary condition on a hypothetical band-d clock).  D(tau) >= d must hold for a set of tau of
+   positive density, and at every such tau Lemma G forbids every same-sign pair with beta <= alpha: no
+   negative-history play and positive-history play may sit together at 0, or together at +1, or together
+   at -1, at time tau.  (For the half-duty clock D(tau) = d+1 at every even tau, and such pairs exist at
+   even tau: that is its failure at band d.)
+
+=====================================================================================================
+4. THE GENERAL STATEMENT:  for every odd d, no clock achieves band d.                    NOT PROVED
+=====================================================================================================
+ What is missing.  To finish along the line of section 3 one must show that the forbidden pairs of the
+ Corollary can be produced by the adversary at "enough" times tau, for EVERY clock.  I did not manage this.
+ Two concrete obstacles, both found by computation (lp_potential.py, lp_cycles.py, lp_pointwise.py - these
+ are exploratory models, NOT proofs):
+  (i) Which low states (level 1 free / level 1 rest / level 2 ...) are reachable by long-positive plays
+      depends on the recent p_t (after p_t = +1 no long-positive play is at level 1 with a free tick), and
+      on how thin the set of long-positive plays is.  I only analysed an idealised "full corridor" model.
+  (ii) Even in that idealised model, Lemmas A, G, S are insufficient: the periodic pattern
+            (n_t, p_t) = (-1,+1), (+1,-1), (+1,-1), (+1,-1)      [period 4]
+      satisfies every inequality of section 3 pointwise when d = 3 (mod 4)  (D(tau) is d+3 right after the
+      "anti-control" tick, where the lemmas only give D <= d+3, and d-1 elsewhere).  A similar period-6
+      family survives for d = 5 (mod 6) (checked for d = 5, 11; periods up to 6, d up to 11 searched).
+      The real game does refute these clocks: Theorem 1 covers d = 7, 11, and the exact best response
+      breaches every phase shift and every periodic choice of z_t within 2d+3 ticks of the start
+      (pattern_attack.log).  But that breach happens in the start-up transient; I did not extract from it
+      a lemma that would also kill the pattern in the steady-state argument.  So the lemma set is
+      insufficient as it stands.  The natural next lemma is the "hybrid" version of Lemma A: a play that
+      was positive on [tau-d, tau-d+j-1] and negative on [tau-d+j, tau-1] receives p on [tau,tau+j) and n
+      on [tau+j,tau+d), which bounds  x_tau + P(tau,tau+j) + N(tau+j,tau+d)  from both sides.  Using it
+      needs the set of levels such crossing plays can occupy, which I did not work out.
+      Computational hint on how much history matters: certificates exist using only sign windows with
+      <= 3 runs (KR=3, d <= 13), while under the 2-run filter the solver reports the filtered game
+      winnable for d = 5, 7.  (The plays of Lemma G already have 3-run windows  - ... - 0 + ... +  after
+      tau, so this is consistent with Lemma G being one of the mechanisms; it does not show it is the
+      only one.)
+ Other things tried and abandoned: a counterexample-guided search for a small universal family of open-loop
+ adversary plays (cegar.cpp, cegar2.cpp: 30 plays suffice at d = 3; d = 5 did not finish in 3 minutes) -
+ the plays it found at d = 3 are all of the shape "short prefix, then alternate pushes in one direction",
+ which is what suggested Lemma G.
+
+=====================================================================================================
+5. Final result lines
+=====================================================================================================
+ solver (results.log, run_d*.log)                                   checker
+   KR=3    d=7  B=7  INFEASIBLE nodes=19450                         OK (C++)
+   exact   d=7  B=7  INFEASIBLE nodes=43023   (11 s)                OK (C++ and Python)
+   KR=3    d=9  B=9  INFEASIBLE nodes=75899                         OK (C++ and Python)
+   exact   d=9  B=9  INFEASIBLE nodes=384459  (about 14 min)        OK (C++)
+   KR=3    d=11 B=11 INFEASIBLE nodes=199469  (about 3 min)         OK (C++).  Python re-check stopped by
+                                                                    me, unfinished (>= 80000 of 199469
+                                                                    nogoods passed, none failed)
+   KR=3    d=13 B=13 INFEASIBLE nodes=550864  (about 22 min)        OK (C++, 6m50s)
+ Not attempted: d >= 15 (the solver indexes arrays by all 3^d sign windows; d = 15 needs a compact
+ encoding of the <=3-run windows - an engineering change, not a new idea.  Node counts under KR=3 grew
+ 4307, 19450, 75899, 199469, 550864 for d = 5..13.)
+
+=====================================================================================================
+6. Files (all in open-c/)
+=====================================================================================================
+ proofs.txt                  this file
+ ngclock.cpp                 nogood-learning exact solver (first version; produced cert_6_6, cert_7_7, cert_9_9)
+ ngclock2.cpp / ngclock3.cpp same + optional run filter KR / minus a dead O(3^d) copy (speed only)
+ ngcheck.py, ngcheck.cpp     the two independent certificate checkers (the trusted part)
+ cert_<d>_<B>[_KR3].txt      certificates (cert_6_7.txt, cert_7_8.txt are stubs from FEASIBLE runs - ignore)
+ mut_cert_7_7_*.txt          deliberately broken certificates used for the negative controls
+ results.log, run_d*.log/.err, check_*.log      solver and checker outputs
+ feasible_d*_B*.txt          band-(d+1) clocks printed by the solver (verified in verify_clock.log)
+ attack.py                   exact best-response adversary against a given clock
+ verify_clock.py/.log        battery A-E of section 2
+ lemma_check.py/.log         machine test of Lemma G (+ negative control)
+ pattern_attack.py/.log      best response against the lemma-surviving periodic patterns of section 4
+ lp_potential.py, lp_cycles.py, lp_pointwise.py   exploratory models for section 4 (not proofs)
+ fclock.cpp, cegar.cpp, cegar2.cpp, explore.py    earlier, superseded attempts (kept, not used in any claim)
+ partial_killed_*            first d=11 run, stopped by me (slow build) and restarted - incomplete, ignore

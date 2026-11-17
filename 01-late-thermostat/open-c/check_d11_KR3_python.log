@@ -1,0 +1,5 @@
+  checked 20000
+  checked 40000
+  checked 60000
+  checked 80000
+STOPPED BY ME at >=80000 of 199469 nogoods checked, no failure up to that point (too slow in Python); the C++ checker completed on this certificate (check_d11_KR3.log)

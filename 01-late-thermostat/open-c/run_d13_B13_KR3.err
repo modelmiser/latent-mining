@@ -1,0 +1,8 @@
+nodes=65536 nogoods=65505 avgK=31.8 depth=30 |S|=498
+nodes=131072 nogoods=131038 avgK=34.5 depth=33 |S|=500
+nodes=196608 nogoods=196573 avgK=35.8 depth=34 |S|=554
+nodes=262144 nogoods=262114 avgK=37.6 depth=29 |S|=319
+nodes=327680 nogoods=327653 avgK=38.6 depth=26 |S|=362
+nodes=393216 nogoods=393189 avgK=38.4 depth=26 |S|=357
+nodes=458752 nogoods=458731 avgK=36.3 depth=20 |S|=262
+nodes=524288 nogoods=524271 avgK=34.8 depth=16 |S|=138

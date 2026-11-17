@@ -1,0 +1,15 @@
+d=5 B=6 prune=0 CLOCK FEASIBLE sets_visited=562 maxdepth=31
+  preperiod=26 period=2
+  prefix: 000 000 000 000 000 000 +0- +0- 00- 000 000 +0- ++0 00- +00 00- +00 0-- ++0 0-- ++0 0-- ++0 0-- ++0 0--
+  cycle: ++0 0--
+  time=1.38s mem=4197504kB
+exit=0 for 5 6
+Command exited with non-zero status 124
+  time=900.19s mem=4197592kB
+exit=124 for 6 6
+d=6 B=7 prune=0 CLOCK FEASIBLE sets_visited=81 maxdepth=45
+  preperiod=38 period=7
+  prefix: 000 000 000 000 000 000 000 +0- +0- +0- 000 000 +0- 000 +0- +0- 000 +0- 000 +0- 000 +0- +0- 000 +0- 000 +0- 000 +0- +0- 000 +0- 000 +0- 000 +0- +0- 000
+  cycle: +0- 000 +0- 000 +0- +0- 000
+  time=1.37s mem=4197628kB
+exit=0 for 6 7
