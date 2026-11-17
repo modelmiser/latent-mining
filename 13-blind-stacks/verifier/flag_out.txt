@@ -1,0 +1,22 @@
+N(2,1..12) = [1, 2, 6, 21, 75, 270, 975, 3525, 12750, 46125, 166875, 603750]
+recurrence a(n)=5a(n-1)-5a(n-2) holds for n in 5..300: True ; at n=4: False
+closed form B (Fibonacci/Lucas) to n=300: True ; closed form A (21U-30U): True ; GF: True
+largest u at which some state value violates the recurrence: 4 ; states violating at u=5: []
+#(state,action) pairs (all attempts incl. optional OUT): 81 ; largest u where some Q violates the recurrence: 4
+A-style S(u) on window (5, 8): forced-probe action set failures=0 ; full action set failures=0
+A-style S(u) on window (4, 7): forced-probe action set failures=4 ; full action set failures=4
+A-style S(u) on window (3, 6): forced-probe action set failures=16 ; full action set failures=27
+A-style S(u) on window (5, 6): forced-probe action set failures=0 ; full action set failures=0
+A-style S(u) on window (6, 7): forced-probe action set failures=0 ; full action set failures=0
+forced probe attains the max in every state, every u<=300: True
+B-style: slack pairs=36 ; any negative slack (u<=300): None ; largest r where slack(r+2)-5slack(r+1)+5slack(r)!=0: 1
+policy at u=130 is a maximiser at every u in 1..300: True
+k=3 order-4 recurrence violated at n = [5, 7, 8]
+k=4 order-10 recurrence violated at n = [11, 12, 13, 14, 15, 16]
+k=1 N=2^(n-1) to n=40: True
+1 [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048] N(k,k+1)==(k+1)!: True deficit(k+2)= 2
+2 [1, 2, 6, 21, 75, 270, 975, 3525, 12750, 46125, 166875, 603750] N(k,k+1)==(k+1)!: True deficit(k+2)= 3
+3 [1, 2, 6, 24, 116, 604, 3188, 16948, 90460, 483924, 2592108, 13894468] N(k,k+1)==(k+1)!: True deficit(k+2)= 4
+4 [1, 2, 6, 24, 120, 715, 4781, 33419, 235814, 1673633, 11922892, 85148125] N(k,k+1)==(k+1)!: True deficit(k+2)= 5
+5 [1, 2, 6, 24, 120, 720, 5034, 39808, 340774, 3004976, 26681636, 238004439] N(k,k+1)==(k+1)!: True deficit(k+2)= 6
+6 [1, 2, 6, 24, 120, 720, 5040, 40313, 361959, 3567592, 37283949, 398035330] N(k,k+1)==(k+1)!: True deficit(k+2)= 7

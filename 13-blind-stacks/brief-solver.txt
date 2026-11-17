@@ -1,0 +1,57 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Fix integers k >= 1 and n >= 1. There are k stacks S_1, ..., S_k in a row, each holding at most 2 items, all initially empty. The numbers 1..n arrive one at a time in an arrival order (a permutation of 1..n) fixed before play. Sorter knows k and n but never sees the arrival order or the value of any item.
+
+Sorter repeatedly attempts one move:
+(IN) Legal if S_1 holds fewer than 2 items and some number has not yet arrived. The next number of the arrival order is pushed onto S_1.
+(SHIFT i), 1 <= i < k. Legal if S_i is non-empty and S_{i+1} holds fewer than 2 items. The top item of S_i is popped and pushed onto S_{i+1}.
+(OUT i), 1 <= i <= k. Legal if S_i is non-empty and its top item equals the smallest number not yet output. That item is popped and leaves for good.
+
+A legal attempt is executed and Sorter is told "done". An illegal attempt changes nothing and Sorter is told "refused". Attempts are free and unlimited. There is no way to inspect an item other than attempting OUT, and a legal OUT is always executed. Items never move backward.
+
+A strategy is a deterministic function from the history of attempts and answers to the next attempt. It beats an arrival order if, played against it, all n numbers are output after finitely many attempts; otherwise (no legal move left, or play never ends) it fails on that order.
+
+Define N(k, n) as the largest number of arrival orders of 1..n that a single strategy beats.
+
+Headline: find N(2, n) exactly as a function of n (closed form, recurrence, or generating function), for all n >= 1.
+
+General form: determine N(k, n) for all k, n; in particular prove or refute that N(k, n) = n! exactly when n <= k + 1.
+
+UNVERIFIED beliefs (hand-derived):
+- N(1, n) = 2^(n-1).
+- N(2, n) = n! for n <= 3; N(2, 4) = 21 (the three lost orders have 1 arriving last).
+- N(k, k+2) < (k+2)! for k <= 4, by letting 1 arrive last and making buried items the next minima.
+- N(k, n) = n! for n <= k + 1, by keeping one item per stack.
+
+Guess: I would bet N(2, n) grows only exponentially in n with a rational generating function, because each item buried without information costs a bounded-factor guess; this is a guess.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

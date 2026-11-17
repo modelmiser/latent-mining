@@ -1,0 +1,24 @@
+Fix integers k >= 1 and n >= 1. There are k stacks S_1, ..., S_k in a row, each holding at most 2 items, all initially empty. The numbers 1..n arrive one at a time in an arrival order (a permutation of 1..n) fixed before play. Sorter knows k and n but never sees the arrival order or the value of any item.
+
+Sorter repeatedly attempts one move:
+(IN) Legal if S_1 holds fewer than 2 items and some number has not yet arrived. The next number of the arrival order is pushed onto S_1.
+(SHIFT i), 1 <= i < k. Legal if S_i is non-empty and S_{i+1} holds fewer than 2 items. The top item of S_i is popped and pushed onto S_{i+1}.
+(OUT i), 1 <= i <= k. Legal if S_i is non-empty and its top item equals the smallest number not yet output. That item is popped and leaves for good.
+
+A legal attempt is executed and Sorter is told "done". An illegal attempt changes nothing and Sorter is told "refused". Attempts are free and unlimited. There is no way to inspect an item other than attempting OUT, and a legal OUT is always executed. Items never move backward.
+
+A strategy is a deterministic function from the history of attempts and answers to the next attempt. It beats an arrival order if, played against it, all n numbers are output after finitely many attempts; otherwise (no legal move left, or play never ends) it fails on that order.
+
+Define N(k, n) as the largest number of arrival orders of 1..n that a single strategy beats.
+
+Headline: find N(2, n) exactly as a function of n (closed form, recurrence, or generating function), for all n >= 1.
+
+General form: determine N(k, n) for all k, n; in particular prove or refute that N(k, n) = n! exactly when n <= k + 1.
+
+UNVERIFIED beliefs (hand-derived):
+- N(1, n) = 2^(n-1).
+- N(2, n) = n! for n <= 3; N(2, 4) = 21 (the three lost orders have 1 arriving last).
+- N(k, k+2) < (k+2)! for k <= 4, by letting 1 arrive last and making buried items the next minima.
+- N(k, n) = n! for n <= k + 1, by keeping one item per stack.
+
+Guess: I would bet N(2, n) grows only exponentially in n with a rational generating function, because each item buried without information costs a bounded-factor guess; this is a guess.

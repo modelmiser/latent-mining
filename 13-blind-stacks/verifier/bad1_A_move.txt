@@ -1,0 +1,15 @@
+# k=2 n=4 claimed_beaten=21
+-|- 4 IN
+-|- 3 IN
+K|- 3 IN
+-|- 2 IN
+KK|- 2 IN
+K|- 2 IN
+K|K 2 IN
+-|- 1 IN
+-|K 1 IN
+KK|- 1 S1
+KK|K 1 S1
+K|- 1 IN
+K|K 1 IN
+K|KK 1 IN

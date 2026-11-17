@@ -1,0 +1,24 @@
+1 5 16 32
+k=1 n=5 beaten=16 of 120
+cert OK: N(1,5) = 16  (32 states)
+2 4 21 105
+k=2 n=4 beaten=21 of 24
+cert OK: N(2,4) = 21  (105 states)
+2 8 3525 301
+k=2 n=8 beaten=3525 of 40320
+cert OK: N(2,8) = 3525  (301 states)
+3 5 116 588
+k=3 n=5 beaten=116 of 120
+cert OK: N(3,5) = 116  (588 states)
+3 7 3188 1274
+k=3 n=7 beaten=3188 of 5040
+cert OK: N(3,7) = 3188  (1274 states)
+4 6 715 3343
+k=4 n=6 beaten=715 of 720
+cert OK: N(4,6) = 715  (3343 states)
+4 7 4781 5488
+k=4 n=7 beaten=4781 of 5040
+cert OK: N(4,7) = 4781  (5488 states)
+5 7 5034 19014
+k=5 n=7 beaten=5034 of 5040
+cert OK: N(5,7) = 5034  (19014 states)

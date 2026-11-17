@@ -1,0 +1,1 @@
+content removed by solver-b: file exceeded the 300 kB limit; regenerate with: python3 check_strategy.py 2 8 strategy_k2_n8.txt lost_k2_n8.txt

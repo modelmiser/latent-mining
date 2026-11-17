@@ -1,0 +1,24 @@
+# k=2 n=5 claimed_beaten=75
+-|- 5 IN
+-|- 4 IN
+K|- 4 IN
+-|- 3 IN
+KK|- 3 S1
+K|- 3 IN
+K|K 3 IN
+-|- 2 IN
+-|K 2 IN
+KK|- 2 S1
+KK|K 2 S1
+K|- 2 IN
+K|K 2 IN
+K|KK 2 IN
+-|- 1 IN
+-|K 1 IN
+-|UK 1 IN
+KK|- 1 S1
+KK|K 1 S1
+K|- 1 IN
+K|K 1 IN
+K|KK 1 IN
+K|UK 1 IN

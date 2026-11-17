@@ -1,0 +1,74 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. Lemma 1 proves that probing every top is free. The description of the consistent orders ("all bijections
+     with m off the flagged items") is asserted in one sentence; its proof is solver-b/proofs.txt Lemma 0.
+ N2. Theorem 2: "after IN and OUT of 1" - shifts made before that OUT only move items forward, so the suffix
+     still holds at least as many items as claimed.
+ N3. Theorem 3, closing remark: "f(s,u) satisfies the recurrence for every s and u >= 5" is checked for every s
+     from u = 6 (d(3) >= 0 is never checked); at u = 5 it holds for the empty state, which is what the theorem uses.
+ N4. The k = 1 statement rests on the run `prove.py 1 3 6`; the induction is not written out.
+ Found by the referee and the review panel (five seats, four model families). None changes a theorem.
+------------------------------------------------------------------------------------------------
+PROOFS (solver-a).  "Phase" = maximal stretch of play with the same smallest-not-yet-output number m.
+
+LEMMA 1 (greedy probing is free) -- COMPLETE.
+Claim: for every strategy s there is a strategy s' that beats every order s beats and that, after
+every change of the configuration, attempts OUT on every stack top it does not already know to be != m.
+Proof. s' runs s on a VIRTUAL configuration V and keeps the real configuration R equal to V with some
+"ghost" items deleted (order inside stacks preserved). Ghosts = items s' has really output but s has
+not yet (virtually) output; s' knows their values. Whenever R changes, s' probes all real tops as in
+the claim; each success turns that item into a ghost. s' answers s as follows.
+ IN: virtually legal iff |V_1|<2 and an item is unarrived; then also really legal (|R_1|<=|V_1|); do it.
+ SHIFT i: legality decided on V (s' knows V). If legal and the virtual top is a ghost, move the ghost
+   in V only; otherwise the same item is the real top of S_i and |R_{i+1}|<=|V_{i+1}|<2, so do it really.
+ OUT i: if the virtual top is a ghost g, answer done iff value(g) = (number of virtual outputs)+1 and
+   delete g from V. If it is a real item x: if a ghost exists the virtual minimum is a ghost (ghost
+   values are below all real values), answer refused; if no ghost exists V=R and x was already probed
+   and refused in this phase, answer refused.
+All answers equal what s would get in true play, so the virtual play is s's true play. If s beats the
+order, V empties after finitely many attempts, hence R (a subset) is empty: s' beats it.  QED
+
+CONSEQUENCE (exact DP, file fast.py). Under the normal form Sorter's knowledge is: the shape, and for
+each item a flag K (refused in this phase) / U. The consistent completions are exactly the bijections
+(remaining positions -> remaining values) with m not on a K item, so the value depends only on
+(flags, u = #unarrived):  top U  ->  f = f(output it, all flags reset to U) + f(flag it K);
+else f = max over IN / SHIFT of f(successor); f = 1 if empty and u=0; f = 0 if no move.
+N(k,n) = f(empty, n). The DAG is finite (items only move forward). slow.py does NOT use Lemma 1.
+
+THEOREM 2 (N(k,n) = n!  iff  n <= k+1) -- COMPLETE.
+(a) n <= k+1 => all orders beaten. Strategy: keep at most one item per stack; before each IN shift
+items right so S_1 is empty; probe every top after every move. If k items are in the system (one per
+stack, all refused) and an item is unarrived, then arrived>=k, so n=k+1, nothing was output, and the
+last arrival is 1: IN (onto S_1's item), OUT. From then on nothing arrives and at most one stack is
+double only momentarily (the IN just output), so every item is a top and each minimum is output.
+(b) n >= k+2 => some order fails, for every strategy s (adversary argument; s deterministic, so the
+adaptive answers below define one fixed order on which s plays exactly this way).
+ Overfull lemma: suppose a phase starts (nothing known about the items in the system beyond being
+ >= m) and for some j the stacks S_j..S_k hold more than k-j+1 items. Then the adversary wins.
+ Proof by downward induction on the LARGEST such j. Maximality gives |S_j|=2 and S_{j+1..k} holds
+ exactly k-j items. Adversary declares m = bottom of S_j. If j=k its cover can never leave (it is not
+ m, nothing else can be output): fail. If j<k: nothing is output until that bottom item is; for that
+ its cover must have been shifted into S_{j+1..k}, which loses nothing meanwhile, so at the start of
+ the next phase S_{j+1..k} holds >= k-j+1 items > k-j stacks: overfull with larger index; values of
+ remaining items are still unconstrained. Induct.  QED
+ Adversary for n>=k+2: 1 arrives last (every OUT refused until then). Just before the last IN,
+ |S_1|<=1 and n-1>=k+1 items are in the system. k=1: impossible, s fails. k>=2: S_2..S_k hold >= k
+ items > k-1 stacks; after IN and OUT of 1 a phase starts with an overfull suffix: s fails.  QED
+ (For k=2,n=4 this shows directly that at most 3 of the 6 orders with 1 last are beaten: S_1=[c],
+ S_2=[x,y]; fail if x=2, or if c=2 and x=3. So N(2,4)<=21.)
+
+THEOREM 3 (N(2,n) = 5 N(2,n-1) - 5 N(2,n-2) for all n >= 5) -- COMPLETE, COMPUTER-ASSISTED
+(finite check = prove.py 2 5 8, output "failures=0"; depends on Lemma 1 and on fast.py being the DP above).
+Let Q(s,a,u) be the value of action a in flag-state s (49 states for k=2, "probe" is the single forced
+action of a state with a U top) with u unarrived. Let lam1,lam2=(5+-sqrt5)/2 (lam1+lam2=lam1*lam2=5).
+Statement S(u): for all s,a: (i) Q(s,a,u)=5Q(s,a,u-1)-5Q(s,a,u-2); (ii) for one fixed action a*(s),
+d_a(u)=Q(s,a*,u)-Q(s,a,u) satisfies d_a(u-1)>=0 and d_a(u)>=lam2*d_a(u-1).
+prove.py verifies S(5..8) exactly (integers; the sqrt5 comparison is done by squaring).
+Step S(u-1),S(u) => S(u+1), u>=6: (ii) gives f(s,v)=Q(s,a*,v) for v=u-2,u-1,u, hence by (i)
+f(s,u)=5f(s,u-1)-5f(s,u-2), which is (i) at u+1 for a=IN. For SHIFT/probe, Q(s,a,u+1) is a sum of
+f(s',u+1) over states s' later in the within-level order (fewer items, or items further right, or
+fewer U flags); treating states in that order, f(s',u+1)=Q(s',a*,u+1) already satisfies the
+recurrence, so (i) holds for (s,a,u+1). Then d(u+1)=5d(u)-5d(u-1) >= 5d(u)-lam1*d(u) = lam2*d(u) >= 0,
+which is (ii). So f(s,u)=5f(s,u-1)-5f(s,u-2) for every s and u>=5; s=empty gives the theorem.  QED
+The same script with "prove.py 1 3 6" proves N(1,n)=2N(1,n-1), i.e. N(1,n)=2^(n-1).
+
+NOT PROVED: recurrences for k=3,4 (fitted only); N(k,k+2)=(k+2)!-(k+1) (computed k<=8 only).

@@ -1,0 +1,4 @@
+k=1 overfull phase-start states tested=5 violations=0 ; non-overfull u=0 states with V=t!: 2
+k=2 overfull phase-start states tested=20 violations=0 ; non-overfull u=0 states with V=t!: 5
+k=3 overfull phase-start states tested=70 violations=0 ; non-overfull u=0 states with V=t!: 13
+k=4 overfull phase-start states tested=230 violations=0 ; non-overfull u=0 states with V=t!: 35

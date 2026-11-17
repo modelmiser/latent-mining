@@ -1,0 +1,6 @@
+# k=1 n=3 claimed_beaten=4
+- 3 IN
+- 2 IN
+K 2 IN
+- 1 IN
+K 1 IN

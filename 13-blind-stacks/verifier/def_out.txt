@@ -1,0 +1,40 @@
+k=1 n=1 N=1  states=2 memo=2
+0.00s 3716kB
+k=1 n=2 N=2  states=9 memo=9
+0.00s 3876kB
+k=1 n=3 N=4  states=24 memo=24
+0.00s 3932kB
+k=1 n=4 N=8  states=54 memo=54
+0.00s 3944kB
+k=1 n=5 N=16  states=114 memo=114
+0.00s 3716kB
+k=1 n=6 N=32  states=234 memo=234
+0.00s 3748kB
+k=1 n=7 N=64  states=474 memo=474
+0.00s 3876kB
+k=2 n=1 N=1  states=3 memo=3
+0.00s 3716kB
+k=2 n=2 N=2  states=25 memo=25
+0.00s 3736kB
+k=2 n=3 N=6  states=132 memo=132
+0.00s 3716kB
+k=2 n=4 N=21  states=568 memo=568
+0.00s 3716kB
+k=2 n=5 N=75  states=2198 memo=2198
+0.00s 3876kB
+k=2 n=6 N=270  states=8434 memo=8434
+0.00s 4052kB
+k=2 n=7 N=975  states=32522 memo=32522
+0.02s 5428kB
+k=3 n=3 N=6  states=404 memo=404
+0.00s 3716kB
+k=3 n=4 N=24  states=2758 memo=2758
+0.00s 3872kB
+k=3 n=5 N=116  states=15950 memo=15950
+0.01s 4500kB
+k=3 n=6 N=604  states=89984 memo=89984
+0.10s 8976kB
+k=4 n=5 N=120  states=71684 memo=71684
+0.09s 7280kB
+k=4 n=6 N=715  states=519518 memo=519518
+1.61s 32912kB

@@ -1,0 +1,85 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. Theorem 2, C(j): "the last j-1 stacks hold the j-1 old items and t: j items" - other covers may have been
+     shifted in as well, so read "at least j items", which is what C(j-1) needs.
+ N2. Lemma 0, well-foundedness: "positions" counts an unarrived item as position 0 (the order used is `rank` in
+     prove_k2.py). In Theorem 3, "topological order" is that same order over all attempts, not only PI's.
+ N3. The closed forms hold for the ranges stated (j >= 1, j >= 2); N(2,1) = 1 and N(2,2) = 2 are separate.
+ Found by the referee and the review panel (five seats, four model families). None changes a theorem.
+------------------------------------------------------------------------------------------------
+PROOFS (solver-b).  Notation: k stacks of capacity 2, items 1..n, m = smallest value not yet output.
+
+LEMMA 0 (reduction to a finite DP) -- COMPLETE
+After any history Sorter knows, for every arrival index, where that item is (IN/SHIFT legality depends only on counts,
+which Sorter can compute; so Sorter never needs to attempt an IN/SHIFT whose answer is "refused", and such an attempt
+changes nothing). The only answers carrying information are those to OUT attempts. A successful OUT pins the value of a
+departed item. A refused OUT on item a while the minimum is m' says value(a) != m'. Once m' has been output (from another
+item) that statement is implied. Hence the set of arrival orders consistent with the history is exactly: departed items
+have their pinned values 1..m-1; the remaining values m..n are assigned to the remaining items (in the stacks or
+unarrived) in any way such that m is not on an item FLAGGED (= refused since the last successful output). So the
+information state is, up to relabelling, (for each stack the bottom-to-top list of flags; r = number unarrived).
+Let V(state) = max over continuations of the number of consistent assignments beaten. An attempt with a known answer
+"refused" changes neither position nor knowledge and can be deleted from any strategy (a strategy doing only such
+attempts forever fails). Every other attempt is IN, SHIFT (one successor) or OUT on an unflagged top (two successors:
+success -> item removed, all flags cleared; refusal -> flag set), and the consistent assignments split disjointly
+between the successors. Therefore
+   V(all empty, r=0) = 1;   V(s) = max over such attempts of the sum of V over successors (0 if none).
+Each such attempt strictly decreases (#items left, positions, -#flags) lexicographically, so the recursion is
+well-founded, and N(k,n) = V(empty stacks, r=n). fast.py is this recursion; slow.py does not use the lemma
+(explicit sets of permutations) and agrees on every case it reaches (k=1 n<=6, k=2 n<=6, k=3 n<=5).
+
+THEOREM 1: N(k,n) = n! for n <= k+1 -- COMPLETE
+Call a position SPREAD if every stack holds <= 1 item and the number of items not yet output (in the stacks or
+unarrived) is <= k. Claim: from a spread position Sorter always wins. Shift items forward one
+step at a time (an item moves into an empty stack) until the items in the system occupy the rightmost stacks; then S_1
+is empty if anything is unarrived (items left <= k); IN the next item, repeat. When everything has arrived all items are
+tops of distinct stacks; attempt OUT on each; exactly one succeeds; the position is spread again with one item fewer.
+n <= k: the start is spread. n = k+1: bring k items in, one per stack (as above). Attempt OUT on all k tops.
+If one succeeds, k items remain, position spread. If all are refused, value 1 is the unarrived item: do IN (S_1 holds 1
+item, so legal), then OUT 1 succeeds on it; k items remain, one per stack: spread. QED.
+
+THEOREM 2: N(k,n) < n! for every n >= k+2 (all k >= 1) -- COMPLETE
+Fix a deterministic strategy. We build an arrival order it fails on, value by value. Whenever a value m is designated
+to an item, all answers during phase m (the time m is the minimum) are determined, hence so is Sorter's play up to the
+output of m, hence the position at that moment; the next designation may depend on that position. If at some phase the
+designated item is never output, complete the order arbitrarily: Sorter fails on it.
+Step A. Designate 1 := the item arriving last, z. If 1 is ever output, at that moment all n items have arrived and n-1 >= k+1
+items remain in the k stacks, no flags are relevant (new phase), nothing is unarrived.
+Claim C(j), 1 <= j <= k: if at the start of a phase nothing is unarrived and the last j stacks S_{k-j+1..k} together
+hold >= j+1 items, the adversary can designate the remaining values so that Sorter fails.
+(At a phase start the relative order of all remaining items is still completely free, by Lemma 0.)
+C(1): S_k holds [b,t] (b below). Designate m := b. t is not m, so t is never output before b, and t cannot be
+shifted out of S_k; b is never a top; m is never output. Fail.
+C(j), j >= 2, assuming C(j-1): let i = k-j+1. If the last j-1 stacks hold >= j items, apply C(j-1). Otherwise they
+hold <= j-1 items, so (S_i holds <= 2 and the j stacks hold >= j+1) S_i holds 2 items [b,t] and the last j-1 stacks hold exactly j-1 items.
+Designate m := b. Nothing is output before b. b can become a top only after t is shifted into S_{i+1}. Items never
+move backward and none leaves, so when b is output (if ever) the last j-1 stacks hold the j-1 old items and t: j items
+(b itself, if it was shifted there too, has just left). A new phase starts, nothing unarrived: C(j-1) applies. QED claim.
+Step A ends in the hypothesis of C(k). QED.
+COROLLARY: N(k,n) = n! if and only if n <= k+1. The problem's belief "N(k,k+2) < (k+2)! for k <= 4" holds for all k.
+
+THEOREM 3: N(2,n) = 5 N(2,n-1) - 5 N(2,n-2) for all n >= 5, with N(2,1..4) = 1,2,6,21 -- COMPLETE, COMPUTER-ASSISTED
+(prove_k2.py; relies on Lemma 0). For k=2 there are 49 flag-states; the set of legal attempts in a state is the same for
+all r >= 1. Fix the policy PI printed by prove_k2.py (state -> attempt, independent of r). Let W_0 = V_0 (computed)
+and for r >= 1 let W_r be the value vector obtained by following PI; then W_r = A W_{r-1} for a fixed 49x49 matrix A
+(same-r successors are resolved in topological order). For a state s and an attempt x != PI(s) let
+slack_{s,x}(r) = [value of PI(s)] - [value of x], computed from W_r, W_{r-1}; it is a fixed linear functional of
+W_{r-1}, so by Cayley-Hamilton the sequence slack(r), r >= 1, and also u(r) = slack(r+2) - 5 slack(r+1) + 5 slack(r),
+satisfy a monic linear recurrence of order <= 49. The program checks, in exact integers, for each of the 36 pairs (s,x):
+ (i) u(r) = 0 for r = 8..128 (>= 49 consecutive zeros, hence u(r) = 0 for all r >= 8);
+ (ii) slack(r) >= 0 for r = 1..9;  (iii) slack(9) - beta*slack(8) >= 0 where beta = (5 - sqrt5)/2 (decided exactly).
+From (i), slack(r+1) - beta*slack(r) is multiplied by alpha = (5+sqrt5)/2 > 0 at each step, so stays >= 0, so
+slack(r+1) >= beta*slack(r) >= 0 for all r >= 8. Hence slack >= 0 for all r >= 1, and by induction on r (and on the
+topological order inside each r) V_r = W_r for all r: the Bellman maximum is attained by PI. Finally N(2,n) = W_n(empty)
+satisfies the same order-<=49 recurrence, and a(n+2) - 5a(n+1) + 5a(n) = 0 is checked for n = 8..128, plus directly for
+n = 3..7. QED.
+Closed form (follows from the recurrence, initial values and F_{m+1}+F_{m-1} = L_m, L_{m+1}+L_{m-1} = 5 F_m):
+   N(2,2j+1) = 3 * 5^(j-1) * F_{2j+1}  (j >= 1),    N(2,2j) = 3 * 5^(j-2) * L_{2j}  (j >= 2),   N(2,1)=1, N(2,2)=2.
+   sum_{n>=1} N(2,n) x^n = (x - 3x^2 + x^3 + x^4) / (1 - 5x + 5x^2).   Growth rate (5+sqrt5)/2 = 3.618...
+
+THEOREM 4: N(1,n) = 2^(n-1) -- SKETCH (the values are COMPUTED for n <= 12 only; the same method as Theorem 3 would
+prove it but I did not run it).
+
+CONJECTURES (computed only):
+ - N(k,k+2) = (k+2)! - (k+1), verified k = 1..7.
+ - N(3,n) = 11a(n-1) - 40a(n-2) + 58a(n-3) - 30a(n-4) for n >= 9 (verified to n = 70); char. poly (x-3)(x^3-8x^2+16x-10).
+ - N(4,n): order-10 recurrence with coefficients 23,-216,1089,-3245,5866,-6173,3032,300,-923,245 for n >= 17 (verified to n = 90).

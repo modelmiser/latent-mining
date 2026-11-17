@@ -1,0 +1,24 @@
+bad1_A_move.txt k=2 n=4 beaten=12 of 24  REJECT (claimed 21)
+  rc=1
+bad2_A_missing.txt k=2 n=4 beaten=12 of 24  REJECT (claimed 21)
+  rc=1
+bad3_A_claim.txt k=2 n=4 beaten=21 of 24  REJECT (claimed 22)
+  rc=1
+BAD_policy_k2_n6.txt k=2 n=6 beaten=150 of 720  REJECT (claimed 270)
+  rc=1
+bad4_B_move.txt k=2 n=8 beaten=3150 of 40320
+  rc=0
+policy_k2_n5.txt k=2 n=5 beaten=75 of 120  REJECT lost-file mismatch (44 vs 45)
+  rc=1
+BAD_strategy_k2_n4_a.txt k=2 n=4 beaten=0 of 24
+  rc=0
+BAD_strategy_k2_n4_b.txt k=2 n=4 beaten=21 of 24
+  rc=0
+BAD_strategy_k2_n4_c.txt k=2 n=4 beaten=0 of 24
+  rc=0
+bad6_cert_leaf.txt REJECT: 10 states violate Bellman
+  rc=1
+REJECT missing (1, ('1', '11'))
+  rc=1
+BAD_cert_k2_n4.txt REJECT: 1 states violate Bellman
+  rc=1

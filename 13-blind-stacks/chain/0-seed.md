@@ -1,0 +1,3 @@
+# Seed
+
+The numbers 1 to n arrive in an arbitrary order and must leave in increasing order. Between input and output stand s stacks in series: an item may be pushed from the input onto the first stack, popped from one stack and pushed onto the next, or popped from the last stack to the output. Each stack can hold at most c items. For unbounded stacks, one stack sorts exactly the permutations avoiding the pattern 231, counted by the Catalan numbers, and two stacks in series already have no finite description of that kind. For each s and c: how many permutations of length n can be sorted, which patterns obstruct sorting, and how does the count grow as the capacity c increases from 1?

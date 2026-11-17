@@ -1,0 +1,14 @@
+k=1 n=4 N=8  states=54  lemma: checked=54 value-mismatch=0 setsize-mismatch=0 flagDP-root=8
+k=1 n=8 N=128  states=954  lemma: checked=954 value-mismatch=0 setsize-mismatch=0 flagDP-root=128
+k=2 n=3 N=6  states=132  lemma: checked=132 value-mismatch=0 setsize-mismatch=0 flagDP-root=6
+k=2 n=4 N=21  states=568  lemma: checked=568 value-mismatch=0 setsize-mismatch=0 flagDP-root=21
+k=2 n=5 N=75  states=2198  lemma: checked=2198 value-mismatch=0 setsize-mismatch=0 flagDP-root=75
+k=2 n=6 N=270  states=8434  lemma: checked=8434 value-mismatch=0 setsize-mismatch=0 flagDP-root=270
+k=2 n=7 N=975  states=32522  lemma: checked=32522 value-mismatch=0 setsize-mismatch=0 flagDP-root=975
+k=2 n=8 N=3525  states=125998  lemma: checked=125998 value-mismatch=0 setsize-mismatch=0 flagDP-root=3525
+k=2 n=9 N=12750  states=489726  lemma: checked=489726 value-mismatch=0 setsize-mismatch=0 flagDP-root=12750
+k=2 n=10 N=46125  states=1907390  lemma: checked=1907390 value-mismatch=0 setsize-mismatch=0 flagDP-root=46125
+k=3 n=5 N=116  states=15950  lemma: checked=15950 value-mismatch=0 setsize-mismatch=0 flagDP-root=116
+k=3 n=6 N=604  states=89984  lemma: checked=89984 value-mismatch=0 setsize-mismatch=0 flagDP-root=604
+k=3 n=7 N=3188  states=514448  lemma: checked=514448 value-mismatch=0 setsize-mismatch=0 flagDP-root=3188
+k=4 n=6 N=715  states=519518  lemma: checked=519518 value-mismatch=0 setsize-mismatch=0 flagDP-root=715

@@ -1,0 +1,72 @@
+policy_k1_n3.txt k=1 n=3 beaten=4 of 6  lost-file matches (2, all with 1 last: True)
+rc=0
+policy_k1_n6.txt k=1 n=6 beaten=32 of 720  lost-file matches (688, all with 1 last: False)
+rc=0
+policy_k2_n3.txt k=2 n=3 beaten=6 of 6  lost-file matches (0, all with 1 last: True)
+rc=0
+policy_k2_n4.txt k=2 n=4 beaten=21 of 24  lost-file matches (3, all with 1 last: True)
+rc=0
+policy_k2_n5.txt k=2 n=5 beaten=75 of 120  lost-file matches (45, all with 1 last: False)
+rc=0
+policy_k2_n6.txt k=2 n=6 beaten=270 of 720  lost-file matches (450, all with 1 last: False)
+rc=0
+policy_k2_n7.txt k=2 n=7 beaten=975 of 5040
+rc=0
+policy_k2_n8.txt k=2 n=8 beaten=3525 of 40320
+rc=0
+policy_k2_n9.txt k=2 n=9 beaten=12750 of 362880
+rc=0
+policy_k3_n4.txt k=3 n=4 beaten=24 of 24  lost-file matches (0, all with 1 last: True)
+rc=0
+policy_k3_n5.txt k=3 n=5 beaten=116 of 120  lost-file matches (4, all with 1 last: True)
+rc=0
+policy_k3_n6.txt k=3 n=6 beaten=604 of 720  lost-file matches (116, all with 1 last: False)
+rc=0
+policy_k3_n8.txt k=3 n=8 beaten=16948 of 40320
+rc=0
+policy_k4_n5.txt k=4 n=5 beaten=120 of 120  lost-file matches (0, all with 1 last: True)
+rc=0
+policy_k4_n6.txt k=4 n=6 beaten=715 of 720  lost-file matches (5, all with 1 last: True)
+rc=0
+policy_k4_n8.txt k=4 n=8 beaten=33419 of 40320
+rc=0
+policy_k5_n6.txt k=5 n=6 beaten=720 of 720  lost-file matches (0, all with 1 last: True)
+rc=0
+policy_k5_n7.txt k=5 n=7 beaten=5034 of 5040
+rc=0
+policy_k6_n7.txt k=6 n=7 beaten=5040 of 5040
+rc=0
+policy_k6_n8.txt k=6 n=8 beaten=40313 of 40320
+rc=0
+strategy_k1_n5.txt k=1 n=5 beaten=16 of 120  lost-file matches (104, all with 1 last: False)
+rc=0
+strategy_k2_n4.txt k=2 n=4 beaten=21 of 24  lost-file matches (3, all with 1 last: True)
+rc=0
+strategy_k2_n8.txt k=2 n=8 beaten=3525 of 40320
+rc=0
+strategy_k3_n5.txt k=3 n=5 beaten=116 of 120  lost-file matches (4, all with 1 last: True)
+rc=0
+strategy_k3_n7.txt k=3 n=7 beaten=3188 of 5040  lost-file matches (1852, all with 1 last: False)
+rc=0
+strategy_k4_n6.txt k=4 n=6 beaten=715 of 720  lost-file matches (5, all with 1 last: True)
+rc=0
+strategy_k4_n7.txt k=4 n=7 beaten=4781 of 5040  lost-file matches (259, all with 1 last: False)
+rc=0
+strategy_k5_n7.txt k=5 n=7 beaten=5034 of 5040  lost-file matches (6, all with 1 last: True)
+rc=0
+cert_k1_n5.txt cert OK root=16 reachable=32 listed=32
+rc=0
+cert_k2_n4.txt cert OK root=21 reachable=105 listed=105
+rc=0
+cert_k2_n8.txt cert OK root=3525 reachable=301 listed=301
+rc=0
+cert_k3_n5.txt cert OK root=116 reachable=588 listed=588
+rc=0
+cert_k3_n7.txt cert OK root=3188 reachable=1274 listed=1274
+rc=0
+cert_k4_n6.txt cert OK root=715 reachable=3343 listed=3343
+rc=0
+cert_k4_n7.txt cert OK root=4781 reachable=5488 listed=5488
+rc=0
+cert_k5_n7.txt cert OK root=5034 reachable=19014 listed=19014
+rc=0

@@ -1,0 +1,12 @@
+# k=1 n=6 claimed_beaten=32
+- 6 IN
+- 5 IN
+K 5 IN
+- 4 IN
+K 4 IN
+- 3 IN
+K 3 IN
+- 2 IN
+K 2 IN
+- 1 IN
+K 1 IN
