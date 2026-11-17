@@ -1,3 +1,13 @@
+NOTES ADDED AFTER REVIEW (2026-11-16; the text below is unchanged)
+ N1. Lines "below that the effect is invisible (NEGATIVE for M <= 192)" and "first exceeds 5M/3 at M = 384":
+     these are the optimum against ONE scripted adversary, sampled only at M = 48, 96, 192, 384, ...; the value
+     at M = 192 is zero, not negative. Against a different adversary (open-f-lower, Theorem A) the same managers
+     lose more and sooner: 7M/4 - 7 exceeds ceil(5M/3) from M = 87. Likewise "greedy rules reach 1.70 M" is
+     against script S only.
+ N2. "odd rank" means the 2nd, 4th, ..., last 2 in Theorem R and the 1st, 3rd, ... in Theorem R'. Each proof
+     is consistent with its own usage.
+ N3. Theorems R and R' are implied by Theorem A of open-f-lower, which has a hand proof.
+
 OPEN-F-UPPER: attempt to show mu^F = 5/3 (a manager for game F with h <= 5M/3 + c).
 Date 2026-11-16.  Everything here was done without reading open-f-lower.
 

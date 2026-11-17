@@ -3,9 +3,10 @@
 A memory allocator that may move blocks, but only at the moment something is
 freed, and only a little. How much is that right worth?
 
-**Short answer: not settled.** The right is worth nothing to an allocator that
-packs its first blocks together (proved), and nobody here found an allocator
-for which it is worth everything. The exact value is open.
+**Short answer: not settled.** An allocator that packs its first blocks
+together cannot use the right to get below 7M/4, which is the best lower bound
+known for the game with no moves at all (proved). Nobody here found an
+allocator for which the right is worth everything. The exact value is open.
 
 ## The game
 
@@ -36,14 +37,14 @@ The question, as the chain left it ([chain/3-link.md](chain/3-link.md)): is
 
 | Claim | Status | Where |
 |---|---|---|
-| Table of h^N, h^F, h^O for M = 3 … 13 (below) | computed; three independent programs agree for M ≤ 11, two for M = 12, 13 | `solver-a/`, `solver-b/`, `verifier/` |
+| Table of h^N, h^F, h^O for M = 3 … 13 (below) | computed; three independent programs agree for M ≤ 11, two for M = 12, 13. Solver A did not run game F at M = 12; its h^F(12) follows from h^O ≤ h^F ≤ h^N | `solver-a/`, `solver-b/`, `verifier/` |
 | h^O(M) ≥ 5M/3 − 14/3 | proved by hand; referee read it | `solver-a/proofs.txt` P1 |
 | h^O(M) ≤ ⌈5M/3⌉ (first fit) | proved by hand; referee read solver A's version; exhaustive check of first fit for M ≤ 16 | `solver-a/proofs.txt` P2, `solver-b/proofs.txt` P5 |
 | **μ^O = 5/3** | follows from the two rows above | |
 | h^N(M) ≥ 7M/4 − 17/4, so **μ^N ≥ 7/4 > μ^O** | proved by hand; referee read it and played it against 321 managers per M; I re-derived it | `solver-b/proofs.txt` P6, `verifier/p6*.log` |
 | h^N(M) ≤ 43M/18 + 12 | proved by hand; referee read it; only a random stress test behind it | `solver-a/proofs.txt` P3 |
 | **Theorem A.** In game F, a manager that puts the first M 1s on consecutive cells needs H ≥ 7M/4 − 7 | proved by hand by one follow-up instance; I re-derived it; played out for M = 3 … 60 against five such managers, no violation | `open-f-lower/proofs.txt` L1, L2, Theorem A |
-| In game F, a manager that puts the first M 1s on cells 0 … M−1 needs H ≥ (5/3 + 1/144)M − 12 | computer-assisted, by a second follow-up instance that did not see the first; weaker than Theorem A, by a different route; not re-derived | `open-f-upper/proofs.txt` R, R′ |
+| In game F, for M ≡ 0 mod 12, a manager that puts the first M 1s on cells 0 … M−1 needs H ≥ (5/3 + 1/144)M − 12 | computer-assisted, by a second follow-up instance that did not see the first; weaker than Theorem A, by a different route; not re-derived | `open-f-upper/proofs.txt` R, R′ |
 | Against managers that leave 3-cell gaps among the first 1s, the same adversary family forces H ≥ about 1.70·M | computed, in a periodic model only (350 layouts, at most 30 ones per period) | `open-f-lower/proofs.txt` section E |
 | **μ^F** | **open.** Proved: 5/3 ≤ μ^F ≤ μ^N ≤ 43/18 | |
 | μ^N exactly | open, in [7/4, 43/18] | |
@@ -61,11 +62,12 @@ Exact values, M = 3 … 13:
 The three games agree up to M = 12, and F agrees with O up to M = 13. That
 looks like evidence that the move right is worth everything. It is not:
 
-- The proved gap between N and O (7/4 against 5/3) cannot show before M is
-  about 59, because of the additive constants.
-- Theorem A's bound passes 5M/3 only for M > 84.
+- The proved bounds separate N from O (7M/4 − 17/4 above ⌈5M/3⌉) first at
+  M = 54, and for every M ≥ 60.
+- Theorem A's bound 7M/4 − 7 exceeds ⌈5M/3⌉ first at M = 87, and for every
+  M ≥ 93.
 - ⌊7M/4⌋ − 1 fits every exact value for M ≤ 12 in all three games, and is
-  provably wrong for game O at M = 24 and for every M > 32.
+  provably wrong for game O at M = 24, 27, 28 and every M ≥ 30.
 
 Both solvers leaned towards μ^F = 5/3 from this data. Both follow-up instances,
 working at M in the hundreds, came to believe the opposite.
@@ -82,6 +84,11 @@ The fix is not to commit. The adversary frees the moved 1 at once, which costs
 nothing, so the manager's move amounts to deleting one 1. With two residue
 classes still alive, a deletion hurts only one of them, and the adversary keeps
 the other. A reply is then worth 1 where the freed 2 gained 2.
+
+This does not say the right is useless to such an allocator. First fit with no
+moves can be driven to about 11M/6 (a sketch in `solver-b/proofs.txt` S1, and
+measured), and first fit that compacts after each free was measured at 7M/4.
+Theorem A says only that no move rule takes it below 7M/4.
 
 A manager escapes this only by leaving room for 2s among its first M 1s. The
 computed cases suggest that this lowers the loss from 3/4 to about 0.70 per
@@ -110,6 +117,24 @@ proof.
 - **Prior art** ([prior-art.md](prior-art.md)): the search found none of this
   in print, but read one paper in full. Robson's 1971 paper, the most likely
   place for the no-move value with sizes {1, 2, 3}, was not read.
+
+## Review
+
+Before publication the claims went to five reviewers from four model families
+(two Claude, GPT, Grok, Gemini), each reading the files. All five confirmed
+the proofs of P1, P2/P5, P3, P6, L1, L2, Theorem A and the hand steps of R and
+R′, and found no contradiction between the two follow-up files. Their findings
+were about wording, and are applied here:
+
+- An earlier draft said the right is "worth nothing" to a packing allocator.
+  That overstated Theorem A; see the paragraph above.
+- The three crossover figures in "What the table cannot tell you" were loose
+  and are now exact.
+- The R′ row lacked its hypothesis M ≡ 0 mod 12.
+- The follow-up proof files have loose sentences of their own. They are left
+  as written, with a note at the top of each listing them.
+
+The corrected wording has not been through a second round.
 
 ## Files
 

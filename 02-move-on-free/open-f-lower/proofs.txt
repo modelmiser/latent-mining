@@ -1,3 +1,13 @@
+NOTES ADDED AFTER REVIEW (2026-11-16; the text below is unchanged)
+ N1. The headline and final-status paraphrase of Theorem A ("first M 1s leave no room for a 2 between them")
+     is looser than the theorem. The hypothesis is the one in the theorem statement: after step 2 there are
+     no two adjacent free cells between the lowest and highest remaining 1. Example: 1s on even cells have
+     no room for a 2 between them, but freeing one residue class opens 3-cell gaps, so the hypothesis fails.
+ N2. Theorem A is proved for the "proof version" of step 4 (free every second clean interior 2), not for
+     the coded step 4 (free a 2 whenever phi rises by >= 2).
+ N3. L3's statement that thinning is free is proved; the value phi is computed by a program
+     (core.thin_best) whose correctness is not proved. Theorem A does not use that program.
+
 OPEN-F-LOWER: is mu^F > 5/3 ?   (adversary side)                       status file, 2026-11-16
 ==========================================================================================
 Every statement is tagged COMPLETE (proved here), COMPUTED (exact output of a program in this
