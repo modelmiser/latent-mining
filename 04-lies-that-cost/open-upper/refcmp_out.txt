@@ -1,0 +1,4 @@
+cmp k=2 N=26 J=14 states=5250 differ=0 (Qk loses where one-lie wins: 0)
+exit 0
+cmp k=3 N=26 J=14 states=5250 differ=0 (Qk loses where one-lie wins: 0)
+exit 0

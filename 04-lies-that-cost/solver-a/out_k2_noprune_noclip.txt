@@ -1,0 +1,12 @@
+k=2 n=2 Q=3 nodes=6 prune=0 clip=0
+k=2 n=3 Q=5 nodes=29 prune=0 clip=0
+k=2 n=4 Q=5 nodes=54 prune=0 clip=0
+k=2 n=5 Q=6 nodes=157 prune=0 clip=0
+k=2 n=6 Q=6 nodes=392 prune=0 clip=0
+k=2 n=7 Q=6 nodes=612 prune=0 clip=0
+k=2 n=8 Q=6 nodes=1285 prune=0 clip=0
+k=2 n=9 Q=7 nodes=5590 prune=0 clip=0
+k=2 n=10 Q=7 nodes=12714 prune=0 clip=0
+k=2 n=11 Q=7 nodes=18601 prune=0 clip=0
+k=2 n=12 Q=7 nodes=35506 prune=0 clip=0
+k=2 n=13 Q=7 nodes=39740 prune=0 clip=0

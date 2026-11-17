@@ -1,0 +1,78 @@
+# questioner strategy: n=7 k=2 wins within q=6. Lines: '<answer path> ? <elements of S>' (question asked after that path of Y/N answers, '-' = root), '<path> = x' (only x alive), '<path> X' (answer illegal: C empty)
+- ? 1 2 3
+Y ? 1 4 5 6 7
+YY ? 2 3 4 5
+YYY ? 1 2
+YYYY ? 1
+YYYYY = 1
+YYYYN = 2
+YYYN ? 3
+YYYNY = 3
+YYYNN ? 4
+YYYNNY = 4
+YYYNNN = 5
+YYN ? 6 7
+YYNY ? 1
+YYNYY = 1
+YYNYN ? 6
+YYNYNY = 6
+YYNYNN = 7
+YYNN = 1
+YN ? 2
+YNY ? 3
+YNYY ? 2
+YNYYY = 2
+YNYYN = 3
+YNYN = 2
+YNN ? 2
+YNNY ? 3
+YNNYY = 3
+YNNYN = 2
+YNNN ? 1
+YNNNY ? 1
+YNNNYY = 1
+YNNNYN = 3
+YNNNN = 3
+N ? 1 4 5
+NY ? 1 4
+NYY ? 1 5
+NYYY ? 1
+NYYYY = 1
+NYYYN ? 4
+NYYYNY = 4
+NYYYNN = 5
+NYYN = 4
+NYN ? 4 6
+NYNY ? 4
+NYNYY = 4
+NYNYN ? 5
+NYNYNY = 5
+NYNYNN = 6
+NYNN ? 7
+NYNNY ? 5
+NYNNYY = 5
+NYNNYN = 7
+NYNNN = 5
+NN ? 2 3 6
+NNY ? 2 3
+NNYY ? 2
+NNYYY = 2
+NNYYN ? 3
+NNYYNY = 3
+NNYYNN = 6
+NNYN ? 7
+NNYNY ? 6
+NNYNYY = 6
+NNYNYN = 7
+NNYNN = 6
+NNN ? 4 5
+NNNY ? 4
+NNNYY = 4
+NNNYN ? 5
+NNNYNY = 5
+NNNYNN = 7
+NNNN ? 6
+NNNNY ? 6
+NNNNYY = 6
+NNNNYN = 7
+NNNNN = 7

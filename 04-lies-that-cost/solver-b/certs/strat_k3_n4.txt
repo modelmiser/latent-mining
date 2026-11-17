@@ -1,0 +1,19 @@
+# strategy for k=3 n=4 within q=5 questions. line = answers-so-far (1=yes,0=no; - = root): elements of S
+k 3 n 4 q 5
+-: 1 2
+1: 1
+11:
+110: 1
+1100: 1
+10: 2
+100: 2 1
+1001: 2
+1000: 3
+0: 3
+01:
+010: 3
+0100: 3
+00: 4
+000: 4 3
+0001: 4
+0000: 1

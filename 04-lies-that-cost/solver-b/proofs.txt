@@ -1,0 +1,69 @@
+PROOFS (solver-b).  Each item is marked COMPLETE or SKETCH.
+
+Notation. After t questions, for x in U let L_x(t) = {s <= t : answer s is false for x}. By (i) the only
+pair (x, L) that can be in V_t is (x, L_x(t)); so x is alive (x in C_t) iff L_x(t) satisfies (ii).
+For alive x put r_x(t) = max(0, max_{s in L_x(t)} (s + k*ell_s) - t)  (0 if x never lied):
+the number of upcoming questions on which x may not lie.
+
+Lemma 1 (state abstraction) -- COMPLETE.
+ (a) Dead stays dead: (ii) for L_x(t) only gets harder as t grows (L_x grows, old ell_s are fixed).
+ (b) Let x be alive at t-1 and let question t have ell_t = min(|S∩C_{t-1}|, |C_{t-1}\S|).
+     - If the answer is true for x: L_x unchanged, x alive, r_x(t) = max(r_x(t-1) - 1, 0).
+     - If the answer is false for x and r_x(t-1) > 0: some s in L_x has t <= s + k*ell_s, (ii) fails, x dies.
+     - If the answer is false for x and r_x(t-1) = 0: every earlier s in L_x has s + k*ell_s < t, so adding
+       t violates nothing (the new element t has no later lies yet); x alive, and since all earlier
+       windows end before t, r_x(t) = k*ell_t.
+ (c) ell_t depends only on how many alive candidates are in S; elements of S outside C_{t-1} are irrelevant.
+ Hence the future of the game depends only on the multiset {r_x : x alive}, and a question is, up to
+ relabelling, a choice of how many candidates of each obligation value go into S.  This confirms the
+ UNVERIFIED claim "position = multiset of least remaining honesty obligation".
+ (d) Horizon cap: with q questions left, r >= q and r = q are equivalent (the candidate cannot lie on any
+     remaining question, and whether it could lie afterwards is irrelevant).  Used in fast.cpp; exact.
+
+Lemma 2 (Q_k(n) >= U1(n)) -- COMPLETE.
+ Let the questioner have a Q_k-strategy winning within q. Play it in the one-lie game (after the Q_k game
+ would have ended, ask anything).  Take any one-lie responder; let D_t be the set of x with |L_x(t)| <= 1.
+ |L| <= 1 satisfies (ii) vacuously, so D_t ⊆ C_t for the same answer sequence, and D_t nonempty makes the
+ answer sequence legal in the Q_k game.  At the first t <= q with |C_t| = 1 we get |D_t| <= 1; D only
+ shrinks afterwards, so the one-lie game is decided by time q.  Hence U1(n) <= Q_k(n).
+
+Lemma 3 (volume bound, and the odd-n refinement) -- COMPLETE.
+ One-lie state (a, b) = (#alive never lied, #alive lied once), q questions left, weight w_q(a,b) = a(q+1)+b.
+ If w_q(a,b) > 2^q the questioner cannot win in q:  a question putting (x, y) into S gives
+ yes-state (x, y + a - x) and no-state (a - x, b - y + x), and
+ w_{q-1}(yes) + w_{q-1}(no) = a q + a + b = w_q(a,b), so one answer has weight > 2^{q-1}; induct; at q = 0
+ weight > 1 means >= 2 alive.
+ Odd n: from (n, 0) with q left, first question puts x in S:  w_{q-1}(yes) - w_{q-1}(no) = (2x - n)(q - 1),
+ of absolute value >= q - 1 for odd n.  So the heavier answer has weight >= (n(q+1) + (q-1))/2, and the
+ questioner loses if n(q+1) + (q-1) > 2^q.
+ Therefore U1(n) >= P(n) := least q with n(q+1) <= 2^q (n even), n(q+1)+(q-1) <= 2^q (n odd), for ALL n.
+ (The converse U1(n) <= P(n) for all n is Pelc's theorem; I did not reprove it.  For the n in my tables it
+ follows from the computation, since Q_k(n) = P(n) was computed and U1 <= Q_k by Lemma 2.)
+
+Lemma 4 (pruning used in fast.cpp is safe) -- COMPLETE.
+ With q left, a Q_k-state with c_r candidates of obligation r is lost if
+   sum_r c_r * w(r) > 2^q,  w(0) = q+1,  w(r) = 1 + max(0, q - r) for r >= 1.
+ Proof: for a candidate with obligation r, the answer patterns over the next q questions in which it lies
+ never, or exactly once at one of the questions r+1..q, are all legal for it (a single further lie after
+ the obligation expired satisfies (ii), by Lemma 1(b)).  That is w(r) patterns.  A winning strategy is a
+ binary tree of depth q; each (candidate, pattern) follows one root-to-leaf answer path of length q
+ (extend past the win arbitrarily), the candidate is alive all along it, and two different candidates
+ alive at the same depth-q node would contradict the win.  Two patterns of one candidate differ in some
+ answer.  So the pairs inject into the 2^q answer strings.
+ An unsafe version of this pruning would bias Q upwards (declare losses that are wins); the pruned and
+ unpruned programs agree on every case both were run on (k = 1,2,3, n <= 12).
+
+Proposition 5 (Q_1(2) is infinite) -- COMPLETE by hand for n = 2; n = 3,4,5,6,7,9 are machine results
+ only (COMPUTED, closed trap sets in certs/inf_k1_n*.txt, checked by check_inf.py).
+ n = 2: states {0,0} -> any separating question -> {0,1} (the liar gets obligation 1*1) -> separating
+ question, responder lets the obligation-0 candidate lie: it gets 1, the other drops to 0: {0,1} again.
+ Non-separating questions (ell = 0) change nothing useful: all-truth answer maps {0,1} to {0,0}, {0,0} to
+ itself.  The responder stays in {{0,0},{0,1}} forever.
+
+Headline statement "Q_2(n) = U1(n) for all n >= 2" -- NOT PROVED.  No sketch is offered as a proof.
+ Heuristic only: a lie at question s with ell_s can be repeated before the end only if 2*ell_s < q - s.
+ A state that is tight for the one-lie volume bound with rho questions left has at least 2^rho/(rho+1)
+ alive candidates, so balanced questions give 2*ell >= rho except when rho <= 4, where the finitely many
+ small endgames were checked by machine; states that are not tight have slack.  Turning this into a
+ proof needs a one-lie strategy with controlled splits at every step (a strengthening of Pelc's
+ construction), which I did not do.

@@ -1,0 +1,56 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Fix integers n >= 2 and k >= 1. A secret x lies in U = {1, ..., n}. A questioner asks yes/no questions one at a time; question t names a set S_t ⊆ U ("is x in S_t?"), chosen knowing all earlier answers. The responder is adversarial, sees everything, may lie, and need not fix x in advance. Each lie forces a period of honesty.
+
+Define by induction on t the set V_t of valid pairs (x, L), x in U, L ⊆ {1, ..., t} (the lie times), and the alive set C_t = {x : (x, L) in V_t for some L}. V_0 = {(x, ∅)}, C_0 = U. For question s put
+  ell_s = min( |S_s ∩ C_{s-1}| , |C_{s-1} \ S_s| ).
+(x, L) is in V_t iff
+(i) for every s <= t, the answer to question s is the true answer for x exactly when s is not in L; and
+(ii) for every s in L, L contains no element of {s+1, ..., s + k*ell_s}.
+The responder must keep C_t nonempty (always possible). The questioner wins at the first t with |C_t| = 1.
+
+Q_k(n) is the least q such that the questioner has an adaptive strategy winning within q questions against every responder (infinity if none). U1(n) is the least q such that the questioner can always identify x when the responder may lie at most once in the whole game (same questions, no other rule).
+
+HEADLINE (yes/no): Is Q_2(n) = U1(n) for every n >= 2? If no, give the least n with Q_2(n) > U1(n).
+
+General form: for each k, determine the set E_k = {n >= 2 : Q_k(n) = U1(n)}.
+
+UNVERIFIED:
+- Q_k(n) >= U1(n) for all k, n (every play with at most one lie satisfies (ii)), so the headline asks only whether Q_2(n) <= U1(n).
+- U1(n) is the least q with n(q+1) <= 2^q for even n, and n(q+1) + (q-1) <= 2^q for odd n (Pelc's solution of the one-lie Ulam game).
+- Q_1(2) = Q_1(3) = infinity (two candidates survive by alternating lies), so E_1 omits 2 and 3.
+- Q_2(2) = 3 = U1(2) and Q_2(3) = 5 = U1(3) (hand analysis).
+- The game position is captured by the multiset, over alive candidates, of the least remaining honesty obligation.
+
+Guess (not a result): yes, because a lie cheap enough to be repeated before the game ends needs a lopsided or tiny split, and weight-balanced one-lie strategies seem able to avoid offering those until too few questions remain.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

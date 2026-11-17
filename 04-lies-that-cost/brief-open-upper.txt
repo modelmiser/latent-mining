@@ -1,0 +1,22 @@
+You are attacking one open step of a precisely defined problem, alone. Do not search the web.
+
+THE PROBLEM
+Read chain/3-question.txt (a liar game in which each lie forces a period of honesty of length k*ell_s, where ell_s is the smaller side of the split of the alive set made by the question that was lied to). P(n) below is the formula quoted there for U1(n): the least q with n(q+1) <= 2^q for even n, n(q+1)+(q-1) <= 2^q for odd n.
+
+WHAT IS ALREADY DONE (two independent solvers; you may read their reports reports/solver-a.md and reports/solver-b.md, their proofs solver-a/proofs.txt and solver-b/proofs.txt, and use their programs in solver-a/ and solver-b/ read-only, including the explicit questioner strategy trees they exported)
+ - Proved: the position is the multiset of remaining honesty obligations of the alive candidates; Q_k(n) >= U1(n) >= P(n) for all k, n.
+ - Computed: Q_2(n) = P(n) for every 2 <= n <= 2805; Q_k(n) = P(n) for k = 3, 4, 5, 8 and n <= 600; Q_1(n) = infinity for n in {2,...,7,9} and Q_1(n) = P(n) for n = 8 and 10 <= n <= 317.
+ - Neither solver has a proof that Q_2(n) <= P(n) for all n. Each gives only a heuristic: a lie can be repeated within the remaining questions only if k*ell is small, i.e. the split it answered was lopsided or the alive set tiny, and weight-balanced strategies need not offer such splits until very late.
+
+YOUR TASK
+ Prove, for all n >= 2: Q_2(n) <= P(n) (the questioner wins the k = 2 game within P(n) questions). If you find it false, give the least counterexample. You may assume Pelc's theorem U1(n) = P(n) as a black box ONLY if you state exactly which form of it you use (existence of a winning one-lie strategy is not enough by itself: in the k = 2 game the responder may lie again later, so you need to control what happens after a second lie).
+ Suggestions, not requirements. (1) Find the right potential: in the one-lie game the Berlekamp weight of a state with a never-lied candidates and b once-lied candidates and j questions left is a(j+1) + b; here a candidate with remaining obligation r and j questions left can lie again only after r more questions, so a natural weight is the number of answer strings still consistent with it, a function w(r, j) you can write down by recursion; note the obligation a new lie creates depends on the split, so w also depends on the strategy. (2) Look at what the solvers' computed optimal strategies actually do (read several strategy trees; tabulate split sizes ell by questions-left) and extract a rule: for example "always ask a question with 2*ell >= questions left, so that no candidate can lie twice", which would reduce the game to the one-lie game outright if such questions always suffice. Test mechanically whether a questioner restricted to such "safe" questions still wins in P(n) for all n up to a few hundred; if yes, prove that restricted statement, which may only need a strengthened form of the one-lie theorem (balanced questions with both sides of the alive set large). (3) Handle the endgame (few questions left, few candidates) by a finite verified table plus an inductive step for large n. A proof that is complete for all n >= N0 plus computation below N0 is acceptable if you say so exactly.
+ If you cannot prove the full statement, prove the most you can and state it exactly (for example: for all n with P(n) >= some bound; or for infinitely many n; or the general-k version for k >= k0), and report any structural fact you established about optimal strategies.
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Write only inside open-upper/ . Do not modify or delete the solvers' files.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=open-upper ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep`. Kill only your own PIDs. python3 and g++ are available. Keep output files under 300 kB.
+
+REPORT
+ Write your proofs to open-upper/proofs.txt, each statement marked COMPLETE or SKETCH (a sketch presented as a proof is worse than no proof), and your report (under 800 words) to reports/open-upper.md; return the report as your final message: what is now proved (exact statements), what was tested mechanically and how, what failed and why, what remains open, and your confidence in each proof.

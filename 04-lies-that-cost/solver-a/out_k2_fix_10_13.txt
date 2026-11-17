@@ -1,0 +1,4 @@
+k=2 n=10 reachable_states=20080 Q=7 never_winning_states=0 (fixed point after 7 rounds)
+k=2 n=11 reachable_states=42685 Q=7 never_winning_states=0 (fixed point after 7 rounds)
+k=2 n=12 reachable_states=105906 Q=7 never_winning_states=0 (fixed point after 7 rounds)
+k=2 n=13 reachable_states=218339 Q=7 never_winning_states=0 (fixed point after 7 rounds)

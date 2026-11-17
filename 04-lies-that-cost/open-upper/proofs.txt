@@ -1,0 +1,119 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as its author wrote it)
+ N1. Lemma S never states ell >= 1. It holds in every case of the lemma (2*ell >= j-1 for j >= 2 with m >= 2;
+     for j = 1 the only state is (0,2) with ell = 1). Statement (ii) uses only k*ell >= j-1.
+ N2. Table T, "k*ell >= 13 >= number of questions left": the number meant is the questions left AFTER the lie
+     (at most 13 when j <= 14), not the state's j.
+ N3. The counts "1310" and "1884" are wider windows than T1; T1 itself has 960 states per k.
+ N4. The second program named for T1 here is the first referee's verifier/ms (k = 2, 3, compared with the
+     one-lie game). The later reader's ref.cpp recomputed T1 for k = 2..14, 20, 1000; see
+     ../open-upper-referee/run1.txt and rerun-t1-k2-k3.txt.
+ Found by the second reader and the review panel (five seats, four model families). None changes a statement.
+--------------------------------------------------------------------------------------------------
+PROOFS (open-upper).  Each statement is marked COMPLETE, COMPLETE-GIVEN-TABLE, or OPEN.
+"COMPLETE-GIVEN-TABLE" = a full proof whose only non-hand step is the finite table T (stated exactly
+below, computed by table.cpp, cross-checked by the referee's ms).  Pelc's theorem is NOT used anywhere.
+
+Notation.  k >= 2 throughout unless said otherwise.  P(n) as in the problem.  By the solvers' Lemma 1
+(state abstraction, COMPLETE there, confirmed by the referee) a position is the multiset of obligations
+of the alive candidates; a candidate lying at a question with split ell gets obligation k*ell; a
+candidate with obligation > 0 that would have to lie dies; with j questions left, obligation >= j is the
+same as "can never lie again" ("blocked").
+State (a,b;j): a alive candidates with obligation 0 ("free"), b alive blocked candidates, j questions
+left.  Weight w = a(j+1) + b.  The state is NICE if b >= a-1.  m = a+b.
+"Winnable" = the questioner can force |C| = 1 within the j remaining questions of the Q_k game.
+
+--------------------------------------------------------------------------------------------------
+LEMMA C (majority halving).  COMPLETE.   [false for k = 1]
+Let k >= 2.  From ANY position with m >= 1 alive candidates (arbitrary obligations) the questioner wins
+the Q_k game within 3*ceil(log2 m) questions.
+Proof.  Let C be the alive set, m >= 2, S a subset of C with |S| = floor(m/2).  Ask S; then, as long as
+fewer than 3 questions of this round have been asked and the current alive set meets both S and C\S, ask
+S again.  Every question asked in the round has ell >= 1 (both sides alive when it is asked; the first
+has ell = floor(m/2) >= 1).  So a candidate that lies at a question of the round gets obligation
+k*ell >= 2 and cannot lie at the next two questions, in particular not again in this round (if it would
+have to, it is dead).  If the round stopped early the alive set is inside one side.  Otherwise three
+answers were given and every alive candidate lied to at most one of them, so its true answer is the
+majority answer; all alive candidates are on the majority side.  Either way, after <= 3 questions the
+alive set (never empty) has <= ceil(m/2) elements.  Induct: h(1) = 0, h(m) <= 3 + h(ceil(m/2)).  QED
+(For k = 1 the obligation 1 does not cover the third question.)
+
+--------------------------------------------------------------------------------------------------
+LEMMA S (safe balanced question).  COMPLETE.
+Let (a,b;j) be nice with w <= 2^j, j >= 1, m >= 2 and m >= 2j-2.  Then there is a question, a1 free and
+b1 blocked candidates in S (a2 = a-a1, b2 = b-b1), such that
+ (i)  2*ell >= j-1, where ell = min(a1+b1, a2+b2);
+ (ii) in the Q_k game (any k >= 2) the answer "yes" leads exactly to the state (a1, b1+a2; j-1) and "no"
+      to (a2, b2+a1; j-1);
+ (iii) both of these are nice and have weight <= 2^(j-1).
+Proof.  Weights: W_yes = a1*j + b1 + a2, W_no = a2*j + b2 + a1, W_yes + W_no = w <= 2^j,
+W_yes - W_no = (a1-a2)(j-1) + (b1-b2).  If |W_yes - W_no| <= 1 then both are <= 2^(j-1) (integers).
+ a even: a1 = a2 = a/2, b1 = ceil(b/2), b2 = floor(b/2).  Difference of weights is 0 or 1.
+   ell = floor(m/2), 2*ell >= m-1 >= j-1 (m >= 2j-2 >= j if j >= 2; m >= 2 if j = 1).
+ a odd: a1 = (a+1)/2, a2 = (a-1)/2.  From niceness, 2b+1 >= a+b = m >= 2j-2, so b >= j-1.  Let
+   d = j-1 if b = j-1 (mod 2), else d = j-2; then 0 <= d <= b and b-d is even; put b1 = (b-d)/2,
+   b2 = b1 + d.  Difference of weights = (j-1) - d, which is 0 or 1.  The sides have sizes a1+b1 and
+   a2+b2 = a1+b1 + (d-1), and d-1 is in {j-2, j-3}, so |d-1| <= max(j-2, 1).  For j >= 3:
+   2*ell = m - |d-1| >= (2j-2) - (j-2) = j >= j-1.  For j = 2: 2*ell >= m-1 >= 1 = j-1.  For j = 1:
+   a odd and w <= 2 force (a,b) = (1,0), excluded by m >= 2.
+ (ii): a free candidate that lies gets obligation k*ell >= 2*ell >= j-1 = number of questions left
+   afterwards, so it is blocked; a blocked candidate that would lie dies; truthful free candidates stay
+   free, truthful blocked ones stay blocked.  "yes": the a1 stay free, b1 stay blocked, a2 become
+   blocked, b2 die.  Symmetric for "no".
+ (iii) niceness: b1 + a2 >= a2 >= a1 - 1 and b2 + a1 >= a1 > a2 - 1.  Weights: above.  QED
+
+--------------------------------------------------------------------------------------------------
+TABLE T (finite computation; the only machine step).
+ T1: for every j <= 14, every k in {2,...,13}, and every nice (a,b) with a(j+1)+b <= 2^j and
+     2 <= a+b <= 2j-3, the state (a,b;j) is winnable in the Q_k game.
+     For k >= 13 and j <= 14 the game is literally the k = 13 game (ell >= 1 gives k*ell >= 13 >= number
+     of questions left; ell = 0 gives obligation 0 for every k), so T1 holds for all k >= 2.
+ T2: Q_2(3) <= 5, Q_3(3) <= 5, Q_2(5) <= 6.
+ Evidence: table.cpp (own exhaustive memoised solver on obligation multisets), run for k = 2..16,
+ j <= 16, a+b <= 2j (a superset): 1884 states per k, 0 lost (table_out.txt); unpruned rerun for k = 2,3,
+ j <= 9 identical; the referee's independent program (verifier/ms cmp, k = 2 and 3, all a+b <= 26,
+ j <= 14, 5250 states each) agrees with the one-lie DP on every state (refcmp_out.txt).  T2 was also
+ found by both solvers and by the referee's literal search.  Control: the same table for k = 1 loses 30
+ of 400 states (j <= 9).
+
+--------------------------------------------------------------------------------------------------
+THEOREM 1 (nice states).  COMPLETE-GIVEN-TABLE (T1).
+Let k >= 2.  Every nice state (a,b;j) with a(j+1)+b <= 2^j and a+b >= 1 is winnable in the Q_k game.
+Proof.  Induction on j.  If m = 1 the game is won.  j = 0: w <= 1 forces m = 1.  Let j >= 1, m >= 2.
+ Case m >= 2j-2: ask the question of Lemma S.  Each legal answer leads to a nice state with j-1 left
+   and weight <= 2^(j-1) (an answer leading to no alive candidate is illegal); apply induction.
+ Case m <= 2j-3 and j <= 14: T1.
+ Case m <= 2j-3 and j >= 15: Lemma C wins within 3*ceil(log2 m) <= 3*ceil(log2(2j-3)) questions, and
+   this is <= j: for j = 15,16,17, 2j-3 <= 31 gives 15; for j >= 18, 2j-3 <= 2^floor(j/3) (true for
+   j = 18,19,20 since 37 <= 64, and j -> j+3 adds 6 to the left side and doubles the right side).  QED
+
+Corollary 1a.  COMPLETE-GIVEN-TABLE.  For k >= 2 and b >= a-1: the Q_k game from (a,b;j) is winnable
+iff the one-lie game from (a,b) is winnable in j iff a(j+1)+b <= 2^j.  (=> directions: solver-a P3',
+P3.)  This proves the referee's equivalence for all nice states, all j, all k >= 2.
+
+--------------------------------------------------------------------------------------------------
+THEOREM 2 (headline, every k >= 2).  COMPLETE-GIVEN-TABLE (T1, T2).
+For every k >= 2 and n >= 2: Q_k(n) <= P(n).  Hence Q_k(n) = U1(n) = P(n), E_k = {n >= 2} for every
+k >= 2, and in particular Q_2(n) = U1(n) for all n >= 2 (headline: YES).  (Lower bounds Q_k >= U1 >= P:
+solvers' Lemmas 2, 3.  As a by-product U1(n) <= P(n), i.e. Pelc's upper bound, is reproved.)
+Proof.  q = P(n).  First question: S = ceil(n/2) candidates; ell = floor(n/2).
+ n even: both answers give n/2 free candidates and n/2 liars with obligation k*n/2 >= n.  n >= q-1
+   because n(n+2) <= 2^(n+1) for all n >= 2 (8 <= 8; step: (n+1)(n+3) <= 2n(n+2) iff n^2 >= 3), i.e.
+   P(n) <= n+1.  So the liars are blocked: state (n/2, n/2; q-1), nice, weight n(q+1)/2 <= 2^(q-1) by
+   the definition of P.  Theorem 1.
+ n odd, n >= 7: liars get obligation k(n-1)/2 >= n-1 >= q-1, because n^2+2n-1 <= 2^n for n >= 7
+   (62 <= 128; step: (n+1)^2+2(n+1)-1 <= 2(n^2+2n-1) iff n^2 >= 4), i.e. P(n) <= n.  "yes" gives
+   ((n+1)/2, (n-1)/2; q-1), nice (b = a-1), weight (n(q+1)+(q-1))/2 <= 2^(q-1) by the definition of P
+   for odd n; "no" gives ((n-1)/2, (n+1)/2; q-1), nice, weight smaller by (q-1).  Theorem 1.
+ n = 5: P = 6, obligation 2k >= 5 = q-1 iff k >= 3; then as above (states (3,2;5), weight 20 and
+   (2,3;5), weight 15, both <= 32).  k = 2: T2.
+ n = 3: P = 5, obligation k >= 4 = q-1 iff k >= 4; then states (2,1;4) weight 11 and (1,2;4) weight 7,
+   both <= 16.  k = 2, 3: T2.  QED
+
+--------------------------------------------------------------------------------------------------
+OPEN (not proved here).
+ - The referee's equivalence for NON-nice states (b < a-1): Q_k winnable from (a,b;j) iff one-lie
+   winnable.  Not needed for the headline; no proof, no counterexample (referee: none for a+b <= 110,
+   j <= 12, k = 2, 3).
+ - Everything about k = 1 (Lemma C and Lemma S(ii) both fail for k = 1).
+ - A hand proof of table T (1310 states with a+b <= 2j, j <= 14 per k; only 13-16 of them are reached
+   from a root (n,0) by the strategy of Theorem 2 for n <= 60000).

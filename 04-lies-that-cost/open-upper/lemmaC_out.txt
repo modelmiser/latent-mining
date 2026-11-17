@@ -1,0 +1,29 @@
+k=2 m=2 bound=3 worst=3
+k=2 m=3 bound=6 worst=6
+k=2 m=4 bound=6 worst=5
+k=2 m=5 bound=9 worst=8
+k=2 m=6 bound=9 worst=8
+k=2 m=7 bound=9 worst=8
+lemmaC k=2 m<=7 R=6 multisets=3424 failures=0
+k=3 m=2 bound=3 worst=3
+k=3 m=3 bound=6 worst=5
+k=3 m=4 bound=6 worst=5
+k=3 m=5 bound=9 worst=7
+k=3 m=6 bound=9 worst=7
+k=3 m=7 bound=9 worst=7
+lemmaC k=3 m<=7 R=6 multisets=3424 failures=0
+k=5 m=2 bound=3 worst=3
+k=5 m=3 bound=6 worst=5
+k=5 m=4 bound=6 worst=5
+k=5 m=5 bound=9 worst=7
+k=5 m=6 bound=9 worst=7
+k=5 m=7 bound=9 worst=7
+lemmaC k=5 m<=7 R=6 multisets=3424 failures=0
+FAIL k=1 obligations=(0, 0, 1) needs INF > 6
+FAIL k=1 obligations=(0, 0, 2) needs INF > 6
+k=1 m=3 bound=6 worst=INF
+k=1 m=4 bound=6 worst=INF
+k=1 m=5 bound=9 worst=INF
+k=1 m=6 bound=9 worst=INF
+k=1 m=7 bound=9 worst=INF
+lemmaC k=1 m<=7 R=6 multisets=3424 failures=2781

@@ -1,0 +1,1 @@
+U1 brute force vs Pelc formula, n=2..60, mismatches: []

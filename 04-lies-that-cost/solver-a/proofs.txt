@@ -1,0 +1,64 @@
+PROOFS (solver-a).  Each item is marked COMPLETE or SKETCH.
+
+Notation.  P(n) = least q with n(q+1) <= 2^q (n even), n(q+1)+(q-1) <= 2^q (n odd).
+For an alive x after t questions, its lie set L is forced by (i) (L = the questions whose answer is false
+for x).  Put D_x = max over s in L of (s + k*ell_s) (D_x = 0 if L empty) and r_x(t) = max(0, D_x - t).
+
+------------------------------------------------------------------------------------------------
+P1  (state abstraction)  COMPLETE
+Claim.  x is in C_t  iff  x is in C_{t-1} and (answer t is true for x, or r_x(t-1) = 0).
+If so, r_x(t) = max(r_x(t-1)-1, 0) when the answer is true for x, and r_x(t) = k*ell_t when x lies at t.
+Hence C_t and the multiset {r_x(t)} depend only on the multiset {r_x(t-1)} and on how many candidates of
+each r-value are put in S_t; elements of S_t outside C_{t-1} are irrelevant (ell_t counts alive ones only).
+Proof.  (ii) for L with max element t is: (ii) for L\{t} (the same condition, restricted to earlier s --
+windows only look forward, and adding t cannot violate (ii) for the element s = t itself because the
+window of t starts at t+1) plus: t is in no window {s+1..s+k*ell_s}, s in L\{t}; i.e. t > D_x(before),
+i.e. r_x(t-1) = 0.  If x lies at t the new D is max(D_old, t + k*ell_t) = t + k*ell_t because D_old < t.
+If truthful, D is unchanged and r drops by one (floored at 0).  QED
+Consequence used by the code: with j questions left, r >= j is equivalent to r = infinity (clipping).
+
+------------------------------------------------------------------------------------------------
+P2  Q_k(n) >= U1(n) for all k >= 1, n >= 2.  COMPLETE
+The one-lie responder has a strategy that, against any sequence of sets, keeps at least two candidates
+consistent with "at most one lie" after each of the first U1(n)-1 questions.  Play it in the Q_k game.
+A pair (x, L) with |L| <= 1 satisfies (ii) vacuously, so every such candidate is in C_t; so |C_t| >= 2
+for all t < U1(n) (in particular C_t is never empty, so the answers are legal).  QED
+
+------------------------------------------------------------------------------------------------
+P3  U1(n) >= P(n).  COMPLETE (the easy half of Pelc's theorem; the other half is NOT proved here)
+One-lie state (a, b): a candidates with no lie so far, b with one.  With j questions left define
+w_j(a,b) = a(j+1) + b.  A question puts a1 of the a's and b1 of the b's in S (a2 = a-a1, b2 = b-b1);
+"yes" gives (a1, b1+a2), "no" gives (a2, b2+a1), and
+  w_{j-1}(a1, b1+a2) + w_{j-1}(a2, b2+a1) = a1*j + b1 + a2 + a2*j + b2 + a1 = a(j+1) + b = w_j(a,b).
+The responder always takes the heavier outcome (it is non-empty since its weight is positive), so the
+weight at most halves per question.  Identification with 0 questions left needs a+b <= 1, i.e. w_0 <= 1.
+Hence a win in q questions from (n,0) needs n(q+1) <= 2^q.
+Odd n: the first question has a1 != a2; the responder takes the outcome with a' = max(a1,a2) >= (n+1)/2,
+whose weight with q-1 left is a'*q + (n-a') >= ((n+1)q + (n-1))/2, which must be <= 2^(q-1):
+n(q+1) + (q-1) <= 2^q.  QED
+Corollary (COMPLETE): Q_k(n) >= U1(n) >= P(n) for all k, n.  So whenever a questioner strategy for Q_k
+within P(n) questions is exhibited, Q_k(n) = U1(n) = P(n) follows without using Pelc's upper bound.
+
+P3' (pruning rule used in fast.cpp)  COMPLETE
+In the Q_k game at a state with a candidates having r = 0 and b having r > 0 and j questions left, a
+questioner win within j questions needs a(j+1) + b <= 2^j.  Proof: from that moment the responder lets
+r=0 candidates lie at most once more and r>0 candidates never; each such lie is legal (P1), the
+candidates that obey this are a subset of C, and they form exactly a one-lie game from (a,b); apply P3.
+
+------------------------------------------------------------------------------------------------
+P4  Q_1(2) = Q_1(3) = infinity.  COMPLETE  (also machine-checked by the fixed point, out_k1_fix.txt)
+k = 1, n in {2,3}.  Fix two candidates x, y.  The responder maintains
+  T: x and y are alive, one of them has r = 0 and the other has r <= 1.
+T holds at the start.  Given T and a question S:
+ - if S does not separate x from y, answer truthfully for both: both stay alive, r's drop (floored at 0).
+ - if S separates them, then 1 <= ell <= floor(|C|/2) <= 1, so ell = 1.  Answer truthfully for the one
+   with the larger r (either if both are 0).  It goes to r = 0.  The other had r = 0, so its lie is legal
+   (P1) and it gets r = k*ell = 1.
+T holds again, so |C_t| >= 2 for all t.  QED
+(For n >= 4 a separating question can have ell = 2 and this argument fails; indeed Q_1(8) = 6.)
+
+------------------------------------------------------------------------------------------------
+P5  Q_2(n) = U1(n) for every n >= 2.   NOT PROVED.  Computed for 2 <= n <= 600 (see report).
+SKETCH of why it is plausible, not a proof: a lie at a split with ell >= j/2 (j = questions left after
+it) is permanent for k = 2, so the game coincides with the one-lie game except after lopsided splits;
+the search always found a winning strategy at q = P(n).  No inductive step n -> larger n is established.

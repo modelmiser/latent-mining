@@ -1,0 +1,14 @@
+ACCEPT trap ../solver-b/certs/inf_k1_n2.txt k=1 n=2 states=2
+ACCEPT traplit ../solver-b/certs/inf_k1_n2.txt k=1 n=2: 300 random plays of 60 questions, literal |C|>=2 throughout
+ACCEPT trap ../solver-b/certs/inf_k1_n3.txt k=1 n=3 states=5
+ACCEPT traplit ../solver-b/certs/inf_k1_n3.txt k=1 n=3: 300 random plays of 60 questions, literal |C|>=2 throughout
+ACCEPT trap ../solver-b/certs/inf_k1_n4.txt k=1 n=4 states=14
+ACCEPT traplit ../solver-b/certs/inf_k1_n4.txt k=1 n=4: 300 random plays of 60 questions, literal |C|>=2 throughout
+ACCEPT trap ../solver-b/certs/inf_k1_n5.txt k=1 n=5 states=30
+ACCEPT traplit ../solver-b/certs/inf_k1_n5.txt k=1 n=5: 300 random plays of 60 questions, literal |C|>=2 throughout
+ACCEPT trap ../solver-b/certs/inf_k1_n6.txt k=1 n=6 states=76
+ACCEPT traplit ../solver-b/certs/inf_k1_n6.txt k=1 n=6: 300 random plays of 60 questions, literal |C|>=2 throughout
+ACCEPT trap ../solver-b/certs/inf_k1_n7.txt k=1 n=7 states=146
+ACCEPT traplit ../solver-b/certs/inf_k1_n7.txt k=1 n=7: 300 random plays of 60 questions, literal |C|>=2 throughout
+ACCEPT trap ../solver-b/certs/inf_k1_n9.txt k=1 n=9 states=570
+ACCEPT traplit ../solver-b/certs/inf_k1_n9.txt k=1 n=9: 300 random plays of 60 questions, literal |C|>=2 throughout

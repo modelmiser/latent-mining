@@ -1,0 +1,7 @@
+# strategy for k=2 n=2 within q=3 questions. line = answers-so-far (1=yes,0=no; - = root): elements of S
+k 2 n 2 q 3
+-: 1
+1: 1
+10: 1
+0: 2
+00: 2

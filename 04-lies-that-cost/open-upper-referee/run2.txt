@@ -1,0 +1,36 @@
+literal Q_k(n) from the definition:
+OK   literal Q_2(2) = 3 (searched to 4); expected 3; P=3
+OK   literal Q_2(3) = 5 (searched to 5); expected 5; P=5
+OK   literal Q_3(3) = 5 (searched to 5); expected 5; P=5
+OK   literal Q_2(4) = 5 (searched to 5); expected 5; P=5
+OK   literal Q_1(2) = None (searched to 6); expected None; P=3
+OK   literal Q_1(3) = None (searched to 6); expected None; P=5
+OK   literal Q_3(2) = 3 (searched to 4); expected 3; P=3
+OK   literal Q_3(4) = 5 (searched to 5); expected 5; P=5
+OK   Lemma C k=2, m<=7, obligations 0..6, all S, all responders, bound 3ceil(log2 m): cases=3431 failures=0
+OK   Lemma C k=3, m<=7, obligations 0..6, all S, all responders, bound 3ceil(log2 m): cases=3431 failures=0
+OK   Lemma C k=5, m<=7, obligations 0..6, all S, all responders, bound 3ceil(log2 m): cases=3431 failures=0
+OK   Lemma C BAD k=1: cases=209 failures=182  (deliberately false: must fail)
+OK   Lemma C BAD bound 3ceil(log2 m)-1, k=2: cases=209 failures=8  (deliberately false: must fail)
+OK   Lemma C BAD two askings instead of three, k=2: cases=209 failures=182  (deliberately false: must fail)
+OK   Lemma S k=2, all nice states, j<=13: cases=3067392 failures=0
+OK   Lemma S k=2, boundary samples j up to 257: cases=45881 failures=0
+OK   Lemma S k=3, all nice states, j<=13: cases=3067392 failures=0
+OK   Lemma S k=3, boundary samples j up to 257: cases=45881 failures=0
+OK   Lemma S k=13, all nice states, j<=13: cases=3067392 failures=0
+OK   Lemma S k=13, boundary samples j up to 257: cases=45881 failures=0
+OK   Lemma S BAD k=1: cases=223730 failures=170  (deliberately false: must fail)
+OK   Lemma S BAD without niceness: cases=242236 failures=1212  (deliberately false: must fail)
+OK   Lemma S BAD with m>=j instead of m>=2j-2: cases=224033 failures=98  (deliberately false: must fail)
+OK   Lemma S BAD d parity swapped: cases=223730 failures=110859  (deliberately false: must fail)
+OK   Thm 1 threshold 3ceil(log2(2j-3)) <= j, j=15..200000: cases=199986 failures=0
+OK   Thm 1 threshold BAD from j=14: cases=199987 failures=1  (deliberately false: must fail)
+OK   Thm 1 three ranges cover each (m,j) exactly once, j<=3000: cases=18012000 failures=0
+OK   Thm 2 first question k=2, n<=200000 + samples to 2^119: cases=200095 failures=0
+OK   Thm 2 first question k=3, n<=200000 + samples to 2^119: cases=200095 failures=0
+OK   Thm 2 first question k=4, n<=200000 + samples to 2^119: cases=200095 failures=0
+OK   Thm 2 first question k=9, n<=200000 + samples to 2^119: cases=200095 failures=0
+OK   Thm 2 BAD k=2 without the exceptions n=3,5: cases=195 failures=2  (deliberately false: must fail)
+OK   Thm 2 BAD k=1: cases=195 failures=8  (deliberately false: must fail)
+OK   Thm 2 BAD even-n formula for odd n: cases=5095 failures=6  (deliberately false: must fail)
+ALL AS EXPECTED

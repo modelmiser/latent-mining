@@ -1,0 +1,49 @@
+t1 k=4 states=960 lost=0 nodes=2021
+t1 k=5 states=960 lost=0 nodes=1971
+t1 k=6 states=960 lost=0 nodes=1937
+t1 k=7 states=960 lost=0 nodes=1937
+t1 k=8 states=960 lost=0 nodes=1937
+t1 k=9 states=960 lost=0 nodes=1937
+t1 k=10 states=960 lost=0 nodes=1937
+t1 k=11 states=960 lost=0 nodes=1937
+t1 k=12 states=960 lost=0 nodes=1937
+t1 k=13 states=960 lost=0 nodes=1937
+t1 k=14 states=960 lost=0 nodes=1937
+t1 k=20 states=960 lost=0 nodes=1937
+t1 k=1000 states=960 lost=0 nodes=1937
+--- false variants
+  LOST k=2 (a=2,b=1;j=3)
+  LOST k=2 (a=3,b=2;j=4)
+t1bad k=2 states=962 lost=2 nodes=2113
+exit=1
+  LOST k=1 (a=2,b=1;j=4)
+  LOST k=1 (a=2,b=1;j=5)
+  LOST k=1 (a=3,b=2;j=5)
+  LOST k=1 (a=3,b=3;j=5)
+  LOST k=1 (a=3,b=4;j=5)
+t1 k=1 states=960 lost=60 nodes=16068
+exit=1
+--- wide
+wide k=2 J=12 M=30 nice=3510 mismatches=0 | non-nice=2925 with win!=[w<=2^j]: 7 | nodes=3805
+wide k=3 J=12 M=30 nice=3510 mismatches=0 | non-nice=2925 with win!=[w<=2^j]: 7 | nodes=3499
+wide k=5 J=12 M=30 nice=3510 mismatches=0 | non-nice=2925 with win!=[w<=2^j]: 7 | nodes=3325
+wide k=13 J=12 M=30 nice=3510 mismatches=0 | non-nice=2925 with win!=[w<=2^j]: 7 | nodes=3202
+--- noprune
+noprune k=2 J=8 M=12 states=810 diffs=0
+noprune k=3 J=8 M=12 states=810 diffs=0
+--- trans
+trans k=13 vs k=50 from j=14: states=468 comparisons=9100 diffs=0
+  TRANS DIFF at j=14
+  TRANS DIFF at j=14
+  TRANS DIFF at j=14
+trans k=13 vs k=12 from j=14: states=468 comparisons=9100 diffs=134
+exit=1
+  TRANS DIFF at j=15
+  TRANS DIFF at j=15
+  TRANS DIFF at j=15
+trans k=13 vs k=14 from j=15: states=1042 comparisons=23818 diffs=134
+exit=1
+root k=2 n=2..300  Q_k(n)!=P(n) count: 0  nodes=9282
+root k=3 n=2..300  Q_k(n)!=P(n) count: 0  nodes=7021
+root k=4 n=2..300  Q_k(n)!=P(n) count: 0  nodes=3647
+root k=7 n=2..300  Q_k(n)!=P(n) count: 0  nodes=3631

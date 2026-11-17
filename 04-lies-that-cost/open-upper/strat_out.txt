@@ -1,0 +1,6 @@
+strat k=2: n=2..60000 and 9828 large n (to 2^200, incl. threshold n) all OK; states=1136994 {'table': 13, 'lemmaC': 0, 'safe': 1136978}
+strat k=3: n=2..60000 and 9828 large n (to 2^200, incl. threshold n) all OK; states=1136995 {'table': 14, 'lemmaC': 0, 'safe': 1136978}
+strat k=7: n=2..60000 and 9828 large n (to 2^200, incl. threshold n) all OK; states=1136997 {'table': 16, 'lemmaC': 0, 'safe': 1136978}
+MUTANT
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('child weight', (1, 4, 3))

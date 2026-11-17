@@ -1,0 +1,34 @@
+TOTAL k=2 J=16 extra=3 states=1884 lost=0
+TOTAL k=3 J=16 extra=3 states=1884 lost=0
+TOTAL k=4 J=16 extra=3 states=1884 lost=0
+TOTAL k=5 J=16 extra=3 states=1884 lost=0
+TOTAL k=6 J=16 extra=3 states=1884 lost=0
+TOTAL k=7 J=16 extra=3 states=1884 lost=0
+TOTAL k=8 J=16 extra=3 states=1884 lost=0
+TOTAL k=9 J=16 extra=3 states=1884 lost=0
+TOTAL k=10 J=16 extra=3 states=1884 lost=0
+TOTAL k=11 J=16 extra=3 states=1884 lost=0
+TOTAL k=12 J=16 extra=3 states=1884 lost=0
+TOTAL k=13 J=16 extra=3 states=1884 lost=0
+TOTAL k=14 J=16 extra=3 states=1884 lost=0
+TOTAL k=15 J=16 extra=3 states=1884 lost=0
+TOTAL k=16 J=16 extra=3 states=1884 lost=0
+CONTROL k=1
+LOST k=1 j=9 a=4 b=3
+LOST k=1 j=9 a=5 b=4
+k=1 j=9 nice small states=108 lost=6 memo=4009
+TOTAL k=1 J=9 extra=3 states=400 lost=30
+NOPRUNE
+TOTAL k=2 J=9 extra=3 states=400 lost=0
+TOTAL k=3 J=9 extra=3 states=400 lost=0
+root k=2 n=3 q=5 win=1
+root k=2 n=3 q=4 win=0
+root k=3 n=3 q=5 win=1
+root k=3 n=3 q=4 win=0
+root k=2 n=5 q=6 win=1
+root k=2 n=5 q=5 win=0
+root k=2 n=2 q=3 win=1
+root k=2 n=2 q=2 win=0
+root k=2 n=4 q=5 win=1
+root k=2 n=7 q=6 win=1
+root k=2 n=6 q=6 win=1

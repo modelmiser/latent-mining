@@ -1,0 +1,7 @@
+REJECT: |C|=2 after 5 questions on path 10000
+REJECT: |C|=2 after 5 questions on path 11010
+REJECT: no question for path '110'
+REJECT: state (0, 1, 1) question [1, 0, 0] escapes
+REJECT: state (0, 0, 0, 1) question [1, 0, 0, 0] escapes
+ACCEPT certs/strat_k2_n9.txt: one-lie game n=9 wins within 7 questions (worst case 7, 61 terminal paths)
+rc=0

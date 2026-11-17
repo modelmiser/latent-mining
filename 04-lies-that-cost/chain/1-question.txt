@@ -1,0 +1,7 @@
+A secret x lies in {1, ..., n}. A questioner asks q yes/no questions in sequence, each of the form "is x in S?", where the set S may depend on all earlier answers. The responder may lie any number of times, but each lie buys a longer period of forced honesty: if the lies occur at question numbers t_1 < t_2 < ... < t_m, then t_{k+1} - t_k > k for every k (after the k-th lie, the next k answers must be truthful; the first lie may come at any time). Call a subset of {1, ..., q} with this property an admissible lie pattern, and let P(q) be the number of admissible lie patterns (P(1)=2, P(2)=3, P(3)=5, P(4)=8). The responder is adversarial and need not fix x in advance: it only has to keep at least one pair (x, admissible lie pattern) consistent with all answers given.
+
+Let A(q) be the largest n for which the questioner has a strategy that, after exactly q questions, always leaves exactly one x consistent with the answers. Counting gives A(q) <= floor(2^q / P(q)).
+
+(1) Determine A(q) exactly for every q from 1 to 12.
+(2) For which q does A(q) = floor(2^q / P(q)) hold? In particular, does equality hold for all sufficiently large q, for infinitely many q, or only finitely many?
+(3) Let Q(n) be the least q with A(q) >= n. Prove or disprove: Q(n) = log2(n) + (c + o(1)) * sqrt(log2 n) * log2(log2 n) for a constant c, and determine c.

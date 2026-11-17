@@ -1,0 +1,12 @@
+k=1 n=2 Q=-1 (>9) nodes=17 prune=0 clip=0
+k=1 n=3 Q=-1 (>9) nodes=37 prune=0 clip=0
+k=1 n=4 Q=-1 (>9) nodes=104 prune=0 clip=0
+k=1 n=5 Q=-1 (>9) nodes=187 prune=0 clip=0
+k=1 n=6 Q=-1 (>9) nodes=439 prune=0 clip=0
+k=1 n=7 Q=-1 (>9) nodes=696 prune=0 clip=0
+k=1 n=8 Q=6 nodes=458 prune=0 clip=0
+k=1 n=9 Q=-1 (>9) nodes=2126 prune=0 clip=0
+k=1 n=10 Q=7 nodes=2147 prune=0 clip=0
+k=1 n=11 Q=7 nodes=2938 prune=0 clip=0
+k=1 n=12 Q=7 nodes=4665 prune=0 clip=0
+k=1 n=13 Q=7 nodes=6446 prune=0 clip=0

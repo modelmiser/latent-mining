@@ -1,0 +1,136 @@
+# questioner strategy: n=10 k=2 wins within q=7. Lines: '<answer path> ? <elements of S>' (question asked after that path of Y/N answers, '-' = root), '<path> = x' (only x alive), '<path> X' (answer illegal: C empty)
+- ? 1 2 3 4 5
+Y ? 1 2 6 7 8 9 10
+YY ? 1 3 4 5 6
+YYY ? 2 3 4 5
+YYYY ? 1 2
+YYYYY ? 1
+YYYYYY = 1
+YYYYYN = 2
+YYYYN ? 3
+YYYYNY = 3
+YYYYNN ? 4
+YYYYNNY = 4
+YYYYNNN = 5
+YYYN ?
+YYYNY = 1
+YYYNN ? 6
+YYYNNY ? 1
+YYYNNYY = 1
+YYYNNYN = 6
+YYYNNN = 1
+YYN ? 1 7 8 9
+YYNY ? 1 2
+YYNYY ? 1
+YYNYYY = 1
+YYNYYN = 2
+YYNYN ? 7
+YYNYNY = 7
+YYNYNN ? 8
+YYNYNNY = 8
+YYNYNNN = 9
+YYNN ?
+YYNNY = 2
+YYNNN ? 10
+YYNNNY ? 2
+YYNNNYY = 2
+YYNNNYN = 10
+YYNNNN = 2
+YN ? 1 2 3
+YNY ? 1 2 4
+YNYY ? 1 2
+YNYYY ? 1
+YNYYYY = 1
+YNYYYN = 2
+YNYYN ? 3
+YNYYNY = 3
+YNYYNN = 4
+YNYN ?
+YNYNY = 3
+YNYNN ? 5
+YNYNNY ? 3
+YNYNNYY = 3
+YNYNNYN = 5
+YNYNNN = 3
+YNN ? 4
+YNNY ? 5
+YNNYY ? 4
+YNNYYY = 4
+YNNYYN = 5
+YNNYN = 4
+YNNN ? 4
+YNNNY ? 5
+YNNNYY = 5
+YNNNYN = 4
+YNNNN ? 3
+YNNNNY ? 3
+YNNNNYY = 3
+YNNNNYN = 5
+YNNNNN = 5
+N ? 1 2 3 4 5 6 7
+NY ? 1 2 3 4 6
+NYY ? 1 2 3 4
+NYYY ? 1 2
+NYYYY ? 1
+NYYYYY = 1
+NYYYYN = 2
+NYYYN ? 3
+NYYYNY = 3
+NYYYNN ? 4
+NYYYNNY = 4
+NYYYNNN = 6
+NYYN ?
+NYYNY = 6
+NYYNN ? 7
+NYYNNY ? 6
+NYYNNYY = 6
+NYYNNYN = 7
+NYYNNN = 6
+NYN ? 5 6 8 9
+NYNY ? 5 6
+NYNYY ? 5
+NYNYYY = 5
+NYNYYN = 6
+NYNYN ? 7
+NYNYNY = 7
+NYNYNN ? 8
+NYNYNNY = 8
+NYNYNNN = 9
+NYNN ?
+NYNNY = 7
+NYNNN ? 10
+NYNNNY ? 7
+NYNNNYY = 7
+NYNNNYN = 10
+NYNNNN = 7
+NN ? 6 7 8
+NNY ? 6 7 9
+NNYY ? 6 7
+NNYYY ? 6
+NNYYYY = 6
+NNYYYN = 7
+NNYYN ? 8
+NNYYNY = 8
+NNYYNN = 9
+NNYN ?
+NNYNY = 8
+NNYNN ? 10
+NNYNNY ? 8
+NNYNNYY = 8
+NNYNNYN = 10
+NNYNNN = 8
+NNN ? 9
+NNNY ? 10
+NNNYY ? 9
+NNNYYY = 9
+NNNYYN = 10
+NNNYN = 9
+NNNN ? 9
+NNNNY ? 10
+NNNNYY = 10
+NNNNYN = 9
+NNNNN ? 8
+NNNNNY ? 8
+NNNNNYY = 8
+NNNNNYN = 10
+NNNNNN = 10

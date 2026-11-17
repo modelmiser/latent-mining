@@ -1,0 +1,3 @@
+# Seed
+
+A questioner must identify a secret number in {1, ..., n} by asking yes/no questions of the form "is the secret in the set S?", chosen adaptively. The responder may lie, but lies are limited in time rather than in number: in any window of w consecutive answers at most one is a lie. (With w larger than the total number of questions this is Ulam's game with one lie; with w = 1 every answer may be a lie and nothing can be learned.) For each w: how many questions q(n, w) does the questioner need in the worst case, how does the price of lying fall as w grows, and what does a good questioning strategy look like when the questioner cannot tell which of the recent answers to trust?

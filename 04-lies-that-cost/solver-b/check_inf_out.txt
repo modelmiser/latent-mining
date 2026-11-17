@@ -1,0 +1,7 @@
+ACCEPT certs/inf_k1_n2.txt: k=1 n=2 responder can stay inside 2 listed states forever
+ACCEPT certs/inf_k1_n3.txt: k=1 n=3 responder can stay inside 5 listed states forever
+ACCEPT certs/inf_k1_n4.txt: k=1 n=4 responder can stay inside 14 listed states forever
+ACCEPT certs/inf_k1_n5.txt: k=1 n=5 responder can stay inside 30 listed states forever
+ACCEPT certs/inf_k1_n6.txt: k=1 n=6 responder can stay inside 76 listed states forever
+ACCEPT certs/inf_k1_n7.txt: k=1 n=7 responder can stay inside 146 listed states forever
+ACCEPT certs/inf_k1_n9.txt: k=1 n=9 responder can stay inside 570 listed states forever

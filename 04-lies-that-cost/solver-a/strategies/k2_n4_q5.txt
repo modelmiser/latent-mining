@@ -1,0 +1,32 @@
+# questioner strategy: n=4 k=2 wins within q=5. Lines: '<answer path> ? <elements of S>' (question asked after that path of Y/N answers, '-' = root), '<path> = x' (only x alive), '<path> X' (answer illegal: C empty)
+- ? 1 2
+Y ? 1 3
+YY ? 2 3
+YYY ? 1
+YYYY = 1
+YYYN ? 2
+YYYNY = 2
+YYYNN = 3
+YYN = 1
+YN ? 1 4
+YNY ? 1
+YNYY = 1
+YNYN ? 2
+YNYNY = 2
+YNYNN = 4
+YNN = 2
+N ? 1 3
+NY ? 1 4
+NYY ? 1
+NYYY = 1
+NYYN ? 3
+NYYNY = 3
+NYYNN = 4
+NYN = 3
+NN ? 2 3
+NNY ? 2
+NNYY = 2
+NNYN ? 3
+NNYNY = 3
+NNYNN = 4
+NNN = 4

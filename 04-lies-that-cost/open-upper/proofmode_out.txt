@@ -1,0 +1,7 @@
+proof k=2 n=2..3000 failures=0 forced-question states=27048 free-search states=26
+proof k=3 n=2..3000 failures=0 forced-question states=27048 free-search states=27
+proof k=4 n=2..3000 failures=0 forced-question states=27048 free-search states=28
+CONTROL k=1
+PROOF-STRATEGY FAILS k=1 n=38 q=9
+PROOF-STRATEGY FAILS k=1 n=39 q=9
+proof k=1 n=2..60 failures=21 forced-question states=285 free-search states=32
