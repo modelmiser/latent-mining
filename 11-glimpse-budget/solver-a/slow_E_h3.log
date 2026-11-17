@@ -1,0 +1,6 @@
+SLOW E h=3 k=0 : LOSE winning starts(0-indexed)=[] sweeps=6
+SLOW E h=3 k=1 : WIN winning starts(0-indexed)=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] sweeps=2
+SLOW E h=3 k=2 : WIN winning starts(0-indexed)=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] sweeps=1
+compare cache_E_h3_k0.dump states 75 mismatches 0
+compare cache_E_h3_k1.dump states 280 mismatches 0
+compare cache_E_h3_k2.dump states 678 mismatches 0

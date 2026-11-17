@@ -1,0 +1,9 @@
+../solver-a/mutants/lose_D_h3_k1.txt -> REJECT: blind move leaves the set at (0, 4, 62414)
+../solver-a/mutants/lose_E_h3_k1.txt -> REJECT: bad state
+../solver-a/mutants/strat_D_h3_k1.txt -> REJECT: no table entry for (2, 1, 65532)
+../solver-a/mutants/strat_E_h4_k2.txt -> REJECT: cycle: robber can evade for ever at (0, 8, 196608, 16)
+../solver-b/bad/D_h3_k1_dropline.txt -> REJECT: opening at 1 not covered
+../solver-b/bad/D_h3_k2_fakeheader.txt -> REJECT: opening at 0 not covered
+../solver-b/bad/E_h3_k1_wrongmove2.txt -> REJECT: illegal cop move
+../solver-b/bad/E_h3_k1_wrongmove.txt -> ACCEPT strategy E(h=3,k=1): every robber caught within 7 rounds (real-game product states 94)
+../solver-b/bad/E_strategy_as_D.txt -> REJECT: node 2 claims capture but robber at 11 is free

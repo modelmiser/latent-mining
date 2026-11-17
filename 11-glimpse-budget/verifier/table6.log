@@ -1,0 +1,14 @@
+E h=6 k=0 winning_starts=0/127 memo=639
+E h=6 k=1 winning_starts=0/127 memo=7109
+E h=6 k=2 winning_starts=0/127 memo=19208
+E h=6 k=3 winning_starts=127/127 memo=41280
+D h=6 k=0 winning_starts=0/127 memo=639
+D h=6 k=1 winning_starts=0/127 memo=4576
+D h=6 k=2 winning_starts=0/127 memo=16525
+D h=6 k=3 winning_starts=0/127 memo=34408
+D h=6 k=4 winning_starts=0/127 memo=56127
+D h=6 k=5 winning_starts=127/127 memo=60333
+
+real	0m0.214s
+user	0m0.204s
+sys	0m0.009s

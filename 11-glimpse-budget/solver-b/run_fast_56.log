@@ -1,0 +1,22 @@
+E h=5 k=0 cop_wins=0 winning_starts:  [A-evals=6 bfs-states=94 maxqueue=17]
+E h=5 k=1 cop_wins=0 winning_starts:  [A-evals=20 bfs-states=257 maxqueue=19]
+E h=5 k=2 cop_wins=1 winning_starts: depth0 depth1 depth2 depth3 depth4 depth5  [A-evals=49 bfs-states=548 maxqueue=23]
+exit 0
+D h=5 k=0 cop_wins=0 winning_starts:  [A-evals=6 bfs-states=94 maxqueue=17]
+D h=5 k=1 cop_wins=0 winning_starts:  [A-evals=21 bfs-states=299 maxqueue=17]
+D h=5 k=2 cop_wins=0 winning_starts:  [A-evals=64 bfs-states=842 maxqueue=20]
+D h=5 k=3 cop_wins=0 winning_starts:  [A-evals=166 bfs-states=2104 maxqueue=23]
+D h=5 k=4 cop_wins=1 winning_starts: depth0 depth1 depth2 depth3 depth4 depth5  [A-evals=231 bfs-states=2840 maxqueue=23]
+exit 0
+E h=6 k=0 cop_wins=0 winning_starts:  [A-evals=7 bfs-states=117 maxqueue=18]
+E h=6 k=1 cop_wins=0 winning_starts:  [A-evals=23 bfs-states=323 maxqueue=22]
+E h=6 k=2 cop_wins=0 winning_starts:  [A-evals=48 bfs-states=640 maxqueue=29]
+E h=6 k=3 cop_wins=1 winning_starts: depth0 depth1 depth2 depth3 depth4 depth5 depth6  [A-evals=171 bfs-states=1956 maxqueue=29]
+exit 0
+D h=6 k=0 cop_wins=0 winning_starts:  [A-evals=7 bfs-states=117 maxqueue=18]
+D h=6 k=1 cop_wins=0 winning_starts:  [A-evals=24 bfs-states=374 maxqueue=18]
+D h=6 k=2 cop_wins=0 winning_starts:  [A-evals=85 bfs-states=1237 maxqueue=23]
+D h=6 k=3 cop_wins=0 winning_starts:  [A-evals=264 bfs-states=3781 maxqueue=27]
+D h=6 k=4 cop_wins=0 winning_starts:  [A-evals=614 bfs-states=8767 maxqueue=30]
+D h=6 k=5 cop_wins=1 winning_starts: depth0 depth1 depth2 depth3 depth4 depth5 depth6  [A-evals=772 bfs-states=10980 maxqueue=30]
+exit 0

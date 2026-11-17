@@ -1,0 +1,12 @@
+mut/m1_A_loseD31_dropline.txt -> REJECT: start 12 not covered
+mut/m2_A_stratE31_stay.txt -> REJECT: no table entry for (0, 8, 532)
+mut/m3_A_stratE31_asD.txt -> REJECT: no table entry for (0, 2, 3888)
+mut/m4_B_loseE30_as_E31.txt -> REJECT: opening at 0 not covered
+mut/m5_B_stratD32_budget1.txt -> REJECT: glimpse without budget
+mut/m6_B_stratE31_wrongleaf.txt -> REJECT: node 104 claims capture but robber at 14 is free
+mut/m7_A_loseD31_otheranswer.txt -> ACCEPT losing D(h=3,k=1): closed set of 250 states
+mut/m8_A_stratD32_stepfirst.txt -> ACCEPT strategy D(h=3,k=2): every robber caught within 6 rounds (real-game product states 58)
+../solver-a/lose_E_h3_k0.txt single-line deletions rejected: 75 of 75
+../solver-a/lose_D_h3_k1.txt single-line deletions rejected: 250 of 250
+../solver-b/wit/E_h3_k0.txt single-line deletions rejected: 75 of 75
+../solver-b/wit/D_h3_k1.txt single-line deletions rejected: 310 of 334

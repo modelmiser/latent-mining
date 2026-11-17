@@ -1,0 +1,14 @@
+brute E h=2 k=0: winning states 441 of 441, winning full starts 7/7 (sweeps 7)
+brute E h=2 k=1: winning states 441 of 441, winning full starts 7/7 (sweeps 1)
+compared 882 states with solve.cpp: mismatches 0
+brute E h=3 k=0: winning states 502 of 245745, winning full starts 0/15 (sweeps 6)
+brute E h=3 k=1: winning states 245745 of 245745, winning full starts 15/15 (sweeps 2)
+brute E h=3 k=2: winning states 245745 of 245745, winning full starts 15/15 (sweeps 1)
+compared 737235 states with solve.cpp: mismatches 0
+brute D h=2 k=0: winning states 441 of 441, winning full starts 7/7 (sweeps 7)
+brute D h=2 k=1: winning states 441 of 441, winning full starts 7/7 (sweeps 1)
+compared 882 states with solve.cpp: mismatches 0
+brute D h=3 k=0: winning states 502 of 245745, winning full starts 0/15 (sweeps 6)
+brute D h=3 k=1: winning states 18853 of 245745, winning full starts 0/15 (sweeps 5)
+brute D h=3 k=2: winning states 245745 of 245745, winning full starts 15/15 (sweeps 2)
+compared 737235 states with solve.cpp: mismatches 0

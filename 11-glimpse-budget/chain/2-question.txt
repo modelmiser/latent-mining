@@ -1,0 +1,21 @@
+Pointing versus telling: direction glimpses on complete binary trees.
+
+Let T_h be the complete binary tree of height h >= 0: a root, every non-leaf vertex has exactly two children, all leaves at distance h from the root (2^(h+1) - 1 vertices). Let k >= 0 be an integer. Two games, D(h, k) and E(h, k), are played by a cop and a robber on T_h; both players know T_h, h, k and which game is played. The games differ only in what a glimpse reveals.
+
+Setup. The cop chooses a start vertex c. The robber, seeing c, chooses a start vertex r different from c. The cop is not told r.
+
+Rounds. Each round has three steps, in this order:
+1. Glimpse (optional). If the cop has used fewer than k glimpses so far, he may spend one. In E(h, k) (exact glimpse) he is told the robber's current vertex. In D(h, k) (direction glimpse) he is told only the unique neighbour of his own current vertex that lies on the path from his vertex to the robber's vertex; nothing else (in particular not the distance).
+2. Cop move. The cop moves to an adjacent vertex or stays. If he is now on the robber's vertex, the robber is captured and the game ends.
+3. Robber move. The robber moves to an adjacent vertex or stays. If she is now on the cop's vertex, she is captured and the game ends.
+
+Information. The robber always knows the cop's vertex, the number of glimpses spent, every glimpse answer, and the cop's whole strategy. The cop knows only his own moves, the answers to his glimpses, and that capture has not yet happened. His strategy is deterministic: a function of that history.
+
+Winning. The cop wins if he has a strategy and a number N such that, against every robber start and every sequence of robber moves, capture occurs within N rounds.
+
+Define d(h) as the least k such that the cop wins D(h, k), and e(h) as the least k such that the cop wins E(h, k). Both are finite (glimpsing every round and always stepping to the indicated neighbour, or toward the revealed vertex, never lets the robber pass the cop, and her region shrinks), and d(h) >= e(h), since an exact glimpse determines the direction.
+
+Questions.
+(i) Determine d(h) and e(h) for h = 0, 1, 2, 3, 4.
+(ii) Is d(h) = e(h) for every h? If not, find the least h with d(h) > e(h), and determine whether d(h) - e(h) is bounded as h grows.
+(iii) Give a closed formula for d(h) for all h, with proof.

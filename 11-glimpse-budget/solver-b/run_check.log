@@ -1,0 +1,16 @@
+wit/D_h1_k0.txt OK: cop wins D(1,0) from start 0 within 3 rounds
+wit/D_h2_k0.txt OK: cop wins D(2,0) from start 0 within 10 rounds
+wit/D_h3_k1.txt OK: cop cannot win D(3,1); 334 states closed
+wit/D_h3_k2.txt OK: cop wins D(3,2) from start 0 within 9 rounds
+wit/D_h4_k2.txt OK: cop cannot win D(4,2); 2817 states closed
+wit/D_h4_k3.txt OK: cop wins D(4,3) from start 0 within 10 rounds
+wit/D_h5_k3.txt OK: cop cannot win D(5,3); 17452 states closed
+wit/D_h5_k4.txt OK: cop wins D(5,4) from start 0 within 13 rounds
+wit/E_h2_k0.txt OK: cop wins E(2,0) from start 0 within 10 rounds
+wit/E_h3_k0.txt OK: cop cannot win E(3,0); 75 states closed
+wit/E_h3_k1.txt OK: cop wins E(3,1) from start 0 within 7 rounds
+wit/E_h4_k1.txt OK: cop cannot win E(4,1); 3262 states closed
+wit/E_h4_k2.txt OK: cop wins E(4,2) from start 0 within 10 rounds
+wit/E_h5_k1.txt OK: cop cannot win E(5,1); 14774 states closed
+wit/E_h5_k2.txt OK: cop wins E(5,2) from start 0 within 10 rounds
+bad/E_h3_k1_wrongmove2.txt REJECT: illegal move

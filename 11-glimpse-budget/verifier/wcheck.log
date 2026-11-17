@@ -1,0 +1,39 @@
+../solver-a/strat_D_h1_k0.txt -> ACCEPT strategy D(h=1,k=0): every robber caught within 3 rounds (real-game product states 5)
+../solver-a/strat_D_h2_k0.txt -> ACCEPT strategy D(h=2,k=0): every robber caught within 10 rounds (real-game product states 40)
+../solver-a/strat_D_h3_k2.txt -> ACCEPT strategy D(h=3,k=2): every robber caught within 7 rounds (real-game product states 72)
+../solver-a/strat_D_h4_k3.txt -> ACCEPT strategy D(h=4,k=3): every robber caught within 9 rounds (real-game product states 204)
+../solver-a/strat_D_h5_k4.txt -> ACCEPT strategy D(h=5,k=4): every robber caught within 11 rounds (real-game product states 532)
+../solver-a/strat_D_h6_k5.txt -> ACCEPT strategy D(h=6,k=5): every robber caught within 13 rounds (real-game product states 1316)
+../solver-a/strat_E_h1_k0.txt -> ACCEPT strategy E(h=1,k=0): every robber caught within 3 rounds (real-game product states 5)
+../solver-a/strat_E_h2_k0.txt -> ACCEPT strategy E(h=2,k=0): every robber caught within 10 rounds (real-game product states 40)
+../solver-a/strat_E_h3_k1.txt -> ACCEPT strategy E(h=3,k=1): every robber caught within 7 rounds (real-game product states 78)
+../solver-a/strat_E_h4_k2.txt -> ACCEPT strategy E(h=4,k=2): every robber caught within 9 rounds (real-game product states 338)
+../solver-a/strat_E_h5_k2.txt -> ACCEPT strategy E(h=5,k=2): every robber caught within 12 rounds (real-game product states 826)
+../solver-a/strat_E_h6_k3.txt -> ACCEPT strategy E(h=6,k=3): every robber caught within 13 rounds (real-game product states 2650)
+../solver-a/lose_D_h3_k1.txt -> ACCEPT losing D(h=3,k=1): closed set of 250 states
+../solver-a/lose_D_h4_k2.txt -> ACCEPT losing D(h=4,k=2): closed set of 1791 states
+../solver-a/lose_D_h5_k3.txt -> ACCEPT losing D(h=5,k=3): closed set of 10736 states
+../solver-a/lose_D_h6_k4.txt -> ACCEPT losing D(h=6,k=4): closed set of 56127 states
+../solver-a/lose_E_h3_k0.txt -> ACCEPT losing E(h=3,k=0): closed set of 75 states
+../solver-a/lose_E_h4_k1.txt -> ACCEPT losing E(h=4,k=1): closed set of 959 states
+../solver-a/lose_E_h5_k1.txt -> ACCEPT losing E(h=5,k=1): closed set of 2619 states
+../solver-a/lose_E_h6_k2.txt -> ACCEPT losing E(h=6,k=2): closed set of 19208 states
+../solver-b/wit/D_h1_k0.txt -> ACCEPT strategy D(h=1,k=0): every robber caught within 3 rounds (real-game product states 5)
+../solver-b/wit/D_h2_k0.txt -> ACCEPT strategy D(h=2,k=0): every robber caught within 10 rounds (real-game product states 40)
+../solver-b/wit/D_h3_k1.txt -> ACCEPT losing D(h=3,k=1): closed set of 334 states
+../solver-b/wit/D_h3_k2.txt -> ACCEPT strategy D(h=3,k=2): every robber caught within 9 rounds (real-game product states 65)
+../solver-b/wit/D_h4_k2.txt -> ACCEPT losing D(h=4,k=2): closed set of 2817 states
+../solver-b/wit/D_h4_k3.txt -> ACCEPT strategy D(h=4,k=3): every robber caught within 10 rounds (real-game product states 200)
+../solver-b/wit/D_h5_k3.txt -> ACCEPT losing D(h=5,k=3): closed set of 17452 states
+../solver-b/wit/D_h5_k4.txt -> ACCEPT strategy D(h=5,k=4): every robber caught within 13 rounds (real-game product states 486)
+../solver-b/wit/E_h2_k0.txt -> ACCEPT strategy E(h=2,k=0): every robber caught within 10 rounds (real-game product states 40)
+../solver-b/wit/E_h3_k0.txt -> ACCEPT losing E(h=3,k=0): closed set of 75 states
+../solver-b/wit/E_h3_k1.txt -> ACCEPT strategy E(h=3,k=1): every robber caught within 7 rounds (real-game product states 94)
+../solver-b/wit/E_h4_k1.txt -> ACCEPT losing E(h=4,k=1): closed set of 3262 states
+../solver-b/wit/E_h4_k2.txt -> ACCEPT strategy E(h=4,k=2): every robber caught within 10 rounds (real-game product states 368)
+../solver-b/wit/E_h5_k1.txt -> ACCEPT losing E(h=5,k=1): closed set of 14774 states
+../solver-b/wit/E_h5_k2.txt -> ACCEPT strategy E(h=5,k=2): every robber caught within 10 rounds (real-game product states 914)
+
+real	0m4.913s
+user	0m4.897s
+sys	0m0.015s

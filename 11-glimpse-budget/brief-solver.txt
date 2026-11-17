@@ -1,0 +1,59 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Let T_h be the complete binary tree of height h >= 0: a root, every non-leaf vertex has exactly two children, all leaves at distance h from the root. Let k >= 0 be an integer. Two games, D(h, k) and E(h, k), are played on T_h by a cop and a robber; both know h, k and which game is played.
+
+Setup. The cop chooses a start vertex c. The robber, seeing c, chooses a start vertex r != c. The cop is not told r. (If h = 0 the robber has no legal start and the cop wins.)
+
+Rounds. Each round has three steps, in this order.
+1. Glimpse (optional). If the cop has spent fewer than k glimpses, he may spend one. In E (exact) he is told the robber's current vertex. In D (direction) he is told only the neighbour of his own vertex that lies on the path from his vertex to the robber's; nothing else.
+2. Cop move. The cop stays or moves to an adjacent vertex. If he is now on the robber's vertex, he has captured her and the game ends.
+3. Robber move. The robber stays or moves to an adjacent vertex. If she is now on the cop's vertex, she is captured and the game ends.
+
+Information. The robber knows the cop's vertex at all times, every glimpse answer, and the cop's whole strategy in advance. The cop knows only his own moves, his glimpse answers, and that capture has not yet occurred. The cop's strategy is deterministic: his start vertex, and in each round whether to glimpse and where to move, are functions of that history (the move may depend on the glimpse just received).
+
+Winning. The cop wins if some strategy and some number N guarantee capture within N rounds against every robber start and every sequence of robber moves.
+
+Let d(h) be the least k for which the cop wins D(h, k), and e(h) the least k for which he wins E(h, k). Both are finite, and e(h) <= d(h), since an exact answer determines the direction answer.
+
+HEADLINE. Find the exact value of h* = the least h with d(h) > e(h); the answer is "none" if d(h) = e(h) for every h. The answer must come with the values d(h) and e(h) for all h <= h* (or, if "none", a proof for all h).
+
+General form. Closed formulas for d(h) and e(h) for all h, with proof; in particular whether d(h) - e(h) is bounded.
+
+UNVERIFIED beliefs.
+- d(h) = e(h) = 0 for h = 0, 1, 2 (T_2 is a caterpillar; a blind cop sweeps it by stepping to each leaf and straight back).
+- d(3) >= 1 and e(3) >= 1.
+- d(h) <= h - 1 for h >= 1: start at the root, glimpse and step down each round until at a parent of leaves, then try both leaves.
+- e(h) is roughly h/2 for large h.
+
+Guess (a bet, not a result): h* exists and is 4 or 5, with d(h) - e(h) unbounded, because an exact glimpse of a robber two steps below the cop fixes two levels of descent and a direction glimpse fixes one.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

@@ -1,0 +1,8 @@
+E h=7 k=0 winning_starts=0/255 memo=1279
+E h=7 k=1 winning_starts=0/255 memo=19360
+E h=7 k=2 winning_starts=0/255 memo=53858
+E h=7 k=3 winning_starts=255/255 memo=139184
+
+real	0m0.319s
+user	0m0.311s
+sys	0m0.008s

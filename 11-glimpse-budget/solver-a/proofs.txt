@@ -1,0 +1,125 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. W_full (K): "c_{r1+1} is that leaf or q1" - it is q1, since r1 is the last time the cop stood on a leaf of q1.
+ N2. W_seed: "height" means distance to the leaves of X (equal to the ambient height because the descendants of
+     v form all of X). The ambient tree is rooted and X hangs from it only through v.
+ N3. W_seed (F) at t = 0 is the hypothesis S_0 contains {v1, v2}. In (K), the reused argument concerns leaf visits
+     at times in [d+3, t-2] (the cop cannot reach depth d+2 before time d+3, and c_{t-1} is not a leaf); for
+     t = d+2 that range is empty and the four leaves are in S_{d+1} directly.
+ N4. Section 2 is tagged COMPLETE but (d), the blind win at h = 2, is a strategy file checked by program.
+ N5. Lam(0), m = 2: the projection uses that pi(c) is outside X (c is outside X), and MONOTONE (section 0),
+     because the projected belief contains the seed and need not equal it.
+ N6. Final Theorem: a cop who never glimpses loses by the Corollary of section 3.
+ N7. The output of lemma_check.py was not saved by the solver; lemma_check_rerun.txt is a later re-run.
+ Found by the referee and the review panel (five seats, four model families). None changes a statement.
+----------------------------------------------------------------------------------------------------------------
+PROOFS for the glimpse cop/robber game on complete binary trees.
+Status tags: COMPLETE = full argument given here; COMPLETE-MODULO-COMPUTATION = full argument resting on a named
+finite computation whose certificate is in this folder.  Nothing here is a sketch.
+
+RESULT.  e(h) = 0 for h<=2, e(h) = floor(h/2) for h>=3.   d(h) = 0 for h<=2, d(h) = h-1 for h>=3.
+         h* = 3  (d(3)=2 > e(3)=1),  d(h)-e(h) = ceil(h/2)-1 for h>=3, unbounded.
+
+0. MODEL (belief game).  COMPLETE (standard reduction)
+ A state at the start of a round is (c,S,j): cop vertex c, S = set of robber vertices consistent with the cop's
+ history (c not in S), j glimpses left.  Blind round: cop moves to c' in N[c]; S1 = S\{c'}; cop has won iff S1 is
+ empty; then S' = N[S1]\{c'}.  Glimpse round: the answer A is {v} for some v in S (game E) or S∩(branch of c through
+ a neighbour u), nonempty (game D); the cop then moves as above with A in place of S and j-1 in place of j.
+ Because the cop is deterministic and the robber knows his strategy, the robber can realise any consistent
+ trajectory, so the cop has a strategy capturing within some N rounds iff he can force S empty in this game with an
+ adversary choosing the answers (finite state space, so a forced win is a bounded-time win).
+ Initial state: (c, V\{c}, k), c chosen by the cop ("full start").
+ MONOTONE: if the cop wins from (c,S,j) he wins from (c,S',j) for S' subset of S (same moves; answers for S' are
+ subsets of answers for S).
+
+1. PROJECTION LEMMA.  COMPLETE
+ Let H be a subtree (connected) of a tree T and pi: T -> H the nearest-point map.  If the cop wins on T from
+ (c,S,j) then he wins on H from (pi(c), (S∩H)\{pi(c)}, j).  Both games E and D.
+ Proof.  pi maps adjacent vertices to equal or adjacent vertices.  The H-cop keeps a copy of the T-game with
+ invariant: his vertex is pi(c) and his belief R satisfies R subset of S∩H.  Blind move c->c' in T: he moves to
+ pi(c').  R\{pi(c')} is a subset of S\{c'} (if c' is not in H it is not in R), and N_H[.]\{pi(c')} of the former is
+ inside N_T[.]\{c'} of the latter.  Glimpse: the H-cop glimpses; in E the answer v in R is a legal T-answer; in D
+ the answer R∩branch_H(pi(c),u) is contained in S∩(one branch of c in T) (the same branch if c in H; if c is not in
+ H all of H lies in one branch of c), which is a legal nonempty T-answer.  Feed that answer to the T-strategy.
+ When the T-belief becomes empty so does R.  QED
+
+2. UPPER BOUNDS.  COMPLETE
+ Sit(m): cop at x, the descendants of x form a T_m below x, S is inside the strict descendants of x.
+ (a) Sit(1) is won blind: step to a leaf, back to x, to the other leaf (a robber stepping to x is caught on the
+     way back).  Sit(0) is already won.
+ (b) D: from Sit(m), m>=2, glimpse, step to the indicated child y: capture or Sit(m-1) at y (the robber cannot
+     pass the cop).  So Sit(m) costs <= m-1 direction glimpses; from the root, d(h) <= h-1 (h>=1).
+ (c) E: from Sit(m), m>=2, glimpse; robber at v at depth t>=1 below x.  t=1: capture.  t>=2: let x,y,w be the first
+     vertices of the path to v.  Step to y; the robber is now in N[v]\{y}, inside subtree(w).  Step to w: capture
+     or the robber is strictly below w and stays so.  That is Sit(m-2) at w.  Hence Sit(m) costs <= floor(m/2) exact
+     glimpses and e(h) <= floor(h/2) (h>=1).
+ (d) h<=2: blind win (T_2 is a caterpillar): explicit strategies strat_*_h1_k0.txt, strat_*_h2_k0.txt.
+
+3. BLIND LEMMAS.  COMPLETE
+ height(z) = h - depth(z).  S_t, c_t = belief and cop vertex at the start of round t+1 (after t rounds, no glimpse).
+ Leaf fact: a leaf in S_t is in S_{t+1} unless c_{t+1} is that leaf.
+ LEMMA W_full.  T_m, m>=3, full start, blind play.  For all t: (W) every vertex z != c_t of height >=2 is in S_t;
+ (K) if c_t = z has height exactly 2 then some child of z is in S_t.
+ Proof (joint induction on t; t=0 clear).
+ (W) at t: if z != c_{t-1}, z was in S_{t-1} and stays.  If z = c_{t-1}: height(z)>=3: both children have height
+   >=2, are in S_{t-1}, one differs from c_t and steps to z.  height(z)=2 (so z is not the root): if c_t is a child
+   of z, parent(z) (height 3, in S_{t-1}) steps to z; if c_t = parent(z), a child of z in S_{t-1} (by K at t-1)
+   steps to z.
+ (K) at t>=1: let q1,q2 be the children of z=c_t and suppose neither is in S_t.  Then no leaf below z is in S_{t-1}
+   (it would step up), and c_{t-1} in N[z] is not a leaf.  Each of the four leaves was in S_0 or was c_0, so each
+   was occupied by the cop at some time <= t-1.  Let r1 > r2 be the last times the cop stood on a leaf of q1,
+   resp. q2 (name q1 the later one); r1 <= t-2.  At time r1: z in S_{r1} by (W).  c_{r1+1} is that leaf or q1, so the
+   robber steps z->q2: q2 in S_{r1+1}.  If r1 = t-2 then c_{t-1}=q1, c_t=z and q2 stays in S_t: contradiction.
+   Otherwise c_{r1+2} is not q2 or a leaf of q2, the robber steps to both leaves of q2, they are never visited
+   again, so they are in S_{t-1}: contradiction.  QED
+ COROLLARY.  A blind cop never wins on T_m, m>=3 (three vertices of height >=2 exist).  So e(h),d(h) >= 1 for h>=3.
+
+ LEMMA W_seed.  Ambient tree T; v a vertex whose descendants form X = T_m, m>=3, with children v1,v2.  Start state:
+ c_0 not in X, S_0 contains {v,v1,v2}.  Blind play.  depth = depth inside X.  For all t:
+ (F) every z in X of depth t+1 is in S_t;  (W) every z in X, z != c_t, height >=2, depth <= t+1, is in S_t;
+ (K) if c_t = z in X has height 2 then some child of z is in S_t.
+ Proof.  The cop needs t >= depth+1 to stand at a vertex of X, i.e. depth(c_t) <= t-1.
+ (F): the parent p of z has depth t, is in S_{t-1} by (F), and c_t is neither p nor z; p steps to z.
+ (W): depth t+1 is (F).  depth <= t and z != c_{t-1}: z in S_{t-1}, stays.  z = c_{t-1} (depth <= t-2): as in W_full,
+   using children (depth <= t-1, height>=2) when height(z)>=3 (this includes z=v), and parent/child via (K) when
+   height(z)=2 (then z != v because m>=3, and the parent is in X).
+ (K): let d = depth(z) = m-2, so t >= d+1.  The children of z are in S_d and the four leaves below z are in
+   S_{d+1} by (F), and the cop is not on them at those times.  If t = d+1 the children stay.  If t >= d+2 repeat the
+   argument of W_full(K) with "visited at some time in [d+2, t-1]".  QED
+
+4. D LOWER BOUND: d(h) >= h-1 for h>=3.  COMPLETE-MODULO-COMPUTATION (base: lose_D_h3_k1.txt)
+ L(m,j): on T_m the cop loses D with j glimpses from every full start.
+ Base L(3,1): exhaustive computation, certificate lose_D_h3_k1.txt (250 states), checked by check.py; also
+ confirmed by the all-states solver slow.py.
+ Step L(m-1,j-1) => L(m,j) for m>=4, j>=1.  Suppose the cop wins D(m,j) from a full start.  His play before the
+ first glimpse is a fixed walk w_0..w_t (if he never glimpses he is blind and loses by the Corollary).  Let X be
+ a child subtree of the root not containing w_t; X = T_{m-1}.  Consider the robber who never leaves X.  By the
+ Projection Lemma construction, the X-cop walking pi(w_0),...,pi(w_t) from the full start pi(w_0) of X has belief
+ R_t inside S_t∩X, R_t nonempty (blind cop on T_{m-1}, m-1>=3).  All of X lies in one branch at w_t, so "towards
+ X" is a legal answer and the remaining belief contains R_t: the glimpse told the cop nothing about a robber in
+ X.  The T-cop then moves to some c' and wins with j-1 glimpses from a belief containing N[R_t\{c'}]\{c'}; so by
+ Projection (and MONOTONE) the X-cop, after the blind move to pi(c'), wins with j-1 glimpses from a state he
+ reached by blind play alone from a full start of X.  This contradicts L(m-1,j-1).  QED.  Hence L(h,h-2) for all h>=3.
+
+5. E LOWER BOUND: e(h) >= floor(h/2) for h>=3.  COMPLETE-MODULO-COMPUTATION (base: 8 blind states on T_3)
+ Psi_m: states (c,S) in an ambient tree T in which some vertex v has: descendants forming X = T_m; a sibling whose
+ descendants also form a T_m; c not in X; S contains N_X[v] = {v,v1,v2}.
+ CLAIM Lam(j): for every m >= 2j+2, every Psi_m state is lost by the cop with j exact glimpses.
+ Lam(0), m>=3: W_seed gives two vertices of {v,v1,v2} other than the cop in S_t for all t.
+ Lam(0), m=2: let Y = parent(v) + X + sibling tree = T_3.  By Projection it suffices that on T_3 with X=subtree of
+   one child v of the root, every state (c,{v,v1,v2}) with c outside X (8 states) is blind-lost.  Computed:
+   lemma_check.py part (3) (closed set of blind states, belief never empty); also contained in slow.py's table.
+ Lam(j-1) => Lam(j), j>=1, m >= 2j+2 >= 4.  Blind prefix up to the first glimpse at time t, cop at c_t (no glimpse:
+   blind, lost).  By W_seed choose the answer u in S_t:
+   c_t not in X:          u = v1  (depth 1, height m-1>=2).            X_u = T_{m-1}, sibling subtree(v2).
+   c_t = v (so t>=1):     u = a grandchild of v (depth 2 <= t+1, height m-2>=2).   X_u = T_{m-2}.
+   c_t in subtree(v_i):   u = the other child of v.                    X_u = T_{m-1}.
+   In each case dist(c_t,u) >= 2 and c_t is not in X_u, so after the cop's move c' (not u, not in X_u) the belief
+   is N[u]\{c'}, which contains N_{X_u}[u]: a Psi_{m'} state with m' >= m-2 >= 2(j-1)+2 and j-1 glimpses.  Lost.  QED
+ THEOREM.  h>=3, k = floor(h/2)-1.  The cop loses E(h,k).  k=0 (h=3): Corollary.  k>=1 (h>=4): blind prefix, first
+ glimpse at c_t; by W_full every vertex of height >=2 other than c_t is in S_t.  If c_t is the root answer a
+ grandchild u (height h-2 >= 2): Psi_{h-2}, and h-2 >= 2(k-1)+2.  Otherwise c_t lies below a child a of the root;
+ answer the other child u (distance >=2): Psi_{h-1}.  Lost by Lam(k-1).  QED
+
+6. CONSEQUENCES
+ e(h)=floor(h/2), d(h)=h-1 for all h>=3; both 0 for h<=2 (2d plus section 2).  h*=3.  The proofs agree with the
+ exhaustive computations for h<=9 (independent of the proofs).

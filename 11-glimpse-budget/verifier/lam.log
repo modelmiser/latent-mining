@@ -1,0 +1,114 @@
+h=3 m=1 j=0: cop wins 24 of 48 Psi seeds
+h=3 m=1 j=1: cop wins 48 of 48 Psi seeds
+h=3 m=1 j=2: cop wins 48 of 48 Psi seeds
+h=3 m=1 j=3: cop wins 48 of 48 Psi seeds
+h=3 m=2 j=0: cop wins 0 of 16 Psi seeds  [Lam says 0]
+h=3 m=2 j=1: cop wins 16 of 16 Psi seeds
+h=3 m=2 j=2: cop wins 16 of 16 Psi seeds
+h=3 m=2 j=3: cop wins 16 of 16 Psi seeds
+lam h=3 violations=0
+h=4 m=1 j=0: cop wins 56 of 224 Psi seeds
+h=4 m=1 j=1: cop wins 224 of 224 Psi seeds
+h=4 m=1 j=2: cop wins 224 of 224 Psi seeds
+h=4 m=1 j=3: cop wins 224 of 224 Psi seeds
+h=4 m=2 j=0: cop wins 0 of 96 Psi seeds  [Lam says 0]
+h=4 m=2 j=1: cop wins 80 of 96 Psi seeds
+h=4 m=2 j=2: cop wins 96 of 96 Psi seeds
+h=4 m=2 j=3: cop wins 96 of 96 Psi seeds
+h=4 m=3 j=0: cop wins 0 of 32 Psi seeds  [Lam says 0]
+h=4 m=3 j=1: cop wins 32 of 32 Psi seeds
+h=4 m=3 j=2: cop wins 32 of 32 Psi seeds
+h=4 m=3 j=3: cop wins 32 of 32 Psi seeds
+lam h=4 violations=0
+h=5 m=1 j=0: cop wins 112 of 960 Psi seeds
+h=5 m=1 j=1: cop wins 576 of 960 Psi seeds
+h=5 m=1 j=2: cop wins 960 of 960 Psi seeds
+h=5 m=1 j=3: cop wins 960 of 960 Psi seeds
+h=5 m=2 j=0: cop wins 0 of 448 Psi seeds  [Lam says 0]
+h=5 m=2 j=1: cop wins 128 of 448 Psi seeds
+h=5 m=2 j=2: cop wins 448 of 448 Psi seeds
+h=5 m=2 j=3: cop wins 448 of 448 Psi seeds
+h=5 m=3 j=0: cop wins 0 of 192 Psi seeds  [Lam says 0]
+h=5 m=3 j=1: cop wins 24 of 192 Psi seeds
+h=5 m=3 j=2: cop wins 192 of 192 Psi seeds
+h=5 m=3 j=3: cop wins 192 of 192 Psi seeds
+h=5 m=4 j=0: cop wins 0 of 64 Psi seeds  [Lam says 0]
+h=5 m=4 j=1: cop wins 0 of 64 Psi seeds  [Lam says 0]
+h=5 m=4 j=2: cop wins 64 of 64 Psi seeds
+h=5 m=4 j=3: cop wins 64 of 64 Psi seeds
+lam h=5 violations=0
+h=6 m=1 j=0: cop wins 224 of 3968 Psi seeds
+h=6 m=1 j=1: cop wins 1280 of 3968 Psi seeds
+h=6 m=1 j=2: cop wins 3968 of 3968 Psi seeds
+h=6 m=1 j=3: cop wins 3968 of 3968 Psi seeds
+h=6 m=2 j=0: cop wins 0 of 1920 Psi seeds  [Lam says 0]
+h=6 m=2 j=1: cop wins 288 of 1920 Psi seeds
+h=6 m=2 j=2: cop wins 1472 of 1920 Psi seeds
+h=6 m=2 j=3: cop wins 1920 of 1920 Psi seeds
+h=6 m=3 j=0: cop wins 0 of 896 Psi seeds  [Lam says 0]
+h=6 m=3 j=1: cop wins 56 of 896 Psi seeds
+h=6 m=3 j=2: cop wins 608 of 896 Psi seeds
+h=6 m=3 j=3: cop wins 896 of 896 Psi seeds
+h=6 m=4 j=0: cop wins 0 of 384 Psi seeds  [Lam says 0]
+h=6 m=4 j=1: cop wins 0 of 384 Psi seeds  [Lam says 0]
+h=6 m=4 j=2: cop wins 144 of 384 Psi seeds
+h=6 m=4 j=3: cop wins 384 of 384 Psi seeds
+h=6 m=5 j=0: cop wins 0 of 128 Psi seeds  [Lam says 0]
+h=6 m=5 j=1: cop wins 0 of 128 Psi seeds  [Lam says 0]
+h=6 m=5 j=2: cop wins 32 of 128 Psi seeds
+h=6 m=5 j=3: cop wins 128 of 128 Psi seeds
+lam h=6 violations=0
+h=7 m=1 j=0: cop wins 448 of 16128 Psi seeds
+h=7 m=1 j=1: cop wins 2688 of 16128 Psi seeds
+h=7 m=1 j=2: cop wins 9984 of 16128 Psi seeds
+h=7 m=1 j=3: cop wins 16128 of 16128 Psi seeds
+h=7 m=2 j=0: cop wins 0 of 7936 Psi seeds  [Lam says 0]
+h=7 m=2 j=1: cop wins 608 of 7936 Psi seeds
+h=7 m=2 j=2: cop wins 2432 of 7936 Psi seeds
+h=7 m=2 j=3: cop wins 7936 of 7936 Psi seeds
+h=7 m=3 j=0: cop wins 0 of 3840 Psi seeds  [Lam says 0]
+h=7 m=3 j=1: cop wins 112 of 3840 Psi seeds
+h=7 m=3 j=2: cop wins 576 of 3840 Psi seeds
+h=7 m=3 j=3: cop wins 3840 of 3840 Psi seeds
+h=7 m=4 j=0: cop wins 0 of 1792 Psi seeds  [Lam says 0]
+h=7 m=4 j=1: cop wins 0 of 1792 Psi seeds  [Lam says 0]
+h=7 m=4 j=2: cop wins 128 of 1792 Psi seeds
+h=7 m=4 j=3: cop wins 1792 of 1792 Psi seeds
+h=7 m=5 j=0: cop wins 0 of 768 Psi seeds  [Lam says 0]
+h=7 m=5 j=1: cop wins 0 of 768 Psi seeds  [Lam says 0]
+h=7 m=5 j=2: cop wins 24 of 768 Psi seeds
+h=7 m=5 j=3: cop wins 768 of 768 Psi seeds
+h=7 m=6 j=0: cop wins 0 of 256 Psi seeds  [Lam says 0]
+h=7 m=6 j=1: cop wins 0 of 256 Psi seeds  [Lam says 0]
+h=7 m=6 j=2: cop wins 0 of 256 Psi seeds  [Lam says 0]
+h=7 m=6 j=3: cop wins 256 of 256 Psi seeds
+lam h=7 violations=0
+h=8 m=1 j=0: cop wins 896 of 65024 Psi seeds
+h=8 m=1 j=1: cop wins 5504 of 65024 Psi seeds
+h=8 m=1 j=2: cop wins 22016 of 65024 Psi seeds
+h=8 m=1 j=3: cop wins 65024 of 65024 Psi seeds
+h=8 m=2 j=0: cop wins 0 of 32256 Psi seeds  [Lam says 0]
+h=8 m=2 j=1: cop wins 1216 of 32256 Psi seeds
+h=8 m=2 j=2: cop wins 5376 of 32256 Psi seeds
+h=8 m=2 j=3: cop wins 24320 of 32256 Psi seeds
+h=8 m=3 j=0: cop wins 0 of 15872 Psi seeds  [Lam says 0]
+h=8 m=3 j=1: cop wins 224 of 15872 Psi seeds
+h=8 m=3 j=2: cop wins 1280 of 15872 Psi seeds
+h=8 m=3 j=3: cop wins 10112 of 15872 Psi seeds
+h=8 m=4 j=0: cop wins 0 of 7680 Psi seeds  [Lam says 0]
+h=8 m=4 j=1: cop wins 0 of 7680 Psi seeds  [Lam says 0]
+h=8 m=4 j=2: cop wins 288 of 7680 Psi seeds
+h=8 m=4 j=3: cop wins 2496 of 7680 Psi seeds
+h=8 m=5 j=0: cop wins 0 of 3584 Psi seeds  [Lam says 0]
+h=8 m=5 j=1: cop wins 0 of 3584 Psi seeds  [Lam says 0]
+h=8 m=5 j=2: cop wins 56 of 3584 Psi seeds
+h=8 m=5 j=3: cop wins 608 of 3584 Psi seeds
+h=8 m=6 j=0: cop wins 0 of 1536 Psi seeds  [Lam says 0]
+h=8 m=6 j=1: cop wins 0 of 1536 Psi seeds  [Lam says 0]
+h=8 m=6 j=2: cop wins 0 of 1536 Psi seeds  [Lam says 0]
+h=8 m=6 j=3: cop wins 144 of 1536 Psi seeds
+h=8 m=7 j=0: cop wins 0 of 512 Psi seeds  [Lam says 0]
+h=8 m=7 j=1: cop wins 0 of 512 Psi seeds  [Lam says 0]
+h=8 m=7 j=2: cop wins 0 of 512 Psi seeds  [Lam says 0]
+h=8 m=7 j=3: cop wins 32 of 512 Psi seeds
+lam h=8 violations=0

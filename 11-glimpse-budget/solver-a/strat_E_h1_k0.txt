@@ -1,0 +1,4 @@
+# game E h=1 k=0 start=1 ; lines: j c S(hex,bit v=vertex v) M c' | G ans:move ...
+0 1 c M 2
+0 2 a M 1
+0 1 8 M 3

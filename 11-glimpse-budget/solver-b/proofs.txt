@@ -1,0 +1,71 @@
+PROOFS (solver-b).  Each item is tagged COMPLETE, COMPLETE-GIVEN-CERTIFICATE, or CONJECTURE.
+Notation: T_h, root rho, height(v) = h - depth(v), Desc(v) = strict descendants of v.
+
+P. Belief-set model (COMPLETE; this is what all programs compute)
+ Because the cop is deterministic and learns only glimpse answers and "not yet captured", his
+ knowledge is the set S of vertices the robber could occupy given the history. Rules:
+   glimpse at c:  S -> one part P of S chosen by the adversary (E: a singleton; D: S meet one
+                  component of T - c);
+   cop steps to c' in N[c]:  S -> S1 = S - {c'}   (a robber on c' is caught);
+   robber moves:  S -> S2 = N[S1] - {c'}          (stepping onto the cop is being caught).
+ The cop wins within N rounds against every robber iff he can force S1 = empty within N rounds in
+ this game against the adversary (each S is exactly the set of robber vertices reachable by a
+ trajectory consistent with the history; an adversary line of play that keeps S non-empty for N
+ rounds yields, by backward choice, one robber trajectory surviving N rounds, and conversely).
+ The state space is finite, so "wins" = least fixpoint of the one-step win operator.
+ Prunings used by fast.cpp, both safe in both directions (they never change the answer):
+  - tree automorphisms preserve everything, so states are canonicalised;
+  - winning is monotone: if the cop wins from (c,S) he wins from (c,S') for S' subset S (play the
+    same strategy). So inside one glimpse-free search a state (c,S) with S superset of an already
+    queued (c,S0) is redundant: any win through it is also a win through (c,S0).
+ slow.cpp / gen.cpp use neither pruning and agree for all h <= 5.
+
+U1. d(h) <= h-1 for h >= 1.  (COMPLETE)
+ Claim: cop at a vertex x of height t >= 1 at the start of a round, robber in Desc(x): t-1 direction
+ glimpses suffice. t = 1: step to a leaf, back to x, to the other leaf (the robber can only stay or
+ step onto x). t >= 2: glimpse, step to the indicated child w; the robber is not on w (or is caught),
+ cannot pass w, so she is in Desc(w); recurse with t-1. Start at the root.
+
+U2. e(h) <= floor(h/2) for h >= 1.  (COMPLETE)
+ Claim: cop at x of height t >= 1 at the start of a round, robber in Desc(x): floor(t/2) exact
+ glimpses suffice. t = 1 as above (0 glimpses). t >= 2: glimpse, robber seen at r at distance m.
+ m = 1: step onto her. m >= 2: let x, c1, c2 be the first vertices of the path to r (c2 = r if
+ m = 2). Step to c1 (she is not there); she moves, staying in N[r] and below c1. Step to c2. At
+ that moment she is in N[r] - {c1}, which lies inside the subtree of c2 (for m >= 3 the parent of r
+ is c2 or below it; for m = 2, N[r] - {c1} = r and its children). So she is caught or in Desc(c2),
+ and stays in Desc(c2) after her move. If t = 2 then m = 2 and c2 = r is a leaf: she was caught.
+ Otherwise recurse at c2 with height t-2: 1 + floor((t-2)/2) = floor(t/2). Start at the root.
+
+L1. Projection lemma for D.  (COMPLETE)
+ If the cop wins D(h,k) with h >= 1, then he wins D(h-1, max(k-1,0)).
+ Proof. Let sigma win D(h,k) within N rounds. Until its first glimpse sigma's moves do not depend
+ on the robber (no information), so the round T of the first glimpse and the cop's vertex c_T then
+ are fixed (T = infinity if sigma never glimpses blind). Let Q be a child subtree of the root
+ (a copy of T_{h-1}, root y) with c_T not in Q (possible: c_T is the root or in the other half; if
+ T = infinity take any Q). Define a strategy sigma' on Q: the Q-cop stands at pi(c), where pi(c)=c
+ for c in Q and pi(c)=y otherwise, and simulates sigma against a robber who stays in Q. This is
+ legal (pi maps a step to a step or a stay). When sigma glimpses with the real cop outside Q the
+ answer is forced ("towards y"), so sigma' does not spend a glimpse; when the real cop is in Q the
+ direction answer in T_h equals the answer in Q. Hence sigma' spends only the glimpses sigma makes
+ inside Q, and the first glimpse of sigma is outside Q: at most max(k-1,0). Any robber trajectory in
+ Q that avoids the Q-cop for N rounds is a legal trajectory in T_h that avoids the real cop (if the
+ real cop is in Q the two cops coincide; if not, the robber is in Q and he is not) and produces
+ exactly the simulated history; so sigma would not win within N. Hence sigma' wins within N.  QED
+ (The same argument fails for E: an exact glimpse from outside Q is informative.)
+
+L2. d(h) = h-1 for every h >= 3; d(0)=d(1)=d(2)=0.  (COMPLETE-GIVEN-CERTIFICATE)
+ Upper bound U1. Lower bound: d(3) >= 2 is the machine-checked certificate wit/D_h3_k1.txt (334
+ states, closed under every cop action; check.py). For h >= 4, if d(h) <= h-2 then by L1 the cop
+ wins D(h-1, h-3), contradicting d(h-1) = h-2 >= 1. h <= 2: strategies wit/D_h1_k0, D_h2_k0.
+
+L3. d(h) - e(h) is unbounded.  (COMPLETE-GIVEN-CERTIFICATE, via L2 and U2)
+ For h >= 3:  d(h) - e(h) >= (h-1) - floor(h/2) = ceil(h/2) - 1.
+
+L4. Headline h* = 3.  (COMPLETE-GIVEN-CERTIFICATE)
+ d = e = 0 for h <= 2 (strategies); e(3) <= 1 by U2 and e(3) >= 1 by wit/E_h3_k0.txt (also: T_3 is
+ not a caterpillar); d(3) = 2 by U1 and wit/D_h3_k1.txt.
+
+L5. e(h) = floor(h/2) for all h >= 3.  (CONJECTURE; lower bound only COMPUTED for 3 <= h <= 8)
+ Only e(h) >= e(h-1) is proved in general (the projection of L1 with unchanged glimpse count works
+ for E). I do not have a proof of e(h) >= e(h-2) + 1. If the conjecture holds,
+ d(h) - e(h) = ceil(h/2) - 1 exactly for h >= 3.

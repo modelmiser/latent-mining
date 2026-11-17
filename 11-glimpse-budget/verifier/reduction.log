@@ -1,0 +1,3 @@
+T_3: 3000 random histories per game, belief != explicit trajectory endpoints in 0 round-checks (non-empty checks 22780)
+T_4: 600 random histories per game, belief != explicit trajectory endpoints in 0 round-checks (non-empty checks 4515)
+T_3: 300 random histories per game, belief != explicit trajectory endpoints in 1449 round-checks (non-empty checks 2128)  [broken update: must be >0]

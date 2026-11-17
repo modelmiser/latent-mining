@@ -1,0 +1,21 @@
+Glimpse budget on complete binary trees.
+
+Let T_h be the complete binary tree of height h >= 0: a root, every non-leaf vertex has exactly two children, all leaves at distance h from the root (2^(h+1) - 1 vertices). Let k >= 0 be an integer. The game G(h, k) is played by a cop and a robber on T_h; both know T_h, h and k.
+
+Setup. The cop chooses a start vertex c. The robber, seeing c, chooses a start vertex r different from c. The cop is not told r.
+
+Rounds. Each round has three steps, in this order:
+1. Glimpse (optional). If the cop has used fewer than k glimpses so far, he may spend one; he is then told the robber's current vertex exactly.
+2. Cop move. The cop moves to an adjacent vertex or stays. If he is now on the robber's vertex, the robber is captured and the game ends.
+3. Robber move. The robber moves to an adjacent vertex or stays. If she is now on the cop's vertex, she is captured and the game ends.
+
+Information. The robber always knows the cop's vertex, the number of glimpses spent, and the cop's whole strategy. The cop knows only his own moves, the answers to his glimpses, and that capture has not yet happened. His strategy is deterministic: a function of that history.
+
+Winning. The cop wins G(h, k) if he has a strategy and a number N such that, against every robber start and every sequence of robber moves, capture occurs within N rounds.
+
+Define g(h) as the least k such that the cop wins G(h, k). It is finite: glimpsing every round gives the full-information game, which one cop wins on any tree.
+
+Questions.
+(i) Determine g(h) for h = 0, 1, 2, 3, 4, 5.
+(ii) Give a closed formula for g(h) for all h, with proof.
+(iii) For each h <= 5, let t(h) be the least N for which some cop strategy wins G(h, g(h)) within N rounds. Determine t(h).

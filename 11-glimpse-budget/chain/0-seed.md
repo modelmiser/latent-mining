@@ -1,0 +1,3 @@
+# Seed
+
+A cop and a robber move alternately along the edges of a finite connected graph, the cop first; each may also stay put. The cop wins on occupying the robber's vertex. Both know the graph. The robber always sees the cop. The cop sees the robber only at certain moments: at the start, and then after every m-th robber move; in between, the cop knows only what can be deduced. For m = 1 this is the classical game and the graphs a single cop wins on are known (the dismantlable graphs). For each m: on which graphs can one cop still force a capture, how long does it take in the worst case on paths, cycles, trees and grids, and how many cops are needed when one is not enough?

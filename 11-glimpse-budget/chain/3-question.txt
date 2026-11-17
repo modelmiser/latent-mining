@@ -1,0 +1,26 @@
+Let T_h be the complete binary tree of height h >= 0: a root, every non-leaf vertex has exactly two children, all leaves at distance h from the root. Let k >= 0 be an integer. Two games, D(h, k) and E(h, k), are played on T_h by a cop and a robber; both know h, k and which game is played.
+
+Setup. The cop chooses a start vertex c. The robber, seeing c, chooses a start vertex r != c. The cop is not told r. (If h = 0 the robber has no legal start and the cop wins.)
+
+Rounds. Each round has three steps, in this order.
+1. Glimpse (optional). If the cop has spent fewer than k glimpses, he may spend one. In E (exact) he is told the robber's current vertex. In D (direction) he is told only the neighbour of his own vertex that lies on the path from his vertex to the robber's; nothing else.
+2. Cop move. The cop stays or moves to an adjacent vertex. If he is now on the robber's vertex, he has captured her and the game ends.
+3. Robber move. The robber stays or moves to an adjacent vertex. If she is now on the cop's vertex, she is captured and the game ends.
+
+Information. The robber knows the cop's vertex at all times, every glimpse answer, and the cop's whole strategy in advance. The cop knows only his own moves, his glimpse answers, and that capture has not yet occurred. The cop's strategy is deterministic: his start vertex, and in each round whether to glimpse and where to move, are functions of that history (the move may depend on the glimpse just received).
+
+Winning. The cop wins if some strategy and some number N guarantee capture within N rounds against every robber start and every sequence of robber moves.
+
+Let d(h) be the least k for which the cop wins D(h, k), and e(h) the least k for which he wins E(h, k). Both are finite, and e(h) <= d(h), since an exact answer determines the direction answer.
+
+HEADLINE. Find the exact value of h* = the least h with d(h) > e(h); the answer is "none" if d(h) = e(h) for every h. The answer must come with the values d(h) and e(h) for all h <= h* (or, if "none", a proof for all h).
+
+General form. Closed formulas for d(h) and e(h) for all h, with proof; in particular whether d(h) - e(h) is bounded.
+
+UNVERIFIED beliefs.
+- d(h) = e(h) = 0 for h = 0, 1, 2 (T_2 is a caterpillar; a blind cop sweeps it by stepping to each leaf and straight back).
+- d(3) >= 1 and e(3) >= 1.
+- d(h) <= h - 1 for h >= 1: start at the root, glimpse and step down each round until at a parent of leaves, then try both leaves.
+- e(h) is roughly h/2 for large h.
+
+Guess (a bet, not a result): h* exists and is 4 or 5, with d(h) - e(h) unbounded, because an exact glimpse of a robber two steps below the cop fixes two levels of descent and a direction glimpse fixes one.

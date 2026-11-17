@@ -1,0 +1,47 @@
+W_full ok h=3 blind states 75
+W_full ok h=4 blind states 159
+W_full ok h=5 blind states 319
+W_full ok h=6 blind states 639
+W_full ok h=7 blind states 1279
+W_full ok h=8 blind states 2559
+W_seed ok h=3 (timed states examined 0)
+W_seed ok h=4 (timed states examined 4724)
+W_seed ok h=5 (timed states examined 36677)
+W_seed ok h=6 (timed states examined 197827)
+W_seed ok h=7 (timed states examined 893903)
+base Lambda+_0 (m=2) ok: closed blind set of 143 states, never empty
+  h=3 m=2 j=0: cop wins from 0 of 8 seed states (lemma says 0)
+  h=3 m=2 j=1: cop wins from 8 of 8 seed states 
+  h=3 m=2 j=2: cop wins from 8 of 8 seed states 
+ full-start check h=3: least k with a winning start = 1
+  h=4 m=3 j=0: cop wins from 0 of 16 seed states (lemma says 0)
+  h=4 m=3 j=1: cop wins from 16 of 16 seed states 
+  h=4 m=3 j=2: cop wins from 16 of 16 seed states 
+  h=4 m=2 j=0: cop wins from 0 of 24 seed states (lemma says 0)
+  h=4 m=2 j=1: cop wins from 20 of 24 seed states 
+  h=4 m=2 j=2: cop wins from 24 of 24 seed states 
+ full-start check h=4: least k with a winning start = 2
+  h=5 m=4 j=0: cop wins from 0 of 32 seed states (lemma says 0)
+  h=5 m=4 j=1: cop wins from 0 of 32 seed states (lemma says 0)
+  h=5 m=4 j=2: cop wins from 32 of 32 seed states 
+  h=5 m=3 j=0: cop wins from 0 of 48 seed states (lemma says 0)
+  h=5 m=3 j=1: cop wins from 6 of 48 seed states 
+  h=5 m=3 j=2: cop wins from 48 of 48 seed states 
+  h=5 m=2 j=0: cop wins from 0 of 56 seed states (lemma says 0)
+  h=5 m=2 j=1: cop wins from 16 of 56 seed states 
+  h=5 m=2 j=2: cop wins from 56 of 56 seed states 
+ full-start check h=5: least k with a winning start = 2
+  h=6 m=5 j=0: cop wins from 0 of 64 seed states (lemma says 0)
+  h=6 m=5 j=1: cop wins from 0 of 64 seed states (lemma says 0)
+  h=6 m=5 j=2: cop wins from 16 of 64 seed states 
+  h=6 m=4 j=0: cop wins from 0 of 96 seed states (lemma says 0)
+  h=6 m=4 j=1: cop wins from 0 of 96 seed states (lemma says 0)
+  h=6 m=4 j=2: cop wins from 36 of 96 seed states 
+  h=6 m=3 j=0: cop wins from 0 of 112 seed states (lemma says 0)
+  h=6 m=3 j=1: cop wins from 7 of 112 seed states 
+  h=6 m=3 j=2: cop wins from 76 of 112 seed states 
+  h=6 m=2 j=0: cop wins from 0 of 120 seed states (lemma says 0)
+  h=6 m=2 j=1: cop wins from 18 of 120 seed states 
+  h=6 m=2 j=2: cop wins from 92 of 120 seed states 
+ full-start check h=6: least k with a winning start = 3
+exit 0

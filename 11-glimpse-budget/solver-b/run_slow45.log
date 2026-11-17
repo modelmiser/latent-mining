@@ -1,0 +1,16 @@
+D h=4 k=2 cop_wins=0 states=3025 sweeps=6 winning_start_vertices(0-based heap):
+exit 0
+D h=4 k=3 cop_wins=1 states=4546 sweeps=6 winning_start_vertices(0-based heap): 0 1 2 3 4 5 6 7 8 9 10 11 12 1
+exit 0
+E h=4 k=1 cop_wins=0 states=3706 sweeps=6 winning_start_vertices(0-based heap):
+exit 0
+E h=4 k=2 cop_wins=1 states=7253 sweeps=10 winning_start_vertices(0-based heap): 0 1 2 3 4 5 6 7 8 9 10 11 12 
+exit 0
+E h=5 k=1 cop_wins=0 states=15698 sweeps=6 winning_start_vertices(0-based heap):
+exit 0
+E h=5 k=2 cop_wins=1 states=31077 sweeps=10 winning_start_vertices(0-based heap): 0 1 2 3 4 5 6 7 8 9 10 11 12
+exit 0
+D h=5 k=3 cop_wins=0 states=18228 sweeps=5 winning_start_vertices(0-based heap):
+exit 0
+D h=5 k=4 cop_wins=1 states=24673 sweeps=7 winning_start_vertices(0-based heap): 0 1 2 3 4 5 6 7 8 9 10 11 12 
+exit 0

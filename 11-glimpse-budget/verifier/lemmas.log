@@ -1,0 +1,18 @@
+W_full (W)+(K), T_3: 75 blind states from all full starts, violations 0
+W_full (W)+(K), T_4: 159 blind states from all full starts, violations 0
+W_full (W)+(K), T_5: 319 blind states from all full starts, violations 0
+W_full (W)+(K), T_6: 639 blind states from all full starts, violations 0
+W_full (W)+(K), T_7: 1279 blind states from all full starts, violations 0
+W_full (W)+(K), T_8: 2559 blind states from all full starts, violations 0
+  [check that can fail] W_full with 'height>=1' on T_3: violations 12 (must be >0)
+  [check that can fail] W_full on T_2 (m>=3 violated): violations 14 (must be >0)
+W_seed in T_4, every v with m>=3, every cop start outside X: 3400 timed states; violations F=0 W=0 K=0 ; 'two of v,v1,v2 remain' 0 ; Lam-step answer u (in S, dist>=2, cop outside X_u) 0
+W_seed in T_5, every v with m>=3, every cop start outside X: 32768 timed states; violations F=0 W=0 K=0 ; 'two of v,v1,v2 remain' 0 ; Lam-step answer u (in S, dist>=2, cop outside X_u) 0
+W_seed in T_6, every v with m>=3, every cop start outside X: 238382 timed states; violations F=0 W=0 K=0 ; 'two of v,v1,v2 remain' 0 ; Lam-step answer u (in S, dist>=2, cop outside X_u) 0
+W_seed in T_7, every v with m>=3, every cop start outside X: 1664330 timed states; violations F=0 W=0 K=0 ; 'two of v,v1,v2 remain' 0 ; Lam-step answer u (in S, dist>=2, cop outside X_u) 0
+  [check that can fail] W_seed with m=2 (v=4 in T_4): F=0 W=0 K=0 two=14 (some must be >0)
+  [check that can fail] Lam step with u=child of v when cop is at v: U violations 95 (must be >0)
+
+real	2m7.868s
+user	2m7.771s
+sys	0m0.071s
