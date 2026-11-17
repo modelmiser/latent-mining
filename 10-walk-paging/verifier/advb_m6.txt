@@ -1,0 +1,12 @@
+advb k=2 m=6 mode=1 variant=0 min_online_faults=12 formula=12 nodes=1061 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=3 m=6 mode=1 variant=0 min_online_faults=12 formula=12 nodes=64794 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=4 m=6 mode=1 variant=0 min_online_faults=11 formula=11 nodes=208776 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=5 m=6 mode=1 variant=0 min_online_faults=11 formula=11 nodes=1241231 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=6 m=6 mode=1 variant=0 min_online_faults=10 formula=10 nodes=616667 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=7 m=6 mode=1 variant=0 min_online_faults=10 formula=10 nodes=1643302 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=8 m=6 mode=1 variant=0 min_online_faults=9 formula=9 nodes=230528 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=9 m=6 mode=1 variant=0 min_online_faults=9 formula=9 nodes=604475 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=10 m=6 mode=1 variant=0 min_online_faults=8 formula=8 nodes=11140 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=11 m=6 mode=1 variant=0 min_online_faults=8 formula=8 nodes=15570 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=12 m=6 mode=1 variant=0 min_online_faults=7 formula=7 nodes=218 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=13 m=6 mode=1 variant=0 min_online_faults=7 formula=7 nodes=68 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT

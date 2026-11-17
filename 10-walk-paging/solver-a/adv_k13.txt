@@ -1,0 +1,5 @@
+ADV k=13 m=1: 2
+ADV k=13 m=2: 3
+ADV k=13 m=3: 4
+ADV k=13 m=4: 5
+ADV k=13 m=5: 6

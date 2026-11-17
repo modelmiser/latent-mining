@@ -1,0 +1,14 @@
+lemma k=2 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=2 L=14 intervals=3 (interval,walk) pairs=49149  fail=0
+lemma k=3 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=3 L=14 intervals=6 (interval,walk) pairs=98298  fail=0
+lemma k=4 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=4 L=14 intervals=10 (interval,walk) pairs=163830  fail=0
+lemma k=5 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=5 L=14 intervals=15 (interval,walk) pairs=245745  fail=0
+lemma k=6 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=6 L=14 intervals=21 (interval,walk) pairs=344043  fail=0
+lemma k=7 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=7 L=14 intervals=28 (interval,walk) pairs=458724  fail=0
+lemma k=8 L=14 walks=16383  Lemma1_fail=0 Lemma2_fail=0 TheoremU_perwalk_fail=0
+lemma3 k=8 L=14 intervals=36 (interval,walk) pairs=589788  fail=0

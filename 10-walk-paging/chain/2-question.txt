@@ -1,0 +1,9 @@
+Pages are the integers. A cache is a set of at most k pages, initially empty. Service rule: when page p is requested and p is in the cache C, nothing happens and C may not change (a hit). When p is not in C (a fault), the owner of the cache picks q in {p-1, p+1} and replaces C by any set C' with p in C', |C'| <= k, and C' a subset of C ∪ {p, q}. So a fault loads p and, optionally, one adjacent page; any pages may be evicted at a fault; nothing else may be loaded.
+
+A walk is a finite sequence of pages p_1, p_2, ..., p_n with p_1 = 0 and |p_{i+1} - p_i| = 1 for every i (consecutive requests are always adjacent pages, never equal). For a walk s, opt(s) is the minimum number of faults over all ways of serving s by the service rule from the empty cache, with the whole of s known in advance.
+
+Game W(k, m), integers k >= 2 and m >= 1, perfect information, two players: Adversary and Online. Online owns one cache, initially empty. Round 1: the request is page 0. In every later round the Adversary, who sees Online's current cache and the whole history, either stops or names p in {last request - 1, last request + 1} such that opt(history followed by p) <= m; any other move is illegal. Online then serves the named page by the service rule, knowing the history and its own cache but nothing about the future; at a fault its choice of q and of C' is its move. The payoff is the total number of faults Online has incurred, counted when the Adversary stops, or the limit of that count if the Adversary never stops. The Adversary maximises the payoff and Online minimises it. (The payoff never exceeds k(m+1), so the value exists.)
+
+Let F(k, m) be the value of W(k, m).
+
+Question. Determine F(k, m) exactly for all k >= 2 and m >= 1, as a closed formula or a recurrence in k and m. In particular give the sequences F(2, m) and F(3, m) for all m, and the rational number r(k) = lim F(k, m)/m (m growing) as a function of k.

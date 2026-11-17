@@ -1,0 +1,2 @@
+k=10 m=6 prune=1 F=8 states=173381 wfsteps=1286
+k=12 m=6 prune=1 F=7 states=1297 wfsteps=156

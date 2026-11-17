@@ -1,0 +1,13 @@
+game k=2 m=6 mode=2 strat=0 value=12 states=270 wfs=23 iters=6 formula=12 EQ
+game k=3 m=6 mode=2 strat=0 value=12 states=23639 wfs=540 iters=7 formula=12 EQ
+game k=4 m=6 mode=2 strat=0 value=11 states=301525 wfs=2238 iters=9 formula=11 EQ
+game k=14 m=6 mode=2 strat=0 value=7 states=310 wfs=78 iters=11 formula=7 EQ
+game k=13 m=6 mode=2 strat=0 value=7 states=430 wfs=78 iters=11 formula=7 EQ
+game k=12 m=6 mode=2 strat=0 value=7 states=1297 wfs=78 iters=15 formula=7 EQ
+game k=11 m=6 mode=2 strat=0 value=8 states=73890 wfs=802 iters=16 formula=8 EQ
+game k=10 m=6 mode=2 strat=0 value=8 states=173381 wfs=643 iters=15 formula=8 EQ
+game k=9 m=6 mode=2 strat=0 value=9 states=2174922 wfs=4908 iters=16 formula=9 EQ
+game k=8 m=6 mode=2 strat=0 value=9 states=2293729 wfs=3800 iters=14 formula=9 EQ
+game k=5 m=6 mode=2 strat=0 value=11 states=2263164 wfs=7266 iters=12 formula=11 EQ
+game k=6 m=6 mode=2 strat=0 value=10 states=3326895 wfs=6604 iters=12 formula=10 EQ
+game k=7 m=6 mode=2 strat=0 value=10 states=7866862 wfs=12448 iters=14 formula=10 EQ

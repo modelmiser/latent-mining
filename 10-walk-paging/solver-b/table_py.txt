@@ -1,0 +1,52 @@
+k=2 m=1 prune=1 F=2 states=8 wfsteps=6
+k=3 m=1 prune=1 F=2 states=10 wfsteps=6
+k=4 m=1 prune=1 F=2 states=10 wfsteps=6
+k=5 m=1 prune=1 F=2 states=10 wfsteps=6
+k=6 m=1 prune=1 F=2 states=10 wfsteps=6
+k=7 m=1 prune=1 F=2 states=10 wfsteps=6
+k=8 m=1 prune=1 F=2 states=10 wfsteps=6
+k=9 m=1 prune=1 F=2 states=10 wfsteps=6
+k=10 m=1 prune=1 F=2 states=10 wfsteps=6
+k=2 m=2 prune=1 F=4 states=30 wfsteps=14
+k=3 m=2 prune=1 F=4 states=166 wfsteps=44
+k=4 m=2 prune=1 F=3 states=65 wfsteps=20
+k=5 m=2 prune=1 F=3 states=46 wfsteps=20
+k=6 m=2 prune=1 F=3 states=38 wfsteps=20
+k=7 m=2 prune=1 F=3 states=38 wfsteps=20
+k=8 m=2 prune=1 F=3 states=38 wfsteps=20
+k=9 m=2 prune=1 F=3 states=38 wfsteps=20
+k=10 m=2 prune=1 F=3 states=38 wfsteps=20
+k=2 m=3 prune=1 F=6 states=66 wfsteps=22
+k=3 m=3 prune=1 F=6 states=832 wfsteps=122
+k=4 m=3 prune=1 F=5 states=1315 wfsteps=120
+k=5 m=3 prune=1 F=5 states=1873 wfsteps=198
+k=6 m=3 prune=1 F=4 states=199 wfsteps=42
+k=7 m=3 prune=1 F=4 states=106 wfsteps=42
+k=8 m=3 prune=1 F=4 states=82 wfsteps=42
+k=9 m=3 prune=1 F=4 states=82 wfsteps=42
+k=10 m=3 prune=1 F=4 states=82 wfsteps=42
+k=2 m=4 prune=1 F=8 states=118 wfsteps=30
+k=3 m=4 prune=1 F=8 states=3203 wfsteps=296
+k=4 m=4 prune=1 F=7 states=11253 wfsteps=504
+k=5 m=4 prune=1 F=7 states=29658 wfsteps=972
+k=6 m=4 prune=1 F=6 states=11021 wfsteps=346
+k=7 m=4 prune=1 F=6 states=8900 wfsteps=488
+k=8 m=4 prune=1 F=5 states=433 wfsteps=72
+k=9 m=4 prune=1 F=5 states=190 wfsteps=72
+k=10 m=4 prune=1 F=5 states=142 wfsteps=72
+k=2 m=5 prune=1 F=10 states=186 wfsteps=38
+k=3 m=5 prune=1 F=10 states=9369 wfsteps=590
+k=4 m=5 prune=1 F=9 states=68017 wfsteps=1674
+k=5 m=5 prune=1 F=9 states=318644 wfsteps=4342
+k=6 m=5 prune=1 F=8 states=238213 wfsteps=2462
+k=7 m=5 prune=1 F=8 states=336052 wfsteps=3630
+k=8 m=5 prune=1 F=7 states=51397 wfsteps=724
+k=9 m=5 prune=1 F=7 states=28743 wfsteps=946
+k=10 m=5 prune=1 F=6 states=791 wfsteps=110
+k=2 m=6 prune=1 F=12 states=270 wfsteps=46
+k=3 m=6 prune=1 F=12 states=23639 wfsteps=1080
+k=4 m=6 prune=1 F=11 states=301525 wfsteps=4476
+k=5 m=6 TIMEOUT
+k=6 m=6 TIMEOUT
+k=7 m=6 TIMEOUT
+k=8 m=6 TIMEOUT

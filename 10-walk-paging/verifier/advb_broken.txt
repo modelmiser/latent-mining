@@ -1,0 +1,15 @@
+advb k=4 m=3 mode=1 variant=1 min_online_faults=3 formula=5 nodes=34 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=5 m=3 mode=1 variant=1 min_online_faults=3 formula=5 nodes=20 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=6 m=4 mode=1 variant=1 min_online_faults=4 formula=6 nodes=68 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=3 m=2 mode=1 variant=1 min_online_faults=2 formula=4 nodes=8 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=7 m=4 mode=1 variant=1 min_online_faults=4 formula=6 nodes=32 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=4 m=3 mode=1 variant=2 min_online_faults=7 formula=5 nodes=1449 illegal_requests=48 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=5 m=3 mode=1 variant=2 min_online_faults=7 formula=5 nodes=6750 illegal_requests=114 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=6 m=4 mode=1 variant=2 min_online_faults=8 formula=6 nodes=9579 illegal_requests=160 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=3 m=2 mode=1 variant=2 min_online_faults=6 formula=4 nodes=608 illegal_requests=35 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=7 m=4 mode=1 variant=2 min_online_faults=8 formula=6 nodes=35070 illegal_requests=288 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=4 m=3 mode=1 variant=3 min_online_faults=5 formula=5 nodes=411 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=5 m=3 mode=1 variant=3 min_online_faults=4 formula=5 nodes=534 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=6 m=4 mode=1 variant=3 min_online_faults=6 formula=6 nodes=1701 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 ACCEPT
+advb k=3 m=2 mode=1 variant=3 min_online_faults=3 formula=4 nodes=95 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT
+advb k=7 m=4 mode=1 variant=3 min_online_faults=5 formula=6 nodes=1702 illegal_requests=0 offline_invariant_failures=0 zero_fault_cycles=0 REJECT

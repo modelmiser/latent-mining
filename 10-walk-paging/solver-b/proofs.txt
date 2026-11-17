@@ -1,0 +1,84 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. PRUNING LEMMA: the invariant "credit >= |V\R|" cannot hold initially (credit is 0). The statement the
+     simulation supports is: real faults <= virtual faults + |V\R| at the start - |V\R| now, with the real cache
+     keeping V∩R, adding p, and evicting only from R\V. Not repaired below.
+ N2. The closing sentence claims unpruned agreement also for k = 2..4, m = 1..3; table_py_noprune.txt holds only
+     k = 3..8, m = 2..4. The referee's unpruned runs (../verifier/) cover the small cases.
+ N3. Upper bound (2): the phrase "|W|>=k-1+... precisely:" is a leftover; read from "k even:".
+ Found by the referee and the review panel (five seats, four model families).
+------------------------------------------------------------------------------------------------
+THEOREM.  F(k,m) = max(m+1, 2m+1-h),  h = floor(k/2),  for all k>=2, m>=1.
+Equivalently D(k,m) = min(m,h) - 1.
+
+Notation. An "entry" is a page entering a cache; a fault causes <=2 entries (p and q). Every
+requested page absent from a cache must enter it, so (#faults) >= ceil(#entries/2).
+Fact V: a walk with opt<=m visits <=2m distinct pages (each must enter the offline cache).
+
+----------------------------------------------------------------------
+UPPER BOUND (COMPLETE).  Online strategy ALG keeps an interval window W (the cache).
+ Round 1: load {0,1}.  A fault is always at the page p just outside W, on side d (=+1/-1).
+ * if |W| <= k-2 (before the fault): load p and p+d, evict nothing        ("pair fault")
+ * else: load p only (q=p-d, already cached); if now |W|=k+1 evict the far end ("single fault").
+Pair faults come first; there are f1<=h of them; then single faults, f2 of them.
+
+(1) Invariant in the pair phase: W is an interval, |W|=2*f1, visited set is a sub-interval and W
+    has at most one unvisited page at each end (after a pair fault at p, p+d is the only unvisited
+    page on side d; the other end is unchanged). So visited >= 2*f1-2, opt >= f1-1.
+    If f2=0: ALG = f1 <= opt+1 <= m+1.
+(2) Suppose f2>=1. Call a maximal block of consecutive single faults in one direction a run;
+    run sizes j0,j1,... sum to f2.
+    First run (direction, say, left; W0=[a0,b0] is the window after the pair phase, |W0|=2h):
+    the faults are at a0-1,...,a0-j0, all outside W0 hence new; a0 itself was visited to get out,
+    so W0 has at most ONE unvisited page (b0). Distinct pages visited by the end of run 0
+    >= 2h-1+j0, so offline has >= 2h-1+j0 entries by that time.
+    After the first single fault |W|>=k-1+... precisely: k even: |W|=k throughout; k odd: the
+    first single fault makes |W|=k without eviction, afterwards |W|=k. In either case after the
+    last fault of ANY run (time t0, page x0) W is the k consecutive pages starting at x0 going
+    back the way the walk came. The next run (opposite direction, j faults) faults at the j pages
+    just beyond the other end, last at time t1; so between t0 and t1 the walk visits k+j distinct
+    pages (an interval). Offline holds <=k pages after serving time t0, so >= j entries occur in
+    (t0,t1]. These time intervals are disjoint from each other and from [1, end of run 0].
+    Total offline entries >= 2h-1+f2, so opt >= ceil((2h-1+f2)/2), i.e. f2 <= 2*opt-2h+1 and
+    ALG = h+f2 <= 2*opt+1-h <= 2m+1-h.   (Also f2>=1 forces opt>=h, so this case needs m>=h.)
+(1)+(2): ALG <= max(m+1, 2m+1-h) on every prefix of every legal play. QED.
+
+----------------------------------------------------------------------
+LOWER BOUND (COMPLETE).  Adversary strategy ADV; it maintains an explicit offline service.
+ Stage 0. After round 1 Online's cache is a subset of {0,q}; let s be the side with s not cached.
+   Request s, 2s, ..., (2g-1)s where g=min(m,h). Offline: g faults loading (0,s),(2s,3s),...;
+   Online: the 2g-1 pages s..(2g-1)s were all absent after round 1, so >= g more faults:
+   Online >= g+1. If m<h stop: F >= m+1.
+   Otherwise (m>=h): offline cache O is an interval of 2h pages containing the position, h faults,
+   Online >= h+1.  Now repeat until m-h "cycles" are done; invariant: an offline service of the
+   history exists with cache O = interval [a,b] containing the current page, |O| in {k-1,k}
+   (k-1 only for odd k before the first cycle), and fault count h+#cycles.
+ Free step (if some page of O is absent from Online's cache C): walk inside O to the nearest such
+   page. Offline: all hits. Online: >=1 fault. Invariant kept.
+ Cycle (O subset of C). Pick an end, WLOG b, with b+1 not in C (if |O|=k then C=O; if |O|=k-1,
+   C has at most one extra page so one of a-1,b+1 is absent). Walk to b (hits for both), request
+   b+1: Online faults, picks C' subset of C+{b+1,b+2}... in any case C' is a subset of
+   [a,b+2] plus at most the one extra page, |C'|<=k, b+1 in C'.
+   (i)  b+2 not in C': request b+2. Online faults again. Offline at b+1 had loaded {b+1,b+2},
+        evicting a,a+1 (if |O|=k) or a (if |O|=k-1): hit. New O=[a+2,b+2] resp. [a+1,b+2].
+   (ii) b+2 in C': then C' holds <= k-2 pages of [a,b].  If |O|=k: >=2 pages of [a,b] are absent,
+        let x be the largest; x>=a+1. If |O|=k-1: >=1 absent, x the largest, x>=a.
+        Request b, b-1, ..., x: Online hits until x, faults at x. Offline at b+1 had loaded only
+        b+1, evicting a (if |O|=k) or nothing: new O=[a+1,b+1] resp. [a,b+1], which contains
+        [x,b+1]: all hits.
+   Either way: offline +1 fault, Online >= +2 faults, new O is an interval of exactly k pages
+   containing the position.  Every prefix has opt <= h+#cycles(+1 inside a cycle) <= m: legal.
+ After m-h cycles Online has >= h+1+2(m-h) = 2m+1-h faults (or infinitely many free steps). QED.
+
+Corollaries: every UNVERIFIED belief in the statement is TRUE (F<=2m; F(k,1)=2; F(2,m)=2m;
+F(3,2)=4, F(4,2)=3; F=m+1 iff k>=2m (the statement's threshold k>=2m+2 is not sharp);
+F/m -> 2), and the candidate formula is exact.  D is bounded: D = floor(k/2)-1 for m>=k/2.
+
+----------------------------------------------------------------------
+PRUNING LEMMA used by game.py prune=1 (COMPLETE). For caches R,V and any future, serving from R
+costs <= serving from V plus |V\R|: simulate V's strategy keeping credit = (virtual faults -
+real faults) >= |V\R|. Virtual fault at p in R: credit+1, |V\R| grows <=1. Both fault: real
+loads the same pair and keeps V'∩(R+{p,q}) (fits in k). Virtual hit at p not in R: real faults,
+credit-1, |V\R|-1. Hence (a) offline entries (C,f) with some (C',f'), f'+|C\C'|<=f, are
+redundant, (b) Online loses nothing by choosing inclusion-maximal C'. An unsafe prune of (a) would
+make opt too large (fewer legal moves, F too small); of (b) would make F too large. prune=0
+(no pruning) agrees on all 18 cases k=3..8, m=2..4 and all k=2..4, m=1..3.

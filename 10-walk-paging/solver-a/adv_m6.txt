@@ -1,0 +1,12 @@
+ADV m=6 k=2: 12 nodes 274
+ADV m=6 k=3: 12 nodes 7456
+ADV m=6 k=4: 11 nodes 10250
+ADV m=6 k=5: 11 nodes 56874
+ADV m=6 k=6: 10 nodes 22917
+ADV m=6 k=7: 10 nodes 60819
+ADV m=6 k=8: 9 nodes 12821
+ADV m=6 k=9: 9 nodes 23954
+ADV m=6 k=10: 8 nodes 2356
+ADV m=6 k=11: 8 nodes 1703
+ADV m=6 k=12: 7 nodes 94
+ADV m=6 k=13: 7 nodes 28

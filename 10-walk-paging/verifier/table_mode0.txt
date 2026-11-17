@@ -1,0 +1,7 @@
+game k=5 m=4 mode=0 strat=0 value=7 states=85299 wfs=762 iters=9 formula=7 EQ
+game k=6 m=4 mode=0 strat=0 value=6 states=69970 wfs=599 iters=11 formula=6 EQ
+game k=7 m=4 mode=0 strat=0 value=6 states=95520 wfs=660 iters=11 formula=6 EQ
+game k=8 m=4 mode=0 strat=0 value=5 states=107144 wfs=688 iters=11 formula=5 EQ
+game k=7 m=3 mode=0 strat=0 value=4 states=10465 wfs=181 iters=6 formula=4 EQ
+game k=8 m=3 mode=0 strat=0 value=4 states=10499 wfs=181 iters=6 formula=4 EQ
+game k=9 m=3 mode=0 strat=0 value=4 states=10499 wfs=181 iters=6 formula=4 EQ

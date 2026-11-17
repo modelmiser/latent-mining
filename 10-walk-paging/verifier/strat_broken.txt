@@ -1,0 +1,12 @@
+game k=4 m=3 mode=1 strat=2 value=19(UNBOUNDED) states=135 wfs=66 iters=21 formula=5 DIFF
+game k=6 m=4 mode=1 strat=2 value=23(UNBOUNDED) states=373 wfs=183 iters=27 formula=6 DIFF
+game k=5 m=3 mode=1 strat=2 value=19(UNBOUNDED) states=204 wfs=99 iters=22 formula=5 DIFF
+game k=8 m=4 mode=1 strat=2 value=23(UNBOUNDED) states=77 wfs=36 iters=26 formula=5 DIFF
+game k=4 m=3 mode=1 strat=3 value=6 states=66 wfs=66 iters=3 formula=5 DIFF
+game k=6 m=4 mode=1 strat=3 value=8 states=183 wfs=183 iters=4 formula=6 DIFF
+game k=5 m=3 mode=1 strat=3 value=6 states=103 wfs=99 iters=3 formula=5 DIFF
+game k=8 m=4 mode=1 strat=3 value=8 states=36 wfs=36 iters=5 formula=5 DIFF
+game k=4 m=3 mode=1 strat=4 value=19(UNBOUNDED) states=218 wfs=66 iters=12 formula=5 DIFF
+game k=6 m=4 mode=1 strat=4 value=23(UNBOUNDED) states=754 wfs=183 iters=16 formula=6 DIFF
+game k=5 m=3 mode=1 strat=4 value=19(UNBOUNDED) states=265 wfs=99 iters=13 formula=5 DIFF
+game k=8 m=4 mode=1 strat=4 value=23(UNBOUNDED) states=99 wfs=36 iters=19 formula=5 DIFF

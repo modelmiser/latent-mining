@@ -1,0 +1,18 @@
+# deliberate failures
+ALG k=4 m=3 variant=1 worst_faults=17 bound=5 states=47 VIOLATION
+ALG k=6 m=4 variant=1 worst_faults=21 bound=6 states=97 VIOLATION
+ADV k=4 m=3 target=6 nodes=4055 finished=1 minfaults_at_stop=5 FAIL
+ADV k=3 m=2 target=5 nodes=187 finished=1 minfaults_at_stop=4 FAIL
+ADV k=6 m=3 target=5 nodes=51 finished=1 minfaults_at_stop=4 FAIL
+# real checks
+ALG k=6 m=3 variant=0 worst_faults=4 bound=4 states=349 OK
+ALG k=6 m=4 variant=0 worst_faults=6 bound=6 states=1187 OK
+ALG k=7 m=4 variant=0 worst_faults=6 bound=6 states=1328 OK
+ALG k=4 m=5 variant=0 worst_faults=9 bound=9 states=4789 OK
+ALG k=3 m=5 variant=0 worst_faults=10 bound=10 states=1980 OK
+ALG k=8 m=4 variant=0 worst_faults=5 bound=5 states=1359 OK
+ADV k=6 m=3 target=4 nodes=2429 finished=0 minfaults_at_stop=1000000000 OK
+ADV k=6 m=4 target=6 nodes=76014 finished=0 minfaults_at_stop=1000000000 OK
+ADV k=4 m=4 target=7 nodes=49095 finished=0 minfaults_at_stop=1000000000 OK
+ADV k=3 m=4 target=8 nodes=39971 finished=0 minfaults_at_stop=1000000000 OK
+ADV k=7 m=4 target=6 nodes=147858 finished=0 minfaults_at_stop=1000000000 OK

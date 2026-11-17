@@ -1,0 +1,3 @@
+# Seed
+
+A cache holds k pages out of a universe of pages grouped into blocks of B consecutive pages. Requests for single pages arrive online, chosen by an adversary who sees the cache. On a fault the cache must load the requested page, and for the same price of one fault it may load any other pages of the same block as well, evicting whatever it likes to make room. The offline optimum has the same right. Without blocks (B = 1) no deterministic algorithm is better than k-competitive and several are exactly k-competitive. For each k and B: what is the best competitive ratio a deterministic online algorithm can guarantee, and what does a good algorithm do: when is it right to load neighbours that were not asked for, and which pages should make way?

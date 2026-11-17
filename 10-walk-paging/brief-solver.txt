@@ -1,0 +1,55 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Pages are the integers. A cache is a set of at most k pages (integer k >= 2), initially empty.
+
+Service rule. When page p is requested and p is in the cache C, it is a hit and C stays unchanged. Otherwise it is a fault: the cache owner picks q in {p-1, p+1} and replaces C by any C' with p in C', |C'| <= k, and C' a subset of C ∪ {p, q}. (A fault loads p and optionally one neighbour; any pages may be evicted; nothing else may be loaded.)
+
+A walk is a finite sequence p_1, ..., p_n of pages with p_1 = 0 and |p_{i+1} - p_i| = 1 for all i. opt(s) is the minimum number of faults over all ways of serving the walk s by the service rule from the empty cache, with all of s known in advance.
+
+Game W(k, m), integers k >= 2, m >= 1, perfect information. Online owns one cache, initially empty. Round 1: the request is page 0 and Online serves it. In each later round the Adversary, seeing the whole history and Online's cache, either stops (the game ends) or names p in {last request - 1, last request + 1}; naming p is legal only if opt(history followed by p) <= m. Online then serves p by the service rule, knowing the history and its cache but not the future; at a fault its move is the choice of q and C'. Play may be infinite. The payoff is the total number of Online's faults (possibly infinite).
+
+F(k, m) is the least integer N such that Online has a strategy keeping the payoff <= N against every Adversary behaviour.
+
+Headline. Find the exact function F(k, m) for all k >= 2 and m >= 1. Equivalently, find the discount D(k, m) = 2m - F(k, m), the number of faults that the empty start and cache size k save Online below the bound 2m.
+
+UNVERIFIED beliefs:
+- F(k, m) <= 2m for all k, m (LRU without prefetch).
+- F(k, 1) = 2 for all k.
+- F(2, m) = 2m for all m.
+- F(3, 2) = 4 and F(4, 2) = 3.
+- F(k, m) = m + 1 whenever k >= 2m + 2 (Online never evicts and always prefetches outward).
+- For fixed k, F(k, m)/m tends to 2.
+- Candidate formula fitting all of the above: F(k, m) = max(m + 1, 2m - floor(k/2) + 1).
+
+Guess (clearly a guess): I would bet that D(k, m) is bounded in m for each fixed k and equals about k/2 for large m, because Online matches the offline player only while its cache is still filling; I would not bet on the candidate formula being exact.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

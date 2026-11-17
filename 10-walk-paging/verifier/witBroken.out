@@ -1,0 +1,7 @@
+k=4 m=3 len=10 opt=4 faults(FILL-FAR)=6 : REJECT opt>m(illegal walk) claimed-opt-wrong claimed-faults-wrong
+k=4 m=3 len=9 opt=3 faults(FILL-FAR)=5 : REJECT claimed-opt-wrong
+k=4 m=3 len=9 opt=3 faults(FILL-FAR)=5 : REJECT claimed-faults-wrong
+k=4 m=3 len=8 opt=-1 faults(FILL-FAR)=0 : REJECT not-a-walk
+k=4 m=3 len=8 opt=3 faults(FILL-FAR)=4 : REJECT faults-below-formula
+k=6 m=4 len=9 opt=-1 faults(FILL-FAR)=0 : REJECT start!=0
+lines=6 rejected=6

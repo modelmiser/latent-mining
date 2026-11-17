@@ -1,0 +1,116 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. Theorem L: "2m >= k (i.e. m >= j)" is wrong for odd k (k = 5, m = 2). The argument uses m >= j, not the aside.
+ N2. Theorem L sets B := j only in the even branch; read it as set before the parity split. A frontier request
+     is outside O and outside the online cache: only the walk up to the frontier is hits for both.
+ N3. Lemma 3 applies Belady's theorem to schedules that never prefetch but may evict more than one page per
+     fault; such schedules can be made lazy without more faults, which is the classical setting.
+ N4. Lemma D: D is not initialised (read D = C \ C') and the eviction that keeps the real cache within k is not
+     spelled out. "Always prefetch an uncached neighbour" is not what follows; what follows is that Online may be
+     limited to inclusion-maximal caches. The lemma is for a fixed future; it transfers to the game because
+     legality of the adversary's moves depends only on the walk.
+ Found by the referee and the review panel (five seats, four model families).
+------------------------------------------------------------------------------------------------
+PROOFS for W(k,m).  j := floor(k/2).   CLAIM:  F(k,m) = max(m+1, 2m - j + 1)  for all k>=2, m>=1.
+
+Notation. "NP schedule" = a way of serving a walk that never prefetches (a fault loads only p; may evict).
+V = set of pages requested so far (always an interval [a,b] containing the current page); v=|V|; the
+"rank" of a page = the order of its first request (page 0 has rank 1).  The two "frontier" pages are a-1, b+1.
+
+---------------------------------------------------------------------------------------------------
+LEMMA 1 (COMPLETE).  opt(s) >= ceil(v/2).
+Each requested page must be loaded by a fault at or before its first request; a fault loads <= 2 pages.
+
+LEMMA 2 (COMPLETE).  For every walk s there is an NP schedule N with capacity k, with at most 2*opt(s)
+faults, whose cache is at all times a subset of the pages requested so far.
+Proof. Take an optimal schedule O (f faults).  Let N's cache := { x in O's cache : x has been requested at or
+after the time x was most recently loaded into O's cache }.  N's cache is a subset of O's (size <= k).  It
+changes only (i) at a fault of O at p: p is not in O's cache, hence not in N's, N faults, loads p, and drops
+what O drops; (ii) at a hit of O on a page p that O prefetched and that has not been requested since: N
+faults and loads p, evicting nothing.  Events (ii) are charged injectively to prefetch loads, <= f of them.
+So N has <= 2f faults and is a legal NP schedule.
+
+LEMMA 3 (COMPLETE, uses Belady's theorem).  In the NP model with capacity k, starting from ANY cache that is
+an interval I containing the current page, the rule "on a fault at p load p; if over capacity evict the
+cached page farthest from p" has the minimum number of faults among all NP schedules starting from I; and
+starting from a superset of a cache C' it has at most as many faults as any NP schedule starting from C'.
+Proof. The cache stays an interval and p is adjacent to it, so the walk must request every other cached page
+before it can request the far end again: the far end is a furthest-in-future page, so the rule is an
+execution of Belady's furthest-in-future rule, optimal for demand paging from any initial cache (classical
+theorem, used as a black box).  Superset: an NP schedule from C'' superset of C' can copy a schedule from C'
+keeping a superset of its cache (if it hits where the other faults, nothing is needed).
+
+---------------------------------------------------------------------------------------------------
+THEOREM U (upper bound, COMPLETE given Lemma 3).  F(k,m) <= max(m+1, 2m-j+1).
+Strategy FILL-FAR.  At a fault at p: if |C| <= k-2 load p and the neighbour of p that is not in C (+1 if
+neither is); otherwise load p only; if now |C| > k evict the page farthest from p.
+Facts.  The cache is always an interval containing the current page, so a fault page p is adjacent to the
+cache and its outward neighbour is uncached: each of the first j faults ("phase 1") adds exactly 2 pages
+(sizes 2,4,...,2j; 2j is k or k-1) and evicts nothing.  From the (j+1)-st fault on ("phase 2") the strategy
+is the rule of Lemma 3.  In phase 1 the cache is contained in V plus the two frontier pages.
+Let s be any walk, f = opt(s), t = number of Online faults.
+Case A: t <= j.  Then 2t = |C| <= v+2, so f >= ceil(v/2) >= t-1:  t <= f+1.
+Case B: t > j.  Let T = time of the j-th fault, I = the cache after it (2j pages, an interval, I contains V).
+The (j+1)-st fault is at a page outside I.  Let t* >= T be the first time with v >= 2j-1.  It exists and is
+before the (j+1)-st fault: at T, v >= 2j-2, and if v = 2j-2 then both ends of I are unrequested, and the walk
+must request one of them (a hit; that moment is t*) before leaving I.  At t* Online's cache is still I and
+contains V.  The schedule N of Lemma 2 has faulted >= v >= 2j-1 times up to and including t* (it faults at
+every first request), so it faults <= 2f-(2j-1) times after t*, and its cache at t* is a subset of V, hence
+of I.  By Lemma 3 Online's faults after t* (= t-j) are <= 2f-2j+1.  So t <= 2f-j+1.
+Either way t <= max(f+1, 2f-j+1) <= max(m+1, 2m-j+1) since f <= m.                                      QED
+Corollary: F(k,m) <= 2m always (j>=1), and F(k,m) <= m+1 whenever k >= 2m (j >= m).
+(Independent of Belady: strat.py checks FILL-FAR exhaustively against all legal walks, k<=13, m<=5/6.)
+
+---------------------------------------------------------------------------------------------------
+THEOREM L (lower bound, COMPLETE).  F(k,m) >= max(m+1, 2m-j+1).
+Adversary ADV (implemented literally in adv.py).  C = Online's cache.  A "region" O is defined below; it is
+always an interval of requested pages containing the current page.
+ BOUNCE: while some page of O is not in C, walk inside O to the nearest such page.  (Online hits until it
+   faults at that page.  If this never ends, Online faults infinitely often.)
+ Stage 1 (fill), O = V.  Repeat: BOUNCE; if v = 2m stop; if v = k-1 go to stage 2; otherwise walk to a
+   frontier page that is NOT in C if there is one (else any frontier page).
+ Stage 2 (entered with v = k-1 < 2m, C contains V).  |C| <= k so some frontier page is not in C; fix the
+   direction d towards it (say left) for the rest of the game; from now on O = the min(v,k) leftmost pages
+   of V.  If k is even: request the frontier page a-1 (rank k), BOUNCE.  Set B := j ("blocks used").
+   Loop: if B = m stop.  Request the next new page x (B := B+1).  If now C contains O: request the next
+   new page as well ("pair block"), then BOUNCE.  Otherwise BOUNCE ("single block").
+
+Online's faults.  Let c_r = number of Online faults from the first request of the rank-r page until just
+before the first request of the rank-(r+1) page.  After each BOUNCE, C contains O.
+ (i) c_1 = 1, c_2 >= 1 (after round 1, C is within {0,q}: a frontier page is uncached and ADV goes there).
+ (ii) Stage 1: c_r = 0 forces both frontier pages to be in C before the step, hence (r-1)+2 <= k, r <= k-1.
+ (iii) Stage 1: c_r = 0 implies c_{r+1} >= 1.  The rank-r page x was a hit and C did not change during
+   period r; the new frontier page beyond x can only ever be loaded by a fault at x (its other neighbour was
+   never requested), and x has not faulted; so it is uncached and ADV steps onto an uncached page.
+ So among ranks 1..2j at most j-1 have c_r = 0 [zeros lie in {3..k-1}, no two adjacent: at most
+   ceil((k-3)/2) = j-1; for k even rank k=2j is requested in direction d at an uncached page, c_k >= 1].
+   Faults in ranks 1..2j  >=  2j-(j-1) = j+1.   Likewise, if 2m <= k-1 the game ends in stage 1 at v = 2m
+   with zeros in {3..2m}, no two adjacent, at most m-1 of them:  Online >= m+1.
+ (iv) Stage-2 loop: every block costs Online >= 2 faults.  When a block starts, v >= k-1 and C contains O;
+   if v >= k then C = O and x is not in C; if v = k-1 (k odd, first block) x is the uncached frontier page
+   chosen as d.  So x faults.  Single block: the BOUNCE yields >= 1 more fault.  Pair block: after the fault
+   at x, C contains the new O, which has k pages (v >= k now), so C = O and the next new page faults.
+ Total, when 2m >= k (i.e. m >= j):  Online >= (j+1) + 2(m-j) = 2m-j+1.
+
+Legality: opt(walk) <= m at the end (opt is monotone under extension, so every prefix is legal too).
+ Stage 1 only: V is an interval of 2m <= k-1 pages; tile it by m adjacent pairs; Offline faults at the
+   first-requested page of each pair and prefetches the other; never evicts.  m faults.
+ Otherwise: the first 2j ranks form an interval of 2j <= k pages; same tiling: j faults, cache = that
+   interval = O.  Single block at x: load x, evict the rightmost page of O if full: the cache is the new O,
+   and the block's BOUNCE stays inside it.  Pair block at x: load x and the next new page, evict the
+   rightmost pages down to k: the cache is the region O after the second page; the walk goes from x straight
+   to the second page (no bounce in between) and then bounces inside that O.  One fault per block: m in all.
+ All bounce walks and walks to the frontier stay inside O, a subset of both caches.                      QED
+
+THEOREM (headline, COMPLETE given Belady).  F(k,m) = max(m+1, 2m - floor(k/2) + 1);
+ D(k,m) = 2m - F(k,m) = min(m-1, floor(k/2)-1).
+
+---------------------------------------------------------------------------------------------------
+LEMMA D (domination, COMPLETE; this is the pruning used by game.py 'fast').
+If cache C' and cost c' satisfy c' + |C \ C'| <= c, then from (C',c') one can serve any continuation, online,
+with final cost <= that of any schedule from (C,c).  Invariant: C' contains C\D and c' <= c-|D|.  Request r:
+r in C and C': nothing.  r in D (C hits, C' faults): C' loads r, D shrinks by one.  r not in C, r in C'
+(C faults and loads r,q): D may gain q, c grows by 1.  Both fault: C' copies q and keeps (C_new \ D).
+Consequences: (a) the work function may drop dominated entries without changing opt of any continuation;
+(b) Online may be restricted to: always prefetch an uncached neighbour, evict only when over capacity.
+An unsafe version of (a) could only RAISE opt (fewer legal adversary moves, F biased down); an unsafe (b)
+could only bias F up.  Both are checked against the unpruned solver (table_slow.txt).

@@ -1,0 +1,25 @@
+k=2 m=1 len=2 opt=1 faults(FILL-FAR)=2 : ACCEPT
+k=2 m=2 len=5 opt=2 faults(FILL-FAR)=4 : ACCEPT
+k=2 m=3 len=7 opt=3 faults(FILL-FAR)=6 : ACCEPT
+k=2 m=4 len=9 opt=4 faults(FILL-FAR)=8 : ACCEPT
+k=3 m=1 len=2 opt=1 faults(FILL-FAR)=2 : ACCEPT
+k=3 m=2 len=4 opt=2 faults(FILL-FAR)=4 : ACCEPT
+k=3 m=3 len=8 opt=3 faults(FILL-FAR)=6 : ACCEPT
+k=3 m=4 len=10 opt=4 faults(FILL-FAR)=8 : ACCEPT
+k=4 m=1 len=2 opt=1 faults(FILL-FAR)=2 : ACCEPT
+k=4 m=2 len=4 opt=2 faults(FILL-FAR)=3 : ACCEPT
+k=4 m=3 len=9 opt=3 faults(FILL-FAR)=5 : ACCEPT
+k=4 m=4 len=11 opt=4 faults(FILL-FAR)=7 : ACCEPT
+k=5 m=1 len=2 opt=1 faults(FILL-FAR)=2 : ACCEPT
+k=5 m=2 len=4 opt=2 faults(FILL-FAR)=3 : ACCEPT
+k=5 m=3 len=6 opt=3 faults(FILL-FAR)=5 : ACCEPT
+k=5 m=4 len=12 opt=4 faults(FILL-FAR)=7 : ACCEPT
+k=6 m=1 len=2 opt=1 faults(FILL-FAR)=2 : ACCEPT
+k=6 m=2 len=4 opt=2 faults(FILL-FAR)=3 : ACCEPT
+k=6 m=3 len=6 opt=3 faults(FILL-FAR)=4 : ACCEPT
+k=6 m=4 len=13 opt=4 faults(FILL-FAR)=6 : ACCEPT
+k=7 m=1 len=2 opt=1 faults(FILL-FAR)=2 : ACCEPT
+k=7 m=2 len=4 opt=2 faults(FILL-FAR)=3 : ACCEPT
+k=7 m=3 len=6 opt=3 faults(FILL-FAR)=4 : ACCEPT
+k=7 m=4 len=8 opt=4 faults(FILL-FAR)=6 : ACCEPT
+lines=24 rejected=0

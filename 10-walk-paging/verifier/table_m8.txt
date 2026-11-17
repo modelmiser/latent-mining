@@ -1,0 +1,7 @@
+game k=18 m=8 mode=2 strat=0 value=9 states=542 wfs=136 iters=15 formula=9 EQ
+game k=17 m=8 mode=2 strat=0 value=9 states=766 wfs=136 iters=15 formula=9 EQ
+game k=16 m=8 mode=2 strat=0 value=9 states=2849 wfs=136 iters=21 formula=9 EQ
+game k=15 m=8 mode=2 strat=0 value=10 states=322688 wfs=1824 iters=22 formula=10 EQ
+game k=14 m=8 mode=2 strat=0 value=10 states=1122325 wfs=1545 iters=21 formula=10 EQ
+game k=2 m=8 mode=2 strat=0 value=16 states=486 wfs=31 iters=8 formula=16 EQ
+game k=3 m=8 mode=2 strat=0 value=16 states=104714 wfs=1424 iters=9 formula=16 EQ
