@@ -1,0 +1,3 @@
+# n=7 k=1: 2 rounds with no process complete (so F>=3). line: t then destroyed links src>dst
+1 1>0
+2 2>1

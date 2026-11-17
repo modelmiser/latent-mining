@@ -1,0 +1,158 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. The closing remark names F(10,4) as the first entry Theorem U leaves open. The first is F(5,4)
+     (2nh = 20 <= kT(2h+1-m) = 24 does not exclude T = 3); see ../reports/referee.md.
+ N2. Theorem L assumes k <= n and T >= ceil(n/k), which excludes for example (n,k) = (4,3). Nobody read
+     this proof in detail; the referee simulated the strategy instead.
+ N3. Lemma Phi and Theorem U assume k < n. Lemma Phi's function A is integer-valued.
+ Found by the referee and the review panel (five seats, four model families).
+------------------------------------------------------------------------------------------------
+PROOFS for "first to know everything, destruction budget k"            (solver-b)
+Status tags: COMPLETE = every step written out below.  SKETCH = not claimed as a proof.
+
+Notation. Indices mod n. A-link at i: (i+1 -> i).  B-link at i: (i-1 -> i).
+"Hit" = one destroyed link in one round.  T = a round number.  F = F(n,k).
+S(T) means: the adversary has a legal play after which no process is complete at round T.
+Completeness is monotone in t (K_t(i) only grows), so F = 1 + max{T : S(T)}.
+
+------------------------------------------------------------------------------
+LEMMA E (extents).  COMPLETE.
+Define integers R_i(0)=L_i(0)=0 and
+   R_i(t) = R_i(t-1)                      if the A-link at i is hit in round t,
+          = max(R_i(t-1), R_{i+1}(t-1)+1) otherwise;
+   L_i(t) likewise with the B-link at i and L_{i-1}.
+Then (1) R_{i-1}(t) <= R_i(t)+1 and L_{i+1}(t) <= L_i(t)+1 for all t, and
+     (2) K_t(i) = { i-L_i(t), ..., i+R_i(t) } mod n; i is complete iff R_i(t)+L_i(t) >= n-1.
+Proof. (1) by induction: R_{i-1}(t) <= max(R_{i-1}(t-1), R_i(t-1)+1) <= R_i(t-1)+1 <= R_i(t)+1.
+(2) by induction. K_t(i) is the union of K_{t-1}(i) and the received neighbour sets. By
+induction each is the image of an integer interval: J0=[i-L_i, i+R_i], from i+1 (if A-link not
+hit) J+=[i+1-L_{i+1}, i+1+R_{i+1}], from i-1 (if B-link not hit) J-=[i-1-L_{i-1}, i-1+R_{i-1}]
+(all at time t-1). By (1) the left end of J+ is >= i-L_i and <= i+1, so J0 u J+ is the interval
+[i-L_i, max(i+R_i, i+1+R_{i+1})]; symmetrically for J-, whose right end is <= i+R_i. So the
+union is the image of [i-max(L_i,L_{i-1}+1 if received), i+max(R_i,R_{i+1}+1 if received)],
+which is the recursion. An image of an integer interval containing i with extents L,R is all of
+Z_n iff L+R >= n-1.  QED.   (Randomised check against sets: lemma_test.py.)
+
+Consequence: the two directions do not interact except through the completion test and the
+budget. A-links only affect R, B-links only affect L.
+
+------------------------------------------------------------------------------
+LEMMA D (deficits).  COMPLETE.
+Let a_i(t) = t - R_i(t), b_i(t) = t - L_i(t), and A_t(x) = a_{x-t}(t) ("moving frame", x in Z_n).
+Round t hits frame position x iff the A-link at i=x-t is hit in round t. Then
+ (I)  A_t(x) <= A_t(x-1)+1;
+ (M)  A_t(x) >= A_{t-1}(x), with A_t(x)=A_{t-1}(x) if x is not hit in round t and
+      A_t(x) = A_{t-1}(x-1)+1 if x is hit;
+ (H)  A_t(x) <= ceil(t/2);
+ (C)  no process is complete at round T  iff  a_i(T)+b_i(T) >= m := 2T-n+2 for every i.
+Proof. From Lemma E: a_i(t) = a_i(t-1)+1 if hit, else min(a_i(t-1)+1, a_{i+1}(t-1)); in frame
+terms A_t(x) = A_{t-1}(x-1)+1 if hit, else min(A_{t-1}(x-1)+1, A_{t-1}(x)).
+(I),(M) together by induction on t: given (I) at t-1, the min equals A_{t-1}(x), and a hit gives
+A_{t-1}(x-1)+1 >= A_{t-1}(x); so (M). Then A_t(x) <= A_{t-1}(x-1)+1 <= A_t(x-1)+1, which is (I).
+(H): claim P(v): if A_t(x) >= v >= 1 there are hits at frame positions x-v+1,...,x at rounds
+t_1<...<t_v<=t with t_{j+1} >= t_j+2. Let tau be the first round with A_tau(x) >= v. By (M) x is
+hit at tau and A_{tau-1}(x-1) >= v-1. If v=1 done. Else apply P(v-1) to (x-1, tau-1): its last hit
+is at frame position x-1 at a round t_{v-1} <= tau-1. Frame position x-1 at round tau-1 and frame
+position x at round tau are the same link (i = x-tau), so t_{v-1} = tau-1 is illegal; hence
+t_{v-1} <= tau-2. So t_v >= 2v-1, i.e. v <= (t+1)/2.
+(C): Lemma E(2): complete iff R+L >= n-1 iff a+b <= 2T-n+1.  QED.
+The mirror statements hold for b (reflect the ring): B_t(y) = b_{y+t}(t), a round-t hit of the
+B-link at i is a hit of frame position y = i-t, B_t(y) <= B_t(y+1)+1, and (M),(H) hold with x-1
+replaced by y+1.
+
+------------------------------------------------------------------------------
+LEMMA Phi (hits pay for tops).  COMPLETE, for k < n.
+For a function A on Z_n with (I), call x a top if A(x+1) <= A(x), and put
+Phi(A) = sum of A(x) over tops x. Then Phi(A_T) <= (number of A-link hits in rounds 1..T).
+Also: sum over tops x of (A(x)+1-A(x+1)) = n (telescoping; non-tops contribute 0).
+Proof. Phi(A_0)=0. In one round at most k<n frame positions are hit, so some position is not
+hit; the hit positions form cyclic runs, and by (M) the simultaneous update equals applying the
+hits one at a time, within each run in DECREASING order of x (each hit then reads the old value
+of x-1). It suffices that one hit raises Phi by at most 1. A hit at x changes A(x) from w to
+v = A(x-1)+1 >= w; if v=w nothing changes. Let v>w. Only the terms of x-1 and x change.
+Term x-1: before, w <= v-1 = A(x-1), so x-1 was a top contributing v-1; after, it is not a top:
+contributes 0. Term x: (I) holds in the intermediate state (x+1 is either untouched, or already
+updated to w+1), so A(x+1) <= w+1 <= v: after the hit x is a top contributing v; before it
+contributed w if it was a top, else 0. Change = v-(v-1)-[w or 0] <= 1.  QED.
+(Randomised check: lemma_test.py.)
+
+------------------------------------------------------------------------------
+THEOREM U (upper bound).  COMPLETE, for k < n.
+Suppose S(T). Let h = ceil(T/2), m = 2T-n+2. Then m <= 2h, and if m >= h+1 then
+        2 n h <= k T (2h+1-m).
+Proof. alpha(i)=a_i(T), beta(i)=b_i(T) are shifts of A_T, B_T; alpha+beta >= m everywhere (C),
+both <= h (H); so m <= 2h. Assume m >= h+1. At a top q of alpha: alpha(q+1) >= m-beta(q+1) >=
+m-h >= 1, so the drop alpha(q)+1-alpha(q+1) <= 2h+1-m. Drops sum to n, so the number N of tops
+is >= n/(2h+1-m). Then
+  Phi(alpha) = sum_tops (alpha(q)+1-alpha(q+1)) + sum_tops (alpha(q+1)-1)
+             >= n + N(m-h-1) >= n + n(m-h-1)/(2h+1-m) = n h/(2h+1-m).
+The same for beta. By Lemma Phi the total number of hits, at most kT, is >= 2nh/(2h+1-m). QED.
+
+COROLLARY U'.  COMPLETE.  For k >= 3 and n > k:  F(n,k) < n - n/k + 1.
+Proof. Let T = F-1, so S(T). If m <= h, i.e. T + floor(T/2) <= n-2, then T < 2n/3 <= n-n/k.
+Else Theorem U applies. T even: 2h+1-m = n-1-T and 2nh = nT, so n <= k(n-1-T): T <= n-1-n/k.
+T odd: 2h+1-m = n-T, 2nh = n(T+1), so n-T >= n(T+1)/(kT) > n/k.  In all cases T < n-n/k.  QED.
+
+------------------------------------------------------------------------------
+THEOREM L (sawtooth strategy, lower bound).  COMPLETE.  (Generator: construct.py; every instance
+n<=60, k<=12 was also run through check.py's simulator: verify_construct.py.)
+Let k <= n, g = ceil(n/k), T = n-1-g, and assume T >= g (true for k>=3, n>=5).
+Then S(T), hence F(n,k) >= n - ceil(n/k).        (For k > n use k' = n: F(n,k) >= n-1.)
+Strategy. Ha = ceil(T/2), Hb = floor(T/2). Pick bases s_0<...<s_{k-1} in Z_n with cyclic gaps
+g_j = s_j - s_{j-1} <= g (s_j = floor(jn/k)). Put e_j = s_{j-1}+T+1.
+ Odd round 2v-1 (v=1..Ha): hit the A-links at i = s_j+v+T-(2v-1), j=0..k-1.
+ Even round 2v  (v=1..Hb): hit the B-links at i = e_j-v-T+2v,     j=0..k-1.
+Legality: k hits per round; A-links only in odd rounds and B-links only in even rounds, so no
+link is hit in two consecutive rounds.
+Effect. In frame terms the odd-round hits are at frame positions x = s_j+T+v at round 2v-1. By
+(M) and induction on v, A_{2v-1}(s_j+T+v) >= v, and by monotonicity alpha(s_j+v) = A_T(s_j+T+v)
+>= v for v=1..Ha. Mirror: beta(e_j-v) >= v for v=1..Hb.
+Check alpha+beta >= m = 2T-n+2 at every i. The arcs (s_{j-1}+Ha, s_j+Ha], j=0..k-1, partition
+Z_n. Let i be in the j-th arc and u = e_j - i = s_{j-1}+T+1-i; on the arc u <= T-Ha = Hb, so
+beta(i) >= u whenever u >= 1.
+  - If i <= s_j (possible only when Ha < g_j): u >= T+1-g_j >= 1 (as T >= g): beta(i) >= T+1-g_j.
+  - If i > s_j and u >= 1: alpha(i) >= i-s_j (1 <= i-s_j <= Ha), so alpha+beta >= e_j-s_j = T+1-g_j.
+  - If i > s_j and u <= 0: alpha(i) >= i-s_j >= s_{j-1}+T+1-s_j = T+1-g_j.
+So alpha+beta >= T+1-g = 2T-n+2 = m because T = n-1-g. By (C) nobody is complete at T.  QED.
+
+------------------------------------------------------------------------------
+THEOREM (headline).  COMPLETE (from U' and L).
+For every k >= 3 and n >= max(5, k+1):
+        n - ceil(n/k)  <=  F(n,k)  <  n - n/k + 1,
+so F(n,k) = n - n/k exactly when k divides n, and F(n,k) is n-ceil(n/k) or n-ceil(n/k)+1 otherwise.
+Hence c(k) = lim F(n,k)/n exists and c(k) = 1 - 1/k for every k >= 3.
+c(3) = 2/3, c(4) = 3/4 (so the bet c(4) = 5/8 is false), c(k) -> 1.
+With Theorem K2: c(1) = c(2) = 1/2, i.e. c(k) = max(1/2, 1-1/k) for all k >= 1.
+
+------------------------------------------------------------------------------
+THEOREM K2.  COMPLETE.  F(n,1) = F(n,2) = floor(n/2) for all n >= 3.
+Proof. F >= floor(n/2) is in the statement (no destruction: R_i(t)+L_i(t) = 2t). Show S(T) fails
+for T = floor(n/2), k = 2. Every frame position with positive deficit was hit at least once (M),
+so #A-hits >= |P_A|, P_A = {alpha>0}; same for B. Hits <= 2T.
+n odd: m = 1, every process needs alpha>0 or beta>0: needs >= n hits > 2T = n-1.
+n even: m = 2, 2T = n. P_A u P_B = Z_n and |P_A|+|P_B| <= n, so they partition Z_n. If one is
+empty, say P_B, then alpha >= 2 everywhere and Lemma Phi gives #hits >= sum_tops alpha(q)
+= n + sum_tops (alpha(q+1)-1) >= n+1. Otherwise there is x in P_A with x-1 not in P_A; by (I)
+alpha(x) <= 1, and beta(x)=0, so alpha+beta = 1 < 2. Contradiction either way.  QED.
+(k=2 < n always, as n >= 3.)
+
+------------------------------------------------------------------------------
+SECTION P: why the prunings in fast.cpp / decide.cpp are safe.  COMPLETE.
+(1) "useful links only": a link whose message adds nothing to the receiver leaves the state
+unchanged when destroyed; destroying it only enlarges D_t, which only shrinks the legal moves
+of round t+1. So dropping it from D_t never hurts the adversary.
+(2) Restricting D_{t-1} to links useful in the current state: by (1) the adversary never wants
+the others now, so the restriction does not change the value.
+(3) Rotations and reflections of the ring map legal plays to legal plays.
+(4) Half-speed bound (decide.cpp only): a link is never hit twice in a row, so in any two
+consecutive rounds it delivers at least once; hence R_i(t+2j) >= R_{i+j}(t)+j. If the implied
+lower bounds at the target round already give R+L >= n-1 for some i, the adversary cannot
+survive to the target round. An unsafe version of (1)-(3) would bias F downward or leave it
+unchanged; an unsafe (4) would bias F downward. fast.cpp (no (4), value search) and decide.cpp
+(with (4), decision search) agree on every case both reached; decide with prune=0 was also run for n<=8, k<=4 (same values).
+
+------------------------------------------------------------------------------
+NOT PROVED (conjecture, supported by computation only)
+ CONJECTURE X: F(n,k) = n - ceil(n/k) for all 3 <= k <= n (every computed entry agrees, n=3..11). Proved when k | n, and whenever the exact inequality of Theorem U excludes
+ T = n-ceil(n/k) (bounds.py prints [lower,upper]). The first unproved entry is F(10,4): Theorem U
+ allows 8, exhaustive search gives 7 = 10 - ceil(10/4). The odd-T case of Theorem U is the loose
+ one (it lets both directions reach height ceil(T/2), which forces all their hits into odd rounds).

@@ -1,0 +1,7 @@
+Forbid the permanent cut. Let n >= 3 and let the processes be the elements of Z_n. There are 2n directed links: (i -> i+1) and (i -> i-1) for each i. Processes are identical, deterministic, know n and share a consistent left/right; each holds one input bit. In every round each process sends one message of unbounded size on each of its two outgoing links.
+
+An adversary who sees everything chooses in each round t = 1, 2, ... a set D_t of links whose messages are destroyed, subject to two rules: |D_t| <= 2, and D_t is disjoint from D_{t-1} (D_0 is empty). So no link may be silenced in two consecutive rounds.
+
+Define influence sets: K_0(i) = {i}, and K_t(i) is the union of K_{t-1}(i) with K_{t-1}(j) for each neighbour j of i such that the link (j -> i) is not in D_t. Let T(n) be the maximum, over all legal sequences D_1, D_2, ..., of the least t for which K_t(i) = Z_n for every i. (T(n) is finite: every link delivers at least every second round, so T(n) <= 2*floor(n/2). T(n) is also the exact number of rounds needed and sufficient for every process to output the number of ones among the inputs, or their OR, or their parity, under this adversary.)
+
+Determine T(n) for every n from 3 to 12, give a closed formula for T(n) valid for all n >= 3, and describe an adversary strategy attaining it. Then say whether the formula changes when the budget 2 is replaced by 3.

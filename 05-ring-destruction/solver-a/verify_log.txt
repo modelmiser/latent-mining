@@ -1,0 +1,73 @@
+gen n=3 k=1 claim>=0 got=1 OK
+gen n=3 k=2 claim>=1 got=1 OK
+gen n=3 k=3 claim>=2 got=2 OK
+gen n=3 k=4 claim>=2 got=2 OK
+gen n=3 k=5 claim>=2 got=2 OK
+gen n=4 k=1 claim>=0 got=2 OK
+gen n=4 k=2 claim>=2 got=2 OK
+gen n=4 k=3 claim>=2 got=2 OK
+gen n=4 k=4 claim>=3 got=3 OK
+gen n=4 k=5 claim>=3 got=3 OK
+gen n=5 k=1 claim>=0 got=2 OK
+gen n=5 k=2 claim>=2 got=2 OK
+gen n=5 k=3 claim>=3 got=3 OK
+gen n=5 k=4 claim>=3 got=3 OK
+gen n=5 k=5 claim>=4 got=4 OK
+gen n=6 k=1 claim>=0 got=3 OK
+gen n=6 k=2 claim>=3 got=3 OK
+gen n=6 k=3 claim>=4 got=4 OK
+gen n=6 k=4 claim>=4 got=4 OK
+gen n=6 k=5 claim>=4 got=4 OK
+gen n=7 k=1 claim>=0 got=3 OK
+gen n=7 k=2 claim>=3 got=3 OK
+gen n=7 k=3 claim>=4 got=4 OK
+gen n=7 k=4 claim>=5 got=5 OK
+gen n=7 k=5 claim>=5 got=5 OK
+gen n=8 k=1 claim>=0 got=4 OK
+gen n=8 k=2 claim>=4 got=4 OK
+gen n=8 k=3 claim>=5 got=5 OK
+gen n=8 k=4 claim>=6 got=6 OK
+gen n=8 k=5 claim>=6 got=6 OK
+gen n=9 k=1 claim>=0 got=4 OK
+gen n=9 k=2 claim>=4 got=4 OK
+gen n=9 k=3 claim>=6 got=6 OK
+gen n=9 k=4 claim>=6 got=6 OK
+gen n=9 k=5 claim>=7 got=7 OK
+gen n=10 k=1 claim>=0 got=5 OK
+gen n=10 k=2 claim>=5 got=5 OK
+gen n=10 k=3 claim>=6 got=6 OK
+gen n=10 k=4 claim>=7 got=7 OK
+gen n=10 k=5 claim>=8 got=8 OK
+gen n=11 k=1 claim>=0 got=5 OK
+gen n=11 k=2 claim>=5 got=5 OK
+gen n=11 k=3 claim>=7 got=7 OK
+gen n=11 k=4 claim>=8 got=8 OK
+gen n=11 k=5 claim>=8 got=8 OK
+gen n=12 k=1 claim>=0 got=6 OK
+gen n=12 k=2 claim>=6 got=6 OK
+gen n=12 k=3 claim>=8 got=8 OK
+gen n=12 k=4 claim>=9 got=9 OK
+gen n=12 k=5 claim>=9 got=9 OK
+gen n=13 k=1 claim>=0 got=6 OK
+gen n=13 k=2 claim>=6 got=6 OK
+gen n=13 k=3 claim>=8 got=8 OK
+gen n=13 k=4 claim>=9 got=9 OK
+gen n=13 k=5 claim>=10 got=10 OK
+gen n=30 k=1 claim>=0 got=15 OK
+gen n=30 k=2 claim>=15 got=15 OK
+gen n=30 k=3 claim>=20 got=20 OK
+gen n=30 k=4 claim>=22 got=22 OK
+gen n=30 k=5 claim>=24 got=24 OK
+gen n=60 k=1 claim>=0 got=30 OK
+gen n=60 k=2 claim>=30 got=30 OK
+gen n=60 k=3 claim>=40 got=40 OK
+gen n=60 k=4 claim>=45 got=45 OK
+gen n=60 k=5 claim>=48 got=48 OK
+--- search witnesses (wit/w_n_k_Tt.txt must be LEGAL with first completion > t)
+search-witness files OK 192
+--- must-fail tests
+n=5 k=3 ILLEGAL: round 2 repeats a link of round 1 first_completion=None
+n=5 k=3 ILLEGAL: round 1 destroys 4 > k first_completion=None
+n=9 k=3 LEGAL first_completion=6
+EXPECTED 7: MISMATCH
+exit=1 (expected 1: g_9_3 completes at 6, not 7)

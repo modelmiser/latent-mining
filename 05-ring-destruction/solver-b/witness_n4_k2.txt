@@ -1,0 +1,3 @@
+# n=4 k=2 F=2 ; each line: round t, then destroyed links as src>dst
+1 2>1 3>2
+2 3>0 0>3

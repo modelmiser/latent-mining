@@ -1,0 +1,25 @@
+## 1. KNOWN
+
+The question as given looks well-posed but, I believe, easy: its own upper bound 2*floor(n/2) is attained. Pick one process s; in every odd round destroy the two links its information is about to cross (one clockwise, one counter-clockwise), and destroy nothing in even rounds. The frontier links change after each advance, so the rule "no link twice in a row" is respected, and s's input travels at half speed in both directions, reaching the antipode at round 2*floor(n/2). So T(n) = 2*floor(n/2), unchanged by budget 3 (not verified by computation). General background: dynamic-network flooding under interval connectivity (Kuhn, Lynch, Oshman) gives n-1 type bounds; whether this exact adversary appears there: unsure. The claim that T(n) equals the round complexity of counting is plausible (known n, orientation, unbounded messages) but unchecked.
+
+## 2. SUCCESSOR QUESTION
+
+The first to know everything. Let n >= 3 and let the processes be the elements of Z_n, arranged on a ring. There are 2n directed links: (i -> i+1), called clockwise, and (i -> i-1), called counter-clockwise, for each i. Time proceeds in synchronous rounds t = 1, 2, ... In every round every process sends, on each of its two outgoing links, everything it has learned so far (processes are identical and deterministic, so there is no protocol to choose; the only player is the adversary).
+
+The adversary sees the whole configuration and chooses, in each round t, a set D_t of links whose messages are destroyed in that round, subject to two rules: |D_t| <= 2, and D_t is disjoint from D_{t-1} (D_0 is empty). So at most two links are silenced per round and no link is silenced in two consecutive rounds. The adversary may choose D_t knowing everything that happened in rounds 1..t-1; since nothing is random or hidden, a strategy is just a legal sequence D_1, D_2, ...
+
+Influence sets: K_0(i) = {i}; K_t(i) is the union of K_{t-1}(i) with K_{t-1}(j) for each neighbour j of i (j = i-1 or i+1) such that the link (j -> i) is not in D_t. Call process i complete at round t if K_t(i) = Z_n.
+
+Define F(n) as the maximum, over all legal sequences D_1, D_2, ..., of the least t at which AT LEAST ONE process is complete. (F(n) is finite and the search is finite: every link delivers at least every second round, so every process is complete by round 2*floor(n/2); hence only sequences of that length matter, and a configuration is fully described by the n sets K_t(i), each an arc of the ring containing i, together with D_t. With no destruction the first completion is at round floor(n/2), so floor(n/2) <= F(n) <= 2*floor(n/2).)
+
+Note that slowing a single input does not suffice: an adversary that halves the speed of one process's information delays the far processes but not the near ones, so the adversary must hinder all n processes at once with two destructions per round. Destroying a link holds back every piece of information currently waiting to cross it, so delayed information can pile up into slow convoys.
+
+Determine F(n) exactly for every n from 3 to 10. Give a closed formula for F(n) valid for all n >= 3 (in particular the value of lim F(n)/n, if it exists), and describe an adversary strategy attaining it.
+
+## 3. WHY IT IS PROBABLY UNCHARTED
+
+Dynamic-network literature studies the last process to finish (flooding time, counting); the earliest finisher under a budgeted, non-repeating link adversary is an odd objective I have not seen. The single-victim trick that kills the original fails here: two half-speed sources placed antipodally still leave a process finishing near n/2, so the answer depends on how convoys of delayed information interact. Doubts: F(n) may turn out to be floor(n/2) plus a small constant, which would make the formula dull; and a result on "broadcast time of the fastest node" in evolving graphs may exist under another name.
+
+## 4. HOW TO CHECK AN ANSWER
+
+Exhaustive search: state = (the n arcs K_t(i), D_t), reduced by rotation and reflection; moves = all link sets of size <= 2 disjoint from D_t; depth <= 2*floor(n/2). Memoised depth-first maximisation of the first-completion round gives F(n) for n = 3..10 (sanity: F(3) = 1, since two destructions cannot hit all three processes in round 1). A claimed formula must match these values; a claimed strategy is checked by simulating it; a claimed upper bound needs a proof, e.g. a potential argument over total arc length.

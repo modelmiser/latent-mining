@@ -1,0 +1,4 @@
+n=11 k=4 T=8 prune=2 : NO nodes=908087 memo=449
+rc=0 11 4 8
+n=12 k=4 T=9 prune=2 : NO nodes=3170875357 memo=1727666
+rc=0 12 4 9

@@ -1,0 +1,1 @@
+strat {'strat_A_ok': 884, 'plays': 988, 'strat_B_ok': 884, 'prefixes': 16170, 'B_U_applicable': 3592, 'A_U_applicable': 3592}

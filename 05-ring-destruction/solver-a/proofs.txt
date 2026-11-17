@@ -1,0 +1,143 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. L0: the auxiliary inequality b_{i+1}(s) <= b_i(s-1)+1 is argued with b_i(s-2), which does not exist at
+     s = 1. That case is immediate: b_{i+1}(1) is 0 or 1 and b_i(0) = 0.
+ N2. Theorem L's construction needs k >= 2 (with k = 1 the bound n - ceil(n/1) = 0 is trivial).
+ N3. Theorem U: "H < n" is asserted, not proved, and is false for very large t. It is not needed: distinct
+     positions on one diagonal have distinct f-values in [1, h_c] and |P_A| = sum of h_c without it.
+ N4. Corollary, t0 odd: "For k >= 4 true as above" should read (k-3)q + 1 >= 2k - 5 >= k - 1 >= r.
+ N5. Section 3, n even: "Take x with f(x) = y >= 2" assumes some position has f > 0; if none has, every
+     position has g > 0 and the mirror argument applies.
+ N6. Section 4 is headed NOT PROVED, but its text does prove F(n,k) = n for even n and k >= 2n (all links on
+     odd rounds, with the cap 2*floor(n/2) from the problem statement).
+ Found by the referee and the review panel (five seats, four model families).
+------------------------------------------------------------------------------------------------
+PROOFS (solver-a).  Status tags: COMPLETE = every step written here; nothing below is a sketch unless tagged SKETCH.
+
+MAIN RESULT.  For all n > k >= 3:   F(n,k) = n - ceil(n/k) = floor(n(k-1)/k).
+              For k = 1, 2 and all n >= 3:  F(n,k) = floor(n/2).
+              Hence c(k) = lim F(n,k)/n exists and equals 1 - 1/k for every k >= 2 (c(1) = 1/2).
+              c(3) = 2/3, c(4) = 3/4.
+
+------------------------------------------------------------------------------------------------
+0. MODEL LEMMAS  (COMPLETE)
+
+Links: "A-link into i" = (i+1 -> i), "B-link into i" = (i-1 -> i).
+Define a_i(0)=b_i(0)=0 and
+   a_i(t) = max(a_i(t-1), a_{i+1}(t-1)+1)  if the A-link into i is not in D_t, else a_i(t-1);
+   b_i(t) = max(b_i(t-1), b_{i-1}(t-1)+1)  if the B-link into i is not in D_t, else b_i(t-1).
+
+L0 (arcs).  K_t(i) = { i-b_i(t), ..., i+a_i(t) } mod n.  So i is complete at t  iff  a_i(t)+b_i(t) >= n-1.
+ Proof. Induction on t. First, b_{i+1}(s) <= b_i(s-1)+1 for all s>=1 (induction on s:
+ b_{i+1}(s) <= max(b_{i+1}(s-1), b_i(s-1)+1) <= max(b_i(s-2)+1, b_i(s-1)+1) = b_i(s-1)+1), symmetric for a.
+ If the A-link into i delivers, K_t(i) gains K_{t-1}(i+1) = {i+1-b_{i+1}(t-1),...,i+1+a_{i+1}(t-1)}; its right
+ end is i + (a_{i+1}(t-1)+1); its left end is not left of i - b_i(t-2) >= i - b_i(t-1) by the inequality just
+ shown (for t=1 it is {i+1}), and it contains i+1, so the union with the arc K_{t-1}(i) is the arc with
+ extents (b_i(t-1), max(a_i(t-1), a_{i+1}(t-1)+1)). Same for the B-link. QED
+
+Delays: d_i(t) = t - a_i(t), e_i(t) = t - b_i(t)  (>= 0).  "Survive t" := no process complete at round t
+ (equivalently at any round <= t, since K only grows)  iff
+        d_i(t) + e_i(t) >= D := 2t - n + 2   for every i.                                  (*)
+ F(n,k) = 1 + max{ t : some legal sequence survives t }.
+
+Pieces.  A-piece p in Z_n has value v_p(t) := d_{p-t}(t)  (it sits at position p-t at time t; A-pieces drift
+ left one step per round).  B-piece q has value u_q(t) := e_{q+t}(t).  Rewriting the recursion:
+   no destruction of the A-link into position p-t in round t:  v_p(t) = min(v_p(t-1), v_{p-1}(t-1)+1)
+   destruction ("an event on piece p"):                         v_p(t) = v_{p-1}(t-1)+1
+
+L1.  For all t,p:  v_p(t) <= v_{p-1}(t)+1;  v_p(t) >= v_p(t-1);  without an event v_p(t) = v_p(t-1);
+     with an event v_p(t) = v_{p-1}(t-1)+1 >= v_p(t-1).
+ Proof. Induction on t; I(t): v_p(t) <= v_{p-1}(t)+1. Given I(t-1): no event => min(...) = v_p(t-1);
+ event => v_{p-1}(t-1)+1 >= v_p(t-1). So v is non-decreasing in t, and in both cases
+ v_p(t) <= v_{p-1}(t-1)+1 <= v_{p-1}(t)+1, which is I(t). QED
+
+L2 (the link rule).  An event on A-piece p in round t and an event on A-piece p-1 in round t-1 hit the same
+ link (the A-link into position p-t), so they cannot both occur.  Same for B (pieces q and q+1).
+
+Pairs.  P_A = set of (p,y), y>=1, such that v_p(s)=y for some s<=t; P_B likewise.
+L3. (i) |P_A|+|P_B| <= (number of destructions in rounds 1..t) <= k t.   [a value changes only by an event,
+        and one event creates at most one new pair]
+    (ii) closure: (p,y) in P_A, y>=2  =>  (p-1,y-1) in P_A.   [the event that first gave p the value y had
+        v_{p-1} = y-1 one round earlier]
+    (iii) a pair with value y is first created in a round >= 2y-1.  [induction on y: by (ii) the pair
+        (p-1,y-1) existed in the round before the creating event, and by L2 it was not created in that very
+        round, so it was created at least two rounds earlier]
+    Consequently all values at time t are <= H := floor((t+1)/2), and if t is odd, pairs of value H are
+    created only in round t, so there are at most k of them (A and B together).
+
+------------------------------------------------------------------------------------------------
+1. THEOREM L (lower bound; COMPLETE).   F(n,k) >= n - ceil(n/m),  m = min(k,n).   (strategy = gen.py)
+
+ delta := ceil(n/m), T := n - delta - 1.  Choose P_1..P_m in Z_n with all cyclic gaps <= delta, Q_c := P_c - T.
+   odd round 2j-1 (j>=1): destroy the A-link into position P_c - j, for every c;
+   even round 2j:         destroy the B-link into position Q_c + j, for every c.
+ Legal: <= m <= k links per round; consecutive rounds use disjoint link types (A vs B).
+ A-chain c: its j-th event is on piece (P_c - j)+(2j-1) = P_c + j - 1 and, by L1 and induction on j, gives it
+ value >= j (the previous piece P_c+j-2 has value >= j-1 from round 2j-3 on). Values never drop (L1). So at
+ time t, with J = ceil(t/2), for 1<=j<=J:  d at position P_c + j - 1 - t is >= j; i.e. with the "A-top"
+ alpha_c := P_c + J - 1 - t:   d_x(t) >= J - (alpha_c - x)  whenever 0 <= alpha_c - x (cyclic distance to the
+ right) <= J-1; trivially also when the distance is larger (right side <= 0).
+ Symmetrically with J' = floor(t/2) and "B-top" beta_c := Q_c - J' + t:  e_x(t) >= J' - (x - beta_c).
+ At t = T: beta_c - alpha_c = Q_c - P_c + 1 + T = 1.  Every position x lies in exactly one cyclic interval
+ [beta_c, alpha_{c'}] where c' is the next chain to the right (alpha_{c'} - alpha_c <= delta), so
+   d_x(T) + e_x(T) >= J + J' - (alpha_{c'} - beta_c) >= T - (delta - 1) = 2T - n + 2 = D.
+ By (*) the sequence survives T, so F >= T+1 = n - delta. QED
+ (Machine check: sweep.py runs this strategy through the definition-level simulator check.py.)
+
+------------------------------------------------------------------------------------------------
+2. THEOREM U (upper bound; COMPLETE).
+
+ Suppose a legal sequence survives t.  Put f(x) = d_x(t), g(x) = e_x(t), D' = D-1 = 2t-n+1.  Assume D' >= H.
+ Then f(x) >= D - g(x) >= D - H >= 1 for every x, same for g.
+
+ Diagonals. For c in Z_n let h_c := max{ y : (c+y, y) in P_A } (0 if none).  By closure, P_A is exactly the
+ set of (c+y,y) with 1<=y<=h_c, so |P_A| = sum_c h_c.  (H < n, so (p,y) <-> (p-y, y) is a bijection.)
+ Position x belongs to diagonal c(x) = x + t - f(x); let X_c = {x : c(x)=c}, delta_c = |X_c|.  Since f>=1
+ everywhere, sum_c delta_c = n.  Distinct x in X_c have distinct f-values, all in [1,h_c], so the position
+ x*_c of X_c with least f has f(x*_c) <= h_c - delta_c + 1, hence by (*) g(x*_c) >= D - h_c + delta_c - 1:
+        delta_c <= g(x*_c) + h_c - D'.                                                      (1)
+ The same holds for B-diagonals with f,g exchanged.
+
+ Case t even (H = t/2).  s := D'-H >= 0, w := 2H-D' = n-t-1.  From (1): delta_c <= h_c - s and delta_c <= w.
+ If w <= 0 this is impossible.  Otherwise the number m_A of non-empty X_c is >= ceil(n/w), and
+ n = sum delta_c <= |P_A| - s m_A.  Same for B.  With L3(i):
+        k t >= 2n + 2 s ceil(n/w).                                                          (E)
+
+ Case t odd (H1 = (t-1)/2, H = H1+1).  s := D'-H1 >= 1, w := 2H1-D' = n-t-2.
+ Let eps_c = [h_c = H], beta_c = [g(x*_c) = H].  (1) gives delta_c <= h_c - s + beta_c and
+ delta_c <= w + eps_c + beta_c.  Sum over all non-empty diagonals of both directions (m of them):
+        2n <= |P_A|+|P_B| - s m + B,      2n <= w m + E + B,
+ where E = sum eps = number of pairs of value H (<= k by L3) and B = sum beta <= E (the x*_c of distinct
+ A-diagonals are distinct positions, each carrying a distinct B-pair of value H, and vice versa).
+ If w <= 0: 2n <= E+B <= 2k, impossible when n > k.  If w >= 1: m >= (2n-E-B)/w, and
+        k t >= 2n - B + s * ceil((2n-E-B)/w)   for some 0 <= B <= E <= k.                    (O)
+
+ ub2.py evaluates exactly "D' >= H and ((E) resp. (O) fails)" => no sequence survives t.
+
+ COROLLARY (n > k >= 3):  no sequence survives t0 := n - q, q := ceil(n/k);  so F(n,k) <= n - ceil(n/k).
+ Write n = kq - r, 0 <= r <= k-1; q >= 2 because n > k.
+  t0 even:  s = (n-3q+2)/2 = ((k-3)q + 2 - r)/2 >= 0  (k=3: r<=2; k>=4: (k-3)q+2 >= 2k-4 >= k-1).  w = q-1 >= 1,
+   n = k(q-1) + (k-r) so ceil(n/w) >= k+1.  (E) would need k(n-q) >= 2n + (n-3q+2)(k+1), i.e.
+   0 >= 3n - 2kq - 3q + 2k + 2 = q(k-3) + 2k + 2 - 3r >= (q-1)(k-3) + 2 > 0.  Contradiction.
+  t0 odd:  D' >= H  <=>  3 t0 >= 2n-1  <=>  (k-3)q + 1 >= r.  For k>=4 true as above.  For k=3 it fails only
+   for r=2, but then t0 = 2q-2 is even, so the odd case does not arise.  s = (n-3q+3)/2 >= 1, w = q-2.
+   q=2: w=0, impossible as n>k.  q>=3: right side of (O) is smallest at B=E=k; 2n-2k = 2k(q-2) + 2(k-r)
+   > 2k w, so the ceiling is >= 2k+1, and (O) would need 2k(n-q) >= 4n - 2k + (n-3q+3)(2k+1), i.e.
+   0 >= 5n - 4kq - 3q + 4k + 3 = q(k-3) + 4k + 3 - 5r.  For k>=4: >= 3(k-3) - k + 8 > 0.  For k=3 (r<=1): > 0.
+   Contradiction. QED
+ Together with Theorem L:  F(n,k) = n - ceil(n/k) for all n > k >= 3, so F(n,k)/n -> 1 - 1/k.
+
+------------------------------------------------------------------------------------------------
+3. k = 1, 2  (COMPLETE).   F(n,1) = F(n,2) = floor(n/2).
+ >= : a_i(t)+b_i(t) <= 2t, so nobody is complete while 2t < n-1.
+ <= , n odd, t=(n-1)/2: D=1, every position needs f>=1 or g>=1, i.e. n distinct pieces with a pair each,
+      but |P| <= 2t = n-1.
+ <= , n even, t=n/2: D=2, |P| <= n.  Each position has a positive f or g, so |P| >= n with equality only if
+      every position has exactly one of f,g positive (then that one is >= 2) and every positive piece has
+      exactly one pair.  Take x with f(x)=y>=2: closure puts (p-1,y-1) in P_A, so f(x-1) = y-1 is that piece's
+      only pair and must be >= 2; repeating, some position gets value 1.  Contradiction. QED
+
+------------------------------------------------------------------------------------------------
+4. NOT PROVED.  The range k >= n.  Data (exhaustive, n<=8, k<=8): F = n-1 for n <= k < 2n; and F(n,k)=n for even
+ n, k >= 2n (all links on odd rounds; upper bound is the statement's 2*floor(n/2)).  Theorem L gives >= n-1
+ for k >= n; for odd n that equals the trivial cap, so F(n,k)=n-1 is proved for odd n, k>=n.  For even n and
+ n <= k < 2n the value n-1 is only COMPUTED (n = 4, 6, 8).

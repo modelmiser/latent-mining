@@ -1,0 +1,14 @@
+F(n,k), exhaustive search (decide.cpp; cross-checked: slow.py n<=6, fast.cpp n<=9 [n=9: k<=4], decide prune=0 n<=8)
+n\k   1  2  3  4
+ 3    1  1  2  2
+ 4    2  2  2  3
+ 5    2  2  3  3
+ 6    3  3  4  4
+ 7    3  3  4  5
+ 8    4  4  5  6
+ 9    4  4  6  6
+10    5  5  6  7
+11    5  5  7  8*      (* not by search: search timed out at 1500 s; value follows from Theorem L + Theorem U)
+Larger k, exhaustive (bigk.log): F(n,k) for k=5..2n
+ 3: 2 2 | 4: 3 3 3 4 | 5: 4 4 4 4 4 4 | 6: 4 5 5 5 5 5 5 6 | 7: 5 5 6 6 6 6 6 6 6 6 | 8: 6 6 6 7 7 7 7 7 7 7 7 8
+Every entry with 3<=k<=n equals n-ceil(n/k); every entry with k<=2 equals floor(n/2).

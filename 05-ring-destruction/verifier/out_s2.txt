@@ -1,0 +1,30 @@
+n=10 k=1 survive round 5: NO (deepest layer 4)
+  [0.01s 3848kB]
+  exit 0 for 10 1 T=5
+n=10 k=2 survive round 5: NO (deepest layer 4)
+  [18.04s 87632kB]
+  exit 0 for 10 2 T=5
+n=11 k=1 survive round 5: NO (deepest layer 4)
+  [0.02s 3868kB]
+  exit 0 for 11 1 T=5
+n=11 k=2 survive round 5: NO (deepest layer 4)
+  [45.51s 172356kB]
+  exit 0 for 11 2 T=5
+n=11 k=3 survive round 7: NO (deepest layer 2)
+  [3.44s 9060kB]
+  exit 0 for 11 3 T=7
+n=12 k=3 survive round 8: NO (deepest layer 3)
+  [695.89s 1083460kB]
+  exit 0 for 12 3 T=8
+n=9 k=3 survive round 5: YES (deepest layer 5)
+  [1.99s 12820kB]
+  exit 0 for 9 3 T=5
+n=9 k=4 survive round 5: YES (deepest layer 5)
+  [364.41s 1102208kB]
+  exit 0 for 9 4 T=5
+Command exited with non-zero status 124
+  [1500.22s 4382180kB]
+  exit 124 for 10 3 T=5
+n=10 k=4 survive round 6: YES (deepest layer 6)
+  [1215.43s 1532824kB]
+  exit 0 for 10 4 T=6

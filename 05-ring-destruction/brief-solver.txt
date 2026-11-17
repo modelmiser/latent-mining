@@ -1,0 +1,55 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+First to know everything, with a destruction budget k.
+
+Setting. Let n >= 3 and k >= 1 be integers. Processes are the elements of Z_n on a ring. There are 2n directed links: (i -> i+1) and (i -> i-1) for each i. Time runs in synchronous rounds t = 1, 2, ... In every round every process sends everything it knows on both outgoing links; there is no protocol to choose.
+
+Adversary. The only player. It has full information and picks, in each round t, a set D_t of links whose messages are destroyed in round t, subject to: |D_t| <= k, and D_t is disjoint from D_{t-1} (D_0 is empty). Nothing is random or hidden, so a strategy is a legal sequence D_1, D_2, ...
+
+Knowledge. K_0(i) = {i}. K_t(i) is the union of K_{t-1}(i) and of K_{t-1}(j) for each j in {i-1, i+1} with (j -> i) not in D_t. Process i is complete at round t if K_t(i) = Z_n.
+
+Value. F(n,k) is the maximum, over legal sequences, of the least t at which at least one process is complete. Since no link fails twice in a row, floor(n/2) <= F(n,k) <= 2*floor(n/2), and F is non-decreasing in k.
+
+Tasks.
+(a) Compute F(n,k) for all 3 <= n <= 10 and 1 <= k <= 4.
+(b) HEADLINE: for each fixed integer k >= 3, find the exact value of c(k) = lim_{n -> infinity} F(n,k)/n (prove the limit exists), as a closed formula in k, with an adversary strategy attaining it and a matching upper-bound proof. The first open case is k = 3: find c(3) exactly.
+
+UNVERIFIED beliefs.
+- F(n,1) = F(n,2) = floor(n/2) for all n (counting argument: by the deadline floor(n/2) the adversary has made at most n, resp. n-1 for odd n, destructions, each of which gives one lasting unit of delay to one (process, direction) pair, and that is too few to delay every process).
+- F(n,2n) = 2*floor(n/2) (destroy every link in every odd round), and k = n already gives about n.
+- F(5,3) = 3 > floor(5/2), so k = 3 is the least budget that ever delays the first completion.
+- c(4) >= 5/8, via "ramps": a destruction that tracks information moving at speed one stacks delay, so j successive tracked destructions build delays 1, 2, ..., j on j consecutive pieces of information; opposing clockwise and counter-clockwise ramps give every process the same total delay.
+- 1/2 < c(3) < c(4) < 1, and c(k) -> 1 as k -> infinity.
+
+GUESS (one sentence): I would bet c(4) = 5/8 exactly and c(k) = 1 - O(1/k), because the rule against hitting the same link twice in a row halves the growth rate of every ramp and I see no way around that.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

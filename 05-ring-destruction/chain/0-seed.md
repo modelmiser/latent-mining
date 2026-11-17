@@ -1,0 +1,3 @@
+# Seed
+
+n identical deterministic processes sit on a ring. Each starts with one input bit and knows n but has no name and no sense of which neighbour is which beyond a consistent left and right. They run in synchronous rounds; in each round every process sends one message to each neighbour. An adversary who sees everything destroys up to f messages in every round. Which functions of the inputs (OR, parity, majority, the exact count of ones) can every process eventually output correctly, and in how many rounds, as a function of n and f? Where is the threshold in f at which each function becomes impossible, and what does the adversary do there?

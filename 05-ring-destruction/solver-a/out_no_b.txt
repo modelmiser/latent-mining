@@ -1,0 +1,6 @@
+n=12 k=3 T=8 prune=2 : NO nodes=2326 memo=1
+done 12 3 8
+out of range
+done 13 3 8
+out of range
+done 13 4 9

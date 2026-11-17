@@ -1,0 +1,43 @@
+solver-b/witness_n3_k1.txt len 1 first completion 1
+solver-b/witness_n3_k2.txt len 1 first completion 1
+solver-b/witness_n3_k3.txt len 2 first completion 2
+solver-b/witness_n3_k4.txt len 2 first completion 2
+solver-b/witness_n4_k1.txt len 2 first completion 2
+solver-b/witness_n4_k2.txt len 2 first completion 2
+solver-b/witness_n4_k3.txt len 2 first completion 2
+solver-b/witness_n4_k4.txt len 3 first completion 3
+solver-b/witness_n5_k1.txt len 2 first completion 2
+solver-b/witness_n5_k2.txt len 2 first completion 2
+solver-b/witness_n5_k3.txt len 3 first completion 3
+solver-b/witness_n5_k4.txt len 3 first completion 3
+solver-b/witness_n6_k1.txt len 3 first completion 3
+solver-b/witness_n6_k2.txt len 3 first completion 3
+solver-b/witness_n6_k3.txt len 4 first completion 4
+solver-b/witness_n6_k4.txt len 4 first completion 4
+solver-b/witness_n7_k1.txt len 3 first completion 3
+solver-b/witness_n7_k2.txt len 3 first completion 3
+solver-b/witness_n7_k3.txt len 4 first completion 4
+solver-b/witness_n7_k4.txt len 5 first completion 5
+solver-b/witness_n8_k1.txt len 4 first completion 4
+solver-b/witness_n8_k2.txt len 4 first completion 4
+solver-b/witness_n8_k3.txt len 5 first completion 5
+solver-b/witness_n8_k4.txt len 6 first completion 6
+solver-b/witness_n9_k1.txt len 4 first completion 4
+solver-b/witness_n9_k2.txt len 4 first completion 4
+solver-b/witness_n9_k3.txt len 6 first completion 6
+solver-b/witness_n9_k4.txt len 6 first completion 6
+best first-completion shown by any witness file, per (n,k):
+ n=3: k1=1 k2=1 k3=2 k4=2 k5=2 k6=2 k7=2 k8=2
+ n=4: k1=2 k2=2 k3=2 k4=3 k5=3 k6=3 k7=3 k8=4
+ n=5: k1=2 k2=2 k3=3 k4=3 k5=4 k6=4 k7=4 k8=4 k9=4 k10=4
+ n=6: k1=3 k2=3 k3=4 k4=4 k5=4 k6=5 k7=5 k8=5 k9=5 k10=5 k11=5 k12=6
+ n=7: k1=3 k2=3 k3=4 k4=5 k5=5 k6=5 k7=6 k8=6 k9=6 k10=6 k11=6 k12=6 k13=6 k14=6
+ n=8: k1=4 k2=4 k3=5 k4=6 k5=6 k6=6 k7=6 k8=7 k9=7 k10=7 k11=7 k12=7 k13=7 k14=7 k15=7 k16=8
+ n=9: k1=4 k2=4 k3=6 k4=6 k5=7
+ n=10: k1=5 k2=5 k3=6 k4=7 k5=8
+ n=11: k1=5 k2=5 k3=7 k4=8 k5=8
+ n=12: k1=6 k2=6 k3=8 k4=9 k5=9
+ n=13: k1=6 k2=6 k3=8 k4=9 k5=10
+ n=30: k1=15 k2=15 k3=20 k4=22 k5=24
+ n=60: k1=30 k2=30 k3=40 k4=45 k5=48
+files {'files': 367, 'prefixes': 1260, 'plays': 367, 'B_U_applicable': 141, 'A_U_applicable': 141}

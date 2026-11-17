@@ -1,0 +1,10 @@
+F(8,3)=5 prune=1
+F(8,4)=6 prune=1
+F(9,1)=4 prune=1
+F(9,2)=4 prune=1
+F(9,3)=6 prune=1
+F(9,4)=6 prune=1
+F(10,1)=5 prune=1
+F(10,2)=5 prune=1
+F(10,3)=6 prune=1
+F(10,4)=7 prune=1
