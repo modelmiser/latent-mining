@@ -1,3 +1,11 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. T3(i): "x sorted is the case c=0" does not cover x = 1^m, which has no 0. That case is immediate: every
+     comparator fixes 1^m; with y=0 the new 0 climbs to wire 1. Likewise (iii) on a sorted vector does nothing.
+ N2. L1 uses s_0 = 0 without saying so. Consequence (d) is shown on 0-1 inputs; it extends to all inputs by L0.
+ N3. T2: the q_v are distinct because at the moment q_v acts its two wires hold exactly the values v and v+1.
+ N4. T3, last paragraph: "before it the state is sorted on wires 1..k" means before the block D_k.
+ Found by the referee (N1) and the review panel.
+----------------------------------------------------------------------------------------------------
 PROOFS (solver-a).  Status of each item is stated.  Notation: wires 1..n top to bottom, c_i sorts
 wires i,i+1 (smaller on top).  A letter is ACTIVE on a run if it exchanges two values, IDLE otherwise.
 "Deletion-proof": w sorts and w with any one letter removed sorts.  A(n) = least size of such a word.

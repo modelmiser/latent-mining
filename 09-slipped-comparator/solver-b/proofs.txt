@@ -1,3 +1,16 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. L2(c) IS FALSE AS STATED, so L2 is not a complete proof. Counterexample (review panel, Grok seat; checked by
+     hand): wires 1..5 = 1 4 5 2 6 is 2-low; I_6 with y = 3 on wire 6 gives 1 2 4 5 3 6, which is neither sorted
+     nor 2-low. It is 3-low: the misplaced entry can change. In the case y > x the text assumes y stops below x
+     and x then reaches its place leaving everything increasing; that fails when y is smaller than entries
+     between x's place and x. Statement (d) needs only "x-low for some x", so a repaired (c) would suffice, but
+     no repair is given here. The upper bound is proved in solver-a/proofs.txt T3.
+ N2. The header cites "slow.py 4 9 up" for the base case u(4) = 9; no output of that run was saved. Saved
+     evidence: runup.txt (fast, reversed input) and ../verifier/out_lemmas.txt (the referee's brute force).
+ N3. "n = 3..6" for the equality of word counts should read n = 3..7 (run7dom.txt).
+ N4. L1 writes "v c u x" for the word u c v applied to x. L5 can be anchored at A(2) = 2; it also uses, without
+     saying so, that deleting a wasted letter leaves the reduced word unchanged.
+----------------------------------------------------------------------------------------------------
 PROOFS (solver-b).  N = n(n-1)/2.  Words are applied left to right. I_k = c_{k-1} c_{k-2} ... c_1.
 
 THEOREM. S(n) = N + n - 1 for every n >= 3 (D(n) = n-1). Also A(n) = N + n - 1 for n >= 2.
