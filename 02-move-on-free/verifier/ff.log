@@ -1,0 +1,35 @@
+ M hO hN | L1=3(K+t)-2 (5M-14)/3 | U1=ceil(5M/3) | L2=ceil((7M-17)/4) | 3M-6 | 43M/18+12
+ 3  4  4 |  1   0.33 |  5 |  1 |  4 |  19.17  OK
+ 4  6  6 |  4   2.00 |  7 |  3 |  6 |  21.56  OK
+ 5  7  7 |  7   3.67 |  9 |  5 |  9 |  23.94  OK
+ 6  9  9 |  7   5.33 | 10 |  7 | 12 |  26.33  OK
+ 7 11 11 | 10   7.00 | 12 |  8 | 15 |  28.72  OK
+ 8 13 13 | 10   8.67 | 14 | 10 | 18 |  31.11  OK
+ 9 14 14 | 13  10.33 | 15 | 12 | 21 |  33.50  OK
+10 16 16 | 16  12.00 | 17 | 14 | 24 |  35.89  OK
+11 18 18 | 16  13.67 | 19 | 15 | 27 |  38.28  OK
+12 20 20 | 16  15.33 | 20 | 17 | 30 |  40.67  OK
+13 21 22 | 19  17.00 | 22 | 19 | 33 |  43.06  OK
+FF game O M=3 reachable=16 max extent=4  ceil(5M/3)=5  OK
+FF game O M=4 reachable=56 max extent=6  ceil(5M/3)=7  OK
+FF game O M=5 reachable=178 max extent=8  ceil(5M/3)=9  OK
+FF game O M=6 reachable=539 max extent=10  ceil(5M/3)=10  OK
+FF game O M=7 reachable=1622 max extent=12  ceil(5M/3)=12  OK
+FF game O M=8 reachable=4801 max extent=14  ceil(5M/3)=14  OK
+FF game O M=9 reachable=14101 max extent=15  ceil(5M/3)=15  OK
+FF game O M=10 reachable=41062 max extent=17  ceil(5M/3)=17  OK
+FF game O M=11 reachable=118908 max extent=19  ceil(5M/3)=19  OK
+FF game N M=3 reachable=16 max extent=4  ceil(5M/3)=5
+FF game N M=4 reachable=56 max extent=6  ceil(5M/3)=7
+FF game N M=5 reachable=178 max extent=8  ceil(5M/3)=9
+FF game N M=6 reachable=611 max extent=10  ceil(5M/3)=10
+FF game N M=7 reachable=2360 max extent=13  ceil(5M/3)=12
+FF game N M=8 reachable=8157 max extent=15  ceil(5M/3)=14
+FF game N M=9 reachable=30481 max extent=17  ceil(5M/3)=15
+FF game N M=10 reachable=115433 max extent=19  ceil(5M/3)=17
+FF game N M=11 reachable=446162 max extent=21  ceil(5M/3)=19
+hexad M=6: worst extent seen=18  bound 43M/18+12=26.3  OK
+hexad M=13: worst extent seen=36  bound 43M/18+12=43.1  OK
+hexad M=24: worst extent seen=54  bound 43M/18+12=69.3  OK
+hexad M=60: worst extent seen=108  bound 43M/18+12=155.3  OK
+hexad M=120: worst extent seen=174  bound 43M/18+12=298.7  OK

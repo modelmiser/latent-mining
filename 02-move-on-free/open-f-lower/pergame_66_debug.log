@@ -1,0 +1,10 @@
+  ==> periodic game value (max over 495 S of min over placements): slope=0.7500   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)
+    DEBUG 1.11.1...1.11.1.22. tail=1 slope=0.7500 advF=0 tf=0 W1=36 W2=72
+    DEBUG 1.11.1...1.11.122.. tail=1 slope=0.7500 advF=0 tf=0 W1=36 W2=72
+    DEBUG 1.11.1...1.11.1.... tail=2 slope=0.7500 advF=0 tf=1 W1=34 W2=70
+    DEBUG 1.11.1.221.11.122.. tail=0 slope=0.7500 advF=0 tf=0 W1=36 W2=72
+    DEBUG 1.11.122.1.11.1.22. tail=0 slope=0.7500 advF=0 tf=0 W1=36 W2=72
+    DEBUG 1.11.1.221.11.1.... tail=1 slope=0.7500 advF=0 tf=0 W1=36 W2=72
+    DEBUG 1.11.122.1.11.1.... tail=1 slope=0.7500 advF=0 tf=0 W1=36 W2=72
+    DEBUG 1.11.122.1.11.122.. tail=0 slope=0.8333 advF=0 tf=0 W1=39 W2=79
+    DEBUG 1.11.1.221.11.1.22. tail=0 slope=0.8333 advF=0 tf=0 W1=40 W2=80

@@ -1,0 +1,6 @@
+home=[3] super-period: 3 ones on 6 cells; span/M=2.000
+  slope dW/dM=0.6667 (2/3)  kept=3 y=0  best manager placement: 111... tail=0  adv F=0 tailfree=0  W(R1)=8 W(R2)=16
+  slope dW/dM=0.3333 (1/3)  kept=1 y=1  best manager placement: 221... tail=0  adv F=0 tailfree=0  W(R1)=3 W(R2)=7
+  slope dW/dM=0.3333 (1/3)  kept=1 y=1  best manager placement: .122.. tail=0  adv F=0 tailfree=0  W(R1)=5 W(R2)=9
+  slope dW/dM=0.3333 (1/3)  kept=1 y=1  best manager placement: 122... tail=0  adv F=0 tailfree=0  W(R1)=4 W(R2)=8
+  ==> periodic game value (max over S of min over placements): slope=0.6667  vs 2/3=0.6667

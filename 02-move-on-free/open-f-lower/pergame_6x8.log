@@ -1,0 +1,7 @@
+home=6,6,6,6,6,6,6,6 super-period: 48 ones on 72 cells; span/M=1.500; R1=4 R2=8
+    new best 0.7500 after 1/6561 placements: 1.11.1...1.11.1...1.11.1...1.11.1...1.11.1...1.11.1...1.11.1...1.11.1.... tail=8 advF=0 tf=1
+    new best 0.7396 after 2/6561 placements: 1.11.122.1.11.1...1.11.1...1.11.1...1.11.1...1.11.1...1.11.1...1.11.1.... tail=7 advF=0 tf=1
+    new best 0.7292 after 3/6561 placements: 1.11.122.1.11.122.1.11.1...1.11.1...1.11.1...1.11.1...1.11.1...1.11.1.... tail=6 advF=0 tf=1
+    new best 0.7188 after 247/6561 placements: 1.11.122.1.11.122.1.11.1.221.11.1...1.11.1...1.11.1...1.11.1...1.11.1.... tail=5 advF=0 tf=1
+    new best 0.7083 after 571/6561 placements: 1.11.122.1.11.122.1.11.1...1.11.1.221.11.1...1.11.1...1.11.1...1.11.1.... tail=5 advF=0 tf=0
+(stopped by me after ~12 min: best so far 0.7083 with 571+ of 6561 placements examined; NOT exhaustive)

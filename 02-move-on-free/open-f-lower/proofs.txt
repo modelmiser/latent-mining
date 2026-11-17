@@ -1,0 +1,309 @@
+OPEN-F-LOWER: is mu^F > 5/3 ?   (adversary side)                       status file, 2026-11-16
+==========================================================================================
+Every statement is tagged COMPLETE (proved here), COMPUTED (exact output of a program in this
+directory, for the stated finite instances only), or NOT PROVED.
+
+HEADLINE
+  mu^F > 5/3 is NOT PROVED.
+  What is proved: Theorem A below -- the adversary P6R forces 7M/4 - 7 in game F against every
+  manager whose first M 1s leave no room for a 2 between them (in particular every manager that
+  puts the first M 1s on consecutive cells: first fit, best fit, any "compact" rule).
+  What is computed: against managers that instead reserve 3-cell gaps between the first M 1s, the
+  same adversary family (kept set chosen from a menu) wins a positive slope in every periodic
+  layout tried (section E).  What is missing: a proof for ARBITRARY first layouts and placements.
+
+------------------------------------------------------------------------------------------
+NOTATION
+  Layout = set of live blocks.  A free run is a maximal interval of free cells; for a heap
+  0..H-1 the runs include the one from the top block to cell H-1.
+  W(layout) = sum over free runs BELOW THE TOP BLOCK of (length mod 3)       ("waste").
+  Residue calculus: if a kept block ends at cell class e (= (start+size) mod 3) and the next kept
+  block starts at class b, the run between them has length = b - e (mod 3).
+
+------------------------------------------------------------------------------------------
+L1. COMPLETE (finalisation lemma).  Suppose that at some moment of game N, F or O the layout has
+    live L <= M and waste W, and the manager is confined to cells 0..H-1.  Then the adversary,
+    by allocating t = floor((M-L)/3) blocks of size 3 (all legal, no frees), shows
+                              H >= M - 2 + W.
+  Proof.  Let the free runs of 0..H-1 have lengths l_1..l_k (the last one may be the run above
+   the top block).  H = L + sum l_i.  No block is freed while the 3s are allocated, so nothing
+   moves (in F moves are granted only by frees) and every 3 is placed inside one of these runs;
+   a run of length l holds at most floor(l/3) of them.  So t <= sum floor(l_i/3)
+   = (sum l_i - sum (l_i mod 3))/3 <= (H - L - W)/3, because the runs below the top block are
+   among the l_i and the remaining run contributes (l mod 3) >= 0.  Hence
+   H >= L + W + 3t >= L + W + (M - L - 2) = M - 2 + W.                                    QED
+
+L2. COMPLETE (a move after a freed 2 is at best a deletion).  In game F, after free(b) with
+    |b| = 2 the manager may move at most one 1.  If the adversary's next request is to free that
+    moved 1 (legal; a freed 1 grants nothing), the layout is the one before the reply minus at
+    most one 1 of the manager's choice.  So an adversary that only frees 1s and 2s, and answers
+    every reply this way, plays against a manager whose only power is: after each freed 2,
+    delete at most one live 1.                                                              QED
+    (The adversaries below never free a 3, so the "one 2 or two 1s" grant never arises.)
+
+L3. COMPLETE (thinning).  Freeing 1s costs the adversary nothing in F.  So from a layout with 1s
+    and larger blocks the adversary can reach, with no reply from the manager, any layout
+    obtained by deleting a subset of the 1s.  phi(layout) := max over such subsets of W is
+    computed exactly by a 3-state DP over the blocks (core.thin_best; state = end class of the
+    last kept block).  By L1, phi >= w implies H >= M - 2 + w.
+
+------------------------------------------------------------------------------------------
+ADVERSARY P6R  (adversaries.adv_P6R; the variant P6RS in wb.py only changes step 2)
+   1. allocate M 1s.
+   2. let d be a residue class (mod 3) holding the fewest 1s; free all 1s on class d.
+      Two classes a, a+1 remain ("redundant pins").  X := number of 1s left, X >= 2M/3.
+   3. allocate y = floor((M - X)/2) 2s.
+   4. while some 2 can be freed with phi rising by >= 2: free the best such 2; if the manager
+      replies by moving a 1, the proof-version frees that 1 at once (L2).
+   5. thin: free 1s down to a phi-optimal subset (L3).   6. allocate 3s (L1).
+   Difference from solver-b's P6: P6 commits to ONE class r before freeing 2s, so each reply
+   removes a pin worth 2 and cancels the freed 2 exactly.  P6R keeps BOTH classes alive while
+   it frees 2s.  The manager cannot know which class will be used; d replies remove d_a pins of
+   one class and d_{a+1} of the other, and the adversary keeps the better class:
+   2*max(x_a - d_a, x_{a+1} - d_{a+1}) >= X - d.  A reply is worth 1, not 2.
+
+------------------------------------------------------------------------------------------
+THEOREM A.  COMPLETE.   Let a manager for game F be such that after step 2 of P6R there are no
+   two adjacent free cells between the lowest and the highest remaining 1.  (True whenever the
+   manager puts the first M 1s on M consecutive cells.)  Then P6R forces
+                         H >= 7M/4 - 7      for every M >= 3,
+   so no manager of this kind stays within (5/3 + eps) M + c for eps < 1/12.
+
+  Proof.  After step 2 the 1s form a set S on classes a, a+1, |S| = X >= M - floor(M/3) >= 2M/3.
+   By hypothesis every 2 allocated in step 3 lies entirely below the lowest 1 of S or entirely
+   above the highest (a 2 needs two adjacent free cells).  Call them the lower chain
+   u_1 < ... < u_l and the upper chain v_1 < ... < v_r, l + r = y.
+   Counted runs: the free run below u_1 (from cell 0; possibly empty), the runs between u_i and
+   u_{i+1}, and the runs between v_i and v_{i+1}.  The run between u_l and S, the run between S
+   and v_1 and everything above v_r are not counted.  Let k = number of counted runs whose
+   length is not divisible by 3.
+   A 2 is interior if both runs next to it are counted: u_1..u_{l-1} and v_2..v_{r-1}; at least
+   y - 3 of the 2s are interior.  An interior 2 is clean if both runs next to it have length
+   divisible by 3.  A counted run that is not divisible by 3 is next to at most two 2s, so at
+   least y - 3 - 2k interior 2s are clean.
+   Step 4 (proof version).  In each maximal sequence of consecutive clean interior 2s take every
+   second one, starting with the first; let F be the set taken, |F| >= (y - 3 - 2k)/2 (and
+   F is empty if that is negative).  Free the 2s of F one at a time; after each reply free the
+   moved 1 (L2).  By L2 the layout is now: chains minus F, and S minus a set D, |D| <= |F|.
+   The replies cannot touch the counted runs: a moved 1 is gone again before the next request,
+   and 2s never move after a freed 2.
+   Each u in F was between two 2s that are not in F (or between cell 0 and such a 2), with runs
+   of lengths g, g' = 0 (mod 3) next to it; after freeing it the three pieces form one free run
+   of length g + 2 + g' = 2 (mod 3), bounded by blocks that stay.  The counted runs not next to
+   a 2 of F are unchanged, and they include all k runs that were not divisible by 3 (those are
+   not next to a clean 2).  So the free runs lying inside the two chains now contribute
+                      W_chain >= k + 2|F|.
+   Step 5.  Let x'_a, x'_{a+1} be the numbers of 1s left on the two classes;
+   x'_a + x'_{a+1} = X - |D| >= X - |F|.  Take r in {a, a+1} with x'_r >= (X - |F|)/2 and free
+   every 1 not on class r.  Between two consecutive remaining 1s (cells p < p', both = r mod 3)
+   every cell is free -- the other 1s there have just been freed and no 2 lies between 1s -- so
+   that run has length p' - p - 1 = 2 (mod 3).  These x'_r - 1 runs are disjoint from the chain
+   runs, all below the top block, hence
+        W >= k + 2|F| + 2(x'_r - 1) >= k + 2|F| + X - |F| - 2 = X + k + |F| - 2.
+   If y - 3 - 2k >= 0 then k + |F| >= k + (y - 3 - 2k)/2 = (y - 3)/2; otherwise k > (y - 3)/2.
+   So W >= X + (y - 3)/2 - 2.  By L1,
+        H >= M - 2 + X + (y - 3)/2 - 2 = M + X + y/2 - 5.5.
+   y >= (M - X - 1)/2 gives H >= M + (3X + M - 1)/4 - 5.5, and X >= 2M/3 gives
+        H >= M + (3M - 1)/4 - 5.5 = 7M/4 - 5.75 > 7M/4 - 7.                                QED
+   Remarks.  (i) The proof uses the manager's replies only through |D| <= |F|: it holds even if
+   the manager is told F in advance.  (ii) The same argument with G free runs of length >= 2
+   inside S costs O(1) per such run (each splits a chain and may break one pin run), so P6R
+   still wins a positive slope when G < M/50 or so; this bookkeeping is NOT written out here
+   (NOT PROVED), and it is useless for G of order M.
+   Check against tests: battery logs, managers FF+move and PG[phi] (both put the first M 1s on
+   consecutive cells): extent - ceil(5M/3) grows with M under P6R (battery_r1.log, wb_r2_big.log
+   row home=None: +5, +9, +16 at M = 48, 72, 96).
+
+------------------------------------------------------------------------------------------
+WHAT A MANAGER MUST DO TO ESCAPE THEOREM A  (analysis; each line tagged)
+  R1. COMPUTED (pat.py, all periodic layouts of period <= 12).  The first M 1s must survive the
+      pure game-O finalisation: phi(P) <= 2M/3 + O(1).  Among periodic layouts this holds only
+      when every gap between 1s is a multiple of 3 ("3-gapped").  E.g. 1111.1111. loses 7M/4 to
+      thinning alone (keep 1..1. in every period).  For non-periodic P this is NOT PROVED.
+  R2. So an escaping manager reserves 3-cell gaps among the first M 1s.  The span is M + 3g for g
+      gaps, so g <= 2M/9 + O(1) at H ~ 5M/3, and every 2 placed above the pattern costs 2 cells
+      of extent directly.
+  R3. A 2 inside a reserved gap hides (costs the adversary) only when one of its neighbours is a
+      free cell left by a dropped 1: e.g. in the 4-run (dropped cell + gap) two 2s fit exactly.
+      In a gap bounded by two kept 1s the 2 leaves a 1-hole, and the phi-optimal thinning (it
+      switches residue class at the 2 and picks up an extra pin) gains 1/2 per 2 when the 2s
+      alternate between the two possible positions, 1 per 2 when they do not -- no better for
+      the manager than a 2 in the tail.  COMPUTED for [6], [6,6] (pergame_66_debug.log) only.
+  R4. The adversary therefore keeps, besides two full classes a, a+1, the 1s of the dropped class
+      that touch a gap ("blockers").  Each blocker costs one unit of budget, i.e. half a 2.
+      Naive estimate if every 2 then yielded 1/2:  H/M -> 5/3 + (1/4)(1/3 - B/M),  B = number
+      of gaps whose two neighbours are not of classes (a, a+1), minimised over a.  This estimate
+      is matched by the short-period runs of section E ([6], [6,6], [4,5], [4], [7,7,4]) and is
+      TOO HIGH for longer placement periods ([6,6,6,6]: .7083 instead of .75; [5,5]: .70
+      instead of .7167; [9,9]: .7222 instead of .75), because of defence (b) of section E.
+      I have no formula for the true value.  NOT PROVED.
+
+------------------------------------------------------------------------------------------
+E. COMPUTED: the "periodic density game" (pergame.cpp; prototype pergame.py; logs pergame_*.log,
+   scan_patterns.log).  Model, chosen so that every simplification FAVOURS THE MANAGER except
+   periodicity:
+     - manager's first layout: runs of 1s (lengths cycled from a list) separated by 3-gaps;
+     - adversary keeps a periodic subset S (exhaustive over one super-period, or the blocker
+       family of R4 = two full classes + any droppable 1s of the third class kept);
+     - manager places the y 2s per super-period on ANY disjoint free pairs of the pattern
+       (periodic, exhaustive), the rest contiguously above the pattern;
+     - adversary frees a periodic subset of the in-pattern 2s and/or every other tail 2;
+     - manager then deletes any |F| 1s KNOWING F IN ADVANCE (exact interdiction DP, checked
+       against brute force); adversary thins by the waste DP (L3).
+   Output: slope dW/dM between 4 and 8 super-periods; H/M >= 1 + slope by L1.  2/3 = held.
+   The cells used by the reserved gaps and by tail 2s are NOT charged to the manager (only the
+   waste bound L1 is used), one more simplification in its favour.
+   Because the manager is given foresight and the adversary is restricted, each number is a
+   valid lower bound on the slope forced against THAT periodic manager (COMPUTED, not proved by
+   hand); it says nothing about managers outside the family.
+
+     first layout (runs)        span/M   kept sets searched            slope   H/M
+     consecutive (no gaps)       1.000   Theorem A                     3/4     1.7500  (proved)
+     [3] (as 3,3 / 3,3,3,3)      2.000   all 32 / 495 (kept 8)         .7500   1.7500  (too wide)
+     [6]                         1.500   all 32                        .7500   1.7500
+     [6,6]                       1.500   all 2048                      .7500   1.7500
+     [6,6,6,6]                   1.500   blocker family (142)          .7083   1.7083  <- same P,
+     [6]x8, S = 1.11.1... fixed  1.500   manager <= 3 in-gap 2s        .7083   1.7083     longer
+                                                                                         placement period
+     [9]                         1.333   all 256                       .7222   1.7222
+     [9,9]                       1.333   blocker family (46)           .7222   1.7222
+     [7,7,4]                     1.500   blocker family (22)           .7222   1.7222
+     [4,4,4,5,5,5]               1.667   blocker family (46)           .7037   1.7037
+     [4,5]                       1.667   all 256                       .7222   1.7222
+     [4]                         1.750   all 2048                      .7083   1.7083  (too wide)
+     [5,7], [4,8]                1.500   all 2048                      .7083   1.7083
+     [5]                         1.600   all with kept 9,11,13 (6475)  .7000   1.7000
+     [5,5] (= [5], period x2)    1.600   blocker family (94)           .7000   1.7000
+     scan: all 350 run lists with <= 4 runs of length 2..9, <= 30 ones per super-period,
+           span <= 1.7M, blocker family:   minimum .7000 (13 layouts, e.g. [5], [4,4,7], [4,6],
+           [2,8], [3,7], [5,8,9,8]);  histogram .7000:13 .7037:51 .7083:83 .7143:94 .7167:14
+           .7222:79 .7333:14 .75:2;  no layout at or below 2/3.
+   Negative controls of the solver: with S = everything (y = 0) it returns exactly 2/3 (the
+   game-O value; rows "kept=6 y=0" in pergame_6.log, pergame_cpp_a.log); the single period [3],
+   where only an even number of dropped 1s is representable and the attack therefore cannot be
+   expressed, returned 2/3 (pergame_3.log), i.e. the program does report "held" when the attack
+   is absent.  The interdiction DP of pergame.py was compared with brute force in 900 cases
+   (300 random layouts, 0..2 deletions); pergame.cpp was checked only by reproducing the
+   python values for [6], [9] and [3].  The slope is read off between 4 and 8 super-periods
+   (3 and 6 gave parity artefacts in the tail); linearity beyond 8 is assumed, not checked.
+
+   How the best managers in this model defend (what limits the attack):
+   (a) reserve 3-gaps, with the residue class of the gap rotating from gap to gap, so that for
+       every choice of the two kept classes two thirds of the gaps need a blocker; the blockers
+       eat the adversary's budget for 2s;
+   (b) put ONE 2 in every few gaps, all hidden from the same class (a 2 on the two cells that
+       miss class a): it gives the adversary +1 for the other class statically, but it makes that
+       class the unique best thinning, so the manager's replies to freed tail 2s all hit that
+       class and are worth 2 instead of 1 (the redundancy that Theorem A exploits is gone).
+       One such 2 "protects" about three tail 2s.  This is why [6] drops from .75 to .7083 once
+       the placement period is 4 gaps, and the value does not improve further at 8 gaps;
+   (c) the replies themselves: lift a 1 of the class the adversary is about to use.
+   With (a)-(c) the best periodic manager found concedes slope .70 (H ~ 1.70 M) instead of 3/4.
+
+------------------------------------------------------------------------------------------
+C1. NOT PROVED (conjecture suggested by A and E).  mu^F > 5/3.
+    The smallest slope conceded by any manager in the computed family is .70 (H ~ 1.70 M); I
+    have no result on managers outside that family, so 1.70 is NOT a conjectured value of mu^F.
+    Missing for a proof: (1) R1 for arbitrary first layouts; (2) a lower bound for phi after
+    step 3 valid for EVERY placement of the 2s into a 3-gapped layout (E is exhaustive only over
+    periodic placements, <= 30 ones per period, plus the partial 48-ones run); (3) the same for
+    first layouts that are not periodic.  The manager's improvement from [6,6] to [6,6,6,6]
+    shows that longer placement periods can help the manager; E does not exclude a hierarchy of
+    ever longer periods approaching 5/3, although nothing of the kind appeared between 4 and 8
+    gaps for [6] (the 8-gap run is not exhaustive) or between 15 and 30 ones for [5].
+
+C2. NOT PROVED.  Nothing here bounds mu^F from above; I did not look at the upper side.
+
+------------------------------------------------------------------------------------------
+OTHER ATTACKS TRIED AND WHAT DEFEATS THEM
+  X1. P6 as written for N (commit to one class, free the junk 2s): cancelled exactly by "after
+      each freed 2 move a pin of the committed class anywhere" (battery2.log column P6N: <= 0
+      against the managers with moves in 33 of 34 games, +3/+10/+15 against FF without moves).
+  X2. P4-safe attacks (free 2s only when no 1 is live, so no move is ever granted).  Analysis
+      only -- not a theorem and NOT simulated: once the 1s are gone the adversary has only 2s;
+      re-allocated 1s are hidden by the manager in the holes the 2s created (a hole of waste w
+      hides w 1s), and each kept 2 costs 2 cells of budget that would have bought 4/3 of waste
+      as 1s; I found no P4-safe line that does not lose to this.  Freeing a 3 returns 3 cells of
+      budget and opens exactly one 3-slot, so in the waste count it gains nothing (analysis).
+  X3. The global residue-class potential Psi_r = 2*(1s on r) + (2s covering r) - 2*(2s missing r)
+      alone cannot beat 5/3 in F: its sum over r is 2*(number of 1s) <= 2M, and a manager who
+      chooses which class each 2 misses keeps all three at <= 2M/3 + 1 (analysis, not a theorem).
+      The gain of P6R comes from waste that no single class sees (2-holes between 2s, and
+      thinnings that switch class at a 2).
+
+------------------------------------------------------------------------------------------
+TESTS (all through the referee core.Game, which rejects illegal placements and moves)
+
+T1 (2a).  COMPUTED.  Exhaustive best response of the manager against the FIXED adversary P6R0
+   (brute.py; every first layout, every placement of the 2s, every reply incl. every destination).
+   VA(M) = least H at which some manager survives it:
+        M      3  4  5  6  7   8   9  10  11  12  13  14  15  16
+        VA     3  5  7  8  9  12  12  15  16  17  18  20  22  24
+        h^F    4  6  7  9  11 13  14  16  18  20  21   ?   ?   ?
+        ceil   5  7  9 10  12 14  15  17  19  20  22  24  25  27   (ceil(5M/3))
+   (M = 17 was cut off by the time limit.)
+   VA <= h^F in every known case (the check that could fail: passed).  At these sizes the fixed
+   adversary is weaker than the optimal one and stays below ceil(5M/3); even against compact
+   managers the proved bound 7M/4 - 7 passes 5M/3 only for M > 84, far beyond exhaustive reach
+   (C(H,M) first layouts).  This test checks the code, not the slope.
+
+T2.  COMPUTED.  Theorem A played out (thmA_check.py): the proof version of P6R against five
+   managers that put the first M 1s on consecutive cells, M = 3..60: hypothesis holds in all 290
+   games, extent >= ceil(7M/4 - 7) in all (0 violations).  extent - ceil(5M/3) lies between -1
+   and +7 at M = 50..60; the proved bound itself passes 5M/3 only for M > 84, and battery2.log
+   shows the same managers at +7..+16 (M = 96) and +12..+24 (M = 144) under P6R.
+
+T3 (2b).  COMPUTED.  Battery (battery2.log, battery3.log), entries = final extent - ceil(5M/3):
+                                         M=48          M=96          M=144
+     adversary:                       P6N  best-F    P6N  best-F    P6N  best-F
+     FF, no moves                      +3    +8      +10   +16      +15   +24
+     FF + move (solver-b S1)           -3    +2       -2    +7        0   +12
+     PG[phi] (greedy on phi)           -3    +5       -2   +13        0   +21
+     PG[phi+views]                     -3    +5       -2   +16        0   +24
+     WB, consecutive 1s                -3    +5       -2   +16        0   +24
+     WB, gaps [6]                      -6    +4      -11    +8      -13   +15
+     WB, gaps [9]                      -6    +3      -11    +9      -13   +13
+     WB, gaps [5]                      -5    +2       -5   +11       -7   +14
+     WB, gaps [4,5]                    -2    +2       -1    +5       -3   +12
+     WB, gaps [5,7]                    -3    +4       -2   +11       -1   +15
+     WB, gaps [4,4,7]                  -3    +3       -2    +4       +2    +8
+     WB, gaps [7,7,4]                  -3    +3       -8    +7       (not run)
+     WB, gaps [4,4,4,5,5,5]            -2    +4       -1    +4        .   +14
+     best manager (min of best-F)            +2             +4             +8  (of those run)
+   "best-F" = max over P6R, P6R with blockers, P6RS.  Controls: P1 = -4,-3,-2 and O-dp = -2,-1,0
+   against every manager without gaps.
+   WB is the manager designed against P6R: it knows the script, reserves gaps, plans all the 2s
+   against the adversary's own end phase and replies with the phi-best move.  It halves the
+   damage but does not stop it: its best variant concedes +2, +4, +8.  These managers are
+   heuristic (greedy plan + local search), so the battery shows that P6R beats every manager I
+   could build, not that it beats every manager.
+
+NEGATIVE CONTROLS
+   NC1  P1 and O-dp free only 1s; against first fit they must stay <= floor((5M+2)/3) (solver-b
+        P5).  Asserted in battery2.py for M = 48, 96, 144: passed (-4..0 relative to ceil(5M/3)).
+   NC2  P6N (solver-b's P6, one committed class): beats FF without moves (+3, +10, +15) and is
+        cancelled by the managers that use the move right (<= 0 in 33 of 34 games; the exception
+        is +2 against WB[4,4,7] at M = 144).  So the battery does detect a
+        manager defeating an attack, and the gain of P6R is not an artefact of the harness.
+   NC3  brute.py: VA(M) <= h^F(M) for M = 3..13.
+   NC4  periodic solver: returns exactly 2/3 when the attack is absent (section E).
+
+------------------------------------------------------------------------------------------
+FINAL STATUS
+   mu^F > 5/3 ................................................ NOT PROVED
+   P6R forces 7M/4 - 7 against managers with no free pair
+       between their first M 1s (Theorem A) ................... COMPLETE
+   L1, L2, L3 ................................................. COMPLETE
+   P6R-family forces slope >= .70 (H >= 1.70M - c) against each
+       periodic 3-gapped manager of section E ................. COMPUTED (those managers only)
+   R1 (first layout must be 3-gapped) for periodic layouts .... COMPUTED;  in general NOT PROVED
+   lower bound against ARBITRARY managers beyond 5M/3 ......... NOT PROVED
+   What I believe: mu^F > 5/3 is more likely than not.  For: the redundancy mechanism is proved
+   against compact managers; every escape I could construct (reserved gaps, blockers forced,
+   one hidden 2 protecting three tail 2s, long placement periods) lowered the slope from 3/4
+   only to .70, with no further improvement in the two cases where I could lengthen the period
+   ([6]: 4 -> 8 gaps, not exhaustive; [5]: 15 -> 30 ones); a manager designed with full knowledge of the
+   adversary still loses a growing amount at M = 48, 96, 144.  Against: the manager's side of
+   this one line of play is searched only over periodic layouts with <= 30 ones per period, and
+   the step from [6,6] to [6,6,6,6] shows that longer periods can matter; the adversary is one
+   family; no exact value beyond M = 13 separates F from O.

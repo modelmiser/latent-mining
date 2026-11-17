@@ -1,0 +1,12 @@
+ EXACT min over 8113 relocations: final extent 39   (5M/3=40.00, 7M/4=42.00)  argmin=...11111111.11.11.11.11.22..22
+M=24 cls=2 par=1 k=2  max v=11 (removed 2, re-placed 0)  final extent=39  minus 5M/3 = -1.0  7M/4=42.0  fluid=e2+C-v=39 (-1.0)
+ EXACT min over 1694245 relocations: final extent 58   (5M/3=60.00, 7M/4=63.00)  argmin=1..11...111111111.11.11.11.11.11.11.22..22..22
+M=36 cls=2 par=1 k=3  max v=16 (removed 3, re-placed 1)  final extent=58  minus 5M/3 = -2.0  7M/4=63.0  fluid=e2+C-v=60 (+0.0)
+ EXACT min over 8113 relocations: final extent 35   (5M/3=40.00, 7M/4=42.00)  argmin=11.111...11111.11.11.11...22..22
+M=24 cls=2 par=0 k=2  max v=15 (removed 2, re-placed 1)  final extent=35  minus 5M/3 = -5.0  7M/4=42.0  fluid=e2+C-v=37 (-3.0)
+ EXACT min over 1694245 relocations: final extent 57   (5M/3=60.00, 7M/4=63.00)  argmin=11.111...11111.11.11.11.11.11.11.11...22..22..22
+M=36 cls=2 par=0 k=3  max v=19 (removed 2, re-placed 1)  final extent=57  minus 5M/3 = -3.0  7M/4=63.0  fluid=e2+C-v=59 (-1.0)
+ EXACT min over 8113 relocations: final extent 39   (5M/3=40.00, 7M/4=42.00)  argmin=1..111.11.11.11.11.11.1122..22
+M=24 cls=0 par=1 k=2  max v=11 (removed 2, re-placed 0)  final extent=39  minus 5M/3 = -1.0  7M/4=42.0  fluid=e2+C-v=39 (-1.0)
+ EXACT min over 1694245 relocations: final extent 58   (5M/3=60.00, 7M/4=63.00)  argmin=1...111.1111.11.11.11.11.11.11.11.1122..22..22
+M=36 cls=0 par=1 k=3  max v=16 (removed 3, re-placed 1)  final extent=58  minus 5M/3 = -2.0  7M/4=63.0  fluid=e2+C-v=60 (+0.0)

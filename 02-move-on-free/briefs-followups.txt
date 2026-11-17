@@ -1,0 +1,151 @@
+==== Referee move-on-free proofs ====
+You are a hostile but fair referee. Two solvers worked independently on the problem below. Their computed tables agree, but they DISAGREE about whether one lower bound is proved. Your job is to find out who is right, by reading the actual proof text and by independent computation. You did not write any of this and have no stake in it being true. A proof with a gap must be reported as having a gap; do not repair it silently and then call it confirmed. Do not search the web.
+
+THE GAME
+
+Cells are 0, 1, 2, .... Fix M >= 3. Blocks have size 1, 2 or 3 and occupy contiguous cells. The heap starts empty. An adversary who sees the layout issues requests forever:
+ - allocate(s), s in {1,2,3}: legal only if (live cells) + s <= M. The manager must immediately place the block on s contiguous free cells.
+ - free(b): a live block chosen by the adversary vanishes.
+Three games: N (no moves): blocks never move. F (move on free): right after free(b) with |b| = s the manager may perform moves whose moved sizes total at most s-1 (a move lifts one live block and puts it on any contiguous cells free once it is lifted; unused allowance is lost; so a freed 1 grants nothing, a freed 2 one move of a 1, a freed 3 one move of a 2 or up to two moves of 1s; 3s never move). O (only 1s freed): game N, but the adversary may free only blocks of size 1.
+h^G(M) = least H such that some manager serves every legal infinite request sequence within cells 0..H-1. So h^O <= h^F <= h^N. mu^G = limsup h^G(M)/M.
+
+WHAT THE SOLVERS CLAIM
+
+Agreed computed table, M = 3..13:
+ h^O = h^F = 4, 6, 7, 9, 11, 13, 14, 16, 18, 20, 21
+ h^N = the same except h^N(13) = 22.
+So the games first separate at M = 13, where F equals O.
+
+Claims to referee:
+ L1. h^O(M) >= about 5M/3 - c (both solvers: A's P1 gives (5M-14)/3, B's P1 gives 3(K+t)-2). Both say COMPLETE.
+ U1. h^O(M) <= about 5M/3 + c by first fit (A's P2: ceil(5M/3); B's P5: floor((5M+2)/3)). Both say COMPLETE. Together: mu^O = 5/3.
+ L2. h^N(M) >= 7M/4 - 17/4 for all M (B's P6, tagged COMPLETE). Solver A calls the 7M/4 attack a SKETCH that works only against "packing" managers and says a manager can deviate; A regards mu^N > 5/3 as OPEN. THIS IS THE DISAGREEMENT. If L2 holds then mu^O = 5/3 < 7/4 <= mu^N: the two no-move benchmarks really differ, and the headline question (where mu^F sits) is meaningful.
+ U2. h^N(M) <= 43M/18 + 12 (A's P3, COMPLETE but not machine-checked), and B's weaker h^N(M) <= 3M - 6 (P2).
+ Note a tension to resolve: L2 at M = 13 gives 7*13/4 - 17/4 = 18.5, consistent with 22; but check L2 against EVERY computed h^N(M), M = 3..13, and check L1/U1 against every computed h^O(M). A formula that contradicts a computed value is refuted.
+
+The texts are in:
+ ./solver-a/proofs.txt
+ ./solver-b/proofs.txt   (and hand.txt, results.txt there)
+You may read anything in those two folders (code, logs). Do not modify them.
+
+YOUR TASKS, IN PRIORITY ORDER
+
+ 1. L2 (most important). Read B's P6 line by line. For each step decide: follows / does not follow / unclear. Look especially for: an assumption about where the manager puts blocks (the bound must hold against EVERY manager, including one that deliberately spreads blocks out or leaves gaps); the counting step "each 2 covers two residue classes, so one kept class r has 2*(1s on r) + (2s covering r) >= ..."; whether freeing the chosen blocks keeps live cells <= M at every moment; whether each later 3 really needs a fresh cell and whether the count of 3s is right; off-by-one and rounding. If there is a gap, name the exact sentence and give a concrete manager behaviour the argument does not cover.
+ 2. Test L2 empirically in a way that could FAIL: implement P6's adversary as an actual algorithm (it adapts to the manager's placements as the proof specifies) and run it in game N against (a) an optimal manager for small M that you compute yourself (safe-set manager at H = h^N(M)) and (b) a few hundred random and adversarially "spread-out" managers at larger M (say M = 24, 36, 48, 60, with a generous heap), recording the heap extent forced. The proof predicts extent >= 7M/4 - 17/4 always. Also run a negative control (ask for one more cell than the bound against first fit, or check that a deliberately weakened adversary does NOT reach the bound).
+ 3. Independent recomputation: write your OWN third implementation from the game definition, not from their code, of h^N, h^F, h^O for M = 3..8 (9 or 10 if cheap). Report whether it matches. Before trusting it, work M = 3 by hand.
+ 4. L1 and U1: read one solver's proof of each and report gaps. For U1, test first fit in game O exhaustively for small M against the claimed bound.
+ 5. U2: read A's P3 more briefly; say whether it is a proof or relies on unchecked steps.
+ 6. Say, for each of these statements, whether it is PROVED, PROVED ASSUMING a named unverified step, or only SUPPORTED BY DATA: (i) mu^O = 5/3; (ii) mu^N >= 7/4; (iii) mu^O < mu^N; (iv) anything at all about mu^F beyond 5/3 <= mu^F <= mu^N.
+
+RULES FOR RUNNING CODE (someone's live workstation)
+ - Write only inside ./verifier/ .
+ - Every compute run: `nice -n 15`, at most 2 CPU cores, `ulimit -v 8000000` in the same shell command, wrapped in `timeout 1500`. No background daemons. TMPDIR=./verifier ; nothing large in /tmp.
+ - Never use pkill/killall, and do not use `pgrep` or `ps` to look at other processes. Do not delete files.
+
+REPORT (final message, under 900 words)
+ For each of L1, U1, L2, U2: a verdict of CONFIRMED, REFUTED, or GAP (with the exact failing step), and your evidence. Then the results of tasks 2 and 3 with file names. Then the task 6 verdicts. State plainly anything you did not check.
+
+==== Prior-art search allocator game ====
+Prior-art search. I need to know whether some specific small results are already in the published literature, or are close corollaries of something that is. Use web search. Be skeptical in both directions: do not declare something novel because a quick search found nothing, and do not declare it known because a paper sounds similar. Never invent a citation: every paper you name must come from a search result you actually saw, with its URL.
+
+THE SETTING
+
+Online storage allocation on a line of cells, worst case, as a game. Blocks have size 1, 2 or 3. An adversary issues allocate(s) and free(block) requests, never exceeding M live cells; the manager must place each block on contiguous free cells at once. h(M) = the smallest heap (highest cell used + 1) some manager can guarantee. Three variants:
+ - N: blocks never move (classical non-moving dynamic storage allocation with block sizes {1,2,3}).
+ - O: as N, but the adversary may free only blocks of size 1 (larger blocks are permanent).
+ - F: "move on free": freeing a block of size s lets the manager, at that moment only, move blocks of total size at most s-1 (so freeing a 1 grants nothing, a 2 lets it move one 1, a 3 lets it move one 2 or two 1s; 3s never move). The right cannot be saved up.
+
+CLAIMS
+ 1. Exact values for M = 3..13: h^O = h^F = 4, 6, 7, 9, 11, 13, 14, 16, 18, 20, 21, and h^N the same except h^N(13) = 22.
+ 2. h^O(M) = 5M/3 + O(1): lower bound by keeping 1s on one residue class mod 3 then allocating 3s; upper bound by first fit.
+ 3. h^N(M) >= 7M/4 - O(1) for sizes {1,2,3} (claimed; under referee), and h^N(M) <= 43M/18 + O(1).
+ 4. Open: the asymptotic ratio for F; conjecture that it equals 5/3, i.e. that this tiny, non-bankable right to move makes the adversary's frees of large blocks useless.
+
+WHAT TO LOOK FOR
+ 1. Robson's results ("An estimate of the store size necessary for dynamic storage allocation", JACM 1971; "Bounds for some functions concerning dynamic storage allocation", JACM 1974; "Worst case fragmentation of first fit and best fit storage allocation strategies", 1977) and anything giving exact or asymptotic worst-case heap size for a SMALL ARBITRARY set of block sizes such as {1,2,3} or {1,...,n} (not only powers of two). What is the known constant for sizes {1,2,3}? Is 7/4 or 43/18 or some other value known? Also Luby, Naor, Orda "Tight bounds for dynamic storage allocation" (1996) and Knuth TAOCP vol. 1 section 2.5 exercises.
+ 2. Partial / bounded compaction: Bendersky and Petrank "Space overhead bounds for dynamic memory management with partial compaction" (POPL 2011 / TOPLAS), Cohen and Petrank "Limitations of partial compaction: towards practical bounds" (PLDI 2013), and later work; storage reallocation and "memory reallocation" (Bender, Farach-Colton, Fekete, Fineman, Gilbert, "Cost-oblivious storage reallocation"; Kuszmaul "Strongly history-independent storage allocation"; Naor and Teague); online interval/segment packing with migration or recourse ("dynamic bin packing with bounded migration", "online strip packing with recourse", Sanders-Sitters-Skutella style migration factor). Look for any model where the right to move is granted per deletion, proportional to (or less than) the deleted size, and not bankable.
+ 3. Any worst-case game analysis where only the smallest blocks may be freed, or a result that restricting which blocks the adversary may free changes the constant.
+
+Run at least a dozen distinct searches across these areas and follow up on the most promising hits by reading the abstract or page (use any fetch tool or agent available to you; if none is, say that you judged from search snippets only).
+
+REPORT (under 650 words)
+ - CLOSEST PRIOR WORK: up to six items, each with title, authors, year, URL, one sentence on what it actually shows, and one sentence on how it differs from the setting above.
+ - VERDICT for each of claims 1-4, one of: FOUND (already published, cite it), LIKELY FOLKLORE or EASY COROLLARY (of a named known result; say which and how), or NOT FOUND (with the list of search queries you ran).
+ - In particular: what does the literature say the no-move worst case is for sizes {1,2,3}, if anything?
+ - What a specialist in which field would be the right person to ask.
+ - State plainly what you could not check.
+
+==== Move-on-free: find a 5/3 manager ====
+You are attacking one open problem about a small allocation game, from ONE side: try to show the limited right to move is strong, i.e. find a manager for game F that needs only about 5M/3 cells. An honest "not proved, here is how far I got" is an acceptable result; a claimed proof with a gap is not. Another agent is independently attacking the opposite side; your work must stay independent of it.
+
+THE GAME
+
+Cells are 0, 1, 2, .... Fix M >= 3. Blocks have size 1, 2 or 3 and occupy contiguous cells. The heap starts empty. An adversary who sees the layout issues requests forever:
+ - allocate(s), s in {1,2,3}: legal only if (live cells) + s <= M. The manager must immediately place the block on s contiguous free cells.
+ - free(b): a live block chosen by the adversary vanishes.
+Three games. N (no moves): blocks never move. F (move on free): right after free(b) with |b| = s, before the next request, the manager may perform moves whose moved sizes total at most s-1; a move lifts one live block and puts it on any contiguous cells that are free once it is lifted; the freed cells count as free; unused allowance is lost and cannot be saved. So a freed 1 grants nothing, a freed 2 grants one move of a 1, a freed 3 grants one move of a 2 or up to two moves of 1s; 3s never move. O (only 1s freed): game N, but the adversary may free only 1s.
+h^G(M) = least H such that some manager serves every legal infinite request sequence within cells 0..H-1. h^O <= h^F <= h^N. mu^G = limsup h^G(M)/M.
+
+KNOWN (proved by hand and refereed; computed values agree across three implementations up to M = 11 and two up to M = 13)
+ - Table M = 3..13: h^O = h^F = 4, 6, 7, 9, 11, 13, 14, 16, 18, 20, 21; h^N the same except h^N(13) = 22.
+ - mu^O = 5/3: lower bound by an adversary that allocates M 1s, keeps those on one residue class mod 3, then allocates 3s (each needs a fresh cell of that class); upper bound ceil(5M/3) by first fit.
+ - mu^N >= 7/4: allocate M 1s, drop the smallest residue class mod 3, allocate 2s, pick the kept class r maximising 2*(1s on r) + (2s covering r), free everything not covering r (including 2s), then allocate 3s. In game F each freed 2 gives the manager one move of a 1, which seems to cancel the gain.
+ - mu^N <= 43/18.
+ OPEN, YOUR TARGET: is mu^F = 5/3? That is, is there a manager for F with h^F(M) <= 5M/3 + c for all M?
+
+WHAT EXISTS (read first; all under ./)
+ - solver-a/proofs.txt (P1, P2 for game O; P3 the 43/18 manager; S1 a sketch of why F's moves defuse the 7/4 attack) and solver-a/ruleF.cpp + ruleF.log: fifteen greedy first-fit/best-fit-plus-move rules, none better than plain first fit.
+ - solver-b/proofs.txt (P5 first fit in O; P6 the 7/4 adversary; S1) and solver-b/rules.cpp, solve*.cpp (exact solvers for all three games).
+ - verifier/: an independent solver (v3.cpp) and the P6 adversary as code (p6.py).
+ Do not read any folder named open-f-lower.
+
+WHAT I WANT
+ 1. Look at what optimal F managers actually do: extract winning strategies from an exact solver at M where the choice matters (M = 11..13 if affordable, smaller otherwise), and look for the rule, in particular how they use the move after a freed 2 or 3, and what invariant the safe layouts share (for example: all 1s below some line, large blocks packed above, a bound on holes not usable by a 3).
+ 2. Propose an explicit manager for F for all M and test it by exhaustive play against every adversary for as many M as you can reach (a fixed-rule manager only needs reachability, which goes much further than the full game: aim for M in the 20s or beyond). Report its worst extent against 5M/3. Watch the test fail on purpose (a deliberately worse rule, or a band one cell too small).
+ 3. If a rule tracks 5M/3 + O(1) in the tests, prove it: state the invariant and show every request and every permitted move preserves it. Tag each statement COMPLETE or NOT PROVED.
+ 4. If every rule you try grows faster than 5M/3 (say like 7M/4), report the slopes you measured and the adversary pattern that beats them; that is evidence for the other side and worth stating plainly.
+
+RULES. Write everything into a NEW directory ./open-f-upper/ (code, logs, and proofs.txt). Do not modify other directories. Live machine: nice -n 15, at most 3 cores, `ulimit -v 8000000` per process, `timeout` on every run, TMPDIR=./open-f-upper (never /tmp, which is RAM). Never use pkill/killall; kill only your own PIDs; do not use ps/pgrep to look at other processes. No web access needed. Do not delete anything.
+
+REPORT BACK (under 800 words): the best manager found, its measured worst extents by M, proof status (COMPLETE / NOT PROVED), the negative control, what you believe about mu^F and why, and file paths.
+
+==== Move-on-free: find a stronger adversary ====
+You are attacking one open problem about a small allocation game, from ONE side: try to show the limited right to move is NOT enough, i.e. find an adversary for game F that forces more than 5M/3 cells in the long run. An honest "not proved, here is how far I got" is an acceptable result; a claimed proof with a gap is not. Another agent is independently attacking the opposite side; your work must stay independent of it.
+
+THE GAME
+
+Cells are 0, 1, 2, .... Fix M >= 3. Blocks have size 1, 2 or 3 and occupy contiguous cells. The heap starts empty. An adversary who sees the layout issues requests forever:
+ - allocate(s), s in {1,2,3}: legal only if (live cells) + s <= M. The manager must immediately place the block on s contiguous free cells.
+ - free(b): a live block chosen by the adversary vanishes.
+Three games. N (no moves): blocks never move. F (move on free): right after free(b) with |b| = s, before the next request, the manager may perform moves whose moved sizes total at most s-1; a move lifts one live block and puts it on any contiguous cells that are free once it is lifted; the freed cells count as free; unused allowance is lost and cannot be saved. So a freed 1 grants nothing, a freed 2 grants one move of a 1, a freed 3 grants one move of a 2 or up to two moves of 1s; 3s never move. O (only 1s freed): game N, but the adversary may free only 1s.
+h^G(M) = least H such that some manager serves every legal infinite request sequence within cells 0..H-1. h^O <= h^F <= h^N. mu^G = limsup h^G(M)/M.
+
+KNOWN (proved by hand and refereed; computed values agree across three implementations up to M = 11 and two up to M = 13)
+ - Table M = 3..13: h^O = h^F = 4, 6, 7, 9, 11, 13, 14, 16, 18, 20, 21; h^N the same except h^N(13) = 22.
+ - mu^O = 5/3: lower bound by an adversary that allocates M 1s, keeps those on one residue class mod 3, then allocates 3s (each needs a fresh cell of that class); upper bound ceil(5M/3) by first fit.
+ - mu^N >= 7/4: allocate M 1s, drop the smallest residue class mod 3, allocate 2s, pick the kept class r maximising 2*(1s on r) + (2s covering r), free everything not covering r (including 2s), then allocate 3s. In game F each freed 2 gives the manager one move of a 1, which seems to cancel the gain exactly.
+ - mu^N <= 43/18.
+ OPEN, YOUR TARGET: is mu^F > 5/3? That is, is there eps > 0 and an adversary strategy for F forcing h^F(M) >= (5/3 + eps) M - c for all M, against EVERY manager?
+
+WHAT EXISTS (read first; all under ./)
+ - solver-b/proofs.txt (P1 the 5/3 adversary; P6 the 7/4 adversary for N; P4: in F a freed 2 with no live 1, or a freed 3 with no live 1 or 2, grants nothing; S1) and solver-b/solve*.cpp (exact solvers for all three games), solver-b/pv_O.txt (adversary lines).
+ - solver-a/proofs.txt (P1; S1).
+ - verifier/: an independent solver (v3.cpp) and the P6 adversary as code (p6.py, p6_opt.py) with a battery of managers.
+ Do not read any folder named open-f-upper.
+
+IDEAS TO TRY (not requirements)
+ - Use P4: arrange that when 2s or 3s are freed there are no smaller blocks alive to move, or that the only movable blocks are ones the manager cannot usefully move (e.g. every hole a moved 1 could fill is already useless). Multi-round attacks: fragment with 1s, convert to 2s, free 2s only when no 1 is live, then 3s.
+ - A freed 3 grants a move of one 2: design layouts where no single move of a 2 repairs a residue-class obstruction.
+ - Potential arguments: find a quantity (like the number of cells of one residue class mod 3 that are "spoiled") that the adversary can raise by more than the manager's granted moves can lower.
+ - Exact computation only reaches M = 13, where F = O. To see a slope you need a best-response computation against a FIXED adversary strategy (as the referee did for P6: the least H at which any manager survives that adversary), which reaches further, or tests against a battery of strong managers at M = 24..60.
+
+WHAT I WANT
+ 1. An explicit adversary strategy for F, as an algorithm that adapts to the manager's placements and moves.
+ 2. Tests that could FAIL: (a) exhaustive best response of the manager against your adversary for as many M as you can reach, compared with ceil(5M/3) and with the exact h^F table (your adversary can never force more than h^F(M); if it claims to, your code is wrong); (b) a battery of managers at larger M, including ones that use the move right as cleverly as you can make them (design at least one manager specifically to beat your adversary). Include a negative control.
+ 3. If the adversary forces a slope above 5/3 in the tests, prove it against every manager. Tag each statement COMPLETE or NOT PROVED.
+ 4. If every adversary you try is held to 5M/3 + O(1) by some manager, report that plainly, with the manager behaviour that defeats each attack; that is evidence for the other side.
+
+RULES. Write everything into a NEW directory ./open-f-lower/ (code, logs, and proofs.txt). Do not modify other directories. Live machine: nice -n 15, at most 3 cores, `ulimit -v 8000000` per process, `timeout` on every run, TMPDIR=./open-f-lower (never /tmp, which is RAM). Never use pkill/killall; kill only your own PIDs; do not use ps/pgrep to look at other processes. No web access needed. Do not delete anything.
+
+REPORT BACK (under 800 words): the best adversary found, what it forces by M, proof status (COMPLETE / NOT PROVED), the negative control, what you believe about mu^F and why, and file paths.
+

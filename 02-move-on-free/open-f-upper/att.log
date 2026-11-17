@@ -1,0 +1,30 @@
+A=0 V=0
+  M=24 attack=44 ratio=1.8333  O-attack=39  5M/3=40 7M/4=42
+  M=48 attack=88 ratio=1.8333  O-attack=78  5M/3=80 7M/4=84
+  M=96 attack=176 ratio=1.8333  O-attack=159  5M/3=160 7M/4=168
+  M=192 attack=352 ratio=1.8333  O-attack=318  5M/3=320 7M/4=336
+  M=288 attack=528 ratio=1.8333  O-attack=480  5M/3=480 7M/4=504
+A=0 V=1
+  M=24 attack=41 ratio=1.7083  O-attack=39  5M/3=40 7M/4=42
+  M=48 attack=82 ratio=1.7083  O-attack=78  5M/3=80 7M/4=84
+  M=96 attack=167 ratio=1.7395  O-attack=159  5M/3=160 7M/4=168
+  M=192 attack=334 ratio=1.7395  O-attack=318  5M/3=320 7M/4=336
+  M=288 attack=504 ratio=1.7500  O-attack=480  5M/3=480 7M/4=504
+A=0 V=3
+  M=24 attack=41 ratio=1.7083  O-attack=39  5M/3=40 7M/4=42
+  M=48 attack=82 ratio=1.7083  O-attack=78  5M/3=80 7M/4=84
+  M=96 attack=167 ratio=1.7395  O-attack=159  5M/3=160 7M/4=168
+  M=192 attack=334 ratio=1.7395  O-attack=318  5M/3=320 7M/4=336
+  M=288 attack=504 ratio=1.7500  O-attack=480  5M/3=480 7M/4=504
+A=0 V=4
+  M=24 attack=41 ratio=1.7083  O-attack=39  5M/3=40 7M/4=42
+  M=48 attack=82 ratio=1.7083  O-attack=78  5M/3=80 7M/4=84
+  M=96 attack=167 ratio=1.7395  O-attack=159  5M/3=160 7M/4=168
+  M=192 attack=334 ratio=1.7395  O-attack=318  5M/3=320 7M/4=336
+  M=288 attack=504 ratio=1.7500  O-attack=480  5M/3=480 7M/4=504
+A=0 V=5
+  M=24 attack=42 ratio=1.7500  O-attack=39  5M/3=40 7M/4=42
+  M=48 attack=83 ratio=1.7291  O-attack=78  5M/3=80 7M/4=84
+  M=96 attack=168 ratio=1.7500  O-attack=159  5M/3=160 7M/4=168
+  M=192 attack=338 ratio=1.7604  O-attack=318  5M/3=320 7M/4=336
+  M=288 attack=510 ratio=1.7708  O-attack=480  5M/3=480 7M/4=504

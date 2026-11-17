@@ -1,0 +1,2 @@
+ M  VA(M)  h^F(M)  ceil(5M/3)  VA<=h^F?   #P tried at VA-1 / #placements   witness (ones; layout after 2s)
+16   24    None     27        n/a    {'P': 245157, 'pl': 1137741}   1.11.11.11.11..122221...   [2242s]

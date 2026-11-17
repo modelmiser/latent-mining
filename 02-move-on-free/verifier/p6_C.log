@@ -1,0 +1,9 @@
+
+Part C: negative controls (each line should show the control FALLING SHORT of the P6 bound)
+  M  bound | P6 vs smart | worse_r vs smart | no_twos vs first_fit | no_twos vs smart
+  24    38 |    41 (+3) |    41 NOT short |    38 NOT short |    38 NOT short
+  36    59 |    62 (+3) |    62 NOT short |    59 NOT short |    59 NOT short
+  48    80 |    83 (+3) |    83 NOT short |    77 short |    77 short
+  60   101 |   104 (+3) |   104 NOT short |    98 short |    98 short
+ 120   206 |   209 (+3) |   209 NOT short |   197 short |   197 short
+ 240   416 |   419 (+3) |   419 NOT short |   398 short |   398 short

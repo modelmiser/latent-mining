@@ -1,0 +1,14 @@
+home=[6] super-period: 6 ones on 9 cells; span/M=1.500
+  slope dW/dM=0.7500 (3/4)  kept=4 y=1  best manager placement: .11.11... tail=1  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope dW/dM=0.7500 (3/4)  kept=4 y=1  best manager placement: 1.11.1... tail=1  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope dW/dM=0.7500 (3/4)  kept=4 y=1  best manager placement: 11.11.... tail=1  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope dW/dM=0.6667 (2/3)  kept=6 y=0  best manager placement: 111111... tail=0  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.6667 (2/3)  kept=4 y=1  best manager placement: .1.111... tail=1  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.6667 (2/3)  kept=4 y=1  best manager placement: 1.1.11... tail=1  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.6667 (2/3)  kept=4 y=1  best manager placement: .111.1... tail=1  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.6667 (2/3)  kept=4 y=1  best manager placement: 11.1.1... tail=1  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.6667 (2/3)  kept=4 y=1  best manager placement: 1.111.... tail=1  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.6667 (2/3)  kept=4 y=1  best manager placement: 111.1.... tail=1  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope dW/dM=0.5000 (1/2)  kept=4 y=1  best manager placement: 221111... tail=0  adv F=0 tailfree=0  W(R1)=11 W(R2)=23
+  slope dW/dM=0.5000 (1/2)  kept=4 y=1  best manager placement: 122111... tail=0  adv F=0 tailfree=0  W(R1)=12 W(R2)=24
+  ==> periodic game value (max over S of min over placements): slope=0.7500  vs 2/3=0.6667

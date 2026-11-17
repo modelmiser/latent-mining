@@ -1,0 +1,15 @@
+G=N M=7 H=11 layouts=11206 sweeps=2 WIN
+G=N M=8 H=13 layouts=60981 sweeps=4 WIN
+G=N M=9 H=14 layouts=179703 sweeps=11 WIN
+G=N M=10 H=16 layouts=993382 sweeps=11 WIN
+M=7 H=h^N=11 safe layouts=9417 500 runs: extent min=10 max=11 P6 bound=8  OK
+M=8 H=h^N=13 safe layouts=51575 500 runs: extent min=13 max=13 P6 bound=10  OK
+M=9 H=h^N=14 safe layouts=102241 500 runs: extent min=13 max=14 P6 bound=12  OK
+M=10 H=h^N=16 safe layouts=726995 500 runs: extent min=16 max=16 P6 bound=14  OK
+  M bound | P6 vs lopsided | worse_r vs lopsided
+  24   38 |    41 >=bound |    39 NOT short
+  36   59 |    65 >=bound |    60 NOT short
+  48   80 |    86 >=bound |    78 short
+  60  101 |   107 >=bound |    99 short
+ 120  206 |   218 >=bound |   198 short
+ 240  416 |   437 >=bound |   399 short

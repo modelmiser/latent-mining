@@ -1,0 +1,12 @@
+N rule 0: H=4 H=6 H=8 H=10 H=13 H=15 H=17 H=19 
+N rule 1: H=4 H=6 H=9 H=12 H=13 H=15 H=17 H=20 
+N rule 2: H=4 H=6 H=8 H=10 H=13 H=15 H=17 H=20 
+N rule 3: H=4 H=6 H=8 H=10 H=13 H=15 H=17 H=19 
+N rule 4: H=4 H=6 H=8 H=10 H=13 H=15 H=17 H=20 
+N rule 5: H=4 H=6 H=8 H=10 H=13 H=15 H=17 H=19 
+N rule 6: H=4 H=6 H=9 H=12 H=15 H=18 H=21 H=24 
+N rule 7: H=4 H=6 H=9 H=11 H=13 H=14 H=17 H=19 
+O rule 0: H=4 H=6 H=8 H=10 H=12 H=14 H=15 H=17 H=19 
+O rule 1: H=4 H=6 H=8 H=10 H=12 H=14 H=15 H=18 H=19 
+O rule 5: H=4 H=6 H=8 H=10 H=12 H=14 H=15 H=17 H=19 
+O rule 7: H=4 H=6 H=9 H=11 H=13 H=14 H=17 H=19 H=21 

@@ -1,0 +1,12 @@
+home=3,3 super-period: 6 ones on 12 cells; span/M=2.000; R1=4 R2=8
+  slope=0.7500 (18/24) kept=4 y=1  manager's best placement: 11....11..... tail=1 (of 7 placements)  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope=0.7500 (18/24) kept=4 y=1  manager's best placement: 1.1...1.1.... tail=1 (of 5 placements)  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope=0.7500 (18/24) kept=4 y=1  manager's best placement: .11....11.... tail=1 (of 7 placements)  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: 111....1..... tail=1 (of 7 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  ==> periodic game value (max over 32 S of min over placements): slope=0.7500   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)
+home=3,3,3,3 super-period: 12 ones on 24 cells; span/M=2.000; R1=4 R2=8
+  slope=0.7500 (36/48) kept=8 y=2  manager's best placement: 1.1...1.1...1.1...1.1.... tail=2 (of 33 placements)  adv F=0 tailfree=1  W(R1)=34 W(R2)=70
+  slope=0.6667 (32/48) kept=8 y=2  manager's best placement: 111...1.1...1.1....1..... tail=2 (of 50 placements)  adv F=0 tailfree=1  W(R1)=30 W(R2)=62
+  slope=0.6667 (32/48) kept=8 y=2  manager's best placement: 1.1...1.1...111....1..... tail=2 (of 50 placements)  adv F=0 tailfree=1  W(R1)=30 W(R2)=62
+  slope=0.6667 (32/48) kept=8 y=2  manager's best placement: 1.1...1.1...1.1...11..... tail=2 (of 41 placements)  adv F=0 tailfree=0  W(R1)=32 W(R2)=64
+  ==> periodic game value (max over 495 S of min over placements): slope=0.7500   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)

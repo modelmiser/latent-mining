@@ -1,0 +1,6 @@
+
+M=144 ceil(5M/3)=240: extent-ceil(5M/3) [moves] {S} time
+  WB home=[4, 4, 7]            P6R:+8[7]{} 49s  P6R-blk:+8[0]{} 0s  P6RS:+8[0]{G0b} 334s   max=+8
+  WB home=[4, 4, 4, 5, 5, 5]   P6R:+14[8]{} 46s  P6R-blk:+8[0]{} 1s  P6RS:+8[0]{G0b} 330s   max=+14
+  WB home=[4, 5]               P6R:+12[12]{} 77s  P6R-blk:+2[0]{} 0s  P6RS:+6[0]{G1b} 386s   max=+12
+(stopped by me before the last row, WB home=[5], which battery2.log already has: +14)

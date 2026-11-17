@@ -1,0 +1,12 @@
+G=F M=10 H=15 states=517184 sweeps=12 LOSE
+G=F M=10 H=16 states=993382 sweeps=10 WIN
+RESULT G=F sizes=7 M=10 h=16
+G=F M=11 H=16 states=1459582 sweeps=12 LOSE
+G=F M=11 H=17 states=2894836 sweeps=15 LOSE
+G=F M=11 H=18 states=5498236 sweeps=11 WIN
+RESULT G=F sizes=7 M=11 h=18
+G=F M=12 H=18 states=8273764 sweeps=14 LOSE
+G=F M=12 H=19 states=16189756 sweeps=15 LOSE
+G=F M=12 H=20 states=30474821 sweeps=11 WIN
+RESULT G=F sizes=7 M=12 h=20
+exit 0

@@ -1,0 +1,226 @@
+G=F M=13 H=21 states=90524042 safe=74260679 sweeps=13 WIN
+ALLOC1 first-fit UNSAFE  1...1.22.11.1..1.....  ff=1 safe=5 8 11 13 14 16 17 19 20 
+FREE2@10 move NEEDED  before=.1.11..3332211.1..... after=.1.11..333..11.1.....  safe moves(42): 1>0 1>5 1>6 1>10 1>11 1>14 1>16 1>17 
+FREE2@0 move NEEDED  before=221..1122111.111..... after=..1..1122111.111.....  safe moves(22): 2>0 2>1 2>3 2>4 2>12 2>16 2>17 2>19 
+FREE2@13 move NEEDED  before=..11.22.22111221..... after=..11.22.22111..1.....  safe moves(30): 2>0 2>1 2>4 2>7 2>13 2>14 2>16 2>17 
+FREE2@0 move NEEDED  before=221.11..1.11.1..1.... after=..1.11..1.11.1..1....  safe moves(36): 2>0 2>3 2>6 2>7 2>9 2>12 2>14 2>15 
+FREE2@0 move NEEDED  before=22122.111.11.11.1.... after=..122.111.11.11.1....  safe moves(29): 2>5 2>9 2>12 2>15 2>17 2>20 7>5 7>9 
+ALLOC3 first-fit UNSAFE  .111.111.....1.11....  ff=8 safe=17 18 
+FREE2@8 move NEEDED  before=.2211..1221..1.11.... after=.2211..1..1..1.11....  safe moves(38): 4>0 4>6 4>8 4>9 4>11 4>12 4>14 4>17 
+FREE2@0 move NEEDED  before=22333..1111..1111.... after=..333..1111..1111....  safe moves(22): 7>0 7>1 7>5 7>6 7>11 7>12 7>17 7>20 
+FREE2@14 move NEEDED  before=1..22..1..1..1221.... after=1..22..1..1..1..1....  safe moves(57): 0>5 0>6 0>8 0>9 0>11 0>12 0>14 0>15 
+ALLOC1 first-fit UNSAFE  11...22..1..11122....  ff=2 safe=3 4 7 8 10 11 17 20 
+FREE2@10 move NEEDED  before=..22..1.112211122.... after=..22..1.11..11122....  safe moves(27): 6>0 6>1 6>4 6>5 6>7 6>10 6>11 6>17 
+FREE2@1 move NEEDED  before=12211.1..1..111..1... after=1..11.1..1..111..1...  safe moves(37): 0>5 0>7 0>8 0>10 0>11 0>15 0>16 6>1 
+FREE2@0 move NEEDED  before=22.11.1.1.11.1.1.1... after=...11.1.1.11.1.1.1...  safe moves(51): 4>7 4>9 4>12 4>14 4>16 6>5 6>7 6>9 
+FREE2@6 move NEEDED  before=11.1.12211...111.1... after=11.1.1..11...111.1...  safe moves(19): 1>4 1>6 1>7 1>16 5>2 5>6 5>7 5>10 
+FREE3@12 move NEEDED  before=11.11..1..1.3331.1... after=11.11..1..1....1.1...  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@6 move NEEDED  before=.11..12211..1.22.1... after=.11..1..11..1.22.1...  safe moves(44): 2>0 2>3 2>4 2>6 2>7 2>10 2>11 2>13 
+FREE2@0 move NEEDED  before=2211.1..11.122..11... after=..11.1..11.122..11...  safe moves(31): 2>0 2>1 2>4 2>6 2>7 2>10 2>14 2>15 
+FREE2@9 move NEEDED  before=1111...112211..111... after=1111...11..11..111...  safe moves(20): 3>6 3>9 3>10 3>13 3>14 8>10 8>13 8>14 
+FREE2@13 move NEEDED  before=..1..22.11..122111... after=..1..22.11..1..111...  safe moves(32): 2>0 2>1 2>3 2>4 2>7 2>10 2>11 2>13 
+FREE2@15 move NEEDED  before=.22..1.111.1..1221... after=.22..1.111.1..1..1...  safe moves(43): 5>0 5>3 5>4 5>6 5>10 5>12 5>13 5>15 
+FREE2@16 move NEEDED  before=11.111.22.111..122... after=11.111.22.111..1.....  safe moves(30): 1>6 1>9 1>13 1>14 1>16 1>17 1>19 1>20 
+FREE2@16 move NEEDED  before=.1.11111111...1122... after=.1.11111111...11.....  safe moves(13): 1>11 1>12 1>13 1>16 1>17 1>20 14>0 14>2 
+FREE2@16 move NEEDED  before=.11..22..11.221122... after=.11..22..11.2211.....  safe moves(27): 2>0 2>3 2>4 2>7 2>8 2>11 2>16 2>17 
+FREE2@9 move NEEDED  before=..22.1.112222.....1.. after=..22.1.11..22.....1..  safe moves(35): 5>0 5>1 5>4 5>9 5>10 5>13 5>14 5>16 
+FREE2@9 move NEEDED  before=11.11.11.221..1...1.. after=11.11.11...1..1...1..  safe moves(21): 11>2 11>5 11>8 11>12 11>13 11>19 11>20 14>2 
+FREE2@11 move NEEDED  before=1111..1..222211...1.. after=1111..1..22..11...1..  safe moves(31): 3>7 3>8 3>11 3>12 3>17 3>19 3>20 6>4 
+FREE2@4 move NEEDED  before=.1.122221.11...1..1.. after=.1.1..221.11...1..1..  safe moves(43): 1>4 1>5 1>9 1>14 1>16 1>17 1>19 1>20 
+FREE2@0 move NEEDED  before=221.122....1.1.1..1.. after=..1.122....1.1.1..1..  safe moves(49): 2>0 2>1 2>3 2>7 2>10 2>12 2>14 2>16 
+FREE2@10 move NEEDED  before=.1.1.22.222222.1..1.. after=.1.1.22.22..22.1..1..  safe moves(39): 1>4 1>7 1>10 1>11 1>14 1>16 1>17 1>19 
+FREE2@3 move NEEDED  before=.2222221.1...111..1.. after=.22..221.1...111..1..  safe moves(20): 15>0 15>3 15>4 15>8 15>10 15>11 15>16 15>17 
+FREE2@8 move NEEDED  before=22.22.11221..221..1.. after=22.22.11..1..221..1..  safe moves(38): 7>2 7>5 7>8 7>9 7>11 7>12 7>16 7>17 
+FREE2@13 move NEEDED  before=.11..13331.22221..1.. after=.11..13331.22..1..1..  safe moves(28): 5>0 5>10 5>13 5>14 5>16 5>17 5>19 5>20 
+FREE2@9 move NEEDED  before=...1122112211.22..1.. after=...112211..11.22..1..  safe moves(23): 8>0 8>1 8>10 8>13 8>16 8>17 8>19 8>20 
+FREE2@12 move NEEDED  before=.1.221.1.2212222..1.. after=.1.221.1.221..22..1..  safe moves(35): 1>6 1>8 1>12 1>13 1>16 1>17 1>19 1>20 
+FREE2@7 move NEEDED  before=.11.333221..1...1.1.. after=.11.333..1..1...1.1..  safe moves(31): 9>0 9>3 9>7 9>8 9>10 9>11 9>13 9>14 
+FREE3@10 move NEEDED  before=11.1.11111333...1.1.. after=11.1.11111......1.1..  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@8 move NEEDED  before=11...1222222.1..1.1.. after=11...122..22.1..1.1..  safe moves(39): 5>2 5>8 5>9 5>12 5>14 5>15 5>17 5>19 
+FREE2@0 move NEEDED  before=22333.1.11.333..1.1.. after=..333.1.11.333..1.1..  safe moves(26): 6>0 6>1 6>10 6>14 6>15 6>17 6>19 6>20 
+ALLOC1 first-fit UNSAFE  ...2211.11111.1.1.1..  ff=0 safe=7 13 17 
+FREE2@6 move NEEDED  before=2211.12211...11.1.1.. after=2211.1..11...11.1.1..  safe moves(49): 2>4 2>6 2>7 2>17 2>19 2>20 5>6 5>7 
+FREE2@0 move NEEDED  before=2222..11122..22.1.1.. after=..22..11122..22.1.1..  safe moves(24): 6>0 6>1 6>11 6>12 6>15 6>17 6>19 6>20 
+FREE2@5 move NEEDED  before=1.333221...11..11.1.. after=1.333..1...11..11.1..  safe moves(31): 7>1 7>8 7>13 7>14 7>17 7>19 7>20 12>1 
+FREE2@0 move NEEDED  before=221..22..33322.11.1.. after=..1..22..33322.11.1..  safe moves(19): 2>0 2>1 2>3 2>4 2>7 2>8 2>14 2>17 
+ALLOC1 first-fit UNSAFE  ...111...1..1.111.1..  ff=0 safe=10 11 13 17 19 20 
+ALLOC2 first-fit UNSAFE  ...111...1..1.111.1..  ff=0 safe=10 19 
+FREE2@9 move NEEDED  before=11..1...122122111.1.. after=11..1...1..122111.1..  safe moves(38): 0>17 0>19 0>20 1>3 1>7 1>9 1>10 1>17 
+ALLOC2 first-fit UNSAFE  .1....221.1.33311.1..  ff=2 safe=3 4 19 
+FREE2@14 move NEEDED  before=..1122..221...221.1.. after=..1122..221.....1.1..  safe moves(42): 2>0 2>6 2>7 2>11 2>12 2>13 2>14 2>15 
+FREE2@14 move NEEDED  before=.1.2222..1..22221.1.. after=.1.2222..1..22..1.1..  safe moves(40): 1>7 1>8 1>10 1>11 1>14 1>15 1>17 1>19 
+FREE2@9 move NEEDED  before=1..111.222211..22.1.. after=1..111.22..11..22.1..  safe moves(41): 0>6 0>9 0>10 0>13 0>14 0>17 0>19 0>20 
+FREE2@4 move NEEDED  before=1...221.1111..122.1.. after=1.....1.1111..122.1..  safe moves(50): 0>3 0>4 0>7 0>12 0>13 0>17 0>19 0>20 
+FREE2@13 move NEEDED  before=1...1.1..22112222.1.. after=1...1.1..2211..22.1..  safe moves(49): 0>3 0>5 0>7 0>8 0>13 0>14 0>17 0>19 
+FREE2@7 move NEEDED  before=.11.11122...1....11.. after=.11.111.....1....11..  safe moves(37): 6>0 6>3 6>13 6>14 6>15 6>16 6>19 6>20 
+FREE2@6 move NEEDED  before=11.1.122...111...11.. after=11.1.1.....111...11..  safe moves(25): 5>2 5>7 5>10 5>19 5>20 11>2 11>4 11>14 
+FREE2@7 move NEEDED  before=1....1.221..1.1..11.. after=1....1...1..1.1..11..  safe moves(45): 0>3 0>4 0>10 0>11 0>13 0>15 0>16 0>19 
+ALLOC2 first-fit UNSAFE  113331....1..11..11..  ff=6 safe=8 11 15 19 
+FREE2@12 move NEEDED  before=.1.11...1...221..11.. after=.1.11...1.....1..11..  safe moves(48): 1>5 1>6 1>7 1>9 1>10 1>11 1>12 1>13 
+FREE2@11 move NEEDED  before=.221..1.1222222..11.. after=.221..1.122..22..11..  safe moves(33): 3>0 3>7 3>11 3>12 3>15 3>16 3>19 3>20 
+FREE3@4 move NEEDED  before=..11333.1.11...1.11.. after=..11....1.11...1.11..  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@3 move NEEDED  before=1.12222....1.1.1.11.. after=1.1..22....1.1.1.11..  safe moves(41): 2>1 2>3 2>4 2>7 2>10 2>12 2>14 2>16 
+FREE2@3 move NEEDED  before=...2211221.11.11.11.. after=.....11221.11.11.11..  safe moves(13): 5>3 5>10 5>13 5>16 5>19 5>20 18>0 18>1 
+FREE2@13 move NEEDED  before=.1.22..1221.1221.11.. after=.1.22..1221.1..1.11..  safe moves(42): 1>5 1>6 1>11 1>13 1>14 1>16 1>19 1>20 
+FREE2@0 move NEEDED  before=221..122..22.122.11.. after=..1..122..22.122.11..  safe moves(24): 2>3 2>4 2>8 2>9 2>12 2>16 2>19 2>20 
+FREE2@7 move NEEDED  before=....1.1221.11...111.. after=....1.1..1.11...111..  safe moves(35): 4>7 4>8 4>10 4>13 4>14 4>15 4>19 4>20 
+FREE2@5 move NEEDED  before=1...1221..1122..111.. after=1...1..1..1122..111..  safe moves(39): 4>3 4>8 4>9 4>14 4>15 4>19 4>20 7>5 
+FREE2@12 move NEEDED  before=.11.1..22...221.111.. after=.11.1..22.....1.111..  safe moves(28): 4>0 4>3 4>6 4>9 4>10 4>12 4>13 4>15 
+FREE2@0 move NEEDED  before=2211..22...1.1.1111.. after=..11..22...1.1.1111..  safe moves(33): 2>4 2>5 2>8 2>9 2>12 2>14 2>19 2>20 
+FREE2@13 move NEEDED  before=.1..1...22..1221111.. after=.1..1...22..1..1111..  safe moves(42): 1>0 1>3 1>10 1>11 1>13 1>14 1>19 1>20 
+FREE2@12 move NEEDED  before=1...1..1.1112222111.. after=1...1..1.111..22111..  safe moves(24): 4>8 4>12 4>13 4>19 4>20 7>8 7>12 7>13 
+FREE2@15 move NEEDED  before=.1......1..1..12211.. after=.1......1..1..1..11..  safe moves(62): 1>3 1>4 1>6 1>7 1>9 1>10 1>12 1>13 
+FREE2@13 move NEEDED  before=..1122..11..1222211.. after=..1122..11..1..2211..  safe moves(40): 2>6 2>7 2>10 2>11 2>13 2>14 2>19 2>20 
+FREE2@16 move NEEDED  before=.111.1..22.22...221.. after=.111.1..22.22.....1..  safe moves(33): 2>0 2>4 2>6 2>7 2>10 2>13 2>14 2>16 
+FREE2@9 move NEEDED  before=.1..22..12211.1.221.. after=.1..22..1..11.1.221..  safe moves(48): 1>0 1>3 1>6 1>7 1>9 1>10 1>13 1>15 
+FREE2@16 move NEEDED  before=.1.33311.1..1..1221.. after=.1.33311.1..1..1..1..  safe moves(50): 1>8 1>10 1>11 1>13 1>14 1>16 1>17 1>19 
+FREE2@16 move NEEDED  before=...1.1.122.22..1221.. after=...1.1.122.22..1..1..  safe moves(32): 5>0 5>4 5>6 5>10 5>13 5>14 5>16 5>17 
+FREE2@16 move NEEDED  before=1....22.1.1.11.1221.. after=1....22.1.1.11.1..1..  safe moves(37): 8>1 8>4 8>11 8>14 8>16 8>17 8>19 8>20 
+FREE2@16 move NEEDED  before=.1..1....11...11221.. after=.1..1....11...11..1..  safe moves(49): 1>0 1>3 1>5 1>7 1>8 1>11 1>12 1>13 
+FREE2@16 move NEEDED  before=1..1.221.....111221.. after=1..1.221.....111..1..  safe moves(61): 0>4 0>8 0>9 0>11 0>12 0>16 0>17 0>19 
+FREE2@16 move NEEDED  before=..221111....1221221.. after=..221111....1221..1..  safe moves(41): 6>0 6>1 6>8 6>16 6>17 6>19 6>20 7>0 
+FREE2@16 move NEEDED  before=..1..22.333.1.22221.. after=..1..22.333.1.22..1..  safe moves(31): 2>0 2>1 2>3 2>4 2>7 2>11 2>13 2>16 
+FREE2@16 move NEEDED  before=.11.22.1.1..1122221.. after=.11.22.1.1..1122..1..  safe moves(17): 7>0 7>3 7>10 7>16 7>17 7>19 7>20 18>0 
+FREE2@2 move NEEDED  before=.1221..221.11..3331.. after=.1..1..221.11..3331..  safe moves(35): 1>0 1>3 1>5 1>6 1>10 1>13 1>14 1>19 
+FREE3@15 move NEEDED  before=1..11..11.11..13331.. after=1..11..11.11..1...1..  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@0 move NEEDED  before=2211.1.11.1...1..22.. after=..11.1.11.1...1..22..  safe moves(21): 2>4 2>6 2>9 2>15 2>16 2>19 2>20 5>0 
+FREE2@7 move NEEDED  before=.1..333221..111..22.. after=.1..333..1..111..22..  safe moves(38): 1>0 1>3 1>7 1>8 1>10 1>11 1>15 1>16 
+FREE2@0 move NEEDED  before=22221....111122..22.. after=..221....111122..22..  safe moves(23): 4>0 4>1 4>7 4>8 4>15 4>16 4>19 4>20 
+FREE2@8 move NEEDED  before=221..1.1221..1.1.22.. after=221..1.1..1..1.1.22..  safe moves(59): 2>6 2>8 2>9 2>11 2>12 2>14 2>16 2>19 
+FREE2@2 move NEEDED  before=.12222.111...111.22.. after=.1..22.111...111.22..  safe moves(8): 1>0 1>3 1>6 1>10 1>12 1>16 1>19 1>20 
+FREE2@8 move NEEDED  before=11...1112222..22.22.. after=11...111..22..22.22..  safe moves(26): 1>4 1>8 1>9 1>12 1>13 1>16 1>19 1>20 
+FREE2@4 move NEEDED  before=11222211...1.1..122.. after=1122..11...1.1..122..  safe moves(34): 6>4 6>8 6>9 6>10 6>12 6>14 6>15 6>19 
+FREE2@8 move NEEDED  before=.333..22221..11.122.. after=.333..22..1..11.122..  safe moves(18): 10>0 10>4 10>5 10>8 10>9 10>11 10>12 10>15 
+FREE2@6 move NEEDED  before=..1.222211...1.1122.. after=..1.22..11...1.1122..  safe moves(35): 2>0 2>3 2>6 2>7 2>10 2>11 2>12 2>14 
+FREE2@14 move NEEDED  before=..1333.11.1..122122.. after=..1333.11.1..1..122..  safe moves(35): 2>6 2>9 2>11 2>12 2>14 2>15 2>19 2>20 
+FREE2@15 move NEEDED  before=.22.1..1.221..12222.. after=.22.1..1.221..1..22..  safe moves(40): 4>0 4>3 4>6 4>8 4>12 4>13 4>15 4>16 
+FREE2@15 move NEEDED  before=..3331..1..11112222.. after=..3331..1..1111..22..  safe moves(30): 5>0 5>1 5>9 5>10 5>15 5>16 5>19 5>20 
+FREE2@2 move NEEDED  before=1122...11..1.1..333.. after=11.....11..1.1..333..  safe moves(49): 1>3 1>4 1>9 1>10 1>12 1>14 1>15 1>19 
+FREE2@11 move NEEDED  before=22.22..1..12211.333.. after=22.22..1..1..11.333..  safe moves(30): 7>2 7>5 7>6 7>8 7>9 7>11 7>12 7>15 
+FREE2@0 move NEEDED  before=221.111..1.1..22333.. after=..1.111..1.1..22333..  safe moves(35): 2>0 2>3 2>7 2>8 2>10 2>12 2>13 2>19 
+FREE2@8 move NEEDED  before=11..11112222.1.....1. after=11..1111..22.1.....1.  safe moves(42): 1>3 1>8 1>9 1>12 1>14 1>15 1>17 1>18 
+FREE2@0 move NEEDED  before=2222..11.2211.1....1. after=..22..11.2211.1....1.  safe moves(32): 6>0 6>1 6>4 6>5 6>8 6>13 6>15 6>16 
+FREE2@0 move NEEDED  before=221.1...11.....1...1. after=..1.1...11.....1...1.  safe moves(62): 2>0 2>3 2>5 2>6 2>7 2>10 2>11 2>14 
+FREE2@6 move NEEDED  before=...1.12211.1.1.1...1. after=...1.1..11.1.1.1...1.  safe moves(30): 8>4 8>10 8>12 8>14 8>18 8>20 13>4 13>6 
+FREE2@10 move NEEDED  before=..22..22.12222.1...1. after=..22..22.1..22.1...1.  safe moves(33): 9>0 9>1 9>4 9>5 9>8 9>11 9>14 9>16 
+FREE3@0 move NEEDED  before=333111.1111...11...1. after=...111.1111...11...1.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@1 move NEEDED  before=1221.11..1...111...1. after=1..1.11..1...111...1.  safe moves(7): 19>1 19>2 19>4 19>7 19>8 19>16 19>17 
+FREE2@0 move NEEDED  before=2211.22.111..221...1. after=..11.22.111..221...1.  safe moves(34): 2>0 2>1 2>4 2>7 2>11 2>12 2>16 2>17 
+FREE2@3 move NEEDED  before=.112211.1..1.122...1. after=.11..11.1..1.122...1.  safe moves(26): 2>0 2>7 2>9 2>10 2>12 2>20 5>0 5>7 
+FREE2@1 move NEEDED  before=.22..111.1..1...1..1. after=.....111.1..1...1..1.  safe moves(49): 5>8 5>10 5>11 5>13 5>14 5>15 5>17 5>18 
+FREE2@1 move NEEDED  before=122221....1.11..1..1. after=1..221....1.11..1..1.  safe moves(50): 0>6 0>8 0>9 0>11 0>14 0>15 0>17 0>18 
+FREE2@3 move NEEDED  before=111221221.....1.1..1. after=111..1221.....1.1..1.  safe moves(53): 2>12 2>13 2>15 2>17 2>18 2>20 5>9 5>10 
+FREE3@8 move NEEDED  before=.1...1.13331..1.1..1. after=.1...1.1...1..1.1..1.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@0 move NEEDED  before=221.122....1.11.1..1. after=..1.122....1.11.1..1.  safe moves(35): 2>0 2>1 2>3 2>7 2>10 2>12 2>15 2>17 
+FREE2@4 move NEEDED  before=..112222.221.22.1..1. after=..11..22.221.22.1..1.  safe moves(34): 2>4 2>5 2>8 2>12 2>15 2>17 2>18 2>20 
+FREE2@9 move NEEDED  before=1...1...12211..11..1. after=1...1...1..11..11..1.  safe moves(31): 0>3 0>13 0>14 0>17 0>18 0>20 8>7 8>13 
+FREE2@10 move NEEDED  before=1...111..12222.11..1. after=1...111..1..22.11..1.  safe moves(20): 6>11 6>14 6>17 6>18 6>20 9>7 9>8 9>10 
+FREE2@12 move NEEDED  before=11......1..122111..1. after=11......1..1..111..1.  safe moves(29): 8>2 8>12 8>13 8>17 8>18 8>20 11>2 11>6 
+FREE2@14 move NEEDED  before=..11...1..111.221..1. after=..11...1..111...1..1.  safe moves(23): 12>0 12>1 12>15 12>17 12>18 12>20 16>0 16>1 
+FREE2@14 move NEEDED  before=.111...1333.11221..1. after=.111...1333.11..1..1.  safe moves(26): 13>0 13>4 13>6 13>11 13>14 13>15 13>17 13>18 
+FREE2@6 move NEEDED  before=..1.112211.....22..1. after=..1.11..11.....22..1.  safe moves(50): 2>0 2>1 2>3 2>6 2>7 2>10 2>11 2>13 
+FREE2@11 move NEEDED  before=..221221..1221.22..1. after=..221221..1..1.22..1.  safe moves(36): 7>0 7>1 7>11 7>12 7>14 7>17 7>18 7>20 
+FREE2@5 move NEEDED  before=.1.11221.1.1.2222..1. after=.1.11..1.1.1.2222..1.  safe moves(52): 1>0 1>5 1>6 1>8 1>10 1>12 1>17 1>18 
+FREE2@12 move NEEDED  before=.111..122..122333..1. after=.111..122..1..333..1.  safe moves(35): 3>0 3>9 3>10 3>12 3>13 3>17 3>18 3>20 
+FREE3@2 move NEEDED  before=.1333.1..11.1....1.1. after=.1....1..11.1....1.1.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@4 move NEEDED  before=1..122111...11...1.1. after=1..1..111...11...1.1.  safe moves(24): 0>4 0>5 0>14 0>15 0>16 0>18 0>20 3>14 
+FREE2@8 move NEEDED  before=.221..112222..1..1.1. after=.221..11..22..1..1.1.  safe moves(57): 3>0 3>8 3>9 3>12 3>13 3>15 3>16 3>18 
+FREE2@11 move NEEDED  before=.221..22..12211..1.1. after=.221..22..1..11..1.1.  safe moves(56): 3>0 3>8 3>9 3>11 3>12 3>15 3>16 3>18 
+FREE2@11 move NEEDED  before=1.1..1333.12222..1.1. after=1.1..1333.1..22..1.1.  safe moves(43): 2>1 2>4 2>9 2>11 2>12 2>15 2>16 2>18 
+FREE2@3 move NEEDED  before=...2211.111..1.1.1.1. after=.....11.111..1.1.1.1.  safe moves(24): 5>7 5>14 5>16 5>18 5>20 13>7 13>11 13>16 
+FREE2@6 move NEEDED  before=1..11.22...11.11.1.1. after=1..11......11.11.1.1.  safe moves(21): 0>5 0>7 0>8 0>10 0>13 0>16 0>18 0>20 
+FREE3@7 move NEEDED  before=11.1...333111.11.1.1. after=11.1......111.11.1.1.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@13 move NEEDED  before=.111...11.122221.1.1. after=.111...11.122..1.1.1.  safe moves(21): 8>0 8>13 8>14 8>16 8>20 15>0 15>9 15>13 
+FREE2@6 move NEEDED  before=1.1.22221..1....11.1. after=1.1.22..1..1....11.1.  safe moves(36): 2>3 2>6 2>7 2>9 2>10 2>12 2>15 2>18 
+FREE2@11 move NEEDED  before=..1.1122...221..11.1. after=..1.1122.....1..11.1.  safe moves(42): 2>0 2>3 2>8 2>9 2>11 2>12 2>14 2>15 
+FREE2@5 move NEEDED  before=.1.1122.....111.11.1. after=.1.11.......111.11.1.  safe moves(26): 1>2 1>5 1>6 1>7 1>8 1>9 1>10 1>11 
+FREE2@9 move NEEDED  before=..22.1.112222..111.1. after=..22.1.11..22..111.1.  safe moves(21): 5>0 5>1 5>9 5>10 5>13 5>14 5>20 8>0 
+FREE3@9 move NEEDED  before=.1...1..133311.111.1. after=.1...1..1...11.111.1.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@13 move NEEDED  before=...1111...1.122111.1. after=...1111...1.1..111.1.  safe moves(23): 6>9 6>11 6>18 6>20 10>7 10>8 10>13 10>14 
+FREE2@14 move NEEDED  before=..11.1.333..222211.1. after=..11.1.333..22..11.1.  safe moves(32): 2>4 2>6 2>10 2>11 2>14 2>15 2>18 2>20 
+FREE2@15 move NEEDED  before=11221....1.1..1221.1. after=11221....1.1..1..1.1.  safe moves(40): 9>7 9>12 9>13 9>15 9>16 9>18 9>20 11>5 
+FREE2@13 move NEEDED  before=22..1..1.22.122221.1. after=22..1..1.22.1..221.1.  safe moves(37): 4>2 4>3 4>5 4>6 4>8 4>11 4>13 4>14 
+FREE2@11 move NEEDED  before=11....1.111221..22.1. after=11....1.111..1..22.1.  safe moves(43): 6>11 6>12 6>14 6>15 6>18 6>20 8>2 8>11 
+FREE2@16 move NEEDED  before=11...1.1.1.1...122.1. after=11...1.1.1.1...1...1.  safe moves(30): 5>2 5>6 5>8 5>10 5>16 5>17 5>18 5>20 
+FREE2@0 move NEEDED  before=2211..1.1...111122.1. after=..11..1.1...111122.1.  safe moves(35): 2>4 2>5 2>7 2>9 2>11 2>18 2>20 3>0 
+FREE2@6 move NEEDED  before=..1.112211....1333.1. after=..1.11..11....1333.1.  safe moves(59): 2>0 2>1 2>3 2>6 2>7 2>10 2>11 2>12 
+FREE2@9 move NEEDED  before=11..1..2222111....11. after=11..1..22..111....11.  safe moves(24): 1>3 1>5 1>6 1>9 1>10 1>14 1>17 1>20 
+FREE3@5 move NEEDED  before=.1.1.33311111.1...11. after=.1.1....11111.1...11.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@5 move NEEDED  before=.11.12222..2211...11. after=.11.1..22..2211...11.  safe moves(8): 4>0 4>3 4>6 4>9 4>10 4>16 4>17 4>20 
+FREE2@4 move NEEDED  before=.2212222.22.1..1..11. after=.221..22.22.1..1..11.  safe moves(37): 3>0 3>8 3>11 3>13 3>14 3>16 3>17 3>20 
+FREE2@10 move NEEDED  before=.1...221.12222.1..11. after=.1...221.1..22.1..11.  safe moves(26): 9>0 9>3 9>4 9>8 9>10 9>11 9>14 9>16 
+FREE2@12 move NEEDED  before=122...1.11.12211..11. after=122...1.11.1..11..11.  safe moves(28): 8>7 8>10 8>13 8>16 8>17 8>20 11>7 11>10 
+FREE2@1 move NEEDED  before=122...122..1..22..11. after=1.....122..1..22..11.  safe moves(40): 0>3 0>9 0>10 0>12 0>13 0>16 0>17 0>20 
+FREE2@8 move NEEDED  before=1..1111122......1.11. after=1..11111........1.11.  safe moves(38): 0>2 0>8 0>9 0>10 0>11 0>12 0>13 0>14 
+FREE2@3 move NEEDED  before=.222222.22..11..1.11. after=.22..22.22..11..1.11.  safe moves(25): 12>0 12>3 12>4 12>7 12>14 12>15 12>17 12>20 
+FREE2@0 move NEEDED  before=221.22.11....11.1.11. after=..1.22.11....11.1.11.  safe moves(15): 2>0 2>3 2>6 2>9 2>12 2>15 2>17 2>20 
+FREE2@0 move NEEDED  before=22122.1....11..11.11. after=..122.1....11..11.11.  safe moves(37): 2>5 2>7 2>8 2>10 2>13 2>14 2>17 2>20 
+FREE2@3 move NEEDED  before=..1221.....333111.11. after=..1..1.....333111.11.  safe moves(20): 2>0 2>1 2>3 2>4 2>6 2>7 2>9 2>10 
+FREE2@14 move NEEDED  before=1.1..1...11.22221.11. after=1.1..1...11.22..1.11.  safe moves(20): 2>1 2>4 2>11 2>14 2>15 2>17 2>20 5>1 
+FREE3@13 move NEEDED  before=..111.1.11...3331.11. after=..111.1.11......1.11.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@7 move NEEDED  before=..221.122...11122.11. after=..221.1.....11122.11.  safe moves(15): 6>0 6>1 6>5 6>7 6>8 6>11 6>17 6>20 
+FREE2@0 move NEEDED  before=221.22..1.122....111. after=..1.22..1.122....111.  safe moves(27): 2>0 2>3 2>6 2>7 2>9 2>13 2>14 2>16 
+FREE2@1 move NEEDED  before=1221..122.1.1.1..111. after=1..1..122.1.1.1..111.  safe moves(38): 0>5 0>9 0>11 0>13 0>16 0>20 3>9 3>13 
+FREE2@0 move NEEDED  before=2222122.11.....1.111. after=..22122.11.....1.111.  safe moves(23): 9>0 9>1 9>7 9>10 9>11 9>16 9>20 15>0 
+FREE2@2 move NEEDED  before=2222...1.1..1.11.111. after=22.....1.1..1.11.111.  safe moves(45): 7>2 7>5 7>8 7>10 7>11 7>13 7>16 7>20 
+FREE2@12 move NEEDED  before=.1.1....1..12222.111. after=.1.1....1..1..22.111.  safe moves(41): 1>4 1>7 1>9 1>10 1>12 1>13 1>16 1>20 
+FREE3@5 move NEEDED  before=1....33311..11..1111. after=1.......11..11..1111.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@3 move NEEDED  before=..1221....1333..1111. after=..1..1....1333..1111.  safe moves(28): 2>0 2>1 2>3 2>4 2>6 2>7 2>9 2>14 
+FREE2@3 move NEEDED  before=..1221.....122.11111. after=..1..1.....122.11111.  safe moves(26): 2>0 2>1 2>3 2>4 2>6 2>7 2>9 2>10 
+FREE2@10 move NEEDED  before=.1...22.11221..22111. after=.1...22.11..1..22111.  safe moves(18): 9>0 9>3 9>4 9>7 9>10 9>11 9>13 9>14 
+FREE2@16 move NEEDED  before=..1.1.11.1.11...2211. after=..1.1.11.1.11.....11.  safe moves(17): 2>3 2>5 2>8 2>10 2>20 4>0 4>1 4>8 
+FREE2@16 move NEEDED  before=.1..1.112211...12211. after=.1..1.112211...1..11.  safe moves(25): 1>0 1>3 1>5 1>13 1>14 1>16 1>17 1>20 
+FREE2@8 move NEEDED  before=..111...2211.1.12211. after=..111.....11.1.12211.  safe moves(26): 2>0 2>5 2>6 2>8 2>9 2>12 2>14 2>20 
+FREE2@16 move NEEDED  before=1.11...1..122.112211. after=1.11...1..122.11..11.  safe moves(26): 2>13 2>16 2>17 2>20 7>1 7>13 7>20 10>1 
+FREE2@16 move NEEDED  before=..11.....1.22.222211. after=..11.....1.22.22..11.  safe moves(43): 2>0 2>1 2>4 2>5 2>6 2>7 2>8 2>10 
+FREE2@5 move NEEDED  before=..111221.11..1...221. after=..111..1.11..1...221.  safe moves(34): 2>0 2>5 2>6 2>8 2>11 2>12 2>20 4>0 
+FREE2@9 move NEEDED  before=.1...22112211.1..221. after=.1...2211..11.1..221.  safe moves(23): 8>0 8>3 8>4 8>10 8>13 8>15 8>16 8>20 
+FREE2@0 move NEEDED  before=2211...1122.1..1.221. after=..11...1122.1..1.221.  safe moves(35): 2>0 2>4 2>5 2>6 2>11 2>13 2>14 2>16 
+FREE2@13 move NEEDED  before=...11.11.1..1221.221. after=...11.11.1..1..1.221.  safe moves(20): 9>5 9>8 9>11 9>13 9>14 9>16 9>20 12>5 
+FREE2@17 move NEEDED  before=1.1.122....1.1..1221. after=1.1.122....1.1..1..1.  safe moves(43): 2>1 2>3 2>7 2>10 2>12 2>14 2>15 2>17 
+FREE2@10 move NEEDED  before=1.1.1...112222..1221. after=1.1.1...11..22..1221.  safe moves(42): 2>1 2>3 2>5 2>7 2>10 2>11 2>14 2>15 
+FREE2@0 move NEEDED  before=221.....111.122.1221. after=..1.....111.122.1221.  safe moves(21): 2>0 2>1 2>3 2>4 2>6 2>7 2>11 2>15 
+FREE2@0 move NEEDED  before=22...221.1..1.111221. after=.....221.1..1.111221.  safe moves(17): 9>0 9>1 9>3 9>4 9>8 9>10 9>11 9>13 
+FREE2@17 move NEEDED  before=1..111111....1.22221. after=1..111111....1.22..1.  safe moves(29): 0>9 0>12 0>14 0>17 0>18 0>20 3>9 3>12 
+FREE2@17 move NEEDED  before=..1.1.11...11.122221. after=..1.1.11...11.122..1.  safe moves(28): 2>0 2>3 2>5 2>8 2>13 2>17 2>18 2>20 
+FREE2@17 move NEEDED  before=1.11....1..1.1333221. after=1.11....1..1.1333..1.  safe moves(37): 2>1 2>4 2>7 2>9 2>10 2>12 2>17 2>18 
+FREE3@16 move NEEDED  before=1..1....1111..1.3331. after=1..1....1111..1....1.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@7 move NEEDED  before=.111.22221..1.....22. after=.111.22..1..1.....22.  safe moves(33): 2>0 2>4 2>7 2>8 2>10 2>11 2>13 2>14 
+FREE2@6 move NEEDED  before=.11..12222122..1..22. after=.11..1..22122..1..22.  safe moves(28): 2>0 2>6 2>7 2>13 2>14 2>16 2>17 2>20 
+FREE2@0 move NEEDED  before=221..11..2211.11..22. after=..1..11..2211.11..22.  safe moves(32): 2>3 2>4 2>7 2>8 2>13 2>16 2>17 2>20 
+FREE2@0 move NEEDED  before=221..1..22.13331..22. after=..1..1..22.13331..22.  safe moves(28): 2>0 2>1 2>3 2>4 2>6 2>7 2>10 2>16 
+FREE2@8 move NEEDED  before=.1.11333221..1..1.22. after=.1.11333..1..1..1.22.  safe moves(37): 1>8 1>9 1>11 1>12 1>14 1>15 1>17 1>20 
+FREE2@5 move NEEDED  before=1..22221..1.111.1.22. after=1..22..1..1.111.1.22.  safe moves(35): 0>5 0>6 0>8 0>9 0>11 0>15 0>17 0>20 
+FREE2@8 move NEEDED  before=..1.1...22122.111.22. after=..1.1.....122.111.22.  safe moves(38): 2>0 2>1 2>3 2>5 2>6 2>7 2>8 2>9 
+FREE2@0 move NEEDED  before=221..1.122..22.22.22. after=..1..1.122..22.22.22.  safe moves(20): 2>0 2>1 2>3 2>4 2>6 2>10 2>11 2>14 
+FREE2@1 move NEEDED  before=1221..1.111..11..122. after=1..1..1.111..11..122.  safe moves(50): 0>4 0>5 0>7 0>11 0>12 0>15 0>16 0>20 
+FREE2@2 move NEEDED  before=.12222.1..11..11.122. after=.1..22.1..11..11.122.  safe moves(39): 1>0 1>3 1>6 1>8 1>9 1>12 1>13 1>16 
+FREE2@11 move NEEDED  before=..1.1...111221..1122. after=..1.1...111..1..1122.  safe moves(27): 2>0 2>3 2>6 2>11 2>12 2>14 2>15 2>20 
+FREE2@15 move NEEDED  before=11.1...11.11..122122. after=11.1...11.11..1..122.  safe moves(44): 1>9 1>12 1>13 1>15 1>16 1>20 7>4 7>9 
+FREE2@16 move NEEDED  before=111...111..22..12222. after=111...111..22..1..22.  safe moves(18): 8>3 8>4 8>9 8>10 8>13 8>14 8>16 8>17 
+FREE2@16 move NEEDED  before=..11..1.221..1112222. after=..11..1.221..111..22.  safe moves(46): 2>4 2>5 2>7 2>11 2>12 2>16 2>17 2>20 
+FREE3@17 move NEEDED  before=11..1..1....11.11333. after=11..1..1....11.11....  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@6 move NEEDED  before=111...3331.11.1.1...1 after=111......1.11.1.1...1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@8 move NEEDED  before=.11.1.1.3331.....1..1 after=.11.1.1....1.....1..1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@8 move NEEDED  before=111..11.333...11.1..1 after=111..11.......11.1..1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@12 move NEEDED  before=.1..1...1.1.333.11..1 after=.1..1...1.1.....11..1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@5 move NEEDED  before=1..113331.111.....1.1 after=1..11...1.111.....1.1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@10 move NEEDED  before=...1...1113331.11.1.1 after=...1...111...1.11.1.1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@13 move NEEDED  before=....11.111..1333.11.1 after=....11.111..1....11.1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@1 move NEEDED  before=13331.11.1....1.122.1 after=1...1.11.1....1.122.1  a 2-move works:1 one 1-move works:1 two 1-moves work:1
+FREE3@10 move NEEDED  before=..1.1....13331.1...11 after=..1.1....1...1.1...11  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@4 move NEEDED  before=1.1.333...11.11.1..11 after=1.1.......11.11.1..11  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@5 move NEEDED  before=1....33311.11.1..1.11 after=1.......11.11.1..1.11  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@2 move NEEDED  before=.1333...1111..1.11.11 after=.1......1111..1.11.11  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@1 move NEEDED  before=13331.1....1.111..111 after=1...1.1....1.111..111  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@12 move NEEDED  before=...11.1.1.1.3331.1111 after=...11.1.1.1....1.1111  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE3@16 move NEEDED  before=.1...11..1...11133311 after=.1...11..1...111...11  a 2-move works:0 one 1-move works:0 two 1-moves work:1
+FREE3@17 move NEEDED  before=1.1....11.11.22.13331 after=1.1....11.11.22.1...1  a 2-move works:1 one 1-move works:1 two 1-moves work:1
+FREE3@18 move NEEDED  before=....11.11.1.1.111.333 after=....11.11.1.1.111....  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+alloc 1 from safe states: 46342522 cases, first fit lands in the safe set in 44303629 (95.60%), last fit in 44303629 (95.60%)
+alloc 2 from safe states: 26044380 cases, first fit lands in the safe set in 24986720 (95.94%), last fit in 24986720 (95.94%)
+alloc 3 from safe states: 13051105 cases, first fit lands in the safe set in 12825596 (98.27%), last fit in 12825596 (98.27%)
+free 2: 152571932 cases; safe without a move 145417314; move NEEDED 7154618; of those compaction (highest 1 -> lowest free cell) is safe in 4004538; mean #safe single moves 32.65
+  histogram of #safe moves when needed: 3:12726 4:16072 5:14896 6:34568 7:22276 8:48222 9:36142 10:39078 11:35842 12:56156 13:55588 14:79232 15:85382 16:109124 17:119308 18:148858 19:134646 20:132672 21:133576 22:143314 23:159650 24:204428 25:211862 26:263240 27:271464 28:256420 29:209418 30:189190 31:181252 32:209684 33:209316 34:241760 35:271986 36:257394 37:213592 38:172786 39:153120 40:152664 41:150396 42:161464 43:170548 44:168870 45:152882 46:115882 47:99474 48:90770 49:98588 50:95476 51:83942 52:72724 53:61668 54:52364 55:39786 56:35024 57:31756 58:29436 59:27824 60:23802 61:17530 62:12780 63:74728
+free 3: 49951141 cases; safe without a move 49313960; move NEEDED 637181; a 2-move works 48318; one 1-move works 628497; only two 1-moves work 8684; compaction(1 or 2 steps) works 560350
+exit 0

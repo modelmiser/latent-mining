@@ -1,0 +1,6 @@
+== exhaustive, game F, first fit + potential-greedy moves (A=0 V=6 COSTMODE=3); optimum 9 11 13 14 16 for M=6..10
+G=F M=6 A=0 V=6 reachable=1746 H_needed=11 ceil(5M/3)=10 floor(7M/4)=10 worst=..1.1..13==
+G=F M=7 A=0 V=6 reachable=6589 H_needed=13 ceil(5M/3)=12 floor(7M/4)=12 worst=..1..1..2=3==
+G=F M=8 A=0 V=6 reachable=48348 H_needed=16 ceil(5M/3)=14 floor(7M/4)=14 worst=..1..1..1..2=3==
+G=F M=9 A=0 V=6 reachable=338012 H_needed=19 ceil(5M/3)=15 floor(7M/4)=15 worst=.1..1..1..1..1.13==
+G=F M=10 A=0 V=6 reachable=2333214 H_needed=22 ceil(5M/3)=17 floor(7M/4)=17 worst=.1..1..1..1..1..1.13==

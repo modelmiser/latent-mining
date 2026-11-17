@@ -1,0 +1,11 @@
+
+Part B: P6 adversary vs managers, game N, heap cap 8M.  min over managers of forced extent
+  M  bound  #mgrs  min_extent  min_guarantee  argmin   violations
+  24    38    321         40            40   rand7_q0.5_w1.0 0
+  36    59    321         61            61   rand23_q1.0_w1.5 0
+  48    80    321         82            82   rand0_q1.0_w1.0 0
+  60   101    321        103           103   rand27_q0.2_w1.5 0
+
+real	0m1.697s
+user	0m1.692s
+sys	0m0.004s

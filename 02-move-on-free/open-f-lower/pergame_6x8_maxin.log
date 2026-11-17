@@ -1,0 +1,8 @@
+### [6]x8, S=1.11.1... , manager limited to <= 2 in-gap 2s (rest in tail)
+    new best 0.7083 after 6/129 placements: 1.11.122.1.11.1...1.11.1.221.11.1...1.11.1...1.11.1...1.11.1...1.11.1.... tail=6 advF=0 tf=1
+  slope=0.7083 (136/192) kept=32 y=8  manager's best placement: 1.11.122.1.11.1...1.11.1.221.11.1...1.11.1...1.11.1...1.11.1...1.11.1.... tail=6 (of 129 placements)  adv F=0 tailfree=1  W(R1)=134 W(R2
+  ==> periodic game value (max over 1 S of min over placements): slope=0.7083   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)
+### [6]x8, S=1.11.1... , manager limited to <= 3 in-gap 2s (rest in tail)
+    new best 0.7083 after 7/577 placements: 1.11.122.1.11.122.1.11.1...1.11.1.221.11.1...1.11.1...1.11.1...1.11.1.... tail=5 advF=0 tf=0
+  slope=0.7083 (136/192) kept=32 y=8  manager's best placement: 1.11.122.1.11.122.1.11.1...1.11.1.221.11.1...1.11.1...1.11.1...1.11.1.... tail=5 (of 577 placements)  adv F=0 tailfree=0  W(R1)=136 W(R2
+  ==> periodic game value (max over 1 S of min over placements): slope=0.7083   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)

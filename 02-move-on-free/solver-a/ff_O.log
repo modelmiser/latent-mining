@@ -1,0 +1,14 @@
+G=O M=11 rule=0 reachable=118908 H_needed=19 worst=..1..1..1..[=[==[==
+G=O M=12 rule=0 reachable=342595 H_needed=20 worst=..1..1..1..[==[==[==
+G=O M=13 rule=0 reachable=984316 H_needed=22 worst=..1..1..1..1.[==[==[==
+G=O M=14 rule=0 reachable=2820678 H_needed=24 worst=..1..1..1..1..[=[=[==[==
+G=O M=15 rule=0 reachable=8065118 H_needed=25 worst=..1..1..1..1..[=[==[==[==
+G=O M=16 rule=0 reachable=23006411 H_needed=27 worst=.1..1..1..1..1..[=[==[==[==
+G=O M=3 rule=0 reachable=16 H_needed=4 worst=.1[=
+G=O M=4 rule=0 reachable=56 H_needed=6 worst=..1[==
+G=O M=5 rule=0 reachable=178 H_needed=8 worst=..1.1[==
+G=O M=6 rule=0 reachable=539 H_needed=10 worst=..1..[=[==
+G=O M=7 rule=0 reachable=1622 H_needed=12 worst=.1..1..[=[==
+G=O M=8 rule=0 reachable=4801 H_needed=14 worst=..1..1..[==[==
+G=O M=9 rule=0 reachable=14101 H_needed=15 worst=..1..[=..[==[==
+G=O M=10 rule=0 reachable=41062 H_needed=17 worst=.1..1..1..[=[=[==

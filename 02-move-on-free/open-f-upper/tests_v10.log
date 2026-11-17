@@ -1,0 +1,18 @@
+== exhaustive, game F, first fit + potential-greedy 1-moves kept below the highest 1, else compaction (A=0 V=10); COSTMODE 3 and 0
+cm=3 G=F M=6 A=0 V=10 reachable=611 H_needed=10 ceil(5M/3)=10 floor(7M/4)=10 worst=..1..2=3==
+cm=3 G=F M=7 A=0 V=10 reachable=2201 H_needed=12 ceil(5M/3)=12 floor(7M/4)=12 worst=.1..1..2=3==
+cm=3 G=F M=8 A=0 V=10 reachable=8027 H_needed=15 ceil(5M/3)=14 floor(7M/4)=14 worst=..1.1..1..2=3==
+cm=3 G=F M=9 A=0 V=10 reachable=29414 H_needed=17 ceil(5M/3)=15 floor(7M/4)=15 worst=..1..1..1..3==3==
+cm=3 G=F M=10 A=0 V=10 reachable=115074 H_needed=19 ceil(5M/3)=17 floor(7M/4)=17 worst=..1.1..1..2=..2=3==
+cm=3 G=F M=11 A=0 V=10 reachable=463660 H_needed=21 ceil(5M/3)=19 floor(7M/4)=19 worst=..1..1..1..2=..3==3==
+cm=0 G=F M=6 A=0 V=10 reachable=611 H_needed=10 ceil(5M/3)=10 floor(7M/4)=10 worst=..1..2=3==
+cm=0 G=F M=7 A=0 V=10 reachable=2085 H_needed=12 ceil(5M/3)=12 floor(7M/4)=12 worst=.1..1..2=3==
+cm=0 G=F M=8 A=0 V=10 reachable=6903 H_needed=14 ceil(5M/3)=14 floor(7M/4)=14 worst=..1..1..3==3==
+cm=0 G=F M=9 A=0 V=10 reachable=25628 H_needed=16 ceil(5M/3)=15 floor(7M/4)=15 worst=..1.1..2=..2=3==
+cm=0 G=F M=10 A=0 V=10 reachable=95476 H_needed=18 ceil(5M/3)=17 floor(7M/4)=17 worst=..1..11..1..3==3==
+cm=0 G=F M=11 A=0 V=10 reachable=326522 H_needed=21 ceil(5M/3)=19 floor(7M/4)=19 worst=..1..1..1..2=..3==3==
+== scripted attack, V=10 cm=3
+ M=24 scripted-attack extent=41  5M/3=40
+ M=48 scripted-attack extent=82  5M/3=80
+ M=96 scripted-attack extent=164  5M/3=160
+ M=192 scripted-attack extent=328  5M/3=320

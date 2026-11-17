@@ -1,0 +1,42 @@
+home=6 super-period: 6 ones on 9 cells; span/M=1.500; R1=4 R2=8
+  slope=0.7500 (18/24) kept=4 y=1  manager's best placement: 11.11..... tail=1 (of 4 placements)  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope=0.7500 (18/24) kept=4 y=1  manager's best placement: 1.11.1.... tail=1 (of 3 placements)  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope=0.7500 (18/24) kept=4 y=1  manager's best placement: .11.11.... tail=1 (of 4 placements)  adv F=0 tailfree=1  W(R1)=16 W(R2)=34
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: 111.1..... tail=1 (of 4 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: 1.111..... tail=1 (of 4 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: 11.1.1.... tail=1 (of 3 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: .111.1.... tail=1 (of 4 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: 1.1.11.... tail=1 (of 3 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.6667 (16/24) kept=4 y=1  manager's best placement: .1.111.... tail=1 (of 4 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.6667 (16/24) kept=6 y=0  manager's best placement: 111111.... tail=0 (of 1 placements)  adv F=0 tailfree=0  W(R1)=16 W(R2)=32
+  slope=0.5000 (12/24) kept=2 y=2  manager's best placement: 1.1....... tail=2 (of 12 placements)  adv F=0 tailfree=1  W(R1)=10 W(R2)=22
+  slope=0.5000 (12/24) kept=2 y=2  manager's best placement: .1.1...... tail=2 (of 12 placements)  adv F=0 tailfree=1  W(R1)=10 W(R2)=22
+  ==> periodic game value (max over 32 S of min over placements): slope=0.7500   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)
+
+real	0m0.018s
+user	0m0.043s
+sys	0m0.003s
+home=9 super-period: 9 ones on 12 cells; span/M=1.333; R1=4 R2=8
+  slope=0.7222 (26/36) kept=7 y=1  manager's best placement: 11111.11..... tail=1 (of 4 placements)  adv F=0 tailfree=1  W(R1)=24 W(R2)=50
+  slope=0.7222 (26/36) kept=7 y=1  manager's best placement: 1111.111..... tail=1 (of 4 placements)  adv F=0 tailfree=1  W(R1)=24 W(R2)=50
+  slope=0.7222 (26/36) kept=7 y=1  manager's best placement: 111.1111..... tail=1 (of 4 placements)  adv F=0 tailfree=1  W(R1)=24 W(R2)=50
+  slope=0.7222 (26/36) kept=7 y=1  manager's best placement: 11.11111..... tail=1 (of 4 placements)  adv F=0 tailfree=1  W(R1)=24 W(R2)=50
+  ==> periodic game value (max over 256 S of min over placements): slope=0.7222   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)
+
+real	0m0.507s
+user	0m1.506s
+sys	0m0.003s
+home=6,6 super-period: 12 ones on 18 cells; span/M=1.500; R1=4 R2=8
+  slope=0.7500 (36/48) kept=8 y=2  manager's best placement: 1.11.1...1.11.1.... tail=2 (of 9 placements)  adv F=0 tailfree=1  W(R1)=34 W(R2)=70
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 111111...11.11..... tail=1 (of 6 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 111111...1.111..... tail=1 (of 6 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 111111....1111..... tail=1 (of 7 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 11111....11111..... tail=1 (of 7 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 111.11...11111..... tail=1 (of 6 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 11.111...11111..... tail=1 (of 6 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  slope=0.7083 (34/48) kept=10 y=1  manager's best placement: 111111...1.11.1.... tail=1 (of 5 placements)  adv F=0 tailfree=1  W(R1)=32 W(R2)=66
+  ==> periodic game value (max over 2048 S of min over placements): slope=0.7500   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)
+
+real	1m28.561s
+user	4m25.603s
+sys	0m0.014s

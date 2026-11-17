@@ -1,0 +1,6 @@
+home=6,6,6,6 super-period: 24 ones on 36 cells; span/M=1.500; R1=4 R2=8
+  slope=0.7083 (68/96) kept=16 y=4  manager's best placement: 1.11.122.1.11.1.221.11.1...1.11.1.... tail=2 (of 81 placements)  adv F=0 tailfree=0  W(R1)=68 W(R2)=136
+  slope=0.7083 (68/96) kept=18 y=3  manager's best placement: 11111122.1.11.1...1.11.1...1.11.1.... tail=2 (of 65 placements)  adv F=0 tailfree=0  W(R1)=68 W(R2)=136
+  slope=0.7083 (68/96) kept=18 y=3  manager's best placement: 1111.122.1111.1...1.11.1.221.11.1.... tail=1 (of 65 placements)  adv F=0 tailfree=0  W(R1)=68 W(R2)=136
+  slope=0.7083 (68/96) kept=18 y=3  manager's best placement: 1.111122.1111.1...1.11.1.221.11.1.... tail=1 (of 65 placements)  adv F=0 tailfree=0  W(R1)=68 W(R2)=136
+  ==> periodic game value (max over 142 S of min over placements): slope=0.7083   (2/3=0.6667 means held at 5M/3; 3/4 means 7M/4... as H/M = 1 + slope)

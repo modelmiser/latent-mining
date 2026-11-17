@@ -1,0 +1,186 @@
+OPEN-F-UPPER: attempt to show mu^F = 5/3 (a manager for game F with h <= 5M/3 + c).
+Date 2026-11-16.  Everything here was done without reading open-f-lower.
+
+RESULT IN ONE PARAGRAPH
+ No manager with h <= 5M/3 + c was found, and the main question stays NOT PROVED in either direction.
+ What was established instead points the other way:
+  (R)  COMPLETE, computer-assisted.  Every F-manager that allocates the way first fit does on one short
+       request prefix (M ones on cells 0..M-1; then 2s packed on top) needs at least 27M/16 - 11 cells for
+       M = 0 mod 12, WHATEVER it does with its moves.  27/16 = 5/3 + 1/48.  So first-fit placement, with any move
+       rule at all, cannot give 5/3.  The exact restricted optimum first exceeds 5M/3 at M = 384 (645 vs 640);
+       below that the effect is invisible (it is NEGATIVE for M <= 192), which is why no table up to M = 13 or
+       even M = 100 shows it.
+  (R') COMPLETE, same computer check.  Every F-manager that puts the first M ones on cells 0..M-1 needs at
+       least (5/3 + 1/144) M - 12 cells, wherever it puts the 2s.
+  (E)  Every explicit rule tested is worse than optimal at every M = 6..13 in exhaustive play (the best, first fit
+       + compaction, by 1 cell at M <= 8 and by 4 at M = 13), and against a scripted adversary at M = 24..288
+       first fit + compaction reaches exactly 7M/4 at M = 288; the greedy-potential move rules reach 1.70 M.
+ My belief: mu^F > 5/3 (about 3 to 1).  NOT PROVED: (R) and (R') cover only managers that put the first M ones on
+ cells 0..M-1; a manager that spreads or offsets them is not covered.
+
+Notation: layout strings: '.' free, '1' a 1-block, "2=" / "22" a 2-block, "3==" a 3-block.  live = live cells.
+
+======================================================================================================
+1. WHAT OPTIMAL F MANAGERS DO (M = 13, H = 21, the only table entry where F differs from N)
+   STATUS: measured (strat.cpp = solver-b/solve2p.cpp core + statistics; log strat_F13_21.log)
+======================================================================================================
+ Maximal safe set: 74,260,679 of 90,524,042 layouts (82%).  It is mirror-symmetric, so "first fit" and "last fit"
+ have identical statistics; there is no built-in preference for low addresses.
+  alloc 1: first fit stays in the safe set in 95.60% of (safe layout, request) cases; alloc 2: 95.94%; alloc 3: 98.27%.
+  free 2 : 152,571,932 cases; safe with NO move in 95.3%; a move is NEEDED in 7,154,618 (4.7%).
+           When needed, on average 32.65 different single 1-moves are safe (minimum seen 3), and
+           compaction (highest 1 -> lowest free cell) is safe in only 4,004,538 of them (56%).
+  free 3 : 49,951,141 cases; a move is needed in 637,181 (1.3%).  One 1-move suffices in 628,497 of those;
+           a 2-move works in only 48,318; two 1-moves are indispensable in 8,684.
+ Source versus destination when a move is needed after a freed 2 (strat1.cpp, strat1_F13_21.log): on average
+ 4.02 of the 7.30 live 1s work as the block to move (55%), but 9.73 of the 10.81 free cells work as a destination
+ (90%); a safe move into the freed hole itself exists in 97.6% of cases; exactly one usable source in 1.6%.
+ So WHICH 1 is taken away matters, WHERE it goes mostly does not.  That is not compaction, and it matches
+ section 3: the 1 that must go is one the adversary would keep as a "blocker" of a free 3-window.
+ (An earlier draft read this off the sampled lines of the log; those are sorted by source and prove nothing.)
+ No simple geometric invariant ("all 1s below a line", "large blocks packed above") describes the safe set:
+ safe layouts with 1s at the far right and holes everywhere are common.  NOT a rule; an observation.
+
+======================================================================================================
+2. RULES TESTED (rt.cpp).  STATUS: measured.  None tracks 5M/3.
+======================================================================================================
+ A = allocation rule, V = move rule.  "exh" = exhaustive reachability against every adversary (exact cells needed
+ by the rule); "att" = one scripted adversary (a lower bound on what the rule needs).
+ Exhaustive, game F (tests.log, tests_greedy.log, tests_v10.log).  Optimum h^F = 9 11 13 14 16 18 20 21 (M = 6..13).
+   M                                   6   7   8   9  10  11  12  13  14
+   first fit, no moves (= game N)     10  13  15  17  19  21  23  25
+   first fit + compaction (A0 V1)     10  12  14  16  18  21  22  25  26      <- best rule found; ceil(5M/3)=..20 22 24
+   first fit + greedy potential V10   10  12  14  16  18  21                  (COSTMODE 0; COSTMODE 3 is worse)
+   first fit + greedy potential V6    11  13  16  19  22                      (lets 1s leave [0,M): bad)
+ Reachable-state counts grow by about 3.4x per unit of M (10.4 million at M = 14), so exhaustive play stops near
+ M = 15-16 with this code; M in the 20s was NOT reached exhaustively.  Larger M were tested only with scripted
+ and randomised adversaries (lower bounds).
+ Scripted adversary S (variant 1 of "att"): alloc 1 x M; free the 1s of one residue class mod 3 ("11.11.11.");
+ alloc 2 while legal (they go on top); free every second of those 2s (one manager move each); free 1s down to a
+ minimum set that leaves no new free 3-window; alloc 3 while legal.  Extent reached (att.log, tests_v10.log):
+   M                         24   48   96   192   288      ratio at the largest M
+   5M/3                      40   80  160   320   480
+   no moves                  44   88  176   352   528      11/6
+   compaction (V1)           41   82  167   334   504      7/4
+   top-local compaction V5   42   83  168   338   510      1.77
+   greedy potential V6 cm3   41   81  162   326            1.70   (but see the exhaustive row above: bad elsewhere)
+   greedy potential V10 cm3  41   82  164   328            1.71
+ Randomised structured adversary ("rnd", 30000 scripts, tests.log): compaction needs >= 42, 84, 170 at
+ M = 24, 48, 96 (ratio 1.75 .. 1.77).
+ NEGATIVE CONTROLS (tests.log), all behaved as they should:
+   - band one cell too small: "exh F 12 0 1 21" reports FAIL (extent 22 reached), "... 22" reports PASS;
+   - deliberately worse rules: last fit (A9) needs 16, 20 at M = 8, 10 (first fit: 14, 18);
+     "move the lowest 1 into the freed hole" (V8) needs 12, 18, 24 at M = 6, 8, 10.
+   - in section 3 the certificate search FAILS for slope 20/12 and succeeds for 21/12 (cyc.log).
+ Files sweep1.log and sweep2.log are partial / interleaved runs and should be ignored.
+
+======================================================================================================
+3. THEOREM R.  STATUS: COMPLETE (computer-assisted: finite graph check cyc.cpp; exact values dp4.cpp)
+======================================================================================================
+ Let M = 0 (mod 12).  Position P(M): 1s on every cell c of [0,M) with c mod 3 != 0 (".11.11. ... .11"),
+ and M/6 2-blocks packed on [M, 4M/3).  live = M.
+ P(M) is the layout of ANY F-manager that puts the first M ones on cells 0..M-1 and puts a 2 on top when no hole
+ fits, after the prefix:  alloc 1 x M;  free the 1s on cells = 0 mod 3;  alloc 2 x M/6.
+ (No 2 or 3 is freed in the prefix, so no move is available; all holes are single cells and cell M-1 holds a 1.)
+ First fit and best fit are such managers.
+
+ THEOREM R.  From P(M) the adversary forces extent >= 27M/16 - 11 against every continuation of the manager.
+ Hence every F-manager reaching P(M) needs at least (5/3 + 1/48) M - 11 cells.
+
+ Proof.  n2 = M/6, k = M/12.
+ Step 1 (adversary).  Free the 2s of odd rank (2nd, 4th, ..., the last one): k frees, so the manager gets k moves,
+   each of one 1 (a freed 2 allows nothing else).  Then free every 1 on a cell >= M.  No move is granted.
+   The kept 2s are untouched (2s cannot move after a freed 2), the top kept 2 ends at e2 = 4M/3 - 2, cell M is
+   occupied by a 2.
+ Step 2 (what the moves can have done).  1s are indistinguishable, so after k moves the set of cells holding a 1
+   differs from the original by at most k deletions and k insertions (each move deletes one cell from the set and
+   inserts one).  So r := #(original 1-cells of [0,M) now empty) <= k and
+   a := #(original holes of [0,M) now holding a 1) <= r  (1s parked outside [0,M) were just freed).
+   Let o be the resulting 0/1 occupancy of [0,M).  The manager's whole influence is the choice of o.
+ Step 3 (adversary).  Compute K = greedy set: scan r = 2..M-1; if the window {r-2,r-1,r} contains a 1 and no cell
+   of K, put the rightmost 1 of the window into K.  Free all 1s outside K.  No move is granted.  Now every free
+   3-window inside [0,M) is one that was already free in o.  Let slots = sum over maximal K-free runs of
+   floor(length/3), and v = |K| + 3*slots.  live = |K| + 2(n2-k) = |K| + M/6.
+ Step 4 (adversary).  alloc 3, n3 = floor((M - live)/3) times.  Cell e2-1 is occupied, so each 3 lies either
+   wholly in a free run below e2 (at most `slots` of them: no frees happen, so runs only shrink) or wholly at
+   cells >= e2.  So the extent is >= e2 + 3(n3 - slots) >= e2 + (M - live - 2) - 3*slots
+        = (4M/3 - 2) + (5M/6 - 2) - v = 13M/6 - 4 - v.
+ Step 5 (the manager cannot make v large).  Claim: for every o,  v <= M/3 + (7/4) r + 27/4.
+   The computation of K and of the slots is a deterministic scan with bounded memory: after cell i the state is
+   (i mod 3, o[i-1], o[i], K[i-1], K[i], R) with R = (length of the current K-free run ending at i-2) mod 3,
+   and reading o[i+1] adds a gain g = [a cell enters K] + 3*[R reaches 3].  This is a walk in a graph with
+   3*16*3 = 144 nodes and 2 edges per node (cyc.cpp builds it; the same transition function is the DP in dp4.cpp).
+   Give each edge the integer weight w = 12 g - 4 - 21*[the edge empties an original 1-cell].
+   cyc.cpp runs Bellman-Ford from all nodes at potential 0 and finds NO positive cycle, for each of the three
+   phases of the pattern, with maximum potential PHI = 53 (cyc.log).  Hence every walk has total weight <= 53:
+        12 (gain on cells 2..M-1) <= 4 (M-2) + 21 r + 53.
+   Cells 0,1 give no gain, and closing the last two cells completes at most one more slot (+3).  So
+        v <= (M-2)/3 + 7r/4 + 53/12 + 3 <= M/3 + 7k/4 + 27/4.
+   (The search also shows the constant 21 cannot be lowered to 20: slope 7/4 per removed 1 is exact.)
+ Step 6.  extent >= 13M/6 - 4 - M/3 - 7M/48 - 27/4 = 81M/48 - 43/4 >= 27M/16 - 11.                          QED
+
+ Exact values of the restricted optimum (dp4.cpp: maximise v over all o with a <= r <= k by dynamic programming;
+ dp4_all.log, dp4.log).  Row "P(M), odd ranks freed" is exactly the setting of the theorem:
+        M                           48    96   192   384   768   1536   3072
+        manager-optimal extent      77   159   320   645  1292   2589   5180
+        minus 5M/3                  -3    -1     0    +5   +12    +29    +60
+        best of 6 script variants   79   161   322   647  1294   2591   5182
+ Cross-checks: dp4 equals brute-force enumeration of all relocations (opt4.cpp, NOTOP=1) in 6 cases at M = 24, 36
+ (crosscheck_dp_vs_enum.log) and at M = 48 (752,718,345 relocations, opt4_48.log: 77); simulated annealing over
+ relocations at M = 96..384 never beat it (opt4_sa.log); the real-game engine rt.cpp run on the same script with
+ concrete move rules always lands above it (section 2).
+ What R does NOT say: nothing about managers that avoid P(M).  It is not a bound on h^F.
+
+ How the best manager spends the moves in P (from the optimal layouts): two moves turn "11.11.11" into
+ "111...11" (a free 3-window whose two neighbours the adversary is then forced to keep), alternating the side on
+ which the neighbouring hole is filled so that the adversary's every-third-cell pattern has to change phase.
+ That is worth 7/4 cell per move.  A freed 2 inside a packed run of 2s costs 2 cells.  Net loss 1/4 cell per
+ freed 2, M/12 freed 2s, hence M/48.  Compaction is worth only 1 per move (hence 7M/4).
+
+======================================================================================================
+3b. THEOREM R'.  STATUS: COMPLETE (same computer check as R; the extra steps are by hand)
+======================================================================================================
+ THEOREM R'.  Let M = 0 (mod 12).  Every F-manager that puts the first M ones on cells 0..M-1 needs at least
+ (5/3 + 1/144) M - 12 cells, wherever it puts 2s and whatever it does with its moves.
+
+ Proof.  Prefix: alloc 1 x M; free the 1s on cells = 0 mod 3; alloc 2 x n2, n2 = M/6.  Below M all holes are single
+ cells and cell M-1 holds a 1, so every 2 lies on cells >= M.  Call them 2_1 < ... < 2_n2 by address, let g_0 be
+ the number of free cells between cell M-1 and 2_1 and g_i the number between 2_i and 2_{i+1}.  A gap is BAD if
+ g_i != 0 mod 3; b = number of bad gaps.
+ The adversary picks a set F of 2s containing no two of adjacent rank and not 2_n2, frees them (|F| moves of one 1
+ each), frees every 1 on a cell >= M, and continues with Steps 3-4 of Theorem R on [0,M).
+ Let e2 = end of 2_n2.  Cells of [M,e2) are cells of kept 2s or free, so
+       e2 = M + 2(n2-|F|) + (sum of lengths of the free runs inside [M,e2)).
+ 3s below e2 lie inside free runs; one run may straddle cell M, and floor((x+y)/3) <= floor(x/3)+floor(y/3)+1, so
+       #3s below e2 <= slots + sum over runs in [M,e2) of floor(len/3) + 1.
+ With 3*n3 >= M - |K| - 2(n2-|F|) - 2 this gives
+       extent >= e2 + 3(n3 - #3s below e2) >= 2M - v + W - 5,   W = sum over free runs in [M,e2) of (len mod 3).
+ Step 5 of Theorem R does not depend on what is above M: v <= M/3 + 7|F|/4 + 27/4.  Hence
+       extent >= 5M/3 + W - 7|F|/4 - 12.                                                              (*)
+ Option 1, F empty: the runs are the gaps, W >= b.
+ Option 2, F = the 2s of odd rank (|F| = n2/2; 2_n2 has even rank and is kept): each freed 2_i gives the run
+   g_{i-1} + 2 + g_i, which is = 2 mod 3 when both gaps are good; every gap touches exactly one freed 2, so
+   W >= 2(|F| - b) and (*) gives extent >= 5M/3 + n2/8 - 2b - 12.
+ max(b, n2/8 - 2b) >= n2/24 = M/144.                                                                   QED
+ What R' does NOT cover: managers whose first M ones are not on cells 0..M-1 (gaps among them, or an offset).
+
+======================================================================================================
+4. WHY I THINK THE MANAGER CANNOT ESCAPE BY SPREADING THE FIRST M ONES.  STATUS: NOT PROVED (heuristic)
+======================================================================================================
+ If g cells among the first M ones are left empty the heap already has extent M+g and the adversary still chooses
+ which 1s survive.  To break the adversary's period-3 thinning the manager's own holes must rotate through all
+ three residue classes; the cheapest pattern I found (a hole every 7th cell) costs M/6 extra cells of extent and
+ forces only about M/42 extra kept 1s.  An offset block [x, x+M) lets 2s go below it as well; I expect the proof
+ of R' to adapt (two top regions) but have not written it.  A real proof for all managers must handle an arbitrary
+ first-M-ones layout; I have not done it.
+
+======================================================================================================
+5. STATUS TABLE
+======================================================================================================
+ mu^F = 5/3 (target)                                               NOT PROVED; I now doubt it is true
+ A manager for F within 5M/3 + c                                   NOT FOUND
+ Theorem R (first-fit-like placement needs >= 27M/16 - 11)         COMPLETE (computer-assisted)
+ Theorem R' (first M ones on 0..M-1 needs >= (5/3+1/144)M - 12)    COMPLETE (computer-assisted)
+ First fit + compaction needs 7M/4 - O(1) against script S         measured at M = 24..288, not proved in general
+ mu^F > 5/3 for ALL managers                                       NOT PROVED (section 4 is heuristic)
+ Exhaustive rule tests reached                                     M = 14 (not the M in the 20s asked for)

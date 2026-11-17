@@ -1,0 +1,33 @@
+== exhaustive, game F, first fit + compaction (A=0 V=1); optimum h^F = 9 11 13 14 16 18 20 21 for M=6..13
+G=F M=6 A=0 V=1 reachable=611 H_needed=10 ceil(5M/3)=10 floor(7M/4)=10 worst=..1..2=3==
+G=F M=7 A=0 V=1 reachable=2085 H_needed=12 ceil(5M/3)=12 floor(7M/4)=12 worst=.1..1..2=3==
+G=F M=8 A=0 V=1 reachable=6599 H_needed=14 ceil(5M/3)=14 floor(7M/4)=14 worst=..1..1..3==3==
+G=F M=9 A=0 V=1 reachable=23561 H_needed=16 ceil(5M/3)=15 floor(7M/4)=15 worst=..1.1..2=..2=3==
+G=F M=10 A=0 V=1 reachable=81028 H_needed=18 ceil(5M/3)=17 floor(7M/4)=17 worst=..1..1..2=..3==3==
+G=F M=11 A=0 V=1 reachable=268133 H_needed=21 ceil(5M/3)=19 floor(7M/4)=19 worst=..1..1..1..2=..3==3==
+G=F M=12 A=0 V=1 reachable=923206 H_needed=22 ceil(5M/3)=20 floor(7M/4)=21 worst=..1..1..1..3==..3==3==
+G=F M=13 A=0 V=1 reachable=3031755 H_needed=25 ceil(5M/3)=22 floor(7M/4)=22 worst=..1..1..1..2=..2=..3==3==
+G=F M=14 A=0 V=1 reachable=10420564 H_needed=26 ceil(5M/3)=24 floor(7M/4)=24 worst=.1..1..1.1..2=..2=..3==3==
+== NEGATIVE CONTROL 1: cap one cell too small must FAIL, exact cap must PASS (M=12, rule needs 22)
+G=F M=12 A=0 V=1 FAIL cap=21 reached extent 22: ..1..1..1..3==..3==3==  (after 517737 states)
+G=F M=12 A=0 V=1 reachable=923206 H_needed=22 ceil(5M/3)=20 floor(7M/4)=21 worst=..1..1..1..3==..3==3==  PASS(cap)
+== NEGATIVE CONTROL 2: deliberately worse rules (last fit A=9; move lowest 1 into the freed hole V=8)
+G=F M=6 A=9 V=1 reachable=614 H_needed=10 ceil(5M/3)=10 floor(7M/4)=10 worst=..1..2=3==
+G=F M=6 A=0 V=8 reachable=2400 H_needed=12 ceil(5M/3)=10 floor(7M/4)=10 worst=..1..1..13==
+G=F M=8 A=9 V=1 reachable=24916 H_needed=16 ceil(5M/3)=14 floor(7M/4)=14 worst=..1..1..1..2=3==
+G=F M=8 A=0 V=8 reachable=103938 H_needed=18 ceil(5M/3)=14 floor(7M/4)=14 worst=..1..1..1..1..13==
+G=F M=10 A=9 V=1 reachable=687446 H_needed=20 ceil(5M/3)=17 floor(7M/4)=17 worst=..1..1..1..1..3==3==
+G=F M=10 A=0 V=8 reachable=5021797 H_needed=24 ceil(5M/3)=17 floor(7M/4)=17 worst=..1..1..1..1..1..1..13==
+== random structured adversary (lower bounds on what each rule needs), large M
+M=24 A=0 V=0 cm=0 random-adversary best extent=44 ratio=1.8333 (5M/3=40.0 7M/4=42.0) script: fill1(100%) fill3(100%) free1(mod3,mask1) fill2(100%) free2(rank mod2,mask1) thin fill3(100%)
+M=24 A=0 V=1 cm=0 random-adversary best extent=42 ratio=1.7500 (5M/3=40.0 7M/4=42.0) script: fill1(100%) fill3(100%) fill2(34%) free1(mod3,mask2) fill2(97%) free2(rank mod2,mask2) free3(rank mod2,mask3) free1(mod6,mask3) fill3(100%) thin fill3(100%)
+M=24 A=0 V=5 cm=0 random-adversary best extent=42 ratio=1.7500 (5M/3=40.0 7M/4=42.0) script: fill1(100%) fill3(100%) fill2(34%) free1(mod3,mask2) fill2(97%) free2(rank mod2,mask2) free3(rank mod2,mask3) free1(mod6,mask3) fill3(100%) thin fill3(100%)
+M=48 A=0 V=0 cm=0 random-adversary best extent=88 ratio=1.8333 (5M/3=80.0 7M/4=84.0) script: fill1(100%) free2(rank mod3,mask5) free1(mod3,mask1) fill2(100%) free2(rank mod4,mask1) fill1(100%) fill1(83%) fill1(100%) free2(rank mod3,mask2) thin fill3(100%)
+M=48 A=0 V=1 cm=0 random-adversary best extent=84 ratio=1.7500 (5M/3=80.0 7M/4=84.0) script: fill1(100%) fill2(100%) free1(mod2,mask1) fill2(100%) fill1(27%) free2(rank mod4,mask5) fill1(100%) fill1(78%) thin fill3(100%)
+M=48 A=0 V=5 cm=0 random-adversary best extent=87 ratio=1.8125 (5M/3=80.0 7M/4=84.0) script: fill1(100%) fill3(100%) fill2(34%) free1(mod2,mask2) fill2(97%) free2(rank mod2,mask2) thin free3(rank mod2,mask3) free1(mod6,mask3) fill1(100%) thin fill3(100%) thin fill3(100%)
+M=96 A=0 V=0 cm=0 random-adversary best extent=176 ratio=1.8333 (5M/3=160.0 7M/4=168.0) script: fill1(100%) fill3(100%) free1(mod2,mask1) thin fill1(100%) free1(mod2,mask2) fill2(94%) fill2(100%) free3(rank mod3,mask2) free2(rank mod2,mask1) fill1(100%) free3(rank mod2,mask1) fill2(100%) thin fill3(100%)
+M=96 A=0 V=1 cm=0 random-adversary best extent=170 ratio=1.7708 (5M/3=160.0 7M/4=168.0) script: fill1(100%) free1(mod5,mask18) free1(mod5,mask16) fill2(100%) free3(rank mod4,mask4) fill2(23%) free2(rank mod2,mask2) fill2(29%) thin fill1(100%) thin fill3(100%)
+M=96 A=0 V=5 cm=0 random-adversary best extent=174 ratio=1.8125 (5M/3=160.0 7M/4=168.0) script: free3(rank mod5,mask4) fill1(100%) fill3(100%) free1(mod2,mask1) fill2(94%) fill2(100%) fill2(100%) free3(rank mod3,mask2) free2(rank mod2,mask1) free3(rank mod2,mask1) thin fill1(100%) thin fill3(100%)
+M=24 A=0 V=6 cm=3 random-adversary best extent=40 ratio=1.6667 (5M/3=40.0 7M/4=42.0) script: fill1(100%) fill2(100%) free1(mod5,mask17) fill3(100%) free2(rank mod5,mask23) free3(rank mod5,mask30) thin fill1(30%) fill1(100%) free2(rank mod5,mask21) free2(rank mod2,mask3) thin fill3(100%)
+M=48 A=0 V=6 cm=3 random-adversary best extent=80 ratio=1.6667 (5M/3=80.0 7M/4=84.0) script: fill1(100%) free3(rank mod2,mask3) free1(mod2,mask2) fill3(27%) thin fill1(100%) free3(rank mod3,mask6) free2(rank mod3,mask1) free1(mod6,mask63) fill1(100%) thin fill3(100%)
+== done

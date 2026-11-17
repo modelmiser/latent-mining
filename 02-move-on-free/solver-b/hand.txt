@@ -1,0 +1,46 @@
+HAND DERIVATION, GAME N, M = 3 and M = 4  (written before any code)
+
+Notation: a layout is a string over cells, '.' free, '1' a size-1 block, 'aa' a 2, 'bbb' a 3.
+
+M = 3.  Claim h^N(3) = 4.
+ Lower bound (H = 3 fails): adversary asks 1,1,1.  With H = 3 the layout is forced: 111.
+   Free cells 0 and 2 -> .1.  Live = 1, so allocate(2) is legal (1+2 <= 3) and does not fit.
+   Only 1s were freed, so this also kills H = 3 in games O and F (freeing a 1 grants no move).
+ Upper bound (H = 4 suffices, any manager): requests that are legal are
+   live = 0: any size  -> fits in an empty heap of 4.
+   live = 1 (a single 1 at cell p), size 1 or 2: a 2 needs two adjacent free cells; with one
+     cell used out of 4, the 3 free cells cannot all be pairwise non-adjacent (p=0: 1,2,3;
+     p=1: 2,3; p=2: 0,1; p=3: 0,1,2).  Fits.
+   live = 2, size 1: 2 free cells exist.  Fits.
+   So every legal request fits in every reachable layout; h^N(3) <= 4.
+ Hence h^O(3) = h^F(3) = h^N(3) = 4.
+
+M = 4.  Claim h^N(4) = 6.
+ Lower bound (H = 5 fails): adversary asks 1,1,1,1.  Four 1s in five cells; let c be the free cell.
+   c != 2: cell 2 holds a 1.  Free the other three -> ..1..  Live = 1, allocate(3) legal, no 3 free
+           contiguous cells.  Manager loses.
+   c  = 2: layout 11.11.  Free cells 0 and 4 -> .1.1.  Live = 2, allocate(2) legal, free cells
+           0,2,4 are pairwise non-adjacent.  Manager loses.
+   Only 1s freed again, so H = 5 fails in O and F too.
+ Upper bound (H = 6 suffices, any manager): legal requests and why they fit in ANY layout:
+   size 3 needs live <= 1: layout is empty or a single 1 at p; one side of p has >= 3 free cells
+     (p <= 2: cells 3,4,5; p >= 3: cells 0,1,2).
+   size 2 needs live <= 2: layout is empty, one 1, two 1s, or one 2.
+     one 2 at p,p+1: 4 free cells split into at most two runs, so some run has >= 2.
+     two 1s: 4 free cells split into at most three runs, so some run has >= 2.
+   size 1 needs live <= 3: >= 3 free cells.
+   So h^N(4) <= 6, hence h^O(4) = h^F(4) = h^N(4) = 6.
+
+Sanity targets for restricted size sets (game N), also by hand:
+ sizes {1}: h = M (any free cell serves).
+ sizes {1,2}, M = 3: h = 4 (same two arguments as above; no 3 is used).
+ sizes {1,2}, M = 4: h = 5.
+   H = 4 fails: 1111 -> free 0,2,3 -> .1.. hmm that has a 2-gap; use: 1111 -> free 0 and 2 -> .1.1,
+     live 2, allocate(2) legal, no gap.  So H >= 5.
+   H = 5 suffices with the rule "never let 1s sit on cells 1 and 3 at the same time":
+     the only layouts with live <= 2 and no free adjacent pair are .1.1. (two 1s at 1 and 3);
+     (one 1: 4 free cells in 5 always contain an adjacent pair; one 2: 3 free cells in at most
+     two runs; two 1s at {a,b}: free cells are pairwise non-adjacent only for {1,3}).
+     When a 1 is requested (live <= 3, so >= 2 free cells) and one of cells 1,3 already holds a 1
+     and the other is free, there is another free cell to use.  A 2 never creates the bad pair.
+   So h^{N,{1,2}}(4) = 5.

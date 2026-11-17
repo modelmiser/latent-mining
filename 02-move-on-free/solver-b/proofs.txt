@@ -1,0 +1,135 @@
+PROOFS  (each marked COMPLETE or SKETCH)
+
+------------------------------------------------------------------------------------------
+P1. COMPLETE.  Lower bound for all three games, all M >= 3:
+
+      h^O(M) >= 3*(K + t) - 2,   K = ceil(M/3),  t = floor((M-K)/3),
+
+    hence h^N(M) >= h^F(M) >= h^O(M) >= 5M/3 - 4, and mu^O, mu^F, mu^N >= 5/3.
+
+  Proof.  Suppose the manager lives in cells 0..H-1.  The adversary:
+   (1) allocates M blocks of size 1 (each legal: live + 1 <= M).  All M cells used lie in 0..H-1.
+   (2) The cells split into three classes by residue mod 3.  Some class r holds >= ceil(M/3) = K of
+       the 1s.  The adversary frees 1s until exactly K remain, all on cells of class r.
+       Only 1s are freed: legal in O, and in F a freed 1 grants no move, so the layout is exactly
+       what the adversary chose.
+   (3) It allocates t blocks of size 3, one at a time.  Each is legal: live before the j-th is
+       K + 3(j-1) <= K + 3t - 3 <= M - 3.
+   No free occurs in step (3), so in F no move ever happens after step (2); 3s never move anyway.
+   Every window of 3 consecutive cells contains exactly one cell of class r, and that cell must be
+   free when the 3 is placed.  So after step (3) there are K + t DISTINCT occupied cells of class r
+   in 0..H-1.  The number of cells of class r in 0..H-1 is at most ceil(H/3).  Therefore
+   ceil(H/3) >= K + t, i.e. H >= 3(K+t) - 2.                                               QED
+   Asymptotics: t >= (M-K-2)/3, so K + t >= (2K + M - 2)/3 >= (2M/3 + M - 2)/3 = 5M/9 - 2/3,
+   hence H >= 5M/3 - 4 for every M.  (Numerically: M=9 -> 13, M=18 -> 28, M=27 -> 43.)
+   This bound is NOT tight for small M (true value at M=9 is 14).
+
+------------------------------------------------------------------------------------------
+P2. COMPLETE (but weak).  Upper bound for every manager whatsoever, all M >= 4:
+
+      h^N(M) <= 3M - 6.
+
+  Proof.  A legal allocate(s) fails only if live <= M - s and every maximal free run has length
+   <= s - 1.  With b live blocks there are at most b + 1 free runs, and b <= live.  So a failure
+   needs H <= live + (s-1)(live+1) <= (M-s) + (s-1)(M-s+1).  For s = 1,2,3 this is M-1, 2M-3,
+   3M-7.  With H = max(2M-3, 3M-7) + 1 = 3M-6 (M >= 4) no legal request can ever fail, whatever the
+   manager does.                                                                             QED
+   (For M = 3 the same count gives h <= 4, which is exact.)
+
+------------------------------------------------------------------------------------------
+P3. COMPLETE.  Exact values for M = 3 and M = 4 in all three games: see hand.txt
+    (adversary frees only 1s, so the lower bounds hold in O and F; the upper bounds hold for every
+    manager in N).
+
+------------------------------------------------------------------------------------------
+P4. COMPLETE (a structural remark, used in the headline discussion).
+    In game F a free grants nothing unless a smaller block is live: freeing a 2 when no 1 is live,
+    or freeing a 3 when no 1 and no 2 is live, changes nothing.  So any adversary strategy for N
+    in which (i) a 2 is freed only when no 1 is live and (ii) a 3 is freed only when no 1 or 2 is
+    live, is equally strong in F.  Proof: the move rule moves only 1s (after a freed 2) or 1s/2s
+    (after a freed 3); with none live the set of permitted move sequences is empty.          QED
+
+------------------------------------------------------------------------------------------
+P5. COMPLETE.  Upper bound for game O, all M >= 3, by FIRST FIT (every block goes to the leftmost
+    position where it fits):
+
+      h^O(M) <= B(M) := 2M - ceil((M-2)/3) = floor((5M+2)/3).
+
+    With P1:  5M/3 - 4 <= h^O(M) <= 5M/3 + 2/3,  so  mu^O = 5/3 exactly (the limit exists).
+
+  Proof.  Run first fit on an unbounded heap; we show it never touches a cell >= B.  In O only 1s
+   are ever freed, so 2s and 3s are permanent, and nothing ever moves.
+   (I1) Every 1 sits on a cell <= M-1.  When a 1 is placed on cell c, cells 0..c-1 are all occupied,
+        so live >= c before the request; legality gives live <= M-1, so c <= M-1.
+   (I2) Let top be the highest occupied cell.  If top >= M then every cell M..top is occupied, by
+        permanent blocks.  Induction over requests.  Frees and 1-allocations only touch cells < M
+        (I1).  Allocation of s in {2,3} at the leftmost fitting start p:
+         - if top < M before: all cells > top are free, so the window starting at top+1 fits and
+           p <= top+1 <= M; the cells >= M now occupied are a (possibly empty) run starting at M.
+         - if top >= M before: cell M is occupied, so the block lies wholly below M (nothing
+           changes above M) or wholly above top; the window at top+1 fits, so p = top+1 and the run
+           M..top grows to M..top+s.
+        By (I1) the occupants of cells >= M are 2s and 3s, hence permanent.
+   Bound.  A 1 is placed on a cell <= M-1 < B.  Take an allocation of s in {2,3} at start p.
+    (a) p > M.  Then by (I2) p = top+1, cells M..p-1 are occupied, and no window of s free cells
+        starts below p.  Inside 0..M-1 every free run therefore has length <= s-1 <= 2, and the
+        runs are separated by occupied cells, so with o = number of occupied cells in 0..M-1 there
+        are at most o+1 runs:  M - o <= 2(o+1),  o >= ceil((M-2)/3).
+        Live before the request = o + (p - M) <= M - s.  So the block ends at
+        p+s-1 <= 2M - 1 - o <= 2M - 1 - ceil((M-2)/3) = B - 1.
+    (b) p <= M.  The block ends at p+s-1 <= M+2 <= B-1 when M >= 4.  For M = 3 (B = 5): s = 3 forces
+        live = 0 and p = 0; s = 2 has live <= 1, at most one occupied cell, so p <= 2 and the block
+        ends at <= 3 <= B-1.
+   So first fit on cells 0..B-1 serves every request.                                         QED
+   Check against the exhaustive solver: B(M) for M = 3..13 is 5,7,9,10,12,14,15,17,19,20,22 and
+   h^O(M) is 4,6,7,9,11,13,14,16,18,20,21 (never above B, equal at M = 12).  rules.cpp also plays
+   first fit against every O-adversary (see rules_out.txt).
+
+   CONSEQUENCE.  floor(7M/4) - 1 fits ALL the exhaustive data M = 3..12 for all three games, yet it
+   exceeds B(M) at M = 24 and at every M > 32, so it is provably NOT the formula for h^O (and h^N
+   itself leaves it at M = 13: h^N(13) >= 22 > 21).  A closed form read off
+   M <= 12 is therefore worthless as evidence for the slope of h^N or h^F as well.
+
+------------------------------------------------------------------------------------------
+P6. COMPLETE.  Lower bound for game N, all M >= 3:
+
+      h^N(M) >= 7M/4 - 17/4,   hence  mu^N >= 7/4 > 5/3 = mu^O.
+
+  Proof.  Suppose the manager lives in cells 0..H-1 in game N (nothing ever moves).
+   Stage 1.  Allocate M 1s.  Let c_0, c_1, c_2 be the numbers of 1s on cells = 0,1,2 (mod 3).
+   Stage 2.  Let a+2 be a class with the fewest 1s; free all 1s of class a+2.  X = c_a + c_{a+1}
+             1s remain, X >= 2M/3.
+   Stage 3.  Allocate y = floor((M-X)/2) blocks of size 2 (legal: live <= X + 2y - 2 <= M - 2
+             before each).  Wherever the manager puts them, each 2 occupies two consecutive cells,
+             so it covers exactly two of the three classes.  Let y_r = number of 2s covering a
+             cell of class r, x_r = c_r.  A 2 on classes {a,a+1} counts in y_a and y_{a+1}, one on
+             {a+1,a+2} in y_{a+1}, one on {a+2,a} in y_a.  So y_a + y_{a+1} >= y, and
+                 (2x_a + y_a) + (2x_{a+1} + y_{a+1}) >= 2X + y.
+             Pick r in {a, a+1} with 2x_r + y_r >= X + y/2.
+   Stage 4.  Free every live block that covers no cell of class r (the 1s of the other class and
+             the 2s lying on the other two classes).  What remains: x_r 1s and y_r 2s, each
+             covering exactly ONE cell of class r, all different; live = x_r + 2 y_r.
+   Stage 5.  Allocate t = floor((M - x_r - 2y_r)/3) blocks of size 3 (each legal).  Every window of
+             three consecutive cells contains exactly one cell of class r, which must be free.
+   At the end x_r + y_r + t distinct cells of class r are occupied, and 0..H-1 has at most
+   ceil(H/3) such cells.  So H >= 3(x_r + y_r + t) - 2 >= 3x_r + 3y_r + (M - x_r - 2y_r - 2) - 2
+       = M + (2x_r + y_r) - 4 >= M + X + y/2 - 4 >= M + X + (M - X - 1)/4 - 4
+       = M + (3X + M - 1)/4 - 4 >= M + (3M - 1)/4 - 4 = 7M/4 - 17/4.                         QED
+   The bound is far from tight for small M (M = 13 gives 19; the true value is 22).
+   WHY IT IS NOT A PROOF FOR F OR O (a remark about this plan, not a theorem about F):
+   Stage 4 frees 2s while 1s are live.  In O that is illegal.
+   In F each freed 2 lets the manager move one of the marker 1s off its class-r cell; the adversary
+   can then only free that 1 (+1 budget, -1 marker = -2 in the final count), which cancels exactly
+   the +2 gained by freeing the 2 instead of keeping it.  So in F this plan yields no more than
+   the O-plan P1.
+
+------------------------------------------------------------------------------------------
+S1. SKETCH (NOT a proof).  First fit is NOT a good manager in N or in F.
+    N: flood M 1s on 0..M-1, keep "11.11.11." (2M/3), allocate M/6 2s (solid on M..4M/3), free every
+    second 2 ("22..22.."), thin the 1s to "1..1..1.." (M/3): live M/2, no free triple below 4M/3,
+    so M/6 3s go on M/2 fresh cells: 11M/6.
+    F, first fit plus "after each freed 2 move the rightmost low 1 into the leftmost hole": the same
+    plan still reaches about 7M/4 (the moves open M/8 cells at the right end of the low region,
+    which absorb M/24 of the 3s; the rest is as before).  This is an argument against ONE F-manager.
+    I have no F-adversary that beats 5M/3 + O(1) against every manager, and no F-manager with a
+    proved 5M/3 + o(M) bound.  mu^F is OPEN here: 5/3 <= mu^F <= mu^N.

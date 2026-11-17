@@ -1,0 +1,2 @@
+G=O M=12 H=19 sizes=7 states=16189756 sweeps=15 safe=12617423 verdict=ADVERSARY_WINS 96.93s 208552KB 
+G=O M=12 H=20 sizes=7 states=30474821 sweeps=10 safe=27000422 verdict=MANAGER_WINS 143.75s 390056KB 

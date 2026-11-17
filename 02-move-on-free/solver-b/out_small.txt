@@ -1,0 +1,111 @@
+G=N M=3 H=3 states=13 sweeps=2 LOSE
+G=N M=3 H=4 states=26 sweeps=1 WIN
+RESULT G=N sizes=7 M=3 h=4
+G=N M=4 H=4 states=33 sweeps=2 LOSE
+G=N M=4 H=5 states=71 sweeps=2 LOSE
+G=N M=4 H=6 states=134 sweeps=1 WIN
+RESULT G=N sizes=7 M=4 h=6
+G=N M=5 H=6 states=190 sweeps=2 LOSE
+G=N M=5 H=7 states=383 sweeps=3 WIN
+RESULT G=N sizes=7 M=5 h=7
+G=N M=6 H=7 states=501 sweeps=2 LOSE
+G=N M=6 H=8 states=1063 sweeps=2 LOSE
+G=N M=6 H=9 states=2068 sweeps=2 WIN
+RESULT G=N sizes=7 M=6 h=9
+G=N M=7 H=9 states=2887 sweeps=2 LOSE
+G=N M=7 H=10 states=5889 sweeps=3 LOSE
+G=N M=7 H=11 states=11206 sweeps=2 WIN
+RESULT G=N sizes=7 M=7 h=11
+G=N M=8 H=11 states=16380 sweeps=2 LOSE
+G=N M=8 H=12 states=32535 sweeps=3 LOSE
+G=N M=8 H=13 states=60981 sweeps=4 WIN
+RESULT G=N sizes=7 M=8 h=13
+G=N M=9 H=13 states=92221 sweeps=2 LOSE
+G=N M=9 H=14 states=179703 sweeps=6 WIN
+RESULT G=N sizes=7 M=9 h=14
+G=F M=3 H=3 states=13 sweeps=2 LOSE
+G=F M=3 H=4 states=26 sweeps=1 WIN
+RESULT G=F sizes=7 M=3 h=4
+G=F M=4 H=4 states=33 sweeps=2 LOSE
+G=F M=4 H=5 states=71 sweeps=2 LOSE
+G=F M=4 H=6 states=134 sweeps=1 WIN
+RESULT G=F sizes=7 M=4 h=6
+G=F M=5 H=6 states=190 sweeps=2 LOSE
+G=F M=5 H=7 states=383 sweeps=3 WIN
+RESULT G=F sizes=7 M=5 h=7
+G=F M=6 H=7 states=501 sweeps=2 LOSE
+G=F M=6 H=8 states=1063 sweeps=2 LOSE
+G=F M=6 H=9 states=2068 sweeps=2 WIN
+RESULT G=F sizes=7 M=6 h=9
+G=F M=7 H=9 states=2887 sweeps=2 LOSE
+G=F M=7 H=10 states=5889 sweeps=3 LOSE
+G=F M=7 H=11 states=11206 sweeps=2 WIN
+RESULT G=F sizes=7 M=7 h=11
+G=F M=8 H=11 states=16380 sweeps=2 LOSE
+G=F M=8 H=12 states=32535 sweeps=3 LOSE
+G=F M=8 H=13 states=60981 sweeps=3 WIN
+RESULT G=F sizes=7 M=8 h=13
+G=F M=9 H=13 states=92221 sweeps=2 LOSE
+G=F M=9 H=14 states=179703 sweeps=5 WIN
+RESULT G=F sizes=7 M=9 h=14
+G=O M=3 H=3 states=13 sweeps=2 LOSE
+G=O M=3 H=4 states=26 sweeps=1 WIN
+RESULT G=O sizes=7 M=3 h=4
+G=O M=4 H=4 states=33 sweeps=2 LOSE
+G=O M=4 H=5 states=71 sweeps=2 LOSE
+G=O M=4 H=6 states=134 sweeps=1 WIN
+RESULT G=O sizes=7 M=4 h=6
+G=O M=5 H=6 states=190 sweeps=2 LOSE
+G=O M=5 H=7 states=383 sweeps=3 WIN
+RESULT G=O sizes=7 M=5 h=7
+G=O M=6 H=7 states=501 sweeps=2 LOSE
+G=O M=6 H=8 states=1063 sweeps=2 LOSE
+G=O M=6 H=9 states=2068 sweeps=2 WIN
+RESULT G=O sizes=7 M=6 h=9
+G=O M=7 H=9 states=2887 sweeps=2 LOSE
+G=O M=7 H=10 states=5889 sweeps=3 LOSE
+G=O M=7 H=11 states=11206 sweeps=2 WIN
+RESULT G=O sizes=7 M=7 h=11
+G=O M=8 H=11 states=16380 sweeps=2 LOSE
+G=O M=8 H=12 states=32535 sweeps=3 LOSE
+G=O M=8 H=13 states=60981 sweeps=3 WIN
+RESULT G=O sizes=7 M=8 h=13
+G=O M=9 H=13 states=92221 sweeps=2 LOSE
+G=O M=9 H=14 states=179703 sweeps=5 WIN
+RESULT G=O sizes=7 M=9 h=14
+G=N M=2 H=2 states=4 sweeps=1 WIN
+RESULT G=N sizes=1 M=2 h=2
+G=N M=3 H=3 states=8 sweeps=1 WIN
+RESULT G=N sizes=1 M=3 h=3
+G=N M=4 H=4 states=16 sweeps=1 WIN
+RESULT G=N sizes=1 M=4 h=4
+G=N M=5 H=5 states=32 sweeps=1 WIN
+RESULT G=N sizes=1 M=5 h=5
+G=N M=6 H=6 states=64 sweeps=1 WIN
+RESULT G=N sizes=1 M=6 h=6
+G=N M=7 H=7 states=128 sweeps=1 WIN
+RESULT G=N sizes=1 M=7 h=7
+G=N M=8 H=8 states=256 sweeps=1 WIN
+RESULT G=N sizes=1 M=8 h=8
+G=N M=2 H=2 states=5 sweeps=1 WIN
+RESULT G=N sizes=3 M=2 h=2
+G=N M=3 H=3 states=12 sweeps=2 LOSE
+G=N M=3 H=4 states=24 sweeps=1 WIN
+RESULT G=N sizes=3 M=3 h=4
+G=N M=4 H=4 states=29 sweeps=2 LOSE
+G=N M=4 H=5 states=62 sweeps=2 WIN
+RESULT G=N sizes=3 M=4 h=5
+G=N M=5 H=5 states=70 sweeps=2 LOSE
+G=N M=5 H=6 states=156 sweeps=2 LOSE
+G=N M=5 H=7 states=316 sweeps=2 WIN
+RESULT G=N sizes=3 M=5 h=7
+G=N M=6 H=7 states=387 sweeps=2 LOSE
+G=N M=6 H=8 states=821 sweeps=3 WIN
+RESULT G=N sizes=3 M=6 h=8
+G=N M=7 H=8 states=951 sweeps=2 LOSE
+G=N M=7 H=9 states=2088 sweeps=2 LOSE
+G=N M=7 H=10 states=4290 sweeps=3 WIN
+RESULT G=N sizes=3 M=7 h=10
+G=N M=8 H=10 states=5232 sweeps=2 LOSE
+G=N M=8 H=11 states=11136 sweeps=4 WIN
+RESULT G=N sizes=3 M=8 h=11

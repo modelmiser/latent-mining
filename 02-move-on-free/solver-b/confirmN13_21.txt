@@ -1,0 +1,2 @@
+G=N M=13 H=21 sizes=7 states=90524042 safe=0 sweeps=5 LOSE
+exit 0

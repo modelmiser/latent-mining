@@ -1,0 +1,49 @@
+G=F M=13 H=21 states=90524042 safe=74260679 sweeps=13 WIN
+FREE2@8 move NEEDED  before=.11.11112222.11..1... after=.11.1111..22.11..1...  safe moves(13): 7>0 7>3 7>9 7>12 7>15 7>16 14>0 14>3 
+FREE2@16 move NEEDED  before=11.1.11..11.221122... after=11.1.11..11.2211.....  safe moves(28): 3>7 3>8 3>11 3>16 3>17 6>2 6>4 6>7 
+FREE2@9 move NEEDED  before=1.....1112211.22..1.. after=1.....111..11.22..1..  safe moves(41): 0>9 0>10 0>13 0>16 0>17 0>19 0>20 6>9 
+ALLOC1 first-fit UNSAFE  ...111...1..1.111.1..  ff=0 safe=10 11 13 17 19 20 
+ALLOC2 first-fit UNSAFE  ...111...1..1.111.1..  ff=0 safe=10 19 
+FREE2@14 move NEEDED  before=.1.1.1..221...221.1.. after=.1.1.1..221.....1.1..  safe moves(66): 1>4 1>6 1>7 1>11 1>12 1>14 1>15 1>17 
+FREE2@0 move NEEDED  before=2211..1....1.1.1.11.. after=..11..1....1.1.1.11..  safe moves(6): 18>0 18>1 18>10 18>12 18>14 18>16 
+FREE2@15 move NEEDED  before=.1..2211...1..12211.. after=.1..2211...1..1..11..  safe moves(46): 1>0 1>3 1>9 1>10 1>12 1>13 1>15 1>16 
+FREE2@16 move NEEDED  before=..1..1..333.1.22221.. after=..1..1..333.1.22..1..  safe moves(46): 2>0 2>1 2>3 2>4 2>6 2>7 2>11 2>13 
+FREE2@8 move NEEDED  before=.....1.1221..11.122.. after=.....1.1..1..11.122..  safe moves(43): 5>0 5>3 5>6 5>8 5>9 5>11 5>12 5>15 
+FREE2@2 move NEEDED  before=1122.1.1.1.....1...1. after=11...1.1.1.....1...1.  safe moves(45): 5>2 5>6 5>8 5>10 5>11 5>16 5>17 5>18 
+FREE2@8 move NEEDED  before=.1.1.3332211.22.1..1. after=.1.1.333..11.22.1..1.  safe moves(44): 1>4 1>8 1>9 1>12 1>15 1>17 1>18 1>20 
+FREE2@4 move NEEDED  before=1.11221.1...11...1.1. after=1.11..1.1...11...1.1.  safe moves(12): 17>1 17>4 17>5 17>7 17>20 19>1 19>4 19>5 
+FREE2@9 move NEEDED  before=.1...1..12222..111.1. after=.1...1..1..22..111.1.  safe moves(36): 5>0 5>3 5>4 5>9 5>10 5>13 5>14 5>18 
+FREE3@5 move NEEDED  before=11..1333.1111.1...11. after=11..1....1111.1...11.  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@3 move NEEDED  before=..1221..1..2211...11. after=..1..1..1..2211...11.  safe moves(27): 2>0 2>1 2>3 2>4 2>6 2>7 2>9 2>10 
+FREE2@14 move NEEDED  before=.1.333..1.1.22221.11. after=.1.333..1.1.22..1.11.  safe moves(34): 1>6 1>7 1>9 1>11 1>14 1>15 1>17 1>20 
+FREE2@16 move NEEDED  before=.11.122..1.11...2211. after=.11.122..1.11.....11.  safe moves(16): 9>0 9>3 9>7 9>10 9>13 9>14 9>17 9>20 
+FREE2@10 move NEEDED  before=1.22..1..12222..1221. after=1.22..1..1..22..1221.  safe moves(28): 6>1 6>4 6>5 6>7 6>8 6>10 6>11 6>14 
+FREE2@8 move NEEDED  before=1.1.3331221..1..1.22. after=1.1.3331..1..1..1.22.  safe moves(46): 2>3 2>8 2>9 2>11 2>12 2>14 2>15 2>17 
+FREE2@10 move NEEDED  before=.122.22..1221.1..333. after=.122.22..1..1.1..333.  safe moves(28): 9>0 9>4 9>7 9>8 9>10 9>11 9>13 9>15 
+FREE2@12 move NEEDED  before=1..11..1.1..221.1...1 after=1..11..1.1....1.1...1  safe moves(46): 0>5 0>6 0>8 0>10 0>11 0>12 0>13 0>15 
+FREE2@0 move NEEDED  before=221..1111.1.22.1.1..1 after=..1..1111.1.22.1.1..1  safe moves(24): 2>3 2>9 2>11 2>14 2>16 2>19 5>9 5>11 
+FREE2@15 move NEEDED  before=1...1.1111.1.22221..1 after=1...1.1111.1.22..1..1  safe moves(35): 0>3 0>12 0>15 0>16 0>18 0>19 6>12 6>15 
+FREE2@8 move NEEDED  before=11..1...2211..22..1.1 after=11..1.....11..22..1.1  safe moves(46): 1>5 1>6 1>8 1>9 1>12 1>13 1>16 1>17 
+FREE3@10 move NEEDED  before=....1.22.13331.11.1.1 after=....1.22.1...1.11.1.1  a 2-move works:1 one 1-move works:1 two 1-moves work:1
+FREE2@3 move NEEDED  before=..12211.22.....1.11.1 after=..1..11.22.....1.11.1  safe moves(29): 2>0 2>1 2>3 2>4 2>7 2>10 2>11 2>13 
+FREE2@16 move NEEDED  before=1..22.22.1..1.22221.1 after=1..22.22.1..1.22..1.1  safe moves(36): 0>5 0>8 0>10 0>11 0>13 0>16 0>17 0>19 
+FREE2@6 move NEEDED  before=.22.2222111..1.1...11 after=.22.22..111..1.1...11  safe moves(44): 8>0 8>3 8>6 8>11 8>12 8>14 8>16 8>17 
+FREE2@5 move NEEDED  before=22.11221.111.....1.11 after=22.11..1.111.....1.11  safe moves(46): 4>2 4>5 4>6 4>8 4>12 4>13 4>15 4>16 
+FREE2@7 move NEEDED  before=..1.333221..11....111 after=..1.333..1..11....111  safe moves(29): 2>0 2>3 2>7 2>8 2>10 2>11 2>14 2>16 
+FREE2@0 move NEEDED  before=221..22..1....1221111 after=..1..22..1....1221111  safe moves(17): 2>0 2>1 2>3 2>4 2>7 2>8 2>10 2>11 
+FREE2@9 move NEEDED  before=.11.11...2211.22..221 after=.11.11.....11.22..221  safe moves(21): 2>0 2>3 2>6 2>7 2>13 2>16 2>17 5>0 
+FREE3@17 move NEEDED  before=..1.1..11..1221.13331 after=..1.1..11..1221.1...1  a 2-move works:0 one 1-move works:1 two 1-moves work:1
+FREE2@19 move NEEDED  before=1.11.111..221..1...22 after=1.11.111..221..1.....  safe moves(46): 2>1 2>4 2>8 2>9 2>13 2>14 2>16 2>17 
+FREE2@19 move NEEDED  before=11.1.111.11..1....122 after=11.1.111.11..1....1..  safe moves(8): 13>2 13>4 13>8 13>11 18>2 18>4 18>8 18>14 
+FREE2@19 move NEEDED  before=1..221.1.22..122..122 after=1..221.1.22..122..1..  safe moves(35): 0>6 0>8 0>11 0>12 0>16 0>17 0>19 0>20 
+FREE2@19 move NEEDED  before=.1.1..22..22.1.22.122 after=.1.1..22..22.1.22.1..  safe moves(38): 1>4 1>5 1>8 1>9 1>12 1>14 1>17 1>19 
+FREE2@19 move NEEDED  before=1..1.22..221..1.11122 after=1..1.22..221..1.111..  safe moves(37): 0>4 0>7 0>8 0>12 0>15 0>19 0>20 3>1 
+FREE2@19 move NEEDED  before=.....1.11.111122.2222 after=.....1.11.111122.22..  safe moves(24): 5>0 5>3 5>4 5>6 5>9 5>16 5>19 5>20 
+alloc 1 from safe states: 46342522 cases, first fit lands in the safe set in 44303629 (95.60%), last fit in 44303629 (95.60%)
+alloc 2 from safe states: 26044380 cases, first fit lands in the safe set in 24986720 (95.94%), last fit in 24986720 (95.94%)
+alloc 3 from safe states: 13051105 cases, first fit lands in the safe set in 12825596 (98.27%), last fit in 12825596 (98.27%)
+free 2: 152571932 cases; safe without a move 145417314; move NEEDED 7154618; of those compaction (highest 1 -> lowest free cell) is safe in 4004538; mean #safe single moves 32.65
+  when a move is needed after a freed 2: exactly ONE source 1 works in 113706 cases (1.6%); mean #working sources 4.02 of 7.30 live 1s; mean #working destinations 9.73 of 10.81 free cells; some safe move goes into the freed hole in 6982144 (97.6%)
+  histogram of #safe moves when needed: 3:12726 4:16072 5:14896 6:34568 7:22276 8:48222 9:36142 10:39078 11:35842 12:56156 13:55588 14:79232 15:85382 16:109124 17:119308 18:148858 19:134646 20:132672 21:133576 22:143314 23:159650 24:204428 25:211862 26:263240 27:271464 28:256420 29:209418 30:189190 31:181252 32:209684 33:209316 34:241760 35:271986 36:257394 37:213592 38:172786 39:153120 40:152664 41:150396 42:161464 43:170548 44:168870 45:152882 46:115882 47:99474 48:90770 49:98588 50:95476 51:83942 52:72724 53:61668 54:52364 55:39786 56:35024 57:31756 58:29436 59:27824 60:23802 61:17530 62:12780 63:74728
+free 3: 49951141 cases; safe without a move 49313960; move NEEDED 637181; a 2-move works 48318; one 1-move works 628497; only two 1-moves work 8684; compaction(1 or 2 steps) works 560350
+exit 0

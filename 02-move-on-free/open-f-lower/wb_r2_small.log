@@ -1,0 +1,20 @@
+
+M=24 ceil(5M/3)=40: extent(extent-ceil(5M/3))[moves]{S chosen}
+  WB home=None         P6R:41(+1)[2]{} 0s   P6R-block:41(+1)[2]{} 0s   P6RS:41(+1)[2]{G0} 0s
+  WB home=[6]          P6R:42(+2)[2]{} 0s   P6R-block:41(+1)[0]{} 0s   P6RS:41(+1)[0]{G0b} 0s
+  WB home=[5]          P6R:39(-1)[2]{} 0s   P6R-block:41(+1)[0]{} 0s   P6RS:41(+1)[0]{G0b} 0s
+  WB home=[5, 8]       P6R:39(-1)[2]{} 0s   P6R-block:41(+1)[0]{} 0s   P6RS:41(+1)[0]{G0b} 0s
+  WB home=[7, 7, 4]    P6R:39(-1)[2]{} 0s   P6R-block:41(+1)[0]{} 0s   P6RS:41(+1)[0]{G0b} 0s
+  WB home=[4, 7]       P6R:40(+0)[2]{} 0s   P6R-block:41(+1)[0]{} 0s   P6RS:41(+1)[0]{G0b} 0s
+  WB home=[8]          P6R:37(-3)[2]{} 0s   P6R-block:41(+1)[0]{} 0s   P6RS:41(+1)[0]{G0b} 0s
+  WB home=[9]          P6R:39(-1)[2]{} 0s   P6R-block:40(+0)[2]{} 0s   P6RS:39(-1)[1]{G1} 0s
+
+M=36 ceil(5M/3)=60: extent(extent-ceil(5M/3))[moves]{S chosen}
+  WB home=None         P6R:60(+0)[3]{} 0s   P6R-block:60(+0)[3]{} 0s   P6RS:60(+0)[3]{G0} 0s
+  WB home=[6]          P6R:63(+3)[3]{} 0s   P6R-block:62(+2)[0]{} 0s   P6RS:62(+2)[0]{G0b} 0s
+  WB home=[5]          P6R:62(+2)[2]{} 0s   P6R-block:61(+1)[0]{} 0s   P6RS:61(+1)[0]{G0b} 0s
+  WB home=[5, 8]       P6R:59(-1)[2]{} 0s   P6R-block:60(+0)[0]{} 0s   P6RS:60(+0)[0]{G0b} 0s
+  WB home=[7, 7, 4]    P6R:60(+0)[3]{} 0s   P6R-block:62(+2)[0]{} 0s   P6RS:62(+2)[0]{G0b} 0s
+  WB home=[4, 7]       P6R:64(+4)[3]{} 0s   P6R-block:62(+2)[0]{} 0s   P6RS:62(+2)[0]{G0b} 0s
+  WB home=[8]          P6R:59(-1)[2]{} 0s   P6R-block:62(+2)[0]{} 0s   P6RS:62(+2)[0]{G0b} 0s
+  WB home=[9]          P6R:60(+0)[3]{} 0s   P6R-block:61(+1)[0]{} 0s   P6RS:61(+1)[0]{G0b} 0s

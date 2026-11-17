@@ -1,0 +1,100 @@
+PROOFS (solver A).  Notation: live = number of live cells; extent E = 1 + highest
+occupied cell (0 if heap empty); f = E - live = free cells below the extent.
+
+=====================================================================
+P1. LOWER BOUND, all three games, all M.            STATUS: COMPLETE
+    h^O(M) >= 3*L(M) - 2,  L(M) = ceil(M/3) + floor((M - ceil(M/3))/3),
+    hence h^N(M) >= h^F(M) >= h^O(M) >= (5M - 14)/3.
+=====================================================================
+Adversary (frees only 1s, so it is legal in O, and in F it grants no moves):
+ 1. allocate(1) M times.  The manager has put M singletons somewhere in 0..H-1.
+ 2. Split cells by residue mod 3.  Let K_q = number of singletons on cells = q (mod 3).
+    K_0+K_1+K_2 = M, so some q has K := K_q >= ceil(M/3).  Free every singleton
+    NOT on a class-q cell.  Now live = K.
+ 3. allocate(3) t := floor((M-K)/3) times (each is legal: live+3 <= M).
+Any 3 consecutive cells contain exactly one class-q cell, and it must be free when
+the 3-block is placed.  So after step 3 there are K + t distinct occupied class-q
+cells in 0..H-1.  The number of class-q cells in 0..H-1 is at most ceil(H/3).
+g(K) = K + floor((M-K)/3) is non-decreasing in K, so K + t >= g(ceil(M/3)) = L(M).
+Therefore ceil(H/3) >= L(M), i.e. H >= 3L(M) - 2.
+Arithmetic: with ceil(M/3) = (M+r)/3, r in {0,1,2}: floor((2M-r)/9) >= (2M-r-8)/9,
+so L >= (5M+2r-8)/9 and H >= (5M+2r-14)/3 >= (5M-14)/3.                      QED
+(The bound is not tight for small M: M=12 gives 16, true value 20.)
+
+=====================================================================
+P2. UPPER BOUND for game O, all M.                   STATUS: COMPLETE
+    FIRST-FIT (every block goes to the lowest address where it fits) never
+    uses a cell >= floor((5M+2)/3) = ceil(5M/3).  So h^O(M) <= ceil(5M/3).
+=====================================================================
+Facts about first-fit in O (heap unbounded to the right):
+ (a) A block is never placed starting above the current extent E (address E always
+     fits), so every cell below the extent is occupied or was occupied earlier.
+ (b) Blocks of size 2,3 are never freed in O.  Hence a cell that is free now and
+     below the extent was last occupied by a singleton.
+ (c) When a singleton is placed on cell x, cells 0..x-1 are all occupied, so
+     x + 1 <= live-after <= M.
+Suppose a request of size s is NOT served inside the current extent, i.e. it is
+placed at E and the extent becomes E+s.  Before it: live L <= M-s, f = E-L.
+ - If f = 0: new extent = L+s <= M.   (This covers s = 1.)
+ - Else s in {2,3} and every maximal run of free cells below E ("gap") has length
+   <= s-1.  Let c be the highest free cell below E.  By (a),(b) a singleton was
+   once placed on c; at the last such time (c) gives c+1 <= M.  All free cells lie
+   in [0,c].  Every gap is immediately followed by a live block (cell E-1 is
+   occupied), and different gaps are followed by different blocks.  Such a block
+   either starts at c+1 (at most one block) or starts below c; in the latter case it
+   lies entirely inside [0,c-1], because c is free.  Let b = number of live blocks
+   inside [0,c].  Then  #gaps <= b+1  and  f + b <= c+1 <= M.  So
+        f <= (s-1)(b+1) <= (s-1)(M - f + 1),   i.e.  f <= (s-1)(M+1)/s.
+   s=3: new extent = L+f+3 <= M + 2(M+1)/3 = (5M+2)/3.
+   s=2: new extent = L+f+2 <= M + (M+1)/2 <= (5M+2)/3.
+The extent only grows at such events, so it is always <= floor((5M+2)/3), and
+floor((5M+2)/3) = ceil(5M/3) for integers.                                    QED
+Machine check: rule.cpp (exhaustive adversary vs first-fit, game O) gives exactly
+ceil(5M/3) for M = 6..16 and ceil(5M/3)-1 for M = 3,4,5 (all in ff_O.log; rerun with ./rule O M 0).
+
+COROLLARY (COMPLETE):  (5M-14)/3 <= h^O(M) <= ceil(5M/3),  so  mu^O = 5/3 exactly
+(a true limit, not only limsup).  Also mu^F >= 5/3 and mu^N >= 5/3.
+
+Where P2 breaks in N and F: fact (b).  A freed 2 or 3 leaves free cells that no
+singleton ever occupied, so "all holes lie in [0,M)" is lost.  First-fit in game N
+needs 2M-1 cells for M = 7..13 (ff_N.log), so first-fit itself is not the answer there.
+
+=====================================================================
+P3. WEAK UPPER BOUND for game N (hence F), all M.    STATUS: COMPLETE (but weak)
+    h^N(M) <= 43M/18 + 12.
+=====================================================================
+Manager: cut the heap into hexads (cells 6j..6j+5).  A non-empty hexad has a type
+s in {1,2,3} and holds only s-blocks on s-aligned positions (six cells / three
+pairs / two triples).  An emptied hexad loses its type.  A request of size s goes
+into any type-s hexad with a free aligned position; if there is none, into the
+lowest-indexed empty hexad (which becomes type s).
+Take any moment, let n_s = number of type-s hexads now, and for each type present
+let tau_s be the last time a type-s hexad was opened.  After tau_s the number of
+type-s hexads cannot increase, so its value just after tau_s is >= n_s.  Order the
+types present by tau: a, then b, then c.  At an opening for size s all type-s
+hexads are full (6 live cells each), every other non-empty hexad of type u holds
+>= u live cells, and the request is legal.  This gives (using M' = M+5)
+     6 n_a <= M',    6 n_b + a n_a <= M',    6 n_c + a n_a + b n_b <= M'.
+The LP max of n_a+n_b+n_c under these is at the all-tight vertex,
+     M' * [36 + 6(6-a) + (6-a)(6-b)] / 216,
+largest for (a,b) = (1,2): 86/216 = 43/108.  A newly opened hexad has index <= the
+number of non-empty hexads, so H = 6 * max(#non-empty hexads) <= 43(M+5)/18.   QED
+(Not machine-checked. It only shows mu^N <= 43/18 ~ 2.39.)
+
+=====================================================================
+S1. SKETCH (NOT a proof): why N might exceed 5/3, and why F probably does not.
+=====================================================================
+Against a manager that packs (first-fit-like), game N has this attack: M singletons
+on [0,M); keep every second one (live M/2); M/4 two-blocks must go to fresh cells
+(extent 3M/2); free every second two-block (live 3M/4, no 3-gap anywhere, f = 3M/4);
+then M/12 three-blocks extend the heap to 7M/4.  In O the two-blocks cannot be
+freed.  In F each freed two-block grants a 1-move, and one 1-move turns "1.1.1"
+into "11...1", i.e. opens a 3-gap; M/8 moves open M/8 >= M/12 three-gaps, so the
+attack yields nothing.
+What is missing: (i) a manager in N can deviate (e.g. leave a 1-cell spacer after
+every second two-block, which makes thinning impossible at a cost of M/8 cells),
+and I have no proof that the adversary can beat every such deviation; (ii) I have
+no invariant for an F manager.  Rounding makes this attack invisible for M < ~24:
+by hand count against a packing manager it gives 18 at M=12 and 27, 34 at M = 16, 20
+(= ceil(5M/3), no better than the O attack); it first exceeds ceil(5M/3) at M = 24 (42 vs 40).
+These hand counts are not machine-checked.

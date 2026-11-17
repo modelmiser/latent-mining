@@ -1,0 +1,13 @@
+h^N(9)=14   [G=N M=9 H=14 layouts=179703 sweeps=11 WIN ; H-1 LOSE verified]
+h^F(9)=14   [G=F M=9 H=14 layouts=179703 sweeps=10 WIN ; H-1 LOSE verified]
+h^O(9)=14   [G=O M=9 H=14 layouts=179703 sweeps=10 WIN ; H-1 LOSE verified]
+h^N(10)=16   [G=N M=10 H=16 layouts=993382 sweeps=11 WIN ; H-1 LOSE verified]
+h^F(10)=16   [G=F M=10 H=16 layouts=993382 sweeps=9 WIN ; H-1 LOSE verified]
+h^O(10)=16   [G=O M=10 H=16 layouts=993382 sweeps=9 WIN ; H-1 LOSE verified]
+h^N(11)=18   [G=N M=11 H=18 layouts=5498236 sweeps=20 WIN ; H-1 LOSE verified]
+h^F(11)=18   [G=F M=11 H=18 layouts=5498236 sweeps=10 WIN ; H-1 LOSE verified]
+h^O(11)=18   [G=O M=11 H=18 layouts=5498236 sweeps=10 WIN ; H-1 LOSE verified]
+
+real	5m44.169s
+user	5m42.212s
+sys	0m1.871s

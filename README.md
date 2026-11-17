@@ -30,7 +30,7 @@ chain produces prose that nothing can test.
 | # | Folder | Subject | Headline | Status |
 |---|---|---|---|---|
 | 1 | [01-late-thermostat](01-late-thermostat/) | regulating a level from a delayed one-bit signal | a blind clock is within 1 of a controller with full memory | headline proved by hand for every delay, not machine-checked; one supporting bound is in Lean; the exact clock value for odd delays is open past 13 |
-| 2 | [02-move-on-free](02-move-on-free/) | a memory allocator that may move blocks only when something is freed | how much that right is worth | in progress: question fixed, no results yet |
+| 2 | [02-move-on-free](02-move-on-free/) | a memory allocator that may move blocks only when something is freed | how much that right is worth | open. Proved by hand: the right is worth nothing to an allocator that packs its first blocks together; without moves the cost is at least 7/4 of live memory against 5/3 when only the smallest blocks are freed. Nothing machine-checked |
 
 ## License
 

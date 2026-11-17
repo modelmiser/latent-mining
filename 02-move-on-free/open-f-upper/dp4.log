@@ -1,0 +1,21 @@
+M=48 cls=2 par=0 k=4  max v=26 (removed 4, re-placed 1)  final extent=76  minus 5M/3 = -4.0  7M/4=84.0  fluid=e2+C-v=78 (-2.0)
+M=48 cls=1 par=0 k=4  max v=23 (removed 3, re-placed 2)  final extent=79  minus 5M/3 = -1.0  7M/4=84.0  fluid=e2+C-v=81 (+1.0)
+
+M=96 cls=2 par=0 k=8  max v=49 (removed 8, re-placed 3)  final extent=158  minus 5M/3 = -2.0  7M/4=168.0  fluid=e2+C-v=159 (-1.0)
+M=96 cls=1 par=0 k=8  max v=46 (removed 7, re-placed 4)  final extent=161  minus 5M/3 = +1.0  7M/4=168.0  fluid=e2+C-v=162 (+2.0)
+
+M=192 cls=2 par=0 k=16  max v=95 (removed 16, re-placed 7)  final extent=319  minus 5M/3 = -1.0  7M/4=336.0  fluid=e2+C-v=321 (+1.0)
+M=192 cls=2 par=1 k=16  max v=92 (removed 16, re-placed 8)  final extent=320  minus 5M/3 = +0.0  7M/4=336.0  fluid=e2+C-v=322 (+2.0)
+
+M=384 cls=0 par=0 k=32  max v=184 (removed 32, re-placed 15)  final extent=647  minus 5M/3 = +7.0  7M/4=672.0  fluid=e2+C-v=648 (+8.0)
+M=384 cls=2 par=1 k=32  max v=184 (removed 32, re-placed 16)  final extent=645  minus 5M/3 = +5.0  7M/4=672.0  fluid=e2+C-v=646 (+6.0)
+
+M=768 cls=0 par=0 k=64  max v=368 (removed 64, re-placed 31)  final extent=1294  minus 5M/3 = +14.0  7M/4=1344.0  fluid=e2+C-v=1296 (+16.0)
+M=768 cls=2 par=1 k=64  max v=368 (removed 64, re-placed 32)  final extent=1292  minus 5M/3 = +12.0  7M/4=1344.0  fluid=e2+C-v=1294 (+14.0)
+
+M=1536 cls=0 par=0 k=128  max v=736 (removed 128, re-placed 63)  final extent=2591  minus 5M/3 = +31.0  7M/4=2688.0  fluid=e2+C-v=2592 (+32.0)
+M=1536 cls=2 par=1 k=128  max v=736 (removed 128, re-placed 64)  final extent=2589  minus 5M/3 = +29.0  7M/4=2688.0  fluid=e2+C-v=2590 (+30.0)
+
+M=3072 cls=0 par=0 k=256  max v=1472 (removed 256, re-placed 127)  final extent=5182  minus 5M/3 = +62.0  7M/4=5376.0  fluid=e2+C-v=5184 (+64.0)
+M=3072 cls=2 par=1 k=256  max v=1472 (removed 256, re-placed 128)  final extent=5180  minus 5M/3 = +60.0  7M/4=5376.0  fluid=e2+C-v=5182 (+62.0)
+
