@@ -1,0 +1,8 @@
+Fix n >= 2 wires, numbered 1..n from top to bottom. An adjacent comparator c_i (1 <= i <= n-1) acts on wires i and i+1: it puts the smaller of the two values on wire i and the larger on wire i+1. A primitive network is a finite word w = c_{i_1} c_{i_2} ... c_{i_m} over the alphabet {c_1, ..., c_{n-1}}, applied left to right; its size is m. No comparator between non-adjacent wires is allowed. A fault deletes one letter of the word (that comparator passes both values through unchanged). Call w f-robust if, for every input of n distinct values and every way of deleting at most f letters, the remaining word leaves the values in increasing order from wire 1 to wire n. The adversary sees the input before choosing which letters to delete.
+
+Define P(n, f) as the least size of an f-robust primitive network on n wires. (P(n, 0) = n(n-1)/2 is classical. By hand, P(2, f) = f+1 and P(3, 1) = 5, attained by c_1 c_2 c_1 c_2 c_1.)
+
+Questions.
+1. Determine the sequence A(n) = P(n, 1) for n = 2, 3, 4, 5, 6, 7, and give a closed formula for A(n) with proof. In particular: is A(n) = n(n-1)/2 + (n-1) for all n, or is the price of the single fault eventually smaller or larger than n-1 comparators?
+2. Determine P(n, f) for all n and f. Is the marginal price P(n, f+1) - P(n, f) independent of f? Is it independent of n beyond some point?
+3. For each n <= 6, count the 1-robust words of size exactly A(n), and say whether every one of them is obtained from some fixed family (for example, a truncation of the alternating odd-even transposition pattern, or a bubble-sort triangle with one extra diagonal) by commuting letters c_i c_j with |i - j| >= 2.

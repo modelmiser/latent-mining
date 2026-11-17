@@ -1,0 +1,16 @@
+Fix an integer n >= 3 and wires numbered 1..n from top to bottom. For 1 <= i <= n-1 the adjacent comparator c_i acts on a vector of n distinct integers by putting the smaller of the values on wires i and i+1 on wire i and the larger on wire i+1; all other wires are unchanged. A word w = c_{i_1} c_{i_2} ... c_{i_m} over the alphabet {c_1, ..., c_{n-1}} is applied left to right; its size is m. No other comparators exist.
+
+A slip of w is a word obtained from w by choosing exactly one position p and replacing the letter c_i at p by c_{i-1} or by c_{i+1}, where the replacement must be in the alphabet (so c_1 can only become c_2, and c_{n-1} can only become c_{n-2}). A slip has the same size as w. A word sorts if it maps every arrangement of n distinct values to increasing order on wires 1..n.
+
+Call w slip-proof if w sorts and every slip of w sorts. (Equivalently: an adversary who sees w and the input, and may make at most one slip, cannot prevent sorting.) Let S(n) be the least size of a slip-proof word on n wires, and put D(n) = S(n) - n(n-1)/2.
+
+HEADLINE. Find the exact function D(n) for all n >= 3. Precisely: is D(n) = n - 1 for every n >= 3, that is, S(n) = (n-1)(n+2)/2? Answer yes with proof, or no with the least n at which it fails and the true value of S(n) there. Small instances to settle by computation: S(4), S(5), S(6).
+
+UNVERIFIED beliefs (do not rely on them):
+(a) A word over adjacent comparators sorts every input if and only if it sorts the single input n, n-1, ..., 1; so each slip needs one test.
+(b) S(3) = 5, attained by c_1 c_2 c_1 c_2 c_1.
+(c) S(n) >= max(n(n-1)/2, 2(n-1)): the unslipped word must undo n(n-1)/2 inversions, and on the input that is sorted except for wires j, j+1 exchanged, slipping the first c_j acts as a deletion, so c_j must occur at least twice.
+(d) Inserting an adjacent comparator anywhere in a sorting word leaves it sorting (monotonicity of adjacent comparators on 0-1 inputs under dominance). Hence a slip is never worse than deleting the letter, and S(n) <= A(n), where A(n) is the least size of a word that still sorts after deletion of any one letter.
+(e) Odd-even transposition sort run for n+2 rounds has size (n-1)(n+2)/2 and may be deletion-proof, which would give D(n) <= n - 1.
+
+GUESS (a bet, not a claim): yes, D(n) = n - 1, because on nearly sorted inputs a slipped comparator does nothing, so slips behave like deletions and each of the n-1 letters seems to need one spare occurrence; the real doubt is whether the misplaced comparator can do useful work on the reversed input and save letters for larger n.

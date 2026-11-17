@@ -1,0 +1,3 @@
+# Seed
+
+A comparator network on n wires is a fixed sequence of compare-exchange elements, each joining two wires and putting the smaller value on the upper one. A sorting network sorts every input. Suppose that when the network is used, an adversary who knows the input may make up to f of the comparators faulty; a faulty comparator does nothing (passes both values through unchanged). What is the least number of comparators S(n, f) in a network that still sorts every input under every choice of at most f faults, and the least depth? How does the price of each tolerated fault behave as n grows, and what do the smallest fault-tolerant networks look like for small n?

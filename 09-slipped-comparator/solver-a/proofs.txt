@@ -1,0 +1,72 @@
+PROOFS (solver-a).  Status of each item is stated.  Notation: wires 1..n top to bottom, c_i sorts
+wires i,i+1 (smaller on top).  A letter is ACTIVE on a run if it exchanges two values, IDLE otherwise.
+"Deletion-proof": w sorts and w with any one letter removed sorts.  A(n) = least size of such a word.
+
+L0 (0-1 principle) COMPLETE (standard).  For a threshold t let f_t(v)=1 if v>=t else 0, applied
+  wire by wire.  f_t commutes with every comparator (min/max commute with monotone maps), hence with
+  every word.  If a word leaves some input unsorted, value a above value b<a, then f_a of that input
+  is a 0-1 input left unsorted.  So a word sorts all inputs iff it sorts all 0-1 inputs.
+
+L1 (monotonicity) COMPLETE.  For 0-1 vectors x,y of equal weight put s_j(x) = number of ones on wires
+  1..j and x <= y iff s_j(x) <= s_j(y) for all j.  The sorted vector (ones at the bottom) is the least
+  element.  c_i changes only s_i, to  max(s_{i-1}, s_{i+1}-1)  (<= old s_i), which is nondecreasing in
+  (s_{i-1}, s_{i+1}).  Hence c_i(x) <= x, and x <= y implies c_i(x) <= c_i(y); the same for every word.
+  (Also machine-checked for n<=7 in bfs.cpp's self-test.)
+  Consequence (belief (a)): 1^k 0^(n-k) is the greatest vector of weight k, and these are the threshold
+  images of the reversed input; so a word sorts everything iff it sorts n, n-1, ..., 1.   TRUE.
+  Consequence (belief (d)): if u v sorts then u c_j v sorts (on a 0-1 input x: c_j(u(x)) <= u(x), so
+  v(c_j(u(x))) <= v(u(x)) = sorted = least).   TRUE.
+
+T1 (slip-proof  <=>  deletion-proof, for n >= 3) COMPLETE.
+  (<=) A slip of w at position p is the deleted word with one letter inserted; apply (d).
+  (=>) Let w be slip-proof, p a position with letter c_i.  As n>=3 there is a slip w^ replacing it by
+  c_j, j = i+1 or i-1.  Let w- be w with position p removed, x any 0-1 input, y the state just
+  before p.  If c_i is idle on y then w- acts on x as w does: sorted.  If c_i is active on y then
+  y_i = 1, y_{i+1} = 0.  For j=i+1 the slipped comparator sees (0, anything) on wires i+1,i+2: idle.
+  For j=i-1 it sees (anything, 1) on wires i-1,i: idle.  So w^ acts on x exactly as w- does, and w^
+  sorts x.  Hence w- sorts every 0-1 input, hence everything (L0).
+  Corollary: S(n) = A(n) for n>=3 and the two sets of words coincide (confirmed: equal counts of
+  words at every size tried, brute.cpp / bfs.cpp).
+
+T2 (lower bound  A(n) >= n(n-1)/2 + n-1, n >= 2) COMPLETE.
+  Let w be deletion-proof and run it on the reversed input.  An active letter exchanges an adjacent
+  inverted pair and changes the relative order of no other pair; so each of the n(n-1)/2 pairs of
+  values is exchanged at exactly one letter, and is in order from then on.  For v = 1..n-1 let p_v
+  be the letter exchanging v+1 and v, and let w- be w without p_v.  Let phi exchange the values v and
+  v+1.  Just after position p_v, (state of w-) = phi(state of w).  This relation persists across any
+  letter whose two wires do not hold exactly {v, v+1} (no value lies strictly between v and v+1, so
+  every comparison has the same outcome in both runs).  At a later letter q whose two wires hold
+  {v, v+1}: in the run of w they are in order (v above v+1), so q is idle in w; in the run of w- they
+  are inverted, q exchanges them, and the two runs coincide from then on.  If no such q existed, w-
+  would end in phi(sorted), which is not sorted.  So for each v there is a letter q_v, idle in the
+  run of w, whose wires at that moment hold v and v+1.  The q_v are distinct for distinct v.
+  So w has n(n-1)/2 active letters and at least n-1 idle ones.
+
+T3 (upper bound) COMPLETE.  W_n = D_1 D_2 ... D_{n-1} D_{n-1},  D_k = c_k c_{k-1} ... c_1, has size
+  n(n-1)/2 + n-1 and is deletion-proof.
+  By L0 it suffices to treat 0-1 inputs.  Let Z_m be the set of 0-1 words on wires 1..m of the form
+  0^a 1^c 0 1^d (c,d >= 0) or sorted ("sorted, with at most one 0 displaced downward").
+  (i) Intact D_m maps (x in Z_m on wires 1..m, y on wire m+1) into Z_{m+1}, and sorted to sorted.
+      x = 0^a 1^c 0 1^d.  y=1: letters c_m..c_{a+c+1} see (0,1) or (1,1): idle; then c_{a+c},...,c_{a+1}
+      carry the displaced 0 up to wire a+1: sorted.  y=0: c_m..c_{m-d+1} carry the new 0 up past the d
+      ones, c_{a+c+1} sees (0,0), then c_{a+c}..c_{a+1} carry the old 0 up to wire a+1; result
+      0^(a+1) 1^c 0 1^d.  (x sorted is the case c=0.)
+  (ii) D_m with one letter c_j removed maps (x sorted on wires 1..m, y) into Z_{m+1}: if y=1 nothing
+      moves; if y=0 the 0 climbs until it meets a 0 (sorted) or reaches wire j+1 and stops there,
+      leaving 0^a 1^c 0 1^d.
+  (iii) D_{n-1} applied to x in Z_n (no new wire): c_{n-1}..c_{a+c+1} idle, the rest carry the 0 up: sorted.
+  Remove one letter of W_n.  If it lies in D_k, k <= n-2 or in the first D_{n-1}: before it the state is
+  sorted on wires 1..k (insertion sort), after it in Z_{k+1} by (ii), then in Z by (i), and the final
+  intact D_{n-1} sorts by (iii).  If it lies in the final D_{n-1}: the state is already sorted.
+  (Machine-checked for n=3..12: check.py witnesses.txt.)
+
+MAIN THEOREM COMPLETE.  For every n >= 3:  S(n) = A(n) = n(n-1)/2 + n-1 = (n-1)(n+2)/2, D(n) = n-1.
+  Lower bound: T1(=>) + T2.  Upper bound: T3 + T1(<=).
+
+NOT PROVED (computed only): odd-even transposition sort with n+2 rounds (either starting parity) is
+  slip-proof and deletion-proof for n = 3..12 (check.py oddeven.txt).  Not needed for the theorem.
+
+Beliefs in the statement: (a) true (L1). (b) true. (c) true but not tight; the true bound is the SUM
+  n(n-1)/2 + (n-1), not the max.  (d) true (L1); moreover the converse holds (T1), so S(n)=A(n).
+  (e) true for n<=12 by computation.  The GUESS is right; the stated doubt does not materialise because
+  on 0-1 inputs a slipped ACTIVE comparator is always idle (T1).

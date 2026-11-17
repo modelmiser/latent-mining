@@ -1,0 +1,16 @@
+n=3 mode=up L=4 prune=1 accepted_words=1 layer_sizes: 2 4 3 1
+witness: 2 1 1 2
+n=3 mode=up L=5 prune=1 accepted_words=8 layer_sizes: 2 4 8 6 1
+witness: 1 1 2 1 1
+n=4 mode=up L=8 prune=1 accepted_words=0 layer_sizes: 3 9 27 60 52 35 5 0
+n=4 mode=up L=9 prune=1 accepted_words=64 layer_sizes: 3 9 27 70 150 157 93 11 1
+witness: 1 2 1 2 3 2 1 2 1
+n=5 mode=up L=13 prune=1 accepted_words=0 layer_sizes: 4 15 56 192 587 1250 2033 1662 1255 528 81 7 0
+n=5 mode=up L=14 prune=1 accepted_words=3860 layer_sizes: 4 15 56 192 604 1698 3647 6260 6064 5130 2358 390 21 1
+witness: 1 2 1 3 2 1 3 4 3 2 1 3 2 1
+n=6 mode=up L=19 prune=1 accepted_words=0 layer_sizes: 5 22 95 386 1471 5171 15573 37807 71614 109166 130991 123555 98910 57790 22932 3690 321 14 0
+n=6 mode=up L=20 prune=1 accepted_words=2611264 layer_sizes: 5 22 95 386 1471 5197 16760 48030 117236 234140 388241 518484 548304 489534 326931 142485 23599 2033 37 1
+witness: 1 2 1 3 2 1 4 3 2 1 4 5 4 3 2 1 4 3 2 1
+n=5 mode=slip L=14 prune=1 accepted_words=1912 layer_sizes: 4 15 56 207 746 2365 5678 10131 9780 7189 1720 244 17 1
+witness: 1 2 1 3 2 1 4 3 2 1 4 3 2 1
+n=5 mode=slip L=14 prune=1 accepted_words=1912 layer_sizes: 0 0 0 0 0 0 0 0 0 0 0 0 0 1

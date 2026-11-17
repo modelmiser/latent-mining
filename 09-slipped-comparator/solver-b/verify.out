@@ -1,0 +1,29 @@
+n=3 W(n) size=5 deletion-proof=True slip-proof=True
+   OET rounds=3 size=3 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=4 size=4 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=5 size=5 sorts=True deletion-proof=True slip-proof=True
+   deliberately wrong (last letter dropped): slip-proof=False  (must be False)
+n=4 W(n) size=9 deletion-proof=True slip-proof=True
+   OET rounds=4 size=6 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=5 size=8 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=6 size=9 sorts=True deletion-proof=True slip-proof=True
+   deliberately wrong (last letter dropped): slip-proof=False  (must be False)
+n=5 W(n) size=14 deletion-proof=True slip-proof=True
+   OET rounds=5 size=10 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=6 size=12 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=7 size=14 sorts=True deletion-proof=True slip-proof=True
+   deliberately wrong (last letter dropped): slip-proof=False  (must be False)
+n=6 W(n) size=20 deletion-proof=True slip-proof=True
+   OET rounds=6 size=15 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=7 size=18 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=8 size=20 sorts=True deletion-proof=True slip-proof=True
+   deliberately wrong (last letter dropped): slip-proof=False  (must be False)
+n=7 W(n) size=27 deletion-proof=True slip-proof=True
+   OET rounds=7 size=21 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=8 size=24 sorts=True deletion-proof=False slip-proof=False
+   OET rounds=9 size=27 sorts=True deletion-proof=True slip-proof=True
+   deliberately wrong (last letter dropped): slip-proof=False  (must be False)
+belief(a) n=3 words up to length 9: 1023 words, 932 sort the reverse input, counterexamples=0
+belief(a) n=4 words up to length 9: 29524 words, 6424 sort the reverse input, counterexamples=0
+belief(a) n=5 words up to length 8: 87381 words, 0 sort the reverse input, counterexamples=0
+belief(d) n=4: 32880 insertions into sorting words of length 6..8, counterexamples=0

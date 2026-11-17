@@ -1,0 +1,108 @@
+PROOFS (solver-b).  N = n(n-1)/2.  Words are applied left to right. I_k = c_{k-1} c_{k-2} ... c_1.
+
+THEOREM. S(n) = N + n - 1 for every n >= 3 (D(n) = n-1). Also A(n) = N + n - 1 for n >= 2.
+Status: COMPLETE, except that the lower bound for n >= 4 rests on ONE computed base case,
+u(4) = 9 (exhaustive over all 3^L words, L <= 8, on all 24 inputs: slow.py 4 9 up; and fast 4 8 up),
+and S(3) >= 5 is a hand check (L3). Everything else is pencil proof.
+
+------------------------------------------------------------------------------------------
+L0 (0-1 principle, both directions). COMPLETE.
+For a threshold t let f_t(x) = 1 if x >= t else 0, applied coordinatewise. f_t commutes with
+every comparator (min/max commute with monotone maps), hence with every word.
+ (i) If w sorts all permutations it sorts all 0-1 vectors: a 0-1 vector with k ones is f_t of a
+     permutation; w(f_t(x)) = f_t(w(x)) is f_t of a sorted vector, so sorted.
+ (ii) If w sorts all 0-1 vectors it sorts all permutations: if w(x) had a > b on wires j < j+1,
+     f_a(w(x)) = w(f_a(x)) would have 1 above 0.
+
+L1 (belief (d): insertion is harmless). COMPLETE.
+For 0-1 vectors x, y with the same number of ones write x <= y if P_j(x) <= P_j(y) for all j,
+P_j = number of ones on wires 1..j. This is a partial order whose unique minimum is the sorted
+vector. For a comparator c_i: P_j(c_i x) = P_j(x) for j != i, and
+P_i(c_i x) = max(P_{i-1}(x), P_{i+1}(x) - 1)   (check the three cases x_i + x_{i+1} = 0, 1, 2).
+So (1) c_i x <= x, and (2) x <= y implies c_i x <= c_i y; (2) extends to words.
+If uv sorts and c is any letter: for 0-1 input x, c(u(x)) <= u(x), hence v(c(u(x))) <= v(u(x)) =
+sorted = minimum, so v c u x is sorted. By L0, u c v sorts all permutations.
+COROLLARY: a slip = deletion followed by insertion at the same place, so deletion-proof implies
+slip-proof, S(n) <= A(n).
+
+------------------------------------------------------------------------------------------
+L2 (upper bound). W_n = I_2 I_3 ... I_n I_n is deletion-proof; size N + n - 1. COMPLETE.
+Call a vector on wires 1..m "x-low" if deleting entry x leaves it increasing and x is smaller
+than every entry below it (on larger wire numbers). Sorted vectors are x-low (any x).
+ (a) I_m applied to a vector whose wires 1..m-1 are increasing makes wires 1..m increasing
+     (insertion step: the entry from wire m moves up past larger entries, later letters no-ops).
+ (b) Delete letter c_j from I_k, with wires 1..k-1 increasing before it. The entry x from wire k
+     is carried up by c_{k-1}..c_{j+1} at most to wire j+1; c_j is missing; c_{j-1}..c_1 act inside
+     the still increasing wires 1..j and do nothing. If x stopped before wire j+1, wires 1..k are
+     increasing; otherwise everything below x was passed by x (so is larger than x) and the rest
+     is increasing: wires 1..k are x-low.
+ (c) If wires 1..m-1 are x-low, then after I_m wires 1..m are x-low or sorted. Let y come from
+     wire m. The entries below x are increasing and > x. y moves up past entries > y.
+     If y > x, y stops at or below the wire just under x; the remaining letters then meet only
+     increasing pairs until the pair (entry above x, x), from where x bubbles up to its correct
+     place: result increasing. If y < x, y passes x (x moves down one wire, still smaller than
+     everything below it), y continues to its correct place among the increasing entries above;
+     result x-low.
+ (d) I_n applied to an x-low vector on wires 1..n sorts it: letters below x are no-ops, then x
+     bubbles up to its place, the rest are no-ops.
+Now take W_n with one letter deleted. If the letter is in the final I_n: I_2..I_n sorts by (a),
+and a sorted vector is fixed by any comparator. If it is in the block I_k (k <= n) of the first
+part: by (a) wires 1..k-1 are increasing before the block, by (b) wires 1..k are x-low after it,
+by (c) wires 1..n are x-low after I_n, and by (d) the final I_n sorts. QED.
+Hence A(n) <= N + n - 1 and, by L1, S(n) <= N + n - 1.
+(Checked on all inputs, all deletions and all slips for n = 3..7: verify.py.)
+
+------------------------------------------------------------------------------------------
+L3 (S(3) >= 5 by hand). COMPLETE. On input (2,1,3) a slip of the first c_1 to c_2 does nothing,
+so c_1 occurs twice; likewise c_2 (belief (c)). A sorting word of length 4 on 3 wires is then
+1212, 1221, 2121 or 2112 (1122, 2211 do not sort 321). Failing slips: 1212 -> 1222, 2121 -> 2111,
+1221 -> 2221, 2112 -> 1112 (none sorts 321). Length <= 3 is excluded by the two occurrences.
+
+------------------------------------------------------------------------------------------
+L4 (lower bound). COMPLETE given the computed base u(4) = 9.
+Class U(n): words w on n wires such that w sorts every input, and for every position holding a
+letter c_i with i <= n-2, replacing that letter by c_{i+1} gives a word that sorts every input
+("up-slips" only). Every slip-proof word is in U(n). Let u(n) = least size of a word in U(n).
+(u(2) = 1, u(3) = 4 with the unique word 2112, u(4) = 9: computed.)
+
+CLAIM: u(n) >= u(n-1) + n for n >= 3.
+Proof. Let w be in U(n). Feed inputs whose maximum M is on wire 1. M's path does not depend on the
+other values: when M is on wire k it moves to wire k+1 at the first c_k that follows ("trajectory
+letter" t_k), k = 1..n-1; all t_k exist because w sorts. While M is on wire k, a letter c_i
+   i = k    : is t_k (the first one); M moves, the order of the other n-1 values is unchanged;
+   i = k-1  : compares something with M: no effect ("wasted");
+   i <= k-2 : acts on the list of the other n-1 values as c_i;
+   i >= k+1 : acts on that list as c_{i-1}.
+Let w* be the word on n-1 wires formed by the letters of the last two kinds, relabelled as said.
+The other values are transformed by w*, so w* sorts every input on n-1 wires, and the same holds
+for (w')* for any word w' that sorts.  |w| = |w*| + (n-1) + (number of wasted letters).
+
+ (1) w* is in U(n-1). Take a letter c_j of w*, j <= n-3, coming from position p of w where M is on
+ wire k and the letter is c_i with either (A) i = j <= k-2, or (B) i = j+1 >= k+1. In both cases
+ i <= n-2, so w' = w with p replaced by c_{i+1} sorts. The new letter is not c_k (A: i+1 <= k-1,
+ B: i+1 >= k+2), so M's path and the classification of all other letters are unchanged.
+   (B), or (A) with i+1 <= k-2: the new letter acts on the others as c_{j+1}; so (w')* is w* with
+       that letter up-slipped, and it sorts.
+   (A) with i+1 = k-1: the new letter is wasted; (w')* is w* with that letter deleted, and it
+       sorts; by L1 re-inserting c_{j+1} (in the alphabet since j+1 <= n-2) at that place still
+       sorts; that is w* with the letter up-slipped.
+ (2) w has at least one wasted letter. n >= 3, so t_{n-2} (a c_{n-2}) may be up-slipped to
+ c_{n-1}; the result w' sorts. In w', M is on wire n-2 at that position and stays there, so w'
+ (hence w) has a c_{n-2} at some later position a and a c_{n-1} at some position b > a. In w,
+ t_{n-1} is the first c_{n-1} after t_{n-2}. If t_{n-1} > a, then a is a c_{n-2} read while M is on
+ wire n-1: wasted. If t_{n-1} < a < b, then b is a c_{n-1} read while M is on wire n: wasted.
+So |w| >= u(n-1) + (n-1) + 1. QED.
+
+With u(4) = 9: for n >= 4, u(n) >= 9 + 5 + ... + n = n(n+1)/2 - 1 = N + n - 1.
+Hence S(n) >= u(n) >= N + n - 1 for n >= 4, and S(3) >= 5 by L3. With L2: S(n) = N + n - 1.
+(The claim alone from u(2) = 1 or u(3) = 4 gives only N + n - 2; the recursion is not tight at
+n = 4, where u(4) = 9 > u(3) + 4. That is why a computed base is used.)
+
+L5 (A(n) >= N + n - 1, n >= 2). COMPLETE, no computation. Same decomposition with deletions:
+deleting a non-trajectory letter leaves M's path unchanged, so w* is deletion-proof on n-1 wires;
+deleting t_{n-1} forces a later c_{n-1}, which in w is wasted. So A(n) >= A(n-1) + n, A(1) = 0,
+A(2) = 2 (one letter deleted must still sort), giving A(n) >= N + n - 1.
+
+NOT PROVED (computed only): odd-even transposition sort with n+2 rounds is deletion-proof
+(n = 3..7, verify.py), with n and n+1 rounds it is not; the number of slip-proof words of minimum
+size equals the number of deletion-proof ones for n = 3..6 (2, 24, 1912, 1210080).

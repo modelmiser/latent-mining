@@ -1,0 +1,27 @@
+n=4 mode=slip L=8 prune=1 accepted_words=0 layer_sizes: 3 9 27 44 34 7 0
+n=4 mode=slip L=9 prune=1 accepted_words=24 layer_sizes: 3 9 27 59 98 99 46 9 1
+witness: 1 2 1 3 2 1 3 2 1
+n=5 mode=slip L=13 prune=1 accepted_words=0 layer_sizes: 4 15 56 160 379 669 830 703 476 142 20 0
+n=5 mode=slip L=14 prune=1 accepted_words=1912 layer_sizes: 4 15 56 160 401 845 1387 1793 1784 1365 596 156 17 1
+witness: 1 2 1 3 2 1 4 3 2 1 4 3 2 1
+n=6 mode=slip L=19 prune=1 accepted_words=0 layer_sizes: 5 22 95 329 970 2485 5374 9808 15204 19956 22127 20957 17499 11310 4070 807 78 0
+n=6 mode=slip L=20 prune=1 accepted_words=1210080 layer_sizes: 5 22 95 329 970 2514 5693 11349 20001 31123 42385 50315 51778 46083 32768 14919 4171 691 33 1
+witness: 1 2 1 3 2 1 4 3 2 1 5 4 3 2 1 5 4 3 2 1
+n=4 mode=up L=8 prune=1 accepted_words=0 layer_sizes: 3 9 25 45 41 23 4 0
+n=4 mode=up L=9 prune=1 accepted_words=64 layer_sizes: 3 9 25 54 83 79 51 10 1
+witness: 1 2 1 2 3 2 1 2 1
+n=5 mode=up L=13 prune=1 accepted_words=0 layer_sizes: 4 15 52 150 345 600 795 734 578 277 57 7 0
+n=5 mode=up L=14 prune=1 accepted_words=3860 layer_sizes: 4 15 52 150 358 712 1149 1504 1528 1277 719 193 19 1
+witness: 1 2 1 3 2 1 3 4 3 2 1 3 2 1
+n=6 mode=up L=19 prune=1 accepted_words=0 layer_sizes: 5 22 89 308 916 2352 5162 9646 15323 20871 23598 22625 19272 13600 6728 1588 239 14 0
+n=6 mode=up L=20 prune=1 accepted_words=2611264 layer_sizes: 5 22 89 308 916 2369 5363 10685 18877 29402 40351 47857 49248 44625 33490 17971 5376 856 35 1
+witness: 1 2 1 3 2 1 4 3 2 1 4 5 4 3 2 1 4 3 2 1
+n=4 mode=del L=8 prune=1 accepted_words=0 layer_sizes: 3 8 21 32 26 7 0
+n=4 mode=del L=9 prune=1 accepted_words=24 layer_sizes: 3 8 21 49 78 83 42 9 1
+witness: 1 2 1 3 2 1 3 2 1
+n=5 mode=del L=13 prune=1 accepted_words=0 layer_sizes: 4 13 40 112 249 441 564 557 424 142 20 0
+n=5 mode=del L=14 prune=1 accepted_words=1912 layer_sizes: 4 13 40 112 277 573 969 1321 1452 1205 578 156 17 1
+witness: 1 2 1 3 2 1 4 3 2 1 4 3 2 1
+n=6 mode=del L=19 prune=1 accepted_words=0 layer_sizes: 5 19 66 209 596 1485 3212 6040 9854 13919 16912 17665 15838 10882 4030 807 78 0
+n=6 mode=del L=20 prune=1 accepted_words=1210080 layer_sizes: 5 19 66 209 596 1526 3463 7051 12899 21126 30666 39246 43634 41415 31136 14639 4159 691 33 1
+witness: 1 2 1 3 2 1 4 3 2 1 5 4 3 2 1 5 4 3 2 1

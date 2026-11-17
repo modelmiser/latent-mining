@@ -1,0 +1,4 @@
+mutant T1 (slip == original): cases 17714 failures 8574 (must be > 0)
+mutant T2 (v, v+2): cases 19272 failures 10232 (must be > 0)
+mutant L4 on merely sorting words n=4 L=8: words 1056 no-wasted 332 star-not-in-U 870 (must be > 0)
+mutant T3: W_6 minus two letters, non-sorting cases 70 of 190 (must be > 0)

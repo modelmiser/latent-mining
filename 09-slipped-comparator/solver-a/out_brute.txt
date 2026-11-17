@@ -1,0 +1,21 @@
+n=3 mode=0 size=4 words_ok_on_reversed=0 words_ok_on_all_inputs=0
+n=3 mode=0 size=5 words_ok_on_reversed=2 words_ok_on_all_inputs=2
+n=3 mode=0 size=6 words_ok_on_reversed=16 words_ok_on_all_inputs=16
+n=3 mode=0 size=7 words_ok_on_reversed=58 words_ok_on_all_inputs=58
+n=4 mode=0 size=8 words_ok_on_reversed=0 words_ok_on_all_inputs=0
+n=4 mode=0 size=9 words_ok_on_reversed=24 words_ok_on_all_inputs=24
+n=4 mode=0 size=10 words_ok_on_reversed=444 words_ok_on_all_inputs=444
+n=3 mode=1 size=4 words_ok_on_reversed=0 words_ok_on_all_inputs=0
+n=3 mode=1 size=5 words_ok_on_reversed=2 words_ok_on_all_inputs=2
+n=3 mode=1 size=6 words_ok_on_reversed=16 words_ok_on_all_inputs=16
+n=3 mode=1 size=7 words_ok_on_reversed=58 words_ok_on_all_inputs=58
+n=4 mode=1 size=8 words_ok_on_reversed=0 words_ok_on_all_inputs=0
+n=4 mode=1 size=9 words_ok_on_reversed=24 words_ok_on_all_inputs=24
+n=4 mode=1 size=10 words_ok_on_reversed=444 words_ok_on_all_inputs=444
+n=5 mode=0 size=12 words_ok_on_reversed=0 words_ok_on_all_inputs=0
+n=5 mode=0 size=13 words_ok_on_reversed=0 words_ok_on_all_inputs=0
+n=5 mode=0 size=14 words_ok_on_reversed=1912 words_ok_on_all_inputs=1912
+
+real	0m29.906s
+user	0m29.903s
+sys	0m0.000s

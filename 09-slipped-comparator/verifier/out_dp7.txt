@@ -1,0 +1,10 @@
+n=7 L=26 mode=slip dom=1 accepted=0
+16.04s 197472kB
+n=7 L=27 mode=slip dom=1 accepted=7144675968
+46.24s 424124kB
+n=7 L=27 mode=del dom=1 accepted=7144675968
+35.96s 389228kB
+n=7 L=26 mode=up dom=1 accepted=0
+18.16s 209100kB
+n=7 L=27 mode=up dom=1 accepted=16896927944
+47.38s 421472kB

@@ -1,0 +1,61 @@
+T1 pointwise n=4 all words len<=7: (82870, 0)
+T1 pointwise n=5 300 random words len 2n(n-1)/2: (37279, 0)
+T1 pointwise n=6 300 random words len 2n(n-1)/2: (119734, 0)
+T1 pointwise n=7 300 random words len 2n(n-1)/2: (350474, 0)
+T1 pointwise n=8 300 random words len 2n(n-1)/2: (952749, 0)
+T1 sets n=3 all words len<=9: words=1023 slipproof=622 delproof=622 differ=0
+T1 sets n=4 all words len<=10: words=88573 slipproof=468 delproof=468 differ=0
+n=2 word [1]: slipproof True delproof False
+T2 n=3 all words len<=9 (sorting words, equivalence failures, count failures, delproof words): (932, 0, 0, 622)
+T2 n=4 all words len<=10: (28408, 0, 0, 468)
+T2 n=5 3000 random words len n(n-1): (1062, 0, 0, 0)
+T2 n=6 3000 random words len n(n-1): (622, 0, 0, 0)
+T2 n=7 3000 random words len n(n-1): (379, 0, 0, 0)
+L4/L5 n=3 L=4: U-words=1 L4-failures=0 delproof-words=0 L5-failures=0
+L4/L5 n=3 L=5: U-words=8 L4-failures=0 delproof-words=2 L5-failures=0
+L4/L5 n=3 L=6: U-words=29 L4-failures=0 delproof-words=16 L5-failures=0
+L4/L5 n=3 L=7: U-words=80 L4-failures=0 delproof-words=58 L5-failures=0
+L4/L5 n=3 L=8: U-words=193 L4-failures=0 delproof-words=160 L5-failures=0
+L4/L5 n=3 L=9: U-words=432 L4-failures=0 delproof-words=386 L5-failures=0
+L4/L5 n=4 L=9: U-words=64 L4-failures=0 delproof-words=24 L5-failures=0
+L4/L5 n=4 L=10: U-words=1053 L4-failures=0 delproof-words=444 L5-failures=0
+L4/L5 n=4 L=11: U-words=9077 L4-failures=0 delproof-words=4554 L5-failures=0
+L4/L5 n=5 witnesses with random insertions: U-words=120 L4-failures=0 delproof-words=80 L5-failures=0
+L4/L5 n=6 witnesses with random insertions: U-words=120 L4-failures=0 delproof-words=80 L5-failures=0
+L4/L5 n=7 witnesses with random insertions: U-words=120 L4-failures=0 delproof-words=80 L5-failures=0
+u(3): no word of size 0
+u(3): no word of size 1
+u(3): no word of size 2
+u(3): no word of size 3
+u(3): first nonempty size 4, 1 words, perm-confirmed=True, e.g. [2, 1, 1, 2]
+u(4): no word of size 0
+u(4): no word of size 1
+u(4): no word of size 2
+u(4): no word of size 3
+u(4): no word of size 4
+u(4): no word of size 5
+u(4): no word of size 6
+u(4): no word of size 7
+u(4): no word of size 8
+u(4): first nonempty size 9, 64 words, perm-confirmed=True, e.g. [1, 2, 1, 2, 3, 2, 1, 2, 1]
+U(4) == 'deletion-proof for letters other than c_{n-1}', words len<=10, mismatches: 0
+T3 invariant (Z_m after each block, 0-1 inputs) n=3: cases=120 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=4: cases=576 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=5: cases=2240 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=6: cases=7680 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=7: cases=24192 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=8: cases=71680 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=9: cases=202752 failures=0
+T3 invariant (Z_m after each block, 0-1 inputs) n=10: cases=552960 failures=0
+L2 invariant (x-low after each block, all permutations) n=3: cases=90 failures=0
+L2 invariant (x-low after each block, all permutations) n=4: cases=864 failures=0
+L2 invariant (x-low after each block, all permutations) n=5: cases=8400 failures=0
+L2 invariant (x-low after each block, all permutations) n=6: cases=86400 failures=0
+L2 invariant (x-low after each block, all permutations) n=7: cases=952560 failures=0
+L1 monotone n=2: failures=0
+L1 monotone n=3: failures=0
+L1 monotone n=4: failures=0
+L1 monotone n=5: failures=0
+L1 monotone n=6: failures=0
+L1 monotone n=7: failures=0
+L1 monotone n=8: failures=0
