@@ -29,7 +29,8 @@ chain produces prose that nothing can test.
 
 | # | Folder | Subject | Headline | Status |
 |---|---|---|---|---|
-| 1 | [01-late-thermostat](01-late-thermostat/) | regulating a level from a delayed one-bit signal | a blind clock is within 1 of a controller with full memory | partly machine-checked, one part open |
+| 1 | [01-late-thermostat](01-late-thermostat/) | regulating a level from a delayed one-bit signal | a blind clock is within 1 of a controller with full memory | headline proved by hand for every delay, not machine-checked; one supporting bound is in Lean; the exact clock value for odd delays is open past 13 |
+| 2 | [02-move-on-free](02-move-on-free/) | a memory allocator that may move blocks only when something is freed | how much that right is worth | in progress: question fixed, no results yet |
 
 ## License
 

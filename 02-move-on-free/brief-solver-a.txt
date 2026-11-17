@@ -1,0 +1,43 @@
+You are solving a precisely defined combinatorial game problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE GAME
+
+Cells are 0, 1, 2, .... Fix an integer M >= 3. Blocks have size 1, 2 or 3 and occupy contiguous cells. The heap starts empty. An adversary who sees the whole layout issues requests one at a time, forever:
+ - allocate(s), s in {1,2,3}: legal only if (number of live cells) + s <= M. The manager must immediately place the new block on s contiguous free cells.
+ - free(b): a live block b chosen by the adversary vanishes.
+
+Three games on these requests:
+ - N (no moves): blocks never move.
+ - F (move on free): immediately after free(b) with |b| = s, and before the next request, the manager may perform a sequence of moves whose moved sizes total at most s - 1. A move lifts one live block and puts it on any contiguous cells that are free once it is lifted (so it may overlap its own old position). The cells b vacated count as free. Unused allowance is lost; nothing can be saved up. So: freeing a 1 grants nothing; freeing a 2 grants one move of a 1; freeing a 3 grants one move of a 2, or up to two moves of 1s (possibly the same 1 twice). Blocks of size 3 never move. No moves at any other time.
+ - O (only 1s freed): game N, except the adversary may free only blocks of size 1.
+
+For G in {N, F, O}, h^G(M) = the least H such that some manager can serve every legal infinite request sequence using only cells 0 ... H-1. So h^O(M) <= h^F(M) <= h^N(M).
+
+WHAT TO FIND
+
+ A. The exact table of h^N(M), h^F(M), h^O(M) for M = 3 .. 8 (go further if it is cheap; stop where it is not and say so).
+ B. For each inequality h^O <= h^F and h^F <= h^N: the least M at which it is strict, if any in your range.
+ C. Witnesses: for each value, evidence that H-1 is impossible (an adversary strategy, or the solver's losing verdict) and that H is enough (a manager strategy; describe it in words if you can find a simple rule, not only as a table).
+ D. Conjectures: closed forms or growth rates for the three sequences, and the HEADLINE: with mu^G = limsup h^G(M)/M, which holds: (a) mu^F = mu^N (the move right is worthless), (b) mu^F = mu^O (the right is so strong the adversary's best play never triggers it), or (c) mu^O < mu^F < mu^N? Give your answer, the value of mu^F if you can, and how strongly the data and any argument support it. With M <= 8 or so the asymptotics are NOT settled by data alone; say so, and look for explicit strategies that scale.
+ E. Any proof you can actually complete: an upper bound via an explicit manager with an invariant for all M, or a lower bound via an explicit adversary strategy for all M. Mark each as COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+
+Before trusting your code on larger M, work M = 3 by hand for all three games and make the code reproduce it.
+
+METHOD NOTES (suggestions, not requirements)
+ - For fixed G, M, H this is a finite safety game. A position is a layout of cells 0..H-1: each cell free or part of a block of size 1, 2 or 3, with at most M live cells. Block identities do not matter. Compute the greatest fixpoint of safe positions: safe iff every legal allocate has a placement leading to a safe position and every legal free (after the manager's best permitted moves, in F) leads to a safe position.
+ - Reflection of the line (cell i <-> H-1-i) is a symmetry you may use, but get a correct plain version first.
+ - Sanity checks that would expose a wrong model: h^O <= h^F <= h^N; each h is non-decreasing in M and at least M; h^N for sizes restricted to {1} must equal M, and for sizes {1,2} check against a hand analysis of small M; a claimed manager strategy must survive exhaustive play by every adversary.
+ - Watch a check fail on purpose at least once (for example confirm the solver reports H-1 as losing, and that a deliberately bad manager is caught).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside /home/cjb/staging/2026-11-16-latent-mining-2/solver-a/ . Write your code and outputs there. Do not read the sibling folders.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=/home/cjb/staging/2026-11-16-latent-mining-2/solver-a ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs. Do not delete files. Do not install system packages; python3 and g++ are available.
+
+REPORT (final message, under 900 words)
+ 1. The table, each entry tagged COMPUTED (exhaustive, with the method) or not.
+ 2. The witnesses, compactly.
+ 3. Conjectures and the headline answer, with your confidence.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

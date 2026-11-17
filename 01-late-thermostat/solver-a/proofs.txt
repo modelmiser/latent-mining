@@ -1,3 +1,19 @@
+ERRATA (added after review, 2026-11-16; the text below this block is unchanged)
+ E1. Theorem 1, last line ("only 3 maps are bounded, with values floor(3d/2)+1, +2, +2"): part (c) shows the two
+     maps with f(0) != 0 REACH floor(3d/2)+2; that they stay within it is computed (d <= 12), not proved.
+     The theorem's statement (value and uniqueness of the optimal map) does not depend on it.
+ E2. Theorem 2, case II, "s+d even": the inequality ceil((d+1+l)/2) - floor(l/2) <= floor(d/2)+1 is FALSE for
+     d odd and l odd (e.g. d=1, l=1). Repair for that sub-case: s is odd, n = d+1+l is odd, L = (l-1)/2,
+     ceil(n/2) = (d+l+2)/2, so x_T <= x_s + e + (d+3)/2 with e <= (d+1)/2. If e = (d+1)/2 then u_{s+d} = +1,
+     x_s <= -1 and x_T <= d+1; otherwise e <= (d-1)/2 and x_T <= d+1. For the other parities the stated
+     inequality holds. An independent proof of the same theorem is solver-b/proofs.txt P2.
+ E3. Theorem 3: "(legal: V rests on odd ticks)" holds for the plays it is applied to (P and Q), not for
+     arbitrary V. In Step 3 choose T0 >= 2d+2 (needed for Step 2); if lam = 1 no pushes are omitted and Q = P.
+     In Step 6 the switched play has w = 0 on even ticks >= sigma, and the level drops by
+     2 * (d+2)/2 = d+2. The corollary's left inequality 0 <= C - H is the class inclusion H <= C.
+ E4. The "NOT PROVED" list at the end is superseded: H(d) <= d for odd d is proved in open-h/proofs.txt
+     (Theorem A), and C(d) >= d+1 is computed for odd d <= 13 in open-c/.
+
 PROOFS (solver A).  Notation: n-tick window = n consecutive ticks; over any n-tick window
 sum(w) <= ceil(n/2) by the rest rule.  All statements symmetric under x -> -x.
 
