@@ -4,8 +4,9 @@ One machine, jobs arriving online with deadlines, and a one-tick penalty for
 leaving a job unfinished. How much does that penalty cost an online scheduler,
 and does it matter whether the benchmark it is compared with pays it too?
 
-**Short answer.** For every maximum job length P ≥ 2 the best worst-case
-lateness an online scheduler can guarantee is exactly P − 1, which is what it
+**Short answer.** For every maximum job length P ≥ 2 and every long enough
+horizon, the best worst-case lateness an online scheduler can guarantee is
+exactly P − 1, which is what it
 gets by never preempting at all. This holds even when the adversary must keep
 the jobs feasible for a clairvoyant scheduler that pays the same penalty. The
 chain that posed the question guessed the opposite.
@@ -49,27 +50,30 @@ online scheduler only by the amount the benchmark is excused from paying it?
 | Exact tables for P = 2, 3, 4 (below) | computed; the referee's own solver reproduces P = 2, P = 3 to T = 8 (S) and T = 7 (F), and P = 4 for T = 3 … 6 only | `solver-a/tables.txt`, `solver-b/results.txt`, `verifier/` |
 | S(2) = F(2) = 1 | proved by hand; three programs agree | `solver-b/proofs.txt` Theorems 3, 3′ |
 | S(3) = F(3) = 2, S(4) = F(4) = 3 | lower bounds are machine-found adversary trees, each accepted by its author's checker and by the referee's independent checker; six deliberately broken trees rejected | `solver-a/strat_*.txt`, `solver-b/wit_*`, `verifier/` |
-| **F_T(P) ≥ P − 1 for every P ≥ 2 and T ≥ P(P+1)/2** ("staircase" adversary) | proved by hand by one follow-up instance; I re-derived it; the rule was played against every scheduler for P = 2 … 6 | `open-f/proofs.txt` Theorem A |
+| **F_T(P) ≥ P − 1 for every P ≥ 2 and T ≥ P(P+1)/2** ("staircase" adversary) | proved by hand by one follow-up instance; I read it line by line; the rule was played against every scheduler for P = 2 … 6 | `open-f/proofs.txt` Theorem A |
 | F_T(P) ≥ min(P − 1, k) whenever T ≥ (k+1)(k+2)/2 | follows from the row above and monotonicity; agrees with every free-promise table entry | `open-f/proofs.txt` Corollary A′ |
-| **S_T(P) ≥ P − 1 for every P ≥ 2 and T ≥ (P−1)(4P−1)** | proved by hand by a second follow-up instance; I re-derived it; the rule was played against every scheduler for P = 2 … 5 | `open-s/proofs.txt` |
+| **S_T(P) ≥ P − 1 for every P ≥ 2 and T ≥ (P−1)(4P−1)** | proved by hand by a second follow-up instance; I read it line by line; the rule was played against every scheduler for P = 2 … 5 | `open-s/proofs.txt` |
 | **S(P) = F(P) = P − 1 for every P ≥ 2** | follows from the upper bound and the row above | |
 | Smallest horizon at which F reaches P − 1 is P(P+1)/2 | exact for P = 2, 3, 4 by the tables; not proved in general | |
-| Smallest horizon at which S reaches P − 1 | 4 and 9 for P = 2, 3; between 10 and 15 for P = 4; open in general (the proved rule needs about 4P², and about 2P² by computation for P ≤ 5) | |
+| Smallest horizon at which S reaches P − 1 | 4 and 9 for P = 2, 3; between 10 and 15 for P = 4; open in general. About 4P² is proved sufficient; this rule's own witness plans pass from about 2P² for P ≤ 5 (computed). Neither is a lower bound on the horizon | |
 
 Exact values (blank = not computed):
 
 | T | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| F_T(2) | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | |
-| S_T(2) | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | | |
+| F_T(2) | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| S_T(2) | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | |
 | F_T(3) | 0 | 0 | 1 | 1 | 1 | 2 | 2 | 2 | 2 | |
 | S_T(3) | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 2 | |
 | F_T(4) | 0 | 0 | 1 | 1 | 1 | 2 | 2 | 2 | 2 | 3 |
 | S_T(4) | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 2 | |
 
 S_9(3) = 2 is not from an exhaustive run: the lower bound is a checked
-adversary tree and the upper bound is the hand proof. S_T(4) is 2 or 3 for
-T = 10 … 14 and 3 from T = 15.
+adversary tree and the upper bound is the hand proof. S_9(4) = 2 rests on
+solver B alone (`solver-b/table_run_S4_L2_full.txt`, a run that uses its
+pruning lemma); solver A has only 2 ≤ S_9(4) ≤ 3. S_T(4) is 2 or 3 for
+T = 10 … 14 and 3 from T = 15; the tree for T = 15 is too large to ship and
+was accepted by the referee's checker (`reports/referee.md`).
 
 ## What this does and does not say
 
@@ -121,8 +125,8 @@ which is why the same-cost promise costs the adversary nothing.
   checked by brute force on the raw job list only for P = 2, 3; for P = 4, 5
   it was checked through the rule's own witness plans, and the P = 5 run
   memoises on a 128-bit hash.
-- **Several P = 4 table entries rest on the solvers' pruning lemma** (Lemma D),
-  which the referee did not read: S_T(4) = 1 for T = 7, 8 and S_9(4) ≤ 2.
+- **Two P = 4 table entries rest on the solvers' pruning lemma** (Lemma D),
+  which the referee did not read: S_8(4) = 1 and S_9(4) ≤ 2.
 - **The upper bound's place in the literature** is from a search that read two
   sources in full ([prior-art.md](prior-art.md)). I have not read the cited
   lemma. The search found the lower bounds nowhere, which is weak evidence
@@ -131,11 +135,36 @@ which is why the same-cost promise costs the adversary nothing.
   earlier links expected min(c, P − 1) under the same-cost promise; with the
   result above that guess is in doubt but untested.
 
+## Review
+
+Before publication the claims went to five reviewers from four model families
+(two Claude, GPT, Grok, Gemini), each reading the files. All five confirmed
+the upper bound, the hand proofs for P = 2, the staircase proof and its
+corollary. Four confirmed the same-cost proof outright; the fifth marked it
+refuted on one point, which is real and is repaired by a one-line change:
+
+- As written, the final "cash-in" step of the same-cost adversary releases
+  "one job of length f mod P" even when that is zero, which is not a legal
+  job. The job must be omitted when f mod P = 0. The program already does so
+  and the count of filler units is unchanged, so the argument stands.
+
+Other findings, applied here or noted at the top of the proof files: the
+headline lacked "for long enough horizons"; two table cells that had been
+computed were blank; S_9(4) = 2 was shown without saying it rests on one
+solver; "I re-derived it" claimed more than a reading; the same-cost proof
+file says two programs' node counts agree for P = 3 when the recorded runs
+used different modes (3,850 against 1,064); and the referee's report, which
+calls the general result a conjecture, was written before the two proofs.
+
+The corrected wording has not been through a second round.
+
 ## Files
 
 - `chain/`: the seed and the three links, verbatim.
 - `brief-*.txt`, `briefs-chain-and-prior-art.txt`: what each instance was told.
-- `reports/`: each instance's final report, verbatim.
+- `reports/`: each instance's final report, verbatim. The solver and referee
+  reports predate the two general proofs and call the general result a
+  conjecture.
 - `solver-a/`, `solver-b/`: exact solvers, tables, adversary trees, proofs.
 - `verifier/`: the referee's own solver and tree checkers.
 - `open-f/`: the staircase adversary, its proof and exhaustive play.

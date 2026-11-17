@@ -1,3 +1,16 @@
+NOTES ADDED AFTER REVIEW (2026-11-17; the text below is unchanged)
+ N1. CASH-IN says "floor(f/P) jobs of length P and one job of length f mod P". When f mod P = 0 that last job
+     has length 0 and is not a legal job: it must be omitted (play.py line 157 already omits it). The number of
+     filler units is still f, so the proofs are unaffected.
+ N2. "tight units have deadline <= Delta": they are released at t <= Delta, so the deadline is <= Delta + 1.
+     Only <= Delta + rho*P with rho >= 1 is needed.
+ N3. "node counts agree exactly with play.py for P = 2, 3, 4": results.txt records P = 3 as 3850 nodes (Python,
+     run without memo) against 1064 (C++). The agreement is recorded for P = 2 and 4 only.
+ N4. The Python match for P = 5 was at Delta = 60 with a 64-bit hash, not the proved Delta = 56; the P = 6
+     "9 deviations" run used Delta = 45, the computed threshold, not the proved one.
+ N5. "for every T >= (P-1)(4P-1)" uses monotonicity in T (solver-a Lemma 2 / solver-b Theorem 2).
+ N6. Section 6 says nobody else has read the proof. Since then: one further instance and five outside reviewers.
+
 S(P) >= P-1 FOR EVERY P >= 2: AN EXPLICIT ADVERSARY UNDER THE SAME-COST PROMISE      (open-s)
 ==========================================================================================
 

@@ -1,3 +1,8 @@
+NOTES ADDED AFTER REVIEW (2026-11-17; the text below is unchanged)
+ N1. a_j is undefined if J_j is never run; read a_j = infinity, which makes level j a stall.
+ N2. Corollary A' is for integers k >= 0; k = 0 is trivial and k >= P-1 is Theorem A itself.
+ N3. "for every T >= P(P+1)/2" uses monotonicity in T (solver-a Lemma 2 / solver-b Theorem 2).
+
 FREE-PROMISE GAME:  F_T(P) = P-1  for every P >= 2 and every T >= P(P+1)/2        (open-f)
 =========================================================================================
 
