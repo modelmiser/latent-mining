@@ -1,0 +1,44 @@
+You are solving a precisely defined combinatorial game problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE GAME
+
+Parameters: integers P >= 1 (maximum job length) and T >= 1 (horizon). Time is ticks 0, 1, 2, ....
+
+ - Jobs. A job is (r, p, d) with integers 1 <= p <= P and r + p <= d <= T. It is revealed at the start of tick r and may run in tick r. Identical jobs may be released more than once (a multiset).
+ - Machine (switch cost 1). In each tick it does exactly one of: run one unit of one released, unfinished job; idle; spend a switch tick. Let A be the job most recently run (none at the start). Running a job B != A while A is unfinished requires the tick immediately before B's unit to be a switch tick. If A is finished, or nothing has run yet, any job may be started or resumed with no switch tick. Idling leaves A unchanged. A switch tick is not aimed at a particular job: after it, the next tick may run any job. Running A itself never needs a switch tick.
+ - Order of play at tick t: the adversary, who has seen the online schedule for ticks 0..t-1, releases any finite multiset of jobs with r = t (possibly none); then the online scheduler, seeing them, chooses what the machine does in tick t.
+ - Promise. After every release, the multiset of ALL jobs released so far must be feasible for some hindsight schedule built from tick 0 that respects release times and completes every job by its deadline. Two versions of the game differ only in which machine the hindsight schedule runs on:
+     same-cost promise: the machine above (switch cost 1);
+     free promise: the same machine with switch cost 0, i.e. ordinary preemptive feasibility.
+   The hindsight schedule has nothing to do with what the online scheduler actually did.
+ - Value. The online scheduler always pays switch cost 1 and keeps working after tick T until every job is done (no job is released with r >= T). Completion of a job = index of the tick after its last unit. Lateness = max(0, completion - d). The online scheduler wants to minimise the maximum lateness over all jobs; the adversary wants to maximise it.
+   S_T(P) = value of the game under the same-cost promise; F_T(P) = value under the free promise. S(P), F(P) = limits as T grows (both sequences are nondecreasing in T).
+
+Claims that came with the question, UNVERIFIED (check them, do not assume them): S_T(P) <= F_T(P) <= P - 1 (the upper bound by never preempting and running earliest deadline first); S(P) >= 1 for P >= 2 by releasing a job of length 1 with a one-tick window just after a long job's first unit; S(2) = F(2) = 1.
+
+WHAT TO FIND
+
+ A. Exact tables of S_T(P) and F_T(P) for P = 2, 3 and T as large as is cheap; P = 4 if you can. Say where each sequence stabilises, and remember: a value that reaches P - 1 is final (if the upper bound is proved), a smaller plateau at the largest T you reached is only a lower bound on the limit.
+ B. HEADLINE: find S(P) and F(P) as functions of P. In particular decide: is S(P) = 1 for every P >= 2 while F(P) = P - 1? In words: does a switch cost hurt an online scheduler only by the amount the benchmark is excused from paying it? The smallest decisive case is S(3) against F(3).
+ C. Witnesses: for each value, why one less is impossible (an adversary strategy, written out as a short tree if you can) and why the value is enough (an online rule in words if you can find one, not only a table). Does an optimal online scheduler ever idle with work pending? Is some simple rule optimal for S (for example: switch exactly when a newly released job cannot otherwise meet its deadline)?
+ D. Any proof you can actually complete, valid for ALL T: an upper bound by an explicit online rule with an invariant, or a lower bound by an explicit adversary strategy together with a proof that its releases keep the promise. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+
+METHOD NOTES (suggestions, not requirements)
+ - For fixed (P, T, L, promise) "can the adversary force some lateness >= L+1" is a finite game. A position needs: the tick, the multiset released so far (for the promise), remaining work of each unfinished job, which job is A and whether it is finished, and whether the previous tick was a switch tick. After the last possible release the online scheduler plays alone.
+ - Free-promise feasibility is decided by preemptive earliest-deadline-first. Same-cost feasibility needs an exact search over hindsight schedules; test that search against brute force on tiny cases before trusting it.
+ - The number of adversary moves per tick is large; bound it honestly (the promise limits total released work to at most T) and say what you pruned and why the pruning is safe. Unsafe pruning of adversary moves gives values that are too LOW; unsafe pruning of scheduler moves gives values that are too HIGH.
+ - Sanity checks that would expose a wrong model: P = 1 gives 0 in both games; S_T <= F_T; both are nondecreasing in T and in P; with switch cost 0 for the online machine too, the value must be 0; a claimed online rule must survive exhaustive play by every adversary at the sizes you can reach.
+ - Watch a check fail on purpose at least once (for example confirm the solver reports L = value - 1 as losing for the scheduler, and that a deliberately bad scheduler is caught).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside ./solver-a/ . Write your code and outputs there. Do not read the sibling folders.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=./solver-a ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+
+REPORT (final message, under 900 words)
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the T reached.
+ 2. The witnesses, compactly.
+ 3. The headline answer with your confidence, and conjectured formulas for S(P) and F(P).
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

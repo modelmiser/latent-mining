@@ -1,0 +1,13 @@
+P=4 T=1 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=2 states=5 hsets=2 0.0s]
+P=4 T=2 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=13 states=28 hsets=7 0.0s]
+P=4 T=3 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=78 states=158 hsets=27 0.0s]
+P=4 T=4 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=417 states=943 hsets=121 0.0s]
+P=4 T=5 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=2249 states=5164 hsets=605 0.0s]
+P=4 T=6 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=12854 states=27650 hsets=3367 0.0s]
+P=4 T=7 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=78888 states=146299 hsets=20574 0.3s]
+P=4 T=8 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=523679 states=772066 hsets=137015 3.9s]
+P=4 T=9 L=2 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=3777817 states=4074250 hsets=987499 39.1s]
+terminate called after throwing an instance of 'St9bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+exit 134

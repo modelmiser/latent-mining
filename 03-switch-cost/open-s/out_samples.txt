@@ -1,0 +1,12 @@
+P=5 DELTA=32 T=52 variant=ok: 20000 sampled plays, adversary won all (lateness >= 4); longest play ended at t=42; maxcash=40 certless=0
+P=5 DELTA=31 T=51 variant=ok: 20000 sampled plays, adversary won all (lateness >= 4); longest play ended at t=42; maxcash=40 certless=0
+P=6 DELTA=45 T=75 variant=ok: 20000 sampled plays, adversary won all (lateness >= 5); longest play ended at t=62; maxcash=54 certless=0
+P=6 DELTA=44 T=74 variant=ok: 20000 sampled plays, adversary won all (lateness >= 5); longest play ended at t=62; maxcash=54 certless=0
+P=7 DELTA=60 T=102 variant=ok: 20000 sampled plays, adversary won all (lateness >= 6); longest play ended at t=76; maxcash=74 certless=0
+P=7 DELTA=59 T=101 variant=ok: 20000 sampled plays, adversary won all (lateness >= 6); longest play ended at t=76; maxcash=74 certless=0
+P=8 DELTA=77 T=133 variant=ok: 20000 sampled plays, adversary won all (lateness >= 7); longest play ended at t=107; maxcash=96 certless=0
+P=8 DELTA=76 T=132 variant=ok: 20000 sampled plays, adversary won all (lateness >= 7); longest play ended at t=107; maxcash=96 certless=0
+P=5 DELTA=56 T=76 variant=ok: 20000 sampled plays, adversary won all (lateness >= 4); longest play ended at t=42; maxcash=40 certless=0
+P=6 DELTA=85 T=115 variant=ok: 20000 sampled plays, adversary won all (lateness >= 5); longest play ended at t=62; maxcash=54 certless=0
+P=7 DELTA=120 T=162 variant=ok: 20000 sampled plays, adversary won all (lateness >= 6); longest play ended at t=76; maxcash=74 certless=0
+P=8 DELTA=161 T=217 variant=ok: 20000 sampled plays, adversary won all (lateness >= 7); longest play ended at t=107; maxcash=96 certless=0

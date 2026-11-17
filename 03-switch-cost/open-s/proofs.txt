@@ -1,0 +1,225 @@
+S(P) >= P-1 FOR EVERY P >= 2: AN EXPLICIT ADVERSARY UNDER THE SAME-COST PROMISE      (open-s)
+==========================================================================================
+
+Status tags:  COMPLETE = hand proof valid for all P (written by one solver, NOT yet refereed);
+              COMPUTED = exhaustive play of the fixed rule against every scheduler, stated P only;
+              SAMPLED  = random/structured schedulers only;   NOT PROVED.
+
+Main claim (COMPLETE).  For every P >= 2 and every T >= (P-1)(4P-1) the rule ADV(P) below is
+legal under the same-cost promise and forces lateness >= P-1 on some job against every online
+scheduler.  Hence S_T(P) >= P-1, and with the upper bound S_T <= F_T <= P-1 of the brief,
+S(P) = F(P) = P-1 for all P >= 2.  (P = 1 is trivial: 0.)
+
+Files: play.py (rule + exhaustive player + promise checks), sample.py (sampled player),
+test_brute.py (brute-force feasibility vs naive enumerator), results.txt (all runs).
+
+------------------------------------------------------------------------------------------
+0. NOTATION
+------------------------------------------------------------------------------------------
+Tick t is the time interval [t, t+1).  "Time t" = the instant before tick t.
+An EMPTY tick is an idle tick or a switch tick.  A job is LOCKED-ON if it is the job most recently
+run and is unfinished (the scheduler may then run another job only after a switch tick).
+A UNIT job has p = 1; unit jobs never lock anything.  A TIGHT unit released at t is (t, 1, t+1).
+O(t) = total remaining work of the online scheduler at time t (all released, unfinished jobs).
+
+Lemma 0 (load bound).  COMPLETE.  If at time t the online scheduler's unfinished jobs with deadline
+<= D have total remaining work W, then some job with deadline <= D completes at time >= t + W, so
+the maximum lateness is >= t + W - D.
+Proof: one unit per tick; the last of these W units is run in a tick >= t + W - 1.  []
+
+------------------------------------------------------------------------------------------
+1. THE RULE ADV(P)
+------------------------------------------------------------------------------------------
+Constants:  Delta = (P-1)(3P-1),   T = Delta + P(P-1) = (P-1)(4P-1).
+Rounds rho = 0, 1, ..., P-2.  Job types:
+   decoy K_rho         = (s_rho, P, Delta + (rho+1)P)      released at the start s_rho of round rho
+   stream unit, round rho = (t, 1, Delta + rho*P)
+   tight unit          = (t, 1, t+1)
+   filler (only in the final "cash-in")
+The adversary keeps one REFERENCE hindsight schedule H (an explicit same-cost schedule of all jobs
+released so far, which never contains an empty tick while the game is on) and, inside a round, two
+continuations of it, PLAN1 and PLAN0.  Invariant at the start of a round: H is unlocked and its only
+unfinished jobs are stream units ("H's pending units").
+
+Round rho, started at time s (H given):
+  Release K_rho.
+  PLAN1 = H, then K_rho in ticks s .. s+P-1, then pending units in order of deadline.
+  PLAN0 = H, then one unit per tick of a job other than K_rho ("inner" unit), never K_rho.
+  Scheduler actions are classified, in this round, as  i = runs a unit of a job other than K_rho,
+  k = runs a unit of K_rho,  e = empty tick.
+
+  Mode A (phase 1, ticks s .. s+P-1, while the scheduler has only played i):
+     at each tick t: if PLAN0 has no unfinished inner job, release a stream unit of round rho.
+     PLAN0 runs its smallest-deadline inner unit, PLAN1 runs K_rho.  Then look at the scheduler:
+       i : stay in A; after the tick s+P-1 go to mode P2.
+       e : go to mode W(s+P).
+       k : go to mode R.
+  Mode R (the scheduler is inside its first run of K_rho; it is locked on K_rho, so it can only play
+          k or e):  each tick release a stream unit if PLAN0 has no inner job; PLAN0 runs an inner
+          unit; PLAN1 runs K_rho, or a pending unit once K_rho is finished.
+       k, K_rho now finished : CASH-IN with PLAN0 and D* = Delta + rho*P.     (adversary wins)
+       k, otherwise          : stay in R.
+       e at tick y           : go to mode W(max(y+1, s+P)).
+  Mode W(tw): release nothing; PLAN1 keeps running K_rho.  At time tw: H := PLAN1, start round rho+1.
+  Mode P2 (phase 2, from time s+P; the scheduler has never touched K_rho):
+     at each tick t: if PLAN1 has no unfinished job: CASH-IN with PLAN1 and D* = Delta + (rho+1)P.
+     Otherwise PLAN1 runs a pending unit.  Scheduler:
+       i : stay.     e : H := PLAN1, start round rho+1 at t+1.     k (at tick x) : go to mode F.
+  Mode F (fork, from tick x+1; the scheduler is locked on K_rho with P-1 units left):
+     at tick x+1 release a tight unit; at later fork ticks release a tight unit only if PLAN1 has no
+     unfinished job.  PLAN1 runs its smallest-deadline unit (the tight one if present).  Scheduler:
+       k, K_rho now finished : stop.                                           (adversary wins)
+       k, otherwise          : stay in F.
+       e at tick y           : H := PLAN1, start round rho+1 at y+1.
+  "Start round P-1" means: CASH-IN with H and D* = Delta + P(P-1) = T.
+
+  CASH-IN(plan, D*) at time t: let c = number of the plan's pending units with deadline <= D*,
+  f = D* - t - c.  Release f units of filler with deadline D* (floor(f/P) jobs of length P and one
+  job of length f mod P).  Release nothing more.  The plan runs its pending units, then the filler
+  jobs one after another (ending exactly at D*), then K_rho if it still has it.
+
+------------------------------------------------------------------------------------------
+2. THE SCHEDULER LOSES                                                      COMPLETE
+------------------------------------------------------------------------------------------
+Position Sigma(w) at time t, round index rho:
+  (S1) H is a legal same-cost schedule on ticks [0,t) of the jobs released before t, it is unlocked
+       and all its unfinished jobs are stream units; c := their number;
+  (S2) every job released so far has deadline <= Delta + rho*P;
+  (S3) O(t) - c >= w        ("the scheduler is w units behind H").
+At time 0, H empty: Sigma(0) with rho = 0.
+
+Round Lemma.  From Sigma(w) at the start of round rho <= P-2, the round ends, whatever the
+scheduler does, either with the adversary having won (lateness >= P-1 unavoidable) or in
+Sigma(w+1) with round index rho+1.
+
+Proof.  Write lag1(t) = O(t) - (remaining work of PLAN1), lag0(t) = Oin(t) - (remaining inner work
+of PLAN0), where Oin = O minus the remaining work of K_rho.  Right after K_rho is released at s,
+lag1 = lag0 = O(s) - c >= w.  A release adds the same amount to both sides of each difference
+(stream units are inner and are given to both plans; tight units are released only when PLAN0 is
+gone).  In every tick of modes A, R, P2, F and of W before s+P, PLAN1 runs a unit; in every tick of
+modes A, R, PLAN0 runs an inner unit (the rule releases a stream unit exactly when it would have
+none).  [PLAN1 has a unit to run in mode R after s+P: every inner unit PLAN0 has run since s is a
+unit job PLAN1 also holds, PLAN0 has run t-s+1 of them, PLAN1 only t-s+1-P.]  Therefore, per tick:
+      scheduler plays i :  lag1 unchanged, lag0 unchanged;
+      scheduler plays k :  lag1 unchanged, lag0 + 1;
+      scheduler plays e :  lag1 + 1,       lag0 + 1.
+By (S2) every job other than K_rho has deadline <= Delta + rho*P, so "inner" = "deadline <=
+Delta + rho*P" for the jobs existing in this round (tight units have deadline <= Delta too, see 3).
+
+ Case e in mode A (tick x):  lag1 >= w+1.  In W, PLAN1 runs K_rho every tick, so lag1 does not
+   decrease.  At s+P PLAN1 has finished K_rho, is unlocked, holds only stream units, all deadlines are
+   <= Delta + (rho+1)P:  Sigma(w+1), index rho+1.
+ Case k in mode A (tick x <= s+P-1), then mode R.  The scheduler is locked on K_rho (P >= 2), so
+   until K_rho is finished each tick is k or e.
+   - First e at tick y:  lag1 >= w+1, and as before Sigma(w+1) holds at max(y+1, s+P) with H = PLAN1.
+   - No e: after the P k-ticks, lag0 >= w + P at time t = x+P.  CASH-IN with PLAN0, D* = Delta+rho*P:
+     the scheduler's unfinished jobs with deadline <= D* are all its jobs except K_rho, plus the
+     filler: total Oin(t) + f >= c0 + w + P + f = (D* - t) + w + P, where c0 = PLAN0's pending inner
+     units.  Lemma 0: lateness >= w + P >= P-1.
+ Case P inner ticks, mode P2 from s+P.  lag1 >= w, and the scheduler still owes all P units of K_rho.
+   No stream unit is released in P2, so the scheduler can play i only finitely often.
+   - PLAN1 has no unfinished job at some time t: then O(t) >= P and CASH-IN with D* = Delta+(rho+1)P
+     (>= every deadline): scheduler's work due by D* is O(t) + f >= P + (D* - t): lateness >= P.
+   - e at tick t: PLAN1 ran a unit, lag1 >= w+1, PLAN1 is unlocked with stream units only: Sigma(w+1).
+   - k at tick x: mode F.  At x+1 the tight unit v = (x+1, 1, x+2) appears; the scheduler is locked on
+     K_rho with P-1 >= 1 units left.  If ticks x+1 .. x+P-1 are all k, v is not started before
+     tick x+P, completes at >= x+P+1, lateness >= P-1: adversary wins.  Otherwise let y <= x+P-1 be
+     the first e.  In ticks x+1..y PLAN1 ran a unit each tick (the tight one, pending ones, or a
+     fresh tight one), so lag1 >= w+1 at y+1; PLAN1 is unlocked and holds stream units only (tight
+     units are run in their release tick):  Sigma(w+1).                                          []
+
+Theorem.  ADV(P) forces lateness >= P-1.
+Proof.  Apply the Round Lemma P-1 times from Sigma(0): the adversary has won, or we are in
+Sigma(P-1) with index P-1 at some time t, where every deadline is <= D* = Delta + P(P-1).  CASH-IN:
+the scheduler's work due by D* is O(t) + f >= c + (P-1) + f = (D* - t) + P - 1.  Lemma 0.        []
+
+------------------------------------------------------------------------------------------
+3. EVERY RELEASE KEEPS THE SAME-COST PROMISE                                 COMPLETE
+------------------------------------------------------------------------------------------
+PLAN0 and PLAN1 are same-cost schedules without any switch: the only non-unit jobs are decoys and
+filler; PLAN1 runs K_rho in P consecutive ticks starting from an unlocked state and afterwards only
+unit jobs; PLAN0 runs only unit jobs until its cash-in, then filler jobs and K_rho one after another,
+each contiguously.  Earlier decoys were finished by H.  So legality reduces to deadlines.
+
+For a plan let B = (time at which it finishes K_rho if it is running it, else now) + (number of its
+pending units other than a tight unit released this tick) -- the time by which it has run all its
+pending units if it does nothing else.  Let Psi = s + c at the start of a round.
+ PLAN0, modes A/R (t <= s+2P-2): pending inner units = max(c-(t-s), 0) or one fresh stream unit:
+     B <= max(Psi, s+2P-1).
+ PLAN1: pending units = c + m(t), m(t) = stream units of this round so far <= max(0, t-s+1-c).
+     Until P2:  B = s+P+c+m <= max(Psi+P, s+3P-1).   In P2: m = max(0,P-c), B = s+P+max(c,P), constant.
+     In F: B grows by one per tight unit, at most P-1 of them: B <= s+2P-1+max(c,P).
+ In all cases B <= Psi + 3P-1, and the next round starts with Psi' = B(PLAN1) <= Psi + 3P-1.
+ Hence B <= (rho+1)(3P-1) <= (P-1)(3P-1) = Delta throughout rounds 0..P-2, and Psi <= Delta at
+ the final cash-in.
+Consequences:
+ - stream units (deadline >= Delta) are run by each plan by time B <= Delta: on time;
+   they are released at t < B <= Delta, so r + 1 <= d;
+ - tight units are run by PLAN1 in their release tick (PLAN1 is unlocked: it is past K_rho);
+   they exist only when PLAN0 has been dropped;
+ - K_rho: PLAN1 finishes it at s+P <= Delta+P; PLAN0 finishes its units by B <= Delta and could run
+   K_rho by Delta+P <= Delta+(rho+1)P; after a PLAN0 cash-in it runs K_rho in [D*, D*+P] with
+   D*+P = Delta+(rho+1)P exactly;
+ - cash-in: f = D* - t - c >= Delta - B >= 0; pending units (deadline >= Delta >= t+c) first, then
+   filler ending at D*; filler jobs satisfy r + p <= d.
+ - all releases happen at times <= Delta < T and all deadlines are <= Delta + P(P-1) = T.
+At each release the adversary exhibits: PLAN1 (always valid while it is kept), and PLAN0 in modes
+A/R and in its cash-in.  []
+
+So T(P) = (P-1)(4P-1) = 4P^2 - 5P + 1 suffices: about 4 P^2, i.e. yes, order P^2.
+
+------------------------------------------------------------------------------------------
+4. WHY IT WORKS (one paragraph)
+------------------------------------------------------------------------------------------
+The quantity that grows is the scheduler's lag behind a hindsight schedule that never wastes a
+tick.  Each round offers a decoy K (latest deadline so far).  PLAN1 "ran the decoy at once", PLAN0
+"did the earlier-deadline unit work instead"; the adversary feeds exactly enough unit work for
+PLAN0 to be busy for P ticks.  A scheduler that touches the decoy early falls behind PLAN0 on the
+inner pack (one unit per decoy tick); a scheduler that idles falls behind both; a scheduler that
+does the unit work first must start the decoy after PLAN1 has finished it, i.e. when PLAN1 is
+unlocked, and is then hit by a tight unit while locked on a fresh P-job: it loses P-1 at once or
+pays a switch tick, which is one more unit of lag behind PLAN1.  P-1 rounds, then the lag is cashed
+by filling the reference schedule up to the last deadline.  The same-cost promise costs nothing
+because neither plan ever switches: the two plans differ in ORDER, not in preemption.
+
+------------------------------------------------------------------------------------------
+5. COMPUTATION  (see results.txt for the raw lines)
+------------------------------------------------------------------------------------------
+play.py implements the rule literally and plays it against every scheduler (actions: run any legal
+job class, idle, switch; the brief's machine, no simplification), memoising on
+(time, adversary mode, both plan states, scheduler state, lateness so far).
+Checks at every node: each plan move is a legal machine move and no plan job is late; at every
+release each live plan has a valid completion (finish the locked job, then non-preemptive EDF);
+every released job satisfies 1<=p<=P, r+p<=d<=T, r<T.  A terminal node must carry the Lemma-0
+certificate; if not, an exact search decides whether the scheduler can still keep lateness <= P-2.
+play.cpp is a second implementation written separately (same rule, same checks, memo on a 128-bit
+hash of the node key); its node counts agree exactly with play.py for P = 2, 3, 4.
+
+COMPUTED, exhaustive (every scheduler), with the proven Delta = (P-1)(3P-1):
+   P = 2  T = 7    21 nodes          P = 4  T = 45   115,138 nodes
+   P = 3  T = 22   1,064 nodes       P = 5  T = 76   20,830,663 nodes      -> adversary wins, lateness >= P-1.
+   P = 2, 3 additionally without memo, with a brute-force same-cost feasibility search on the raw
+   job list at every release and an exact lateness search at every terminal (no disagreement).
+   No terminal ever lacked the Lemma-0 certificate (certless = 0).
+COMPUTED, smallest Delta for which the witness plans pass, exhaustive: 5, 12, 21, 32 for P = 2..5,
+   i.e. (P-1)(P+3), giving T = (P-1)(2P+3) = 7, 18, 33, 52; Delta - 1 fails the promise check each
+   time (the check uses the fixed witness plans, so "fails" means "this rule's plans fail", not
+   "infeasible").  NOT PROVED for general P; the proved bound is Delta = (P-1)(3P-1).
+P = 6 exhaustive was NOT run: extrapolated > 10^9 nodes, beyond the 8 GB / 1500 s limits.
+P = 6, 7, 8, NOT exhaustive (results.txt section 6):
+   every scheduler that deviates from non-preemptive EDF in at most 9 (P=6), 7 (P=7), 6 (P=8) ticks;
+   20,000 sampled random/structured schedulers each.  All lost.  (For P = 8 six deviations cannot
+   even survive the forks, so that run only exercises the early rounds.)
+Negative controls, all detected: fork without the tight unit (scheduler survives by running the
+   decoy through); fork unit with a slack deadline; P-2 rounds instead of P-1 (scheduler survives
+   with lateness P-2); Delta too small (promise check objects).  Sampling is weak for the promise
+   check: at P = 5, Delta = 31 passes 20,000 samples but fails exhaustively.
+
+------------------------------------------------------------------------------------------
+6. WHAT IS NOT PROVED / NOT CHECKED
+------------------------------------------------------------------------------------------
+ - The proof above has not been read by anyone else.
+ - Minimal horizon: NOT PROVED.  The rule needs ~2P^2 (computed) / ~4P^2 (proved); the solvers'
+   exact values (4, 9, <=15) are smaller, so this rule is not horizon-optimal and says nothing
+   about whether the true first horizon is P^2.
+ - The upper bound S_T <= P-1 is taken from the brief / the two solvers (not re-derived here).

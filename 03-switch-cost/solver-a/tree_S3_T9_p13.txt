@@ -1,0 +1,1005 @@
+PMASK=10 P=3 T=9 MODE=1 OC=1 MAXJ=1 POL=0 : adversary forces lateness >= 1 ? YES   (memo 210, promise states 93, viaMemo 182)
+PMASK=10 P=3 T=9 MODE=1 OC=1 MAXJ=1 POL=0 : adversary forces lateness >= 2 ? YES   (memo 85601, promise states 43584, viaMemo 20871)
+PMASK=10 P=3 T=9 MODE=1 OC=1 MAXJ=1 POL=0 : adversary forces lateness >= 3 ? NO   (memo 74454, promise states 47133, viaMemo 22069)
+VALUE P=3 T=9 MODE=1 OC=1 MAXJ=1 POL=0 : 2
+[t=0] online {} A=- : adversary releases (r0,p3,d9) 
+  scheduler run -> {(rem2,d9)} A=(rem2,d9)
+    [t=1] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r1,p1,d4) 
+      scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+        [t=2] online {(rem1,d4)(rem1,d9)} A=(rem1,d9) : adversary releases (r2,p1,d3) 
+          scheduler run -> {(rem1,d3)(rem1,d4)} A=-
+            [t=3] online {(rem1,d3)(rem1,d4)} A=- : adversary releases (r3,p1,d4) 
+              scheduler run -> {(rem1,d4)(rem1,d4)} A=-
+                [t=4] online {(rem1,d4)(rem1,d4)} A=- : adversary releases nothing
+                  scheduler run -> {(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler run -> {(rem1,d3)(rem1,d4)} A=-
+                [t=4] {(rem1,d3)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d3)(rem1,d4)(rem1,d4)} A=-
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+          scheduler idle -> {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9)
+            [t=3] online {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+              scheduler run -> {(rem1,d3)(rem1,d4)} A=-
+                [t=4] {(rem1,d3)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler switch -> {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+          scheduler switch -> {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+            [t=3] online {(rem1,d3)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw : adversary releases (r3,p1,d4) 
+              scheduler run -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=-
+                [t=4] online {(rem1,d4)(rem1,d4)(rem1,d9)} A=- : adversary releases nothing
+                  scheduler run -> {(rem1,d4)(rem1,d9)} A=-
+                    [t=5] {(rem1,d4)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler run -> {(rem1,d4)(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=-
+                    [t=5] {(rem1,d4)(rem1,d4)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler run -> {(rem1,d3)(rem1,d4)(rem1,d9)} A=-
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler run -> {(rem1,d3)(rem1,d4)(rem1,d4)} A=-
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d3)(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler switch -> {(rem1,d3)(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                [t=4] {(rem1,d3)(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+      scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+        [t=2] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+          scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+            [t=3] online {(rem1,d4)(rem1,d9)} A=(rem1,d9) : adversary releases (r3,p1,d4) 
+              scheduler run -> {(rem1,d4)(rem1,d4)} A=-
+                [t=4] online {(rem1,d4)(rem1,d4)} A=- : adversary releases nothing
+                  scheduler run -> {(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] online {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                  scheduler run -> {(rem1,d4)(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                    [t=5] {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler switch -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                [t=4] online {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw : adversary releases nothing
+                  scheduler run -> {(rem1,d4)(rem1,d9)} A=-
+                    [t=5] {(rem1,d4)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler run -> {(rem1,d4)(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                    [t=5] {(rem1,d4)(rem1,d4)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+          scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+            [t=3] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+              scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] online {(rem1,d4)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                  scheduler run -> {(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                [t=4] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                  scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                [t=4] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                  scheduler run -> {(rem2,d9)} A=-
+                    [t=5] online {(rem2,d9)} A=- : adversary releases (r5,p1,d6) 
+                      scheduler run -> {(rem2,d9)} A=-
+                        [t=6] online {(rem2,d9)} A=- : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] online {(rem2,d9)} A=- : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] online {(rem2,d9)} A=- : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] online {(rem1,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)} A=-
+                                    [t=9] {(rem1,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d9)} A=(rem1,d9) sw
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=-
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=- : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d7)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d7)(rem2,d9)} A=-
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=- : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] online {(rem2,d9)} A=- : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=-
+                                [t=8] {(rem1,d7)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                        [t=6] online {(rem1,d6)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                          scheduler run -> {(rem1,d6)} A=-
+                            [t=7] {(rem1,d6)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d6)(rem1,d9)} A=(rem1,d9) sw
+                            [t=7] {(rem1,d6)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d6)(rem2,d9)} A=-
+                        [t=6] online {(rem1,d6)(rem2,d9)} A=- : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] online {(rem2,d9)} A=- : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=-
+                                [t=8] {(rem1,d8)(rem2,d9)} A=-  => (position already expanded above)
+                          scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d6)(rem2,d9)} A=-
+                            [t=7] {(rem1,d6)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+          scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+            [t=3] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+              scheduler run -> {(rem2,d9)} A=-
+                [t=4] online {(rem2,d9)} A=- : adversary releases (r4,p1,d5) 
+                  scheduler run -> {(rem2,d9)} A=-
+                    [t=5] online {(rem2,d9)} A=- : adversary releases (r5,p1,d6) 
+                      scheduler run -> {(rem2,d9)} A=-
+                        [t=6] {(rem2,d9)} A=-  => (position already expanded above)
+                      scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                      scheduler idle -> {(rem1,d6)(rem2,d9)} A=-
+                        [t=6] {(rem1,d6)(rem2,d9)} A=-  => (position already expanded above)
+                  scheduler run -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                    [t=5] online {(rem1,d5)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                      scheduler run -> {(rem1,d5)} A=-
+                        [t=6] {(rem1,d5)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d5)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d5)(rem1,d9)} A=(rem1,d9) sw
+                        [t=6] {(rem1,d5)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d5)(rem2,d9)} A=-
+                    [t=5] online {(rem1,d5)(rem2,d9)} A=- : adversary releases nothing
+                      scheduler run -> {(rem2,d9)} A=-
+                        [t=6] online {(rem2,d9)} A=- : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] {(rem2,d9)} A=-  => (position already expanded above)
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                          scheduler idle -> {(rem1,d7)(rem2,d9)} A=-
+                            [t=7] {(rem1,d7)(rem2,d9)} A=-  => (position already expanded above)
+                      scheduler run -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d5)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem2,d9)} A=-
+                        [t=6] {(rem1,d5)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+              scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                [t=4] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+              scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                [t=4] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+      scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+        [t=2] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+          scheduler run -> {(rem2,d9)} A=-
+            [t=3] online {(rem2,d9)} A=- : adversary releases (r3,p3,d8) 
+              scheduler run -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                [t=4] online {(rem2,d8)(rem2,d9)} A=(rem2,d8) : adversary releases (r4,p1,d5) 
+                  scheduler run -> {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                    [t=5] online {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8) : adversary releases nothing
+                      scheduler run -> {(rem1,d5)(rem2,d9)} A=-
+                        [t=6] {(rem1,d5)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                        [t=6] {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                        [t=6] {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                    [t=5] online {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) : adversary releases nothing
+                      scheduler run -> {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                        [t=6] {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                        [t=6] {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                        [t=6] {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                    [t=5] online {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) sw : adversary releases nothing
+                      scheduler run -> {(rem2,d8)(rem2,d9)} A=-
+                        [t=6] online {(rem2,d8)(rem2,d9)} A=- : adversary releases nothing
+                          scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                            [t=7] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler run -> {(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem2,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem2,d8)} A=-
+                                [t=8] {(rem2,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem2,d8)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem2,d8)(rem2,d9)} A=-
+                            [t=7] online {(rem2,d8)(rem2,d9)} A=- : adversary releases nothing
+                              scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => (position already expanded above)
+                              scheduler run -> {(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem2,d8)(rem2,d9)} A=-
+                                [t=8] {(rem2,d8)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler run -> {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                        [t=6] {(rem1,d5)(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler run -> {(rem1,d5)(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d5)(rem2,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                        [t=6] {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                        [t=6] {(rem1,d5)(rem2,d8)(rem2,d9)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler run -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                [t=4] online {(rem3,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                  scheduler run -> {(rem3,d8)} A=-
+                    [t=5] online {(rem3,d8)} A=- : adversary releases nothing
+                      scheduler run -> {(rem2,d8)} A=(rem2,d8)
+                        [t=6] online {(rem2,d8)} A=(rem2,d8) : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem1,d7)(rem1,d8)} A=(rem1,d8)
+                            [t=7] online {(rem1,d7)(rem1,d8)} A=(rem1,d8) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d8)} A=(rem1,d8)
+                                [t=8] {(rem1,d7)(rem1,d8)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d8)} A=(rem1,d8) sw
+                                [t=8] {(rem1,d7)(rem1,d8)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d7)(rem2,d8)} A=(rem2,d8)
+                            [t=7] online {(rem1,d7)(rem2,d8)} A=(rem2,d8) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d8)} A=(rem1,d8)
+                                [t=8] {(rem1,d7)(rem1,d8)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d8)} A=(rem2,d8)
+                                [t=8] {(rem1,d7)(rem2,d8)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d8)} A=(rem2,d8) sw
+                                [t=8] {(rem1,d7)(rem2,d8)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d7)(rem2,d8)} A=(rem2,d8) sw
+                            [t=7] online {(rem1,d7)(rem2,d8)} A=(rem2,d8) sw : adversary releases nothing
+                              scheduler run -> {(rem2,d8)} A=-
+                                [t=8] {(rem2,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler run -> {(rem1,d7)(rem1,d8)} A=(rem1,d8)
+                                [t=8] {(rem1,d7)(rem1,d8)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d8)} A=(rem2,d8)
+                                [t=8] {(rem1,d7)(rem2,d8)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d8)} A=(rem2,d8) sw
+                                [t=8] {(rem1,d7)(rem2,d8)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem3,d8)} A=-
+                        [t=6] online {(rem3,d8)} A=- : adversary releases nothing
+                          scheduler run -> {(rem2,d8)} A=(rem2,d8)
+                            [t=7] online {(rem2,d8)} A=(rem2,d8) : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem1,d8)(rem1,d8)} A=(rem1,d8)
+                                [t=8] online {(rem1,d8)(rem1,d8)} A=(rem1,d8) : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)} A=-
+                                    [t=9] {(rem1,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d8)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem1,d8)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d8)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem1,d8)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d8)(rem2,d8)} A=(rem2,d8)
+                                [t=8] {(rem1,d8)(rem2,d8)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d8)(rem2,d8)} A=(rem2,d8) sw
+                                [t=8] {(rem1,d8)(rem2,d8)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem3,d8)} A=-
+                            [t=7] {(rem3,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                    [t=5] online {(rem3,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                      scheduler run -> {(rem3,d8)} A=-
+                        [t=6] {(rem3,d8)} A=-  => (position already expanded above)
+                      scheduler idle -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                        [t=6] online {(rem3,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                          scheduler run -> {(rem3,d8)} A=-
+                            [t=7] {(rem3,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem3,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw
+                            [t=7] {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw
+                        [t=6] online {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw : adversary releases nothing
+                          scheduler run -> {(rem2,d8)(rem1,d9)} A=(rem2,d8)
+                            [t=7] online {(rem2,d8)(rem1,d9)} A=(rem2,d8) : adversary releases nothing
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d8)
+                                [t=8] online {(rem1,d8)(rem1,d9)} A=(rem1,d8) : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=-  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem2,d8)(rem1,d9)} A=(rem2,d8)
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem2,d8)(rem1,d9)} A=(rem2,d8) sw
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler run -> {(rem3,d8)} A=-
+                            [t=7] {(rem3,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem3,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw
+                            [t=7] {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw
+                    [t=5] online {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw : adversary releases nothing
+                      scheduler run -> {(rem2,d8)(rem1,d9)} A=(rem2,d8)
+                        [t=6] online {(rem2,d8)(rem1,d9)} A=(rem2,d8) : adversary releases nothing
+                          scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d8)
+                            [t=7] online {(rem1,d8)(rem1,d9)} A=(rem1,d8) : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                [t=8] online {(rem1,d8)(rem1,d9)} A=- : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=-  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8)
+                                [t=8] online {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) sw
+                                [t=8] online {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) sw : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d8)(rem1,d8)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem1,d8)(rem1,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem2,d8)(rem1,d9)} A=(rem2,d8)
+                            [t=7] {(rem2,d8)(rem1,d9)} A=(rem2,d8)  => (position already expanded above)
+                          scheduler switch -> {(rem2,d8)(rem1,d9)} A=(rem2,d8) sw
+                            [t=7] online {(rem2,d8)(rem1,d9)} A=(rem2,d8) sw : adversary releases nothing
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d8)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d8)  => (position already expanded above)
+                              scheduler run -> {(rem2,d8)} A=-
+                                [t=8] {(rem2,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem2,d8)(rem1,d9)} A=(rem2,d8)
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem2,d8)(rem1,d9)} A=(rem2,d8) sw
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler run -> {(rem3,d8)} A=-
+                        [t=6] {(rem3,d8)} A=-  => (position already expanded above)
+                      scheduler idle -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem3,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                      scheduler switch -> {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw
+                        [t=6] {(rem3,d8)(rem1,d9)} A=(rem1,d9) sw  => (position already expanded above)
+              scheduler idle -> {(rem3,d8)(rem2,d9)} A=-
+                [t=4] online {(rem3,d8)(rem2,d9)} A=- : adversary releases nothing
+                  scheduler run -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                    [t=5] online {(rem2,d8)(rem2,d9)} A=(rem2,d8) : adversary releases nothing
+                      scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                        [t=6] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] online {(rem2,d9)} A=- : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=-
+                                [t=8] {(rem1,d8)(rem2,d9)} A=-  => (position already expanded above)
+                          scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                            [t=7] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] online {(rem2,d9)} A=- : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                            [t=7] online {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] online {(rem1,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)} A=-
+                                    [t=9] {(rem1,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d9)} A=(rem1,d9) sw
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => (position already expanded above)
+                              scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem1,d8) sw  => (position already expanded above)
+                      scheduler idle -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                        [t=6] online {(rem2,d8)(rem2,d9)} A=(rem2,d8) : adversary releases nothing
+                          scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                            [t=7] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => (position already expanded above)
+                          scheduler idle -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                            [t=7] online {(rem2,d8)(rem2,d9)} A=(rem2,d8) : adversary releases nothing
+                              scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => (position already expanded above)
+                              scheduler idle -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                                [t=8] {(rem2,d8)(rem2,d9)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                                [t=8] {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                            [t=7] online {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw : adversary releases nothing
+                              scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => (position already expanded above)
+                              scheduler run -> {(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                                [t=8] {(rem2,d8)(rem2,d9)} A=(rem2,d8)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                                [t=8] {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                        [t=6] online {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw : adversary releases nothing
+                          scheduler run -> {(rem1,d8)(rem2,d9)} A=(rem1,d8)
+                            [t=7] {(rem1,d8)(rem2,d9)} A=(rem1,d8)  => (position already expanded above)
+                          scheduler run -> {(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem2,d8)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem2,d8)} A=-
+                                [t=8] {(rem2,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem2,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem2,d8)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem2,d8)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                            [t=7] {(rem2,d8)(rem2,d9)} A=(rem2,d8)  => (position already expanded above)
+                          scheduler switch -> {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw
+                            [t=7] {(rem2,d8)(rem2,d9)} A=(rem2,d8) sw  => (position already expanded above)
+                  scheduler run -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem3,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                  scheduler idle -> {(rem3,d8)(rem2,d9)} A=-
+                    [t=5] online {(rem3,d8)(rem2,d9)} A=- : adversary releases nothing
+                      scheduler run -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                        [t=6] {(rem2,d8)(rem2,d9)} A=(rem2,d8)  => (position already expanded above)
+                      scheduler run -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem3,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                      scheduler idle -> {(rem3,d8)(rem2,d9)} A=-
+                        [t=6] online {(rem3,d8)(rem2,d9)} A=- : adversary releases nothing
+                          scheduler run -> {(rem2,d8)(rem2,d9)} A=(rem2,d8)
+                            [t=7] {(rem2,d8)(rem2,d9)} A=(rem2,d8)  => (position already expanded above)
+                          scheduler run -> {(rem3,d8)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem3,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem3,d8)(rem2,d9)} A=-
+                            [t=7] {(rem3,d8)(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+          scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+            [t=3] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+          scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+            [t=3] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+          scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+            [t=3] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+  scheduler idle -> {(rem3,d9)} A=-
+    [t=1] online {(rem3,d9)} A=- : adversary releases nothing
+      scheduler run -> {(rem2,d9)} A=(rem2,d9)
+        [t=2] online {(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+          scheduler run -> {(rem1,d9)} A=(rem1,d9)
+            [t=3] online {(rem1,d9)} A=(rem1,d9) : adversary releases (r3,p3,d9) 
+              scheduler run -> {(rem3,d9)} A=-
+                [t=4] online {(rem3,d9)} A=- : adversary releases nothing
+                  scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                    [t=5] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r5,p1,d7) 
+                      scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                        [t=6] online {(rem1,d7)(rem1,d9)} A=(rem1,d9) : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem1,d7)(rem1,d7)} A=-
+                            [t=7] online {(rem1,d7)(rem1,d7)} A=- : adversary releases nothing
+                              scheduler run -> {(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) sw
+                            [t=7] online {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=-
+                                [t=8] {(rem1,d7)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler run -> {(rem1,d7)(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d7)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                        [t=6] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d7)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                        [t=6] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] online {(rem2,d9)} A=- : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=-
+                                [t=8] {(rem1,d8)(rem2,d9)} A=-  => (position already expanded above)
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                          scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                            [t=7] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                          scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+                  scheduler idle -> {(rem3,d9)} A=-
+                    [t=5] online {(rem3,d9)} A=- : adversary releases nothing
+                      scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                        [t=6] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d7)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)} A=-
+                                [t=8] {(rem1,d7)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem3,d9)} A=-
+                        [t=6] online {(rem3,d9)} A=- : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                            [t=7] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem2,d9)
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem2,d9)
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] online {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem2,d9)
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw
+                                    [t=9] {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem3,d9)} A=-
+                            [t=7] online {(rem3,d9)} A=- : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                                [t=8] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem3,d9)} A=-
+                                [t=8] {(rem3,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                [t=4] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) : adversary releases nothing
+                  scheduler run -> {(rem3,d9)} A=-
+                    [t=5] {(rem3,d9)} A=-  => (position already expanded above)
+                  scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                    [t=5] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) : adversary releases nothing
+                      scheduler run -> {(rem3,d9)} A=-
+                        [t=6] {(rem3,d9)} A=-  => (position already expanded above)
+                      scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                        [t=6] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) : adversary releases nothing
+                          scheduler run -> {(rem3,d9)} A=-
+                            [t=7] {(rem3,d9)} A=-  => (position already expanded above)
+                          scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem3,d9)} A=-
+                                [t=8] {(rem3,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d9)(rem3,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                            [t=7] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem3,d9)} A=-
+                                [t=8] {(rem3,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler run -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                [t=8] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d9)(rem3,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                        [t=6] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw : adversary releases nothing
+                          scheduler run -> {(rem3,d9)} A=-
+                            [t=7] {(rem3,d9)} A=-  => (position already expanded above)
+                          scheduler run -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                            [t=7] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                [t=8] online {(rem1,d9)(rem1,d9)} A=(rem1,d9) : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=-  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler switch -> {(rem1,d9)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                                    [t=9] {(rem1,d9)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                              scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                              scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                                  scheduler run -> {(rem2,d9)} A=-
+                                    [t=9] {(rem2,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d9)(rem3,d9)} A=(rem1,d9)  => (position already expanded above)
+                          scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                            [t=7] {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw  => (position already expanded above)
+                  scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                    [t=5] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw : adversary releases nothing
+                      scheduler run -> {(rem3,d9)} A=-
+                        [t=6] {(rem3,d9)} A=-  => (position already expanded above)
+                      scheduler run -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                        [t=6] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                          scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d9)(rem1,d9)} A=(rem1,d9) : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                [t=8] {(rem1,d8)(rem1,d9)} A=-  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                [t=8] online {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] online {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw : adversary releases nothing
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=-  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d8)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler idle -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                                    [t=9] {(rem1,d8)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                            [t=7] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                          scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                              scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+                      scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d9)(rem3,d9)} A=(rem1,d9)  => (position already expanded above)
+                      scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                        [t=6] {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw  => (position already expanded above)
+              scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                [t=4] online {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw : adversary releases nothing
+                  scheduler run -> {(rem3,d9)} A=-
+                    [t=5] {(rem3,d9)} A=-  => (position already expanded above)
+                  scheduler run -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                    [t=5] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                      scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                        [t=6] online {(rem1,d9)(rem1,d9)} A=(rem1,d9) : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=-
+                            [t=7] online {(rem1,d7)(rem1,d9)} A=- : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=-
+                                [t=8] {(rem1,d8)(rem1,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=-
+                                [t=8] {(rem1,d7)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler run -> {(rem1,d7)(rem1,d8)} A=-
+                                [t=8] {(rem1,d7)(rem1,d8)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d8)(rem1,d9)} A=-
+                                [t=8] {(rem1,d7)(rem1,d8)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                            [t=7] online {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=-
+                                [t=8] {(rem1,d7)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                            [t=7] online {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem1,d9)(rem1,d9)} A=-
+                                [t=8] online {(rem1,d9)(rem1,d9)} A=- : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=-  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem1,d9)(rem1,d9)} A=-
+                                    [t=9] {(rem1,d9)(rem1,d9)(rem1,d9)} A=-  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=-
+                                [t=8] {(rem1,d7)(rem1,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw
+                                [t=8] {(rem1,d7)(rem1,d9)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                        [t=6] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                      scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                        [t=6] online {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] online {(rem2,d9)} A=- : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=-
+                                [t=8] {(rem1,d8)(rem2,d9)} A=-  => (position already expanded above)
+                          scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                          scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                            [t=7] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                          scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+                  scheduler idle -> {(rem1,d9)(rem3,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d9)(rem3,d9)} A=(rem1,d9)  => (position already expanded above)
+                  scheduler switch -> {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw
+                    [t=5] {(rem1,d9)(rem3,d9)} A=(rem1,d9) sw  => (position already expanded above)
+          scheduler idle -> {(rem2,d9)} A=(rem2,d9)
+            [t=3] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r3,p1,d4) 
+              scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] online {(rem1,d4)(rem1,d9)} A=(rem1,d9) : adversary releases nothing
+                  scheduler run -> {(rem1,d4)} A=-
+                    [t=5] {(rem1,d4)} A=-  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem1,d9)} A=(rem1,d9) sw
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                [t=4] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                  scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                [t=4] online {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                  scheduler run -> {(rem2,d9)} A=-
+                    [t=5] online {(rem2,d9)} A=- : adversary releases (r5,p1,d6) 
+                      scheduler run -> {(rem2,d9)} A=-
+                        [t=6] {(rem2,d9)} A=-  => (position already expanded above)
+                      scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                      scheduler idle -> {(rem1,d6)(rem2,d9)} A=-
+                        [t=6] {(rem1,d6)(rem2,d9)} A=-  => (position already expanded above)
+                  scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                    [t=5] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+          scheduler switch -> {(rem2,d9)} A=(rem2,d9) sw
+            [t=3] online {(rem2,d9)} A=(rem2,d9) sw : adversary releases (r3,p1,d4) 
+              scheduler run -> {(rem2,d9)} A=-
+                [t=4] online {(rem2,d9)} A=- : adversary releases (r4,p1,d5) 
+                  scheduler run -> {(rem2,d9)} A=-
+                    [t=5] {(rem2,d9)} A=-  => (position already expanded above)
+                  scheduler run -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d5)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                  scheduler idle -> {(rem1,d5)(rem2,d9)} A=-
+                    [t=5] {(rem1,d5)(rem2,d9)} A=-  => (position already expanded above)
+              scheduler run -> {(rem1,d4)(rem1,d9)} A=(rem1,d9)
+                [t=4] {(rem1,d4)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+              scheduler idle -> {(rem1,d4)(rem2,d9)} A=(rem2,d9)
+                [t=4] {(rem1,d4)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+              scheduler switch -> {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw
+                [t=4] {(rem1,d4)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+      scheduler idle -> {(rem3,d9)} A=-
+        [t=2] online {(rem3,d9)} A=- : adversary releases nothing
+          scheduler run -> {(rem2,d9)} A=(rem2,d9)
+            [t=3] {(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+          scheduler idle -> {(rem3,d9)} A=-
+            [t=3] online {(rem3,d9)} A=- : adversary releases nothing
+              scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                [t=4] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r4,p1,d5) 
+                  scheduler run -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                    [t=5] {(rem1,d5)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                  scheduler idle -> {(rem1,d5)(rem2,d9)} A=(rem2,d9)
+                    [t=5] online {(rem1,d5)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                      scheduler run -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d5)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem2,d9)} A=(rem2,d9)
+                        [t=6] {(rem1,d5)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d5)(rem2,d9)} A=(rem2,d9) sw
+                        [t=6] {(rem1,d5)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler switch -> {(rem1,d5)(rem2,d9)} A=(rem2,d9) sw
+                    [t=5] online {(rem1,d5)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                      scheduler run -> {(rem2,d9)} A=-
+                        [t=6] {(rem2,d9)} A=-  => (position already expanded above)
+                      scheduler run -> {(rem1,d5)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d5)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem1,d5)(rem2,d9)} A=(rem2,d9)
+                        [t=6] {(rem1,d5)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d5)(rem2,d9)} A=(rem2,d9) sw
+                        [t=6] {(rem1,d5)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+              scheduler idle -> {(rem3,d9)} A=-
+                [t=4] online {(rem3,d9)} A=- : adversary releases nothing
+                  scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                    [t=5] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r5,p1,d6) 
+                      scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                        [t=6] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                      scheduler idle -> {(rem1,d6)(rem2,d9)} A=(rem2,d9)
+                        [t=6] online {(rem1,d6)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                          scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d6)(rem2,d9)} A=(rem2,d9)
+                            [t=7] {(rem1,d6)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d6)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] {(rem1,d6)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler switch -> {(rem1,d6)(rem2,d9)} A=(rem2,d9) sw
+                        [t=6] online {(rem1,d6)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=-
+                            [t=7] {(rem2,d9)} A=-  => (position already expanded above)
+                          scheduler run -> {(rem1,d6)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d6)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler idle -> {(rem1,d6)(rem2,d9)} A=(rem2,d9)
+                            [t=7] {(rem1,d6)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d6)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] {(rem1,d6)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                  scheduler idle -> {(rem3,d9)} A=-
+                    [t=5] online {(rem3,d9)} A=- : adversary releases nothing
+                      scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                        [t=6] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r6,p1,d7) 
+                          scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                            [t=7] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                          scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) : adversary releases nothing
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                          scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                            [t=7] online {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=-
+                                [t=8] {(rem2,d9)} A=-  => (position already expanded above)
+                              scheduler run -> {(rem1,d7)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d7)(rem1,d9)} A=(rem1,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem1,d7)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler switch -> {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d7)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                      scheduler idle -> {(rem3,d9)} A=-
+                        [t=6] online {(rem3,d9)} A=- : adversary releases nothing
+                          scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                            [t=7] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r7,p1,d8) 
+                              scheduler run -> {(rem1,d8)(rem1,d9)} A=(rem1,d9)
+                                [t=8] {(rem1,d8)(rem1,d9)} A=(rem1,d9)  => (position already expanded above)
+                              scheduler idle -> {(rem1,d8)(rem2,d9)} A=(rem2,d9)
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem2,d9)  => (position already expanded above)
+                              scheduler switch -> {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw
+                                [t=8] {(rem1,d8)(rem2,d9)} A=(rem2,d9) sw  => (position already expanded above)
+                          scheduler idle -> {(rem3,d9)} A=-
+                            [t=7] online {(rem3,d9)} A=- : adversary releases nothing
+                              scheduler run -> {(rem2,d9)} A=(rem2,d9)
+                                [t=8] online {(rem2,d9)} A=(rem2,d9) : adversary releases (r8,p1,d9) 
+                                  scheduler run -> {(rem1,d9)(rem1,d9)} A=(rem1,d9)
+                                    [t=9] {(rem1,d9)(rem1,d9)} A=(rem1,d9)  => no more releases; scheduler alone cannot avoid lateness 2 (exhaustive)
+                                  scheduler idle -> {(rem1,d9)(rem2,d9)} A=(rem2,d9)
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9)  => some job cannot finish by d+1: ADVERSARY WINS
+                                  scheduler switch -> {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw
+                                    [t=9] {(rem1,d9)(rem2,d9)} A=(rem2,d9) sw  => some job cannot finish by d+1: ADVERSARY WINS
+                              scheduler idle -> {(rem3,d9)} A=-
+                                [t=8] {(rem3,d9)} A=-  => some job cannot finish by d+1: ADVERSARY WINS

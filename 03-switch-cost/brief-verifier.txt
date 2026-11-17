@@ -1,0 +1,43 @@
+You are a hostile but fair referee. Two solvers worked independently on the problem below and AGREE. Agreement between two instances of the same model is weak evidence: they may share a misreading of the rules. Your job is to find out whether they are right, by reading the actual proof text and by independent computation. You did not write any of this and have no stake in it being true. A proof with a gap must be reported as having a gap; do not repair it silently and then call it confirmed. Do not search the web.
+
+THE GAME
+
+Parameters: integers P >= 1 (maximum job length) and T >= 1 (horizon). Time is ticks 0, 1, 2, ....
+
+ - Jobs. A job is (r, p, d) with integers 1 <= p <= P and r + p <= d <= T. It is revealed at the start of tick r and may run in tick r. Identical jobs may be released more than once (a multiset).
+ - Machine (switch cost 1). In each tick it does exactly one of: run one unit of one released, unfinished job; idle; spend a switch tick. Let A be the job most recently run (none at the start). Running a job B != A while A is unfinished requires the tick immediately before B's unit to be a switch tick. If A is finished, or nothing has run yet, any job may be started or resumed with no switch tick. Idling leaves A unchanged. A switch tick is not aimed at a particular job: after it, the next tick may run any job. Running A itself never needs a switch tick.
+ - Order of play at tick t: the adversary, who has seen the online schedule for ticks 0..t-1, releases any finite multiset of jobs with r = t (possibly none); then the online scheduler, seeing them, chooses what the machine does in tick t.
+ - Promise. After every release, the multiset of ALL jobs released so far must be feasible for some hindsight schedule built from tick 0 that respects release times and completes every job by its deadline. Two versions of the game differ only in which machine the hindsight schedule runs on:
+     same-cost promise: the machine above (switch cost 1);
+     free promise: the same machine with switch cost 0, i.e. ordinary preemptive feasibility.
+   The hindsight schedule has nothing to do with what the online scheduler actually did.
+ - Value. The online scheduler always pays switch cost 1 and keeps working after tick T until every job is done (no job is released with r >= T). Completion of a job = index of the tick after its last unit. Lateness = max(0, completion - d). The online scheduler wants to minimise the maximum lateness over all jobs; the adversary wants to maximise it.
+   S_T(P) = value of the game under the same-cost promise; F_T(P) = value under the free promise. S(P), F(P) = limits as T grows (both sequences are nondecreasing in T).
+
+WHAT THE SOLVERS CLAIM
+
+ The question's author guessed S(P) = 1 for all P >= 2 and F(P) = P - 1. Both solvers say the guess is FALSE:
+ C1. Upper bound: S_T(P) <= F_T(P) <= P - 1 for all T, by non-preemptive earliest-deadline-first (solver-a Theorem 1, solver-b Theorem 1). Hand proofs.
+ C2. Monotone in T and in P (hand proofs).
+ C3. S_4(2) >= 1 and F_3(2) >= 1 by hand (solver-a Theorem 3; solver-b Theorems 3, 3').
+ C4. Exact tables. F_T(2) = 0,0,1,1,... (T = 1,2,3,...); S_T(2) = 0,0,0,1,...; F_T(3) = 0,0,1,1,1,2,...; S_T(3) = 0,0,0,1,1,1,1,1,2 (T = 1..9); F_T(4) = 0,0,1,1,1,2,2,2,2,3 (T = 1..10); S_T(4) = 0,0,0,1,1,1,1,1 (T = 1..8), S_9(4) = 2 (solver B exhaustive; solver A has only 2..3), then undetermined until 3 at T = 15 (B) or T = 16 (A).
+ C5. Hence S(2) = F(2) = 1, S(3) = F(3) = 2, S(4) = F(4) = 3. The lower bounds for P = 3, 4 under the same-cost promise are machine-found adversary trees (solver-a strat_*.txt checked by its verify.cpp; solver-b wit_* checked by its verify.py), not hand proofs.
+ C6. Conjecture only: S(P) = F(P) = P - 1 for all P.
+
+YOUR TASKS, IN PRIORITY ORDER
+
+ 1. Rules audit (most important). Re-read the game definition above against each solver's stated interpretations (section 5 of each report, in ./reports/solver-a.md and solver-b.md) and against what their code actually does. Look for a shared misreading that would inflate the value: is the promise checked with a hindsight machine that starts with no current job at tick 0 and pays a switch tick exactly when the online machine would? May the hindsight schedule idle? Does the adversary see the online action of tick t before releasing at tick t (it must NOT)? Is a job released at r allowed to run in tick r? Is lateness counted for jobs finishing after T?
+ 2. Write your OWN solver from the game definition above, not from their code, with the plain unsimplified machine (run / idle / switch tick as separate actions) and an exact same-cost feasibility search that you test against brute-force enumeration of hindsight schedules on tiny cases. Recompute S_T(2), F_T(2) as far as cheap, F_T(3) to T = 6, S_T(3) as far as you can (T = 9 is the decisive entry; if you cannot reach it exhaustively say so). Before trusting your solver, work S_3(2) = 0 and S_4(2) = 1 by hand.
+ 3. Check the decisive S_9(3) >= 2 certificate yourself: write your own checker for solver-b's wit_S3_T9_L1.txt (19 nodes) or solver-a's strat file, verifying (i) every online action at every node is covered, (ii) every release keeps the same-cost promise (exhibit the hindsight schedule), (iii) every leaf really has lateness >= 2 whatever the scheduler does afterwards. Also walk the main line by hand and write it out. Then mutate the tree in a way that should break it and confirm your checker rejects it.
+ 4. Read the upper-bound proof (C1) in one solver's proofs.txt line by line: follows / does not follow / unclear for each step. Note that the scheduler in the proof must cope with jobs arriving while it is locked on a job; check the blocking argument uses the promise correctly (the free promise is the weaker promise, so the bound must be proved under it).
+ 5. Read the hand proofs of C3. In particular solver B says the one-line witness "unit job with a one-tick window just after a long job's first unit" covers only one branch; check the other branch (scheduler declines to start the long job).
+ 6. If time remains: check S_9(4) = 2 or the S(4) >= 3 certificate (they disagree on the horizon: 15 vs 16 are both only upper bounds on the threshold, so that is not a contradiction; say whether either certificate verifies under your checker).
+ 7. For each of these, say PROVED BY HAND, MACHINE-CHECKED CERTIFICATE (say by how many independent programs), or SUPPORTED BY DATA ONLY: (i) F(P) <= P - 1; (ii) S(2) = F(2) = 1; (iii) F(3) = 2; (iv) S(3) = 2; (v) S(4) = F(4) = 3; (vi) anything for P >= 5.
+
+RULES FOR RUNNING CODE (someone's live workstation)
+ - Write only inside ./verifier/ . You may READ ./solver-a/ and solver-b/ (proofs, code, strategy trees); do not modify them and read nothing else on this machine.
+ - Every compute run: `nice -n 15`, at most 2 CPU cores, `ulimit -v 8000000` in the same shell command, wrapped in `timeout 1500`. No background daemons. TMPDIR=./verifier ; nothing large in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `pgrep` or `ps` to look at other processes. Kill only PIDs you recorded when you started them. Do not delete files.
+
+REPORT (final message, under 900 words)
+ For each of C1-C5: CONFIRMED, REFUTED, or GAP (with the exact failing step), and your evidence. Then tasks 1-3 with file names. Then the task 7 verdicts. State plainly anything you did not check.

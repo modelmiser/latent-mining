@@ -1,0 +1,66 @@
+== 1. brute-force feasibility search vs naive enumerator
+brute_feasible == naive enumerator on 4000 random tiny job lists (2542 feasible, 1458 infeasible) and 6 hand cases
+== 2. exhaustive play, python (play.py), proven Delta=(P-1)(3P-1); --brute --exact = no memo, brute-force promise check of the raw job list at every release, exact lateness search at every terminal
+P=2 DELTA=5 T=7 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 1)
+   {'nodes': 21, 'maxcash': 5, 'maxrel': 4, 'wins_fork': 1, 'wins_cash0': 2, 'wins_cash1': 11, 'early': 0, 'maxlate_seen': 0}
+P=3 DELTA=16 T=22 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 2)
+   {'nodes': 3850, 'maxcash': 13, 'maxrel': 12, 'wins_fork': 184, 'wins_cash0': 77, 'wins_cash1': 2370, 'early': 9, 'maxlate_seen': 0}
+P=4 DELTA=33 T=45 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 3)
+   {'nodes': 115138, 'maxcash': 26, 'maxrel': 25, 'wins_fork': 1610, 'wins_cash0': 2347, 'wins_cash1': 57570, 'early': 1015, 'maxlate_seen': 0}
+== 3. exhaustive play, C++ (play.cpp, independent implementation), proven Delta
+P=2 DELTA=5 T=7 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 1)
+   nodes=21 maxcash=5 maxrel=4 wins_fork=1 wins_cash0=2 wins_cash1=11 early=0 certless=0
+P=3 DELTA=16 T=22 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 2)
+   nodes=1064 maxcash=13 maxrel=12 wins_fork=28 wins_cash0=46 wins_cash1=543 early=6 certless=0
+P=4 DELTA=33 T=45 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 3)
+   nodes=115138 maxcash=26 maxrel=25 wins_fork=1610 wins_cash0=2347 wins_cash1=57570 early=1015 certless=0
+P=5 DELTA=56 T=76 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 4)
+   nodes=20830663 maxcash=45 maxrel=45 wins_fork=131296 wins_cash0=205733 wins_cash1=9762720 early=278825 certless=0
+== 4. smallest Delta that passes / first that fails (C++, exhaustive)
+P=2 DELTA=5 T=7 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 1)
+P=2 DELTA=4 T=6 variant=ok : FAIL: PROMISE: plan1 has no valid completion (t=3)
+P=3 DELTA=12 T=18 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 2)
+P=3 DELTA=11 T=17 variant=ok : FAIL: PROMISE: plan1 has no valid completion (t=10)
+P=4 DELTA=21 T=33 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 3)
+P=4 DELTA=20 T=32 variant=ok : FAIL: PROMISE: plan1 has no valid completion (t=19)
+P=5 DELTA=32 T=52 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 4)
+P=5 DELTA=31 T=51 variant=ok : FAIL: PROMISE: plan1 has no valid completion (t=30)
+== 5. negative controls (must FAIL)
+-- nothreat: fork without the tight unit
+P=3 DELTA=16 T=22 variant=nothreat : FAIL: SCHEDULER SURVIVES at fork terminal (t=6)
+P=5 DELTA=56 T=76 variant=nothreat : FAIL: SCHEDULER SURVIVES at fork terminal (t=10)
+P=4 DELTA=33 T=45 variant=nothreat : FAIL: SCHEDULER SURVIVES: at terminal fork t=8 exact search finds a completion with max lateness <= 2
+-- notight: fork unit gets the stream deadline instead of t+1
+P=4 DELTA=33 T=45 variant=notight : FAIL: SCHEDULER SURVIVES: at terminal fork t=8 exact search finds a completion with max lateness <= 2
+-- fewrounds: P-2 rounds instead of P-1
+P=4 DELTA=33 T=41 variant=fewrounds : FAIL: SCHEDULER SURVIVES at cash terminal (t=15)
+P=5 DELTA=56 T=71 variant=fewrounds : FAIL: SCHEDULER SURVIVES at cash terminal (t=30)
+-- Delta too small: promise checker must object
+P=5 DELTA=20 T=40 variant=ok : FAIL: PROMISE: plan1 has no valid completion (t=31)
+== 6. P >= 6: NOT exhaustive. (a) every scheduler with <= MAXDEV deviations from non-preemptive EDF (C++)
+P=6 DELTA=85 T=115 variant=ok : ADVERSARY WINS against every scheduler with <= 8 deviations from NP-EDF (lateness >= 5)
+   nodes=38399753 maxcash=68 maxrel=67 wins_fork=65198 wins_cash0=462705 wins_cash1=4689993 early=480989 certless=0
+P=6 DELTA=45 T=75 variant=ok : ADVERSARY WINS against every scheduler with <= 9 deviations from NP-EDF (lateness >= 5)
+   nodes=99804656 maxcash=68 maxrel=68 wins_fork=144206 wins_cash0=1139880 wins_cash1=14725930 early=1188312 certless=0
+P=7 DELTA=120 T=162 variant=ok : ADVERSARY WINS against every scheduler with <= 7 deviations from NP-EDF (lateness >= 6)
+   nodes=46051830 maxcash=95 maxrel=94 wins_fork=48363 wins_cash0=358757 wins_cash1=1536086 early=470933 certless=0
+P=7 DELTA=60 T=102 variant=ok : ADVERSARY WINS against every scheduler with <= 7 deviations from NP-EDF (lateness >= 6)
+   nodes=46051830 maxcash=95 maxrel=94 wins_fork=48363 wins_cash0=358757 wins_cash1=1536086 early=470933 certless=0
+P=8 DELTA=161 T=217 variant=ok : ADVERSARY WINS against every scheduler with <= 6 deviations from NP-EDF (lateness >= 7)
+   nodes=20471175 maxcash=100 maxrel=126 wins_fork=20336 wins_cash0=141700 wins_cash1=0 early=240170 certless=0
+P=8 DELTA=77 T=133 variant=ok : ADVERSARY WINS against every scheduler with <= 6 deviations from NP-EDF (lateness >= 7)
+   nodes=20471175 maxcash=100 maxrel=126 wins_fork=20336 wins_cash0=141700 wins_cash1=0 early=240170 certless=0
+-- controls inside the restricted class (must FAIL)
+P=6 DELTA=85 T=115 variant=nothreat : FAIL: SCHEDULER SURVIVES at fork terminal (t=12)
+P=6 DELTA=85 T=109 variant=fewrounds : FAIL: SCHEDULER SURVIVES at cash terminal (t=50)
+P=7 DELTA=59 T=101 variant=ok : FAIL: PROMISE: plan1 has no valid completion (t=87)
+== 6. (b) sampled random/structured schedulers (sample.py), 20000 plays each
+P=5 DELTA=56 T=76 variant=ok: 20000 sampled plays, adversary won all (lateness >= 4); longest play ended at t=42; maxcash=40 certless=0
+P=6 DELTA=85 T=115 variant=ok: 20000 sampled plays, adversary won all (lateness >= 5); longest play ended at t=62; maxcash=54 certless=0
+P=7 DELTA=120 T=162 variant=ok: 20000 sampled plays, adversary won all (lateness >= 6); longest play ended at t=76; maxcash=74 certless=0
+P=8 DELTA=161 T=217 variant=ok: 20000 sampled plays, adversary won all (lateness >= 7); longest play ended at t=107; maxcash=96 certless=0
+P=6 DELTA=45 T=75 variant=ok: 20000 sampled plays, adversary won all (lateness >= 5); longest play ended at t=62; maxcash=54 certless=0
+P=7 DELTA=60 T=102 variant=ok: 20000 sampled plays, adversary won all (lateness >= 6); longest play ended at t=76; maxcash=74 certless=0
+P=8 DELTA=77 T=133 variant=ok: 20000 sampled plays, adversary won all (lateness >= 7); longest play ended at t=107; maxcash=96 certless=0
+-- note: sampling is weak for the promise: P=5 Delta=31 passes sampling but fails exhaustively
+P=5 DELTA=31 T=51 variant=ok: 20000 sampled plays, adversary won all (lateness >= 4); longest play ended at t=42; maxcash=40 certless=0

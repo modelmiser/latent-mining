@@ -1,0 +1,7 @@
+# minimal-size adversary strategy forcing lateness >= 1. P=2 T=3 promise=F maxrel=-1 nodes=3
+# deadlines shown are TRUE deadlines; 'e' = empty tick (idle or switch); rX,Y = run one unit of a job with X units left and deadline Y
+t=0 release: (r0,p2,d3)  -> online has {(2,d3)}
+  online e:
+    t=1 release: (r1,p1,d2)  -> online has {(1,d2)(2,d3)}  ADV WINS (cannot finish within lateness 0)
+  online r2,3:
+    t=1 release: (r1,p1,d2)  -> online has {(1,d2)(1,d3)} lock(1,d3)  ADV WINS (cannot finish within lateness 0)

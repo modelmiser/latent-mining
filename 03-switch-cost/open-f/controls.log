@@ -1,0 +1,29 @@
+control null (expect 0)            P=2 T=3   value=0 (target P-1=1) FAILS  nodes=2 releases_checked=1 last_release_tick=0  0.0s
+control null (expect 0)            P=3 T=4   value=0 (target P-1=2) FAILS  nodes=3 releases_checked=1 last_release_tick=0  0.0s
+control null (expect 0)            P=4 T=5   value=0 (target P-1=3) FAILS  nodes=4 releases_checked=1 last_release_tick=0  0.0s
+control null (expect 0)            P=5 T=6   value=0 (target P-1=4) FAILS  nodes=5 releases_checked=1 last_release_tick=0  0.0s
+control null (expect 0)            P=6 T=7   value=0 (target P-1=5) FAILS  nodes=6 releases_checked=1 last_release_tick=0  0.0s
+control liar (expect violation)    PROMISE VIOLATION: promise broken at t=0 by (r=0,p=1,d=1); all jobs [(0, 1, 1), (0, 1, 1)]; trace ()
+control staircase/nostall          PROMISE VIOLATION: illegal job (r=3,p=3,d=7) P=3 T=6
+control staircase/short            PROMISE VIOLATION: illegal job (r=2,p=2,d=5) P=3 T=4
+control staircase/nounit           P=3 T=6   value=0 (target P-1=2) FAILS  nodes=5 releases_checked=2 last_release_tick=1  0.0s
+control staircase/lastlen          P=3 T=5   value=1 (target P-1=2) FAILS  nodes=5 releases_checked=3 last_release_tick=3  0.0s
+control staircase/nostall          PROMISE VIOLATION: illegal job (r=6,p=4,d=11) P=4 T=10
+control staircase/short            PROMISE VIOLATION: illegal job (r=4,p=3,d=8) P=4 T=7
+control staircase/nounit           P=4 T=10  value=1 (target P-1=3) FAILS  nodes=9 releases_checked=3 last_release_tick=3  0.0s
+control staircase/lastlen          P=4 T=9   value=2 (target P-1=3) FAILS  nodes=9 releases_checked=4 last_release_tick=6  0.0s
+control staircase/nostall          PROMISE VIOLATION: illegal job (r=10,p=5,d=16) P=5 T=15
+control staircase/short            PROMISE VIOLATION: illegal job (r=7,p=4,d=12) P=5 T=11
+control staircase/nounit           P=5 T=15  value=2 (target P-1=4) FAILS  nodes=14 releases_checked=4 last_release_tick=6  0.0s
+control staircase/lastlen          P=5 T=14  value=3 (target P-1=4) FAILS  nodes=14 releases_checked=5 last_release_tick=10  0.1s
+control staircase/nostall          PROMISE VIOLATION: illegal job (r=15,p=6,d=22) P=6 T=21
+control staircase/short            PROMISE VIOLATION: illegal job (r=11,p=5,d=17) P=6 T=16
+control staircase/nounit           P=6 T=21  value=3 (target P-1=5) FAILS  nodes=20 releases_checked=5 last_release_tick=10  2.0s
+control staircase/lastlen          P=6 T=20  value=4 (target P-1=5) FAILS  nodes=20 releases_checked=6 last_release_tick=15  4.6s
+control simple N=P-2               P=3 T=4   value=1 (target P-1=2) FAILS  nodes=6 releases_checked=2 last_release_tick=1  0.0s
+control simple N=P-2               P=4 T=10  value=2 (target P-1=3) FAILS  nodes=14 releases_checked=5 last_release_tick=7  0.0s
+control simple N=P-2               P=5 T=18  value=3 (target P-1=4) FAILS  nodes=24 releases_checked=8 last_release_tick=15  0.7s
+control staircase/loose windows    P=3 T=7   value=1 (target P-1=2) FAILS  max_states_per_L=36 releases_checked=3 last_release_tick=3  0.0s
+control staircase/loose windows    P=4 T=11  value=2 (target P-1=3) FAILS  max_states_per_L=639 releases_checked=4 last_release_tick=6  0.0s
+control staircase/loose windows    P=5 T=16  value=3 (target P-1=4) FAILS  max_states_per_L=18720 releases_checked=5 last_release_tick=10  0.2s
+control staircase/loose windows    P=6 T=22  value=4 (target P-1=5) FAILS  max_states_per_L=858209 releases_checked=6 last_release_tick=15  13.3s

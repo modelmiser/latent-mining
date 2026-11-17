@@ -31,6 +31,7 @@ chain produces prose that nothing can test.
 |---|---|---|---|---|
 | 1 | [01-late-thermostat](01-late-thermostat/) | regulating a level from a delayed one-bit signal | a blind clock is within 1 of a controller with full memory | headline proved by hand for every delay, not machine-checked; one supporting bound is in Lean; the exact clock value for odd delays is open past 13 |
 | 2 | [02-move-on-free](02-move-on-free/) | a memory allocator that may move blocks only when something is freed | how much that right is worth | open. Proved by hand: an allocator that packs its first blocks together cannot use the right to get below 7/4 of live memory asymptotically, the best lower bound known with no moves at all; with only the smallest blocks freed the cost is exactly 5/3 asymptotically. Nothing machine-checked |
+| 3 | [03-switch-cost](03-switch-cost/) | online scheduling with a one-tick penalty for leaving a job unfinished | over a long horizon, no online rule beats never preempting, even against a benchmark that pays the same penalty | proved by hand for every maximum job length, not machine-checked; the two general lower bounds were each written by one instance and re-derived once; small cases confirmed by exhaustive search |
 
 ## License
 

@@ -1,0 +1,132 @@
+==== Experiment 3 chain link 1 ====
+You are one link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one step further away from well-known territory while keeping it sharp. Reply from thought alone: do not run code, do not search the web, do not read files. Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+
+A single processor serves jobs that arrive online. Time is discrete. Each job arrives at some tick with an integer length (ticks of work it needs) and an integer deadline. An adversary chooses the arrivals, seeing the schedule so far, but may only issue job sets that a clairvoyant scheduler could finish on time if switching between jobs were free. The online scheduler may preempt a job and resume it later, but every time it switches from one unfinished job to a different job the processor is idle for c ticks first (a context switch). Starting a job after another has finished is free. The online scheduler is given a processor that is s times faster than the clairvoyant one. For each switch cost c: what is the smallest speed s(c) with which some online scheduler meets every deadline against every adversary? How does it grow with c, and what does the best scheduler look like (when is it right to refuse to preempt)?
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is already established about the question as given. Name results or fields only if you are confident; write "unsure" rather than inventing a citation. If you think the question as given has an easy answer or is ill-posed (for example: the answer is unbounded, or trivially 1), say what it is.
+
+2. SUCCESSOR QUESTION: one new question that
+   (a) would NOT be settled by a textbook or by a theorem you can name;
+   (b) is fully formal: every object is defined, and a unique correct answer exists;
+   (c) has small instances whose exact answer can be established by exhaustive computation in a few minutes on one laptop core, AND a general form whose answer would be a formula or a theorem;
+   (d) keeps the heart of the original (one server, work arriving online with deadlines chosen by an adversary, and a price paid for changing what you are working on) rather than changing the subject;
+   (e) is self-contained: a reader who never saw the original must be able to work on it from your text alone.
+   Make it harder and stranger than what you received, but not vaguer. Prefer a twist that makes the known answers to the original stop applying. Keep the number of parameters small: a question with one integer parameter whose answer is a sequence is better than one with four. Avoid real-valued parameters such as a speed; prefer integer quantities so that small cases are finite games.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): your honest reasons, including your doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 100 words): what computation or proof would confirm or refute a claimed answer.
+
+Keep the whole reply under 600 words. Use exactly those four headings.
+
+==== Experiment 3 chain link 2 ====
+You are one link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one step further away from well-known territory while keeping it sharp. Reply from thought alone: do not run code, do not search the web, do not read files. Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+
+Fix integers P >= 1 (maximum job length) and c >= 1 (switch cost). Time is ticks 0, 1, 2, ....
+
+- Jobs. A job is (r, p, d) with integers 1 <= p <= P and d >= r + p. It is revealed at the start of tick r and may run in tick r.
+- Scheduler. In each tick the processor runs one unit of one job, or idles, or spends a switch tick. Let A be the job most recently run. Running a job B != A while A is unfinished requires that the c ticks immediately before B's unit were switch ticks. If A is finished, or nothing has run yet, starting or resuming any job is free. Idling does not change A.
+- Adversary. It is adaptive and sees the schedule so far. It may release any finite number of jobs per tick, subject to one rule: at all times, for all integers a < b, the total length of released jobs with a <= r and d <= b is at most b - a. That is, a scheduler for whom switching is free could meet every deadline.
+- Value. A job's lateness is max(0, completion time - d), where completion time is the tick index after its last unit. L(c, P) is the least integer L such that some online scheduler guarantees lateness <= L for every job against every adversary.
+
+Questions. Determine the sequence a(P) = L(1, P) for P = 1, 2, 3, ..., and then L(c, P) in general.
+- Is a(P) = P - 1 always, meaning never preempting is optimal even when a switch costs a single tick?
+- Or is a(P) = o(P), for example of order sqrt(P), from balancing refused preemptions against accumulated switch ticks?
+- For which (c, P) does L(c, P) first equal its never-preempt value?
+- What rule tells the optimal scheduler to refuse a preemption?
+
+(Background from the previous thinker: the original question asked how much faster a processor must be to meet every deadline when each preemption costs c idle ticks; that is infinite for c >= 1, because a one-tick job with a one-tick window can arrive mid-job. So deadlines were softened to lateness and job length was capped at P. The previous thinker's own doubts: non-preemptive earliest-deadline-first probably gives lateness <= P - 1, and the answer may collapse to exactly P - 1 for every c >= 1; also windows d - r are unbounded, so it is not clear the game for fixed (c, P) is finite.)
+
+A CAUTION ABOUT THE QUESTION AS GIVEN: check whether it is well-posed, non-trivial and computable before you build on it. Think concretely with c = 1 and small P. (i) A job of length P has just had its first unit run when a job of length 1 with a one-tick window arrives. What does each choice cost, and to whom? Can the adversary repeat or nest the trick so that lateness accumulates without bound (making L infinite), or does the load rule stop that? (ii) Is "never preempt" really bounded by P - 1, and is it really forced? (iii) For fixed (c, P), is there an honest finite game: can windows, the number of pending jobs and the backlog be bounded without changing the value? If the game as given is trivial, infinite or not finitely checkable, repair it in your successor with ONE change, and say what you changed and why.
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is already established or easy about the question as given, including any flaw you found. Name results or fields only if you are confident; write "unsure" rather than inventing a citation.
+
+2. SUCCESSOR QUESTION: one new question that
+   (a) would NOT be settled by a textbook or by a theorem you can name;
+   (b) is fully formal: every object is defined, and a unique correct answer exists;
+   (c) has small instances whose exact answer can be established by exhaustive computation in a few minutes on one laptop core, AND a general form whose answer would be a formula or a theorem;
+   (d) keeps the heart of the original (one server, work arriving online with deadlines chosen by an adversary bound by a feasibility promise, and a price paid for changing what you are working on) rather than changing the subject;
+   (e) is self-contained: a reader who never saw the original must be able to work on it from your text alone.
+   Make it harder and stranger than what you received, but not vaguer. Prefer ONE well-chosen twist over several; do not multiply parameters.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): your honest reasons, including your doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 100 words): what computation or proof would confirm or refute a claimed answer.
+
+Keep the whole reply under 650 words. Use exactly those four headings.
+
+==== Experiment 3 chain link 3 ====
+You are the LAST link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one final step away from well-known territory and, because you are last, to leave it as ONE sharp question with ONE headline answer to find. Reply from thought alone: do not run code, do not search the web, do not read files. Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+
+Fix integers P >= 1, c >= 1, T >= 1. Time is ticks 0, 1, 2, ....
+
+- Jobs. A job is (r, p, d) with integers 1 <= p <= P and r + p <= d <= T. It is revealed at the start of tick r and may run in tick r.
+- Machine. In each tick it runs one unit of one job, idles, or spends a switch tick. Let A be the job most recently run. Running B != A while A is unfinished requires the c ticks immediately before B's unit to be switch ticks. If A is finished, or nothing has run, starting or resuming any job is free. Idling does not change A.
+- Adversary. It is adaptive, sees the schedule so far, and may release any finite multiset of jobs per tick. Rule: after every release, the set of all jobs released so far must be c-feasible, meaning some schedule of this same machine, built with full hindsight from tick 0 and unrelated to the online schedule, completes every job by its deadline.
+- Value. Lateness is max(0, completion - d), where completion is the tick index after the last unit. The scheduler keeps working after T. M_T(c, P) is the least L an online scheduler can guarantee for every job. M(c, P) = lim over T of M_T(c, P).
+
+Claimed by the previous thinker (unverified): M_T is nondecreasing in T and at most P - 1 (never preempting, earliest deadline first); M >= min(c, P - 1), by a unit job with a one-tick window released just after a long job's first unit.
+
+Questions as received.
+1. Compute M_T(1, P) for P = 2, 3, 4 and T up to stabilisation.
+2. Is M(1, 3) equal to 1 or 2? (The smallest case where the two bounds differ.)
+3. Is M(c, P) = min(c, P - 1) for all c and P? If not, give the formula. Is M(1, P) bounded as P grows?
+4. Does an optimal scheduler ever idle with work pending, to deny the adversary a feasible trap?
+
+(Background from earlier thinkers: the original asked how much faster a processor must be to meet every deadline when each preemption costs c idle ticks. That is infinite, so deadlines were softened to lateness and job length capped at P. Against an adversary promising feasibility for a scheduler that switches FREE, the answer was believed to collapse to P - 1 for every c, because each preemption leaves the online scheduler permanently c ticks behind a benchmark that never pays. So the promise was changed: the job set must be feasible for a clairvoyant scheduler that pays the SAME switch cost. The horizon T was added only to make instances finite. The previous thinker's doubts: it may still collapse to min(c, P - 1) by a short exchange argument, or to P - 1 by a nesting trap; stabilisation in T may be slow.)
+
+YOUR TASK IS DIFFERENT FROM THE EARLIER LINKS: the question has accumulated four sub-questions and three parameters. Do not add parameters. Instead:
+- Check the model once more for a degenerate or trivial answer under these exact rules. Think concretely with c = 1, P = 2 and P = 3. Check each claimed bound: is "never preempt, earliest deadline first" really within P - 1 under this promise? Does the unit-job trap really give min(c, P - 1), given that the online scheduler could have idled or chosen differently before the trap, and that the adversary must keep the whole set feasible for a clairvoyant machine that also pays? Note that the clairvoyant machine can avoid switches by ordering jobs with hindsight, so what the online scheduler lacks is knowledge, not a cheaper switch. Check also whether the rule "after A finishes, anything is free" or "idling does not change A" creates a loophole (for example idling instead of switching). If the model is degenerate, repair it with one change and say what you changed.
+- Then choose the single most surprising thing that could be true in this setting, the kind of statement a specialist would not predict before computing, and make THAT the headline. The headline should compare two exactly defined quantities (for example the same game under the free-switch promise against the same-cost promise, or lateness with switch cost c against lateness with no right to preempt at all), so that its answer is a statement about what the price of changing your mind really costs an online scheduler. You may keep at most one supporting sub-question. Prefer a single integer parameter whose answer is a sequence; fix the others at their smallest interesting values if you can (for example c = 1).
+- Make sure the smallest instances are really computable: say for which parameter values the exact game has at most a few million positions, and how the horizon T or window lengths can be bounded so that a fixed-parameter instance is an honest finite game whose value does not depend on an arbitrary cut-off (or say exactly how the dependence on the cut-off should be reported).
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is established or easy about the question as given, including any flaw you found. Name results only if confident; write "unsure" rather than inventing a citation.
+
+2. FINAL QUESTION: fully formal and self-contained (a reader who saw nothing else must be able to work on it from your text alone), with every object defined, a unique correct answer, small instances decidable by exhaustive computation in minutes on one laptop core, and a general form whose answer would be a formula or theorem. State the headline as a precise yes/no or "find the exact value/function" question. Say which direction you would bet on and why, in one sentence, clearly marked as a guess.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): honest reasons and doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 120 words): the exact finite game to solve for fixed parameters, the enumeration needed, and what proof obligations a general claim carries.
+
+Keep the whole reply under 700 words. Use exactly those four headings.
+
+==== Prior-art search switch-cost lateness game ====
+Prior-art search. I need to know whether some specific small results are already in the published literature, or are close corollaries of something that is. Use web search. Be skeptical in both directions: do not declare something novel because a quick search found nothing, and do not declare it known because a paper sounds similar. Never invent a citation: every paper you name must come from a search result you actually saw, with its URL.
+
+THE SETTING
+
+Online single-machine scheduling in discrete time, as a worst-case game. Jobs (release r, length p <= P, deadline d) are released by an adaptive adversary. The online scheduler may preempt, but leaving an unfinished job for another costs one idle tick (a context switch / preemption overhead); starting a job after another finishes is free. The objective is the maximum lateness max(0, completion - d) over all jobs. The adversary is bound by a promise: the set of jobs released so far must always be feasible (all deadlines met) for a clairvoyant schedule. Two versions: the clairvoyant schedule switches for FREE (ordinary preemptive feasibility), value F(P); or the clairvoyant schedule pays the SAME one-tick switch cost, value S(P).
+
+CLAIMS
+ 1. F(P) <= P - 1 for every P: non-preemptive earliest-deadline-first is at most P - 1 late on any preemptively feasible job set with job lengths <= P.
+ 2. Exact small values by exhaustive game solving: S(2) = F(2) = 1, S(3) = F(3) = 2, S(4) = F(4) = 3. So for P <= 4 the right to preempt at a cost of one tick is worth NOTHING to an online scheduler in the worst case: never preempting is optimal, even when the benchmark pays the same cost.
+ 3. Conjecture: S(P) = F(P) = P - 1 for all P.
+ 4. The adversary needs a longer horizon under the same-cost promise (4, 9, about 15 ticks for P = 2, 3, 4) than under the free promise (3, 6, 10).
+
+WHAT TO LOOK FOR
+ 1. Claim 1 is surely classical: find the standard reference for the blocking bound of non-preemptive EDF (maximum lateness / tardiness bounded by the longest job; Jeffay, Stanat, Martel 1991 "On non-preemptive scheduling of periodic and sporadic tasks"; George, Rivierre, Spuri; "non-preemptive EDF tardiness bound").
+ 2. Online scheduling with preemption penalties / preemption overhead / context-switch cost / setup cost on preemption: competitive analysis ("online scheduling with preemption penalties", Zheng, Xu, Zhang; Fung; "preemption with restart"; "scheduling with bounded preemption cost"), limited-preemption real-time scheduling (Buttazzo, Bertogna, Yao: "limited preemptive scheduling"; "preemption threshold"; "floating non-preemptive regions"; Baruah "the limited-preemption uniprocessor scheduling of sporadic task systems"), and any LOWER BOUND showing an online scheduler cannot benefit from costly preemption, or an optimality result for non-preemptive EDF among online schedulers with preemption overhead.
+ 3. Online minimisation of maximum lateness or tardiness against an adversary (rather than throughput or flow time), with or without resource augmentation; "online deadline scheduling maximum lateness lower bound"; "non-clairvoyant" is a different thing (unknown lengths) but check.
+ 4. Any work comparing an online algorithm against an offline optimum that pays the same switching/preemption cost versus one that does not.
+ 5. Related models where changing what you work on costs time: online scheduling with setup times / changeover, "job switching cost", polling systems worst case.
+
+Run at least a dozen distinct searches across these areas and follow up on the most promising hits by reading the abstract or page (use any fetch tool or agent available to you; if none is, say that you judged from search snippets only).
+
+REPORT (under 650 words)
+ - CLOSEST PRIOR WORK: up to six items, each with title, authors, year, URL, one sentence on what it actually shows, and one sentence on how it differs from the setting above.
+ - VERDICT for each of claims 1-4, one of: FOUND (already published, cite it), LIKELY FOLKLORE or EASY COROLLARY (of a named known result; say which and how), or NOT FOUND (with the list of search queries you ran).
+ - What a specialist in which field would be the right person to ask.
+ - State plainly what you could not check.
+

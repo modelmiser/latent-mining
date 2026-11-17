@@ -1,0 +1,2 @@
+P=4 T=14 L=2 promise=S oncost=1 maxrel=1 : adversary forces lateness>=3 ? no   [postnodes=11690115 states=1326246 hsets=2551043 82.6s]
+P=4 T=14 L=2 promise=S oncost=1 maxrel=1 : adversary forces lateness>=3 ? no   [postnodes=14591469 states=1321718 hsets=2416058 61.4s]

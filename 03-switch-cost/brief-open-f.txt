@@ -1,0 +1,43 @@
+You are trying to prove a general theorem about a precisely defined scheduling game, alone. Earlier solvers settled small cases by computer; nobody has an argument for all P. A proof with a gap must be labelled as having a gap. Do not search the web.
+
+THE GAME
+
+Parameters: integers P >= 1 (maximum job length) and T >= 1 (horizon). Time is ticks 0, 1, 2, ....
+
+ - Jobs. A job is (r, p, d) with integers 1 <= p <= P and r + p <= d <= T. It is revealed at the start of tick r and may run in tick r. Identical jobs may be released more than once (a multiset).
+ - Machine (switch cost 1). In each tick it does exactly one of: run one unit of one released, unfinished job; idle; spend a switch tick. Let A be the job most recently run (none at the start). Running a job B != A while A is unfinished requires the tick immediately before B's unit to be a switch tick. If A is finished, or nothing has run yet, any job may be started or resumed with no switch tick. Idling leaves A unchanged. A switch tick is not aimed at a particular job: after it, the next tick may run any job. Running A itself never needs a switch tick.
+ - Order of play at tick t: the adversary, who has seen the online schedule for ticks 0..t-1, releases any finite multiset of jobs with r = t (possibly none); then the online scheduler, seeing them, chooses what the machine does in tick t.
+ - Promise. After every release, the multiset of ALL jobs released so far must be feasible for some hindsight schedule built from tick 0 that respects release times and completes every job by its deadline. Two versions of the game differ only in which machine the hindsight schedule runs on:
+     same-cost promise: the machine above (switch cost 1);
+     free promise: the same machine with switch cost 0, i.e. ordinary preemptive feasibility.
+   The hindsight schedule has nothing to do with what the online scheduler actually did.
+ - Value. The online scheduler always pays switch cost 1 and keeps working after tick T until every job is done (no job is released with r >= T). Completion of a job = index of the tick after its last unit. Lateness = max(0, completion - d). The online scheduler wants to minimise the maximum lateness over all jobs; the adversary wants to maximise it.
+   S_T(P) = value of the game under the same-cost promise; F_T(P) = value under the free promise. S(P), F(P) = limits as T grows (both sequences are nondecreasing in T).
+
+WHAT IS KNOWN (from two independent solvers; a referee is checking it in parallel, so treat it as probable, not certain)
+ - S_T(P) <= F_T(P) <= P - 1 for all T (hand proof: never preempt, earliest deadline first).
+ - S(2) = F(2) = 1, S(3) = F(3) = 2, S(4) = F(4) = 3. F first reaches P - 1 at T = 3, 6, 10 (triangular numbers). S first reaches P - 1 at T = 4, 9, and somewhere in 10..15 for P = 4.
+ - The lower bounds for P = 3, 4 are machine-found adversary trees. Solver A's are in solver-a/strat_*.txt (print with python3 showstrat.py <file> <depth>) and tree_S3_T9*.txt; solver B's in solver-b/wit_*.txt and .json. The idea under the same-cost promise: open with a slack "decoy" job whose deadline is T; whatever the scheduler does with it, the hindsight schedule is the one that did the opposite; then keep two incompatible hindsight plans alive.
+ - Nothing is known for P >= 5; exhaustive search ran out of memory.
+
+YOUR GOAL
+Prove F(P) = P - 1 for every P >= 2: give an explicit adversary, valid under the FREE promise, that forces lateness P - 1 on some job against every online scheduler, and say what horizon T it needs (is it P(P+1)/2?). Work only on the free promise; someone else is working on the same-cost promise.
+
+HOW TO WORK
+ 1. Study the small trees until you can describe the adversary as a RULE that takes P as a parameter, not as a table. Write the rule down precisely: what is released, when, as a function of what the scheduler has done.
+ 2. Prove two things for all P: (a) every release keeps the promise (exhibit the hindsight schedule for every branch); (b) every scheduler ends with some job at least P - 1 late. An induction on P (the adversary for P uses the adversary for P - 1 inside a longer job's lock) is the natural shape; if it fails say exactly where.
+ 3. Test in ways that can fail: implement your rule as a program and play it exhaustively against EVERY scheduler for P = 2, 3, 4 and also P = 5, 6 (the adversary is fixed, so only the scheduler branches: this is far cheaper than solving the game). Check the promise at every release with an exact feasibility test that you have compared with brute force on tiny cases. A rule that wins at P = 5 is already a new result even without a proof: report the horizon T it needs.
+ 4. Run a negative control: a deliberately weakened rule that should fail, and confirm your harness reports the failure.
+ 5. If you cannot get P - 1, report the best general lower bound you can PROVE (for example a function growing with P), and what your rule achieves by computation for P = 5..8.
+
+RULES FOR RUNNING CODE (someone's live workstation)
+ - Write only inside ./open-f/ . You may READ ./solver-a/ and solver-b/ (proofs, code, strategy trees); do not modify them and read nothing else on this machine.
+ - Every compute run: `nice -n 15`, at most 2 CPU cores, `ulimit -v 8000000` in the same shell command, wrapped in `timeout 1500`. No background daemons. TMPDIR=./open-f ; nothing large in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `pgrep` or `ps` to look at other processes. Kill only PIDs you recorded when you started them. Do not delete files.
+
+REPORT (final message, under 800 words), and write the full argument to proofs.txt in your folder:
+ - the adversary rule;
+ - each claim tagged COMPLETE (hand proof valid for all P), COMPUTED (exhaustive play of the fixed rule against every scheduler, for the stated P only), or NOT PROVED;
+ - the horizon T(P) your rule needs;
+ - negative controls;
+ - what you did not check.

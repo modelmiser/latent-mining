@@ -1,0 +1,103 @@
+PROOFS for the switch-cost online lateness game (solver B)
+Each item is marked COMPLETE (a full argument, valid for all T) or COMPUTED (finite exhaustive
+check by machine, no hand proof) or OPEN.
+
+Notation.  A tick is a "run tick" (one unit of some job) or an "empty tick" (idle or switch tick).
+"A is live" = A, the most recently run job, is unfinished.
+
+------------------------------------------------------------------------------------------
+Lemma M (model simplification).  COMPLETE.
+For either machine with switch cost 1, the set of achievable run-tick sequences is exactly the
+set of sequences obeying the single rule
+   (*)  a run tick of B may not come IMMEDIATELY after a run tick of a different job A that is
+        still unfinished after that tick.
+Proof.  (=>) If B != A runs at tick t and A is live, the rule of the brief needs tick t-1 to be a
+switch tick, hence not a run tick; so (*) holds.  (<=) Given a sequence of run/empty ticks obeying
+(*), declare every empty tick a switch tick.  Whenever B != A (A live) runs at tick t, the last run
+tick before t was A's (definition of A), and by (*) it was not tick t-1, so tick t-1 is empty, i.e.
+a switch tick.  Legal.  []
+Consequence: in the game an idle tick is never better than a switch tick (the state after a switch
+tick allows a superset of continuations), so the scheduler state is (unfinished jobs, lock) where
+lock = the job run in the previous tick if it is still unfinished.  game.cpp uses this; brute.py
+and verify.py do NOT (they keep idle, switch and the flag separately) and agree with it.
+
+Lemma R (removal).  COMPLETE.  If a multiset J is feasible on a switch-cost-1 machine then so is
+every sub-multiset.  Proof: take a feasible schedule, turn every run tick of a removed job into an
+empty tick.  (*) only constrains pairs of adjacent run ticks of different jobs where the first job
+is unfinished; all surviving adjacent pairs were adjacent before, and each surviving job has the
+same units, so its finished/unfinished status after each tick is unchanged.  []
+Consequences used by the solver: (i) "feasible after every release" is the same as "feasible after
+the last release of each tick", and releasing a multiset can be simulated by adding its jobs one at
+a time in a canonical order, pruning as soon as one addition is infeasible; (ii) a hindsight state
+that cannot finish its current jobs can be discarded, it can never become feasible again.
+
+Lemma D (dominance between hindsight states at the same tick).  COMPLETE.
+Let X, Y be states (multiset of (remaining, deadline), lock).  Suppose there is an injection m from
+X's jobs to Y's jobs with rem(x) <= rem(m(x)) and d(x) >= d(m(x)), and either X is unlocked, or X is
+locked on x0, Y is locked on y0 and m(x0) = y0.  Then for every future release sequence, if Y can
+finish everything on time so can X.
+Proof.  Take Y's continuation s.  X runs x in the first rem(x) ticks in which s runs m(x), runs new
+jobs exactly when s does, and leaves every other run tick of s empty.  x finishes no later than
+m(x), so on time.  Two adjacent run ticks of X are adjacent run ticks of s; if they belong to
+different jobs then in s the first job finished at the first tick, i.e. that tick was the LAST unit
+of m(x) and it was kept, so rem(x) = rem(m(x)) and x finishes there too.  First tick: if X is locked
+on x0 then Y is locked on y0 = m(x0), so s's first tick is empty or runs y0, and X's is empty or
+runs x0.  []   (Greedy matching by increasing d(x), best fit in rem, decides existence exactly;
+the run with NODOM=1, which disables this pruning, gives the same answers.)
+
+------------------------------------------------------------------------------------------
+Theorem 1 (upper bound).  COMPLETE.   S_T(P) <= F_T(P) <= P - 1 for all P, T.
+(a) S_T <= F_T: a multiset feasible with switch cost 1 is feasible with switch cost 0 (same
+schedule), so every adversary strategy legal under the same-cost promise is legal under the free
+promise, and the online side of the two games is identical.
+(b) F_T <= P-1.  Online rule NP-EDF: if a started job is unfinished, run it; otherwise, if some
+released job is unfinished, start one with the earliest deadline; otherwise idle.  It never changes
+job while A is live, so it never needs a switch tick.  Let the final released multiset be J
+(preemptively feasible by the promise).  Feasibility gives the load bound
+   (LB)  for all a < b: total length of jobs of J with r >= a and d <= b is at most b - a.
+Suppose job j completes at C > d_j.  Let t1 <= C be the largest time such that tick t1-1 is idle or
+runs a job with deadline > d_j (t1 = 0 if there is none).  In [t1, C) the machine runs, without a
+gap, only jobs with deadline <= d_j, and tick C-1 runs j.
+ Case 1: t1 = 0 or tick t1-1 idle.  Every job run in [t1,C) was released at >= t1 (a job released
+ earlier and unfinished at t1-1 would have been run instead of idling), so it started in [t1,C);
+ jobs are run without interruption and the last one, j, ends at C, so all of them lie wholly in
+ [t1,C).  Their total length is C - t1, all have r >= t1 and d <= d_j, so (LB) gives C - t1 <=
+ d_j - t1, contradicting C > d_j.
+ Case 2: tick t1-1 runs k with d_k > d_j.  k is not run at tick t1, and NP-EDF never abandons a
+ live job, so k finished at t1; it started at s = t1 - p_k.  Every job run in [t1,C) has deadline
+ <= d_j < d_k, so it was not available when k was chosen at tick s: released at >= s+1.  As in
+ case 1 these jobs lie wholly in [t1,C), so (LB) gives C - t1 <= d_j - (s+1), i.e.
+ C <= d_j + p_k - 1 <= d_j + P - 1.
+Hence every lateness is at most P-1.  []
+Machine check of the statement (not of the proof): with the scheduler restricted to NP-EDF
+(SCHED=3) no adversary forces lateness P at any size tried (results.txt).
+
+Theorem 2 (monotonicity).  COMPLETE.  S_T(P), F_T(P) are nondecreasing in T and in P.
+An adversary strategy for (P,T) is legal for (P',T') with P' >= P, T' >= T (same jobs, same
+feasibility, it simply stops releasing after tick T-1), and the online side is unchanged.  []
+So a lower bound found at one T holds for all larger T, and with Theorem 1 a value P-1 is final.
+
+Theorem 3.  COMPLETE.  S_T(P) >= 1 for all P >= 2, T >= 4.
+Release a = (0,2,4).
+ - Online runs a in tick 0.  Release u = (1,1,2).  Promise: idle, u, a, a.  Online in tick 1 is
+   locked on a: running a, idling or switching all leave u unstarted at time 2 = d_u.  Lateness >= 1.
+ - Online does not run a in tick 0.  Release (1,1,3) and (1,1,4).  Promise: a, a, u, u'.  Online has
+   4 units to run and only ticks 1,2,3 before time 4; all deadlines are <= 4.  Lateness >= 1.  []
+(The brief's one-line witness covers only the first branch; the second is needed because the
+scheduler may decline to start the long job.)
+Theorem 3'.  COMPLETE.  F_T(P) >= 1 for P >= 2, T >= 3: release (0,2,3); whatever tick 0 does,
+release (1,1,2).  Free promise: a,u,a.  Online: if it ran a it is locked and u is late; if not, 3
+units remain for ticks 1,2 with deadlines <= 3.  []
+
+------------------------------------------------------------------------------------------
+Lower bounds S_T(3) >= 2 (T >= 9) and S_T(4) >= 3 (T >= 15).   COMPUTED, not hand-proved.
+Explicit finite adversary trees wit_S3_T9_L1.json (19 nodes; readable copy wit_S3_T9_L1.txt) and
+wit_S4_T15_L2.json were exported by game.cpp and re-checked by verify.py, which shares no code with
+game.cpp, uses the unsimplified machine, re-derives the promise for every release by exhaustive
+search over hindsight schedules from tick 0, and checks by exhaustive search that at every leaf the
+scheduler can no longer keep all lateness <= 1 (resp. 2).  Extension to larger T is Theorem 2.
+With Theorem 1:  S(3) = F(3) = 2,  S(4) = F(4) = 3,  S(2) = F(2) = 1.
+
+OPEN (conjecture, no proof, no sketch I trust): S(P) = F(P) = P - 1 for every P >= 2.
+The upper bound is Theorem 1; what is missing is an adversary for general P.  I do not have even
+F(P) >= P-1 for P >= 5.

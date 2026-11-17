@@ -1,0 +1,62 @@
+# minimal-size adversary strategy forcing lateness >= 2. P=3 T=9 promise=S maxrel=1 nodes=28
+# deadlines shown are TRUE deadlines; 'e' = empty tick (idle or switch); rX,Y = run one unit of a job with X units left and deadline Y
+t=0 release: (r0,p3,d9)  -> online has {(3,d9)}
+  online e:
+    t=1 release: nothing  -> online has {(3,d9)}
+      online e:
+        t=2 release: (r2,p3,d9)  -> online has {(3,d9)(3,d9)}
+          online e:
+            t=3 release: (r3,p3,d6)  -> online has {(3,d6)(3,d9)(3,d9)}  ADV WINS (cannot finish within lateness 1)
+          online r3,9:
+            t=3 release: (r3,p3,d6)  -> online has {(3,d6)(2,d9)(3,d9)} lock(2,d9)  ADV WINS (cannot finish within lateness 1)
+      online r3,9:
+        t=2 release: (r2,p3,d6)  -> online has {(3,d6)(2,d9)} lock(2,d9)
+          online e:
+            t=3 release: (r3,p3,d9)  -> online has {(3,d6)(2,d9)(3,d9)}  ADV WINS (cannot finish within lateness 1)
+          online r2,9:
+            t=3 release: (r3,p1,d6)  -> online has {(1,d6)(3,d6)(1,d9)} lock(1,d9)  ADV WINS (cannot finish within lateness 1)
+  online r3,9:
+    t=1 release: (r1,p1,d4)  -> online has {(1,d4)(2,d9)} lock(2,d9)
+      online e:
+        t=2 release: nothing  -> online has {(1,d4)(2,d9)}
+          online e:
+            t=3 release: (r3,p3,d8)  -> online has {(1,d4)(3,d8)(2,d9)}
+              online e:
+                t=4 release: (r4,p1,d5)  -> online has {(1,d4)(1,d5)(3,d8)(2,d9)}  ADV WINS (cannot finish within lateness 1)
+              online r1,4:
+                t=4 release: (r4,p1,d5)  -> online has {(1,d5)(3,d8)(2,d9)}
+                  online r1,5:
+                    t=5 release: (r5,p1,d9)  -> online has {(3,d8)(1,d9)(2,d9)}  ADV WINS (cannot finish within lateness 1)
+                  online e r3,8 r2,9: ADV WINS at once (lateness 1 no longer reachable)
+              online r3,8 r2,9: ADV WINS at once (lateness 1 no longer reachable)
+          online r1,4:
+            t=3 release: (r3,p3,d8)  -> online has {(3,d8)(2,d9)}
+              online e:
+                t=4 release: (r4,p1,d5)  -> online has {(1,d5)(3,d8)(2,d9)}
+                  online r1,5:
+                    t=5 release: (r5,p1,d9)  -> online has {(3,d8)(1,d9)(2,d9)}  ADV WINS (cannot finish within lateness 1)
+                  online e r3,8 r2,9: ADV WINS at once (lateness 1 no longer reachable)
+              online r3,8:
+                t=4 release: (r4,p1,d5)  -> online has {(1,d5)(2,d8)(2,d9)} lock(2,d8)
+                  online e:
+                    t=5 release: (r5,p1,d9)  -> online has {(1,d5)(2,d8)(1,d9)(2,d9)}  ADV WINS (cannot finish within lateness 1)
+                  online r2,8: ADV WINS at once (lateness 1 no longer reachable)
+              online r2,9:
+                t=4 release: nothing  -> online has {(3,d8)(1,d9)} lock(1,d9)
+                  online e:
+                    t=5 release: (r5,p1,d8)  -> online has {(1,d8)(3,d8)(1,d9)}
+                      online r1,8:
+                        t=6 release: (r6,p1,d9)  -> online has {(3,d8)(1,d9)(1,d9)}  ADV WINS (cannot finish within lateness 1)
+                      online r3,8:
+                        t=6 release: (r6,p1,d9)  -> online has {(1,d8)(2,d8)(1,d9)(1,d9)} lock(2,d8)  ADV WINS (cannot finish within lateness 1)
+                      online e r1,9: ADV WINS at once (lateness 1 no longer reachable)
+                  online r1,9:
+                    t=5 release: nothing  -> online has {(3,d8)}
+                      online e:
+                        t=6 release: (r6,p1,d7)  -> online has {(1,d7)(3,d8)}  ADV WINS (cannot finish within lateness 1)
+                      online r3,8:
+                        t=6 release: (r6,p1,d7)  -> online has {(1,d7)(2,d8)} lock(2,d8)  ADV WINS (cannot finish within lateness 1)
+          online r2,9:
+            t=3 release: (r3,p1,d4)  -> online has {(1,d4)(1,d4)(1,d9)} lock(1,d9)  ADV WINS (cannot finish within lateness 1)
+      online r2,9:
+        t=2 release: (r2,p3,d5)  -> online has {(1,d4)(3,d5)(1,d9)} lock(1,d9)  ADV WINS (cannot finish within lateness 1)

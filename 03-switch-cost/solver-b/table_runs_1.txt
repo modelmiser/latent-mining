@@ -1,0 +1,8 @@
+P=4 T=4 L=0 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=1 ? YES   [postnodes=178 states=709 hsets=102 0.0s]
+P=4 T=3 L=0 promise=F oncost=1 maxrel=-1 : adversary forces lateness>=1 ? YES   [postnodes=40 states=33 hsets=14 0.0s]
+P=4 T=6 L=1 promise=F oncost=1 maxrel=-1 : adversary forces lateness>=2 ? YES   [postnodes=6825 states=5883 hsets=429 0.0s]
+P=4 T=9 L=2 promise=F oncost=1 maxrel=-1 : adversary forces lateness>=3 ? no   [postnodes=1598208 states=948887 hsets=16796 6.6s]
+P=4 T=10 L=2 promise=F oncost=1 maxrel=-1 : adversary forces lateness>=3 ? YES   [postnodes=7908112 states=4745520 hsets=58786 51.8s]
+P=3 T=5 L=1 promise=F oncost=1 maxrel=-1 : adversary forces lateness>=2 ? no   [postnodes=1440 states=1189 hsets=132 0.0s]
+P=2 T=4 L=0 promise=S oncost=1 maxrel=-1 : adversary forces lateness>=1 ? YES   [postnodes=169 states=370 hsets=95 0.0s]
+P=2 T=3 L=0 promise=F oncost=1 maxrel=-1 : adversary forces lateness>=1 ? YES   [postnodes=40 states=33 hsets=14 0.0s]

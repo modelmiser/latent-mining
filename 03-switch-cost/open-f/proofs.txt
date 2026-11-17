@@ -1,0 +1,156 @@
+FREE-PROMISE GAME:  F_T(P) = P-1  for every P >= 2 and every T >= P(P+1)/2        (open-f)
+=========================================================================================
+
+Status tags:  COMPLETE = hand proof valid for all P;  COMPUTED = exhaustive play of the fixed
+rule against every scheduler, for the stated P only;  NOT PROVED.
+
+Conventions.  Tick t occupies the time interval [t, t+1).  "Empty tick" = idle or switch tick.
+A run tick of job B directly after a run tick of a different job A is illegal while A is
+unfinished (the tick before B's unit would have to be a switch tick).  This is the only
+property of the machine the lower-bound proofs use.
+
+-----------------------------------------------------------------------------------------
+THEOREM A (staircase adversary).   F_T(P) >= P-1 for all P >= 2, T >= P(P+1)/2.   COMPLETE
+With the known upper bound F_T(P) <= P-1 (solver-a/solver-b Theorem 1, non-preemptive EDF;
+I re-read that proof and rely on it, I did not re-derive it): F_T(P) = P-1 for
+T >= P(P+1)/2, so F(P) = P-1.
+-----------------------------------------------------------------------------------------
+THE RULE.  Put T = P(P+1)/2.  Jobs J_1, ..., J_{P-1} with length |J_j| = j+1 (so 2,3,...,P)
+and one unit job u.  Constants
+        L_j = sum_{i=j+1}^{P-1} (i+1) + 1        (0 <= j <= P-1),
+so L_0 = T, L_{P-1} = 1, and L_{j-1} - L_j = j+1 = |J_j|.
+   s_0 = 0.   At tick 0 release J_1 = (0, 2, T).
+   For j = 1, ..., P-1 let a_j be the tick in which the scheduler runs the FIRST unit of J_j.
+        s_j = a_j + 1             if a_j <= s_{j-1} + j        ("level j is timely")
+        s_j = s_{j-1} + j + 1     otherwise                    ("level j is a stall":
+                                   J_j is not run in any of the j+1 ticks s_{j-1}..s_{j-1}+j)
+   At tick s_j release  J_{j+1} = (s_j, j+2, s_j + L_j)   if j <= P-2,
+                        u       = (s_j, 1,   s_j + 1)     if j  = P-1.
+   Nothing else is ever released: P jobs, total work T, one job per release.
+The rule is online: s_j is known at tick s_j from the scheduler's ticks < s_j.
+Write D_j = s_j + L_j and W_j = [s_j, D_j]  ("window j"); D_0 = T, W_{P-1} = [s_{P-1}, s_{P-1}+1].
+"W_j-jobs" = J_{j+1}, ..., J_{P-1}, u  = exactly the jobs released at ticks >= s_j.
+
+(1) Facts about the s_j.   1 <= s_j - s_{j-1} <= j+1  (J_j is released at s_{j-1}, so
+a_j >= s_{j-1}).  Hence D_j - D_{j-1} = (s_j - s_{j-1}) - (j+1) <= 0: the windows are nested,
+W_0 > W_1 > ... > W_{P-1}, and every W_j-job has release >= s_j and deadline <= D_j.
+The W_j-jobs have total work exactly L_j = D_j - s_j.
+
+(2) Legality and promise.   J_{j+1} has length j+2 <= P, release s_j, and
+s_j + (j+2) <= s_j + L_j = D_j <= T because L_j >= (j+2) + 1.  u has deadline s_{P-1}+1 =
+D_{P-1} <= T, so s_{P-1} <= T-1 < T.  Hindsight schedule (preemptive, switch cost 0) after the
+release at s_m: for i < m run J_{i+1} in the ticks of W_i that are not in W_{i+1}, i.e. in
+[s_i, s_{i+1}) and [D_{i+1}, D_i); that is (s_{i+1}-s_i) + (D_i - D_{i+1}) = L_i - L_{i+1} =
+i+2 = |J_{i+1}| ticks, all inside [release, deadline] of J_{i+1}.  Run the newest job (J_{m+1},
+or u) in the first ticks of W_m (it fits: L_m >= its length).  These tick sets are disjoint.
+So every release keeps the free promise.
+
+(3) Saturation lemma.   Fix any scheduler and any i in 0..P-1.  Let C_i be the completion time
+of the last W_i-job and
+        delta_i = number of ticks in [s_i, C_i) that are NOT run ticks of W_i-jobs.
+All units of W_i-jobs are run at ticks >= s_i, exactly L_i of them, so
+C_i = s_i + L_i + delta_i = D_i + delta_i.  The job completing at C_i has deadline <= D_i,
+so its lateness is >= delta_i.
+        max lateness >= max_i delta_i.
+
+(4) Lock lemma.   Let level j be timely.  At time s_j exactly one unit of J_j has been run (in
+tick a_j = s_j - 1) and j units remain.  Let x_j be the first tick >= s_j that is not a run tick
+of J_j.  Then either
+   (F_j) x_j = s_j + j: the ticks s_j, ..., s_j+j-1 all run J_j (J_j finishes at s_j + j); or
+   (S_j) x_j <= s_j + j - 1, J_j is unfinished at x_j, and tick x_j is EMPTY (it cannot run
+         another job: tick x_j - 1 is a run tick of the unfinished job J_j, not a switch tick).
+In both cases no W_j-job has run a unit before tick x_j (they are released at >= s_j, and
+ticks s_j..x_j-1 run J_j), so every tick in [s_j, x_j] is < C_j <= C_i for all i <= j.
+Ordering: if levels j and j+1 are both timely then a_{j+1} >= s_j is a tick not running J_j,
+so a_{j+1} >= x_j; in case (S_j) x_j is empty so x_j < a_{j+1} < s_{j+1} <= x_{j+1}; in case
+(F_j) s_{j+1} = a_{j+1}+1 >= s_j + j + 1.
+
+(5) Proof of the theorem.  Suppose some scheduler keeps every lateness <= P-2.  By (3),
+delta_i <= P-2 for all i.  Downward induction on j = P-1, P-2, ..., 1 with the statement
+        H(j): levels j, j+1, ..., P-1 are all timely and all of type (S).
+Assume H(j+1) (empty statement for j = P-1).  It gives empty ticks x_{j+1} < ... < x_{P-1},
+all >= s_{j+1} > s_j, and x_m < C_m <= C_i for i <= m; so each of these P-1-j ticks is counted
+in delta_i for every i <= j+1.
+ (a) Level j is not a stall.  If it were, the j+1 ticks s_{j-1}, ..., s_{j-1}+j = s_j - 1 run
+     no W_{j-1}-job (J_j is not run, and J_{j+1},...,u are released at >= s_j); they are
+     < C_{j-1} because J_j is still unstarted.  With the P-1-j empty ticks above (all >= s_j):
+     delta_{j-1} >= (j+1) + (P-1-j) = P.  Contradiction.
+ (b) Level j is not of type (F).  If j = P-1: u = (s,1,s+1) with s = s_{P-1}, and ticks
+     s, ..., s+P-2 run J_{P-1}, so u completes at >= s+P: lateness >= P-1.  Contradiction.
+     If j <= P-2: the j ticks s_j..s_j+j-1 run J_j, which is not a W_j-job, and are < C_j.
+     The empty ticks x_{j+1}, ..., x_{P-1} are >= s_{j+1} >= s_j + j + 1 (by (4), level j+1 is
+     timely), hence different from those j ticks.  delta_j >= j + (P-1-j) = P-1.  Contradiction.
+ So level j is timely of type (S): H(j).
+H(1) gives P-1 distinct empty ticks x_1 < ... < x_{P-1}, all >= s_1 > 0 and < C_0.  So
+delta_0 >= P-1, contradiction.  Hence every scheduler has a job with lateness >= P-1.    QED
+
+Remark (what the rule is doing).  When the scheduler has run the first unit of J_j it is
+locked on a job with j units left, and the adversary opens a new saturated window that does not
+contain J_j.  Finishing J_j costs j ticks in the new window; leaving it costs one empty tick in
+every window opened so far.  The last job has length P, so finishing it makes the tight unit
+job P-1 late.  Counting backwards from the last level, every level must have paid an empty tick,
+and P-1 empty ticks in the saturated outer window [0,T] is lateness P-1.  A stall (refusing to
+start J_j for j+1 ticks) is worse for the scheduler than either choice.
+The shape is not the induction "P uses the adversary for P-1 inside a longer job's lock" that
+the brief suggested; it is one chain of nested windows, and the induction runs over the levels
+of a single play (from the innermost level outwards).
+
+Corollary A'.  F_T(P) >= min(P-1, k) whenever T >= (k+1)(k+2)/2.               COMPLETE
+(Theorem A for P' = k+1 <= P and monotonicity in P and T: the same jobs are legal.)
+This matches every entry of solver-a/tables.txt for the free promise (MODE=0), P <= 4.
+
+-----------------------------------------------------------------------------------------
+THEOREM B (simple adversary, larger horizon).  F_T(P) >= P-1 for T >= P^2 - 1.    COMPLETE
+(Superseded by Theorem A; kept because the argument is three lines and independent.)
+-----------------------------------------------------------------------------------------
+N = P-1, T = N(P+1).  At tick 0 release N jobs B_1..B_N = (0, P, T).  Whenever the scheduler runs
+the first unit of some B_i, in tick a_i, release u_i = (a_i + 1, 1, a_i + 2).  If the number of
+empty ticks reaches P-1 at a time tau when some B_i is still unstarted, release
+T - (work released so far) unit jobs (tau, 1, T) and stop.
+ Trap: let x_i be the first tick after a_i that does not run B_i.  If B_i is finished at x_i
+ then u_i completes >= a_i + P + 1: lateness >= P-1.  Otherwise x_i is an empty tick.  For
+ a_i < a_k, a_k is a tick after a_i not running B_i, so x_i < a_k < x_k: the x_i are distinct.
+ So either some u_i is P-1 late or there are P-1 empty ticks while work is pending; total work
+ is T and all deadlines are <= T, so the last completion is >= T + P - 1.
+ Timing: before a_N the scheduler has run at most (N-1)(P+1) units and (else we stopped) at most
+ P-2 empty ticks, so a_N <= T-3 and u_N is legal; in the early-stop case
+ tau <= (N-1)P + k + (P-1) < NP + k <= work released (k = traps sprung), which is exactly the
+ condition for the fillers to be feasible (demand in [s,T] <= T - s for all s).
+ Promise: unit jobs sit in distinct ticks, the B_i have r = 0, d = T, total work <= T.
+
+-----------------------------------------------------------------------------------------
+IS P(P+1)/2 THE SMALLEST HORIZON?                                   NOT PROVED for general P
+-----------------------------------------------------------------------------------------
+Theorem A shows P(P+1)/2 suffices.  That no smaller T works is known only from the earlier
+solvers' exhaustive tables: F_2(2) = 0, F_5(3) = 1, F_9(4) = 2 (so the threshold is exact for
+P = 2, 3, 4, if those tables are right; I did not re-run them).  A proof for general P needs a
+scheduler strategy holding lateness <= P-2 for T < P(P+1)/2; I have none.
+
+-----------------------------------------------------------------------------------------
+COMPUTED checks (harness.py, rules.py; logs stair.log, controls.log, simple_*.log)
+-----------------------------------------------------------------------------------------
+Results (value = smallest L for which SOME scheduler keeps all lateness <= L):
+  staircase, T = P(P+1)/2:  P=2 T=3 value 1;  P=3 T=6 value 2;  P=4 T=10 value 3;
+                            P=5 T=15 value 4;  P=6 T=21 value 5   (1,095,815 states at L=4).
+                            P=7 (T=28): NOT COMPUTED, the run hit the 1500 s limit.
+  simple, T = P^2-1:        P=2,3,4 (no symmetry reduction) and P=5 (T=24, with the reduction
+                            "identical unlocked jobs are interchangeable"): value P-1.
+                            P=6 did not finish in 600 s.
+  negative controls (all detected):
+    null adversary (one job)                      value 0
+    two tight unit jobs at tick 0                 promise violation raised
+    staircase without the stall rule              illegal job raised (deadline > T) on the line
+                                                  where the scheduler refuses to start a job
+    staircase without u                           value 0,1,2,3 for P=3..6
+    staircase, last job of length P-1             value P-2 for P=3..6
+    staircase, every window one tick too long     value P-2 for P=3..6 (T+1 with slack fails)
+    simple rule with P-2 long jobs                value P-2 for P=3,4,5
+    ("staircase/short" in controls.log is a mis-built variant, its stall timing does not match
+     its job lengths; it raises an illegal-job error and shows nothing beyond that.)
+The harness plays the fixed rule
+against every scheduler (run / idle / switch, unsimplified machine), memoised on
+(tick, adversary state, jobs, remaining work, last-run job, switch flag), checks every released
+job for legality and re-tests the free promise after every single release by an EDF simulation of
+ALL jobs released so far from tick 0.  The EDF test agreed with an independent brute force on
+20000 random instances (14000 feasible, 6000 infeasible).
+"value" = smallest L for which some scheduler keeps all lateness <= L.

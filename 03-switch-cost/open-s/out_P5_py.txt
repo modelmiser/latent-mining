@@ -1,0 +1,2 @@
+P=5 DELTA=60 T=80 variant=ok : ADVERSARY WINS against every scheduler (lateness >= 4)
+   {'nodes': 20830663, 'maxcash': 45, 'maxrel': 45, 'wins_fork': 131296, 'wins_cash0': 205733, 'wins_cash1': 9762720, 'early': 278825, 'maxlate_seen': 0}

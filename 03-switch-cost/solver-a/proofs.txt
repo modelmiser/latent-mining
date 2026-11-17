@@ -1,0 +1,127 @@
+PROOFS AND THEIR STATUS  (solver-a)
+====================================
+
+Notation. A job is (r,p,d). "Free-feasible" = feasible for ordinary preemptive scheduling.
+"Same-cost-feasible" = feasible on the switch-cost-1 machine. Completion time C_j = index of
+the tick after the job's last unit.
+
+--------------------------------------------------------------------------------------------
+THEOREM 1 (upper bound, all T, all P).   S_T(P) <= F_T(P) <= P-1.        STATUS: COMPLETE
+--------------------------------------------------------------------------------------------
+Rule NP-EDF: if some job has been started and is unfinished, run it. Otherwise, if some
+released unfinished job exists, start the one with the earliest deadline (ties arbitrary).
+Idle only when no released unfinished job exists. The rule never needs a switch tick, because
+a different job is only ever started when the last job run is finished (or nothing has run).
+
+Claim: if the released multiset is free-feasible at the end, every job has C_j <= d_j + P - 1.
+Proof. Fix a job j with C_j > d_j. Let s be the last tick in [0, C_j) that is either idle or
+runs a unit of a job whose deadline is > d_j; s = -1 if there is none. Every tick in
+(s, C_j) runs a unit of a job with deadline <= d_j. Let Q be the set of jobs having a unit
+in (s, C_j). Jobs are run without interruption, one after another, and j's last unit is tick
+C_j - 1, so every job of Q has ALL its units inside (s, C_j) (a job of Q cannot have a unit
+at a tick <= s: tick s is idle or belongs to a job of later deadline, and jobs run contiguously).
+Hence work(Q) = C_j - s - 1.
+ Case s = -1: all of Q has release >= 0 and deadline <= d_j, so free feasibility gives
+   work(Q) <= d_j, i.e. C_j <= d_j. Contradiction.
+ Case tick s idle: the rule idles only when no released unfinished job exists, so every job
+   of Q has release >= s+1 and deadline <= d_j; feasibility gives work(Q) <= d_j - s - 1,
+   i.e. C_j <= d_j. Contradiction.
+ Case tick s runs a unit of job k with d_k > d_j: tick s+1 runs a different job, so tick s is
+   k's last unit, and k was started at tick a = s - p_k + 1, at which moment no job was in
+   progress and the rule chose k as an earliest-deadline released unfinished job. A job i of Q
+   has d_i <= d_j < d_k and is unfinished at tick a, so it was not yet released at tick a
+   (release happens before the scheduler's choice, so r_i <= a would contradict the choice):
+   r_i >= a+1. Feasibility: work(Q) <= d_j - a - 1. So
+   C_j = s + 1 + work(Q) <= d_j + s - a = d_j + p_k - 1 <= d_j + P - 1.                 QED
+The claim uses only free feasibility of the final multiset, so F_T(P) <= P-1 for every T.
+S_T <= F_T: a same-cost hindsight schedule, with its switch ticks read as idle ticks, is a
+valid preemptive schedule, so every release legal under the same-cost promise is legal under
+the free promise; the adversary of the S game has a subset of the F adversary's strategies and
+the payoff is the same function of the play.                                              QED
+
+--------------------------------------------------------------------------------------------
+LEMMA 2 (monotonicity).  S_T(P), F_T(P) are nondecreasing in T and in P.   STATUS: COMPLETE
+--------------------------------------------------------------------------------------------
+Every job legal for (P,T) is legal for (P,T+1) and (P+1,T); the promise and the payoff do not
+mention P or T. So the adversary keeps all its strategies. With Theorem 1 the limits exist and
+a value P-1 reached at some T is final for all larger T.
+
+--------------------------------------------------------------------------------------------
+THEOREM 3.  S_4(2) >= 1, hence S(2) = F(2) = 1.                 STATUS: COMPLETE (by hand)
+--------------------------------------------------------------------------------------------
+Adversary, T = 4. Tick 0: release X = (0,2,4).
+ (a) Scheduler runs X in tick 0. Tick 1: release U = (1,1,2). Promise: idle, U, X, X.
+     X is unfinished, so U cannot run in tick 1 (no switch tick precedes it); U completes at
+     time >= 3 > 2.
+ (b) Scheduler does not run X in tick 0. Release nothing at tick 1.
+   (b1) runs X in tick 1. Tick 2: release U = (2,1,3). Promise: X, X, U. X is unfinished, so
+        U cannot run in tick 2; U completes >= 4 > 3.
+   (b2) does not run X in tick 1. Release nothing at tick 2.
+        runs X in tick 2: tick 3 release V = (3,1,4); promise: X, X, idle, V. Two units remain
+        (one of X, V) from time 3, both due at 4: one completes >= 5.
+        does not run X in tick 2: X completes >= 5 > 4.
+(F_3(2) >= 1 the same way with X = (0,2,3), U = (1,1,2); promise X,U,X.)
+
+--------------------------------------------------------------------------------------------
+THEOREM 4.  S_9(3) >= 2, S_16(4) >= 3, F_6(3) >= 2, F_10(4) >= 3.
+            Hence S(3) = F(3) = 2 and S(4) = F(4) = 3.
+            STATUS: COMPLETE AS A COMPUTER-CHECKED FINITE CERTIFICATE (not a human-readable proof)
+--------------------------------------------------------------------------------------------
+Each bound is an explicit finite adversary strategy tree (files strat_S_P3_T9.txt,
+strat_S_P4_T16.txt, strat_F_P3_T6.txt, strat_F_P4_T10.txt; also strat_S_P4_T9.txt for
+S_9(4) >= 2). verify.cpp, which shares no code with the solver, replays every legal scheduler
+action sequence against the tree and checks (1) each released job is legal, (2) after each
+release the whole released list is feasible, by brute-force search over hindsight schedules
+from tick 0 on the full job list, (3) each play ends with a job that cannot finish by d+L.
+The checker was watched failing on four corrupted inputs (see checks.txt).
+Combined with Theorem 1 and Lemma 2 the values are exact for all T >= 9 / 16 / 6 / 10.
+
+--------------------------------------------------------------------------------------------
+LEMMA D (dominance of hindsight states; used ONLY to speed up the solver, option DOM=1)
+            STATUS: COMPLETE, but see the note on what depends on it
+--------------------------------------------------------------------------------------------
+A hindsight state is (multiset of unfinished jobs as (remaining, deadline), the job A last run
+if unfinished, flag "previous tick was a switch tick"). Say h1 dominates h2 if there is an
+injection phi from the jobs of h1 to the jobs of h2 preserving deadlines with rem1 <= rem2, and
+   (i) h1 has no unfinished A, or (ii) flag1 = 1, or
+   (iii) h2 has an unfinished A2, phi(A1) = A2 and flag1 >= flag2.
+Claim: for every sequence of future releases, if h2 can complete everything on time, so can h1.
+Proof (simulation, keeping the relation after every tick; added jobs are matched to
+themselves). h2 runs a unit of job y:
+   if y = phi(x) and x still has work: h1 runs x. This is legal: in (i) anything is legal, in
+   (ii) the flag licenses it, in (iii) either y = A2 and x = A1, or h2 used flag2 = 1 so
+   flag1 = 1. Afterwards x is h1's A (or finished -> (i)), y is h2's A, phi(x) = y, flags 0: (iii)/(i).
+   if y has no partner with work left: in (i) h1 idles (stays (i)); in (ii) h1 spends another
+   switch tick (stays (ii)); in (iii) with y = A2 the partner A1 has work (it is unfinished),
+   so this sub-case cannot occur; in (iii) with y != A2, flag2 = 1 = flag1 and that is case (ii).
+ h2 idles: h1 idles in (i),(iii) (flags become 0; (iii) kept), spends a switch tick in (ii).
+ h2 spends a switch tick: h1 does too (in (i) it idles); (iii) kept with both flags 1.
+ rem1 <= rem2 is preserved, so h1 finishes every job no later than h2 finishes its partner. QED
+Repeated switch ticks are legal ("in each tick it does exactly one of ..."), which the proof uses.
+Consequence: deleting dominated states from the set of viable hindsight states does not change
+which future releases are legal.
+What depends on Lemma D: only the entries S_8(4) = 1 (exhaustive run needed DOM=1 to fit in
+memory) and the SEARCH that found the P=4, T=16 strategy (the strategy itself is verified
+without it). All other table entries were computed with DOM off; DOM on/off agree on every
+size where both ran (P=3 T<=8, P=2 T<=8, P=4 T<=7), and the promise machinery with DOM on and
+off was compared against brute-force feasibility on ~0.5M-1M job lists with 0 mismatches.
+
+--------------------------------------------------------------------------------------------
+CONJECTURE 5.  S(P) = F(P) = P-1 for every P >= 1.             STATUS: CONJECTURE (no proof)
+--------------------------------------------------------------------------------------------
+Proved for P <= 4 (Theorems 1, 3, 4). For P >= 5 only the upper bound P-1 is proved; the lower
+bounds I can prove are S(P) >= S(4) = 3 and F(P) >= 3 (Lemma 2).
+Observed first horizons: F reaches P-1 at T = 3, 6, 10 (= P(P+1)/2, exact for P = 2,3,4);
+S reaches P-1 at T = 4, 9 (= P^2, exact for P = 2,3) and at some T in [9..16] for P = 4
+(T = 16 works; T <= 8 does not; T = 9..15 gives 2 <= S_T(4) <= 3, undecided).
+SKETCH of the mechanism seen in all the S witnesses (NOT a proof): a "decoy" job with the
+latest deadline is released first. If the scheduler runs it, a package of earlier-deadline work
+is released one tick later that exactly fills an inner window for a hindsight schedule that
+idled in tick 0; the scheduler is blocked for a tick (it must finish or switch away from the
+decoy), so it enters the inner window one tick behind, and the inner window replays the
+argument one level down with tight unit jobs released just after the scheduler commits to a
+long job. If the scheduler declines the decoy, the hindsight schedule "did run it", and the
+decoy itself becomes package work the scheduler is behind on. The hindsight schedule pays for
+its flexibility with idle ticks OUTSIDE the window in which the scheduler is being squeezed,
+which is why the same-cost promise costs the adversary horizon (P^2 instead of P(P+1)/2) but,
+for P <= 4, no value. I did not turn this into an induction.

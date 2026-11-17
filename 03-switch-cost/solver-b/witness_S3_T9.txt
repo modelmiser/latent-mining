@@ -1,0 +1,567 @@
+# adversary strategy forcing lateness >= 2, P=3 T=9 promise=S (deadlines shown are the TRUE deadlines d)
+t=0 release: (r0,p2,d9)  online now {(2,d9)}
+  online empty:
+    t=1 release: nothing  online now {(2,d9)}
+      online empty:
+        t=2 release: nothing  online now {(2,d9)}
+          online empty:
+            t=3 release: (r3,p1,d4)  online now {(1,d4)(2,d9)}
+              online empty:
+                t=4 release: nothing  online now {(1,d4)(2,d9)}
+                  online empty -> a job can no longer make d+1: adversary wins
+                  online run(1,d4):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(1,d6)(2,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(1,d6):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> a job can no longer make d+1: adversary wins
+                      online run(1,d6):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                      online run(2,d9) -> state {(1,d6)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                  online run(2,d9) -> a job can no longer make d+1: adversary wins
+              online run(1,d4):
+                t=4 release: (r4,p1,d5)  online now {(1,d5)(2,d9)}
+                  online empty:
+                    t=5 release: nothing  online now {(1,d5)(2,d9)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                      online run(2,d9) -> a job can no longer make d+1: adversary wins
+                  online run(1,d5):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(1,d6)(2,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(1,d6):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> a job can no longer make d+1: adversary wins
+                      online run(1,d6):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                      online run(2,d9) -> state {(1,d6)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                  online run(2,d9) -> state {(1,d5)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+              online run(2,d9) -> state {(1,d4)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+          online run(2,d9):
+            t=3 release: (r3,p3,d9)  online now {(1,d9)(3,d9)} lock(1,d9)
+              online empty:
+                t=4 release: nothing  online now {(1,d9)(3,d9)}
+                  online empty:
+                    t=5 release: nothing  online now {(1,d9)(3,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(1,d9)(3,d9)}
+                          online empty -> state {(1,d9)(3,d9)} cannot be finished within lateness 1: adversary wins
+                          online run(1,d9):
+                            t=7 release: nothing  online now {(3,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(3,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)} lock(2,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(3,d9):
+                            t=7 release: nothing  online now {(1,d9)(2,d9)} lock(2,d9)
+                              online empty -> state {(1,d9)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(2,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(1,d9)(1,d9)} lock(1,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                      online run(1,d9):
+                        t=6 release: nothing  online now {(3,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(3,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(3,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)} lock(2,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(3,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)} lock(2,d9)
+                              => online cannot finish all within lateness 1: adversary wins
+                      online run(3,d9):
+                        t=6 release: nothing  online now {(1,d9)(2,d9)} lock(2,d9)
+                          online empty:
+                            t=7 release: nothing  online now {(1,d9)(2,d9)}
+                              online empty -> state {(1,d9)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(1,d9)(1,d9)} lock(1,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(2,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(1,d9)(1,d9)} lock(1,d9)
+                              online empty -> state {(1,d8)(1,d9)(1,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                  online run(1,d9):
+                    t=5 release: nothing  online now {(3,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(3,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(3,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(3,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)} lock(2,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(3,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)} lock(2,d9)
+                              => online cannot finish all within lateness 1: adversary wins
+                      online run(3,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d9)} lock(2,d9)
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                  online run(3,d9):
+                    t=5 release: nothing  online now {(1,d9)(2,d9)} lock(2,d9)
+                      online empty:
+                        t=6 release: nothing  online now {(1,d9)(2,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(1,d9)(2,d9)}
+                              online empty -> state {(1,d9)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(1,d9)(1,d9)} lock(1,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(1,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(1,d9)(1,d9)} lock(1,d9)
+                              online empty -> state {(1,d8)(1,d9)(1,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(1,d9)(1,d9)} lock(1,d9)
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(1,d9)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d8) -> a job can no longer make d+1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+              online run(1,d9):
+                t=4 release: nothing  online now {(3,d9)}
+                  online empty:
+                    t=5 release: nothing  online now {(3,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(3,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(3,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(3,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)} lock(2,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(3,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)} lock(2,d9)
+                              => online cannot finish all within lateness 1: adversary wins
+                      online run(3,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d9)} lock(2,d9)
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                  online run(3,d9):
+                    t=5 release: (r5,p1,d7)  online now {(1,d7)(2,d9)} lock(2,d9)
+                      online empty:
+                        t=6 release: nothing  online now {(1,d7)(2,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                      online run(2,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(1,d7)(1,d9)} lock(1,d9)
+                          => online cannot finish all within lateness 1: adversary wins
+      online run(2,d9):
+        t=2 release: (r2,p1,d3)  online now {(1,d3)(1,d9)} lock(1,d9)
+          online empty:
+            t=3 release: (r3,p1,d4)  online now {(1,d3)(1,d4)(1,d9)}
+              online empty -> a job can no longer make d+1: adversary wins
+              online run(1,d3):
+                t=4 release: (r4,p1,d5)  online now {(1,d4)(1,d5)(1,d9)}
+                  online empty -> a job can no longer make d+1: adversary wins
+                  online run(1,d4):
+                    t=5 release: (r5,p1,d6)  online now {(1,d5)(1,d6)(1,d9)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: (r6,p1,d7)  online now {(1,d6)(1,d7)(1,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(1,d6):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d8) -> a job can no longer make d+1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7) -> a job can no longer make d+1: adversary wins
+                          online run(1,d9) -> a job can no longer make d+1: adversary wins
+                      online run(1,d6) -> a job can no longer make d+1: adversary wins
+                      online run(1,d9) -> a job can no longer make d+1: adversary wins
+                  online run(1,d5) -> a job can no longer make d+1: adversary wins
+                  online run(1,d9) -> a job can no longer make d+1: adversary wins
+              online run(1,d4) -> a job can no longer make d+1: adversary wins
+              online run(1,d9) -> a job can no longer make d+1: adversary wins
+          online run(1,d9):
+            t=3 release: (r3,p3,d9)  online now {(1,d3)(3,d9)}
+              online empty -> a job can no longer make d+1: adversary wins
+              online run(1,d3):
+                t=4 release: nothing  online now {(3,d9)}
+                  online empty:
+                    t=5 release: nothing  online now {(3,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(3,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(3,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(3,d9):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)} lock(2,d9)
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(3,d9):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)} lock(2,d9)
+                              => online cannot finish all within lateness 1: adversary wins
+                      online run(3,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d9)} lock(2,d9)
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                  online run(3,d9):
+                    t=5 release: (r5,p1,d7)  online now {(1,d7)(2,d9)} lock(2,d9)
+                      online empty:
+                        t=6 release: nothing  online now {(1,d7)(2,d9)}
+                          online empty:
+                            t=7 release: nothing  online now {(1,d7)(2,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d8)(2,d9)}
+                              online empty -> state {(1,d8)(2,d9)} cannot be finished within lateness 1: adversary wins
+                              online run(1,d8):
+                                t=8 release: (r8,p1,d9)  online now {(1,d9)(2,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(2,d9) -> state {(1,d8)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                          online run(2,d9) -> state {(1,d7)(1,d9)} lock(1,d9) cannot be finished within lateness 1: adversary wins
+                      online run(2,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(1,d7)(1,d9)} lock(1,d9)
+                          => online cannot finish all within lateness 1: adversary wins
+              online run(3,d9) -> a job can no longer make d+1: adversary wins
+  online run(2,d9):
+    t=1 release: (r1,p3,d7)  online now {(3,d7)(1,d9)} lock(1,d9)
+      online empty:
+        t=2 release: nothing  online now {(3,d7)(1,d9)}
+          online empty:
+            t=3 release: nothing  online now {(3,d7)(1,d9)}
+              online empty:
+                t=4 release: nothing  online now {(3,d7)(1,d9)}
+                  online empty:
+                    t=5 release: nothing  online now {(3,d7)(1,d9)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(3,d7):
+                        t=6 release: nothing  online now {(2,d7)(1,d9)} lock(2,d7)
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(2,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)} lock(1,d7)
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                      online run(1,d9) -> a job can no longer make d+1: adversary wins
+                  online run(3,d7):
+                    t=5 release: nothing  online now {(2,d7)(1,d9)} lock(2,d7)
+                      online empty:
+                        t=6 release: nothing  online now {(2,d7)(1,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(2,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)} lock(1,d7)
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(1,d9) -> a job can no longer make d+1: adversary wins
+                      online run(2,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(1,d7)(1,d9)} lock(1,d7)
+                          online empty -> state {(1,d7)(1,d7)(1,d9)} cannot be finished within lateness 1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d8) -> a job can no longer make d+1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+                  online run(1,d9):
+                    t=5 release: nothing  online now {(3,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(3,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)} lock(2,d7)
+                          => online cannot finish all within lateness 1: adversary wins
+              online run(3,d7):
+                t=4 release: nothing  online now {(2,d7)(1,d9)} lock(2,d7)
+                  online empty:
+                    t=5 release: nothing  online now {(2,d7)(1,d9)}
+                      online empty:
+                        t=6 release: nothing  online now {(2,d7)(1,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(2,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)} lock(1,d7)
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(1,d9) -> a job can no longer make d+1: adversary wins
+                      online run(2,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(1,d7)(1,d9)} lock(1,d7)
+                          online empty -> state {(1,d7)(1,d7)(1,d9)} cannot be finished within lateness 1: adversary wins
+                          online run(1,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d8) -> a job can no longer make d+1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+                      online run(1,d9):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)}
+                          => online cannot finish all within lateness 1: adversary wins
+                  online run(2,d7):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(1,d7)(1,d9)} lock(1,d7)
+                      online empty:
+                        t=6 release: nothing  online now {(1,d6)(1,d7)(1,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(1,d6):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d8) -> a job can no longer make d+1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7) -> a job can no longer make d+1: adversary wins
+                          online run(1,d9) -> a job can no longer make d+1: adversary wins
+                      online run(1,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d6)(1,d7)(1,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(1,d6):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)}
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                              online run(1,d8) -> a job can no longer make d+1: adversary wins
+                              online run(1,d9) -> a job can no longer make d+1: adversary wins
+                          online run(1,d7) -> a job can no longer make d+1: adversary wins
+                          online run(1,d9) -> a job can no longer make d+1: adversary wins
+              online run(1,d9):
+                t=4 release: nothing  online now {(3,d7)}
+                  online empty:
+                    t=5 release: nothing  online now {(3,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(3,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)} lock(2,d7)
+                          => online cannot finish all within lateness 1: adversary wins
+                  online run(3,d7):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d7)} lock(2,d7)
+                      => online cannot finish all within lateness 1: adversary wins
+          online run(3,d7):
+            t=3 release: (r3,p1,d5)  online now {(1,d5)(2,d7)(1,d9)} lock(2,d7)
+              online empty:
+                t=4 release: nothing  online now {(1,d5)(2,d7)(1,d9)}
+                  online empty:
+                    t=5 release: nothing  online now {(1,d5)(2,d7)(1,d9)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: nothing  online now {(2,d7)(1,d9)}
+                          online empty -> a job can no longer make d+1: adversary wins
+                          online run(2,d7):
+                            t=7 release: (r7,p1,d8)  online now {(1,d7)(1,d8)(1,d9)} lock(1,d7)
+                              online empty -> a job can no longer make d+1: adversary wins
+                              online run(1,d7):
+                                t=8 release: (r8,p1,d9)  online now {(1,d8)(1,d9)(1,d9)}
+                                  => online cannot finish all within lateness 1: adversary wins
+                          online run(1,d9) -> a job can no longer make d+1: adversary wins
+                      online run(2,d7) -> a job can no longer make d+1: adversary wins
+                      online run(1,d9) -> a job can no longer make d+1: adversary wins
+                  online run(1,d5):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d7)(1,d9)}
+                      online empty -> state {(1,d6)(2,d7)(1,d9)} cannot be finished within lateness 1: adversary wins
+                      online run(1,d6):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)(1,d9)}
+                          => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d7) -> state {(1,d6)(1,d7)(1,d9)} lock(1,d7) cannot be finished within lateness 1: adversary wins
+                      online run(1,d9) -> state {(1,d6)(2,d7)} cannot be finished within lateness 1: adversary wins
+                  online run(2,d7) -> state {(1,d5)(1,d7)(1,d9)} lock(1,d7) cannot be finished within lateness 1: adversary wins
+                  online run(1,d9):
+                    t=5 release: nothing  online now {(1,d5)(2,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)}
+                          => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d7) -> a job can no longer make d+1: adversary wins
+              online run(2,d7):
+                t=4 release: (r4,p1,d5)  online now {(1,d5)(1,d5)(1,d7)(1,d9)} lock(1,d7)
+                  => online cannot finish all within lateness 1: adversary wins
+          online run(1,d9):
+            t=3 release: nothing  online now {(3,d7)}
+              online empty:
+                t=4 release: nothing  online now {(3,d7)}
+                  online empty:
+                    t=5 release: nothing  online now {(3,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(3,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)} lock(2,d7)
+                          => online cannot finish all within lateness 1: adversary wins
+                  online run(3,d7):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d7)} lock(2,d7)
+                      => online cannot finish all within lateness 1: adversary wins
+              online run(3,d7):
+                t=4 release: (r4,p1,d5)  online now {(1,d5)(2,d7)} lock(2,d7)
+                  online empty:
+                    t=5 release: nothing  online now {(1,d5)(2,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)}
+                          => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d7) -> a job can no longer make d+1: adversary wins
+                  online run(2,d7) -> state {(1,d5)(1,d7)} lock(1,d7) cannot be finished within lateness 1: adversary wins
+      online run(1,d9):
+        t=2 release: nothing  online now {(3,d7)}
+          online empty:
+            t=3 release: nothing  online now {(3,d7)}
+              online empty:
+                t=4 release: nothing  online now {(3,d7)}
+                  online empty:
+                    t=5 release: nothing  online now {(3,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(3,d7):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)} lock(2,d7)
+                          => online cannot finish all within lateness 1: adversary wins
+                  online run(3,d7):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d7)} lock(2,d7)
+                      => online cannot finish all within lateness 1: adversary wins
+              online run(3,d7):
+                t=4 release: (r4,p1,d5)  online now {(1,d5)(2,d7)} lock(2,d7)
+                  online empty:
+                    t=5 release: nothing  online now {(1,d5)(2,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)}
+                          => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d7) -> a job can no longer make d+1: adversary wins
+                  online run(2,d7) -> state {(1,d5)(1,d7)} lock(1,d7) cannot be finished within lateness 1: adversary wins
+          online run(3,d7):
+            t=3 release: (r3,p1,d5)  online now {(1,d5)(2,d7)} lock(2,d7)
+              online empty:
+                t=4 release: nothing  online now {(1,d5)(2,d7)}
+                  online empty:
+                    t=5 release: nothing  online now {(1,d5)(2,d7)}
+                      online empty -> a job can no longer make d+1: adversary wins
+                      online run(1,d5):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)}
+                          => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d7) -> a job can no longer make d+1: adversary wins
+                  online run(1,d5):
+                    t=5 release: (r5,p1,d6)  online now {(1,d6)(2,d7)}
+                      online empty -> state {(1,d6)(2,d7)} cannot be finished within lateness 1: adversary wins
+                      online run(1,d6):
+                        t=6 release: (r6,p1,d7)  online now {(1,d7)(2,d7)}
+                          => online cannot finish all within lateness 1: adversary wins
+                      online run(2,d7) -> state {(1,d6)(1,d7)} lock(1,d7) cannot be finished within lateness 1: adversary wins
+                  online run(2,d7) -> state {(1,d5)(1,d7)} lock(1,d7) cannot be finished within lateness 1: adversary wins
+              online run(2,d7):
+                t=4 release: (r4,p1,d5)  online now {(1,d5)(1,d5)(1,d7)} lock(1,d7)
+                  => online cannot finish all within lateness 1: adversary wins

@@ -1,0 +1,89 @@
+## online switch cost 0 => value must be 0
+VALUE P=3 T=6 MODE=0 OC=0 MAXJ=-1 POL=0 : 0
+VALUE P=3 T=6 MODE=1 OC=0 MAXJ=-1 POL=0 : 0
+VALUE P=4 T=7 MODE=0 OC=0 MAXJ=-1 POL=0 : 0
+VALUE P=4 T=6 MODE=1 OC=0 MAXJ=-1 POL=0 : 0
+## free promise via frontier machinery (MODE 2) must equal MODE 0 (EDF): expect 1 2 2
+VALUE P=3 T=5 MODE=2 OC=1 MAXJ=-1 POL=0 : 1
+VALUE P=3 T=6 MODE=2 OC=1 MAXJ=-1 POL=0 : 2
+VALUE P=3 T=7 MODE=2 OC=1 MAXJ=-1 POL=0 : 2
+## dominance reduction on (DOM=1), exhaustive: must equal tables.txt
+VALUE P=3 T=5 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+VALUE P=3 T=6 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+VALUE P=3 T=7 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+VALUE P=3 T=8 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+VALUE P=4 T=7 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+VALUE P=2 T=8 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+## exhaustive S_8(4) (needs DOM=1 for memory)
+VALUE P=4 T=8 MODE=1 OC=1 MAXJ=-1 POL=0 : 1
+## promise machinery vs brute-force feasibility (verify feas)
+mode=1 DOM=0: feasibility cross-check P=3 T=6 promise=same-cost: 483997 job lists (147504 feasible), 0 mismatches
+mode=1 DOM=1: feasibility cross-check P=3 T=6 promise=same-cost: 483997 job lists (147504 feasible), 0 mismatches
+mode=0 DOM=0: feasibility cross-check P=3 T=6 promise=free: 530719 job lists (159318 feasible), 0 mismatches
+mode=1 DOM=1: feasibility cross-check P=4 T=7 promise=same-cost: 623153 job lists (274466 feasible), 0 mismatches
+## a deliberately bad scheduler is caught: NP-EDF (POL 2) and never-switch (POL 3) where the optimum is 1
+VALUE P=3 T=5 MODE=1 OC=1 MAXJ=-1 POL=2 : 2
+VALUE P=3 T=5 MODE=1 OC=1 MAXJ=-1 POL=3 : 2
+VALUE P=3 T=5 MODE=0 OC=1 MAXJ=-1 POL=3 : 2
+## NP-EDF never exceeds P-1 (all adversaries)
+VALUE P=3 T=7 MODE=1 OC=1 MAXJ=-1 POL=2 : 2
+VALUE P=3 T=8 MODE=0 OC=1 MAXJ=-1 POL=2 : 2
+VALUE P=4 T=8 MODE=0 OC=1 MAXJ=-1 POL=2 : 3
+VALUE P=2 T=8 MODE=0 OC=1 MAXJ=-1 POL=2 : 1
+## scheduler forbidden to idle with work pending (POL 1): same values as tables.txt
+VALUE P=3 T=3 MODE=0 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=4 MODE=0 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=5 MODE=0 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=6 MODE=0 OC=1 MAXJ=-1 POL=1 : 2
+VALUE P=3 T=7 MODE=0 OC=1 MAXJ=-1 POL=1 : 2
+VALUE P=3 T=8 MODE=0 OC=1 MAXJ=-1 POL=1 : 2
+VALUE P=3 T=4 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=5 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=6 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=7 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=3 T=8 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=4 T=3 MODE=0 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=4 T=6 MODE=0 OC=1 MAXJ=-1 POL=1 : 2
+VALUE P=4 T=8 MODE=0 OC=1 MAXJ=-1 POL=1 : 2
+VALUE P=4 T=9 MODE=0 OC=1 MAXJ=-1 POL=1 : 2
+VALUE P=4 T=4 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=4 T=6 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+VALUE P=4 T=7 MODE=1 OC=1 MAXJ=-1 POL=1 : 1
+## 'simple rule' candidates against all adversaries, same-cost promise, P=3 (optimum is 1 for T<=8)
+# POL 4 = take the first of [continue A, other jobs by deadline, switch, idle] after which the current jobs alone can still all finish by d+L
+# POL 5 = take the move minimising the best achievable max lateness of the current jobs alone (same tie order)
+VALUE P=3 T=5 MODE=1 OC=1 MAXJ=-1 POL=4 : 1
+VALUE P=3 T=6 MODE=1 OC=1 MAXJ=-1 POL=4 : 2
+VALUE P=3 T=7 MODE=1 OC=1 MAXJ=-1 POL=4 : 2
+VALUE P=3 T=5 MODE=1 OC=1 MAXJ=-1 POL=5 : 1
+VALUE P=3 T=6 MODE=1 OC=1 MAXJ=-1 POL=5 : 1
+VALUE P=3 T=7 MODE=1 OC=1 MAXJ=-1 POL=5 : 2
+## witnesses (restricted adversary => lower bounds), dumped and verified independently
+dumped 6 nodes
+VERIFIED: P=2 T=4 promise=same-cost : the strategy forces lateness >= 1 against every scheduler.
+  strategy nodes 6, positions checked 8, terminal plays 13, feasibility checks 8 (distinct job lists 4), max jobs in a play 2
+dumped 4 nodes
+VERIFIED: P=2 T=3 promise=free : the strategy forces lateness >= 1 against every scheduler.
+  strategy nodes 4, positions checked 5, terminal plays 10, feasibility checks 5 (distinct job lists 3), max jobs in a play 2
+dumped 163 nodes
+VERIFIED: P=3 T=9 promise=same-cost : the strategy forces lateness >= 2 against every scheduler.
+  strategy nodes 163, positions checked 257, terminal plays 593, feasibility checks 257 (distinct job lists 72), max jobs in a play 8
+dumped 47 nodes
+VERIFIED: P=3 T=6 promise=free : the strategy forces lateness >= 2 against every scheduler.
+  strategy nodes 47, positions checked 60, terminal plays 126, feasibility checks 60 (distinct job lists 15), max jobs in a play 5
+dumped 621 nodes
+VERIFIED: P=4 T=10 promise=free : the strategy forces lateness >= 3 against every scheduler.
+  strategy nodes 621, positions checked 1282, terminal plays 3087, feasibility checks 1282 (distinct job lists 136), max jobs in a play 9
+dumped 77 nodes
+VERIFIED: P=4 T=9 promise=same-cost : the strategy forces lateness >= 2 against every scheduler.
+  strategy nodes 77, positions checked 195, terminal plays 417, feasibility checks 195 (distinct job lists 52), max jobs in a play 6
+dumped 1877 nodes
+VERIFIED: P=4 T=16 promise=same-cost : the strategy forces lateness >= 3 against every scheduler.
+  strategy nodes 1877, positions checked 11854, terminal plays 32800, feasibility checks 11854 (distinct job lists 1938), max jobs in a play 13
+## the same restricted family does NOT reach 3 at T=15 for P=4 (inconclusive: restricted adversary)
+PMASK=18 P=4 T=15 MODE=1 OC=1 MAXJ=1 POL=0 : adversary forces lateness >= 3 ? NO   (memo 1038091, promise states 158512, viaMemo 321265)
+## checker watched failing on corrupted inputs (each line must say VERIFY FAILED)
+VERIFY FAILED: strategy has no answer to a legal scheduler move at node 0 state 49:0:49
+VERIFY FAILED: strategy claims terminal but checker disagrees at node 5 state 0:0:41
+VERIFY FAILED: promise violated at node 3
+VERIFY FAILED: promise violated at node 6
