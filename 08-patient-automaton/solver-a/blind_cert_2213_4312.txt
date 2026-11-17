@@ -1,0 +1,6 @@
+# every family (maximal possible images before a Synchronizer letter) reachable in the blind game; closed under both letters; none has a letter making all members singletons
+12 13 14 234
+12 13 234
+12 134
+12 134 23 24
+1234

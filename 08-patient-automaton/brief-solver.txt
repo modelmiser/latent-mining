@@ -1,0 +1,54 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Objects. A is a complete deterministic finite automaton with state set Q = {1, ..., n} and two letters a, b; each letter is an arbitrary map Q -> Q, so there are n^(2n) labelled automata. For a word v, Q·v is the image of Q under v (letters applied left to right). Fix an integer d >= 0 (the delay).
+
+Play. In rounds t = 1, 2, 3, ... the Synchronizer chooses a letter x_t, then the Spoiler chooses a letter y_t. The played word is x_1 y_1 x_2 y_2 ....
+
+Information. Both players know A and d. The Synchronizer's strategy is deterministic and x_t may depend only on x_1, ..., x_(t-1) and y_1, ..., y_(t-1-d) (on no Spoiler letter while t <= d+1). The Spoiler knows that strategy and sees every letter played so far.
+
+Winning. A is d-winnable if some Synchronizer strategy and some number T give |Q·(x_1 y_1 ... y_(T-1) x_T)| = 1 against every Spoiler play. A is blind-winnable if one fixed word x_1 ... x_T, chosen before play, has that property for all 2^(T-1) choices of y_1 ... y_(T-1). Write W_d(n) and W_inf(n) for the sets of d-winnable and blind-winnable automata on Q; then W_0(n) ⊇ W_1(n) ⊇ ... ⊇ W_inf(n). Call A a patient automaton if it is d-winnable for every d >= 0 but not blind-winnable. Let s(n) be the least d with W_d(n) = W_inf(n), and s(n) = infinity if no such d exists (equivalently, if a patient automaton with n states exists).
+
+HEADLINE (yes/no): Does a patient automaton exist for some n?
+If yes: find the least such n, give one explicit transition table, and give the Synchronizer's strategy as a function of d.
+If no: find s(n) exactly as a function of n, with a family of automata that are (s(n)-1)-winnable but not blind-winnable.
+
+Small instances (required with either answer): the table of |W_d(n)| for n = 3, 4 and d = 0, 1, ..., 6, together with |W_inf(n)|, and the first d (if any, within that range) at which the two numbers agree.
+
+UNVERIFIED beliefs.
+- s(2) = 0: on two states a non-constant map is a permutation, so winnable at any delay forces a constant letter, which alone is a blind winning word.
+- A uniform T costs nothing: the game tree is finitely branching, so a strategy that wins every play wins within a bounded number of rounds.
+- If a patient automaton exists it has at least 3 states, and W_0(n) ≠ W_inf(n) for some n <= 4.
+- If s(n) is finite it is at most exponential in n (pumping on the family of reachable images).
+
+GUESS: I would bet yes, a patient automaton exists with fewer than ten states, because the Spoiler's clairvoyant advantage in the blind game can hinge on one early choice that the Synchronizer can outwait at any finite delay if the automaton offers a harmless waiting letter; the interleaved Spoiler letters are what could make this false.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

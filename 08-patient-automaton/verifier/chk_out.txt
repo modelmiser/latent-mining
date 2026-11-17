@@ -1,0 +1,60 @@
+== orbits
+A.W1 1123 3422
+A.W2 1123 4134
+B.C2 1123 4134
+B.C1 1123 3422
+== literal definition vs rank solver (min T), all n=2,3 automata + n=4 sample; d<=2, T<=6
+cases 2697 literal wins 1469 mismatches 0
+== rank solver vs C++ table: count n=3 and n=4 winnable at d=0,1,2 and blind
+ n=3 W_0,1,2 = [405, 405, 405]  W_inf = 405
+ (n=4 python recount skipped; pass --full4)
+== minimal T by rank solver, d=0..10
+A.W1 [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13] blind None
+A.W2 [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13] blind None
+B.C2 [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13] blind None
+B.C1 [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13] blind None
+== strategies, literal over all Spoiler plays
+A.W1 0:OK 1:OK 2:OK 3:OK 4:OK 5:OK 6:OK 7:OK 8:OK 9:OK 10:OK 11:OK 12:OK
+A.W1pad5 0:OK 1:OK 2:OK 3:OK 4:OK 5:OK 6:OK 7:OK 8:OK 9:OK 10:OK 11:OK 12:OK
+A.W2 0:OK 1:OK 2:OK 3:OK 4:OK 5:OK 6:OK 7:OK 8:OK 9:OK 10:OK 11:OK 12:OK
+B.C2 0:OK 1:OK(T-1 also wins) 2:OK 3:OK 4:OK(T-1 also wins) 5:OK 6:OK 7:OK(T-1 also wins) 8:OK 9:OK 10:OK(T-1 also wins) 11:OK 12:OK
+B.C1 0:OK 1:OK(T-1 also wins) 2:OK 3:OK 4:OK(T-1 also wins) 5:OK 6:OK 7:OK(T-1 also wins) 8:OK 9:OK 10:OK(T-1 also wins) 11:OK 12:OK
+B.C2pad6 0:OK 1:OK(T-1 also wins) 2:OK 3:OK 4:OK(T-1 also wins) 5:OK 6:OK 7:OK(T-1 also wins) 8:OK 9:OK 10:OK(T-1 also wins) 11:OK 12:OK
+== strategies by family tracking, d=0..300 (uniform T reached; None = fails)
+A.W1 fails at [] T(0..12)= [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13, 15, 16] max T-d = 4
+A.W1pad5 fails at [] T(0..12)= [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13, 15, 16] max T-d = 4
+A.W2 fails at [] T(0..12)= [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13, 15, 16] max T-d = 4
+B.C2 fails at [] T(0..12)= [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13, 15, 16] max T-d = 4
+B.C1 fails at [] T(0..12)= [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13, 15, 16] max T-d = 4
+B.C2pad6 fails at [] T(0..12)= [4, 4, 6, 7, 7, 9, 10, 10, 12, 13, 13, 15, 16] max T-d = 4
+family tracker agrees with literal enumeration for d<=7
+== NEGATIVE CONTROLS (each must be rejected)
+  A.W1 with residues swapped (1,0), d=3, T=7 -> rejected
+  A.W1 residues (0,2), d=5, T=20 -> rejected
+  B sigma on C2 with b(4)=3 instead of 4, d=2, T=6 -> rejected
+  B sigma on A.W1 (wrong automaton), d=2, T=6 -> ACCEPTED (CHECKER BROKEN)
+  B sigma peeking at y_1 one round early, d=3 -> rejected as illegal: needs y_1 at t=2 d=3
+  B sigma with claimed T=d+3 at d=2 (r=5 branch needs 6) -> rejected
+  constant strategy a on C2, d=0, T=8 -> rejected
+  blind: A.W1 with a(4)=1 (2211/4311) claimed non-blind-winnable -> rejected (blind T=2)
+== solver-a Theorem 2: round tables and the 4-family certificate, recomputed
+ round-table entries wrong: 0
+ 4-family certificate on W1: True
+ NEG: same certificate, F3 removed: False  | on mutated automaton 2211/4311: False  | F1 replaced by {13}: False
+ 9-family file closed & no killing letter: True (families: 9 )
+== solver-a Theorem 1 invariants I(t), J(t), all plays, d<=9
+ invariant violations: 0
+== solver-b Lemma A claims, all plays, d<=9
+ claim violations: 0 | "M_(r-1) = 13" false at (d, y1, r, M_(r-1)): [(0, 'a', 2, '123'), (1, 'a', 2, '123')]
+== solver-b Lemma B: Spoiler rule against every word of length <= 16 (C2), and same rule on C1
+ C2: words beaten-by-synchronizer: (0, None)
+ C1 (rule not claimed for it): (0, None)
+ NEG: same rule on A.W1: (0, None)  on mutated C2 1123/4133: (1999, 'bb')
+ NEG: rule with residue 1 instead of 2 on C2, words beaten: 1669
+== blind brute force: no winning word up to length 13 against all fills (families method), and blind_minT
+  A.W1 blind_minT = None
+  A.W2 blind_minT = None
+  B.C2 blind_minT = None
+  B.C1 blind_minT = None
+  A.W1pad5 blind_minT = None
+  B.C2pad6 blind_minT = None

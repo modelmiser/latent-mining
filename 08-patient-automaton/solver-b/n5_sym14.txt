@@ -1,0 +1,203 @@
+CAND lastwin=14 a=11233 b=34221 orbit=240
+CAND lastwin=14 a=11234 b=34221 orbit=240
+CAND lastwin=14 a=11235 b=34221 orbit=240
+CAND lastwin=14 a=11234 b=15321 orbit=240
+CAND lastwin=14 a=21123 b=51421 orbit=240
+CAND lastwin=14 a=11234 b=24521 orbit=240
+CAND lastwin=14 a=11234 b=53131 orbit=240
+CAND lastwin=14 a=11144 b=25331 orbit=240
+CAND lastwin=14 a=21123 b=51431 orbit=240
+CAND lastwin=14 a=11234 b=53531 orbit=240
+CAND lastwin=14 a=11124 b=53141 orbit=240
+CAND lastwin=14 a=11234 b=15241 orbit=240
+CAND lastwin=14 a=11154 b=23441 orbit=240
+CAND lastwin=14 a=11233 b=43541 orbit=240
+CAND lastwin=14 a=13422 b=55151 orbit=240
+CAND lastwin=14 a=11234 b=51251 orbit=240
+CAND lastwin=14 a=11453 b=23251 orbit=240
+CAND lastwin=14 a=11225 b=34351 orbit=240
+CAND lastwin=14 a=11125 b=31451 orbit=240
+CAND lastwin=14 a=11125 b=32451 orbit=240
+CAND lastwin=14 a=11234 b=42451 orbit=240
+CAND lastwin=14 a=11233 b=43451 orbit=240
+CAND lastwin=14 a=11234 b=34551 orbit=240
+CAND lastwin=14 a=11223 b=35212 orbit=240
+CAND lastwin=14 a=11223 b=35412 orbit=240
+CAND lastwin=14 a=11223 b=43512 orbit=240
+CAND lastwin=14 a=11223 b=45122 orbit=240
+CAND lastwin=14 a=11124 b=45122 orbit=240
+CAND lastwin=14 a=11233 b=34222 orbit=240
+CAND lastwin=14 a=11234 b=34222 orbit=240
+CAND lastwin=14 a=11235 b=34222 orbit=240
+CAND lastwin=14 a=11223 b=35222 orbit=240
+CAND lastwin=14 a=11223 b=45222 orbit=240
+CAND lastwin=14 a=11124 b=45222 orbit=240
+CAND lastwin=14 a=11124 b=45322 orbit=240
+CAND lastwin=14 a=11453 b=23422 orbit=240
+CAND lastwin=14 a=11124 b=45422 orbit=240
+CAND lastwin=14 a=11124 b=45522 orbit=240
+CAND lastwin=14 a=11234 b=53232 orbit=240
+CAND lastwin=14 a=11254 b=14232 orbit=240
+CAND lastwin=14 a=11223 b=35232 orbit=240
+CAND lastwin=14 a=11144 b=13532 orbit=240
+CAND lastwin=14 a=11124 b=45532 orbit=240
+CAND lastwin=14 a=11223 b=35242 orbit=240
+CAND lastwin=14 a=11233 b=41342 orbit=240
+CAND lastwin=14 a=11234 b=41342 orbit=240
+CAND lastwin=14 a=11235 b=41342 orbit=240
+CAND lastwin=14 a=11123 b=43542 orbit=240
+CAND lastwin=14 a=11223 b=34542 orbit=240
+CAND lastwin=14 a=11225 b=34542 orbit=240
+CAND lastwin=14 a=11234 b=14152 orbit=240
+CAND lastwin=14 a=11234 b=14252 orbit=240
+CAND lastwin=14 a=11223 b=35252 orbit=240
+CAND lastwin=14 a=11234 b=35252 orbit=240
+CAND lastwin=14 a=21123 b=41452 orbit=240
+CAND lastwin=14 a=11125 b=32452 orbit=240
+CAND lastwin=14 a=11233 b=43452 orbit=240
+CAND lastwin=14 a=11235 b=45452 orbit=240
+CAND lastwin=14 a=11234 b=34552 orbit=240
+CAND lastwin=14 a=11234 b=54552 orbit=240
+CAND lastwin=14 a=11234 b=45552 orbit=240
+CAND lastwin=14 a=11124 b=54213 orbit=240
+CAND lastwin=14 a=11124 b=54313 orbit=240
+CAND lastwin=14 a=11234 b=14513 orbit=240
+CAND lastwin=14 a=11124 b=45123 orbit=240
+CAND lastwin=14 a=11453 b=23223 orbit=240
+CAND lastwin=14 a=11233 b=34223 orbit=240
+CAND lastwin=14 a=11234 b=34223 orbit=240
+CAND lastwin=14 a=11235 b=34223 orbit=240
+CAND lastwin=14 a=11234 b=15223 orbit=240
+CAND lastwin=14 a=11244 b=15223 orbit=240
+CAND lastwin=14 a=11124 b=45323 orbit=240
+CAND lastwin=14 a=11154 b=13423 orbit=240
+CAND lastwin=14 a=11254 b=23423 orbit=240
+CAND lastwin=14 a=11124 b=45523 orbit=240
+CAND lastwin=14 a=23112 b=45133 orbit=240
+CAND lastwin=14 a=11453 b=34233 orbit=240
+CAND lastwin=14 a=11234 b=44533 orbit=240
+CAND lastwin=14 a=11124 b=45533 orbit=240
+CAND lastwin=14 a=11225 b=52243 orbit=240
+CAND lastwin=14 a=11233 b=41343 orbit=240
+CAND lastwin=14 a=11234 b=41343 orbit=240
+CAND lastwin=14 a=11235 b=41343 orbit=240
+CAND lastwin=14 a=11233 b=41153 orbit=240
+CAND lastwin=14 a=11234 b=52153 orbit=240
+CAND lastwin=14 a=11234 b=14153 orbit=240
+CAND lastwin=14 a=23111 b=45153 orbit=240
+CAND lastwin=14 a=13422 b=55153 orbit=240
+CAND lastwin=14 a=11233 b=41253 orbit=240
+CAND lastwin=14 a=11225 b=52253 orbit=240
+CAND lastwin=14 a=11453 b=23253 orbit=240
+CAND lastwin=14 a=11234 b=14253 orbit=240
+CAND lastwin=14 a=11235 b=14253 orbit=240
+CAND lastwin=14 a=23111 b=45253 orbit=240
+CAND lastwin=14 a=11233 b=41353 orbit=240
+CAND lastwin=14 a=11233 b=24353 orbit=240
+CAND lastwin=14 a=11124 b=31453 orbit=240
+CAND lastwin=14 a=21123 b=41453 orbit=240
+CAND lastwin=14 a=11125 b=23453 orbit=240
+CAND lastwin=14 a=11233 b=24453 orbit=240
+CAND lastwin=14 a=11124 b=35453 orbit=240
+CAND lastwin=14 a=11234 b=51553 orbit=240
+CAND lastwin=14 a=11234 b=34553 orbit=240
+CAND lastwin=14 a=11234 b=45553 orbit=240
+CAND lastwin=14 a=11223 b=52414 orbit=240
+CAND lastwin=14 a=11234 b=52514 orbit=240
+CAND lastwin=14 a=11123 b=23514 orbit=240
+CAND lastwin=14 a=11223 b=54514 orbit=240
+CAND lastwin=14 a=11125 b=52124 orbit=240
+CAND lastwin=14 a=11225 b=52124 orbit=240
+CAND lastwin=14 a=11125 b=53224 orbit=240
+CAND lastwin=14 a=11233 b=34224 orbit=240
+CAND lastwin=14 a=11234 b=34224 orbit=240
+CAND lastwin=14 a=11235 b=34224 orbit=240
+CAND lastwin=14 a=11125 b=52324 orbit=240
+CAND lastwin=14 a=11125 b=53324 orbit=240
+CAND lastwin=14 a=11225 b=53324 orbit=240
+CAND lastwin=14 a=11125 b=52424 orbit=240
+CAND lastwin=14 a=11223 b=15424 orbit=240
+CAND lastwin=14 a=11223 b=45424 orbit=240
+CAND lastwin=14 a=11125 b=32524 orbit=240
+CAND lastwin=14 a=11125 b=52524 orbit=240
+CAND lastwin=14 a=11125 b=13524 orbit=240
+CAND lastwin=14 a=11234 b=24524 orbit=240
+CAND lastwin=14 a=11234 b=25134 orbit=240
+CAND lastwin=14 a=11125 b=52234 orbit=240
+CAND lastwin=14 a=11354 b=43234 orbit=240
+CAND lastwin=14 a=11125 b=53234 orbit=240
+CAND lastwin=14 a=11124 b=45234 orbit=240
+CAND lastwin=14 a=11124 b=51334 orbit=240
+CAND lastwin=14 a=11125 b=52334 orbit=240
+CAND lastwin=14 a=11234 b=52534 orbit=240
+CAND lastwin=14 a=11123 b=23534 orbit=240
+CAND lastwin=14 a=21133 b=43154 orbit=240
+CAND lastwin=14 a=11223 b=53154 orbit=240
+CAND lastwin=14 a=11234 b=51254 orbit=240
+CAND lastwin=14 a=11223 b=35254 orbit=240
+CAND lastwin=14 a=11233 b=41354 orbit=240
+CAND lastwin=14 a=11234 b=35354 orbit=240
+CAND lastwin=14 a=11124 b=23454 orbit=240
+CAND lastwin=14 a=11234 b=51554 orbit=240
+CAND lastwin=14 a=11234 b=52554 orbit=240
+CAND lastwin=14 a=11234 b=34554 orbit=240
+CAND lastwin=14 a=11223 b=51315 orbit=240
+CAND lastwin=14 a=11234 b=25315 orbit=240
+CAND lastwin=14 a=11234 b=25415 orbit=240
+CAND lastwin=14 a=11234 b=14515 orbit=240
+CAND lastwin=14 a=11233 b=34225 orbit=240
+CAND lastwin=14 a=11234 b=34225 orbit=240
+CAND lastwin=14 a=11223 b=51325 orbit=240
+CAND lastwin=14 a=11223 b=51425 orbit=240
+CAND lastwin=14 a=11124 b=45235 orbit=240
+CAND lastwin=14 a=11223 b=51335 orbit=240
+CAND lastwin=14 a=11223 b=51435 orbit=240
+CAND lastwin=14 a=11223 b=41535 orbit=240
+CAND lastwin=14 a=11223 b=24535 orbit=240
+CAND lastwin=14 a=11124 b=51145 orbit=240
+CAND lastwin=14 a=11234 b=25145 orbit=240
+CAND lastwin=14 a=11124 b=51245 orbit=240
+CAND lastwin=14 a=11233 b=41345 orbit=240
+CAND lastwin=14 a=11234 b=41345 orbit=240
+CAND lastwin=14 a=11223 b=51345 orbit=240
+CAND lastwin=14 a=11124 b=51345 orbit=240
+CAND lastwin=14 a=11223 b=51445 orbit=240
+CAND lastwin=14 a=11124 b=51445 orbit=240
+CAND lastwin=14 a=11124 b=51545 orbit=240
+CAND lastwin=14 a=11124 b=53545 orbit=240
+CAND lastwin=14 a=11234 b=24155 orbit=240
+CAND lastwin=14 a=11233 b=41355 orbit=240
+CAND lastwin=14 a=11124 b=23455 orbit=240
+n=5 total=9765625 classes=41876
+|W_0|=3645945
+|W_1|=3318105
+|W_2|=3253305
+|W_3|=3243465
+|W_4|=3241545
+|W_5|=3240825
+|W_6|=3240105
+|W_7|=3240105
+|W_8|=3240105
+|W_9|=3240105
+|W_10|=3240105
+|W_11|=3240105
+|W_12|=3240105
+|W_13|=3240105
+|W_14|=3240105
+|W_inf|=3199305
+not 0-winnable: 6119680
+non-blind, largest winnable d (<=14) = 0 : 327840
+non-blind, largest winnable d (<=14) = 1 : 64800
+non-blind, largest winnable d (<=14) = 2 : 9840
+non-blind, largest winnable d (<=14) = 3 : 1920
+non-blind, largest winnable d (<=14) = 4 : 720
+non-blind, largest winnable d (<=14) = 5 : 720
+non-blind, largest winnable d (<=14) = 6 : 0
+non-blind, largest winnable d (<=14) = 7 : 0
+non-blind, largest winnable d (<=14) = 8 : 0
+non-blind, largest winnable d (<=14) = 9 : 0
+non-blind, largest winnable d (<=14) = 10 : 0
+non-blind, largest winnable d (<=14) = 11 : 0
+non-blind, largest winnable d (<=14) = 12 : 0
+non-blind, largest winnable d (<=14) = 13 : 0
+non-blind, largest winnable d (<=14) = 14 : 40800

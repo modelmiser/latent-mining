@@ -1,0 +1,56 @@
+Notation: automaton W: a = (1->2, 2->2, 3->1, 4->3), b = (1->4, 2->3, 3->1, 4->1). "Turn t" = the moment before x_t.
+"Round" = one Synchronizer letter followed by one Spoiler letter.  M = any singleton.
+
+Images of pairs (direct computation):
+  .a : 12->{2}  13->12  23->12  14->23  24->23  34->13
+  .b : 12->34   13->14  23->13  14->14  24->13  34->{1}
+Round tables (pair at turn t  ->  possible pairs at turn t+1, Spoiler choosing):
+  x=a : 12->M ; 13->{M,34} ; 23->{M,34} ; 14->{12,13} ; 24->{12,13} ; 34->{12,14}
+  x=b : 12->{13,M} ; 13->{23,14} ; 23->{12,14} ; 14->{23,14} ; 24->{12,14} ; 34->M
+
+THEOREM 1 (COMPLETE). W is d-winnable for every d >= 0, by the strategy sigma_d of witnesses.txt.
+ Legality: tau >= d+2, so x_t = a for 2 <= t <= d+1 whatever y_1 is, x_1 = b always; for t >= d+2 the letter
+ depends only on y_1, which is visible then.
+ Q.b = 134.
+ Case y_1 = a (tau = 0 mod 3, tau >= 3, so x_2 = a): 134.a = 123, 123.a = 12, then y_2 gives {2} or 34.
+   So at turn 3 the image is M or 34.
+   Invariant I(t), 3 <= t <= tau: the image at turn t is M, or 34 if t=0, or one of 14,12 if t=1, or one of
+   13,12 if t=2 (mod 3).  For t < tau, x_t = a, and by the x=a round table: 34->{12,14}, 14->{12,13}, 12->M,
+   13->{M,34}; so I(t) implies I(t+1).  At t = tau = 0 (mod 3) the image is M or 34 and x_tau = b gives 34.b = {1}.
+ Case y_1 = b (tau = 1 mod 3, so tau >= 4 and x_2 = x_3 = a): 134.b = 14, 14.a = 23, y_2 gives 12 or 13.
+   Invariant J(t), 3 <= t <= tau: M, or one of 13,12 if t=0, or 34 if t=1, or one of 14,12 if t=2 (mod 3).
+   Same table; at t = tau = 1 (mod 3) the image is M or 34 and b makes it a singleton.
+ After tau every image is a singleton and stays one; T = max(tau for y_1=a, tau for y_1=b).  QED
+
+THEOREM 2 (COMPLETE). W is not blind-winnable.
+ Families F1={13,14}, F2={14,23}, F3={12,13,34}, F4={12,14,34}.  From the round tables, the set of PAIRS reachable
+ in one round from a member of F:
+   F1: a -> {12,13,34} = F3        b -> {23,14} = F2
+   F2: a -> {34,12,13} = F3        b -> {12,14,23} contains F2
+   F3: a -> {34,12,14} = F4        b -> {13,23,14} contains F1
+   F4: a -> {12,14,13} contains F1 b -> {13,23,14} contains F1
+ Lemma: for F among F1..F4 and any word x_1..x_k (k >= 0) there are P in F and Spoiler letters y_1..y_(k-1) with
+ |P.x_1 y_1 ... y_(k-1) x_k| = 2.  Induction on k: k = 0 trivial.  For k >= 1 take F' from the table for (F, x_1);
+ by induction some P' in F' survives x_2..x_k; P' = P.x_1.y with P in F, and |P.x_1| = 2 since |P'| = 2.
+ Now let x_1..x_T be any fixed word.  T = 1: |Q.a| = |Q.b| = 3.  T >= 2: if x_1 = a the possible images at turn 2
+ are 12 and 134, containing the pairs 12,14,34 = F4; if x_1 = b they are 123 and 14, containing 13,14 = F1.
+ By the Lemma some play leaves an image containing a 2-element set after x_T.  QED
+
+COROLLARY (COMPLETE). W is patient; W_d(4) != W_inf(4) for all d, s(4) = infinity.
+ For n >= 5 let states 5..n act like state 1 (a: ->2, b: ->4).  Then Q.x is the same set as in W for either first
+ letter, so every image from then on equals the image in W: sigma_d wins, no blind word wins.  So s(n) = infinity
+ for all n >= 4.
+
+THEOREM 3 (COMPLETE, trivial). Uniform T: for a fixed strategy, the plays not yet at a singleton form a finitely
+ branching tree; if every play reaches a singleton the tree has no infinite branch, so is finite (Koenig).
+
+NOT PROVED (computed only): no patient automaton for n <= 3.  This rests on the exhaustive computation
+ |W_0(n)| = |W_inf(n)| for n = 1,2,3 (then W_0 = W_1 = ... = W_inf by the inclusions).  The solver for W_0 and the
+ blind solver are finite fixed-point computations, exact (no horizon), so I regard this as a machine proof.
+
+Reduction used by the solver (COMPLETE): because the Synchronizer's strategy is deterministic and known, when the
+ Spoiler picks y_j he already knows x_(j+1..j+d) (they depend only on y_1..y_(j-1)).  So the game equals the
+ perfect-information game on positions (S, q): S = image after the last revealed Spoiler letter, q = the <= d
+ pending Synchronizer letters; Synchronizer appends x; he has won if every completion of the pending Spoiler letters
+ gives a singleton after x; otherwise (if |q| = d) the Spoiler reveals the oldest pending letter.  Reachability game
+ on a finite graph: winning region = least fixed point; rank = minimal uniform T.

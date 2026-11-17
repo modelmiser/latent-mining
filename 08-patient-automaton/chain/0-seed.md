@@ -1,0 +1,3 @@
+# Seed
+
+A deterministic finite automaton has n states and two input letters. The current state is unknown: at the start it may be any of the n states. Two players build a word together, choosing letters in turn. The Synchronizer wants the set of states the automaton could be in to shrink to a single state; the Spoiler wants to prevent that for ever. Both know the automaton. Among n-state automata on which the Synchronizer can win, what is the largest number of letters the Spoiler can make the game last, as a function of n (the game analogue of the Cerny bound (n-1)^2 for synchronizing words)? How does the answer change if the Spoiler chooses only every k-th letter, and which automata are extremal?

@@ -1,0 +1,21 @@
+n=6 total=2176782336 classes=1540696
+|W_0|=708201936
+|W_1|=601411536
+|W_2|=578288016
+|W_3|=572993136
+|W_4|=571486896
+|W_5|=570912336
+|W_6|=570537936
+|W_7|=570477456
+|W_8|=570451536
+|W_inf|=556677936
+not 0-winnable: 1468580400
+non-blind, largest winnable d (<=8) = 0 : 106790400
+non-blind, largest winnable d (<=8) = 1 : 23123520
+non-blind, largest winnable d (<=8) = 2 : 5294880
+non-blind, largest winnable d (<=8) = 3 : 1506240
+non-blind, largest winnable d (<=8) = 4 : 574560
+non-blind, largest winnable d (<=8) = 5 : 374400
+non-blind, largest winnable d (<=8) = 6 : 60480
+non-blind, largest winnable d (<=8) = 7 : 25920
+non-blind, largest winnable d (<=8) = 8 : 13773600

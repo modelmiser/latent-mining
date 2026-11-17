@@ -1,0 +1,81 @@
+PROOFS (solver-b).  Each item is marked COMPLETE, COMPUTED or SKETCH.
+Notation: S_k = Q.(x_1 y_1 ... x_k y_k) is the image after k full rounds. Sets are written as digit strings (134 = {1,3,4}).
+
+Lemma 0 (inclusions)  COMPLETE.
+  W_inf <= W_(d+1) <= W_d : a fixed word is a strategy for every delay; a strategy legal at delay d+1 uses a
+  subset of the information available at delay d. Also a singleton image stays a singleton, so "singleton after
+  x_T" for one T is the same as "singleton after x_t for all t >= T".
+
+Lemma 1 (uniform T is free)  COMPLETE.
+  Fix a strategy that makes every infinite Spoiler play eventually singleton. The Spoiler prefixes y_1..y_(t-1)
+  after which the image after x_t is still not a singleton form a prefix-closed binary tree (Lemma 0) with no
+  infinite branch, hence finite (Koenig); its height + 1 is a uniform T.
+
+Lemma 2 (state abstraction used by the programs)  COMPLETE.
+  For a fixed deterministic strategy, winning means: every Spoiler sequence wins; so it does not matter when the
+  Spoiler commits. At time t >= d+1 the Synchronizer knows exactly (S_k, w) with k = t-1-d, w = x_(k+1)..x_(t-1).
+  S_k singleton  =>  true image singleton; true image singleton after x_T  =>  S_T singleton, revealed d rounds
+  later. So A is d-winnable iff for some w in {a,b}^d the position (Q, w) lies in the attractor of {|S| = 1} in the
+  finite game: Synchronizer appends x, adversary picks y, (S, w_1 w') -> (S.w_1.y, w' x). (d = 0: S -> S.x.y.)
+  Blind game: a word wins iff every pair of states is merged for every Spoiler fill, so BFS over sets of unmerged
+  pairs (game.cpp) or over families of image sets (table_py.py, verify.py) is exact.
+
+THEOREM 1 (a patient automaton with 4 states)  COMPLETE (both lemmas below are also machine-checked, verify.py).
+  C2:   a: 1->1, 2->1, 3->2, 4->3        b: 1->4, 2->1, 3->3, 4->4
+  Round maps (Synchronizer letter, then Spoiler letter):
+     aa: 1->1 2->1 3->1 4->2      ab: 1->4 2->4 3->1 4->3
+     ba: 1->3 2->1 3->2 4->3      bb: 1->4 2->4 3->3 4->4
+
+ Lemma A (C2 is d-winnable for every d, with T = d+4).
+  Strategy sigma_d:  x_1 = b.  Let r be the least integer >= d+1 with r = 2 (mod 3) if y_1 = a, r = 0 (mod 3) if
+  y_1 = b.  Play x_t = a for 2 <= t <= r, x_(r+1) = b, afterwards a.
+  Legal: x_t = a for all t <= d+1 whatever y_1 is (r >= d+1), and for t >= d+2 the letter y_1 is known.
+  Wins: Q.b = 134, so S_1 = 123 (y_1 = a) or 34 (y_1 = b). Define the main line M_1 = S_1 and M_(k+1) = M_k.ab:
+     123 -> 14 -> 34 -> 13 -> 14 -> ...        34 -> 13 -> 14 -> 34 -> ...
+  so M_k = 14 exactly when k = 2 (mod 3) [y_1 = a] resp. k = 0 (mod 3) [y_1 = b], k >= 2; in particular M_r = 14
+  and M_(r-1) = 13.   Claim for 1 <= k <= r: S_k is M_k, or a singleton, or 12, and S_k = 12 only if
+  M_(k-1) is 14 or 34.  Induction: Synchronizer plays a in round k+1 <= r. If S_k = M_k the Spoiler's b gives
+  M_(k+1); the Spoiler's a gives 123.aa = 1, 13.aa = 1, 14.aa = 12, 34.aa = 12. If S_k = 12 then 12.a = 1.
+  Singletons stay singletons.  At k = r: M_(r-1) = 13, so S_r is 14 or a singleton, and 14.b = {4}.
+  Hence the image after x_(r+1) is a singleton for every Spoiler play, and r+1 <= d+4.
+
+ Lemma B (C2 is not blind-winnable).
+  It suffices to show that against every infinite word x_1 x_2 ... the Spoiler keeps every S_k non-singleton
+  (extend a finite word by b's; if the image after x_T were a singleton, S_T would be).
+  Facts (from the round maps):
+   (F1) reply b to a:  34 -> 13 -> 14 -> 34,   23 -> 14,   123 -> 14,   1234 -> 134 -> 134.
+   (F2) reply b to b:  each of 34, 13, 134, 1234 goes to 34.
+   (F3) reply a to b:  each of 34, 13, 134 goes to 23;  1234 goes to 123.
+  Write the word as maximal runs b^(j0) a^(m1) b^(j1) a^(m2) ... (j0 >= 0). Spoiler's rule: reply b to every a;
+  reply b to every b that is followed by a b (or by nothing but b's); to a b that is followed by a run a^m b with m finite: reply a if m = 2
+  (mod 3), reply b otherwise (if the following a-run is infinite reply b).
+  Invariant: at the start of every finite a-run a^m the set is
+       34 if m != 2 (mod 3),   23 or 123 if m = 2 (mod 3),   or 1234 (only if the word starts with a).
+  By (F1) after the run the set is 34 or 13 (from 34, since m mod 3 is 0 or 1), 34 (from 23/123, m = 2 mod 3),
+  or 134 (from 1234) -- never 14, the only set of the list that the next b could kill. In the b-run that follows,
+  (F2) keeps the set at 34 until its last b, where (F2)/(F3) give 34 or 23 as the invariant requires. Initial
+  b-run from 1234: (F2) gives 34 and then as before; if j0 = 1 the single reply gives 34 or 123 as required.
+  An infinite final a-run cycles through non-singletons by (F1); an infinite final b-run stays at 34.
+  All sets named are non-singletons.                                                               QED
+
+THEOREM 2 (minimality)  COMPUTED (exhaustive, n <= 3) + COMPLETE given the computation.
+  n = 1: the image is always a singleton. n = 2, 3: exhaustive enumeration gives W_0(n) = W_inf(n) (12 of 16,
+  405 of 729), so by Lemma 0 no patient automaton has fewer than 4 states. Least n = 4.
+
+THEOREM 3 (all n >= 4)  COMPLETE.
+  Add states 5..n to C2 with both letters sending each new state to 1. Since 1 lies in Q.a = 123 and in Q.b = 134,
+  the image after x_1 is the same as in C2, so both games are unchanged: the padded automaton is patient.
+  Hence s(n) = infinity for every n >= 4, and s(n) = 0 for n <= 3 (Theorem 2).
+
+THEOREM 4 (n = 4 census)  COMPUTED + COMPLETE given the computation.
+  The non-blind-winnable, 2-winnable automata on 4 states are exactly 96, forming two classes under state
+  renaming and letter swap (48 each): C2 above and
+  C1:   a: 1->1, 2->1, 3->2, 4->3        b: 1->3, 2->4, 3->2, 4->2 .
+  C1 is d-winnable for every d by the SAME strategy sigma_d (COMPLETE): Q.b = 234, S_1 = 123 or 24; main line under
+  reply b:  123 -> 34 -> 24 -> 23 -> 34,  24 -> 23 -> 34;  reply a: 123 -> 1, 23 -> 1, 34 -> 12, 24 -> 12; 12.a = 1;
+  34.b = {2}. The argument of Lemma A goes through with 14,34,13 replaced by 34,24,23.
+  C1 not blind-winnable: COMPUTED only (exact BFS, two implementations); I did not write a hand proof.
+  Consequently |W_d(4)| = 27808 for EVERY d >= 2 and exactly 96 automata on 4 states are patient.
+
+NOT PROVED (computed only): for n = 5, 6 the automata that survive to the largest delay tested are not shown to be
+  patient individually; only "d-winnable up to the tested delay, not blind-winnable" is established for them.
