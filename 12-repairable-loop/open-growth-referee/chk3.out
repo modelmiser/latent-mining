@@ -1,0 +1,1 @@
+{'d in {0,1}: pairs': 56, 'd in {0,1}: solutions': 0, 'd<=-1 pairs': 56, "d<=-1 count > 2^(d'-1)": 0, 'd>=2 pairs': 56, 'd>=2 count > 2^(d-1)': 0, 'd>=2 count == 2^(d-1)': 56}

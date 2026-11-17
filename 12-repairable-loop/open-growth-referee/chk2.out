@@ -1,0 +1,47 @@
+repairable loops: {3: 2130, 4: 1578, 5: 20, 6: 31} | candidates n=5: 20 n=6 strings seen: 197
+  lengths n=6: [(76, 1), (77, 3), (78, 4), (79, 6), (80, 5), (81, 3), (84, 1), (85, 1), (86, 1), (87, 1), (88, 1), (89, 2), (90, 2)]
+  non-universal repairable: {3: 332, 4: 62, 5: 0, 6: 0}
+== Theorem 1, consistency on real loops of length 2^n+2 (n=4,5; the proof itself needs n>=7)
+ n=4 {'loops': 12, 'iso': 8}
+ n=5 {'loops': 20, 'iso': 40}
+== Theorem 1 steps 5,6,7 literally, on loops 'de Bruijn + pair' (which have the forced 3-excess), brute-force replies
+ n=4 {'loops': 60, 'iso1': 23, 'iso1_answers': 25, 'iso1_answerable': 23, 'mid': 76, 'mid_answers': 192, 'repairable': 24}
+ n=5 {'loops': 60, 'mid': 107, 'mid_answers': 196, 'iso1': 58, 'repairable': 0, 'iso1_pq>=3': 12, 'iso1_answers': 1, 'iso1_answerable': 1}
+ n=7 {'loops': 14, 'iso1': 52, 'iso1_pq>=3': 14, 'mid': 74, 'mid_answers': 32}
+ n=8 {'loops': 5, 'iso1': 42, 'mid': 43, 'mid_answers': 10, 'iso1_pq>=3': 10}
+ (n=4,5: D+pair loops can be repairable, so 'answerable' is reachable by this checker; n>=7: none with p,q>=3 may be)
+== G1,G2,G3 on every repairable loop (all singletons, all k=2..n), universal and non-universal separately
+as stated: {'G12 cases N': 850, 'G12 cases U': 8379, 'G3 cases N': 4960, 'G3 cases U': 51817}
+FALSE VARIANT G3 (right side 2 - #): {'G12 cases N': 850, 'G12 cases U': 8379, 'G3 cases N': 4960, 'G3 cases U': 51817, 'G3bad U': 628}
+FALSE VARIANT G3 (every singleton has a P-window): {'G12 cases N': 850, 'G12 cases U': 8379, 'G3 cases N': 4960, 'G3 cases U': 51817, 'G3bad U': 394}
+FALSE VARIANT G2 (k-2): {'G12 cases N': 850, 'G12 cases U': 8379, 'G2bad N': 8, 'G3 cases N': 4960, 'G3 cases U': 51817}
+G3 inequality on NON-repairable loops (random universal, e<=2) -- must be violated somewhere: {'cases': 9688, 'viol': 5916}
+== G4: bad singletons <= bound, ANY loop of length > 2n+2
+  exhaustive necklaces n=3 L=9..15, n=4 L=11..16, n=5 L=13..16, n=6 L=15..16 (27806 loops): as stated {'cases': 99442, 'attained(>0)': 329}
+  exhaustive necklaces n=3 L=9..15, n=4 L=11..16, n=5 L=13..16, n=6 L=15..16 (27806 loops): FALSE VARIANT 2^(max-2) {'cases': 99442, 'attained(>0)': 1204, 'viol': 353}
+  exhaustive necklaces n=3 L=9..15, n=4 L=11..16, n=5 L=13..16, n=6 L=15..16 (27806 loops): FALSE VARIANT no repeat term {'cases': 99442, 'attained(>0)': 4148, 'viol': 272}
+  exhaustive necklaces n=3 L=9..15, n=4 L=11..16, n=5 L=13..16, n=6 L=15..16 (27806 loops): FALSE VARIANT min for max {'cases': 99442, 'attained(>0)': 940, 'viol': 62}
+  random / periodic / chunked / (edited) universal n=5..10 / repairable (621 loops): as stated {'cases': 2740, 'attained(>0)': 8}
+  random / periodic / chunked / (edited) universal n=5..10 / repairable (621 loops): FALSE VARIANT 2^(max-2) {'cases': 2740, 'viol': 37, 'attained(>0)': 2}
+  random / periodic / chunked / (edited) universal n=5..10 / repairable (621 loops): FALSE VARIANT no repeat term {'cases': 2740, 'attained(>0)': 192, 'viol': 79}
+  random / periodic / chunked / (edited) universal n=5..10 / repairable (621 loops): FALSE VARIANT min for max {'cases': 2740, 'attained(>0)': 9, 'viol': 55}
+  at lengths n+2..2n+2 (outside the hypothesis, information): {'cases': 3926}
+== G4 inner count: #factors on [p,p+k+d-1] with word(J_p)=word(W_u) and w[-1]!=w[0]  (claimed <= 2^(d-1)), all k<=8
+  violations: 28 | equation/word-equality mismatches: 0 | (p,d>=2) pairs with count exactly 2^(d-1): {True: 56, 'exceeds 2^(d-2) (false variant fails)': 56}
+== proof of (**), term by term, on every repairable loop
+  {'loops': 3759, 'k-cases': 9229}
+== arithmetic of (**)
+ n : best k, least e allowed by (**) | closed bound (2^(n-3)-19n^2)/(19n) | e from k=n-4
+  6 : k= 6 e>=0 | -5.9298245614035086 | 0
+  7 : k= 7 e>=0 | -6.879699248120301 | 0
+ 13 : k=13 e>=0 | -8.854251012145749 | 0
+ 14 : k=10 e>=1 | -6.3007518796992485 | 1
+ 15 : k=11 e>=9 | -0.6280701754385964 | 9
+ 16 : k=12 e>=25 | 10.947368421052632 | 25
+ 17 : k=13 e>=54 | 33.72445820433437 | 54
+ 20 : k=16 e>=418 | 324.9263157894737 | 418
+ 25 : k=21 e>=10544 | 8805.113684210526 | 10544
+ 30 : k=26 e>=272775 | 235439.69824561404 | 272775
+ 40 : k=36 e>=201523356 | 180840688.25263157 | 201523356
+ first n with a non-zero bound: 14
+ closed bound <= rearranged bound whenever the closed bound is >= 0: checked n=6..399; closed bound first positive at n = 16

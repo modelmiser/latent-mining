@@ -1,0 +1,33 @@
+R 00010011101 universal
+R 00010101111 universal
+R 00010111001 universal
+R 00010111011 universal
+R 00010111101 universal
+R 00011011101 universal
+R 00011110101 universal
+R 00001010111 universal
+R 00001011101 universal
+R 00001110101 universal
+dfs3 chunk 0/1 n=3 L=11 k=0 maxrep=3 prune2=on prefixes=0 leaves=119 pruned2=3 repairable(normalised words)=10
+R 00010011101 universal
+R 00010101111 universal
+R 00010111001 universal
+R 00010111011 universal
+R 00010111101 universal
+R 00011011101 universal
+R 00011110101 universal
+R 00001010111 universal
+R 00001011101 universal
+R 00001110101 universal
+dfs3 chunk 0/1 n=3 L=11 k=1 maxrep=4 prune2=on prefixes=0 leaves=192 pruned2=17 repairable(normalised words)=10
+R 00010011101 universal
+R 00010101111 universal
+R 00010111001 universal
+R 00010111011 universal
+R 00010111101 universal
+R 00011011101 universal
+R 00011110101 universal
+R 00001010111 universal
+R 00001011101 universal
+R 00001110101 universal
+dfs3 chunk 0/1 n=3 L=11 k=2 maxrep=5 prune2=on prefixes=0 leaves=221 pruned2=25 repairable(normalised words)=10

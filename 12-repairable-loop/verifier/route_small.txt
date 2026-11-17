@@ -1,0 +1,26 @@
+route n=3 L=8 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=0,2,4 candidates=18 found(with dups)=0 necklaces=0 nonuniversal_necklaces=0 perk: 0 0 0 0
+route n=3 L=9 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=2,4,9 candidates=62 found(with dups)=0 necklaces=0 nonuniversal_necklaces=0 perk: 0 0 0 0
+route n=3 L=10 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=4,9,26 candidates=185 found(with dups)=29 necklaces=3 nonuniversal_necklaces=0 perk: 3 0 0 0
+route n=3 L=11 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=9,26,65 candidates=494 found(with dups)=112 necklaces=10 nonuniversal_necklaces=0 perk: 10 0 0 0
+route n=3 L=12 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=26,65,146 candidates=1267 found(with dups)=327 necklaces=25 nonuniversal_necklaces=0 perk: 25 0 0 0
+route n=3 L=13 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=65,146,325 candidates=3132 found(with dups)=1014 necklaces=70 nonuniversal_necklaces=6 perk: 64 6 0 0
+route n=3 L=14 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=146,325,712 candidates=7415 found(with dups)=3238 necklaces=220 nonuniversal_necklaces=40 perk: 180 40 0 0
+WARNING no start edge
+route n=3 L=15 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=325,712,1444 candidates=16490 found(with dups)=8596 necklaces=526 nonuniversal_necklaces=70 perk: 456 70 0 0
+WARNING no start edge
+WARNING no start edge
+WARNING no start edge
+route n=3 L=16 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=712,1444,2998 candidates=37024 found(with dups)=22046 necklaces=1276 nonuniversal_necklaces=216 perk: 1060 216 0 0
+route n=4 L=16 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=0,16,32 candidates=272 found(with dups)=0 necklaces=0 nonuniversal_necklaces=0 perk: 0 0 0 0 0
+route n=4 L=17 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=16,32,76 candidates=952 found(with dups)=0 necklaces=0 nonuniversal_necklaces=0 perk: 0 0 0 0 0
+route n=4 L=18 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=32,76,204 candidates=2532 found(with dups)=84 necklaces=12 nonuniversal_necklaces=0 perk: 12 0 0 0 0
+route n=4 L=19 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=76,204,603 candidates=7522 found(with dups)=216 necklaces=24 nonuniversal_necklaces=0 perk: 24 0 0 0 0
+route n=4 L=20 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=204,603,1554 candidates=20419 found(with dups)=656 necklaces=62 nonuniversal_necklaces=2 perk: 60 2 0 0 0
+route n=4 L=21 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=603,1554,4097 candidates=57828 found(with dups)=4200 necklaces=308 nonuniversal_necklaces=8 perk: 300 8 0 0 0
+route n=4 L=22 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=1554,4097,10582 candidates=156415 found(with dups)=17184 necklaces=1172 nonuniversal_necklaces=52 perk: 1120 40 8 4 0
+route n=5 L=32 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=0,2048,4096 candidates=67584 found(with dups)=0 necklaces=0 nonuniversal_necklaces=0 perk: 0 0 0 0 0 0
+0.17s
+route n=5 L=33 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=2048,4096,9472 candidates=227840 found(with dups)=0 necklaces=0 nonuniversal_necklaces=0 perk: 0 0 0 0 0 0
+0.65s
+route n=5 L=34 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=4096,9472,25728 candidates=591360 found(with dups)=156 necklaces=20 nonuniversal_necklaces=0 perk: 20 0 0 0 0 0
+1.92s

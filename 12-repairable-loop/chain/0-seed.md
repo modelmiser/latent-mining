@@ -1,0 +1,3 @@
+# Seed
+
+A lock opens as soon as the last n bits entered equal its secret n-bit code; nothing else is remembered. A de Bruijn sequence, written out as 2^n + n - 1 bits, tries every code and no shorter string does. Now suppose the keypad is unreliable: an adversary who knows the code and sees the whole string in advance may, once, make one keypress register twice (the lock sees that bit doubled) or, in another version, not register at all. For each n: what is the length of the shortest string that is guaranteed to open the lock whatever the code and whatever the adversary does, and what do the shortest such strings look like?

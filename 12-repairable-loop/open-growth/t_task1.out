@@ -1,0 +1,23 @@
+== Step 4: which (t,z) in [-4,4]^2 admit a mechanic reply (3-window counts) to BOTH isolated moves?
+   survivors: [(0, 0)] (proof claims exactly [(0, 0)])
+   FALSE variant (only the 1-move used): survivors: [(0, -2), (0, -1), (0, 0), (1, -2), (1, -1), (1, 0)] (more than one expected => the test can fail)
+== Step 5: replies to the isolated-1 move when x = [alternating]:
+    dbl (1, 0, 1) {'000': 2}
+== Step 6: replies to the S3 move (middle 1 of 10101) when x = [alternating]:
+    loss (0, 1, 0, 0, 1) {}
+    loss (1, 0, 0, 1, 0) {}
+    loss (1, 0, 0, 1, 1) {}
+    loss (1, 1, 0, 0, 1) {}
+== structure of the known repairable loops of length 2^n+2 (n=4,5)
+   n=4: loops=216; x=[alt] on 3-words: 216; S=sigma+2 and rho=T+2: 216; 'de Bruijn cycle + alternating pair': 216
+   n=5: loops=20; x=[alt] on 3-words: 20; S=sigma+2 and rho=T+2: 20; 'de Bruijn cycle + alternating pair': 20
+== Lemma Z: universal, length 2^n+2, excess(000)=2 on 3-words  =>  exactly one 0-run of length >= n-1, of length n+2
+   n=3: loops with excess(000)=2: 20, violations=0; FALSE variant (1-runs instead of 0-runs) violations=20
+   n=4: loops with excess(000)=2: 288, violations=0; FALSE variant (1-runs instead of 0-runs) violations=288
+== Step 7 prediction on loops with x=[alt]: an isolated 1 (0-runs p,q>=2 around it) can be answered only if {p,q}={n,2}
+   n=4: loops=60 isolated singletons tested=29 answerable=29 violations=0 | with p,q>=3: 0, answerable 0 | FALSE variant '(p,q)=(n,2) only' violations=7 | fully repairable: 28 of 60
+   n=5: loops=60 isolated singletons tested=103 answerable=11 violations=0 | with p,q>=3: 24, answerable 0 | FALSE variant '(p,q)=(n,2) only' violations=5 | fully repairable: 1 of 60
+   n=6: loops=40 isolated singletons tested=148 answerable=2 violations=0 | with p,q>=3: 30, answerable 0 | FALSE variant '(p,q)=(n,2) only' violations=0 | fully repairable: 0 of 40
+   n=7: loops=25 isolated singletons tested=199 answerable=1 violations=0 | with p,q>=3: 47, answerable 0 | FALSE variant '(p,q)=(n,2) only' violations=1 | fully repairable: 0 of 25
+   n=8: loops=10 isolated singletons tested=149 answerable=0 violations=0 | with p,q>=3: 39, answerable 0 | FALSE variant '(p,q)=(n,2) only' violations=0 | fully repairable: 0 of 0
+   n=9: loops=4 isolated singletons tested=128 answerable=0 violations=0 | with p,q>=3: 32, answerable 0 | FALSE variant '(p,q)=(n,2) only' violations=0 | fully repairable: 0 of 0

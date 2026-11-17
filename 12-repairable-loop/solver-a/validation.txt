@@ -1,0 +1,17 @@
+n=2 L=4 pruned-union=1 leaves: leaves=1 leaves=4 
+n=2 L=5 pruned-union=2 leaves: leaves=5 leaves=7 
+n=2 L=6 pruned-union=10 leaves: leaves=10 leaves=13 
+n=2 L=7 pruned-union=17 leaves: leaves=21 leaves=23 
+n=3 L=10 pruned-union=3 leaves: leaves=48 leaves=87 leaves=111 
+n=3 L=11 pruned-union=10 leaves: leaves=119 leaves=192 leaves=221 
+n=3 L=12 pruned-union=25 leaves: leaves=277 leaves=387 leaves=432 
+n=4 L=18 pruned-union=12 leaves: leaves=505 leaves=1837 leaves=2900 leaves=3470 
+n=4 L=19 pruned-union=24 leaves: leaves=2052 leaves=5696 leaves=8937 leaves=9563 
+n=4 L=20 pruned-union=62 leaves: leaves=6737 leaves=16263 leaves=23483 leaves=24542 
+n=4 L=21 pruned-union=308 leaves: leaves=19820 leaves=41501 leaves=57177 leaves=58439 
+n=5 L=34 pruned-union=20 leaves: leaves=10036 leaves=29283 leaves=18207 leaves=6922 leaves=2678 
+n=5 L=35 pruned-union=40 leaves: leaves=97537 leaves=232152 leaves=171091 leaves=54651 leaves=15978 
+n=5 L=36 pruned-union=108 leaves: leaves=619217 leaves=1416052 leaves=1195790 leaves=390567 leaves=93146 
+k=0 maxrep=2 prune2=off prefixes=0 leaves=10 pruned2=0 repairable(normalised words)=10
+k=0 maxrep=3 prune2=off prefixes=0 leaves=21 pruned2=0 repairable(normalised words)=17
+k=0 maxrep=4 prune2=off prefixes=0 leaves=277 pruned2=0 repairable(normalised words)=25

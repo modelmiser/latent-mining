@@ -1,0 +1,23 @@
+w= 000011110101011001 len 18 universal
+pass  -1 -> 000011110101011001 : pass@-1 loss@8 dbl@0 dbl@4 dbl@9 dbl@10 dbl@11
+loss   0 -> 00011110101011001 : dbl@0
+loss   4 -> 00001110101011001 : loss@7 dbl@4
+loss   8 -> 00001111101011001 : pass@-1 loss@4 dbl@0 dbl@4
+loss   9 -> 00001111001011001 : loss@8 loss@14
+loss  10 -> 00001111011011001 : loss@9
+loss  11 -> 00001111010011001 : loss@10
+loss  12 -> 00001111010111001 : loss@11
+loss  13 -> 00001111010101001 : loss@12 dbl@13
+loss  15 -> 00001111010101101 : loss@9 dbl@8 dbl@15
+loss  17 -> 00001111010101100 : dbl@10
+dbl    0 -> 0000011110101011001 : pass@-1 loss@0 loss@9 dbl@0 dbl@5 dbl@10 dbl@11 dbl@12
+dbl    4 -> 0000111110101011001 : pass@-1 loss@4 loss@9 dbl@0 dbl@4 dbl@10 dbl@11 dbl@12
+dbl    8 -> 0000111100101011001 : loss@8 loss@16 dbl@10
+dbl    9 -> 0000111101101011001 : pass@-1 loss@8 loss@9 dbl@0 dbl@4 dbl@8 dbl@9 dbl@14
+dbl   10 -> 0000111101001011001 : pass@-1 loss@10 loss@18 dbl@0 dbl@4 dbl@10 dbl@16 dbl@18
+dbl   11 -> 0000111101011011001 : pass@-1 loss@11 dbl@0 dbl@4 dbl@11 dbl@13 dbl@14
+dbl   12 -> 0000111101010011001 : loss@12 dbl@11
+dbl   13 -> 0000111101010111001 : loss@13 dbl@9 dbl@11
+dbl   15 -> 0000111101010110001 : loss@15 dbl@10
+dbl   17 -> 0000111101010110011 : loss@17 dbl@10
+REPAIRABLE

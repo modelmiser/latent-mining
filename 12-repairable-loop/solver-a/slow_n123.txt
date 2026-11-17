@@ -1,0 +1,79 @@
+n=1 L=1 repairable necklaces: 0 
+n=1 L=2 repairable necklaces: 0 
+n=1 L=3 repairable necklaces: 0 
+n=1 L=4 repairable necklaces: 2 0011
+   0011 universal
+   0101 universal
+n=1 L=5 repairable necklaces: 4 00011
+   00011 universal
+   00101 universal
+   00111 universal
+   01011 universal
+n=1 L=6 repairable necklaces: 10 000011
+   000011 universal
+   000101 universal
+   000111 universal
+   001001 universal
+   001011 universal
+   001101 universal
+   001111 universal
+   010101 universal
+   010111 universal
+   011011 universal
+n=2 L=1 repairable necklaces: 0 
+n=2 L=2 repairable necklaces: 0 
+n=2 L=3 repairable necklaces: 0 
+n=2 L=4 repairable necklaces: 1 0011
+   0011 universal
+n=2 L=5 repairable necklaces: 2 00011
+   00011 universal
+   00111 universal
+n=2 L=6 repairable necklaces: 9 000011
+   000011 universal
+   000101 NOT-universal
+   000111 universal
+   001001 NOT-universal
+   001011 universal
+   001101 universal
+   001111 universal
+   010111 NOT-universal
+   011011 NOT-universal
+n=2 L=7 repairable necklaces: 14 0000011
+   0000011 universal
+   0000101 NOT-universal
+   0000111 universal
+   0001001 NOT-universal
+   0001011 universal
+   0001101 universal
+   0001111 universal
+   0010011 universal
+   0010111 universal
+   0011011 universal
+   0011101 universal
+   0011111 universal
+   0101111 NOT-universal
+   0110111 NOT-universal
+n=3 L=1 repairable necklaces: 0 
+n=3 L=2 repairable necklaces: 0 
+n=3 L=3 repairable necklaces: 0 
+n=3 L=4 repairable necklaces: 0 
+n=3 L=5 repairable necklaces: 0 
+n=3 L=6 repairable necklaces: 0 
+n=3 L=7 repairable necklaces: 0 
+n=3 L=8 repairable necklaces: 0 
+n=3 L=9 repairable necklaces: 0 
+n=3 L=10 repairable necklaces: 3 0001010111
+   0001010111 universal
+   0001011101 universal
+   0001110101 universal
+n=3 L=11 repairable necklaces: 10 00001010111
+   00001010111 universal
+   00001011101 universal
+   00001110101 universal
+   00010011101 universal
+   00010101111 universal
+   00010111001 universal
+   00010111011 universal
+   00010111101 universal
+   00011011101 universal
+   00011110101 universal

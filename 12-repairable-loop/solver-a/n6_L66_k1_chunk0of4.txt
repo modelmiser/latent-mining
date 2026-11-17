@@ -1,0 +1,3 @@
+dfs3 chunk 0/4 n=6 L=66 k=1 maxrep=3 prune2=on prefixes=11789 leaves=1355 pruned2=1257830867 repairable(normalised words)=0
+204.23s
+exit=0

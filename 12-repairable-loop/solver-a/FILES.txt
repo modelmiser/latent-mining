@@ -1,0 +1,28 @@
+solver-a file map
+
+CODE
+  slow.py            definition-level reference (python): universal / all edits / repairable / exhaustive by necklace
+  fast.cpp           bitmask implementation (L <= ~60): `brute n L` (all necklaces, no pruning),
+                     `dfs n L` (normalised DFS, repeat-count pruning only), `check n word`
+  dfs2.cpp           vector implementation (any L), adds the "needy cell" pruning; `dfs2 n L k`
+  dfs2c.cpp          same, chunked over prefixes
+  dfs3.cpp           same, sharper (still safe) chain bound for k >= 1; `dfs3 n L k maxprint MOD R`
+  randsearch.cpp     random DFS over universal loops (found nothing for n=6; negative evidence only)
+  shrink.cpp         greedy shortening from de Bruijn-twice (upper bounds only)
+  anneal.cpp         simulated annealing at fixed L (upper bounds only)
+  check_witness.py   independent checker of witnesses.txt using slow.py only; writes strategy_*.txt
+
+RESULTS
+  slow_n123.txt      n=1,2,3 exhaustive by slow.py (all lengths up to 6/7/11)
+  brute_n123.txt     same by fast.cpp brute (agrees)
+  brute_n4.txt       n=4, L=12..22, every necklace, no pruning
+  dfs_n4.txt, dfs_n5.txt   normalised DFS with repeat pruning only: n=4 L=16..22, n=5 L=32..36
+  n4_L18_all.txt, n5_L34_all.txt   all minimal witnesses (normalised words)
+  validation.txt, validation3.txt, val_*.txt, val3_*.txt
+                     needy-cell pruning (dfs2 / dfs3) reproduces the unpruned counts for n<=5
+  n6_L66_k0.txt      n=6, L=66, k=0 (universal w): exhaustive, none
+  n6_L66_k{1..5}_chunk{0..3}of4.txt   n=6, L=66, non-universal w, exhaustive in 4 chunks each
+  rand6_L*.txt, shrink_*.txt, anneal_*.txt   heuristic searches
+  witnesses.txt      witnesses and deliberately wrong objects;  check_witness.out = checker output
+  strategy_n*_L*.txt for each witness: every adversary move with one winning mechanic reply
+  proofs.txt         proofs, each tagged COMPLETE or SKETCH

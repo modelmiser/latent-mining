@@ -1,0 +1,4 @@
+(a) window-count formulas for loss/doubling: tests=8000 mismatches=0
+    FALSE variant 'a loss creates k windows': tests=300 mismatches=300 (expected all)
+(b) n=4: isolated singletons in repairable loops of length 2^n+2: 144; with neighbour runs other than {n,2}: 0
+(b) n=5: isolated singletons in repairable loops of length 2^n+2: 40; with neighbour runs other than {n,2}: 0

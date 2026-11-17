@@ -1,0 +1,2 @@
+dfs2 n=6 L=66 k=0 maxrep=2 prune2=on prefixes=9705 leaves=399296 pruned2=2962272023 repairable(normalised words)=0
+490.48s

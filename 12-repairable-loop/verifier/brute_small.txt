@@ -1,0 +1,42 @@
+brute n=1 L=1 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 first=
+brute n=1 L=2 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 first=
+brute n=1 L=3 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 first=
+brute n=1 L=4 necklaces=2 strings=6 nonuniversal_necklaces=0 perk: 2 0 first=0011
+brute n=1 L=5 necklaces=4 strings=20 nonuniversal_necklaces=0 perk: 4 0 first=00011
+brute n=1 L=6 necklaces=10 strings=50 nonuniversal_necklaces=0 perk: 10 0 first=000011
+brute n=1 L=7 necklaces=16 strings=112 nonuniversal_necklaces=0 perk: 16 0 first=0000011
+brute n=1 L=8 necklaces=32 strings=238 nonuniversal_necklaces=0 perk: 32 0 first=00000011
+brute n=1 L=9 necklaces=56 strings=492 nonuniversal_necklaces=0 perk: 56 0 first=000000011
+brute n=1 L=10 necklaces=104 strings=1002 nonuniversal_necklaces=0 perk: 104 0 first=0000000011
+brute n=1 L=11 necklaces=184 strings=2024 nonuniversal_necklaces=0 perk: 184 0 first=00000000011
+brute n=1 L=12 necklaces=348 strings=4070 nonuniversal_necklaces=0 perk: 348 0 first=000000000011
+brute n=1 L=13 necklaces=628 strings=8164 nonuniversal_necklaces=0 perk: 628 0 first=0000000000011
+brute n=1 L=14 necklaces=1178 strings=16354 nonuniversal_necklaces=0 perk: 1178 0 first=00000000000011
+brute n=2 L=1 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 first=
+brute n=2 L=2 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 first=
+brute n=2 L=3 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 first=
+brute n=2 L=4 necklaces=1 strings=4 nonuniversal_necklaces=0 perk: 1 0 0 first=0011
+brute n=2 L=5 necklaces=2 strings=10 nonuniversal_necklaces=0 perk: 2 0 0 first=00011
+brute n=2 L=6 necklaces=9 strings=48 nonuniversal_necklaces=4 perk: 5 4 0 first=000011
+brute n=2 L=7 necklaces=14 strings=98 nonuniversal_necklaces=4 perk: 10 4 0 first=0000011
+brute n=2 L=8 necklaces=31 strings=236 nonuniversal_necklaces=10 perk: 21 10 0 first=00000011
+brute n=2 L=9 necklaces=54 strings=474 nonuniversal_necklaces=14 perk: 40 14 0 first=000000011
+brute n=2 L=10 necklaces=103 strings=1000 nonuniversal_necklaces=24 perk: 79 24 0 first=0000000011
+brute n=2 L=11 necklaces=182 strings=2002 nonuniversal_necklaces=32 perk: 150 32 0 first=00000000011
+brute n=2 L=12 necklaces=347 strings=4068 nonuniversal_necklaces=56 perk: 291 56 0 first=000000000011
+brute n=2 L=13 necklaces=626 strings=8138 nonuniversal_necklaces=76 perk: 550 76 0 first=0000000000011
+brute n=2 L=14 necklaces=1177 strings=16352 nonuniversal_necklaces=122 perk: 1055 122 0 first=00000000000011
+brute n=3 L=1 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=2 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=3 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=4 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=5 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=6 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=7 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=8 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=9 necklaces=0 strings=0 nonuniversal_necklaces=0 perk: 0 0 0 0 first=
+brute n=3 L=10 necklaces=3 strings=30 nonuniversal_necklaces=0 perk: 3 0 0 0 first=0001010111
+brute n=3 L=11 necklaces=10 strings=110 nonuniversal_necklaces=0 perk: 10 0 0 0 first=00001010111
+brute n=3 L=12 necklaces=25 strings=300 nonuniversal_necklaces=0 perk: 25 0 0 0 first=000001010111
+brute n=3 L=13 necklaces=70 strings=910 nonuniversal_necklaces=6 perk: 64 6 0 0 first=0000001010111
+brute n=3 L=14 necklaces=220 strings=3052 nonuniversal_necklaces=40 perk: 180 40 0 0 first=00000001010111

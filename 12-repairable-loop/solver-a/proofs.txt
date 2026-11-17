@@ -1,0 +1,115 @@
+PROOFS (solver-a).  Each item is tagged COMPLETE or SKETCH.
+
+Notation. Loops are cyclic. A run is a maximal block of equal symbols; rho(v) = number of runs
+(even when >= 2). T = 2^(n-1). C(v) = set of n-words covered by v. An "isolated cell" is a run
+of length 1. Throughout n >= 3 unless stated, so all loops in play have length >= 7 >= n+1 and
+no window wraps onto itself.
+
+----------------------------------------------------------------------------------------
+P0 (COMPLETE). A universal loop has length >= 2^n; hence M(n) >= 2^n.
+  A loop of length m has m windows, so covers <= m words. If the adversary plays a loss, w' has
+  length L-1 and w'' has length <= L, so L >= 2^n.
+
+P1 (COMPLETE). M(n) <= 2^(n+1) for all n >= 1.
+  Let D be a de Bruijn cycle of order n and w = DD (length 2^(n+1)). Every word has two
+  occurrences whose start cells are 2^n apart (both ways round). One edit changes only windows
+  that contain the edited cell (loss) or both copies (doubling): their start cells lie in an
+  interval of n consecutive cells of w. Since 2^n > n-1, at most one of the two occurrences of
+  any word is hit; the other survives verbatim in w'. So w' is universal and the mechanic passes.
+
+P2 (COMPLETE). One edit creates at most n-1 new words:  |C(v') \ C(v)| <= n-1  when v' is v
+  after one edit and both have length >= n.
+  Loss at k: a window of v' that does not contain both neighbours of the removed cell is, cell
+  for cell, a window of v. Exactly n-1 windows of v' contain both neighbours.
+  Doubling at k: a window of v' containing at most one of the two copies is a window of v;
+  exactly n-1 windows contain both copies.
+
+P3 (COMPLETE). Reversibility. An adversary doubling is undone by a loss of the new cell. An
+  adversary loss inside a run of length >= 2 is undone by doubling a remaining cell of that run.
+  So if w is universal, w is repairable iff for each isolated cell s, w-s is within one edit of
+  universal. (A loss of an isolated cell cannot be undone: no edit creates a run, and when
+  rho >= 4 the loss lowers rho by 2.)
+
+P4 (COMPLETE). Run count of short universal loops. If u is universal of length 2^n or 2^n+1
+  (n >= 2) then rho(u) = T = 2^(n-1).
+  rho(u)/2 = number of cells i with u_i u_(i+1) = 01 = number of windows whose word starts
+  with 01; likewise with 10. Length 2^n: every word is covered once, so both counts are
+  2^(n-2). Length 2^n+1: exactly one word is covered twice, all others once; the number of
+  windows starting 01 is 2^(n-2) + [the doubled word starts 01] and the number starting 10 is
+  2^(n-2) + [the doubled word starts 10]. Both equal rho/2, and the doubled word cannot start
+  with both, so both brackets are 0.
+
+P5 (COMPLETE). THEOREM: M(n) >= 2^n + 2 for every n >= 3.
+  By P0, L >= 2^n. Suppose w is repairable with L in {2^n, 2^n+1}; write rho = rho(w).
+  w is not constant (then no w'' has both symbols), so rho >= 2.
+  (a) Let the adversary play a loss in a run of length >= 2 (if one exists). w' has length L-1
+      and rho runs. w'' must be universal of length >= 2^n, so the mechanic passes or doubles
+      (if L = 2^n he must double); both keep rho runs, and w'' has length 2^n or 2^n+1.
+      By P4, rho = T.
+  (b) Let the adversary play a loss of an isolated cell (if one exists). If rho = 2 the result
+      is constant and cannot be repaired; so rho >= 4 and w' has rho-2 runs. As in (a) the
+      mechanic passes or doubles, w'' has rho-2 runs and length 2^n or 2^n+1, so rho = T+2.
+  So w cannot contain both kinds of run.
+  All runs isolated: then rho = L, and (b) gives L = T+2 = 2^(n-1)+2 < 2^n for n >= 3. Contradiction.
+  All runs of length >= 2: then (a) gives rho = T and L >= 2 rho = 2^n. So either L = 2^n with all
+  runs of length exactly 2, or L = 2^n+1 with one run of length 3 and the rest of length 2.
+  A universal loop needs a 0-run of length >= n >= 3 and a 1-run of length >= n >= 3. Let the
+  adversary play a loss in the run of length 3 if there is one (any run otherwise). Now every
+  run has length <= 2. The mechanic cannot play a loss (w'' would have length L-2 < 2^n), so he
+  passes or doubles, which lengthens at most one run, to at most 3. So at most one symbol has
+  a run of length >= 3 in w''. Contradiction.                                               QED
+  Remark: the proof does not assume w universal.
+
+P6 (COMPLETE, by the definitions). The values M(1)=4, M(2)=4 do not follow the pattern; they are
+  computed (slow.py), and the hand reasons are: n=1 needs two 0s and two 1s (a symbol occurring
+  once is deleted and cannot be recreated); n=2 has 0011.
+
+----------------------------------------------------------------------------------------
+P7 (SKETCH -- NOT A PROOF). Why I expect M(n) - 2^n to be unbounded.
+  Take w universal of length 2^n + e, s an isolated cell, the adversary deletes s.
+  Let U_s = words all of whose occurrences in w are windows through s, J = the n-1 junction
+  words of w-s, N = the <= n-1 new words of the mechanic's edit (P2). Repair forces
+  U_s \ J  subset of N, hence |U_s \ J| <= n-1 while there are n windows through s.
+  (i)  [proved, see below] A junction word can equal a word of a window through s only if s sits
+       at a square: for some 1 <= d <= n-1, w[-d..-1] = w[0..d-1] with w[d] = w[1], or the mirror
+       image. So away from such periodic contexts all n windows through s are lost unless one of
+       them carries a word that occurs twice in w, and there are at most 2e such windows.
+  (ii) [gap] The count in (i) is tight by one: a single saved word makes |U_s \ J| = n-1 and the
+       counting alone gives no contradiction. To finish one must use that the mechanic's edit has
+       to rebuild the whole factor of length 2n-2 around s out of a near-copy elsewhere, and that
+       a doubling of a run of length r <= n-2 itself destroys the n-r-1 windows containing that
+       whole run, which must then be multiply covered. If that is made rigorous, each multiply
+       covered window serves O(n^2) isolated cells, while a universal loop has >= 2^(n-7) cells in
+       the context 1001001 (n >= 7), giving e >= c 2^n / n^2.
+  Steps not done: the order of the rebuilt windows, the mechanic's loss case, the mechanic acting
+  next to the adversary's junction, and non-universal w. Treat P7 as a heuristic only.
+  Derivation of (i): put s at cell 0. A junction window J covers cells [p,q] minus {0}, q-p = n,
+  p <= -1, q >= 1; a window W through s covers [u,u+n-1], -(n-1) <= u <= 0. Equality of words
+  reads w[c] = w[c+d] for c in [p,-1] and w[c] = w[c+d-1] for c in [1,q], with d = u-p.
+  d = 0 forces w[0] = w[1], false. d > 0: -p >= d, so the first family contains c = -d..-1, the
+  square; c = 1 in the second gives w[d] = w[1]. d < 0 is the mirror image.
+
+----------------------------------------------------------------------------------------
+P8 (COMPLETE as an argument; its implementation is validated only empirically, see validation3.txt).
+  Soundness of the "needy cell" pruning used for n=6 (dfs2.cpp / dfs3.cpp).
+  Let w be repairable of length L = 2^n + e and miss exactly k words. Then
+  (a) k <= n-1: the adversary passes and one edit creates <= n-1 words (P2).
+  (b) the number of windows whose word already occurred at an earlier window (cyclic) is e + k,
+      so any linear prefix has at most e + k such repeats.
+  (c) Let s be an isolated cell, J_s the junction words of w-s, and call a window W through s
+      "saved" if its word is in J_s or also occurs at another window of w. After the adversary
+      deletes s, every word of an unsaved window, and every missing word not in J_s, is absent
+      from w-s and must be created by the mechanic's single edit: at most n-1 words. With n
+      windows through s:  (#saved windows through s) + |Miss ∩ J_s| >= k+1.
+      (Counting two equal-word windows through s as two saved windows only weakens the test.)
+  (d) In a prefix, a window through s that is not yet saved can only become saved by a later
+      window repeating its word; one later window repeats one word, whose single earlier
+      occurrence is one window, i.e. n consecutive cells. So isolated cells pairwise >= n apart
+      need pairwise different later repeats, and the total number of later repeats is at most
+      (e + k) - (repeats so far). Missing words are words unseen so far; if the unseen junction
+      words of the chosen cells are pairwise disjoint, they contribute at most k savers in total.
+  The search prunes a prefix exactly when (c),(d) cannot be met. Normalisation (first run is a
+  longest 0-run, last cell is 1) only removes rotations. Every surviving complete loop is tested
+  with the full definition.
+  Empirical check: for n=2..5 (13 (n,L) pairs, including n=4, L=20..22 where non-universal
+  repairable loops exist) the pruned search returns exactly the loops found without this pruning.

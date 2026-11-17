@@ -1,0 +1,11 @@
+# n=1 w=0011
+# adversary move -> mechanic move (cells 0-indexed in the loop they act on) -> w''
+pass -1 -> pass -1 -> 0011
+loss 0 -> pass -1 -> 011
+loss 1 -> pass -1 -> 011
+loss 2 -> pass -1 -> 001
+loss 3 -> pass -1 -> 001
+double 0 -> pass -1 -> 00011
+double 1 -> pass -1 -> 00011
+double 2 -> pass -1 -> 00111
+double 3 -> pass -1 -> 00111

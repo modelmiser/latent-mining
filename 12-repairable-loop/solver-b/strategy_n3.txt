@@ -1,0 +1,15 @@
+w= 0001011101 len 10 universal
+pass  -1 -> 0001011101 : pass@-1 loss@3 loss@4 loss@8 loss@9 dbl@0 dbl@3 dbl@4 dbl@5 dbl@8 dbl@9
+loss   0 -> 001011101 : loss@2 loss@8 dbl@0
+loss   3 -> 000011101 : pass@-1 loss@0 dbl@0 dbl@4
+loss   4 -> 000111101 : pass@-1 loss@3 dbl@0 dbl@3
+loss   5 -> 000101101 : loss@4 loss@7 dbl@5
+loss   8 -> 000101111 : pass@-1 loss@5 dbl@0 dbl@5
+loss   9 -> 000101110 : pass@-1 loss@0 loss@8 dbl@0 dbl@5 dbl@8
+dbl    0 -> 00001011101 : pass@-1 loss@0 loss@4 loss@5 loss@9 loss@10 dbl@0 dbl@4 dbl@5 dbl@6 dbl@9 dbl@10
+dbl    3 -> 00011011101 : pass@-1 loss@3 loss@5 dbl@0 dbl@3 dbl@5 dbl@6 dbl@9
+dbl    4 -> 00010011101 : pass@-1 loss@3 loss@4 dbl@0 dbl@3 dbl@4 dbl@6 dbl@10
+dbl    5 -> 00010111101 : pass@-1 loss@3 loss@4 loss@5 loss@9 loss@10 dbl@0 dbl@3 dbl@4 dbl@5 dbl@9 dbl@10
+dbl    8 -> 00010111001 : pass@-1 loss@8 loss@10 dbl@0 dbl@3 dbl@5 dbl@8 dbl@10
+dbl    9 -> 00010111011 : pass@-1 loss@8 loss@9 dbl@0 dbl@4 dbl@5 dbl@8 dbl@9
+REPAIRABLE

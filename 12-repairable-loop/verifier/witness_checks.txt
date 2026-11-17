@@ -1,0 +1,67 @@
+== witnesses (ref.py, literal definition, every cell)
+n=1 len=4 universal=True adversary_moves=9 unanswered=0 -> REPAIRABLE
+n=2 len=4 universal=True adversary_moves=9 unanswered=0 -> REPAIRABLE
+n=3 len=10 universal=True adversary_moves=21 unanswered=0 -> REPAIRABLE
+n=4 len=18 universal=True adversary_moves=37 unanswered=0 -> REPAIRABLE
+n=5 len=34 universal=True adversary_moves=69 unanswered=0 -> REPAIRABLE
+n=4 len=18 universal=True adversary_moves=37 unanswered=0 -> REPAIRABLE
+n=5 len=34 universal=True adversary_moves=69 unanswered=0 -> REPAIRABLE
+n=6 len=78 universal=True adversary_moves=157 unanswered=0 -> REPAIRABLE
+n=6 len=80 universal=True adversary_moves=161 unanswered=0 -> REPAIRABLE
+n=6 len=76 universal=True adversary_moves=153 unanswered=0 -> REPAIRABLE
+n=6 len=78 universal=True adversary_moves=157 unanswered=0 -> REPAIRABLE
+n=6 len=78 universal=True adversary_moves=157 unanswered=0 -> REPAIRABLE
+== deliberately broken witnesses (must be NOT repairable)
+n=6 len=76 universal=False adversary_moves=153 unanswered=99 -> NOT repairable
+   unanswered: (('loss', 3), '111100100000011110010101000110011010101000010111011011111101000100111000010')
+   unanswered: (('dbl', 3), '11100100100000011110010101000110011010101000010111011011111101000100111000010')
+   unanswered: (('loss', 4), '111000100000011110010101000110011010101000010111011011111101000100111000010')
+n=6 len=75 universal=False adversary_moves=151 unanswered=117 -> NOT repairable
+   unanswered: (('loss', 3), '11110010000011110010101000110011010101100010111011011111101000100111000010')
+   unanswered: (('dbl', 3), '1110010010000011110010101000110011010101100010111011011111101000100111000010')
+   unanswered: (('loss', 4), '11100010000011110010101000110011010101100010111011011111101000100111000010')
+n=6 len=76 universal=False adversary_moves=153 unanswered=148 -> NOT repairable
+   unanswered: (('pass', -1), '1110100100000011110001101000110011010101100010111011011111101000100111000010')
+   unanswered: (('loss', 0), '110100100000011110001101000110011010101100010111011011111101000100111000010')
+   unanswered: (('dbl', 0), '11110100100000011110001101000110011010101100010111011011111101000100111000010')
+n=3 len=8 universal=True adversary_moves=17 unanswered=2 -> NOT repairable
+   unanswered: (('loss', 3), '0000111')
+   unanswered: (('loss', 4), '0001111')
+n=3 len=9 universal=True adversary_moves=19 unanswered=2 -> NOT repairable
+   unanswered: (('loss', 3), '00001110')
+   unanswered: (('loss', 4), '00011110')
+n=5 len=34 universal=False adversary_moves=69 unanswered=62 -> NOT repairable
+   unanswered: (('pass', -1), '0000011100110001010111110110101011')
+   unanswered: (('loss', 0), '000011100110001010111110110101011')
+   unanswered: (('dbl', 0), '00000011100110001010111110110101011')
+n=4 len=16 universal=True adversary_moves=33 unanswered=4 -> NOT repairable
+   unanswered: (('loss', 4), '000000110101111')
+   unanswered: (('loss', 9), '000010011101111')
+   unanswered: (('loss', 10), '000010011001111')
+n=2 len=4 universal=False adversary_moves=9 unanswered=1 -> NOT repairable
+   unanswered: (('pass', -1), '0101')
+n=6 len=64 universal=False adversary_moves=129 unanswered=129 -> NOT repairable
+   unanswered: (('pass', -1), '1110100100000011110010101000110011010101100010111011011111101000')
+   unanswered: (('loss', 0), '110100100000011110010101000110011010101100010111011011111101000')
+   unanswered: (('dbl', 0), '11110100100000011110010101000110011010101100010111011011111101000')
+== same objects through the fast C++ checker
+n=6 len=78 missing=0 REPAIRABLE
+n=6 len=80 missing=0 REPAIRABLE
+n=6 len=76 missing=0 REPAIRABLE
+n=6 len=76 missing=5 NOT
+n=6 len=75 missing=1 NOT
+n=6 len=76 missing=5 NOT
+== strategy tables
+A-format ../solver-a/strategy_n1_L4.txt: n=1 len=4 lines=9 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+A-format ../solver-a/strategy_n2_L4.txt: n=2 len=4 lines=9 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+A-format ../solver-a/strategy_n3_L10.txt: n=3 len=10 lines=21 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+A-format ../solver-a/strategy_n4_L18.txt: n=4 len=18 lines=37 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+A-format ../solver-a/strategy_n5_L34.txt: n=5 len=34 lines=69 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+A-format ../solver-a/strategy_n6_L78.txt: n=6 len=78 lines=157 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+A-format ../solver-a/strategy_n6_L80.txt: n=6 len=80 lines=161 bad_lines=0 missing_adversary_moves=0 extra=0 -> OK
+B-format ../solver-b/strategy_n1.txt: n=1 len=4 rows=5 replies_checked=23 bad=0 adversary_moves_not_covered=0 -> OK
+B-format ../solver-b/strategy_n2.txt: n=2 len=4 rows=5 replies_checked=13 bad=0 adversary_moves_not_covered=0 -> OK
+B-format ../solver-b/strategy_n3.txt: n=3 len=10 rows=13 replies_checked=91 bad=0 adversary_moves_not_covered=0 -> OK
+B-format ../solver-b/strategy_n4.txt: n=4 len=18 rows=21 replies_checked=76 bad=0 adversary_moves_not_covered=0 -> OK
+B-format ../solver-b/strategy_n5.txt: n=5 len=34 rows=37 replies_checked=112 bad=0 adversary_moves_not_covered=0 -> OK
+B-format ../solver-b/strategy_n6_L76.txt: n=6 len=76 rows=81 replies_checked=403 bad=0 adversary_moves_not_covered=0 -> OK

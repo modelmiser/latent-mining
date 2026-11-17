@@ -1,0 +1,2 @@
+COUNT n=6 m=66 mode=0 prefix=0000001100 found=0 unis=14155776 tested=14155776 nodes=1195569896
+exit 0

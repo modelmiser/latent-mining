@@ -1,0 +1,15 @@
+COUNT n=5 m=32 mode=1 prefix= found=0 unis=2048 tested=98304 nodes=75361 0.43s 
+COUNT n=5 m=32 mode=0 prefix= found=0 unis=2048 tested=2048 nodes=75361 0.01s 
+COUNT n=5 m=32 mode=-1 prefix= found=0 unis=2048 tested=65536 nodes=75361 0.21s 
+0000011100110001010111110110101001 COUNT n=5 m=33 mode=1 prefix= found=16 unis=4096 tested=200704 nodes=455361 2.59s 
+COUNT n=5 m=33 mode=0 prefix= found=0 unis=4096 tested=4096 nodes=455361 0.03s 
+COUNT n=5 m=33 mode=-1 prefix= found=0 unis=4096 tested=135168 nodes=455361 1.22s 
+00000111001100010101111110110101001 COUNT n=5 m=34 mode=1 prefix= found=112 unis=9472 tested=480256 nodes=2135114 6.71s 
+0000011100110001010111110110101001 COUNT n=5 m=34 mode=0 prefix= found=20 unis=9472 tested=9472 nodes=2135114 0.11s 
+COUNT n=5 m=34 mode=-1 prefix= found=0 unis=9472 tested=322048 nodes=2135114 2.95s 
+000001110011000101011111110110101001 COUNT n=5 m=35 mode=1 prefix= found=320 unis=25728 tested=1347200 nodes=8395265 18.52s 
+00000111001100010101111110110101001 COUNT n=5 m=35 mode=0 prefix= found=40 unis=25728 tested=25728 nodes=8395265 0.32s 
+0000011100110001010111110110101001 COUNT n=5 m=35 mode=-1 prefix= found=400 unis=25728 tested=900480 nodes=8395265 9.07s 
+0000011111011100110001010110110101001 COUNT n=5 m=36 mode=1 prefix= found=1072 unis=71760 tested=3863776 nodes=29708748 51.58s 
+000001111101101010111001100010101001 COUNT n=5 m=36 mode=0 prefix= found=108 unis=71760 tested=71760 nodes=29708748 0.99s 
+00000111001100010101111110110101001 COUNT n=5 m=36 mode=-1 prefix= found=856 unis=71760 tested=2583360 nodes=29708748 26.94s 

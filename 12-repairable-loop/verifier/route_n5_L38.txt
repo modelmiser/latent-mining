@@ -1,0 +1,2 @@
+route n=5 L=38 rho=-1 comp=0 chunk=0/1 universal(L-1,L,L+1)=221904,630284,1724240 candidates=42139436 found(with dups)=1440 fast: skipped_universal=6284600 fast_rejected=20911028 full_tests=14313524 necklaces=1440 nonuniversal_necklaces=0 perk: 1440 0 0 0 0 0
+38.06s

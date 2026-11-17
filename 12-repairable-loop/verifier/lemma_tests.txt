@@ -1,0 +1,43 @@
+P2 (A) / filter used by referee: 257720 edits tested, violations=0
+n=2: universal loops tested=57; P4 violations=0 of 7; FactA violations=0; P3/Lemma4 violations=0
+n=3: universal loops tested=214; P4 violations=0 of 26; FactA violations=0; P3/Lemma4 violations=0
+n=4: universal loops tested=3022; P4 violations=0 of 400; FactA violations=0; P3/Lemma4 violations=0
+Fact B: 73960 edits on loops with >=4 runs, violations=0
+Fact C on greedy de Bruijn order 6 and its complement/reverse: True True True
+Thm2/P1 n=1: every edit of DD still universal: True
+Thm2/P1 n=2: every edit of DD still universal: True
+Thm2/P1 n=3: every edit of DD still universal: True
+Thm2/P1 n=4: every edit of DD still universal: True
+Thm2/P1 n=5: every edit of DD still universal: True
+Thm2/P1 n=6: every edit of DD still universal: True
+P2 (A) / filter used by referee: 257720 edits tested, violations=0
+n=2: universal loops tested=57; P4 violations=0 of 7; FactA violations=0; P3/Lemma4 violations=0
+n=3: universal loops tested=214; P4 violations=0 of 26; FactA violations=0; P3/Lemma4 violations=0
+n=4: universal loops tested=3022; P4 violations=0 of 400; FactA violations=0; P3/Lemma4 violations=0
+Fact B: 73960 edits on loops with >=4 runs, violations=0
+Fact C on greedy de Bruijn order 6 and its complement/reverse: True True True
+Thm2/P1 n=1: every edit of DD still universal: True
+Thm2/P1 n=2: every edit of DD still universal: True
+Thm2/P1 n=3: every edit of DD still universal: True
+Thm2/P1 n=4: every edit of DD still universal: True
+Thm2/P1 n=5: every edit of DD still universal: True
+Thm2/P1 n=6: every edit of DD still universal: True
+../solver-b/n5L34.txt: loops=20 repairable(ref.py)=20 universal with only alternating surplus words=20 run counts={18: 20} S={10: 20}
+../solver-b/n4L18.txt: loops=216 repairable(ref.py)=216 universal with only alternating surplus words=216 run counts={10: 216} S={6: 216}
+../solver-a/n5_L34_all.txt: loops=20 repairable(ref.py)=20 universal with only alternating surplus words=20 run counts={18: 20} S={10: 20}
+../solver-a/n4_L18_all.txt: loops=12 repairable(ref.py)=12 universal with only alternating surplus words=12 run counts={10: 12} S={6: 12}
+n=2 length=2^n+0: run counts of universal loops {2: 2} within [T, T+2*floor(e/2)] = True
+n=2 length=2^n+1: run counts of universal loops {2: 5} within [T, T+2*floor(e/2)] = True
+n=2 length=2^n+2: run counts of universal loops {2: 9, 4: 6} within [T, T+2*floor(e/2)] = True
+n=2 length=2^n+3: run counts of universal loops {2: 14, 4: 21} within [T, T+2*floor(e/2)] = True
+n=2 length=2^n+4: run counts of universal loops {2: 20, 4: 50, 6: 12} within [T, T+2*floor(e/2)] = True
+n=3 length=2^n+0: run counts of universal loops {4: 8} within [T, T+2*floor(e/2)] = True
+n=3 length=2^n+1: run counts of universal loops {4: 18} within [T, T+2*floor(e/2)] = True
+n=3 length=2^n+2: run counts of universal loops {4: 30, 6: 15} within [T, T+2*floor(e/2)] = True
+n=3 length=2^n+3: run counts of universal loops {4: 44, 6: 99} within [T, T+2*floor(e/2)] = True
+n=3 length=2^n+4: run counts of universal loops {4: 60, 6: 306, 8: 24} within [T, T+2*floor(e/2)] = True
+n=4 length=2^n+0: run counts of universal loops {8: 128} within [T, T+2*floor(e/2)] = True
+n=4 length=2^n+1: run counts of universal loops {8: 272} within [T, T+2*floor(e/2)] = True
+n=4 length=2^n+2: run counts of universal loops {8: 432, 10: 252} within [T, T+2*floor(e/2)] = True
+n=4 length=2^n+3: run counts of universal loops {8: 608, 10: 1330} within [T, T+2*floor(e/2)] = True
+n=4 length=2^n+4: run counts of universal loops {8: 800, 10: 4830, 12: 400} within [T, T+2*floor(e/2)] = True

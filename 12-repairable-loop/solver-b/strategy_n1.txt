@@ -1,0 +1,7 @@
+w= 0011 len 4 universal
+pass  -1 -> 0011 : pass@-1 loss@0 loss@2 dbl@0 dbl@2
+loss   0 -> 011 : pass@-1 loss@1 dbl@0 dbl@1
+loss   2 -> 001 : pass@-1 loss@0 dbl@0 dbl@2
+dbl    0 -> 00011 : pass@-1 loss@0 loss@3 dbl@0 dbl@3
+dbl    2 -> 00111 : pass@-1 loss@0 loss@2 dbl@0 dbl@2
+REPAIRABLE

@@ -1,0 +1,55 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Fix an integer n >= 1. A loop is a cyclic binary word v = v_0 ... v_{m-1} of length m >= 1 (indices mod m). It covers a word c in {0,1}^n if some index i has v_{(i+j) mod m} = c_j for every j = 0..n-1 (windows may wrap, repeatedly if m < n). A loop is universal if it covers all 2^n words of length n.
+
+Edits on a loop of length m:
+- loss at cell k (legal only if m >= 2): remove v_k, giving a loop of length m-1;
+- doubling at cell k (always legal): insert a copy of v_k immediately after v_k, giving a loop of length m+1.
+
+Game, perfect information, exactly three moves.
+1. The designer chooses a loop w of length L.
+2. The adversary, seeing w, performs one legal edit at a cell of its choice, or passes. Result: w'.
+3. The mechanic, seeing w and w', performs one legal edit on w' (either kind, any cell), or passes. Result: w''.
+The designer wins iff w'' is universal.
+
+w is repairable if for every adversary move there is a mechanic move making w'' universal. M(n) is the least length of a repairable loop.
+
+HEADLINE. Find M(n) exactly for every n >= 1: a closed formula, or a theorem that determines it. The first instances to compute are M(4) and, if feasible, M(5). The general answer must in particular decide whether M(n) - 2^n stays bounded.
+
+UNVERIFIED beliefs, to be re-derived:
+- 2^n <= M(n) <= 2^(n+1). Lower: after an adversary loss, w'' has length at most L and a universal loop has length at least 2^n. Upper: a de Bruijn cycle of order n written twice around the loop stays universal after any one edit, so the mechanic passes.
+- M(1) = 4 (0011), M(2) = 4 (0011), M(3) = 10 (witness 0001011101, run lengths 3,1,1,3,1,1; length 9 excluded by a hand case analysis on run counts).
+- Lemma: if w is universal, every adversary edit except a loss in a run of length 1 is undone exactly by the mechanic (an edit changes one run length by 1; only deleting a length-1 run is irreversible, since no edit splits a run). So a universal w is repairable iff deleting any one length-1 run leaves a loop within one edit of universal. A shortest repairable loop is not known to be universal.
+
+GUESS (not a claim): M(n) - 2^n is unbounded, and in fact M(n) >= (1+d) 2^n for a constant d > 0, because deleting a length-1 run destroys about n words that a near-minimal loop covers only once, and the single repair needs a near-twin context whose own words must already be covered twice.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

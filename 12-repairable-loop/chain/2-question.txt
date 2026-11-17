@@ -1,0 +1,23 @@
+The tape loop with a mechanic.
+
+Fix an integer n >= 1. A loop is a cyclic binary word v = v_0 ... v_{m-1} of length m >= 1 (indices mod m). It covers a word c in {0,1}^n if some index i has v_{(i+j) mod m} = c_j for j = 0..n-1 (windows may wrap, several times if m < n). A loop is universal if it covers all 2^n words of length n.
+
+Two kinds of edit apply to a loop v of length m:
+- loss at cell k (legal only if m >= 2): remove v_k, giving a loop of length m-1;
+- doubling at cell k: insert a second copy of v_k immediately after v_k, giving a loop of length m+1.
+Neither edit can create a symbol that is not a copy of an adjacent one. (Equivalently: an edit changes the length of one maximal run by 1; a loss in a run of length 1 deletes that run and merges its two neighbours, and no edit can ever split a run.)
+
+The game has three moves, all with perfect information.
+1. The designer commits to a loop w of length L.
+2. The adversary, seeing w, performs one edit (loss or doubling at a cell of its choice) or passes. Call the result w'.
+3. The mechanic, seeing w' (and w), performs one edit on w' (loss or doubling at a cell of its choice, of either kind, independent of what the adversary did) or passes. Call the result w''.
+The designer wins if w'' is universal. There are no further moves.
+
+Call w repairable if the designer wins against every adversary move, that is, if for each of the 2L+1 possible w' (2L when L = 1) there is at least one mechanic move with w'' universal. Let M(n) be the least length of a repairable loop, and R(n) the number of repairable loops of length M(n), counted up to rotation.
+
+Question. Determine M(n) and R(n) for n = 1, 2, 3, 4, 5, and determine M(n) for all n by a closed formula or a theorem. In particular:
+(a) for which n is M(n) = 2^n, i.e. for which n does there exist a de Bruijn cycle of order n that is repairable;
+(b) is M(n) - 2^n bounded as n grows, and if so what is its eventual value;
+(c) for n >= 2, is every repairable loop of length M(n) obtained from a de Bruijn cycle of order n by doublings?
+
+Anchors to be re-derived, not trusted. Since w'' has length at least L - 1 + 1 after the worst loss and must have length at least 2^n, M(n) >= 2^n. By hand M(1) = 4 (loop 0011; the loop 01 fails because a loss leaves a one-symbol loop that doubling cannot diversify) and M(2) = 4 (loop 0011: after the loss of a 0 the mechanic doubles the remaining 0). For n = 3 both de Bruijn cycles appear to fail: the adversary deletes a run of length 1 (the 1 in 00010111 becomes 0000111), the mechanic must return to length 8 by one doubling, and neither 00000111 nor 00001111 is universal; so M(3) >= 9 appears to hold. A loop all of whose single-edit damages are already universal is repairable with the mechanic passing, and writing a de Bruijn cycle twice around the loop is such a loop, so M(n) <= 2^(n+1).

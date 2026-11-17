@@ -1,0 +1,33 @@
+brute n=1 L=1 repairable necklaces: 0 
+brute n=1 L=2 repairable necklaces: 0 
+brute n=1 L=3 repairable necklaces: 0 
+brute n=1 L=4 repairable necklaces: 2 1100
+brute n=1 L=5 repairable necklaces: 4 11000
+brute n=1 L=6 repairable necklaces: 10 110000
+brute n=1 L=7 repairable necklaces: 16 1100000
+brute n=1 L=8 repairable necklaces: 32 11000000
+brute n=1 L=9 repairable necklaces: 56 110000000
+brute n=1 L=10 repairable necklaces: 104 1100000000
+brute n=1 L=11 repairable necklaces: 184 11000000000
+brute n=2 L=1 repairable necklaces: 0 
+brute n=2 L=2 repairable necklaces: 0 
+brute n=2 L=3 repairable necklaces: 0 
+brute n=2 L=4 repairable necklaces: 1 1100
+brute n=2 L=5 repairable necklaces: 2 11000
+brute n=2 L=6 repairable necklaces: 9 110000
+brute n=2 L=7 repairable necklaces: 14 1100000
+brute n=2 L=8 repairable necklaces: 31 11000000
+brute n=2 L=9 repairable necklaces: 54 110000000
+brute n=2 L=10 repairable necklaces: 103 1100000000
+brute n=2 L=11 repairable necklaces: 182 11000000000
+brute n=3 L=1 repairable necklaces: 0 
+brute n=3 L=2 repairable necklaces: 0 
+brute n=3 L=3 repairable necklaces: 0 
+brute n=3 L=4 repairable necklaces: 0 
+brute n=3 L=5 repairable necklaces: 0 
+brute n=3 L=6 repairable necklaces: 0 
+brute n=3 L=7 repairable necklaces: 0 
+brute n=3 L=8 repairable necklaces: 0 
+brute n=3 L=9 repairable necklaces: 0 
+brute n=3 L=10 repairable necklaces: 3 1110101000
+brute n=3 L=11 repairable necklaces: 10 11101010000

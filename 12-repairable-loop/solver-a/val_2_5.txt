@@ -1,0 +1,6 @@
+R 00111 universal
+R 00011 universal
+dfs2 n=2 L=5 k=0 maxrep=1 prune2=on prefixes=0 leaves=5 pruned2=0 repairable(normalised words)=2
+R 00111 universal
+R 00011 universal
+dfs2 n=2 L=5 k=1 maxrep=2 prune2=on prefixes=0 leaves=7 pruned2=0 repairable(normalised words)=2

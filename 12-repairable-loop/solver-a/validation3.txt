@@ -1,0 +1,13 @@
+n=2 L=6 pruned-union=10 nonuniv=5 leaves: leaves=10 leaves=13 
+n=2 L=7 pruned-union=17 nonuniv=6 leaves: leaves=21 leaves=23 
+n=3 L=10 pruned-union=3 nonuniv=0 leaves: leaves=48 leaves=87 leaves=111 
+n=3 L=11 pruned-union=10 nonuniv=0 leaves: leaves=119 leaves=192 leaves=221 
+n=3 L=12 pruned-union=25 nonuniv=0 leaves: leaves=277 leaves=387 leaves=432 
+n=4 L=18 pruned-union=12 nonuniv=0 leaves: leaves=505 leaves=1766 leaves=2876 leaves=3418 
+n=4 L=19 pruned-union=24 nonuniv=0 leaves: leaves=2052 leaves=5646 leaves=8899 leaves=9480 
+n=4 L=20 pruned-union=62 nonuniv=2 leaves: leaves=6737 leaves=16186 leaves=23412 leaves=24460 
+n=4 L=21 pruned-union=308 nonuniv=8 leaves: leaves=19820 leaves=41381 leaves=57089 leaves=58277 
+n=4 L=22 pruned-union=1172 nonuniv=52 leaves: leaves=52248 leaves=99649 leaves=131423 leaves=131768 
+n=5 L=34 pruned-union=20 nonuniv=0 leaves: leaves=10036 leaves=23565 leaves=14145 leaves=5325 leaves=2529 
+n=5 L=35 pruned-union=40 nonuniv=0 leaves: leaves=97537 leaves=200889 leaves=145067 leaves=46272 leaves=14274 
+n=5 L=36 pruned-union=108 nonuniv=0 leaves: leaves=619217 leaves=1285070 leaves=1061733 leaves=342462 leaves=81895 

@@ -1,0 +1,12 @@
+R 0001010111 universal
+R 0001011101 universal
+R 0001110101 universal
+dfs2 n=3 L=10 k=0 maxrep=2 prune2=on prefixes=0 leaves=48 pruned2=2 repairable(normalised words)=3
+R 0001010111 universal
+R 0001011101 universal
+R 0001110101 universal
+dfs2 n=3 L=10 k=1 maxrep=3 prune2=on prefixes=0 leaves=87 pruned2=14 repairable(normalised words)=3
+R 0001010111 universal
+R 0001011101 universal
+R 0001110101 universal
+dfs2 n=3 L=10 k=2 maxrep=4 prune2=on prefixes=0 leaves=111 pruned2=21 repairable(normalised words)=3

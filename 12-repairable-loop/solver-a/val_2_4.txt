@@ -1,0 +1,4 @@
+R 0011 universal
+dfs2 n=2 L=4 k=0 maxrep=0 prune2=on prefixes=0 leaves=1 pruned2=1 repairable(normalised words)=1
+R 0011 universal
+dfs2 n=2 L=4 k=1 maxrep=1 prune2=on prefixes=0 leaves=4 pruned2=0 repairable(normalised words)=1

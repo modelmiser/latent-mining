@@ -1,0 +1,24 @@
+== C1 / C3: all universal loops n=3 L=8..13, n=4 L=16..19 (necklaces), random Euler loops n=5..8 e=0..6
+as stated: {'c1': 53352, 'c3': 748, 'loops': 748}
+FALSE VARIANT (N_f>=2^(n-k)+1; rho==T): {'c1bad': 46033, 'c1': 53352, 'c3': 748, 'loops': 748, 'c3bad': 470}
+== C2: exhaustive, all loops of length k+2..11 (k=2..6), every cell, both edits; exact multiset identity
+as stated: {'cases': 202240}
+FALSE VARIANT (doubling destroys k-1 windows): {'cases': 202240, 'dbl_bad': 202240}
+k=1 (outside the lemma; sum c_f <= k-1 = 0 must fail): {'cases': 3576, 'ineq_bad': 3576}
+below the stated length k+2 (information only): {('L=k', 'cases'): 256, ('L=k+1', 'cases'): 632}
+== Theorem 1 steps 3-6: my own enumeration of mechanic options on 3-window excess vectors
+step 3: every solution in [-3,3]^8 of the linear constraints has the stated form; solutions: 35
+step 4: (t,z) in [-6,6]^2 surviving both moves: [(0, 0)]  | surviving the first move only (shows the check can fail): 6
+step 5 options after deleting an isolated 1: [('dbl', '101')]
+   resulting excess: [{'000': 2}] (loss must end at total 0: none of the loss options listed means none feasible)
+step 6 options after deleting the middle of 10101: [('loss', '01001'), ('loss', '10010'), ('loss', '10011'), ('loss', '11001')]
+step 6 mirrored (middle of 01010): [('loss', '00110'), ('loss', '01100'), ('loss', '01101'), ('loss', '10110')]
+== Step 5 'Lemma Z': universal, length 2^n+2, 3-excess = (000:+2, rest 0) => exactly one 0-run >= n-1 and it has length n+2
+as stated: {'univ': 85, 'hyp': 138}
+FALSE VARIANT (length n+1): {'univ': 85, 'hyp': 138, 'bad': 138}
+== Step 0 (E1,E2,E3): random universal u0 of length 2^n+1,+2,+3; w = every inverse edit (resp. u0 itself)
+n=5 {'w': 1117, 'E3bad': 140, 'E1bad': 44} (proof claims n>=7 only; failures at n=5,6 show the test can fail)
+n=6 {'w': 2172, 'E3bad': 15} (proof claims n>=7 only; failures at n=5,6 show the test can fail)
+n=7 {'w': 4281} 
+n=8 {'w': 8506} 
+n=9 {'w': 5652} 

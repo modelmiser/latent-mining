@@ -1,0 +1,22 @@
+R 010111 NOT-universal
+R 011011 NOT-universal
+R 011101 NOT-universal
+R 001001 NOT-universal
+R 001011 universal
+R 001101 universal
+R 001111 universal
+R 000101 NOT-universal
+R 000111 universal
+R 000011 universal
+dfs2 n=2 L=6 k=0 maxrep=2 prune2=on prefixes=0 leaves=10 pruned2=0 repairable(normalised words)=10
+R 010111 NOT-universal
+R 011011 NOT-universal
+R 011101 NOT-universal
+R 001001 NOT-universal
+R 001011 universal
+R 001101 universal
+R 001111 universal
+R 000101 NOT-universal
+R 000111 universal
+R 000011 universal
+dfs2 n=2 L=6 k=1 maxrep=3 prune2=on prefixes=0 leaves=13 pruned2=0 repairable(normalised words)=10

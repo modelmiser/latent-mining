@@ -1,0 +1,15 @@
+repairable loops loaded: {3: 38, 4: 1782, 5: 168, 6: 3}
+n=3: G2 tests=114 violations=0 | G3 tests=420 violations=0 | FALSE variant 'rhs 2': violations=52 | FALSE variant 'ignore junction': violations=0
+n=4: G2 tests=7128 violations=0 | G3 tests=48656 violations=0 | FALSE variant 'rhs 2': violations=2404 | FALSE variant 'ignore junction': violations=432
+n=5: G2 tests=840 violations=0 | G3 tests=8880 violations=0 | FALSE variant 'rhs 2': violations=1176 | FALSE variant 'ignore junction': violations=672
+n=6: G2 tests=18 violations=0 | G3 tests=408 violations=0 | FALSE variant 'rhs 2': violations=0 | FALSE variant 'ignore junction': violations=3
+n=4: G3 violated on 20 of 20 random de Bruijn cycles (not repairable; expected > 0)
+n=5: G3 violated on 20 of 20 random de Bruijn cycles (not repairable; expected > 0)
+n=6: G3 violated on 20 of 20 random de Bruijn cycles (not repairable; expected > 0)
+n=7: G3 violated on 20 of 20 random de Bruijn cycles (not repairable; expected > 0)
+G4 on random de Bruijn cycles n=4..10: tests=375 violations=0 (max actual/bound=1.000) | FALSE 'min' variant violations=101 | FALSE 'no repeat term' violations=0
+G4 on de Bruijn + 1..6 random edits n=4..9: tests=431 violations=0 (max actual/bound=1.000) | FALSE 'min' variant violations=6 | FALSE 'no repeat term' violations=7
+G4 on random loops n=3..7: tests=571 violations=0 (max actual/bound=0.300) | FALSE 'min' variant violations=0 | FALSE 'no repeat term' violations=86
+G4 on periodic loops n=3..7: tests=573 violations=0 (max actual/bound=0.143) | FALSE 'min' variant violations=0 | FALSE 'no repeat term' violations=84
+G4 on known repairable loops: tests=542 violations=0 (max actual/bound=0.333) | FALSE 'min' variant violations=0 | FALSE 'no repeat term' violations=47
+G4 exhaustive, all loops of length 9..15, n=3,4: tests=160256 violations=0

@@ -1,0 +1,202 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as its author wrote it)
+ N1. Part 1 header and Theorem 1: "three independent exhaustive runs" for n = 6. Two runs cover all loops of
+     length 66 (solver A's pruned search; the referee's enumeration). Solver B's covers universal loops only.
+ N2. C3 needs n >= 2.
+ N3. Step 6 (a): "length n (as in Step 5)" - by the same count as in Step 5, applied to a de Bruijn cycle, where
+     0^n occurs once.
+ N4. Steps 6-7 and the Remarks say "a de Bruijn cycle plus one alternating pair". What Step 6 proves is: a
+     singleton 0 lengthened to 00, and a 1 inserted into a run 00, possibly at different places.
+ N5. G4: "w[-1] != w[0] is a non-trivial condition on the first d cells" is asserted. Reason (second reader): the
+     first family of equations makes w periodic with period d on [p, d-1]; cells -1 and 0 lie in that range in
+     different classes mod d (d >= 2), so they copy two different free cells and the condition excludes exactly
+     half of the 2^d assignments.
+ N6. G4: a repeat cell t accounts for s in [t+2, t+k-1], which is k-2 singletons; the text's k-1 is valid but loose.
+     "len(w) - #distinct repeats" means len(w) minus the number of distinct n-words of w.
+ N7. Theorem 2 "for all n": the closed bound is negative for n <= 15 (first positive at n = 16) and k = n-4 needs
+     n >= 6; (**) with the best k first improves on Theorem 1 at n = 15 (e >= 9). The summary sentence "fewer
+     than 2^(n-3) coincidences" is loose: the d-sum is 2^(n-3) + 16k - 48, plus the repeat term.
+ Found by the second reader and the review panel (five seats, four model families). None changes a theorem.
+=====================================================================================================
+PROOFS (open-growth).  Each item is tagged COMPLETE or SKETCH.  Tests named in [brackets] are files in this folder.
+
+Notation.  Loops are cyclic binary words.  For a loop v and a word f of length k, N_f(v) = number of cells i with
+v_i..v_{i+k-1} = f ("k-windows with word f").  Sum over all f of length k of N_f(v) = len(v).
+T = 2^(n-1), sigma = 2^(n-2).  rho(v) = number of runs, S(v) = number of runs of length 1 ("singletons").
+An "isolated" singleton is a run of length 1 whose two neighbour runs both have length >= 2.
+Used from the solvers (all checked by the referee): Fact A, Fact B, Fact C (solver B), P2 (solver A).
+
+=====================================================================================================
+PART 0.  THE COUNTING TOOLS                                                              (COMPLETE)
+=====================================================================================================
+C1.  If u is universal of order n and |f| = k <= n then N_f(u) >= 2^(n-k).
+     (An occurrence of f at cell i is an n-window at i whose word has prefix f; 2^(n-k) words have prefix f.)
+     More precisely N_f(u) = 2^(n-k) + #{surplus n-windows having f at offset j}, for every j in [0, n-k], where the
+     surplus multiset contains each n-word c exactly mult(c)-1 times (count the n-windows starting at i-j).
+
+C2.  One edit, k >= 2, loop length >= k+2.  Exact effect on the multiset of k-windows:
+       loss of cell c:      the k windows through c disappear, the k-1 windows containing both neighbours appear;
+       doubling of cell c:  the k-2 windows that contain c and c+1 and do not start at c disappear, the k-1 windows
+                            containing both copies appear (the old window starting at c survives at the copy).
+     In both cases N_f(v') <= N_f(v) + c_f for all f, with c_f >= 0 and sum_f c_f <= k-1.
+     For k = 3: loss of c in context o p c q r:  -opc -pcq -cqr +opq +pqr;  doubling of c in context p c q:
+     -pcq +pcc +ccq.                          [t_formulas.py: 8000 random edits, k=2..6, 0 mismatches; false for k=1]
+
+C3.  (run count; referee's lemma)  u universal of length 2^n+e  =>  rho(u) = T + 2a with 0 <= a <= e/2.
+     rho/2 = N_01 = 2^(n-2) + #{surplus windows starting 01} = N_10 = 2^(n-2) + #{surplus windows starting 10}.
+
+=====================================================================================================
+PART 1.  THEOREM 1.  For every n >= 7 no loop of length 2^n + 2 is repairable.           (COMPLETE)
+         With the computed case n = 6 (three independent exhaustive runs):  M(n) >= 2^n + 3 for all n >= 6.
+=====================================================================================================
+Let n >= 7 and suppose w is repairable, len(w) = 2^n+2.  b_k = 2^(n-k);  x(f) = N_f(w) - b_|f| (may be negative).
+For every word g:  x(g) = x(g0)+x(g1) = x(0g)+x(1g)   (*)   (true for N, and b_k = 2 b_(k+1)).
+
+Step 0 (moves that exist).  The adversary may pass, so w is one edit (or none) away from a universal loop u0.
+ As in the proof of Fact C, w arises from u0 by altering at most ONE run of u0 (a run gets +-1 cell, or is split by
+ a foreign cell); every other run keeps its length, and unaltered runs adjacent in u0 stay adjacent in w.
+ (E1) w has three consecutive singleton runs.  u0 contains (01)^.. and (10)^.. of length n >= 7.  If the two
+      occurrences share a cell they agree there, so they are shifted by an odd amount and their union is an alternating
+      stretch of >= n+1 >= 8 cells, with >= 6 consecutive interior singleton runs R1..R6; one altered run leaves
+      R1R2R3 or R4R5R6.  If they share no cell, each has 5 consecutive interior singleton runs and the altered run
+      meets at most one of the two groups.
+ (E2) w has a run of length exactly 2 and >= 4 runs (Fact C; in fact rho(w) >= T - 2).
+ (E3) w has an isolated 1-singleton and an isolated 0-singleton.  u0 has N_00100 >= 2^(n-5) >= 4 isolated
+      1-singletons; an altered run is a neighbour of at most two of them, or is one of them.  Same for 0.
+
+Step 1.  S(w) = sigma + 2, i.e. x(010) + x(101) = 2.
+ >=: the adversary deletes the middle run of (E1).  By Fact B, S drops by 3; one edit raises S by at most 1; the
+     result is universal, so S(w'') >= sigma (Fact A).  Hence S(w) - 2 >= sigma.
+ <=: the adversary deletes a cell of a run of length 2: S(w') = S(w)+1 >= sigma+3, len(w') = 2^n+1.
+     Pass: Fact A gives S(w') <= sigma+1, impossible.  Doubling: len(w'') = 2^n+2, S(w'') <= sigma+2 and
+     S(w'') >= S(w')-1 = S(w).  Loss: len(w'') = 2^n, S(w'') = sigma >= S(w')-3.  Both give S(w) <= sigma+2.
+
+Step 2.  rho(w) = T + 2, i.e. x(01) = x(10) = 1, hence x(00) + x(11) = 0.
+ Deleting a cell of a 2-run: rho(w') = rho(w); pass / doubling / loss lead to a universal loop of length
+ 2^n+1 / 2^n+2 / 2^n with rho(w) or rho(w)-2 runs; by C3, rho(w) in {T, T+2}.
+ Deleting the middle run of (E1): rho(w') = rho(w)-2 and the same three cases give rho(w)-2 >= T.
+
+Step 3.  Put x(010) = 1+t, x(000) = z.  From Steps 1, 2 and (*):
+   x(101) = 1-t, x(011) = x(110) = -t, x(001) = x(100) = t, x(111) = -z.
+
+Step 4.  t = 0 and z = 0; i.e. x(010) = x(101) = 1 and x = 0 on the other six 3-words.
+ The adversary deletes an isolated 1 (context 00100): 3-windows 001, 010, 100 lose one occurrence each, 000 gains
+ two.  The mechanic creates at most two 3-windows (C2).  Afterwards every excess must be >= 0 (C1).
+   excess(001) = excess(100) = t-1: for t <= -1 four creations would be needed.  So t >= 0.
+ The adversary deletes an isolated 0 (context 11011): excess(011) = excess(110) = -t-1.  So t <= 0.
+ With t = 0: after the first move excess(001) = excess(100) = -1, so both creations are used up and
+ excess(111) = -z cannot be raised: z <= 0.  Symmetrically z >= 0.
+ [t_task1.py "Step 4": all (t,z) in [-4,4]^2, all 41 local mechanic moves: only (0,0) survives both moves;
+  with one move only, six pairs survive (the test can fail).]
+
+Step 5.  If the adversary deletes an isolated 1 of w, the mechanic must double a singleton 0 standing between two
+ 1s, and w'' has exactly one 0-run of length >= n-1, of length exactly n+2.
+ After the adversary: excess = (000: 2, 001: -1, 100: -1, 101: 1, others 0), length 2^n+1.  Pass: impossible.
+ Loss: w'' has length 2^n, so every excess must become 0: the three destroyed windows would be 000, 000, 101, which
+ are not three consecutive windows.  Doubling of c in context pcq creates pcc, ccq = {100, 001}: p=1, c=0, q=1,
+ destroying 101.  Result: excess(000) = 2, all other 3-words 0, length 2^n+2.          [t_task1.py "Step 5"]
+ By C1 both surplus n-windows of w'' carry 000 at every offset, i.e. both are 0^n: mult(0^n) = 3, every other
+ n-word has mult 1.  mult(1 0^(n-1)) = 1 says there is exactly one 0-run of length r >= n-1, and r-n+1 = 3.
+ [t_task1.py "Lemma Z": all universal loops of length 2^n+2 with excess(000)=2, n=3,4: 0 violations.]
+
+Step 6.  Complementing w if necessary, the middle run of (E1) is a 1, in context 1 0 [1] 0 1.  The adversary
+ deletes it: excess = (001: 1, 100: 1, 101: -1, others 0), length 2^n+1.  A doubling creates only windows with a
+ doubled letter, never 101; pass is impossible; so the mechanic plays a loss, len(w'') = 2^n, every excess 0, and
+ the only solutions are: delete one 0 of a run 00 standing between two 1s.            [t_task1.py "Step 6"]
+ So w'' = D is a de Bruijn cycle, and w is obtained from D by: lengthen a singleton 0-run (between 1s) to 00;
+ then insert a 1 into a run 00 (between 1s).  Consequences:
+  (a) the 0-runs of length >= 3 of w and of D correspond with equal lengths.  D has exactly one 0-run of length
+      >= n-1, of length n (as in Step 5).  So w has exactly one 0-run Z of length >= n-1, and len(Z) = n.
+  (b) D contains 0001000 (n >= 7): a 1-singleton s* between 0-runs A, B of lengths p, q >= 3.  Neither operation
+      touches A, B or s*, so s* is an isolated 1-singleton of w with neighbour runs of lengths p, q >= 3.
+
+Step 7 (contradiction).  The adversary deletes s*.  By Step 5 the 0-runs of w'' are those of w, except that A and B
+ are replaced by one run of length p+q and one singleton 0-run became 00; and w'' has exactly one 0-run of length
+ >= n-1, of length n+2.  If Z is neither A nor B, Z survives in w'' with length n: contradiction.  If Z = A then the
+ merged run has length n+q >= n+3: contradiction.  Likewise Z = B.                                         QED
+ [t_task1.py "Step 7": random loops D + pair (both forms of Step 6), n=4..9, literal brute-force replies:
+  756 isolated singletons, every answerable one has neighbour runs {n,2}; the 172 with p,q >= 3 are never
+  answerable; the false variant "(p,q) = (n,2) only" fails.  t_formulas.py (b): in all 216+20 repairable loops of
+  length 2^n+2 for n=4,5 every isolated singleton has neighbour runs {n,2}, and each loop is "D + pair".]
+
+Remarks.  Steps 1-6 show, for n >= 7, that a repairable loop of length 2^n+2 would have to be a de Bruijn cycle
+ with one alternating pair added; this is exactly what all minimal loops look like for n = 4, 5.  The proof fails
+ for n = 6 only at (b): 0001000 does not fit; there both isolated 1s would have to sit as 1 00 1 0^6 1 00 1, which
+ the 3-window counts do not exclude (n = 6 is settled by the solvers' computation, not by this proof).
+
+=====================================================================================================
+PART 2.  THEOREM 2.  M(n) - 2^n is unbounded;  M(n) >= 2^n + (2^(n-3) - 19 n^2) / (19 n)  for all n.   (COMPLETE)
+=====================================================================================================
+Precise form.  Let w be repairable of length 2^n + e, n >= 4, 2 <= k <= n, m = n-k.  Then
+   2^(n-2) - 2  <=  k (2^m + 1)(e + k - 1)  +  2 sum_{d=2}^{k-1} (k-d) 2^(max(m,d)-1)  +  2 (k-1)(e + n - 1).   (**)
+With k = n-4 this gives the displayed bound; bound.py tabulates the best k (first non-trivial at n = 14;
+e >= 9 at n = 15, e >= 418 at n = 20, e >= 272775 at n = 30; e >= (1-o(1)) 2^n / (152 n)).
+
+Fix k, b = 2^m, x(f) = N_f(w) - b for |f| = k, P = {f : x(f) >= 1}.
+
+G1.  sum_f x(f) = e.
+
+G2.  sum_f max(0, -x(f)) <= k-1; hence sum_{f in P} x(f) <= e + k - 1.
+ The adversary passes; the mechanic reaches a universal u0 by at most one edit; N_f(w) + c_f >= N_f(u0) >= b with
+ sum c_f <= k-1 (C1, C2).                                       [t_growth.py: 8100 (loop,k) cases, 0 violations]
+
+G3 (key lemma).  Let s be a singleton cell of w, F_s the set of words of the k windows through s, and call s
+ "k-bad" if one of the k-1 junction windows of w - s (those containing both neighbours of s) has its word in F_s.
+ If s is not k-bad then some window through s has its word in P.   More generally
+        sum_{f in F_s} x(f)  >=  1 - #{junction windows whose word is in F_s}.
+ Proof.  The adversary deletes s.  The windows of w' are the windows of w not through s (same words) and the
+ junction windows, so sum_{f in F_s} N_f(w') = sum_{f in F_s} N_f(w) - k + #{junction windows with word in F_s}.
+ The mechanic's move adds at most k-1 windows in total (C2) and must end with N_f >= b for each f in F_s (C1).
+ [t_growth.py: every singleton of every known repairable loop (n=3..6, 1991 loops), every k: 58364 cases,
+  0 violations; the false variants "right side 2" and "ignore the junction" fail (3632 and 1107 violations);
+  the lemma is violated by 80 of 80 random de Bruijn cycles, which are not repairable.]
+
+G4.  For ANY loop w of length > 2n+2 the number of k-bad singletons is at most
+        2 sum_{d=2}^{k-1} (k-d) 2^(max(m,d)-1)  +  2 (k-1)(len(w) - #distinct n-words of w).
+ Proof.  Put s at cell 0.  Junction window J_p = cells [p, p+k] minus 0 (p in [-(k-1), -1]); through window
+ W_u = cells [u, u+k-1] (u in [-(k-1), 0]); d = u-p.  word(J_p) = word(W_u) reads
+        w[c+d] = w[c] for c in [p, -1],     w[c+d-1] = w[c] for c in [1, p+k].
+ d = 0 forces w[0] = w[1]; d = 1 forces w[0] = w[-1]; both false.  Reversing the loop sends d to 1-d, so it
+ suffices to count d >= 2 (then p in [-(k-1), -d]: k-d values) and double.  For d >= 2 each of the last k cells of
+ the factor on [p, p+k+d-1] is a copy of an earlier cell, so the factor is determined by its first d cells, and
+ w[-1] != w[0] is a non-trivial condition on those: at most 2^(d-1) factors.  [t_pi.py: exhaustive for k <= 8,
+ and the equivalence "junction word = through word <=> the equations" for k <= 5; 2^(d-2) fails.]
+ Hence the n-window starting at cell p belongs to a set of at most 2^(max(m,d)-1) n-words (if k+d <= n: 2^(d-1)
+ factors times 2^(n-k-d) continuations; if k+d > n: the n-prefix of the factor).  Call a cell a "repeat" if its
+ n-window word already occurred at an earlier cell (fixed linear order); there are len(w) - #distinct repeats, and
+ non-repeat cells carry distinct words (the reversed loop has the same number of repeats).  For fixed (p,d) the
+ map s -> s+p is injective, so at most
+ 2^(max(m,d)-1) bad singletons have s+p non-repeat; and a repeat cell t accounts for at most k-1 singletons
+ (s in [t+2, t+k-1]).                 [t_growth.py: exhaustive for all loops of length 9..15 with n=3,4 (160256
+ cases) and 2492 cases on de Bruijn cycles n<=10, edited de Bruijn cycles, random, periodic and repairable loops:
+ 0 violations, bound attained; the false variants "min instead of max" and "no repeat term" fail.]
+
+Proof of (**).  S(w) = N_010 + N_101 >= 2^(n-2) - 2 (G2 with k = 3).  w misses at most n-1 words (P2 and the pass
+ move), so len(w) - #distinct <= e + n - 1.  Every singleton that is not k-bad lies in a k-window whose word is in
+ P (G3); such windows number sum_{f in P} (b + x(f)) <= (b+1) sum_{f in P} x(f) <= (2^m+1)(e+k-1) (G2), and each
+ contains at most k singletons.  Add G4.                                                                  QED
+ For k = n-4:  2 sum <= 48(k-2) + 2^(n-3), and (**) rearranges to e (19k-2) >= 2^(n-3) - 19n^2 + 117n - 64.
+
+Why k < n is the point.  With k = n (solver A's P7, solver B's Sketch 6) the junction coincidences of G4 cannot be
+ bounded: they number up to about 2^n.  With k = n-4 a coincidence is still a k-bit event, but its pattern has
+ length k+d <= 2k-1, and its n-prefix is pinned by d <= k-1 = n-5 free cells, so coincidences number < 2^(n-3),
+ while N_f >= 2^(n-k) = 16 remains a valid necessary condition for every k-word.
+
+=====================================================================================================
+PART 3.  WHAT IS NOT PROVED
+=====================================================================================================
+SKETCH A (NOT a proof):  M(n) >= (1+d) 2^n.
+ G3 only uses that the mechanic creates <= k-1 windows.  His edit also destroys k-2 or k windows at its own site;
+ for a singleton that is not bad, with a set A_s of windows through s in P, the same accounting gives
+     #(windows through s with word in P) + #(windows destroyed at the mechanic's site with word in P) >= k
+ up to coincidences.  If one site could serve only O(1) singletons this would give e >= c 2^n.  The gap: at the
+ level of k-words one edit creates k-1 words, and a created word z serves every singleton lying in any of the
+ 2^m occurrences of z, at any offset.  To get O(1) one must show that the created windows are aligned with the
+ windows through s (same order), which fails exactly when the site's context is periodic; I could bound this for
+ pairs of windows overlapping in >= k/2 cells but not in general.  Not done.
+
+SKETCH B (NOT a proof):  no upper bound better than 2^(n+1) was found.  The natural construction "de Bruijn cycle
+ plus a twin region" (a second copy with spare cells every >= 2n cells) is longer than DD, because every window
+ through a singleton that does not cross the twin's spare cell must be covered twice.  No construction was tested.
+
+Not attempted: narrowing 67 <= M(6) <= 76.  Theorem 1 does not extend to length 2^n+3 without a new case analysis
+ (the 3-window excess vector is no longer forced).

@@ -1,0 +1,192 @@
+len=65 extra={000000 } universal_loops=1125744 candidates=37149552 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1863136 candidates=1863136 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1808384 candidates=28934144 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3833328 candidates=65166576 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=0/64 universal(L-1,L,L+1)=1125744,1863136,5641712 candidates=133113408 found(with dups)=0 fast: skipped_universal=3339136 fast_rejected=116018236 full_tests=11892900
+chunk 0 exit=0
+len=65 extra={000000 } universal_loops=1156640 candidates=38169120 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1623352 candidates=1623352 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1889768 candidates=30236288 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3072440 candidates=52231480 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=2/64 universal(L-1,L,L+1)=1156640,1623352,4962208 candidates=122260240 found(with dups)=0 fast: skipped_universal=3322336 fast_rejected=107017342 full_tests=10297210
+chunk 2 exit=0
+len=65 extra={000000 } universal_loops=1034372 candidates=34134276 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1912432 candidates=1912432 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1603704 candidates=25659264 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2335488 candidates=39703296 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=4/64 universal(L-1,L,L+1)=1034372,1912432,3939192 candidates=101409268 found(with dups)=0 fast: skipped_universal=2705354 fast_rejected=88520396 full_tests=8271086
+chunk 4 exit=0
+len=65 extra={000000 } universal_loops=1062680 candidates=35068440 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1690640 candidates=1690640 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1849776 candidates=29596416 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2608064 candidates=44337088 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=6/64 universal(L-1,L,L+1)=1062680,1690640,4457840 candidates=110692584 found(with dups)=0 fast: skipped_universal=2872092 fast_rejected=97033566 full_tests=9096286
+chunk 6 exit=0
+len=65 extra={000000 } universal_loops=986136 candidates=32542488 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=2374760 candidates=2374760 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1862844 candidates=29805504 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2358032 candidates=40086544 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=8/64 universal(L-1,L,L+1)=986136,2374760,4220876 candidates=104809296 found(with dups)=0 fast: skipped_universal=3118999 fast_rejected=91080461 full_tests=8235076
+chunk 8 exit=0
+len=65 extra={000000 } universal_loops=961120 candidates=31716960 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1624960 candidates=1624960 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1822928 candidates=29166848 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2612048 candidates=44404816 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=10/64 universal(L-1,L,L+1)=961120,1624960,4434976 candidates=106913584 found(with dups)=0 fast: skipped_universal=3311891 fast_rejected=93126103 full_tests=8850630
+chunk 10 exit=0
+len=65 extra={000000 } universal_loops=1163744 candidates=38403552 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1404928 candidates=1404928 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=2042936 candidates=32686976 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3477856 candidates=59123552 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=12/64 universal(L-1,L,L+1)=1163744,1404928,5520792 candidates=131619008 found(with dups)=0 fast: skipped_universal=3666356 fast_rejected=114902766 full_tests=11644958
+chunk 12 exit=0
+len=65 extra={000000 } universal_loops=768928 candidates=25374624 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1905176 candidates=1905176 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1975284 candidates=31604544 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3071984 candidates=52223728 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=14/64 universal(L-1,L,L+1)=768928,1905176,5047268 candidates=111108072 found(with dups)=0 fast: skipped_universal=3144356 fast_rejected=96231101 full_tests=9827439
+chunk 14 exit=0
+len=65 extra={000000 } universal_loops=1010944 candidates=33361152 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1705360 candidates=1705360 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1777496 candidates=28439936 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3046096 candidates=51783632 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=16/64 universal(L-1,L,L+1)=1010944,1705360,4823592 candidates=115290080 found(with dups)=0 fast: skipped_universal=2986402 fast_rejected=100530118 full_tests=10068200
+chunk 16 exit=0
+len=65 extra={000000 } universal_loops=1150560 candidates=37968480 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1427920 candidates=1427920 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1952424 candidates=31238784 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3569120 candidates=60675040 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=18/64 universal(L-1,L,L+1)=1150560,1427920,5521544 candidates=131310224 found(with dups)=0 fast: skipped_universal=3508101 fast_rejected=114596403 full_tests=11777800
+chunk 18 exit=0
+len=65 extra={000000 } universal_loops=894532 candidates=29519556 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1404272 candidates=1404272 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1710880 candidates=27374080 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3481296 candidates=59182032 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=20/64 universal(L-1,L,L+1)=894532,1404272,5192176 candidates=117479940 found(with dups)=0 fast: skipped_universal=3137292 fast_rejected=102031546 full_tests=10906830
+chunk 20 exit=0
+len=65 extra={000000 } universal_loops=927616 candidates=30611328 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1845248 candidates=1845248 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1569152 candidates=25106432 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2735044 candidates=46495748 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=22/64 universal(L-1,L,L+1)=927616,1845248,4304196 candidates=104058756 found(with dups)=0 fast: skipped_universal=2886082 fast_rejected=90503631 full_tests=8823795
+chunk 22 exit=0
+len=65 extra={000000 } universal_loops=988128 candidates=32608224 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1663136 candidates=1663136 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1924736 candidates=30795776 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2702420 candidates=45941140 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=24/64 universal(L-1,L,L+1)=988128,1663136,4627156 candidates=111008276 found(with dups)=0 fast: skipped_universal=3057333 fast_rejected=96881193 full_tests=9406614
+chunk 24 exit=0
+len=65 extra={000000 } universal_loops=918576 candidates=30313008 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1899328 candidates=1899328 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1554576 candidates=24873216 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3093984 candidates=52597728 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=26/64 universal(L-1,L,L+1)=918576,1899328,4648560 candidates=109683280 found(with dups)=0 fast: skipped_universal=2883322 fast_rejected=94974978 full_tests=9925652
+chunk 26 exit=0
+len=65 extra={000000 } universal_loops=899008 candidates=29667264 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=2237496 candidates=2237496 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1760496 candidates=28167936 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2452096 candidates=41685632 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=28/64 universal(L-1,L,L+1)=899008,2237496,4212592 candidates=101758328 found(with dups)=0 fast: skipped_universal=2567665 fast_rejected=88725912 full_tests=8227255
+chunk 28 exit=0
+len=65 extra={000000 } universal_loops=760184 candidates=25086072 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=2097576 candidates=2097576 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1420688 candidates=22731008 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2294840 candidates=39012280 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=30/64 universal(L-1,L,L+1)=760184,2097576,3715528 candidates=88926936 found(with dups)=0 fast: skipped_universal=2404281 fast_rejected=76963992 full_tests=7461087
+chunk 30 exit=0
+len=65 extra={000000 } universal_loops=1067500 candidates=35227500 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1732136 candidates=1732136 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1567712 candidates=25083392 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2678192 candidates=45529264 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=32/64 universal(L-1,L,L+1)=1067500,1732136,4245904 candidates=107572292 found(with dups)=0 fast: skipped_universal=2765582 fast_rejected=94341185 full_tests=8733389
+chunk 32 exit=0
+len=65 extra={000000 } universal_loops=1012800 candidates=33422400 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1729696 candidates=1729696 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1434380 candidates=22950080 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2731234 candidates=46430978 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=34/64 universal(L-1,L,L+1)=1012800,1729696,4165614 candidates=104533154 found(with dups)=0 fast: skipped_universal=2787410 fast_rejected=91263424 full_tests=8752624
+chunk 34 exit=0
+len=65 extra={000000 } universal_loops=1096592 candidates=36187536 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1626864 candidates=1626864 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1689560 candidates=27032960 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2463040 candidates=41871680 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=36/64 universal(L-1,L,L+1)=1096592,1626864,4152600 candidates=106719040 found(with dups)=0 fast: skipped_universal=3124824 fast_rejected=93475482 full_tests=8491870
+chunk 36 exit=0
+len=65 extra={000000 } universal_loops=751200 candidates=24789600 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1965088 candidates=1965088 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1820800 candidates=29132800 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2317408 candidates=39395936 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=38/64 universal(L-1,L,L+1)=751200,1965088,4138208 candidates=95283424 found(with dups)=0 fast: skipped_universal=2976186 fast_rejected=82111028 full_tests=8231122
+chunk 38 exit=0
+len=65 extra={000000 } universal_loops=1197456 candidates=39516048 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=2016944 candidates=2016944 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1181808 candidates=18908928 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2979168 candidates=50645856 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=40/64 universal(L-1,L,L+1)=1197456,2016944,4160976 candidates=111087776 found(with dups)=0 fast: skipped_universal=2467944 fast_rejected=96948539 full_tests=9654349
+chunk 40 exit=0
+len=65 extra={000000 } universal_loops=987948 candidates=32602284 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1708720 candidates=1708720 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1565032 candidates=25040512 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3189584 candidates=54222928 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=42/64 universal(L-1,L,L+1)=987948,1708720,4754616 candidates=113574444 found(with dups)=0 fast: skipped_universal=3123980 fast_rejected=98473613 full_tests=10268131
+chunk 42 exit=0
+len=65 extra={000000 } universal_loops=1081384 candidates=35685672 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1947216 candidates=1947216 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1611296 candidates=25780736 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3098904 candidates=52681368 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=44/64 universal(L-1,L,L+1)=1081384,1947216,4710200 candidates=116094992 found(with dups)=0 fast: skipped_universal=3303844 fast_rejected=100601772 full_tests=10242160
+chunk 44 exit=0
+len=65 extra={000000 } universal_loops=1030720 candidates=34013760 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1736616 candidates=1736616 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1490840 candidates=23853440 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3033168 candidates=51563856 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=46/64 universal(L-1,L,L+1)=1030720,1736616,4524008 candidates=111167672 found(with dups)=0 fast: skipped_universal=3013668 fast_rejected=96578830 full_tests=9838558
+chunk 46 exit=0
+len=65 extra={000000 } universal_loops=1079712 candidates=35630496 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1443136 candidates=1443136 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1740256 candidates=27844096 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2588368 candidates=44002256 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=48/64 universal(L-1,L,L+1)=1079712,1443136,4328624 candidates=108919984 found(with dups)=0 fast: skipped_universal=3000296 fast_rejected=95104943 full_tests=9371609
+chunk 48 exit=0
+len=65 extra={000000 } universal_loops=1244176 candidates=41057808 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1557960 candidates=1557960 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1953468 candidates=31255488 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2686704 candidates=45673968 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=50/64 universal(L-1,L,L+1)=1244176,1557960,4640172 candidates=119545224 found(with dups)=0 fast: skipped_universal=3331685 fast_rejected=105258729 full_tests=9396850
+chunk 50 exit=0
+len=65 extra={000000 } universal_loops=1328224 candidates=43831392 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1755840 candidates=1755840 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1720624 candidates=27529984 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2491696 candidates=42358832 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=52/64 universal(L-1,L,L+1)=1328224,1755840,4212320 candidates=115476048 found(with dups)=0 fast: skipped_universal=2970992 fast_rejected=101672088 full_tests=9077128
+chunk 52 exit=0
+len=65 extra={000000 } universal_loops=1171176 candidates=38648808 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1847152 candidates=1847152 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1635744 candidates=26171904 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2877926 candidates=48924742 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=54/64 universal(L-1,L,L+1)=1171176,1847152,4513670 candidates=115592606 found(with dups)=0 fast: skipped_universal=2686120 fast_rejected=101619583 full_tests=9439751
+chunk 54 exit=0
+len=65 extra={000000 } universal_loops=1320568 candidates=43578744 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1947696 candidates=1947696 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=2282304 candidates=36516864 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=2956824 candidates=50266008 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=56/64 universal(L-1,L,L+1)=1320568,1947696,5239128 candidates=132309312 found(with dups)=0 fast: skipped_universal=3462896 fast_rejected=116277196 full_tests=10621524
+chunk 56 exit=0
+len=65 extra={000000 } universal_loops=1085552 candidates=35823216 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1879872 candidates=1879872 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1824872 candidates=29197952 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3246568 candidates=55191656 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=58/64 universal(L-1,L,L+1)=1085552,1879872,5071440 candidates=122092696 found(with dups)=0 fast: skipped_universal=3011696 fast_rejected=106340470 full_tests=10860658
+chunk 58 exit=0
+len=65 extra={000000 } universal_loops=1118400 candidates=36907200 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=1706576 candidates=1706576 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=2494000 candidates=39904000 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3568480 candidates=60664160 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=60/64 universal(L-1,L,L+1)=1118400,1706576,6062480 candidates=139181936 found(with dups)=0 fast: skipped_universal=4115170 fast_rejected=121552944 full_tests=11807246
+chunk 60 exit=0
+len=65 extra={000000 } universal_loops=1078240 candidates=35581920 found_so_far=0
+len=66 extra={010101 101010 } universal_loops=2265392 candidates=2265392 found_so_far=0
+len=67 extra={000000 010101 101010 } universal_loops=1921856 candidates=30749696 found_so_far=0
+len=67 extra={001001 010010 100100 } universal_loops=3324320 candidates=56513440 found_so_far=0
+route n=6 L=66 rho=34 comp=1 chunk=62/64 universal(L-1,L,L+1)=1078240,2265392,5246176 candidates=125110448 found(with dups)=0 fast: skipped_universal=3618764 fast_rejected=108415033 full_tests=10811259
+chunk 62 exit=0

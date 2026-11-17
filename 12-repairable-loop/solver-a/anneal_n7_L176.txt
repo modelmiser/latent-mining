@@ -1,0 +1,1 @@
+n=7 L=176 iterations=76323 best cost=3 final=3

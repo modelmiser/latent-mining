@@ -1,0 +1,1 @@
+n=6 L=80 restarts=37494 nodes=7498800000 universal-candidate leaves=164503664 found=0

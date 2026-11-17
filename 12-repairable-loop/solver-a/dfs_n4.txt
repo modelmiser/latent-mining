@@ -1,0 +1,22 @@
+dfs n=4 L=16 maxrep=3 prefixes=2177 leaves=2177 repairable(normalised words)=0
+dfs n=4 L=17 maxrep=4 prefixes=5739 leaves=5070 repairable(normalised words)=0
+REPAIRABLE 000010011010101111 universal
+REPAIRABLE 000010011110101011 universal
+REPAIRABLE 000010100110101111 universal
+dfs n=4 L=18 maxrep=5 prefixes=12622 leaves=11629 repairable(normalised words)=12
+REPAIRABLE 0000100110101011111 universal
+REPAIRABLE 0000100111110101011 universal
+REPAIRABLE 0000101001101011111 universal
+dfs n=4 L=19 maxrep=6 prefixes=20136 leaves=25065 repairable(normalised words)=24
+REPAIRABLE 00001001101010101111 universal
+REPAIRABLE 00001001101010111111 universal
+REPAIRABLE 00001001111010101011 universal
+dfs n=4 L=20 maxrep=7 prefixes=28138 leaves=52379 repairable(normalised words)=62
+REPAIRABLE 000010010011010101111 universal
+REPAIRABLE 000010010011110101011 universal
+REPAIRABLE 000010010100110101111 universal
+dfs n=4 L=21 maxrep=8 prefixes=36016 leaves=107600 repairable(normalised words)=308
+REPAIRABLE 0000100010011010101111 universal
+REPAIRABLE 0000100010011110101011 universal
+REPAIRABLE 0000100010100110101111 universal
+dfs n=4 L=22 maxrep=9 prefixes=43981 leaves=217815 repairable(normalised words)=1172

@@ -1,0 +1,11 @@
+brute n=4 L=12 repairable necklaces: 0 
+brute n=4 L=13 repairable necklaces: 0 
+brute n=4 L=14 repairable necklaces: 0 
+brute n=4 L=15 repairable necklaces: 0 
+brute n=4 L=16 repairable necklaces: 0 
+brute n=4 L=17 repairable necklaces: 0 
+brute n=4 L=18 repairable necklaces: 12 111101010110010000
+brute n=4 L=19 repairable necklaces: 24 1111010101100100000
+brute n=4 L=20 repairable necklaces: 62 11110101011001000000
+brute n=4 L=21 repairable necklaces: 308 111101010110010000000
+brute n=4 L=22 repairable necklaces: 1172 1111010101100100000000

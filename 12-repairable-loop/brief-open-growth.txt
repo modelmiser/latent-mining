@@ -1,0 +1,28 @@
+You are attacking the open part of a precisely defined problem, alone. Do not search the web.
+
+THE PROBLEM
+Read chain/3-question.txt (repairable loops; M(n) = least length of a loop that the mechanic can always make universal after one adversary edit).
+
+WHAT IS ALREADY DONE (two independent solvers and a referee; you may read reports/solver-a.md, solver-b.md, referee.md, the proofs solver-a/proofs.txt and solver-b/proofs.txt, and use the programs in solver-a/, solver-b/, verifier/ read-only)
+ - Computed: M(1) = M(2) = 4; M(n) = 2^n + 2 for n = 3, 4, 5; every shortest repairable loop for n <= 5 is universal.
+ - Proved: 2^n + 2 <= M(n) <= 2^(n+1) for all n >= 3.
+ - Computed three ways: no repairable loop of length 66 exists for n = 6, so 67 <= M(6); a repairable loop of length 76 exists, so M(6) <= 76.
+ - Structure known: a repairable loop is a universal loop, or one plus an inserted cell, or one minus a cell (solver B Lemma 5). Universal loops of length 2^n + e are Eulerian circuits of the de Bruijn graph plus a balanced multiset of e extra edges. A universal loop that is repairable need only survive losses of isolated cells (length-1 runs); every other adversary edit can be undone exactly. For n >= 5 a universal repairable loop of length 2^n + 2 has only alternating words in its two surplus windows (solver B Theorem 3). The referee's run-count lemma: a repairable loop of length 66 (n = 6) has exactly 34 runs.
+ - Open, and the headline of the problem: is M(n) - 2^n bounded? Both solvers guess not (sketches only: solver A P7, solver B Sketch 6). Both point at singletons in contexts such as 001011 (n >= 6) whose loss the cheap repair mechanisms cannot fix.
+
+YOUR TASKS, in this order of priority
+ 1. Prove for every n >= 6 that no loop of length 2^n + 2 is repairable, i.e. M(n) >= 2^n + 3. The n = 6 case is computed; find the reason and prove it for general n. (The referee's suggestion: Theorem 3 and the run-count lemma fix the surplus structure; what is missing is one singleton whose loss provably cannot be repaired.)
+ 2. Push further: prove M(n) - 2^n is unbounded, or better a growth rate, e.g. M(n) >= 2^n + c*n or M(n) >= 2^n + 2^n/poly(n) or M(n) >= (1+d)*2^n. A clean way to think: after the loss of an isolated cell, some set of words of length n is uncovered; the mechanic's one edit creates at most n-1 new words; so every isolated cell must lie in a context where all but a repairable set of its words occur elsewhere in the loop. Count how much duplication that forces over ALL isolated cells of a universal loop simultaneously (there are at least 2^(n-2) of them), and whether one inserted or removed cell (the non-universal case) can evade it.
+ 3. In the other direction: is M(n) <= 2^n + f(n) for some f much smaller than 2^n? An explicit construction (for example a de Bruijn cycle with every isolated cell's context protected by local duplication, or a product/concatenation construction) with a proof would settle the rate from above. Test any construction by program for n = 4, 5, 6, 7 before proving it.
+ 4. If cheap, narrow 67 <= M(6) <= 76 (the referee estimates about 10^11 unrestricted candidates for length 67 before structural pruning; only attempt it with a proved restriction on the surplus multiset).
+ Any one of 1, 2, 3 proved completely is a good outcome. State exactly what you prove.
+
+RULES
+ - Test every lemma mechanically on all cases within reach BEFORE trying to prove it, and run at least one deliberately false variant to confirm the test can fail.
+ - Mark each statement COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ - Write only inside open-growth/ . Do not modify or delete anything else.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=open-growth ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep`. Kill only your own PIDs. python3 and g++ are available. Keep output files under 300 kB.
+
+REPORT
+ Write your proofs to open-growth/proofs.txt and your report (under 800 words) to reports/open-growth.md; return the report as your final message: what is now proved (exact statements), what was tested mechanically and how, what failed and why, what remains open, and your confidence in each proof.

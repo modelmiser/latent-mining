@@ -1,0 +1,33 @@
+WITNESSES (solver-b).  Loops are written as strings, cell 0 first, cyclic.
+Check any line with:  python3 explain.py <n> <loop>     (independent of the C++ search code; prints every adversary
+move with all winning mechanic replies; last line REPAIRABLE / NOT REPAIRABLE).  Full strategy tables:
+strategy_n1.txt ... strategy_n5.txt.
+
+UPPER BOUNDS (repairable loops)
+n=1  L=4   0011
+n=2  L=4   0011
+n=3  L=10  0001011101                 (all 3 necklaces of length 10: n3L10.txt, 30 strings)
+n=4  L=18  000011110101011001         (all 12 necklaces: 216 strings in n4L18.txt)
+n=5  L=34  0000011100110001010111110110101001   (all 20 necklaces: n5L34.txt; all are universal)
+n=6  L=76  1110100100000011110010101000110011010101100010111011011111101000100111000010
+     (heuristic: sa2.cpp then polish2.cpp; universal, 12 surplus windows; strategy table strategy_n6_L76.txt;
+      earlier, longer n=6 loops: sa2_n6_a.txt (80), polish_n6.txt (79), n6_L78_a.txt, n6_L78_b.txt)
+
+LOWER BOUNDS (no repairable loop of the given length) -- exhaustive counts another program can reproduce
+n=1: L=1,2,3            0 of 2,4,8 strings                        (slow.py, brute)
+n=2: L=1,2,3            0 strings                                 (slow.py, brute)
+n=3: L<=9               0 of all 2^L strings                      (slow.py and brute, identical counts L<=13)
+n=4: L=16,17            0 of all 2^L strings                      (brute; also dfs and uni)
+n=5: L=32,33            0   (dfs: all loops with w0=0,w_{L-1}=1 and at most L-32+5 repeated windows;
+                             uni: all loops within one edit of a universal loop of length 31..34)
+     numbers of universal loops of order 5 written as 0^5 ... 1 (one per run of >=5 zeros):
+       length 32: 2048   33: 4096   34: 9472   35: 25728   36: 71760
+n>=6: L<=2^n+1          none, by Theorem 1 in proofs.txt (proof, not computation)
+n=6: L=66, w universal  0 of 113246208 universal loops of length 66 whose two surplus windows are alternating
+                             (Theorem 3 shows no other universal loop of length 66 can be repairable); n6_66u/
+     L=66, w NOT universal: NOT excluded.
+
+DELIBERATE FAILURES (checker rejects wrong objects)
+python3 explain.py 5 0000011100110001010111110110101011   -> NOT REPAIRABLE (one bit of the n=5 witness flipped)
+python3 explain.py 4 00001111010101100                    -> NOT REPAIRABLE (n=4 witness minus one cell)
+python3 explain.py 2 011                                  -> NOT REPAIRABLE
