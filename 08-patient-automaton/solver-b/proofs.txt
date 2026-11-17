@@ -1,3 +1,11 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as the solver wrote it)
+ N1. Lemma 1: "height + 1 is a uniform T" is right only if height counts levels (nodes on the longest branch).
+     With height counted in edges it is height + 2. The explicit T = d+4 of Theorem 1 does not use this.
+ N2. Lemma A, legality: "x_t = a for all t <= d+1" should read "x_1 = b, and x_t = a for 2 <= t <= d+1".
+ N3. Lemma A: "M_(r-1) = 13" is false when r = 2 (y_1 = a, d = 0 or 1), where the image is 123. The conclusion
+     holds because 123.aa = {1}.
+ Found by the referee (N1, N3) and the review panel (N2).
+--------------------------------------------------------------------------------------------------------------
 PROOFS (solver-b).  Each item is marked COMPLETE, COMPUTED or SKETCH.
 Notation: S_k = Q.(x_1 y_1 ... x_k y_k) is the image after k full rounds. Sets are written as digit strings (134 = {1,3,4}).
 

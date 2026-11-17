@@ -1,0 +1,63 @@
+== solver-a/wd 2 6 0
+n=2 sym=0 classes=16 total_weight=16 (expect 16)
+d=0 |W_d|=12 maxT=1
+d=1 |W_d|=12 maxT=1
+d=2 |W_d|=12 maxT=1
+d=3 |W_d|=12 maxT=1
+d=4 |W_d|=12 maxT=1
+d=5 |W_d|=12 maxT=1
+d=6 |W_d|=12 maxT=1
+|W_inf|=12 maxT=1
+== solver-b/game full 2 6
+n=2 total=16
+|W_0|=12
+|W_1|=12
+|W_2|=12
+|W_3|=12
+|W_4|=12
+|W_5|=12
+|W_6|=12
+|W_inf|=12
+monotonicity_violations=0
+== solver-a/wd 3 6 0
+n=3 sym=0 classes=729 total_weight=729 (expect 729)
+d=0 |W_d|=405 maxT=3
+d=1 |W_d|=405 maxT=3
+d=2 |W_d|=405 maxT=3
+d=3 |W_d|=405 maxT=3
+d=4 |W_d|=405 maxT=3
+d=5 |W_d|=405 maxT=3
+d=6 |W_d|=405 maxT=3
+|W_inf|=405 maxT=3
+== solver-b/game full 3 6
+n=3 total=729
+|W_0|=405
+|W_1|=405
+|W_2|=405
+|W_3|=405
+|W_4|=405
+|W_5|=405
+|W_6|=405
+|W_inf|=405
+monotonicity_violations=0
+== solver-a/wd 4 6 0
+n=4 sym=0 classes=65536 total_weight=65536 (expect 65536)
+d=0 |W_d|=28960 maxT=8
+d=1 |W_d|=27952 maxT=6
+d=2 |W_d|=27808 maxT=6
+d=3 |W_d|=27808 maxT=7
+d=4 |W_d|=27808 maxT=7
+d=5 |W_d|=27808 maxT=9
+d=6 |W_d|=27808 maxT=10
+|W_inf|=27712 maxT=5
+== solver-b/game full 4 6
+n=4 total=65536
+|W_0|=28960
+|W_1|=27952
+|W_2|=27808
+|W_3|=27808
+|W_4|=27808
+|W_5|=27808
+|W_6|=27808
+|W_inf|=27712
+monotonicity_violations=0
