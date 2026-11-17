@@ -85,7 +85,7 @@ The optimal controllers are simple:
   both checkers) and `open-c/cert_7_7_KR3.txt`. The certificates for d = 9, 11
   and 13 (13 MB to 170 MB) and the history strategy tables above 1.5 MB are
   left out. To regenerate one, build `ngclock3.cpp` and run
-  `ngclock3 d d certfile 0 KR` with KR = 1000 for the exact game or 3 for the
+  `ngclock3 d d certfile 4000000000 KR` with KR = 1000 for the exact game or 3 for the
   filtered one (see the header of `ngclock2.cpp` and `open-c/results.log`), then
   check it with `ngcheck.cpp`. Compiled binaries are left out.
 

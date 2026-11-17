@@ -30,8 +30,8 @@ METHOD NOTES (suggestions, not requirements)
  - Watch a check fail on purpose at least once (for example confirm the solver reports H-1 as losing, and that a deliberately bad manager is caught).
 
 RULES FOR RUNNING CODE (this is someone's live workstation)
- - Work only inside /home/cjb/staging/2026-11-16-latent-mining-2/solver-b/ . Write your code and outputs there. Do not read the sibling folders.
- - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=/home/cjb/staging/2026-11-16-latent-mining-2/solver-b ; never put large files in /tmp (it is RAM).
+ - Work only inside ./solver-b/ . Write your code and outputs there. Do not read the sibling folders.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=./solver-b ; never put large files in /tmp (it is RAM).
  - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs. Do not delete files. Do not install system packages; python3 and g++ are available.
 
 REPORT (final message, under 900 words)
