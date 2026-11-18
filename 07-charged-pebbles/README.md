@@ -13,6 +13,18 @@ strategy by both solvers, the impossibility by one follow-up instance and read
 by one other. Not machine-checked. Exhaustive search confirms it in every case
 reached.
 
+**Added after a deeper literature check (2026-11-17).** The upper bound here
+is not new. It follows in a few lines from a recurrence in a preprint posted
+a month before this experiment: Thumann and Soloveichik, "Energy-optimal
+scheduling for clocked reversible computing", arXiv:2610.24435 (17 Oct 2026),
+Theorem 1, together with Knill's 1995 theorem on the fully reversible game.
+That paper studies the same game with a price on erasures, does not state the
+closed form, and proves its recurrence by a different method. What remains
+unaccounted for in what was read: the closed form as a stated result, the
+bound on the highest node ever pebbled, the per-pebble version, and the proof
+by anchors given here. Details in [prior-art-deep.md](prior-art-deep.md) and
+under "What to distrust".
+
 ## The game
 
 Nodes 1, 2, 3, … on a line; node 0 always counts as pebbled. You hold p
@@ -90,7 +102,22 @@ predecessor. The bound holds even if a "forgetting" may remove any pebble.
   hide; the reader followed them and tested each branch by program up to
   q = 6, which checks the statements at small q and not the argument at
   general q. Nothing is machine-checked as a proof.
-- **Prior art** ([prior-art.md](prior-art.md)): the game with a pooled budget
+- **Prior art, superseded in part.** A second, deeper search
+  ([prior-art-deep.md](prior-art-deep.md)) read the classical papers'
+  erasure sections and traced their citations. It found the preprint named at
+  the top of this page. Letting the erasure price go to infinity in its
+  Theorem 1 gives a recurrence for the least number of erasures,
+  I(n, S) = min over m of I(m, S) + I(n − m, S − 1) + [m > 2^(S−2)], and an
+  induction on S and n gives I(n, S) ≥ ⌈n/2^(S−2)⌉ − 2, which is the upper
+  bound of this experiment. That derivation is by the search instance; I
+  checked the induction by hand and read the preprint's game definition and
+  Theorem 1, not its proof. The preprint's erasure rule is more permissive
+  than the one here, so its bound transfers. The search estimates the closed
+  form is probably known to that group even though it is not stated. The
+  bound on the highest node ever pebbled and the per-pebble version were not
+  found. The paragraph below is the first, shallower search and is out of
+  date where it says no upper bound was found.
+- **Prior art, first search** ([prior-art.md](prior-art.md)): the game with a pooled budget
   of erasures is Li and Vitányi's "m-erasure pebble game" (1996). The search
   found published strategies that gain the same 2^(p−2) per erasure and reach
   (f + 1)·2^(p−2), one block short of the value here, and no upper bound for
@@ -143,6 +170,7 @@ The corrected wording has not been through a second round.
 - `verifier/`: the referee's own programs.
 - `open-upper/`: the upper-bound proof and its tests.
 - `open-upper-referee/`: the second reader's programs and logs.
-- `prior-art.md`: the literature search.
+- `prior-art.md`: the first literature search.
+- `prior-art-deep.md`: the second, deeper search, which found the 2026 preprint.
 
 Binaries are left out.
