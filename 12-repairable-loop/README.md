@@ -136,6 +136,16 @@ made the count go through.
   Kiah, Vardy, Vu, Yaakobi 2020). The search did not find the question of
   keeping one cycle universal after an edit, or the function M(n). It read
   no source in full.
+- **A second, deeper search** ([prior-art-deep.md](prior-art-deep.md))
+  extracted the full text of nine of the nearest papers and inspected every
+  mention of deletions, insertions and duplications. It found no paper that
+  asks for one cycle that stays or can be made universal after an edit, and
+  none of the results here except the classical run counts for de Bruijn
+  cycles (Golomb) and the one-line upper bound. Its estimate is 5 to 10
+  percent that the two general theorems are in print. It also rates the
+  interest as mild: a clean extremal question with no application yet and no
+  good upper bound. No paper was read line by line, and paywalled sources
+  were not reached.
 
 ## Review
 
@@ -178,6 +188,7 @@ The corrected wording has not been through a second round.
 - `verifier/`: the referee's programs, including the length-66 enumeration.
 - `open-growth/`: the two new theorems and their tests.
 - `open-growth-referee/`: the second reader's programs and outputs.
-- `prior-art.md`: the literature search.
+- `prior-art.md`: the first literature search.
+- `prior-art-deep.md`: the second, deeper search.
 
 Binaries are left out.
