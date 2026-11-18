@@ -1,0 +1,18 @@
+# Output of: greedy_exact 20 1 1 16 9 20 600   (18 November 2026), lines for n = 1..15.
+# Columns: n, worst case W(n) of rule R with ties to the Adversary, then B(n) = max(0, n/4 - 1) and a mark if W > B,
+# positions stored, distinct directed trees seen, (unused), seconds, GB of the position table.
+1 0 B=0  states 0 exact 1 patterns 0  0s 0.0GB
+2 0 B=0  states 1 exact 2 patterns 0  0s 0.1GB
+3 0 B=0  states 3 exact 5 patterns 0  0s 0.1GB
+4 0 B=0  states 9 exact 12 patterns 0  0s 0.1GB
+5 0 B=0  states 25 exact 35 patterns 0  0s 0.1GB
+6 1 B=0 >B states 78 exact 107 patterns 0  0s 0.1GB
+7 1 B=0 >B states 250 exact 369 patterns 0  0s 0.1GB
+8 1 B=1  states 867 exact 1329 patterns 0  0s 0.1GB
+9 2 B=1 >B states 3140 exact 5083 patterns 0  0s 0.1GB
+10 2 B=1 >B states 11918 exact 20083 patterns 0  1s 0.1GB
+11 2 B=1 >B states 46738 exact 81951 patterns 0  8s 0.1GB
+12 3 B=2 >B states 188827 exact 341965 patterns 0  45s 0.1GB
+13 3 B=2 >B states 780688 exact 1455868 patterns 0  246s 0.1GB
+14 3 B=2 >B states 3292962 exact 6297197 patterns 0  1336s 0.1GB
+15 4 B=2 >B states 14121985 exact 27618489 patterns 0  7289s 0.5GB

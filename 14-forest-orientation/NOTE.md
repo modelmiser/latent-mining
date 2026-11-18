@@ -1,4 +1,4 @@
-# A lower bound of n/3 − O(log n) on total flips for 2-orientations of incremental forests
+# Total flips for 2-orientations of incremental forests: between n/3 and n/2
 
 *A short note. Draft of 18 November 2026. Source and all supporting files:
 this folder; overview in [README.md](README.md).*
@@ -17,12 +17,24 @@ adversary can force.
 
 **Theorem 2.** For every n ≥ 19, T(n) ≤ (9/16)·n − log₂ n.
 
-So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 9/16. Theorem 1 is
+**Theorem 3.** For every n ≥ 1, T(n) ≤ max(0, ⌊(n − 3)/2⌋).
+
+**Theorem 4.** For every j ≥ 1, the algorithm of Gupta, Kumar and Stein
+[7, Theorem 2.1], with its ties broken by the Adversary, can be made to pay
+(3^j − 1)/2 − j flips on 3^j vertices.
+
+So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 1/2. Theorem 1 is
 machine-checked in Lean 4 in the integer form n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋
-(Section 6). Theorem 2 is proved by hand with a finite check by program. It
-holds for the algorithm of Gupta, Kumar and Stein [7, Theorem 2.1], who
-prove 2n; what is added is the analysis, and 9/16 is the best constant
-the recurrence used can give (Section 5). We do not know the value of L.
+(Section 6). Theorems 2 and 3 are two analyses of the algorithm of [7], for
+which its authors prove 2n. Theorem 2 uses a recurrence f on tree sizes and
+is proved by hand with a finite check by program; the recurrence itself gives
+the smaller bound for most n below 94. Theorem 3 uses a potential, is proved
+by hand, and gives the smaller bound from n = 126 on (computed to n = 4000).
+Theorem 4 shows that Theorem 3 cannot be improved for that algorithm beyond
+lower-order terms when its ties are broken against it: the worst case is then
+n/2 − O(log² n). So an upper bound on L below 1/2 needs a different
+algorithm, or a tie-breaking rule for this one that we have not analysed
+(Section 5). We do not know the value of L.
 
 A forest can always be oriented with out-degree at most 1. Keeping that
 bound as edges arrive can require Ω(n log n) flips, and Gupta, Kumar and
@@ -308,7 +320,7 @@ converges to its supremum, which is 9/16: at most 9/16 by the bound just
 stated, and at least that because f(2^k)/2^k tends to 9/16. This is a
 statement about f, not about T. An upper bound below 9/16 needs a different
 algorithm, or an analysis that does not charge each merge by c of the
-smaller size alone.
+smaller size alone. Theorem 3 below is such an analysis.
 
 **Comparison with [7].** The algorithm is theirs, as just noted. Gupta,
 Kumar and Stein bound the flipped path by log₂ of the size of the smaller
@@ -320,6 +332,187 @@ from two things in the path bound: the size fact, which gives
 log₂(a + 1) − 1 in place of log₂ a, and rounding down, since a path length
 is an integer. Without the rounding the recurrence gives about 0.69·n at
 n = 1000 (computed).
+
+**A potential for the rule of [7].** From here to the end of the proof of
+Theorem 4 the algorithm is the rule of [7] itself, which we call rule R: for
+the named pair, let p be an endpoint with h(p) ≤ h(q), q being the other;
+flip a shortest directed path from p to an unsaturated vertex and direct the
+new edge from p to q. The cost is k = h(p); if k = 0 nothing is flipped. Ties
+(h(p) = h(q), or several shortest paths) may be broken in any way. This is
+not the smaller-tree rule at the start of this section, and Lemma 4 below
+fails for that rule: take for u the root of a complete binary out-tree on 7
+vertices and for v a vertex with two out-neighbours of out-degree 0 and five
+in-neighbours of out-degree 1; the smaller-tree rule flips from u at cost 2
+and Φ rises by 3/2.
+
+For a position, let
+
+    Φ = (1/2) · Σ over edges x → c of min( h(c), h(x) + 1 ).
+
+Φ is 0 when there are no edges, and Φ of a position is the sum of Φ over its
+trees. For a saturated vertex whose out-neighbours have h equal to m ≤ M
+(so the vertex has h = m + 1), its two out-edges contribute
+F(m, M) = (m + min(M, m + 2))/2. A vertex with one out-neighbour, of h equal
+to M, contributes (1/2)·min(M, 1).
+
+**Lemma 4 (one round).** A round of rule R of cost k raises Φ by at least k.
+
+*Proof.* Let the flipped path be p = w_0 → w_1 → … → w_k, so h(w_i) = k − i.
+For i < k, w_i is saturated; let c_i be its out-neighbour other than
+w_(i+1), and a_i = h(c_i) ≥ k − i − 1. Let b = h(q) ≥ k. The vertex w_k has
+no out-neighbour or one, which we call z. After the round the out-neighbours
+are: w_0 → {c_0, q}; w_i → {c_i, w_(i−1)} for 1 ≤ i ≤ k − 1; and w_k →
+{w_(k−1)} or {z, w_(k−1)}. Every other vertex keeps its out-neighbours. A
+directed path from c_i, from z or from q cannot reach a vertex of the flipped
+path, since with the path it would close a cycle (q is in another tree). So
+the out-trees of c_i, z and q, and hence their values of h, are unchanged.
+
+Let k ≥ 1 and write g_i for the new value of h at w_i.
+
+*No h decreases.* We show g_i ≥ k − i = h(w_i) for every i < k by induction
+on i. First, g_0 = 1 + min(a_0, b) ≥ k. For 1 ≤ i < k the induction
+hypothesis is g_(i−1) ≥ k − i + 1, so g_i = 1 + min(a_i, g_(i−1)) ≥ k − i.
+Also g_k ≥ 0 = h(w_k). Any other vertex keeps its
+out-neighbours, and h of a vertex is non-decreasing in the h of its
+out-neighbours, so by induction along its out-tree its h does not decrease.
+
+*Edges out of vertices off the path.* These edges are unchanged, and
+min(h(c), h(x) + 1) is non-decreasing in both arguments. So their terms do
+not decrease. This covers every edge into a path vertex from outside the
+path, every edge into q, and every edge of the other tree.
+
+*Edges out of w_i, 1 ≤ i ≤ k − 1.* Put d = k − i − 1, a = a_i ≥ d and
+g = g_(i−1) ≥ d + 2. The old contribution is F(d, a) and the new one is F on
+the pair {a, g}.
+- a = d: old d; new (d + min(g, d + 2))/2 = d + 1.
+- a = d + 1: old d + 1/2; new (d + 1 + min(g, d + 3))/2 ≥ d + 3/2.
+- a ≥ d + 2 and a ≤ g: old d + 1; new (a + min(g, a + 2))/2 ≥ a ≥ d + 2.
+- a > g: old d + 1; new (g + min(a, g + 2))/2 ≥ g + 1/2 ≥ d + 5/2.
+
+The gain is at least 1 in every case.
+
+*Edges out of w_0.* Put d = k − 1, a = a_0 ≥ d and b ≥ d + 1. Old F(d, a),
+new F on {a, b}.
+- a = d: old d; new (d + min(b, d + 2))/2 ≥ d + 1/2.
+- a = d + 1: old d + 1/2; both values are at least d + 1, so new ≥ d + 1.
+- a ≥ d + 2 and b ≤ a: old d + 1; the smaller value is b ≥ d + 1 and
+  min(a, b + 2) ≥ d + 2, so new ≥ d + 3/2.
+- a ≥ d + 2 and b > a: old d + 1; new (a + min(b, a + 2))/2 ≥ a + 1/2 ≥ d + 5/2.
+
+The gain is at least 1/2.
+
+*Edges out of w_k.* Here g_(k−1) ≥ 1.
+- No old out-neighbour: old 0; new (1/2)·min(g_(k−1), 1) = 1/2.
+- Old out-neighbour z with h(z) = 0: old 0; new (0 + min(g_(k−1), 2))/2 ≥ 1/2.
+- h(z) ≥ 1: old 1/2; both new values are at least 1, so new ≥ 1.
+
+The gain is at least 1/2.
+
+Adding up, Φ rises by at least 1/2 + (k − 1) + 1/2 = k.
+
+Let k = 0. Nothing is flipped and p gains the out-neighbour q. No h
+decreases, so the terms of all edges out of other vertices do not decrease.
+If p had no out-neighbour, the new edge contributes at least 0. If p had one
+out-neighbour z, the old contribution of p was (1/2)·min(h(z), 1) and the new
+one is F on {h(z), h(q)}: if h(z) = 0 the old one is 0; if h(z) ≥ 1 and
+h(q) = 0 the new one is min(h(z), 2)/2 ≥ 1/2; if both are at least 1 the new
+one is at least 1. ∎
+
+**Lemma 5 (counting).** Every tree T on n vertices, directed with all
+out-degrees at most 2, has Φ(T) ≤ (n − 1)/2 − H(T), where H(T) is the largest
+h in T. No assumption is made on how T arose.
+
+*Proof.* Let S(T) = 2Φ(T); we show S(T) ≤ n − 2H(T) − 1 by induction on n.
+For n = 1 both sides are 0. Let n ≥ 2. T has n − 1 edges, so some vertex r
+has in-degree 0, and r has an out-neighbour since T is connected. No out-tree
+of another vertex contains r, so deleting r changes no other h.
+
+If r has one out-neighbour c, then T − r is a tree T_1 on n − 1 vertices,
+H(T) = H(T_1), and S(T) = S(T_1) + min(h(c), 1) ≤ (n − 1) − 2H(T_1) − 1 + 1.
+
+If r has two out-neighbours, T − r consists of two trees T_1 and T_2, with
+n_1 + n_2 = n − 1, containing the out-neighbours c_1 and c_2. Name them so
+that m = h(c_1) ≤ M = h(c_2), and write H_1, H_2 for H(T_1), H(T_2); then
+H_1 ≥ m, H_2 ≥ M and H(T) = max(H_1, H_2, m + 1). By induction
+
+    S(T) ≤ (n − 1) − 2H_1 − 2H_2 − 2 + m + min(M, m + 2),
+
+and it suffices that E = m + min(M, m + 2) − 2H_1 − 2H_2 − 2 + 2H(T) ≤ 0.
+- H(T) = H_2: E = m + min(M, m + 2) − 2H_1 − 2 ≤ 2m + 2 − 2m − 2 = 0.
+- H(T) = H_1: E = m + min(M, m + 2) − 2H_2 − 2 ≤ m + M − 2M − 2 < 0.
+- H(T) = m + 1 > H_1, H_2: then H_1 = H_2 = M = m and
+  E = 2m − 4m − 2 + 2m + 2 = 0. ∎
+
+**Proof of Theorem 3.** Play rule R against any Adversary. Φ starts at 0, and
+by Lemma 4 each round costs at most the rise of Φ in that round, so the total
+cost is at most Φ of the final tree, which by Lemma 5 is at most
+(n − 1)/2 − H. If the total cost is positive then Φ > 0 at the end, so some
+edge x → c has h(c) ≥ 1 and H ≥ 1; the total is then at most (n − 3)/2, and
+it is an integer. So rule R never pays more than max(0, ⌊(n − 3)/2⌋), and
+T(n) is at most that. ∎
+
+Lemma 4 on all pairs of directed trees with at most 10 vertices each and at
+most 15 together, and Lemma 5 on all directed trees with at most 10 vertices,
+were also checked by enumeration (`upper/lemma4_check.py`,
+`upper/lemma5_check.py`). A vertex with h = 3 needs 15 vertices, so these
+runs only contain flipped paths of length at most 2; longer paths are
+exercised by `upper/pool_search.cpp`, which builds trees by rule R and tests
+Lemma 4 on every round it generates, but not exhaustively: run as
+`pool_search 160 10` it tested 972,225,750 rounds with no violation, of
+which 94,104,638 had a flipped path of length 3, 4 or 5. The potential was found by a linear program fitted to such
+rounds; the proof above does not depend on that.
+
+**The two bounds compared.** Write U(n) = max(0, ⌊(n − 3)/2⌋). Computed from
+the table of f (`upper/compare_bounds.py`, for n ≤ 4000 only): f(n) ≤ U(n)
+for every n ≤ 95; U(n) ≤ f(n) for every n from 94 to 4000; and U(n) < f(n)
+at n = 96 and for every n from 126 to 4000. We do not prove the comparison
+beyond 4000. For n ≤ 15 the exact values below are no larger than either.
+
+**Proof of Theorem 4.** Define directed trees A_j with a marked vertex, the
+root. A_1 is a vertex, the root, with two out-neighbours of out-degree 0; it
+is built by two rounds of cost 0, naming the root with each of the other two
+vertices, with the ties (all h are 0) broken so that both edges are directed
+out of the root. To build A_j, the Adversary builds three
+copies X, Y, Z of A_(j−1) with roots x, y, z, then names {x, y}, then {x, z}.
+We show by induction the invariant I(j): the out-tree of the root of A_j is a
+complete binary out-tree of depth j, with saturated inner vertices and with
+its 2^j deepest vertices of out-degree 0. I(1) holds. Assume I(j − 1).
+
+When {x, y} is named, h(x) = h(y) = j − 1. The two choices of p give the same
+position up to renaming; say p = x. Every shortest directed path from x to an
+unsaturated vertex ends at a deepest vertex of the out-tree of x and has
+length j − 1, so the round costs j − 1. Afterwards the out-neighbours of x are
+y and the out-neighbour c of x that was not on the flipped path. The
+out-tree of c is unchanged, a complete binary out-tree of depth j − 2, so
+h(c) = j − 2, h(y) = j − 1 and h(x) = j − 1.
+
+When {x, z} is named, h(x) = h(z) = j − 1; the Adversary breaks the tie so
+that p = x. Every shortest path from x now goes through c, and the round
+costs j − 1. Afterwards the out-neighbours of x are y and z, whose out-trees
+are unchanged, and I(j) holds with root x.
+
+So the cost c_j of building A_j satisfies c_1 = 0 and
+c_j = 3·c_(j−1) + 2(j − 1), which gives c_j = (3^j − 1)/2 − j. ∎
+
+A_j has 3^j vertices and its root has h = j. Its cost is at most
+(n − 1)/2 − H by the proof of Theorem 3, which gives H ≤ j, so H = j and the
+cost equals that bound: the proof of Theorem 3 is exact on this family.
+`upper/ternary_family.py` plays these rounds for j ≤ 9 (19,683 vertices) and
+checks each cost.
+
+**The worst case of rule R.** Let W(n) be the most that rule R can be made to
+pay on n vertices when the Adversary also breaks its ties. Then
+W(n) ≤ U(n) by the proof of Theorem 3, and W(a + b) ≥ W(a) + W(b), since
+rule R looks only at the two trees named. Write n in base 3 with digits d_i,
+let J = ⌊log₃ n⌋ and c_0 = 0; then W(n) ≥ Σ d_i·c_i ≥ n/2 − (J + 1)². So
+W(n) = n/2 − O(log² n). The construction relies on the Adversary breaking
+ties in two places: when A_1 is built, and in the second of the two rounds
+at every level. The tie in the first of the two rounds is symmetric, and the
+choice among shortest paths does not matter. We have not determined the
+worst case of rule R under a fixed tie-breaking rule, so Theorem 4 does not
+exclude that some tie-breaking rule does better. For n ≤ 15, exhaustive
+search gives W(n) = f(n) except at n = 14, where W(14) = 3 < f(14) = 4 (one program,
+`upper/greedy_exact.cpp`; its output is `upper/greedy_exact_log.txt`).
 
 **The limit exists.** T(a + b) ≥ T(a) + T(b): the Adversary plays an optimal
 strategy on a set of a vertices, then on the other b looking only at those,
@@ -344,8 +537,8 @@ lemma gives L = lim T(n)/n = sup T(n)/n.
   between 16 and 30 if the value T(16) = 3, whose upper half rests on one
   program, is set aside.
 
-**A limit of the method** (proved in `open-limit/proofs.txt`, Theorem 3, not
-here). Abstract the strategy of Section 4 to a *pair game* on multisets of
+**A limit of the method** (proved in `open-limit/proofs.txt`, Theorem 3 of
+that file, not here). Abstract the strategy of Section 4 to a *pair game* on multisets of
 pairs (p, q), one per tree, starting from n copies of (−1, −1): the
 Adversary picks two pairs, the Algorithm picks one of the four alternatives
 of Lemma 2 and pays its cost bound, and the Adversary keeps either the new
@@ -399,8 +592,8 @@ What this does and does not give:
 - That the backward-induction value equals the value under history-dependent
   strategies is standard for finite games of perfect information and is not
   formalised.
-- Nothing else in this note is formalised: not Theorem 2, the limit, the
-  small cases or the abstract game.
+- Nothing else in this note is formalised: not Theorems 2 to 4, the limit,
+  the small cases or the abstract game.
 
 ## 7. Related work
 
@@ -417,8 +610,9 @@ afterwards, for this note.
   lower bounds). Their Section 2 is this problem, stated for in-degree: edges
   of a forest arrive online, load at most 2 is maintained, and Theorem 2.1
   gives an algorithm with at most 2n flips in total, by flipping the shorter
-  of the two shortest directed paths to an unsaturated vertex. Theorem 2
-  above is a tighter analysis of that algorithm (Section 5). They also
+  of the two shortest directed paths to an unsaturated vertex. Theorems 2
+  and 3 above are tighter analyses of that algorithm, and Theorem 4 shows
+  that n/2 is its worst case up to lower-order terms (Section 5). They also
   recall that keeping load 1 can require Ω(n log n) flips, citing Grove et
   al. [12]. Section 2 states no lower bound on
   flips at load 2, and our scan of the rest of the paper found none.
@@ -508,9 +702,10 @@ we would like to hear of it.
 
 ## 8. Open questions
 
-1. The value of L. We have 1/3 ≤ L ≤ 9/16. The recurrence of Section 5
-   gives 9/16 and no less, so an upper bound below 9/16 needs a different
-   algorithm or a finer analysis of this one.
+1. The value of L. We have 1/3 ≤ L ≤ 1/2. By Theorem 4 the algorithm of [7]
+   pays n/2 up to lower-order terms when its ties are broken against it, so
+   an upper bound below 1/2 needs a different algorithm, or at least a
+   tie-breaking rule for this one that we have not analysed.
 2. Is L = 1/3? By Section 5 the pair game cannot force more than 1/3, and
    the one candidate potential for an Algorithm does not transfer to real
    trees. Neither settles the question.

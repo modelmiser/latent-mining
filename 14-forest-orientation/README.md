@@ -7,14 +7,16 @@ can the adversary force over the whole sequence?
 
 A self-contained write-up with full proofs is in [NOTE.md](NOTE.md).
 
-**Short answer: at least about n/3, and at most about 9n/16.** A simple attack
+**Short answer: at least about n/3, and at most about n/2.** A simple attack
 forces B(n) = max(0, ⌊n/4⌋ − 1) flips and is exactly optimal for up to 15
 vertices. It stops
 being optimal by n = 30, and a better attack forces
-n/3 − (7/3)·log₂(n+1) + 5/6 for every n. The best upper bound proved here
-is (9/16)·n − log₂ n for n ≥ 19. The exact rate, somewhere from 1/3 to
-9/16 flip per vertex,
-is open. The lower bound is machine-checked in Lean 4 (see "Machine check").
+n/3 − (7/3)·log₂(n+1) + 5/6 for every n. Two upper bounds are proved here, both for the algorithm of
+Gupta, Kumar and Stein (2014): (9/16)·n − log₂ n for n ≥ 19, and (n − 3)/2,
+which is the smaller one for large n. With its ties broken against it, that
+algorithm can be made to pay n/2 up to lower-order terms, so doing better
+needs a different algorithm or a tie-breaking rule not analysed here. The
+exact rate, somewhere from 1/3 to 1/2 flip per vertex, is open. The lower bound is machine-checked in Lean 4 (see "Machine check").
 The chain guessed the simple attack would fail somewhere between
 n = 16 and 24; it holds at least to 15, and the first failure is somewhere
 from 17 to 30 (from 16, if the single-program value at n = 16 is set aside).
@@ -52,7 +54,9 @@ L denotes the limit of T(n)/n, which exists.
 | This family of attacks (one tracked vertex per tree) cannot force more than (n − 1)/3 in its reduced game | proved by hand; read by the second instance | `open-limit/proofs.txt` Theorem 3 |
 | The least n with T(n) > B(n) | open; in 17 … 30 (16 … 30 without the single-program value at 16) | |
 | T(n) ≤ (9/16)·n − log₂ n for n ≥ 19, so L ≤ 9/16; and 9/16 is exactly the rate of the recurrence used, f(2^k) = 9·2^k/16 − k for k ≥ 4 | proved by hand in the note, added 18 November 2026 (first as 4n/7, then sharpened); an induction resting on finite checks done by program; review status in "Review" below. The algorithm is Gupta, Kumar and Stein's (the bound holds for their rule and for the smaller-tree rule); the gain is from a path bound of ⌊log₂(a+1)⌋ − 1 in place of their log₂ a. Their own recurrence gives n − 1 − log₂ n, attained at powers of 2, and so no constant below 1 | [NOTE.md](NOTE.md) Section 5; `upper/greedy_recurrence.py` |
-| The exact value of L | open; 1/3 ≤ L ≤ 9/16 | |
+| T(n) ≤ max(0, ⌊(n − 3)/2⌋) for every n, so L ≤ 1/2 | proved by hand in the note (Theorem 3), added 18 November 2026: a potential, ½·Σ over edges x → c of min(h(c), h(x) + 1), rises by at least the cost of every round of the Gupta–Kumar–Stein rule (Lemma 4) and is at most (n − 1)/2 − H on any tree (Lemma 5). Holds for their rule (flip from the endpoint of smaller h), not for the smaller-tree variant. The two lemmas were also checked by enumeration on small trees; the enumeration only reaches flipped paths of length 2. Review status in "Review" below | `NOTE.md` Section 5; `upper/lemma4_check.py`, `upper/lemma5_check.py`, `upper/pool_search.cpp`, `upper/compare_bounds.py` |
+| The Gupta–Kumar–Stein rule, with ties broken against it, pays (3^j − 1)/2 − j on 3^j vertices, so its worst case is n/2 − O(log² n) | proved by hand in the note (Theorem 4), added 18 November 2026; the construction was read off trees found by a search and is replayed by program up to 19,683 vertices. It relies on the Adversary breaking ties: once when the 3-vertex tree is built and once per level after that. Review status in "Review" below | `NOTE.md` Section 5; `upper/ternary_family.py`, `upper/greedy_exact.cpp` |
+| The exact value of L | open; 1/3 ≤ L ≤ 1/2 | |
 
 The general bound of the seventh row is weak for small n: it is positive only
 from n = 34, first exceeds B(n) at n = 179, and exceeds it for every n from
@@ -232,7 +236,19 @@ Their findings were about the documentation around it:
   tried to turn its own potential into an Algorithm and found a 9-vertex
   tree where that fails. One solver reported that the greedy recursion
   evaluates to about 0.558 n for n ≤ 3000 (approaching 9/16 from below). The note now proves that the
-  recursion grows exactly like 9n/16.
+  recursion grows exactly like 9n/16. It also proves, for the rule of
+  Gupta, Kumar and Stein (flip from the endpoint of smaller h, which is not
+  solver B's smaller-tree rule), that it pays at most (n − 3)/2 and that
+  with ties broken against it it can be made to pay n/2 up to lower-order
+  terms. Anything below 1/2 needs another algorithm, or a tie-breaking rule
+  for that one which has not been analysed.
+- **Probes that found nothing** (18 November 2026, not in the repository,
+  not reviewed). Three reduced games that give the Adversary more knowledge
+  than the pair game were solved by program: deeper knowledge of one
+  vertex's out-tree, real play on trees of up to 4, 6, 8, 9 and 10 vertices,
+  and both together. Each forced exactly the pair-game value at every n
+  reached (n ≤ 52, 31, 22, 17 and 16 for the five tree sizes). This is weak
+  evidence for L = 1/3 and nothing more.
 - **Prior art.** Two searches ([prior-art.md](prior-art.md),
   [prior-art-deep.md](prior-art-deep.md)). Incremental edge orientation in
   forests is an active topic (Bender, Kopelowitz, Kuszmaul, Porat, Stein
@@ -333,6 +349,29 @@ only the sizes of the two trees", which is not shown; the note now claims
 it for this recurrence only. The paragraph on the two older papers,
 written after round 3, has had no reviewer.
 
+The (n − 3)/2 bound went to a fifth round as a draft before it entered the
+note. All five seats confirmed the case analysis of Lemma 4 for flipped
+paths of length 1 or more, the induction of Lemma 5 and the deduction. Three
+pointed out that the cost-0 case of Lemma 4 was asserted and not argued; it
+is now written out. Two pointed out that the bound is for the 2014 rule
+only and gave a merge where the lemma fails for the smaller-tree variant
+this page had been using; the note now says so. Two noted that my
+enumerations never contain a flipped path longer than 2, which the note
+now states. The comparison of the two bounds was wrong in its figures and
+is now computed by a program.
+
+A sixth round read the two results as they stand in the note, including
+the construction that makes the 2014 rule pay about n/2, which no reviewer
+had seen. All five seats confirmed that construction and its proof, the two
+lemmas as rewritten, and that nothing else here contradicts them; two
+replayed the 9- and 27-vertex cases themselves. All five objected to one
+thing: I had written that going below 1/2 "needs a different algorithm",
+but the construction depends on ties being broken against the algorithm,
+so a tie-breaking rule might still do better. The note and this page now
+say that. The other findings were a comparison claimed for all n but
+computed only to 4000, and programs that mishandled bad arguments; all are
+fixed. The fixes made after round 6 have not been re-read.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -347,6 +386,11 @@ written after round 3, has had no reviewer.
 - `open-limit/`: the n/3 bound, the reduced game and their tests.
 - `open-limit-referee/`: the second reader's programs and logs.
 - `upper/greedy_recurrence.py`: the table and the finite checks behind the 9n/16 upper bound.
+- `upper/lemma4_check.py`, `upper/lemma5_check.py`: the two lemmas of the (n − 3)/2 bound on all small trees.
+- `upper/pool_search.cpp`: builds costly trees under the Gupta–Kumar–Stein rule and tests Lemma 4 on each round.
+- `upper/ternary_family.py`: replays the family that makes that rule pay (3^j − 1)/2 − j.
+- `upper/greedy_exact.cpp`, `upper/greedy_exact_log.txt`: exact worst case of that rule for n ≤ 15, and the output of the run.
+- `upper/compare_bounds.py`: where each of the two upper bounds is the smaller.
 - `lean/`: the Lean 4 formalisation of the lower bound; `brief-lean.txt` is what its author was told.
 - `prior-art.md`, `prior-art-deep.md`: the two literature searches.
 - `NOTE.md`: the short note, with full proofs and related work.
