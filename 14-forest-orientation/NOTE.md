@@ -15,14 +15,14 @@ adversary can force.
 
     T(n) ≥ n/3 − (7/3)·log₂(n+1) + 5/6.
 
-**Theorem 2.** For every n ≥ 16, T(n) ≤ (4/7)·n − log₂(n+1).
+**Theorem 2.** For every n ≥ 19, T(n) ≤ (9/16)·n − log₂ n.
 
-So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 4/7. Theorem 1 is
+So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 9/16. Theorem 1 is
 machine-checked in Lean 4 in the integer form n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋
 (Section 6). Theorem 2 is proved by hand with a finite check by program. It
 holds for the algorithm of Gupta, Kumar and Stein [7, Theorem 2.1], who
-prove 2n; what is added is the analysis (Section 5). We do not
-know the value of L.
+prove 2n; what is added is the analysis, and 9/16 is the best constant
+the recurrence used can give (Section 5). We do not know the value of L.
 
 A forest can always be oriented with out-degree at most 1. Keeping that
 bound as edges arrive can require Ω(n log n) flips, and Gupta, Kumar and
@@ -258,40 +258,64 @@ built a tree with m vertices cost at most f(m) in total, so T(n) ≤ f(n).
 The same holds for the rule of [7], which flips the shorter of the two
 shortest paths: that path is no longer than the one from u.
 
-**Proof of Theorem 2.** Put N = 16 and α = 4/7. We show
-f(n) ≤ αn − log₂(n+1) for every n ≥ N. Two finite facts are needed, both
-checked in integer arithmetic by `upper/greedy_recurrence.py` from the table
-of f(1), …, f(30), which is 0,0,0,0,0,1,1,1,2,2,2,3,3,4,4,5,5,6,6,6,7,7,8,8,9,9,10,10,10,11:
+**Proof of Theorem 2.** Let ψ(n) = log₂ n if n is a power of 2 and
+ψ(n) = log₂(n+1) otherwise. We show
 
-- (i) f(n) ≤ αn − log₂(n+1) for 16 ≤ n ≤ 30;
-- (ii) f(a) + c(a) + log₂(1 + a/17) ≤ αa for 1 ≤ a ≤ 15.
+    f(n) ≤ (9/16)·n − ψ(n)   for every n ≥ 64.                        (∗∗)
 
-Let n ≥ 31 and suppose the claim holds for all m with 16 ≤ m < n. Take any
-a ≤ b with a + b = n; then 16 ≤ b < n. If a ≥ 16, then since
-c(a) ≤ log₂(a+1) − 1,
+Three finite facts are used, all checked in integer arithmetic by
+`upper/greedy_recurrence.py`, which prints the table of f(1), …, f(126):
 
-    f(a) + f(b) + c(a) ≤ αn − log₂(b+1) − 1 ≤ αn − log₂(n+1),
+- (i) (∗∗) holds for 64 ≤ n ≤ 126;
+- (ii) f(a) + c(a) + log₂(1 + (a+1)/64) ≤ (9/16)·a for 1 ≤ a ≤ 63;
+- (iii) f(n) ≤ (9/16)·n − log₂ n for 19 ≤ n ≤ 63.
 
-because 2(b + 1) ≥ n + 1. If a ≤ 15, then
+One more fact: ψ(a) − c(a) ≥ 1 for every a ≥ 2. If a is not a power of 2
+this is log₂(a+1) ≥ ⌊log₂(a+1)⌋; if a = 2^k with k ≥ 1 then c(a) = k − 1.
 
-    f(a) + f(b) + c(a) ≤ αn − log₂(n+1) + [f(a) + c(a) + log₂((n+1)/(b+1)) − αa],
+Let n ≥ 127 and suppose (∗∗) holds for all m with 64 ≤ m < n. Take any
+a ≤ b with a + b = n; then 64 ≤ b < n.
 
-and the bracket is at most 0 by (ii), since (n+1)/(b+1) = 1 + a/(b+1) ≤
-1 + a/17. ∎
+*Case a ≥ 64.* By (∗∗) for a and b,
 
-Below 16 the inequality of Theorem 2 fails at n = 1, 2, 3, 4, 6 and 9; for
-n ≤ 15 the exact values are in the small cases below. The constant 4/7 is
-not the best this argument gives. The maximum of f(n)/n is 0.5579 for
-n ≤ 3000 (the program above) and 0.5621 for n ≤ 40000 (a separate run of
-the same recurrence, not in the repository), and f(n)/n appears to tend to
-9/16. We have not proved that, and it would bound only this analysis.
+    f(a) + f(b) + c(a) ≤ (9/16)·n − ψ(b) − (ψ(a) − c(a)) ≤ (9/16)·n − ψ(b) − 1,
+
+and ψ(b) + 1 ≥ ψ(n): if b is not a power of 2, ψ(b) + 1 = log₂(2b + 2) ≥
+log₂(n+1) ≥ ψ(n). If b = 2^m and a < b, then n + 1 ≤ 2^(m+1), so
+ψ(n) ≤ log₂(n+1) ≤ m + 1. If a = b = 2^m, then ψ(n) = m + 1.
+
+*Case a ≤ 63.* By (∗∗) for b,
+
+    f(a) + f(b) + c(a) ≤ (9/16)·n − ψ(n) + [f(a) + c(a) + ψ(n) − ψ(b) − (9/16)·a],
+
+and the bracket is at most 0 by (ii), since ψ(n) − ψ(b) ≤ log₂(n+1) − log₂ b
+= log₂(1 + (a+1)/b) ≤ log₂(1 + (a+1)/64).
+
+So (∗∗) holds for all n ≥ 64. Since ψ(n) ≥ log₂ n, this gives Theorem 2 for
+n ≥ 64, and (iii) gives it for 19 ≤ n ≤ 63. ∎
+
+Among n ≤ 18, f(n) exceeds (9/16)·n − log₂ n at n = 6, 9 and 18. For n ≤ 16
+the exact values of T are in the small cases below; T(18) is not known,
+which is why the theorem starts at 19.
+
+**The constant 9/16 is exact for this recurrence.** For every k ≥ 4,
+f(2^k) = 9·2^k/16 − k. The table gives f(16) = 5 and f(32) = 13. Taking
+a = b = 2^k in the definition gives f(2^(k+1)) ≥ 2·f(2^k) + k − 1, so
+f(2^k) ≥ 9·2^k/16 − k by induction, and (∗∗) gives the reverse for k ≥ 6.
+Also f(n) ≤ (9/16)·n for every n: for n ≥ 64 by (∗∗) and for n ≤ 63 by the
+table. Since c ≥ 0, f(a + b) ≥ f(a) + f(b), so by Fekete's lemma f(n)/n
+converges to its supremum, which is 9/16: at most 9/16 by the bound just
+stated, and at least that because f(2^k)/2^k tends to 9/16. This is a
+statement about f, not about T. An upper bound below 9/16 needs a different
+algorithm, or an analysis that does not charge each merge by c of the
+smaller size alone.
 
 **Comparison with [7].** The algorithm is theirs, as just noted. Gupta,
 Kumar and Stein bound the flipped path by log₂ of the size of the smaller
 tree and get the recurrence with log₂ min(a, b) in place of c(a). They state
 the bound 2n, noting 2n − log₂ n − 2 by induction. The same induction gives
 n − 1 − log₂ n for their recurrence, with equality at powers of 2, so that
-recurrence cannot give a constant below 1. The improvement to 4/7 comes
+recurrence cannot give a constant below 1. The improvement to 9/16 comes
 from two things in the path bound: the size fact, which gives
 log₂(a + 1) − 1 in place of log₂ a, and rounding down, since a path length
 is an integer. Without the rounding the recurrence gives about 0.69·n at
@@ -484,9 +508,9 @@ we would like to hear of it.
 
 ## 8. Open questions
 
-1. The value of L. We have 1/3 ≤ L ≤ 4/7. The recurrence of Section 5
-   appears to give 9/16 and no less, so an upper bound below 9/16 needs a
-   different algorithm or a finer analysis of this one.
+1. The value of L. We have 1/3 ≤ L ≤ 9/16. The recurrence of Section 5
+   gives 9/16 and no less, so an upper bound below 9/16 needs a different
+   algorithm or a finer analysis of this one.
 2. Is L = 1/3? By Section 5 the pair game cannot force more than 1/3, and
    the one candidate potential for an Algorithm does not transfer to real
    trees. Neither settles the question.

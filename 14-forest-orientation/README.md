@@ -7,13 +7,13 @@ can the adversary force over the whole sequence?
 
 A self-contained write-up with full proofs is in [NOTE.md](NOTE.md).
 
-**Short answer: at least about n/3, and at most about 4n/7.** A simple attack
+**Short answer: at least about n/3, and at most about 9n/16.** A simple attack
 forces B(n) = max(0, ⌊n/4⌋ − 1) flips and is exactly optimal for up to 15
 vertices. It stops
 being optimal by n = 30, and a better attack forces
 n/3 − (7/3)·log₂(n+1) + 5/6 for every n. The best upper bound proved here
-is (4/7)·n − log₂(n+1) for n ≥ 16. The exact rate, somewhere from 1/3 to
-4/7 flip per vertex,
+is (9/16)·n − log₂ n for n ≥ 19. The exact rate, somewhere from 1/3 to
+9/16 flip per vertex,
 is open. The lower bound is machine-checked in Lean 4 (see "Machine check").
 The chain guessed the simple attack would fail somewhere between
 n = 16 and 24; it holds at least to 15, and the first failure is somewhere
@@ -43,7 +43,7 @@ L denotes the limit of T(n)/n, which exists.
 |---|---|---|
 | The Algorithm loses nothing by a normal form: reverse nothing and orient the new edge out of an endpoint with a free slot, or reverse one directed path from a saturated endpoint through saturated vertices to the first vertex with a free slot | proved by hand by solver B; referee read it and checked by program, for every position with n ≤ 11 and every Adversary move, that the best normal reply is as good as the best re-orientation of the merged tree (a one-round check); known as a repair move in the literature, where its optimality for the whole game was not found stated | `solver-b/proofs.txt` Lemma 1 |
 | T(n) ≥ B(n) for all n; T is monotone and superadditive, so L exists | proved by hand, twice; referee read both | `solver-a/proofs.txt` P3, P4; `solver-b/proofs.txt` Lemmas 2, 3, 5 |
-| T(n) ≤ n − log₂(n+1), by always reversing a shortest path in the smaller tree | proved by hand by solver B; referee read it. **Not new:** Gupta, Kumar and Stein (SODA 2014, Theorem 2.1) prove 2n for this problem with a similar rule (they flip the shorter path, not the path in the smaller tree), and their recurrence already gives the bound n − 1 − log₂ n (attained at powers of 2). Superseded by the row for 4n/7 below | `solver-b/proofs.txt` Lemma 4 |
+| T(n) ≤ n − log₂(n+1), by always reversing a shortest path in the smaller tree | proved by hand by solver B; referee read it. **Not new:** Gupta, Kumar and Stein (SODA 2014, Theorem 2.1) prove 2n for this problem with a similar rule (they flip the shorter path, not the path in the smaller tree), and their recurrence already gives the bound n − 1 − log₂ n (attained at powers of 2). Superseded by the row for 9n/16 below | `solver-b/proofs.txt` Lemma 4 |
 | T(n) = B(n) for n ≤ 15 | computed exhaustively by both solvers and the referee, three programs | `reports/` |
 | T(16) = 3 = B(16) | the upper half rests on one solver's program | `solver-a/run_n16.txt` |
 | T(30) ≥ 7 > 6 = B(30) | two routes with different lemmas and certificates (both use a simulation argument of the same kind), each certificate checked by the referee's own checker | `solver-a/cert_W2_*.txt`, `solver-b/cert_n30_k7.txt` |
@@ -51,8 +51,8 @@ L denotes the limit of T(n)/n, which exists.
 | T(n) > B(n) for every n ≥ 30 | for 30 ≤ n ≤ 35 from the certificates for T(30) ≥ 7 and T(32) ≥ 8; for 62 and 63 also from those two certificates by superadditivity (T(62) ≥ 7 + 8 = 15 > 14); for 36 ≤ n ≤ 61 only from a reduced game computed by the follow-up's program and the second reader's (the follow-up's own unpruned cross-check stops at 61); from 64 on from the certificate for T(64) ≥ 18 and superadditivity | `open-limit/proofs.txt` Theorem 2 |
 | This family of attacks (one tracked vertex per tree) cannot force more than (n − 1)/3 in its reduced game | proved by hand; read by the second instance | `open-limit/proofs.txt` Theorem 3 |
 | The least n with T(n) > B(n) | open; in 17 … 30 (16 … 30 without the single-program value at 16) | |
-| T(n) ≤ (4/7)·n − log₂(n+1) for n ≥ 16, so L ≤ 4/7 | proved by hand in the note, added 18 November 2026; an induction resting on two finite checks done by program; reviewed by four models from three vendors. The algorithm is Gupta, Kumar and Stein's (the bound holds for their rule and for the smaller-tree rule); the gain is from a path bound of ⌊log₂(a+1)⌋ − 1 in place of their log₂ a. Their own recurrence gives n − 1 − log₂ n, attained at powers of 2, and so no constant below 1 | [NOTE.md](NOTE.md) Section 5; `upper/greedy_recurrence.py` |
-| The exact value of L | open; 1/3 ≤ L ≤ 4/7 | |
+| T(n) ≤ (9/16)·n − log₂ n for n ≥ 19, so L ≤ 9/16; and 9/16 is exactly the rate of the recurrence used, f(2^k) = 9·2^k/16 − k for k ≥ 4 | proved by hand in the note, added 18 November 2026 (first as 4n/7, then sharpened); an induction resting on finite checks done by program; review status in "Review" below. The algorithm is Gupta, Kumar and Stein's (the bound holds for their rule and for the smaller-tree rule); the gain is from a path bound of ⌊log₂(a+1)⌋ − 1 in place of their log₂ a. Their own recurrence gives n − 1 − log₂ n, attained at powers of 2, and so no constant below 1 | [NOTE.md](NOTE.md) Section 5; `upper/greedy_recurrence.py` |
+| The exact value of L | open; 1/3 ≤ L ≤ 9/16 | |
 
 The general bound of the seventh row is weak for small n: it is positive only
 from n = 34, first exceeds B(n) at n = 179, and exceeds it for every n from
@@ -231,8 +231,8 @@ Their findings were about the documentation around it:
 - **Nothing is known from above beyond the greedy algorithm.** The follow-up
   tried to turn its own potential into an Algorithm and found a 9-vertex
   tree where that fails. One solver reported that the greedy recursion
-  evaluates to about 0.558 n for n ≤ 3000. The note now proves 4n/7 from
-  that recursion; numerically it tends to 9n/16, which is not proved.
+  evaluates to about 0.558 n for n ≤ 3000 (approaching 9/16 from below). The note now proves that the
+  recursion grows exactly like 9n/16.
 - **Prior art.** Two searches ([prior-art.md](prior-art.md),
   [prior-art-deep.md](prior-art-deep.md)). Incremental edge orientation in
   forests is an active topic (Bender, Kopelowitz, Kuszmaul, Porat, Stein
@@ -252,7 +252,7 @@ Their findings were about the documentation around it:
   problem. Theorem 2.1 there gives at most 2n flips by flipping the shorter
   shortest path. The first version of this page's upper bound, n − log₂(n+1),
   is no improvement on that paper: its recurrence already gives the bound
-  n − 1 − log₂ n. The 4n/7 bound added later does
+  n − 1 − log₂ n. The 9n/16 bound added later does
   improve on it. It states no lower bound on flips at
   out-degree 2; its only one is the known n log n at out-degree 1, cited
   from Grove et al. (1995). The lower bound of n/3 is still not found
@@ -317,14 +317,21 @@ their argument "with the path bound shortened by one": their recurrence
 already gives n − 1 − log₂ n, so the bound on this page was no improvement.
 One reviewer's numbers showed that the sharper path bound, with path
 lengths rounded down, is worth far more than I had claimed, and I then
-proved the 4n/7 bound. A third round checked that new proof and the
+proved a 4n/7 bound. A third round checked that proof and the
 program: the four seats that answered (two Claude models, GPT and Gemini;
 the Grok seat failed) confirmed every step, recomputed the table and the
 two finite checks, and pointed out that the bound holds for the 2014
 algorithm itself, which the note now says. Their remaining findings were
-stale figures in the older files, now marked. The last edits made in
-response, including the paragraph on the two older papers, have had no
-further round.
+stale figures in the older files, now marked.
+
+The constant was then sharpened from 4/7 to 9/16, with the proof that
+9/16 is exact for the recurrence, and a fourth round read that. All five
+seats (three vendors besides Anthropic) confirmed the induction, every
+sub-case, the table and the finite checks. One (GPT) objected that I had
+generalised the exactness of the recurrence to "any analysis that uses
+only the sizes of the two trees", which is not shown; the note now claims
+it for this recurrence only. The paragraph on the two older papers,
+written after round 3, has had no reviewer.
 
 ## Files
 
@@ -339,7 +346,7 @@ further round.
 - `verifier/`: the referee's solvers and certificate checker.
 - `open-limit/`: the n/3 bound, the reduced game and their tests.
 - `open-limit-referee/`: the second reader's programs and logs.
-- `upper/greedy_recurrence.py`: the table and the two finite checks behind the 4n/7 upper bound.
+- `upper/greedy_recurrence.py`: the table and the finite checks behind the 9n/16 upper bound.
 - `lean/`: the Lean 4 formalisation of the lower bound; `brief-lean.txt` is what its author was told.
 - `prior-art.md`, `prior-art-deep.md`: the two literature searches.
 - `NOTE.md`: the short note, with full proofs and related work.
