@@ -1,6 +1,6 @@
 # A lower bound of n/3 − O(log n) on total flips for 2-orientations of incremental forests
 
-*A short note. Draft of 17 November 2026. Source and all supporting files:
+*A short note. Draft of 18 November 2026. Source and all supporting files:
 this folder; overview in [README.md](README.md).*
 
 ## Summary
@@ -15,15 +15,17 @@ adversary can force.
 
     T(n) ≥ n/3 − (7/3)·log₂(n+1) + 5/6.
 
-**Theorem 2** (a sharpening of Gupta, Kumar and Stein [7, Theorem 2.1], who
-prove 2n by the same method). For every n ≥ 1, T(n) ≤ n − log₂(n+1).
+**Theorem 2.** For every n ≥ 16, T(n) ≤ (4/7)·n − log₂(n+1).
 
-So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 1. Theorem 1 is
+So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 4/7. Theorem 1 is
 machine-checked in Lean 4 in the integer form n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋
-(Section 6). We do not know the value of L.
+(Section 6). Theorem 2 is proved by hand with a finite check by program. It
+holds for the algorithm of Gupta, Kumar and Stein [7, Theorem 2.1], who
+prove 2n; what is added is the analysis (Section 5). We do not
+know the value of L.
 
 A forest can always be oriented with out-degree at most 1. Keeping that
-bound as edges arrive can cost of order n log n flips, and Gupta, Kumar and
+bound as edges arrive can require Ω(n log n) flips, and Gupta, Kumar and
 Stein [7] showed that relaxing the bound to 2 brings the total down to O(n).
 Theorem 1 says that this is the right order and that the amortized number of
 flips per insertion cannot be below 1/3 − o(1). A constant amortized lower
@@ -241,29 +243,66 @@ The bound is weak for small n. It is positive from n = 34 on.
 
 ## 5. The upper bound, and what else is known
 
-**Proof of Theorem 2.** This is the argument of [7, Section 2] with the path
-length counted more tightly. The Algorithm replies as follows. If an endpoint is
-unsaturated, direct the new edge out of it and flip nothing. Otherwise let u
-be the endpoint in the smaller of the two trees, of size a; flip a shortest
-directed path from u to an unsaturated vertex and direct the edge out of u.
-The cost is h(u) ≤ log₂(a + 1) − 1 by the size fact. So the total is at most
-f(n), where f(1) = 0 and f(n) is the maximum over a ≤ b, a + b = n, of
-f(a) + f(b) + log₂(a + 1) − 1. By induction f(m) ≤ m − log₂(m + 1):
+**The algorithm.** If an endpoint of the named pair is unsaturated, direct
+the new edge out of it and flip nothing. Otherwise let u be the endpoint in
+the smaller of the two trees, of size a; flip a shortest directed path from u
+to an unsaturated vertex and direct the edge out of u. The cost is 0 in the
+first case and h(u) in the second, all flipped edges lie in the tree of u,
+and by the size fact h(u) ≤ c(a), where
 
-    f(a) + f(b) + log₂(a+1) − 1 ≤ n − log₂(b+1) − 1 ≤ n − log₂(n+1),
+    c(a) = ⌊log₂(a + 1)⌋ − 1 ≥ 0.
 
-because 2(b + 1) ≥ n + 1. ∎
+Define f(1) = 0 and, for n ≥ 2, f(n) as the maximum over a ≤ b with
+a + b = n of f(a) + f(b) + c(a). By induction on the rounds, the rounds that
+built a tree with m vertices cost at most f(m) in total, so T(n) ≤ f(n).
+The same holds for the rule of [7], which flips the shorter of the two
+shortest paths: that path is no longer than the one from u.
 
-Gupta, Kumar and Stein bound the path by log₂ of the tree size, flip the
-shorter of the two available paths, and get 2n − log₂ n − 2 from the same
-recurrence. The gain here is only from the size fact, which shortens the
-path bound by one.
+**Proof of Theorem 2.** Put N = 16 and α = 4/7. We show
+f(n) ≤ αn − log₂(n+1) for every n ≥ N. Two finite facts are needed, both
+checked in integer arithmetic by `upper/greedy_recurrence.py` from the table
+of f(1), …, f(30), which is 0,0,0,0,0,1,1,1,2,2,2,3,3,4,4,5,5,6,6,6,7,7,8,8,9,9,10,10,10,11:
+
+- (i) f(n) ≤ αn − log₂(n+1) for 16 ≤ n ≤ 30;
+- (ii) f(a) + c(a) + log₂(1 + a/17) ≤ αa for 1 ≤ a ≤ 15.
+
+Let n ≥ 31 and suppose the claim holds for all m with 16 ≤ m < n. Take any
+a ≤ b with a + b = n; then 16 ≤ b < n. If a ≥ 16, then since
+c(a) ≤ log₂(a+1) − 1,
+
+    f(a) + f(b) + c(a) ≤ αn − log₂(b+1) − 1 ≤ αn − log₂(n+1),
+
+because 2(b + 1) ≥ n + 1. If a ≤ 15, then
+
+    f(a) + f(b) + c(a) ≤ αn − log₂(n+1) + [f(a) + c(a) + log₂((n+1)/(b+1)) − αa],
+
+and the bracket is at most 0 by (ii), since (n+1)/(b+1) = 1 + a/(b+1) ≤
+1 + a/17. ∎
+
+Below 16 the inequality of Theorem 2 fails at n = 1, 2, 3, 4, 6 and 9; for
+n ≤ 15 the exact values are in the small cases below. The constant 4/7 is
+not the best this argument gives. The maximum of f(n)/n is 0.5579 for
+n ≤ 3000 (the program above) and 0.5621 for n ≤ 40000 (a separate run of
+the same recurrence, not in the repository), and f(n)/n appears to tend to
+9/16. We have not proved that, and it would bound only this analysis.
+
+**Comparison with [7].** The algorithm is theirs, as just noted. Gupta,
+Kumar and Stein bound the flipped path by log₂ of the size of the smaller
+tree and get the recurrence with log₂ min(a, b) in place of c(a). They state
+the bound 2n, noting 2n − log₂ n − 2 by induction. The same induction gives
+n − 1 − log₂ n for their recurrence, with equality at powers of 2, so that
+recurrence cannot give a constant below 1. The improvement to 4/7 comes
+from two things in the path bound: the size fact, which gives
+log₂(a + 1) − 1 in place of log₂ a, and rounding down, since a path length
+is an integer. Without the rounding the recurrence gives about 0.69·n at
+n = 1000 (computed).
 
 **The limit exists.** T(a + b) ≥ T(a) + T(b): the Adversary plays an optimal
 strategy on a set of a vertices, then on the other b looking only at those,
 then joins the two trees. Flips the Algorithm makes outside the part being
 played only add to what it pays, so its payments within each part are at
-least the value of that part. With Theorem 2 and Fekete's lemma, L = lim T(n)/n = sup T(n)/n.
+least the value of that part. Since T(n)/n is bounded (Theorem 2), Fekete's
+lemma gives L = lim T(n)/n = sup T(n)/n.
 
 **Small cases** (details, proofs and programs in [README.md](README.md)).
 
@@ -306,7 +345,7 @@ candidate is refuted.
 ## 6. Machine check
 
 `lean/` contains a Lean 4 development (toolchain 4.36.0, core library only,
-about 1,950 lines) proving
+about 1,970 lines) proving
 
     theorem T_lower_bound (n : Nat) (hn : 1 ≤ n) :
         n + 3 ≤ 3 * T n + 7 * Nat.log2 (n + 1)
@@ -331,7 +370,8 @@ What this does and does not give:
 - The inequality first forces T(n) ≥ 1 at n = 26 (it does so for n = 26 to
   30, says nothing at 31 and 32, and does so again for every n from 33 on).
   That is beyond any exhaustive computation of T, which stops at n = 16, so
-  there is no numerical test of the theorem itself. At n = 1000 it gives T ≥ 314; Theorem 2 gives T ≤ 990.
+  there is no numerical test of the theorem itself. At n = 1000 it gives
+  T ≥ 314; Section 5 gives T ≤ f(1000) = 549.
 - That the backward-induction value equals the value under history-dependent
   strategies is standard for finite games of perfect information and is not
   formalised.
@@ -353,10 +393,11 @@ afterwards, for this note.
   lower bounds). Their Section 2 is this problem, stated for in-degree: edges
   of a forest arrive online, load at most 2 is maintained, and Theorem 2.1
   gives an algorithm with at most 2n flips in total, by flipping the shorter
-  of the two shortest paths to an unsaturated vertex. Theorem 2 above is
-  that result with a smaller constant. They also recall that keeping load 1
-  can require Ω(n log n) flips, citing Grove et al. (1995). They state no
-  lower bound on flips at load 2.
+  of the two shortest directed paths to an unsaturated vertex. Theorem 2
+  above is a tighter analysis of that algorithm (Section 5). They also
+  recall that keeping load 1 can require Ω(n log n) flips, citing Grove et
+  al. [12]. Section 2 states no lower bound on
+  flips at load 2, and our scan of the rest of the paper found none.
 - Brodal and Fagerberg [1] (Sections 3 to 5 read). A different rule; for
   trees it gives bound 2 with an amortized 3 flips per insertion. We read
   that in survey slides by Gupta [8] and derived a total of 3(n − 1) from
@@ -388,16 +429,29 @@ nearest statements:
 - Online bipartite matching with replacements. Bernstein, Holm and
   Rotenberg [6] (Sections 1 and 6.1 read) report upper and lower bounds of
   order n log n on total replacements when the graph stays a forest, citing
-  Chaudhuri, Daskalakis, Kleinberg and Lin (2009; introduction and related
-  work read) and Grove et al. (1995; not read). Our reading is that this is
+  Chaudhuri, Daskalakis, Kleinberg and Lin [10] (introduction and related
+  work read) and Grove et al. [12]. Our reading is that this is
   the case without slack, capacity 1, corresponding to out-degree 1.
 - Kaplan, Naori and Sadeh [9] (abstract read, rest scanned) prove an Ω(1)
   amortized recourse lower bound for edge colouring of incremental forests,
   a neighbouring problem.
 
-**Not read.** He, Tang and Zeh (ISAAC 2014) and Grove, Kao, Krishnan and
-Vitter (WADS 1995). A reader who knows this literature may well know a
-reference we missed, and we would like to hear of it.
+**Two older sources, read last** (18 November 2026, by one instance, from
+open copies; whole text of each).
+
+- He, Tang and Zeh [11] contains no lower bound on reorientations. Its
+  bounds for insertions need out-degree at least 10 on forests (our
+  arithmetic from its Theorem 1).
+- Grove et al. [12] is an extended abstract on competitive ratios, with
+  most proofs sketched; the extraction lost the Ω and √ signs, which we
+  restore from context. Its only lower bound at capacity 2 on a tree is
+  Theorem 11, Ω(√n) on the competitive ratio, and its proof uses
+  disconnections. Without disconnections its Theorem 3 gives a
+  2-competitive algorithm on a tree of stations fixed in advance, with each
+  customer switched at most once.
+
+A reader who knows this literature may well know a reference we missed, and
+we would like to hear of it.
 
 **References**
 
@@ -421,12 +475,18 @@ reference we missed, and we would like to hear of it.
    https://cs.nyu.edu/~anupamg/talks/shonan-recourse.pptx
 9. H. Kaplan, D. Naori, Y. Sadeh. Dynamic Edge Coloring of Forests. 2026.
    arXiv:2605.09711
+10. K. Chaudhuri, C. Daskalakis, R. D. Kleinberg, H. Lin. Online Bipartite
+    Perfect Matching With Augmentations. INFOCOM 2009.
+11. M. He, G. Tang, N. Zeh. Orienting Dynamic Graphs, with Applications to
+    Maximal Matchings and Adjacency Queries. ISAAC 2014, LNCS 8889.
+12. E. F. Grove, M.-Y. Kao, P. Krishnan, J. S. Vitter. Online Perfect
+    Matching and Mobile Computing. WADS 1995, LNCS 955, pp. 194–205.
 
 ## 8. Open questions
 
-1. The value of L. We have 1/3 ≤ L ≤ 1. The greedy recursion in the proof of
-   Theorem 2, evaluated with floors, stays below 0.558·n for n ≤ 3000, which
-   is numerical evidence only that the greedy analysis is not tight.
+1. The value of L. We have 1/3 ≤ L ≤ 4/7. The recurrence of Section 5
+   appears to give 9/16 and no less, so an upper bound below 9/16 needs a
+   different algorithm or a finer analysis of this one.
 2. Is L = 1/3? By Section 5 the pair game cannot force more than 1/3, and
    the one candidate potential for an Algorithm does not transfer to real
    trees. Neither settles the question.
@@ -441,7 +501,7 @@ Anthropic) in an experiment on whether such models can pose and settle small
 checkable questions: one chain of instances posed the problem, two solved it
 independently, others refereed, and a further one wrote the Lean
 development. The claims were then reviewed by five models from four vendors
-reading the files. The record of that process, including the errors found on
+reading the files; what each review covered is in the README. The record of that process, including the errors found on
 the way, is in [README.md](README.md). No human mathematician has yet checked
 the proofs; the Lean check of Theorem 1 is offered in place of that for the
 main result. Corrections are welcome as issues on the repository.
