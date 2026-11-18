@@ -1,0 +1,3 @@
+game3 n=15 J=2: Adversary forces >= 5 ? NO   (states=5588039 trees=24798881 pairs=5465665 pool=338323107 calls=5903496)
+1433.05s 4799800kB
+exit=0

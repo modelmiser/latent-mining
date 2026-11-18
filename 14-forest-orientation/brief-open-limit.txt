@@ -1,0 +1,27 @@
+You are attacking the open part of a precisely defined problem, alone. Do not search the web.
+
+THE PROBLEM
+Read chain/3-question.txt (online edge orientation of a forest with out-degree at most 2; T(n) = total flips the Adversary can force; B(n) = max(0, floor(n/4) - 1)).
+
+WHAT IS ALREADY DONE (two independent solvers and a referee; you may read reports/solver-a.md, solver-b.md, referee.md, the proofs solver-a/proofs.txt and solver-b/proofs.txt, and use the programs and certificates in solver-a/, solver-b/, verifier/ read-only)
+ - Proved: Algorithm loses nothing by a normal form (flip nothing, or flip one directed path from a saturated endpoint through saturated vertices to the first unsaturated one); only the two merging components matter; T(n) >= B(n); T monotone and superadditive, so L = lim T(n)/n exists and equals sup T(n)/n; T(n) <= n - log2(n+1).
+ - Computed: T(n) = B(n) for n <= 15 (three programs) and n = 16 (one program).
+ - Certified: T(30) >= 7 > 6 = B(30); T(32) >= 8; T(64) >= 18. So the answer to "is T = B always" is NO, and 9/32 <= L <= 1.
+ - Mechanism: a paid merge of two saturated vertices leaves a saturated vertex whose out-neighbours are saturated ("bad"); naming two bad vertices in different trees costs 2. Solver A formalises this with games W_j (Adversary also receives psi_j of the final tree; T(a+b) >= W_j(a) + W_j(b) - j). Solver B conjectures T(4^k) >= (4^k - 1)/3 - k, hence L >= 1/3, verified exhaustively over Algorithm for k = 3, and says a naive "cost + depth" induction fails when Algorithm overpays by 1 in one subtree.
+ - Open: the least n with T(n) > B(n) (in [17, 30]); the exact formula; the exact value of L.
+
+YOUR TASKS, in this order of priority
+ 1. The limit from below. Prove L >= 1/3 (or more) by an explicit Adversary strategy for all sizes of some family, with a potential function that survives every Algorithm reply, including overpaying. Think of the state of a tree as (what Algorithm has paid so far, the "depth" profile: the directed distance from saturated vertices to the nearest unsaturated vertex); the Adversary merges trees of equal profile at their deepest saturated vertices, and Algorithm chooses between paying depth now or leaving a deeper tree. Find the invariant "paid + f(profile) >= g(size)" that is preserved, test it mechanically against all normal-form replies on every case you can reach BEFORE proving it, and make sure it is inductive from every position satisfying it, not only reachable ones. Then ask whether deeper recursion gives more than 1/3: what is the best constant this family of strategies can reach?
+ 2. The limit from above. The known upper bound is T(n) <= n - log2(n+1) (greedy shortest path; numerically about 0.558 n by solver B's recursion). Find a better Algorithm or a better analysis: for example an Algorithm that sometimes overpays to keep trees shallow, analysed with a potential function. A proved bound L <= c with c < 0.558, or better a matching pair lower = upper, would be the headline.
+ 3. The least n with T(n) > B(n). Either a certificate (in solver B's format, checkable by solver-b/check_cert.py or verifier/certcheck.py) for T(n) >= B(n) + 1 at some n < 30, or a proof or certified computation that T(n) = B(n) for all n <= 29. Only attempt computations that fit the limits below; the referee estimates a full solve of n = 16 already needs about 17 GB.
+ Any one of 1, 2, 3 settled completely is a good outcome. State exactly what you prove.
+
+RULES
+ - Test every lemma mechanically on all cases within reach BEFORE trying to prove it, and run at least one deliberately false variant to confirm the test can fail.
+ - Mark each statement COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ - Write only inside open-limit/ . Do not modify or delete anything else.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=open-limit ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep`. Kill only your own PIDs. python3 and g++ are available. Keep output files under 300 kB unless a file is a certificate someone must check.
+
+REPORT
+ Write your proofs to open-limit/proofs.txt and your report (under 800 words) to reports/open-limit.md; return the report as your final message: what is now proved (exact statements), what was tested mechanically and how, what failed and why, what remains open, and your confidence in each proof.

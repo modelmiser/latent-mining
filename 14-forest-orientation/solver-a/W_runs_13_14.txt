@@ -1,0 +1,4 @@
+J=1 RESULT adv=0 cap=2 n=13 T=3
+J=2 RESULT adv=0 cap=2 n=13 T=3
+J=3 RESULT adv=0 cap=2 n=13 T=3
+J=1 RESULT adv=0 cap=2 n=14 T=3

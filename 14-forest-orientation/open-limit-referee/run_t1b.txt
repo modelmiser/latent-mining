@@ -1,0 +1,13 @@
+MAXTOT 8 fW {'quads': 5745, 'orient': 500856, 'nonnormal': 488239, 'S_cases': 612368, 'S_fail': 1803, 'W_fail': 2844, 'L1_fail': 0, 'mincost_mismatch': 0, 'S_fail_normal': 0}
+ example strict failure [(6, [(1, 0), (1, 2), (4, 3), (4, 5)], 1, 4, ((0, 1), (1, 2), (3, 4), (4, 5), (4, 1)), 2, 2)]
+ example weak failure [(2, [], 0, 1, ((1, 0),), 0, 0, 1)]
+MAXTOT 8 fL1 {'quads': 5745, 'orient': 500856, 'nonnormal': 488239, 'S_cases': 612368, 'S_fail': 1803, 'W_fail': 0, 'L1_fail': 500856, 'mincost_mismatch': 0, 'S_fail_normal': 0}
+ example strict failure [(6, [(1, 0), (1, 2), (4, 3), (4, 5)], 1, 4, ((0, 1), (1, 2), (3, 4), (4, 5), (4, 1)), 2, 2)]
+ example weak failure []
+MAXTOT 9 true {'quads': 24201, 'orient': 3908569, 'nonnormal': 3854928, 'S_cases': 4800488, 'S_fail': 15743, 'W_fail': 0, 'L1_fail': 0, 'mincost_mismatch': 0, 'S_fail_normal': 0}
+ example strict failure [(6, [(1, 0), (1, 2), (4, 3), (4, 5)], 1, 4, ((0, 1), (1, 2), (3, 4), (4, 5), (4, 1)), 2, 2)]
+ example weak failure []
+
+real	1m19.036s
+user	1m18.993s
+sys	0m0.032s

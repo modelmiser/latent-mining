@@ -1,0 +1,79 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as its author wrote it)
+ N1. Lemma 1 is worded "against every Adversary strategy ... cost(L) <= cost(A)". What the proof shows is: on one
+     and the same sequence of named pairs, the normal-form play L built from an arbitrary play A costs no more.
+     Read pointwise against an adaptive Adversary the wording is false (an Adversary may treat a non-normal
+     Algorithm more gently). The consequence that is used, that the game restricted to normal-form replies has
+     the same value, does follow: a deterministic Algorithm is a function of the pair history, the simulation
+     turns it into a normal-form Algorithm no worse on every sequence. See also the shadow construction in
+     ../reports/open-limit-referee.md.
+ Found by the second reader and the review panel (five seats, four model families). None changes a theorem.
+------------------------------------------------------------------------------------------------
+proofs.txt  (solver-b)            every item is marked COMPLETE or SKETCH
+Notation. outdeg <= 2; "saturated" = outdeg 2. charge c(v) = 1 - outdeg(v) in {+1,0,-1}; a tree has total charge 1
+(so #outdeg-0 vertices = #saturated + 1: the problem's belief is TRUE). In a tree the outdegree vector determines the
+orientation (peel leaves), which is what the fast programs use.
+h(x) = length of a shortest directed path from x to an unsaturated vertex (0 if x is unsaturated). It is finite:
+if every vertex reachable from x were saturated, the reachable set R would carry 2|R| edges inside a forest.
+
+LEMMA 1 (normal form of Algorithm) -- COMPLETE.
+Call a reply NORMAL if it is of one of two kinds, for an endpoint x in {u,v} (y the other endpoint):
+ (free) x unsaturated: flip nothing, orient x->y.
+ (path) x saturated: flip one directed path x=w0->w1->...->wk (k>=1), w0..w(k-1) saturated, wk unsaturated; orient x->y. Cost k.
+Claim: against every Adversary strategy, for every Algorithm strategy A there is a strategy L using only normal replies
+with total cost(L) <= total cost(A). Hence T(n) is unchanged if Algorithm is restricted to normal replies.
+Proof. L simulates A on the same Adversary sequence (Adversary's legality depends only on G). Keep the invariant
+   cost(L) + d(D_L, D_A) <= cost(A),          d = number of edges oriented differently.
+Round: A goes from D_A to D_A' (on G+uv), paying p = d(D_A, D_A' restricted to old edges). Say D_A' has x->y.
+ Case 1: x unsaturated in D_L. L orients x->y, flips nothing. New distance = d(D_L, D_A'|old) <= d(D_L,D_A)+p. OK.
+ Case 2: x saturated in D_L. In D_A', x has out-edge xy, so at most one old out-edge; D_L has two. So some old edge
+   x->w1 of D_L is w1->x in D_A'. If w1 is saturated in D_L: w1 has two out-edges in D_L, neither is w1x; in D_A' w1 has
+   out-edge w1->x hence at most one more; so some D_L-edge w1->w2 is reversed in D_A'. Repeat. The walk is a directed
+   path in a forest, so it never repeats a vertex and ends at some wk unsaturated in D_L. All k edges of the path are
+   disagreements. L flips the path (valid: inner vertices keep outdeg 2, wk gains one, x loses one and regains it with
+   x->y) and pays k; the distance to D_A' drops by k and the new edge agrees. Invariant: cost+k + (d(D_L,D_A'|old)-k).
+ At the end d >= 0 gives cost(L) <= cost(A).   QED
+
+LEMMA 2 (lower bound; the problem's "T(n) >= B(n)" is TRUE) -- COMPLETE.
+For a position let s = #components containing a saturated vertex, q = #saturated-free components with >= 2 vertices,
+g = #singletons, P = s + floor((q + floor(g/2))/2). Claim: from any position Adversary can force future payment >= P-1.
+Strategy: (a) if g>=2 name two singletons; (b) else if q>=2 name two outdeg-1 vertices in two different saturated-free
+components of size>=2 (such a tree has an edge, hence a vertex of outdeg exactly 1); (c) else if s>=2 name two saturated
+vertices in different components; (d) else stop caring (then g<=1,q<=1,s<=1 so P<=1).
+Each round under (a)-(c) satisfies P_after + payment >= P_before (Algorithm arbitrary, not only normal):
+ - a component not merged this round changes type only if edges in it are flipped; saturated -> saturated-free needs
+   >=1 flip there and lowers P by <=1; saturated-free -> saturated does not lower P.
+ - (a) new pair: g-2, q+1, P unchanged. (b) with 0 flips in the merged tree the tail of uv has outdeg 2: s+1, q-2,
+   P unchanged; with >=1 flip there P drops by <=1. (c) the tail of uv was saturated, so >=1 old edge in the merged tree
+   is flipped; if the merged tree still has a saturated vertex P drops by 1; if it has none, every formerly saturated
+   vertex (>=2 of them, distinct tails) lost an old out-edge, >=2 flips, and P drops by <=2.
+Summing: payment >= P_start - 1. At the start P = floor(floor(n/2)/2) = floor(n/4).  So T(n) >= B(n).  QED
+
+LEMMA 3 -- COMPLETE.  T(n+1) >= T(n) and T(a+b) >= T(a)+T(b).
+Adversary plays an optimal a-strategy on a set A (only A carries edges, so this is literally the a-game), then an
+optimal b-strategy on B looking only at B (Algorithm's behaviour restricted to B is a legal b-game behaviour and its
+B-payments are at most its real payments), then joins the two trees.  QED
+
+LEMMA 4 (linear upper bound; the belief "T(n) <= Cn" is TRUE with C = 1) -- COMPLETE.   T(n) <= n - log2(n+1).
+Greedy Algorithm: if an endpoint is unsaturated, orient out of it, flip nothing. Otherwise let u lie in the smaller
+component (size a), flip a shortest directed path from u to an unsaturated vertex, orient u->v. Cost k = h(u).
+All vertices at directed distance < k from u are saturated, and directed paths from u in a tree end at distinct
+vertices, so the component has >= 1+2+...+2^k = 2^(k+1)-1 vertices: k <= log2(a+1)-1.
+So total <= f(n), f(1)=0, f(n) <= max_{a<=b} f(a)+f(b)+log2(a+1)-1. Induction f(m) <= m-log2(m+1):
+f(a)+f(b)+log2(a+1)-1 <= n - log2(b+1) - 1 <= n - log2(n+1) because 2(b+1) >= a+b+1.  QED
+(gdp.py evaluates the sharper recursion with floor(log2(a+1))-1: g(n)/n <= 0.558 for n <= 3000. NUMERIC, not a proof for all n.)
+
+LEMMA 5 -- COMPLETE.  L = lim T(n)/n exists and equals sup_n T(n)/n (Fekete, by Lemmas 3 and 4). Hence L >= T(n)/n for every n.
+
+COMPUTER-CHECKED LOWER BOUNDS (rely on Lemma 1 only; certificates + independent checker check_cert.py):
+ T(30) >= 7 = B(30)+1,  T(32) >= 8 = B(32)+1,  T(64) >= 18 = B(64)+3.  So the answer to "T = B for all n?" is NO, and
+ L >= 18/64 = 9/32 > 1/4.
+
+SKETCH (NOT a proof): why 2-payments appear, and a conjectured rate.
+ Paying merge of saturated x,y at cost 1 leaves x->y with x,y saturated: x is "ripe" (one unsaturated out-neighbour,
+ one saturated). Naming two ripe vertices of different trees: every reply costs 1 and makes one of them "bad"
+ (h>=2), or costs 2. Naming two bad vertices of different trees costs >= 2. Ripe trees: 8 vertices at cost 1 (two
+ 4-blocks) or 6 vertices at cost 0 (pair-tail named with the saturated vertex of a block). Bad trees: 16 vertices at
+ cost 3, or 14 at cost 2; 16+14 = 30 gives 3+2+2 = 7.  Iterating with depth k (four depth-k trees -> one depth-(k+1)
+ tree, three merges of cost k) would give T(4^k) >= (4^k-1)/3 - k, i.e. L >= 1/3. I could not prove that Algorithm
+ cannot profitably overpay to destroy depth at higher levels (a naive potential "cost + depth" induction FAILS when one
+ subtree has overpaid by 1), so this is a conjecture; it is confirmed by exhaustive search over Algorithm for k=3 (n=64).

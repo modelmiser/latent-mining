@@ -1,0 +1,6 @@
+cap=2 n=1 T=0 states=1
+cap=2 n=2 T=0 states=3
+cap=2 n=3 T=0 states=19
+cap=2 n=4 T=0 states=197
+cap=2 n=5 T=0 states=2916
+cap=2 n=6 T=0 states=56737

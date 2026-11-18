@@ -1,0 +1,2 @@
+n=13 b=2 : VERIFIED T(n) <= b (positions=270048, violations=0)
+rc=0

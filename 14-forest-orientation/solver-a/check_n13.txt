@@ -1,0 +1,7 @@
+mode=fast adv=0 cap=2 n=13 T=2 states=79457 trees=298731
+-rw-rw-r-- 1 user user 3416829 Nov 17 14:57 table_n13.txt
+states checked: 79457  inconsistent: 0  n=13  value of start state: 2
+CERTIFICATE OK
+real	4m18.567s
+user	4m18.426s
+sys	0m0.096s

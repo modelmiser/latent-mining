@@ -1,0 +1,7 @@
+cap=1 n=1 T=0 states=1
+cap=1 n=2 T=0 states=3
+cap=1 n=3 T=0 states=16
+cap=1 n=4 T=1 states=125
+cap=1 n=5 T=1 states=1296
+cap=1 n=6 T=2 states=16807
+cap=1 n=7 T=3 states=262144

@@ -1,0 +1,3 @@
+n=14 adv=0 can(B+1=3)=0 nodes=1102861 states=1099564 trees=2815036
+n=15 adv=0 can(B+1=3)=0 nodes=4560269 states=4537949 trees=11804885
+rc=0

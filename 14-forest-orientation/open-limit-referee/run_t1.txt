@@ -1,0 +1,12 @@
+pairs6 f1 {'cases': 1212260, 'fail': 617058, 'replies': 797146, 'lemmaB_fail': 0}
+ first failure ((), 0, 1, 0, [0], 0, 0, (-1, 0))
+ first failure ((), 0, 1, 1, [1], 0, 0, (-1, 0))
+pairs6 f2 {'cases': 1212260, 'fail': 196, 'replies': 797146, 'lemmaB_fail': 0}
+ first failure (((1, 0), (0, 2), (0, 3), (1, 4), (6, 5), (5, 7), (5, 8), (6, 9)), 1, 6, 1, [1, 0, 2], 3, 2, (0, 1))
+ first failure (((1, 0), (0, 2), (0, 3), (1, 4), (6, 5), (5, 7), (5, 8), (6, 9)), 1, 6, 1, [1, 0, 3], 3, 2, (0, 1))
+pairs6 f3 {'cases': 1212260, 'fail': 480646, 'replies': 797146, 'lemmaB_fail': 0}
+ first failure ((), 0, 1, 0, [0], 0, 0, (-1, 0))
+ first failure ((), 0, 1, 1, [1], 0, 0, (-1, 0))
+tree counts by size {1: 1, 2: 1, 3: 3, 4: 7, 5: 23, 6: 72, 7: 262, 8: 960, 9: 3754} total 5083
+Y set 12 + 57
+big true {'cases': 33091870, 'fail': 0, 'replies': 21170578, 'lemmaB_fail': 0}

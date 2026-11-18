@@ -1,0 +1,2 @@
+states checked: 18623  inconsistent: 0  n=12  value of start state: 2
+CERTIFICATE OK

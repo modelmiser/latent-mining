@@ -1,0 +1,170 @@
+NOTES ADDED AFTER REVIEW (the text below the line is as its author wrote it)
+ N1. Section 0 and Remark (i): "inductive from EVERY position" holds in the normal-form game (or on the shadow
+     orientation of ../reports/open-limit-referee.md); after a non-normal reply the real position need not carry
+     the types.
+ N2. Theorem 1, potential: merges of two trees of the same index preserve P >= 0; the cleanup merges can lower it,
+     by at most 2/3 each, which is where the logarithmic term comes from.
+ N3. After Theorem 3: "no strategy that tracks one witness ... proves more than 1/3" is proved for the pair game
+     as defined (Lemma B's cost bounds, witness at a named endpoint), not for every conceivable one-witness
+     strategy on real forests.
+ N4. Corollary 7 and the sentence after it are about normal-form Algorithms.
+ N5. The values of V_pair for n = 62..66 were computed by pairdp.py alone here; the second reader's own program
+     reproduces the whole table for n <= 66.
+ N6. The closed bound of Theorem 1 is negative for small n: positive from n = 34, first above B(n) at n = 179,
+     above B(n) for every n >= 189.
+ Found by the second reader and the review panel (five seats, four model families). None changes a theorem.
+------------------------------------------------------------------------------------------------
+proofs.txt (open-limit)      every item is marked COMPLETE, COMPUTED or SKETCH/OPEN
+All files named below are in open-limit/ .
+
+0. SETTING
+By solver-b Lemma 1 (normal form; checked by the referee) T(n) is the value of the game in which Algorithm
+uses only NORMAL replies to a named pair {u,v}: choose an endpoint x (y = the other one) and
+   (free) x unsaturated: flip nothing, add x->y;                                             cost 0
+   (path) x saturated: flip one directed path x=w0->w1->...->wd (w0..w(d-1) saturated, wd unsaturated),
+          add x->y;                                                                          cost d >= 1.
+Every lower bound below is a strategy of Adversary against normal replies, hence a lower bound on T(n).
+h(v) = length of a shortest directed path from v to an unsaturated vertex (0 if v is unsaturated).
+SLOTS. Every vertex has two slots; a slot holds an out-neighbour o and then has value h(o), or is empty (a
+"hole") and has value -1.  slots(v) = (P,Q), P <= Q, the two values sorted.  Then h(v) = P + 1 in all cases.
+For integers -1 <= p <= q say "v HAS TYPE (p,q)" if P >= p and Q >= q.  Types are monotone: if v has type
+(p,q) it has every type (p0,q0) with p0 <= p, q0 <= q.  Note: sorting is monotone, i.e. a >= a', b >= b'
+implies sort(a,b) >= sort(a',b') componentwise.
+paid(C), for a tree C of the current forest = total cost of the rounds that built C (in the normal-form game
+every flip of a round lies inside the tree created in that round, so paid(C1+C2) = paid(C1)+paid(C2)+cost).
+
+FACT 0 (COMPLETE, trivial).  Under normal replies no out-degree ever decreases: in a path reply x loses
+x->w1 and gains x->y, inner path vertices lose one out-edge and gain one, wd gains one.  So every round
+consumes exactly one hole, at the named endpoint (free) or at directed distance d from it (cost d).
+
+1. LEMMA A (locality) -- COMPLETE.
+Let x in X, y in Y be named and let Algorithm reply at x.
+ (a) path reply through the out-neighbour o of x (w1 = o): cost >= 1 + h(o).
+ (b) if o' is the other out-neighbour of x, h(o') is the same before and after the reply.
+ (c) h(y) and the slot values of y are the same before and after the reply.
+ (d) after the reply the out-neighbours of x are y and o' (path reply), or y and the old ones (free reply).
+Proof. (a) o->...->wd is a directed path from o to an unsaturated vertex, so d-1 >= h(o).
+(b) Let R = set of vertices reachable from o' by directed paths (old orientation).  No path vertex lies in R:
+the unique tree path from o' to x is the edge o'x, oriented x->o'; the unique tree path from o' to wi (i>=1)
+starts with the same edge o'x.  So neither is a directed path out of o'.  All flipped edges have both ends on
+the path, hence no edge leaving a vertex of R is flipped, out-degrees inside R are unchanged, and the set
+reachable from o' is still R.  h(o') depends only on that.  (c) no edge of Y is flipped and the new edge
+points into y.  (d) by inspection.  QED
+
+2. LEMMA B (pair lemma) -- COMPLETE.   [tested: test_pair_lemma.py]
+Let x have type (p,q), y have type (p',q'), in different trees, and let Adversary name {x,y}.
+Then h(y) >= p'+1, and every normal reply AT x satisfies one of
+   (X1) cost >= p+1 and afterwards x has type sort(q, p'+1);
+   (X2) cost >= q+1 and afterwards x has type sort(p, p'+1);
+in both cases y still has type (p',q').  Symmetrically for replies at y (Y1: cost >= p'+1, y gets
+sort(q', p+1);  Y2: cost >= q'+1, y gets sort(p', p+1);  x keeps type (p,q)).
+Proof. Let (P,Q) >= (p,q) be the true sorted slot values of x.  h(y) = 1 + (smaller slot value of y) >= p'+1,
+unchanged by Lemma A(c).  Free reply (x unsaturated, so P = -1 = p): cost 0 = p+1; the new slot values of x
+are {Q, h(y)} >= {q, p'+1}: (X1).  Path reply through the out-neighbour in the slot of value P: cost >= P+1
+>= p+1 by A(a), new slot values {Q, h(y)} by A(b,d): (X1).  Path reply through the slot of value Q:
+cost >= Q+1 >= q+1, new slot values {P, h(y)} >= {p, p'+1}: (X2).  y: Lemma A(c).  QED
+
+3. TYPE LEMMA -- COMPLETE.   [tested: test_lemma.py]
+A_k := type (k-1,k-1)  (k >= 0; "h(x) >= k"; A_0 = every vertex),   index 2k,   F(A_k) = k + 1/3
+R_k := type (k-1,k)    (k >= 0; R_0 = a vertex with an out-edge),   index 2k+1, F(R_k) = k + 2/3
+The types are nested: A_0 > R_0 > A_1 > R_1 > ...; a tree "has index i" if some vertex (a witness) has the
+type of index i.  Rule M(i): Adversary names witnesses x, y of index i in two different trees.
+ i = 2k   : every normal reply costs >= k and its endpoint becomes a witness of index 2k+1.
+ i = 2k+1 : every normal reply either costs >= k and its endpoint becomes a witness of index 2k+2,
+            or costs >= k+1 and its endpoint is a witness of index 2k+1.
+In all cases the new tree gets an index j in {i, i+1} with   cost + F(j) >= 2 F(i).           (*)
+Proof. Lemma B with (p,q) = (p',q').  A_k: X1 and X2 both give cost >= k, type sort(k-1,k) = R_k.
+R_k: X1 gives cost >= k, type sort(k,k) = A_(k+1); X2 gives cost >= k+1, type sort(k-1,k) = R_k.
+(*): k + (k+2/3) = 2(k+1/3);  k + (k+1+1/3) = 2(k+2/3);  (k+1) + (k+2/3) > 2(k+2/3).  QED
+
+4. THEOREM 1 -- COMPLETE.     T(n) >= n/3 - (7/3) log2(n+1) + 5/6   for all n >= 1.   Hence L >= 1/3.
+[tested: sim.py on explicit forests against five Algorithms; check_bound.py against the exact worst case of
+the strategy in the abstract game absdp.py]
+Strategy. Every tree C carries an assigned index a(C) for which it has a witness; singletons get 0.
+Let P(C) = paid(C) + F(a(C)) - |C|/3.  Initially P = 0 for every tree.
+MAIN PHASE: while two trees have the same assigned index i, apply M(i) to them; the new tree is assigned
+the index j given by the Type Lemma.  By (*):  P(new) >= P(X) + P(Y).  So P(C) >= 0 for every tree, whatever
+Algorithm does (overpaying is the second alternative of the Type Lemma, and it gains Adversary 1/3).
+CLEANUP: now the trees X_1..X_m have distinct indices i_1 < ... < i_m.  Put Y_m = X_m; for r = m-1,...,1 apply
+M(i_r) to Y_(r+1) and X_r (legal: types are nested and a(Y_(r+1)) >= i_(r+1) > i_r) and call the result Y_r,
+with assigned index b_r in {i_r, i_r+1}.  The same computation as (*), with Y_(r+1) downgraded, gives
+   P(Y_r) >= P(Y_(r+1)) + P(X_r) - (F(b_(r+1)) - F(i_r)),      b_m := i_m.
+Total paid = paid(Y_1) = n/3 - F(b_1) + P(Y_1) >= n/3 - [ F(i_m) + sum_{r<m} (F(b_r) - F(i_r)) ]
+           >= n/3 - F(i_m) - (2/3)(m-1),          because F(i+1) - F(i) <= 2/3.              (**)
+Size bound: a tree with a vertex of h >= k has >= 2^(k+1)-1 vertices (solver-b Lemma 4), and a witness of
+index 2k or 2k+1 has h >= k; so i_m <= 2 log2(n+1) - 1.  Also m <= i_m + 1 and F(i) <= i/2 + 1/3.  Hence
+total >= n/3 - (7/6) i_m - 1/3 >= n/3 - (7/3) log2(n+1) + 5/6.   QED
+Remarks. (i) The invariant is inductive from EVERY position: it uses only the current orientation of the two
+trees (their witnesses), not their history.  (ii) Why the "cost + depth" induction of solver B failed and this
+one does not: the schedule is not a fixed 4-ary tree; trees are re-paired by their current type.
+(iii) Against shortest-path replies the strategy pays exactly (4^k-1)/3 - k at n = 4^k (sim.py: 3, 18, 81).
+The worst case of this particular strategy is 1 or 2 lower (abstract game: 17 at n=64, 79 at n=256), so
+solver B's conjecture T(4^k) >= (4^k-1)/3 - k is NOT proved here for general k (see Theorem 2 for k = 3).
+
+5. THEOREM 2 (pair-type game) -- COMPLETE (reduction) + COMPUTED (values).
+Abstract game: a state is a multiset of pairs (p,q); start = n copies of (-1,-1).  Adversary picks two pairs
+t = (p,q), t' = (p',q'); Algorithm picks one of X1, X2, Y1, Y2 of Lemma B and pays its cost bound
+(p+1, q+1, p'+1, q'+1); then ADVERSARY replaces the two pairs by either the new pair of the replying endpoint
+or the unchanged pair of the other endpoint.  V_pair(n) = its value.
+Claim: T(n) >= V_pair(n).
+Proof. Say a forest is REPRESENTED by a state S if each tree C contains a vertex x_C having the type listed
+for C.  By induction on the number of trees, from a forest represented by S Adversary forces >= V(S): it
+names the witnesses of the maximising pair; by Lemma B the real reply costs at least the bound of one option
+and the new forest is represented by both successor states of that option.  QED
+COMPUTED (pairdp.py with pruning, pairdp_noprune.py without pruning and with another state encoding; they
+agree for every n <= 61; the values for 62..66 come from pairdp.py alone; pairdp_control.py shows the DP
+exceeds the exact T(n) already at n = 4 when the slot-1 cost is falsified to p+2):
+  V_pair(n) = B(n) for n <= 29;  V_pair = 7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,12,12,13 for n = 30..48;
+  13,13,13,14,14,14,14,15,15,15,15,16,16,17,17,18,18,18 for n = 49..66.
+Consequences: T(36) >= 9 and T(40) >= 10 (solver B had these as uncertified search output), T(46) >= 12,
+T(48) >= 13, T(60) >= 16; from pairdp.py alone T(62) >= 17 and T(64) >= 18 (the latter is also certified).
+With monotonicity (T(63) >= T(62) >= T(61) >= 16 > 14) and the referee's T(64q+r) >= 18q + B(r):
+   T(n) > B(n) for EVERY n >= 30.
+This does not decide 17 <= n <= 29: there the pair game gives exactly B(n) (evidence only).
+
+6. THEOREM 3 (the pair-type family stops at exactly 1/3) -- COMPLETE.     V_pair(n) <= (n-1)/3.
+[tested: pair_potential3.py, all 11025 pairs of types with entries <= 12]
+Together with Theorem 1 (whose strategy is a strategy of the pair game): lim V_pair(n)/n = 1/3.  So no
+strategy that tracks one witness (p,q) per tree -- with any pairing of trees, equal or mixed, and any
+recursion depth -- proves more than L >= 1/3.
+Proof. g(p,q) = q + phi(q-p), phi(0) = 4/3, phi(1) = 2/3, phi(d) = 1/3 for d >= 2.  Then g(p,q) >= p + 4/3
+and g(p,q) >= q + 1/3; g(-1,-1) = 1/3.  Claim: for all t, t' some option has
+     cost + max( g(new pair), g(kept pair) ) <= g(t) + g(t').                               (***)
+Then Algorithm keeps paid(C) + g(pair of C) <= |C|/3 for every tree, and at the end paid <= n/3 - 1/3.
+Let p <= p' (else swap).  Exceptional case t = (p,p+1), t' = (p,p): use Y1: cost p+1, new pair
+sort(p,p+1): (p+1) + (p+1+2/3) = 2p + 8/3 <= (p+5/3) + (p+4/3); kept: p+1 <= g(t').
+Otherwise use X1: cost p+1, new pair sort(q,p'+1), kept pair t'.  Kept: p+1 <= g(t).  New, with d = q-p,
+d' = q'-p':
+ (a) q >= p'+2: g(new) = q + phi(q-p'-1) <= q + 2/3; and g(t) + g(t') >= (q+1/3) + (p'+4/3) >= p+1+q+2/3.
+ (b) q = p'+1: g(new) = q + 4/3, so (***) reads p + 7/3 <= phi(d) + g(t').  As p <= p' = q-1, d >= 1.
+     If d >= 2: g(t') >= p'+4/3 = p + d + 1/3 and d + 1/3 + phi(d) >= 8/3.  If d = 1: p' = p and
+     g(t') >= p + 5/3 unless t' = (p,p), the exceptional case; then 2/3 + 5/3 = 7/3.
+ (c) q <= p': g(new) = p'+1+phi(e), e = p'+1-q >= 1, so (***) reads 2 + phi(e) <= psi(d) + psi(d') with
+     psi(d) = d + phi(d) >= 4/3; and 2 + phi(e) <= 8/3.   QED
+
+7. COROLLARY (bounded-depth Algorithms cannot reach 1/3) -- COMPLETE.
+Let D >= 1.  If Algorithm uses normal replies and never creates a vertex with h >= D+1, Adversary forces at
+least (1/3 + 1/(6*4^D)) n - (D+1)(D+3/2).  (D = 1: rate 3/8.)
+Proof. Run the main phase of Theorem 1 with F(A_k) = a_k = delta*4^k + k + 1/3, F(R_k) = r_k = 2a_k - k,
+delta = 1/(6*4^D), k <= D, and invariant paid(C) + F >= (1/3+delta)|C|.  A_k+A_k: k + r_k = 2a_k.
+R_k+R_k -> A_(k+1) (only possible for k < D): k + a_(k+1) = 2 r_k.  R_k+R_k -> R_k: k+1+r_k >= 2r_k iff
+r_k <= k+1 iff 4^k <= 4^D.  At most one tree per index is left, and sum of F <= (D+1)(D+3/2).  QED
+So if L = 1/3, an optimal Algorithm must let h grow without bound.
+
+8. WHAT I TRIED FOR AN UPPER BOUND AND WHY IT FAILED -- no proof; the bound stays T(n) <= n - log2(n+1).
+Natural candidate: Algorithm minimises cost + G(new tree), G(C) = max over vertices of g(slots(v)) with g of
+Theorem 3 (or F of the best A/R index).  The needed inequality "some normal reply has cost + G(new) <=
+G(X) + G(Y)" for ALL pairs of oriented trees and all named vertices:
+ COMPUTED true for all pairs of trees with <= 7 vertices each (test_upper.py, test_upper2.py);
+ COMPUTED FALSE with 8-9 vertices.  Smallest counterexamples: Y = [4->3, 4->5, 3->0, 0->{1,2}, 5->6,
+ 6->{7,8}] (9 vertices) named at 4 against a copy of itself: every reply costs 1 and makes 3 (or 5) a vertex
+ with h = 2, total 10/3 > 4/3 + 4/3.  Mechanism: the END of the flipped path loses a hole; if it had one hole
+ and a saturated out-neighbour ("pre-ripe") it becomes deep.  A one-witness pair type cannot see this.
+This is NOT an Adversary gain (18 vertices are worth 6 at rate 1/3 and yield 10/3); it only shows that the
+potential of Theorem 3 does not transfer from the pair game to real trees.  OPEN: L <= 1/3.
+
+9. STATUS
+ PROVED here: L >= 1/3 with explicit error term (Thm 1); T(n) > B(n) for all n >= 30 (Thm 2 + computed table);
+              the one-witness pair family is worth exactly 1/3 (Thm 3); bounded-depth Algorithms lose (Cor. 7).
+ OPEN: the upper bound (1/3 <= L <= 1);  the least n with T(n) > B(n) (still in [17,30]);  the exact formula.
+ My guess, not a result: L = 1/3, T(4^k) = (4^k-1)/3 - k, least n = 30.

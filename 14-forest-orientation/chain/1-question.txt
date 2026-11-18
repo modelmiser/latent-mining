@@ -1,0 +1,10 @@
+Fix an integer n ≥ 1 and the vertex set {1, …, n}. A position is a simple undirected graph G on these vertices (no loops, no parallel edges) together with a direction for every edge such that each vertex has at most one edge pointing out of it; call such a direction assignment valid. The game starts with no edges. Two players, Adversary and Algorithm, both deterministic, both seeing the whole position and history, play rounds:
+
+1. Adversary either stops the game, or names a pair {u, v} of distinct vertices that is not already an edge, such that G + uv has at least one valid direction assignment (equivalently: every connected component of G + uv contains at most one cycle). If no such pair exists the game stops.
+2. Algorithm replaces the current direction assignment by any valid direction assignment of G + uv. It pays 1 for each edge of G (the old edges only) whose direction now differs from its direction before this round. The new edge is free. Algorithm may redirect edges anywhere in the graph, not only near u and v.
+
+The game lasts at most n rounds. Let P(n) be the value of this finite game: the least total payment Algorithm can guarantee, equal to the most Adversary can force. Let F(n) be the value of the same game when Adversary is additionally required to keep G a forest (so at most n − 1 rounds).
+
+Determine P(n) and F(n) exactly for every n: give the values for all n ≤ 12 and a closed formula (or exact recursive characterisation) valid for all n. In particular decide whether F(n) = Σ_{k=0}^{n−1} s2(k) − (n − 1), where s2(k) is the number of ones in the binary expansion of k, and determine the exact difference P(n) − F(n).
+
+Note what the cycle rule changes. In a tree component Algorithm chooses one root (the unique vertex with no out-edge) and all edges point towards it. A component containing a cycle has no root, so when Adversary joins a tree to it at tree vertex u, the tree must be re-rooted at u at full cost depth(u), with no cheaper side to choose. Algorithm must therefore weigh cheap re-rootings against keeping trees shallow.

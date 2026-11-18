@@ -1,0 +1,109 @@
+== reference (whole-forest re-orientation, no pruning) vs lazy branch-and-bound vs budget solver ==
+mode=full adv=0 cap=1 n=1 T=0 states=0 trees=1
+mode=fast adv=0 cap=1 n=1 T=0 states=0 trees=1
+RESULT adv=0 cap=1 n=1 T=0
+mode=full adv=0 cap=1 n=2 T=0 states=1 trees=2
+mode=fast adv=0 cap=1 n=2 T=0 states=0 trees=1
+RESULT adv=0 cap=1 n=2 T=0
+mode=full adv=0 cap=1 n=3 T=0 states=2 trees=4
+mode=fast adv=0 cap=1 n=3 T=0 states=1 trees=2
+RESULT adv=0 cap=1 n=3 T=0
+mode=full adv=0 cap=1 n=4 T=1 states=5 trees=8
+mode=fast adv=0 cap=1 n=4 T=1 states=2 trees=4
+RESULT adv=0 cap=1 n=4 T=1
+mode=full adv=0 cap=1 n=5 T=1 states=11 trees=17
+mode=fast adv=0 cap=1 n=5 T=1 states=4 trees=7
+RESULT adv=0 cap=1 n=5 T=1
+mode=full adv=0 cap=1 n=6 T=2 states=28 trees=37
+mode=fast adv=0 cap=1 n=6 T=2 states=9 trees=15
+RESULT adv=0 cap=1 n=6 T=2
+mode=full adv=0 cap=1 n=7 T=3 states=67 trees=85
+mode=fast adv=0 cap=1 n=7 T=3 states=22 trees=34
+RESULT adv=0 cap=1 n=7 T=3
+mode=full adv=0 cap=1 n=8 T=5 states=171 trees=200
+mode=fast adv=0 cap=1 n=8 T=5 states=52 trees=77
+RESULT adv=0 cap=1 n=8 T=5
+mode=full adv=0 cap=1 n=9 T=5 states=433 trees=486
+mode=fast adv=0 cap=1 n=9 T=5 states=135 trees=184
+RESULT adv=0 cap=1 n=9 T=5
+mode=full adv=0 cap=2 n=1 T=0 states=0 trees=1
+mode=fast adv=0 cap=2 n=1 T=0 states=0 trees=1
+RESULT adv=0 cap=2 n=1 T=0
+mode=full adv=0 cap=2 n=2 T=0 states=1 trees=2
+mode=fast adv=0 cap=2 n=2 T=0 states=0 trees=1
+RESULT adv=0 cap=2 n=2 T=0
+mode=full adv=0 cap=2 n=3 T=0 states=2 trees=5
+mode=fast adv=0 cap=2 n=3 T=0 states=1 trees=2
+RESULT adv=0 cap=2 n=3 T=0
+mode=full adv=0 cap=2 n=4 T=0 states=6 trees=12
+mode=fast adv=0 cap=2 n=4 T=0 states=2 trees=5
+RESULT adv=0 cap=2 n=4 T=0
+mode=full adv=0 cap=2 n=5 T=0 states=16 trees=35
+mode=fast adv=0 cap=2 n=5 T=0 states=4 trees=11
+RESULT adv=0 cap=2 n=5 T=0
+mode=full adv=0 cap=2 n=6 T=0 states=53 trees=107
+mode=fast adv=0 cap=2 n=6 T=0 states=11 trees=33
+RESULT adv=0 cap=2 n=6 T=0
+mode=full adv=0 cap=2 n=7 T=0 states=172 trees=369
+mode=fast adv=0 cap=2 n=7 T=0 states=31 trees=99
+RESULT adv=0 cap=2 n=7 T=0
+mode=full adv=0 cap=2 n=8 T=1 states=617 trees=1329
+mode=fast adv=0 cap=2 n=8 T=1 states=103 trees=343
+RESULT adv=0 cap=2 n=8 T=1
+mode=full adv=0 cap=2 n=9 T=1 states=2273 trees=5083
+mode=fast adv=0 cap=2 n=9 T=1 states=368 trees=1228
+RESULT adv=0 cap=2 n=9 T=1
+== exact T(n), cap 2, n = 10..14 (fast = exact value B&B ; fast3d = budget search) ==
+mode=fast adv=0 cap=2 n=10 T=1 states=1396 trees=4713
+RESULT adv=0 cap=2 n=10 T=1
+mode=fast adv=0 cap=2 n=11 T=1 states=5430 trees=18554
+RESULT adv=0 cap=2 n=11 T=1
+mode=fast adv=0 cap=2 n=12 T=2 states=18623 trees=70715
+RESULT adv=0 cap=2 n=12 T=2
+mode=fast adv=0 cap=2 n=13 T=2 states=79457 trees=298731
+RESULT adv=0 cap=2 n=13 T=2
+mode=fast adv=0 cap=2 n=14 T=2 states=347316 trees=1297498
+RESULT adv=0 cap=2 n=14 T=2
+== cap 1 sanity table (not asked) ==
+mode=fast adv=0 cap=1 n=10 T=6 states=354 trees=455
+mode=fast adv=0 cap=1 n=11 T=7 states=935 trees=1133
+mode=fast adv=0 cap=1 n=12 T=9 states=2471 trees=2877
+== W_j(n) (terminal payoff psi_j), exact, n = 1..12 ==
+J=1 RESULT adv=0 cap=2 n=1 T=0
+J=1 RESULT adv=0 cap=2 n=2 T=0
+J=1 RESULT adv=0 cap=2 n=3 T=0
+J=1 RESULT adv=0 cap=2 n=4 T=1
+J=1 RESULT adv=0 cap=2 n=5 T=1
+J=1 RESULT adv=0 cap=2 n=6 T=1
+J=1 RESULT adv=0 cap=2 n=7 T=1
+J=1 RESULT adv=0 cap=2 n=8 T=2
+J=1 RESULT adv=0 cap=2 n=9 T=2
+J=1 RESULT adv=0 cap=2 n=10 T=2
+J=1 RESULT adv=0 cap=2 n=11 T=2
+J=1 RESULT adv=0 cap=2 n=12 T=3
+J=2 RESULT adv=0 cap=2 n=1 T=0
+J=2 RESULT adv=0 cap=2 n=2 T=0
+J=2 RESULT adv=0 cap=2 n=3 T=0
+J=2 RESULT adv=0 cap=2 n=4 T=1
+J=2 RESULT adv=0 cap=2 n=5 T=1
+J=2 RESULT adv=0 cap=2 n=6 T=1
+J=2 RESULT adv=0 cap=2 n=7 T=1
+J=2 RESULT adv=0 cap=2 n=8 T=2
+J=2 RESULT adv=0 cap=2 n=9 T=2
+J=2 RESULT adv=0 cap=2 n=10 T=2
+J=2 RESULT adv=0 cap=2 n=11 T=2
+J=2 RESULT adv=0 cap=2 n=12 T=3
+J=3 RESULT adv=0 cap=2 n=1 T=0
+J=3 RESULT adv=0 cap=2 n=2 T=0
+J=3 RESULT adv=0 cap=2 n=3 T=0
+J=3 RESULT adv=0 cap=2 n=4 T=1
+J=3 RESULT adv=0 cap=2 n=5 T=1
+J=3 RESULT adv=0 cap=2 n=6 T=1
+J=3 RESULT adv=0 cap=2 n=7 T=1
+J=3 RESULT adv=0 cap=2 n=8 T=2
+J=3 RESULT adv=0 cap=2 n=9 T=2
+J=3 RESULT adv=0 cap=2 n=10 T=2
+J=3 RESULT adv=0 cap=2 n=11 T=2
+J=3 RESULT adv=0 cap=2 n=12 T=3
+== restricted Adversary (blocks of 4 only), n=16 ==
+RESULT adv=5 cap=2 n=16 T_restricted=3

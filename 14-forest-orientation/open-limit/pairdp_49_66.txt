@@ -1,0 +1,19 @@
+49 13 B=11 >B states 44700
+50 13 B=11 >B states 112929
+51 13 B=11 >B states 128502
+52 14 B=12 >B states 128529
+53 14 B=12 >B states 128813
+54 14 B=12 >B states 201743
+55 14 B=12 >B states 204207
+56 15 B=13 >B states 204236
+57 15 B=13 >B states 204648
+58 15 B=13 >B states 293083
+59 15 B=13 >B states 340296
+60 16 B=14 >B states 340327
+61 16 B=14 >B states 340650
+62 17 B=14 >B states 340682
+63 17 B=14 >B states 341758
+64 18 B=15 >B states 341791
+65 18 B=15 >B states 343742
+66 18 B=15 >B states 757198
+done

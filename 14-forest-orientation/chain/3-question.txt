@@ -1,0 +1,21 @@
+Fix an integer n ≥ 1 and the vertex set V = {1, …, n}. A position is a pair (G, D): G is a forest on V (simple undirected graph, no cycle) and D assigns to every edge of G one of its two directions, so that every vertex is the tail of at most 2 edges. Call such a D valid for G. The start position has no edges.
+
+Two deterministic players, Adversary and Algorithm, both see the whole position and history. The game has exactly n − 1 rounds. In each round:
+
+1. Adversary names a pair {u, v} of vertices in different connected components of G. Every such pair is legal.
+2. Algorithm chooses any assignment D′ valid for G + uv. It pays the number of edges e of G (old edges only) with D′(e) ≠ D(e). The new edge uv costs nothing in either direction. Algorithm may change edges anywhere in the forest and more than necessary. The position becomes (G + uv, D′).
+
+Adversary maximises and Algorithm minimises the total payment over the n − 1 rounds. Let T(n) be the value of this finite perfect-information game.
+
+Call a vertex saturated if it is the tail of exactly 2 edges. Let B(n) = max(0, ⌊n/4⌋ − 1).
+
+HEADLINE: find the exact function T(n) for all n ≥ 1, as a closed formula or an exact finite recursion. The first decisive step is yes/no: is T(n) = B(n) for every n? If not, give the least n with T(n) > B(n) and the true formula, including the exact rational value of lim T(n)/n.
+
+UNVERIFIED beliefs:
+- T(n) = 0 for n ≤ 7 and T(8) = 1.
+- T(n) ≥ B(n). Adversary splits V into blocks of 4. In each block it joins two pairs and then joins the two tails, forcing a saturated vertex or a payment. It then merges components, always naming saturated vertices when both components have one. Invariant: a component built from k blocks has cost at least k − 1, and at least k if it has no saturated vertex.
+- T(a + b) ≥ T(a) + T(b).
+- T(n) ≤ Cn for an absolute constant C.
+- Algorithm can remove one saturated vertex for 1 unit whenever it has an out-neighbour of out-degree 0, and each tree has exactly one more out-degree-0 vertex than saturated vertices.
+
+GUESS (not a result): I would bet T(n) ≠ B(n), with first deviation at some n between 16 and 24, because Adversary should be able to build two trees in which a saturated vertex has only saturated out-neighbours, forcing a payment of 2 in one round.

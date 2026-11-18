@@ -1,0 +1,94 @@
+PROOFS (solver-a).  Each item is tagged COMPLETE or SKETCH.  od(x) = out-degree; saturated = od 2.
+"Cost" = number of old edges whose direction changes in a round.  f(m) = floor(m/4), B(n) = max(0, f(n)-1).
+
+P1. LAZINESS LEMMA (COMPLETE).  Algorithm loses nothing by changing, in each round, only edges of the
+two components being merged.
+Proof. Validity is a per-component property (od(x) only counts edges of x's component).  Let S be
+any Algorithm strategy.  Define S', which runs S internally on the same sequence of named pairs
+(legal for S too: legality depends only on the component partition, which is the same) and keeps its
+own "real" orientation: in a round merging C1, C2 into C, S' sets C to the orientation S has on C
+after that round, and leaves every other component untouched.  S' is valid: an untouched component
+keeps an orientation that was valid when it was last set, and C gets S's valid one.  Fix an edge e
+and let t1 < t2 < ... be the rounds in which S' changes e.  S' changes e in round t_i only if S's
+direction of e after t_i differs from S's direction after t_{i-1} (after its creation round for
+i = 1; note S' also gives a new edge S's direction for free), so S changed e, and paid for it, at
+least once in a round of (t_{i-1}, t_i].  These intervals are disjoint, so for every sequence of named
+pairs cost(S') <= cost(S).  Hence the worst case of S' is no worse than that of S, and the game
+restricted to such "lazy" Algorithm moves has the same value.  Its positions are multisets of
+oriented trees and it is a finite perfect-information game, so position-based dynamic programming
+computes its value.
+(Empirical check: `fast full` implements whole-forest re-orientation with no pruning; it agrees
+with the lazy solver for n <= 9, caps 1 and 2, and with slow.py for n <= 6 (cap 2), n <= 7 (cap 1).)
+
+P2. DESATURATION DISTANCE (COMPLETE).  In an oriented tree with all od <= 2, let u be saturated and
+d(u) = length of a shortest directed path from u to an unsaturated vertex (exists: directed walks in
+a tree end at a vertex of od 0).  Then the least number of flips giving a valid orientation with
+od(u) <= 1 is exactly d(u).
+Proof. <=: reverse that path; u loses 1, the endpoint gains 1 (still <= 2), interior unchanged.
+>=: let F be a flip set achieving it.  u has more F-arcs out than in, so some F-arc u->x1.  If x1 was
+saturated then, as its new od is <= 2, it has at least as many F-arcs out as in, so an F-arc x1->x2;
+continue.  The walk uses original directions, so it is a directed path in a tree (no repeats) and
+ends at an originally unsaturated vertex; it has >= d(u) arcs, all in F.
+COROLLARY (2 components, COMPLETE).  With components A, B left, the value is min(maxd(A), maxd(B)),
+maxd(X) = max over saturated u in X of d(u), 0 if X has no saturated vertex.  (If u or v is
+unsaturated the new edge is free; otherwise u or v must be desaturated inside its own tree.)
+
+P3. T(n) >= B(n) FOR ALL n (COMPLETE).
+Adversary: split off k = f(n) blocks of 4 vertices.  In a block join two disjoint pairs, then name
+the two tails.  Then repeatedly merge two block-components, naming a saturated vertex in each when
+both have one (any vertices otherwise); finally attach leftover vertices arbitrarily.
+For a component C made of k_C whole blocks let cost(C) = all payments ever made on edges of C.
+Invariant I(C): cost(C) >= k_C - 1 + [C has no saturated vertex].
+Block: the two tails have od 1; a reply with no flip makes the new tail saturated; so either a flip
+(cost>=1) or a saturated vertex: I holds with k=1.
+Flips made inside C in a round where C is not merged: each raises cost(C) by 1 and the bracket rises
+by at most 1 in total, so I(C) is preserved whenever at least one flip is made, trivially otherwise.
+Merge X, Y (r flips inside X u Y in that round):
+ both have a saturated vertex, x and y named: any valid reply needs r >= 1.  If r = 1, the flip is an
+ out-arc of x (or of y), the other one is still saturated, the new edge must have the freed vertex as
+ tail and it is saturated again: cost >= (kX-1)+(kY-1)+1 and a saturated vertex exists.  If r >= 2:
+ cost >= kX+kY.  Either way I holds.
+ exactly one (say Y) has a saturated vertex y, named: cost >= kX + (kY-1) + r; if r = 0, y is still
+ saturated; if r >= 1 the bound kX+kY holds.  I holds.
+ neither: cost >= kX + kY.  I holds.
+So the final tree has cost >= k - 1.  QED.
+
+P4. SUPERADDITIVITY, LIMIT (COMPLETE).  T(a+b) >= T(a)+T(b): Adversary plays an optimal a-game on
+a vertices, then an optimal b-game on the other b, then one more merge.  Payments on edges of the two
+parts are disjoint; the Algorithm's behaviour restricted to one part (other-part flips ignored) is a
+legal Algorithm for that part's game, so it pays >= T(.) there.  By Fekete, tau = lim T(n)/n exists
+and equals sup T(n)/n.
+
+P5. T(n) <= 3(n-1) (COMPLETE).  Algorithm: orient the new edge arbitrarily; while some vertex x has
+od(x) >= 3, reverse ALL out-arcs of x.  Analysis for a fixed play: let R be the final tree, O* its
+orientation towards a fixed root (od* <= 1 everywhere).  Phi = number of current arcs disagreeing
+with O*.  A new edge raises Phi by <= 1.  Reversing the t >= 3 out-arcs of x: at most one of them
+agreed with O*, so Phi changes by <= -(t-1)+1 = 2-t <= -1 and t <= 3(t-2).  Hence the loop terminates
+(valid orientation) and total flips <= 3 * (total increase of Phi) <= 3(n-1).
+So 1/4 <= tau <= 3.
+
+P6. COMPOSITION WITH TERMINAL POTENTIALS (COMPLETE, given the computed W values).
+For j >= 1 and an oriented tree X let psi_j(X) = min over valid re-orientations X' of
+   dist(X, X') + min(j, maxd(X')).
+Let W_j(m) = value of the m-vertex game in which Adversary additionally receives psi_j(final tree).
+Claim: T(a+b) >= W_j(a) + W_j(b) - j.
+Proof. Adversary plays the W_j-optimal strategy on a vertices (part A), then on the other b (part B),
+then names u in A, v in B with d(u) = maxd(A), d(v) = maxd(B) for the then-current orientations
+(any vertices if a part has no saturated vertex).  Let cA, cB be the payments during the two
+sub-games on edges of the own part, xA the flips on A-edges after the A-game and before the last
+round, A' the orientation of A just before the last round.  By definition of psi_j,
+xA + min(j, maxd(A')) >= psi_j(A at the end of its game), so cA + xA + min(j, maxd(A')) >= W_j(a);
+likewise cB + min(j, maxd(B')) >= W_j(b) (B' = B at the end of its game, no rounds in between).
+The last round costs >= min(maxd(A'), maxd(B')) by P2, and
+min(p, q) >= min(j,p) + min(j,q) - j.  Sum up.  QED.
+Consequence used: T(30) >= W_2(14) + W_2(16) - 2 >= 4 + 5 - 2 = 7 > B(30) = 6, and
+T(32) >= 2*W_2(16) - 2 >= 8 > B(32) = 7.  The two inputs W_2(14) >= 4 and W_2(16) >= 5 are machine
+certificates cert_W2_14_ge4.txt, cert_W2_16_ge5.txt, verified by the independent check_lb.py.
+Remark (why 30 is the best this method gives): with W_2(m) = floor(m/4) for m <= 13 (computed) the
+bound W_j(a)+W_j(b)-j exceeds B(a+b) for no a+b < 30.
+
+P7. BUDGET SEARCH (COMPLETE, trivial).  "value(S) <= b" holds iff for every Adversary move there is a
+reply of cost c <= b with value(successor) <= b - c; replies of cost > b are irrelevant.  Orbit
+reduction: vertices of a tree in the same automorphism orbit give isomorphic successors.
+
+NOT PROVED (open): T(n) <= B(n) for any infinite family; the exact tau; the least n with T(n) > B(n).

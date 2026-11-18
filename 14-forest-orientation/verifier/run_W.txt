@@ -1,0 +1,16 @@
+game3 n=13 J=2: Adversary forces >= 3 ? YES   (states=57 trees=3537 pairs=46 pool=5860 calls=61)
+0.07s 4240kB
+game3 n=13 J=2: Adversary forces >= 4 ? NO   (states=310654 trees=1321280 pairs=303618 pool=15366398 calls=320143)
+53.48s 227336kB
+game3 n=13 J=1: Adversary forces >= 4 ? NO   (states=310654 trees=1321280 pairs=303618 pool=15366398 calls=320143)
+30.87s 227368kB
+game3 n=13 J=3: Adversary forces >= 4 ? NO   (states=310654 trees=1321280 pairs=303618 pool=15366398 calls=320143)
+164.02s 227328kB
+game3 n=14 J=1: Adversary forces >= 4 ? NO   (states=1290324 trees=5651255 pairs=1261194 pool=71021305 calls=1345736)
+154.32s 1194956kB
+game3 n=14 J=2: Adversary forces >= 4 ? YES   (states=58 trees=2902 pairs=49 pool=6095 calls=62)
+0.07s 4232kB
+game3 n=14 J=2: Adversary forces >= 5 ? NO   (states=1290324 trees=5651255 pairs=1261194 pool=71021373 calls=1345736)
+273.84s 1195476kB
+game3 n=16 J=0: Adversary forces >= 3 ? YES   (states=255 trees=14716 pairs=244 pool=44139 calls=285)
+0.08s 5456kB

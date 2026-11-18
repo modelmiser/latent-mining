@@ -1,0 +1,5 @@
+adv=0 cap=2 n=15 : value > 0 ? YES   (states=17 trees=6 calls=17)
+adv=0 cap=2 n=15 : value > 1 ? YES   (states=43 trees=19 calls=60)
+adv=0 cap=2 n=15 : value > 2 ? NO   (states=1159368 trees=5177473 calls=1191307)
+RESULT adv=0 cap=2 n=15 T=2
+119.01s 664204kB

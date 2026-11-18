@@ -1,0 +1,52 @@
+strategy worst case (abstract, lowest-duplicate policy) n=16: 3   Thm1 bound -3.37
+strategy worst case (abstract, lowest-duplicate policy) n=30: 6   Thm1 bound -0.73
+strategy worst case (abstract, lowest-duplicate policy) n=64: 17   Thm1 bound 8.11
+strategy worst case (abstract, lowest-duplicate policy) n=256: 79   Thm1 bound 67.49
+strategy worst case (abstract, lowest-duplicate policy) n=300: 94   Thm1 bound 81.62
+bound-vs-worstcase failures n<=300: 0
+adversary-optimal order of equal-index merges: n=16,64: 3 17
+Theorem 3: pairs 11025 no option works: 0  prescribed option fails: 0  g(-1,-1)= 1/3
+Cor 7 D=1: capped abstract worst case n=300: 110, claimed bound 107.50
+Cor 7 D=2: capped abstract worst case n=300: 99, claimed bound 92.62
+Cor 7 D=3: capped abstract worst case n=300: 95, claimed bound 82.78
+Corollary 7 failures: 0  VARIANT true
+---
+strategy worst case (abstract, lowest-duplicate policy) n=16: 3   Thm1 bound 2.08
+strategy worst case (abstract, lowest-duplicate policy) n=30: 6   Thm1 bound 5.88
+strategy worst case (abstract, lowest-duplicate policy) n=64: 17   Thm1 bound 16.14
+strategy worst case (abstract, lowest-duplicate policy) n=256: 79   Thm1 bound 78.16
+strategy worst case (abstract, lowest-duplicate policy) n=300: 94   Thm1 bound 92.60
+bound-vs-worstcase failures n<=300: 7
+adversary-optimal order of equal-index merges: n=16,64: 3 17
+Theorem 3: pairs 11025 no option works: 0  prescribed option fails: 0  g(-1,-1)= 1/3
+Cor 7 D=1: capped abstract worst case n=300: 110, claimed bound 107.50
+Cor 7 D=2: capped abstract worst case n=300: 99, claimed bound 92.62
+Cor 7 D=3: capped abstract worst case n=300: 95, claimed bound 82.78
+Corollary 7 failures: 0  VARIANT fbound
+---
+strategy worst case (abstract, lowest-duplicate policy) n=16: 3   Thm1 bound -3.37
+strategy worst case (abstract, lowest-duplicate policy) n=30: 6   Thm1 bound -0.73
+strategy worst case (abstract, lowest-duplicate policy) n=64: 17   Thm1 bound 8.11
+strategy worst case (abstract, lowest-duplicate policy) n=256: 79   Thm1 bound 67.49
+strategy worst case (abstract, lowest-duplicate policy) n=300: 94   Thm1 bound 81.62
+bound-vs-worstcase failures n<=300: 0
+adversary-optimal order of equal-index merges: n=16,64: 3 17
+Theorem 3: pairs 11025 no option works: 13  prescribed option fails: 13  g(-1,-1)= 1/3
+Cor 7 D=1: capped abstract worst case n=300: 110, claimed bound 107.50
+Cor 7 D=2: capped abstract worst case n=300: 99, claimed bound 92.62
+Cor 7 D=3: capped abstract worst case n=300: 95, claimed bound 82.78
+Corollary 7 failures: 0  VARIANT fphi
+---
+strategy worst case (abstract, lowest-duplicate policy) n=16: 3   Thm1 bound -3.37
+strategy worst case (abstract, lowest-duplicate policy) n=30: 6   Thm1 bound -0.73
+strategy worst case (abstract, lowest-duplicate policy) n=64: 17   Thm1 bound 8.11
+strategy worst case (abstract, lowest-duplicate policy) n=256: 79   Thm1 bound 67.49
+strategy worst case (abstract, lowest-duplicate policy) n=300: 94   Thm1 bound 81.62
+bound-vs-worstcase failures n<=300: 0
+adversary-optimal order of equal-index merges: n=16,64: 3 17
+Theorem 3: pairs 11025 no option works: 0  prescribed option fails: 0  g(-1,-1)= 1/3
+Cor 7 D=1: capped abstract worst case n=300: 110, claimed bound 120.00
+Cor 7 D=2: capped abstract worst case n=300: 99, claimed bound 95.75
+Cor 7 D=3: capped abstract worst case n=300: 95, claimed bound 83.56
+Corollary 7 failures: 262  VARIANT fdelta
+---

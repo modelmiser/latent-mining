@@ -1,0 +1,13 @@
+Fix an integer n ≥ 1 and the vertex set {1, …, n}. A position is a forest G on these vertices (a simple undirected graph with no cycle) together with a direction for every edge such that each vertex has at most TWO edges pointing out of it; call such a direction assignment valid. The game starts with no edges. Two players, Adversary and Algorithm, both deterministic, both seeing the whole position and the whole history, play rounds:
+
+1. Adversary either stops the game, or names a pair {u, v} of vertices lying in different connected components of G. If G is connected the game stops.
+2. Algorithm replaces the current direction assignment by any valid direction assignment of G + uv. It pays 1 for each edge of G (the old edges only) whose direction now differs from its direction before this round. The new edge is free, in either direction. Algorithm may redirect edges anywhere in the forest, not only near u and v, and may redirect more edges than the new edge forces.
+
+The game lasts at most n − 1 rounds. Let T(n) be its value: the least total payment Algorithm can guarantee, equal to the most Adversary can force.
+
+Determine T(n) exactly: give T(n) for all n ≤ 12 and a closed formula or exact recursive characterisation valid for all n. In particular:
+(i) for each k ≥ 1 find m(k), the least n with T(n) ≥ k, and decide whether m(1) = 8;
+(ii) decide whether T(n) = O(n), and if so determine the limit of T(n)/n (prove that it exists and give it as an exact rational, or prove it does not exist);
+(iii) decide whether Algorithm loses anything by being lazy, i.e. whether the value changes when Algorithm is forbidden to reverse any edge in a round where some valid direction assignment of G + uv agrees with the current one on all old edges.
+
+Orientation: with bound one instead of two, every tree has a single root and joining two trees at non-root vertices forces a re-rooting, giving a total cost that grows faster than linearly. With bound two a tree on m vertices has m − 1 units of out-degree spread over capacity 2m, so a payment is forced only when Adversary joins two vertices that both already have two out-edges; Algorithm then must reverse a directed path leading from one of them to a vertex with at most one out-edge. Algorithm controls where the saturated vertices sit and how far they are from spare capacity; Adversary controls which trees meet and where.
