@@ -105,6 +105,8 @@ the `#guard` caught it.  Deliberately false variants and Lean's refusals: `False
 `Spec.lean` (M0) · `SpecCheck.lean` · `Core.lean` (M1) · `Graph.lean`, `Normal.lean`,
 `Reply.lean` (M2) · `Strategy.lean` (M3) · `Full.lean`, `Main.lean` (M4) · `Axioms.lean` →
 `AXIOMS.txt` · `SORRY.txt` · `FalseVariants.lean.txt` · `PROGRESS.md`.
+Upper bound: `UpperSpec.lean` (U0) · `UpperCore.lean` (U1) · `UpperPhi.lean`, `UpperLemma6.lean` (U2) ·
+`UpperPath.lean`, `UpperRound.lean` (U3) · `UpperMain.lean` (U3, U4).
 
 
 ## NOTES ADDED AFTER REVIEW (not by the author of this file)
@@ -132,3 +134,97 @@ raised about this document and the files around it:
 - `Main.lean`: `T_lower_bound_pow` is a weaker corollary of `T_lower_bound`, not equivalent.
 - The theorem first forces T(n) >= 1 at n = 26 (also for n = 27..30; nothing at n = 31, 32;
   every n >= 33). An earlier version of this note said "first at n = 33", which was wrong.
+
+
+# UPPER BOUND (added 2026-11-18): `T(n) ≤ (n − 1)/3`
+
+Source: `../NOTE.md`, Section 6 (Theorem 5, Lemmas 6, 7, 8) and `../upper/third_check.py`. The Lean files
+were written from an earlier draft of that section, which they call "the draft"; it stated rule L by
+lexicographically smaller slots. The note now states rule L by the code `2h + ε`, as the Lean does (UD1).
+`FO/Spec.lean` is unchanged; the game, `value` and `T` are the trusted definitions above.
+
+## Statement (`FO/UpperSpec.lean`, proved in `FO/UpperMain.lean`)
+
+```lean
+def UpperStatement : Prop := ∀ n : Nat, 1 ≤ n → 3 * T n + 1 ≤ n      -- namespace FO
+theorem upper_third : ∀ n : Nat, 1 ≤ n → 3 * FO.T n + 1 ≤ n            -- root namespace
+```
+For `n ≥ 1` the natural-number inequality `3 T(n) + 1 ≤ n` is `3 T(n) ≤ n − 1`, i.e.
+`T(n) ≤ (n − 1)/3`, i.e. `T(n) ≤ ⌊(n − 1)/3⌋` because `T(n)` is an integer. Nothing is lost.
+False at `n = 0` (`T 0 = 0`). With `+ 2` in place of `+ 1` it is false at `n = 1` (checked).
+
+## New definitions (none of them is trusted: they only occur inside the proof)
+
+| Lean | Draft |
+|---|---|
+| `Upper.w1`, `w2s`, `w2`, `wt` (`UpperCore.lean`), integers, in thirds | the weight table |
+| `Upper.gam h e = 3h + 1 + e` | `γ` |
+| `Upper.pi o e f` | the carry `π`; `e`, `f` are FLAGS (0 = slots equal), the draft's are Booleans "equal" |
+| `Upper.oldRest`, `newRest`, `headFlag` | the sums of old/new weights along an abstract path profile |
+| `hF D fuel v`, `hh D v = hF D n v` (`UpperPhi.lean`) | `h(v)`, numeric; `le_hh_iff : k ≤ hh D v ↔ Hge D k v` in a forest |
+| `eps D v` | `ε(v)`: 0 for no out-neighbour, 1 for one, `[h(a) ≠ h(b)]` for two |
+| `wv D v`, `Phi D` | `w(v)`, `Φ` (integers; can be negative) |
+| `delOut D r`, `Source D r`, `selSum` (`UpperLemma6.lean`) | deleting a vertex of in-degree 0 |
+| `spath D fuel v`, `code D v = 2h + ε`, `ruleL D u v` (`UpperMain.lean`) | rule L |
+
+## Main theorems of the upper bound (all without `sorry`)
+
+- U1 `Upper.w1_mono`, `w2_mono` (Lemma 7); `path_start`, `path_interior`, `path_end_none`,
+  `path_end_some`, `free_none`, `free_some` (Lemma 8 (a)–(d), for ALL natural parameters);
+  `rest_gain`, `path_gain` (telescoping).
+- U2 `lemma6 : Forest D → Valid D → Phi D ≤ D.length`, from `lemma6_gen`.
+- U3 `round_gain`, `ruleL_round` (legal reply, cost = path length, `Φ` rises by `3·cost`).
+- U4 `upper_value : Forest D → Valid D → 3 * value k D + Phi D ≤ D.length + k`, `upper`,
+  `upper_third`.
+
+## DEVIATIONS (upper bound)
+
+- **UD1. Rule L by codes.** The note's rule L lets the Algorithm flip from an endpoint `x` with
+  `code x ≤ code y`, `code = 2h + ε`, along any shortest path. The inequality of a round is proved in
+  that generality (`round_gain`: hypothesis `hrule` is `code x ≤ code y`, and `ws` is ANY shortest path
+  from `x`). The function `ruleL`, which the final induction plays, is one such reply: it flips from the
+  endpoint with the smaller code (from the first named vertex on a tie of codes) along one fixed path
+  (`spath`: step to the out-neighbour of smaller `h`, first in list order on a tie). The earlier draft
+  compared the sorted slots `(P, Q)` lexicographically; if the slots of `x` are lexicographically at most
+  those of `y` then `code x ≤ code y` (`h = P + 1`, `ε = [P < Q]`), so that rule is a special case. The
+  implication itself is not formalised.
+- **UD2. Lemma 6 is proved in a different form.** Draft: `Φ(T) ≤ n − max_v γ(v)` for a tree on
+  `n` vertices. Lean: `Phi D + Σ_{s ∈ sel} (γ(s) − 1) ≤ #edges` for every list `sel` of vertices
+  in pairwise different trees (`lemma6_gen`), hence `Phi D ≤ #edges` (`lemma6`) and
+  `Phi D + γ(s) ≤ #edges + 1` (`lemma6_gamma`). For one tree (`#edges = n − 1`) and `s` a vertex
+  of maximal `γ` the last is the draft's inequality; "`#edges = n − #trees`" is not formalised
+  and not needed, because the final induction counts edges: `3·value k D + Φ(D) ≤ #edges + k`.
+  The proof is the draft's (delete a vertex of in-degree 0), with the vertex kept as an
+  isolated vertex of `Fin n`; the list `sel` replaces "one maximum per tree".
+- **UD3. Lemma 7 is stated as monotonicity in the code `2h + ε`** of each out-neighbour
+  (`w1_mono`, `w2_mono`), which is equivalent to monotonicity under the draft's single-slot
+  steps (S1)–(S4) (`lemma7_steps` gives these literally); explanation in `UpperCore.lean`.
+- **UD4. The finite case analysis of Lemma 8 is not used**: (a)–(d) are proved for all natural
+  parameters by `omega` after case lemmas for the table.
+- **UD5. Weights are integers and can be negative** (`−1` for a vertex whose two
+  out-neighbours both have height 0 and flag 0). The earlier draft did not say so (the note now does);
+  nothing depends on non-negativity.
+- **UD6. "No h decreases"** (Step 1 of Lemma 4 of the note) is not taken from the note's proof:
+  `no_decrease` gets it from the exact new heights on the path (`suffix_profile`) and induction
+  off the path.
+- **UD7. The draft's "finer statement"** (cost of building a tree `T` is at most
+  `(n − max γ)/3`) and the remark `L = 1/3` (a limit) are not formalised.
+
+## Sanity checks of the upper bound (part of the build)
+
+Weight table against hand values (`UpperCore.lean`, 10 `decide`s); `hh`, `eps`, `wv`, `Phi` on a
+path, a complete binary tree on 7 vertices, an in-star and a cherry-with-tail
+(`UpperPhi.lean`); rule L on an 8-vertex position: the chosen endpoint, the reply as a list, its
+membership in `replies`, its cost, `Φ` before and after (`UpperMain.lean`). One of my expected
+values was wrong (I wrote `Φ = 5` after the reply; it is 3) and the `#guard` caught it.
+
+Deliberately FALSE variants, each refuted by a proved negation (`example : ¬ ∀ …`):
+F7a (table with `3p + 2` in the second line is not monotone), F7b (strict monotonicity),
+F7c (monotone in the heights alone); F8a ((a) without rule L), F8b ((b) with `π ≡ 0`),
+F8c ((d) without rule L), F8d (`path_gain` without rule L: total gain 2 for cost 1); and on a
+real position `Phi (nreply exD 0 5 [1]) = Phi exD + 2`, i.e. flipping from the wrong endpoint
+gains 2 < 3. The final statement with `+ 2` is refuted at `n = 1`.
+Mutation tests on scratch copies of `UpperCore.lean` (not in the build and not kept in the repository): carry
+without the `o = 1` clause → `path_start` and `path_interior` fail; table with `3p + 3` in
+the third line → two hand values, `w2s_eq_max`, `w2_le_left`, `w2_le_right`, `path_interior` and
+the refutation F8b fail (Lemma 7 survives that mutant).

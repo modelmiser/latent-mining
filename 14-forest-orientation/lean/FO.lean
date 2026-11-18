@@ -7,3 +7,10 @@ import FO.Reply
 import FO.Strategy
 import FO.Full
 import FO.Main
+import FO.UpperSpec
+import FO.UpperCore
+import FO.UpperPhi
+import FO.UpperLemma6
+import FO.UpperPath
+import FO.UpperRound
+import FO.UpperMain

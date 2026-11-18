@@ -1,1 +1,6 @@
-no match for the words sorry / admit / axiom / native_decide / unsafe / implemented_by / extern in FO/*.lean FO.lean Axioms.lean
+Words searched (whole words): sorry / admit / axiom / native_decide / unsafe / implemented_by / extern
+Files: FO/*.lean FO.lean (old and new, including FO/Upper*.lean); command: grep -n -w -E 'sorry|admit|axiom|native_decide|unsafe|implemented_by|extern' FO/*.lean FO.lean
+--- output (matches in comments included) ---
+no match
+--- Axioms.lean: lines that are not blank, a comment, '#print axioms' or '#check' ---
+none

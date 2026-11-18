@@ -20,4 +20,68 @@ FO.normal_game_bound : ∀ (n : Nat),
 @FO.transfer : ∀ {n : Nat} (k : Nat) (L A : FO.Pos n) (g : Nat),
   FO.Core.Forces FO.NLegal FO.NReply k L g →
     FO.Forest L → FO.Valid L → FO.Al L A → FO.Valid A → g ≤ FO.value k A + FO.flips L A
-axioms exit 0
+'FO.Upper.w2_mono' depends on axioms: [propext, Quot.sound]
+'FO.Upper.w1_mono' depends on axioms: [propext, Quot.sound]
+'FO.Upper.lemma7_steps' depends on axioms: [propext, Quot.sound]
+'FO.Upper.path_start' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.path_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.path_end_none' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.path_end_some' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.free_none' depends on axioms: [propext, Quot.sound]
+'FO.Upper.free_some' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.rest_gain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.path_gain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.Upper.w2_le_parent' depends on axioms: [propext, Quot.sound]
+FO.Upper.path_gain : ∀ (al ce be ey : Nat) (rest : List (Nat × Nat)) (z : Option (Nat × Nat)),
+  ce ≤ 1 →
+    ey ≤ 1 →
+      (∀ (c : Nat × Nat), c ∈ rest → c.snd ≤ 1) →
+        (∀ (c : Nat × Nat), z = some c → c.snd ≤ 1) →
+          (be = 0 → ey = 0 → al = 0) →
+            3 * (↑rest.length + 1) ≤
+              FO.Upper.w2 (rest.length + al) ce (rest.length + 1 + be) ey +
+                  FO.Upper.newRest (min al (be + 1)) (FO.Upper.flagNe al (be + 1)) rest z -
+                (FO.Upper.w2 rest.length (FO.Upper.headFlag rest z) (rest.length + al) ce + FO.Upper.oldRest rest z)
+'FO.le_hh_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.hh_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.lemma6_gen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.lemma6' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.lemma6_gamma' depends on axioms: [propext, Classical.choice, Quot.sound]
+@FO.lemma6 : ∀ {n : Nat} {D : FO.Pos n}, FO.Forest D → FO.Valid D → FO.Phi D ≤ ↑(List.length D)
+@FO.lemma6_gen : ∀ {n : Nat} (m : Nat) (D : FO.Pos n),
+  List.length D ≤ m →
+    FO.Forest D →
+      FO.Valid D →
+        ∀ (sel : List (Fin n)),
+          List.Pairwise (fun a b => ¬FO.Conn D a b) sel → FO.Phi D + FO.selSum D sel ≤ ↑(List.length D)
+'FO.suffix_profile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.path_round' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.off_path' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.round_gain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.spath_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.cost_nreply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.ruleL_round' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.upper_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FO.upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'upper_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+@FO.round_gain : ∀ {n : Nat} {D : FO.Pos n} {x y : Fin n} {ws : List (Fin n)},
+  FO.Forest D →
+    FO.Valid D →
+      ¬FO.Conn D x y →
+        FO.NPath D x ws →
+          ws.length = FO.hh D x →
+            2 * FO.hh D x + FO.eps D x ≤ 2 * FO.hh D y + FO.eps D y →
+              FO.Phi D + 3 * ↑ws.length ≤ FO.Phi (FO.nreply D x y ws)
+@FO.ruleL_round : ∀ {n : Nat} {D : FO.Pos n},
+  FO.Forest D →
+    FO.Valid D →
+      ∀ {u v : Fin n},
+        ¬FO.Conn D u v →
+          FO.ruleL D u v ∈ FO.replies D u v ∧
+            FO.Forest (FO.ruleL D u v) ∧
+              FO.Valid (FO.ruleL D u v) ∧
+                List.length (FO.ruleL D u v) = List.length D + 1 ∧
+                  FO.Phi D + 3 * ↑(FO.cost D (FO.ruleL D u v)) ≤ FO.Phi (FO.ruleL D u v)
+@FO.upper_value : ∀ {n : Nat} (k : Nat) (D : FO.Pos n),
+  FO.Forest D → FO.Valid D → 3 * ↑(FO.value k D) + FO.Phi D ≤ ↑(List.length D) + ↑k
+upper_third : ∀ (n : Nat), 1 ≤ n → 3 * FO.T n + 1 ≤ n

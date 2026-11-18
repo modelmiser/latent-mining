@@ -17,7 +17,7 @@ Setting's standard names: incremental (insertion-only) edge orientation in fores
 - **Superadditivity, monotonicity, limit exists (Fekete): EASY COROLLARY** (standard; not found stated for this game).
 - **T(n) ≤ n − log₂(n+1) (B's Lemma 4): NOT FOUND.** *(Superseded: Gupta, Kumar and Stein, SODA 2014, was read later; its recurrence gives the bound n − 1 − log₂ n. See the addendum to prior-art-deep.md.)*
 - **T(n) ≥ ⌊n/4⌋−1, B's Lemma 2 formula, any positive amortized lower-bound constant for incremental forests at outdegree 2: NOT FOUND.** Items 3 and 5 suggest no such lower bound is recorded.
-- **Exact values T(1..16); T ≠ B with T(30) ≥ 7, T(32) ≥ 8, T(64) ≥ 18; limit bounds 9/32 ≤ L ≤ 1; W_j games: NOT FOUND.** *(The bounds are now 1/3 ≤ L ≤ 1/2; see NOTE.md.)*
+- **Exact values T(1..16); T ≠ B with T(30) ≥ 7, T(32) ≥ 8, T(64) ≥ 18; limit bounds 9/32 ≤ L ≤ 1; W_j games: NOT FOUND.** *(L = 1/3 is now proved; see NOTE.md.)*
 
 Queries run (19): incremental edge orientation forests outdegree flips; Brodal Fagerberg dynamic representations amortized reorientations; lower bound flips outdegree 2 forest insertions adversary; OEIS 0,0,0,1,1,2,3,5,5,6,7,9; amortized recourse exact constant trees insertion-only; "flipping game" Kaplan Solomon; Kowalik adjacency queries; online load balancing recourse two machines tree; cuckoo hashing bucket size 2 adversarial evictions; amortized lower bound incremental forest exact minimax; Ghaffari Kopelowitz Stein trees outdegree 2; BF lemma "(k + r)" formula; exact value game adversary forest outdegree 2 n/4; outdegree 1 total flips n log n; BF 1999 lemma δ-orientation; Efron Patel Stein 2411.07553; outdegree 2 "from the empty graph" open problem; BF wads99 lemma 1 (extended); plus one OEIS site search.
 

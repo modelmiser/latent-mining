@@ -1,4 +1,4 @@
-# Total flips for 2-orientations of incremental forests: between n/3 and n/2
+# Total flips for 2-orientations of incremental forests: n/3 − O(log n)
 
 *A short note. Draft of 18 November 2026. Source and all supporting files:
 this folder; overview in [README.md](README.md).*
@@ -15,35 +15,45 @@ adversary can force.
 
     T(n) ≥ n/3 − (7/3)·log₂(n+1) + 5/6.
 
+**Theorem 5.** For every n ≥ 1,
+
+    T(n) ≤ ⌊(n − 1)/3⌋.
+
+So T(n) = n/3 − O(log n), and the limit L of T(n)/n is 1/3. Both theorems
+are machine-checked in Lean 4, as statements about one and the same
+definition of T: Theorem 1 in the integer form
+n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋ and Theorem 5 as 3·T(n) + 1 ≤ n (Section 7).
+We do not know whether n/3 − T(n) is unbounded.
+
+Theorem 5 is achieved by the algorithm of Gupta, Kumar and Stein
+[7, Theorem 2.1], for which its authors prove 2n, with one of its ties
+broken by a fixed rule (rule L, Section 6). Three weaker results about that
+algorithm came first and are kept in Section 5, numbered in the order found:
+
 **Theorem 2.** For every n ≥ 19, T(n) ≤ (9/16)·n − log₂ n.
 
 **Theorem 3.** For every n ≥ 1, T(n) ≤ max(0, ⌊(n − 3)/2⌋).
 
-**Theorem 4.** For every j ≥ 1, the algorithm of Gupta, Kumar and Stein
-[7, Theorem 2.1], with its ties broken by the Adversary, can be made to pay
-(3^j − 1)/2 − j flips on 3^j vertices.
+**Theorem 4.** For every j ≥ 1, the algorithm of [7], with its ties broken
+by the Adversary, can be made to pay (3^j − 1)/2 − j flips on 3^j vertices.
 
-So the limit L of T(n)/n, which exists, satisfies 1/3 ≤ L ≤ 1/2. Theorem 1 is
-machine-checked in Lean 4 in the integer form n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋
-(Section 6). Theorems 2 and 3 are two analyses of the algorithm of [7], for
-which its authors prove 2n. Theorem 2 uses a recurrence f on tree sizes and
-is proved by hand with a finite check by program; the recurrence itself gives
-the smaller bound for most n below 94. Theorem 3 uses a potential, is proved
-by hand, and gives the smaller bound from n = 126 on (computed to n = 4000).
-Theorem 4 shows that Theorem 3 cannot be improved for that algorithm beyond
-lower-order terms when its ties are broken against it: the worst case is then
-n/2 − O(log² n). So an upper bound on L below 1/2 needs a different
-algorithm, or a tie-breaking rule for this one that we have not analysed
-(Section 5). We do not know the value of L.
+As bounds on T, Theorems 2 and 3 are superseded by Theorem 5, except that
+Theorem 3 gives T(4) = 0 where Theorem 5 gives T(4) ≤ 1. Theorem 2 is
+an analysis by a recurrence on tree sizes and Theorem 3 one by a potential;
+both hold however the ties are broken. Theorem 4 shows that Theorem 3 cannot
+be improved beyond lower-order terms without saying how ties are broken: the
+worst case with ties broken against the algorithm is n/2 − O(log² n). So the
+tie-breaking rule is what brings the cost from n/2 down to n/3.
 
 A forest can always be oriented with out-degree at most 1. Keeping that
 bound as edges arrive can require Ω(n log n) flips, and Gupta, Kumar and
 Stein [7] showed that relaxing the bound to 2 brings the total down to O(n).
-Theorem 1 says that this is the right order and that the amortized number of
-flips per insertion cannot be below 1/3 − o(1). A constant amortized lower
-bound is not surprising. Our search did not find one stated, nor this
-constant (Section 7). Besides the constant, the note offers a proof short
-enough to check and a statement of what the method cannot do (Section 5).
+Theorems 1 and 5 say that the amortized number of flips per insertion that
+an adversary can force is 1/3 − o(1), no more and no less. A constant
+amortized bound in each direction is not surprising. Our search did not find
+this constant stated, as a lower or as an upper bound (Section 8); we are
+not specialists, and it may be known. Besides the constant, the note offers
+proofs short enough to check and a machine check of both.
 
 ## 1. The game
 
@@ -253,7 +263,7 @@ the bound for T(n). ∎
 
 The bound is weak for small n. It is positive from n = 34 on.
 
-## 5. The upper bound, and what else is known
+## 5. The algorithm of [7] with arbitrary ties, and other facts
 
 **The algorithm.** If an endpoint of the named pair is unsaturated, direct
 the new edge out of it and flip nothing. Otherwise let u be the endpoint in
@@ -327,7 +337,9 @@ Kumar and Stein bound the flipped path by log₂ of the size of the smaller
 tree and get the recurrence with log₂ min(a, b) in place of c(a). They state
 the bound 2n, noting 2n − log₂ n − 2 by induction. The same induction gives
 n − 1 − log₂ n for their recurrence, with equality at powers of 2, so that
-recurrence cannot give a constant below 1. The improvement to 9/16 comes
+recurrence cannot give a constant below 1. This sharper reading of their
+recurrence is not new: Ozdayi [13, Theorem 2.4] proves n − log₂ n − 1 for n
+edges from it (we found [13] only after writing this section). The improvement to 9/16 comes
 from two things in the path bound: the size fact, which gives
 log₂(a + 1) − 1 in place of log₂ a, and rounding down, since a path length
 is an integer. Without the rounding the recurrence gives about 0.69·n at
@@ -509,8 +521,8 @@ W(n) = n/2 − O(log² n). The construction relies on the Adversary breaking
 ties in two places: when A_1 is built, and in the second of the two rounds
 at every level. The tie in the first of the two rounds is symmetric, and the
 choice among shortest paths does not matter. We have not determined the
-worst case of rule R under a fixed tie-breaking rule, so Theorem 4 does not
-exclude that some tie-breaking rule does better. For n ≤ 15, exhaustive
+worst case of rule R under every fixed tie-breaking rule; Section 6 gives
+one that pays at most (n − 1)/3. For n ≤ 15, exhaustive
 search gives W(n) = f(n) except at n = 14, where W(14) = 3 < f(14) = 4 (one program,
 `upper/greedy_exact.cpp`; its output is `upper/greedy_exact_log.txt`).
 
@@ -519,7 +531,7 @@ strategy on a set of a vertices, then on the other b looking only at those,
 then joins the two trees. Flips the Algorithm makes outside the part being
 played only add to what it pays, so its payments within each part are at
 least the value of that part. Since T(n)/n is bounded (Theorem 2), Fekete's
-lemma gives L = lim T(n)/n = sup T(n)/n.
+lemma gives L = lim T(n)/n = sup T(n)/n. By Theorems 1 and 5, L = 1/3.
 
 **Small cases** (details, proofs and programs in [README.md](README.md)).
 
@@ -547,55 +559,360 @@ bound on T(n), and the strategy of Section 4 is a strategy of it. Its value
 is at most (n − 1)/3: with g(p, q) = q + φ(q − p), φ(0) = 4/3, φ(1) = 2/3,
 φ(d) = 1/3 for d ≥ 2, the Algorithm can always choose an alternative that
 keeps paid(C) + g(pair of C) ≤ |C|/3. So the pair game is worth exactly
-n/3 up to lower-order terms, and a proof of L > 1/3, if that is true, cannot
-be a strategy of this game. This does not rule out other arguments that
-track a single vertex per tree.
+n/3 up to lower-order terms. (This was proved before Theorem 5, which now
+gives the same ceiling for the real game.)
 
 In the other direction, the natural attempt to turn g into an Algorithm on
 real forests fails. Let G(C) be the maximum of g over the slot values of the
 vertices of C; the Algorithm would need, for every named pair, a normal reply
 with cost + G(new tree) ≤ G(X) + G(Y). This holds for all pairs of trees
 with at most 7 vertices each and fails for a 9-vertex oriented tree named
-against a copy of itself (computed; same file, Section 8). Only this one
-candidate is refuted.
+against a copy of itself (computed; same file, Section 8). Section 6 uses
+a different potential, a sum over all vertices of weights built from the
+same g.
 
-## 6. Machine check
+## 6. Proof of Theorem 5
+
+Recall the slots of a vertex v (Section 3): the values h(c) of its
+out-neighbours c, and −1 for each missing one. Write them sorted, (P, Q)
+with P ≤ Q; then h(v) = P + 1. Let ε(v) = 0 if P = Q and ε(v) = 1 if P < Q.
+So ε(v) = 0 exactly when v has no out-neighbour or two out-neighbours of
+equal h.
+
+**Rule L.** For the named pair, let x be an endpoint with
+
+    2·h(x) + ε(x) ≤ 2·h(y) + ε(y),
+
+y being the other endpoint (if both qualify, either). Flip a shortest
+directed path x = w_0 → w_1 → … → w_k from x to an unsaturated vertex, any
+such path, and direct the new edge from x to y. The cost is k = h(x).
+
+In words: flip from the endpoint of smaller h; if the two h are equal and
+exactly one endpoint has its two slots equal, flip from that one; otherwise
+flip from either. Since h(x) ≤ h(y), rule L is rule R of Section 5 with some
+of its ties decided, and so it is the algorithm of [7] with a tie-breaking
+rule. The choice among shortest paths stays free.
+
+**The potential.** In this section every quantity is multiplied by 3, so
+that all of them are integers: a round of cost k has to raise the potential
+by 3k. For a vertex c put
+
+    γ(c) = 3·h(c) + 1 + ε(c).
+
+The weight w(v) of a vertex v depends on its out-neighbours:
+
+    no out-neighbour:                             w = 0
+    one out-neighbour c:                          w = ε(c) if h(c) = 0;   w = 1 if h(c) ≥ 1
+    two, of heights p ≤ q, with flags ε_p, ε_q:   w = 3p − 1 + ε_p + ε_q    if q = p
+                                                  w = 3p + 1 + ε_p + ε_q    if q = p + 1
+                                                  w = 3p + 2 + ε_p          if q ≥ p + 2
+
+Here "height" means h and "flag" means ε. Φ is the sum of w over all
+vertices; it is 0 when there are no edges, and Φ of a position is the sum of
+Φ over its trees. A weight can be negative: it is −1 for a vertex whose two
+out-neighbours both have no out-neighbour.
+
+Equivalently, with (P, Q) the slots of v,
+
+    w(v) = 1 + Σ_c γ(c) − max( γ(c) over the out-neighbours c of v,  g(v) ),
+
+where g(v) = 3Q + 4, 3Q + 2 or 3Q + 1 according as Q − P is 0, 1 or at least
+2, for a vertex v with at least one out-neighbour. This g is three times the
+g(p, q) of the paragraph "A limit of the method" in Section 5. Note that
+g(v) ≥ γ(v), with equality unless Q − P ≥ 2. That the table and the formula
+agree is a direct computation in each line of the table;
+`upper/third_check.py`, part (0), also checks it for all heights below 30.
+
+**Lemma 6 (every tree).** For every directed tree T on n vertices with all
+out-degrees at most 2,
+
+    Φ(T) ≤ n − max over v of γ(v) ≤ n − 1.
+
+No assumption is made on how T arose.
+
+*Proof.* Induction on n. For n = 1, Φ = 0 and γ = 1. Let n ≥ 2 and let r be
+a vertex of in-degree 0, which exists since T has n − 1 edges. No out-tree
+of another vertex contains r, so deleting r changes no other h, slot, γ or
+w. Write Θ(T) for the maximum of γ over T; then Θ(T) is the maximum of γ(r)
+and of Θ over the trees of T − r.
+
+If r has one out-neighbour c, then T − r is a tree T_1. From the formula
+with the maximum and g(r) ≥ γ(r), w(r) ≤ 1 + γ(c) − max(γ(c), γ(r)), so by
+induction
+
+    Φ(T) ≤ (n − 1) − Θ(T_1) + 1 + γ(c) − max(γ(c), γ(r)).
+
+For fixed s the function t ↦ max(t, s) − t is non-increasing, and
+Θ(T_1) ≥ γ(c), so max(Θ(T_1), γ(r)) − Θ(T_1) ≤ max(γ(c), γ(r)) − γ(c). Hence
+Φ(T) ≤ n − max(Θ(T_1), γ(r)) = n − Θ(T).
+
+If r has two out-neighbours c_1, c_2, in the trees T_1, T_2 of T − r, of
+sizes n_1 + n_2 = n − 1, then
+w(r) ≤ 1 + γ(c_1) + γ(c_2) − max(γ(c_1), γ(c_2), γ(r)). For fixed t the
+function (a, b) ↦ a + b − max(a, b, t) is non-decreasing in a and in b.
+With Θ_i = Θ(T_i) ≥ γ(c_i),
+
+    Φ(T) ≤ n_1 − Θ_1 + n_2 − Θ_2 + 1 + Θ_1 + Θ_2 − max(Θ_1, Θ_2, γ(r)) = n − Θ(T). ∎
+
+**Lemma 7 (monotone).** The weight of a vertex does not decrease when one
+slot of one of its out-neighbours is raised by one, the out-neighbours
+themselves staying the same. (The slots stay sorted: the larger slot may
+always be raised, the smaller one only if it is below the larger.)
+
+*Proof.* Raising one slot of an out-neighbour c changes the pair
+(h(c), ε(c)) in one of four ways: (S1) (h, 0) → (h, 1), when the slots were
+equal; (S2) no change, when the larger of two different slots is raised;
+(S3) (h, 1) → (h + 1, 0) and (S4) (h, 1) → (h + 1, 1), when the smaller slot
+is raised.
+
+*One out-neighbour.* The weight is ε(c) if h(c) = 0 and 1 if h(c) ≥ 1. (S1)
+raises it from 0 to 1 if h(c) = 0 and leaves it at 1 otherwise. (S3) and
+(S4) start from flag 1, so from weight 1, and end at height at least 1, so
+at weight 1.
+
+*Two out-neighbours, c the one of smaller height p,* the other of height
+q ≥ p and flag ε_q. (S1) adds 1 in each of the three lines of the table. For
+(S3) and (S4) the old flag of c is 1 and its new height is p + 1, with a new
+flag ε′:
+- q = p: old 3p + ε_q; new (heights p and p + 1) 3p + 1 + ε_q + ε′.
+- q = p + 1: old 3p + 2 + ε_q; new (heights equal) 3p + 2 + ε′ + ε_q.
+- q = p + 2: old 3p + 3; new 3p + 4 + ε′ + ε_q.
+- q ≥ p + 3: old 3p + 3; new 3p + 5 + ε′.
+
+*Two out-neighbours, c the one of larger height q > p,* the other with flag
+ε_p. (S1) adds 1 if q = p + 1 and nothing if q ≥ p + 2. For (S3) and (S4):
+if q = p + 1 the old weight is 3p + 2 + ε_p and the new one, with heights p
+and p + 2, is 3p + 2 + ε_p; if q ≥ p + 2 nothing changes. ∎
+
+`upper/third_check.py`, part (M), also checks every single-slot increase
+with slots below 30.
+
+**Lemma 8 (the path pays).** In a round of rule L of cost k, the vertices
+w_0, …, w_k of the flipped path together gain at least 3k in weight. (For
+k = 0: the vertex x does not lose weight.)
+
+*Notation.* As in Lemma 4: h(w_i) = k − i; for i < k, c_i is the
+out-neighbour of w_i other than w_(i+1), and a_i = h(c_i) ≥ k − i − 1; put
+α_i = a_i − (k − i − 1) ≥ 0. Let b = h(y) ≥ k and β = b − k. The end w_k has
+no out-neighbour or one, z. As shown in the proof of Lemma 4, the out-trees
+of the c_i, of z and of y contain no path vertex, so their h and their ε do
+not change. After the round the out-neighbours are: of w_0, c_0 and y; of
+w_i (1 ≤ i < k), c_i and w_(i−1); of w_k, w_(k−1) and z if there is one.
+Let h′ be the new h. Then h′(w_0) = 1 + min(a_0, b) and
+h′(w_i) = 1 + min(a_i, h′(w_(i−1))) for 1 ≤ i < k. Put
+o_i = h′(w_i) − h(w_i). Then
+
+    o_0 = min(α_0, β + 1),      o_i = min(α_i, o_(i−1) + 2)  for 1 ≤ i < k,
+
+and in particular o_i ≥ 0. The new slots of w_0 are equal exactly when
+α_0 = β + 1, and those of w_i (1 ≤ i < k) exactly when α_i = o_(i−1) + 2.
+The old slots of w_i (i < k) are equal exactly when α_i = 0, and those of
+w_k exactly when it has no out-neighbour.
+
+*What rule L gives.* Besides h(x) ≤ h(y), the proof uses one consequence of
+rule L: if β = 0 and ε(y) = 0, then ε(x) = 0. For k ≥ 1 this says α_0 = 0;
+for k = 0 it says that if y has no out-neighbour then x has none.
+
+*The carry.* For i < k define the state s_i = (o_i, e_i, f_i), where e_i
+says whether the new slots of w_i are equal and f_i whether the old slots of
+w_(i+1) are equal. Let
+
+    π(o, e, f) = −1  if f is false and (o, e) is one of (0, false), (1, true), (1, false), (2, true);
+    π(o, e, f) = 0   otherwise.
+
+*Claim.* Writing gain(v) for the new weight of v minus the old one:
+(a) gain(w_0) ≥ 2 + π(s_0);
+(b) gain(w_i) ≥ 3 + π(s_i) − π(s_(i−1)) for 1 ≤ i < k;
+(c) gain(w_k) ≥ 1 − π(s_(k−1));
+(d) if k = 0, gain(x) ≥ 0.
+
+For k ≥ 1, adding (a), (b) for each i and (c), the carries cancel and the
+total gain is at least 2 + 3(k − 1) + 1 = 3k.
+
+Every weight involved is given by the table. By the table, a gain is
+unchanged if all heights are shifted by the same amount, provided the vertex
+has two out-neighbours before and after; that is so for w_0, …, w_(k−1).
+For i < k measure heights from ℓ = h(w_(i+1)) = k − i − 1, and write
+ε_n = ε(w_(i+1)) before the round, ε_c = ε(c_i) and α = α_i. The old weight
+of w_i, minus 3ℓ, is
+
+    −1 + ε_n + ε_c  (α = 0);     1 + ε_n + ε_c  (α = 1);     2 + ε_n  (α ≥ 2).
+
+(b) *Interior.* The new out-neighbours are c_i, of height ℓ + α, and
+w_(i−1), of height ℓ + 2 + o with o = o_(i−1) and with new flag ε′. Put
+d = α − o − 2. The new weight, minus 3ℓ, is
+
+    3α + 2 + ε_c (d ≤ −2);    3α + 1 + ε_c + ε′ (d = −1);    3α − 1 + ε_c + ε′ (d = 0);
+    3o + 7 + ε_c + ε′ (d = 1);    3o + 8 + ε′ (d ≥ 2).
+
+The right side of (b) is at most 4. If α ≥ 3, the old weight is at most 3
+and the new one at least 7. If α ≤ 2 and o ≥ 3, then d ≤ −2, so the new
+weight and the new state (α, false, f_i) do not depend on o, and
+π(s_(i−1)) = 0; so it is enough to take o ∈ {0, 1, 2, 3}. That leaves
+α ∈ {0, 1, 2}, o ∈ {0, 1, 2, 3} and the flags: finitely many cases.
+
+(a) *Start.* The new out-neighbours are c_0, of height ℓ + α, and y, of
+height ℓ + 1 + β and flag ε_y. Put d = α − β − 1. The new weight, minus 3ℓ,
+is
+
+    3α + 2 + ε_c (d ≤ −2);    3α + 1 + ε_c + ε_y (d = −1);    3α − 1 + ε_c + ε_y (d = 0);
+    3β + 4 + ε_c + ε_y (d = 1);    3β + 5 + ε_y (d ≥ 2).
+
+The right side of (a) is at most 2. If α ≥ 3, the old weight is at most 3
+and the new one at least 5. If α ≤ 2 and β ≥ 3, then d ≤ −2 and nothing
+depends on β. That leaves α ∈ {0, 1, 2}, β ∈ {0, 1, 2, 3} and the flags,
+without the cases excluded by rule L (β = 0, ε_y = 0, α ≥ 1).
+
+(c) *End.* The new out-neighbour w_(k−1) of w_k has height 1 + o, with
+o = o_(k−1), and its flag is given by e_(k−1). If w_k had no out-neighbour,
+its weight goes from 0 to 1, and π(s_(k−1)) = 0 because f_(k−1) is true. If
+it had z, of height ζ and flag ε_z, the old weight is ε_z (ζ = 0) or 1
+(ζ ≥ 1), and the new one is given by the table for heights ζ and 1 + o. The
+right side of (c) is at most 2. If ζ ≥ 3, or ζ = 2 and o ≥ 1, the new weight
+is at least 5 and the old one at most 1. If o ≥ ζ + 1, the new weight
+3ζ + 2 + ε_z does not depend on o. That leaves ζ ≤ 2, o ≤ 3 and the flags.
+
+(d) *k = 0.* Here x is unsaturated and gains the out-neighbour y. If x had
+no out-neighbour, its weight goes from 0 to ε(y) or 1, which is at least 0.
+If x had an out-neighbour z, the case that y has no out-neighbour is
+excluded by rule L. Let z have height ζ and flag ε_z, and y height b and
+flag ε_y; the old weight is ε_z if ζ = 0 and 1 if ζ ≥ 1, and the new one is
+given by the table for the heights ζ and b. If both heights are at least 1,
+the new weight is at least 2. If ζ = 0 and b ≥ 2, it is 2 + ε_z. If b = 0 and
+ζ ≥ 2, it is 2 + ε_y. If ζ = 0 and b = 1, or ζ = 1 and b = 0, it is
+1 + ε_z + ε_y. If ζ = b = 0, it is −1 + ε_z + ε_y, and ε_y = 1 because y has
+an out-neighbour, so it is ε_z, the old weight.
+
+The finite cases of (a) to (d) are checked by `upper/third_check.py`,
+part (P), which runs over all values of α, β, o and ζ below 30 and so
+contains the lists above. ∎
+
+**Proof of Theorem 5.** Play rule L against any Adversary and consider one
+round, of cost k. By the first step of the proof of Lemma 4, which uses only
+that the flipped path is a shortest path from x, that y is in another tree
+and that h(y) ≥ h(x), no h decreases. Hence the sorted slots of every vertex do not decrease in either
+coordinate. For a vertex off the path this is because it keeps its
+out-neighbours. For the path vertices it is the computation in Lemma 8: the
+old slots of w_i (1 ≤ i < k) are (k − i − 1, a_i) and the new ones are a_i
+and h′(w_(i−1)) ≥ k − i + 1; the old slots of w_0 are (k − 1, a_0) and the
+new ones a_0 and b ≥ k; and w_k (or x, if k = 0) keeps its out-neighbour, if
+any, and gains one, which is a slot rising from −1.
+
+A vertex off the path keeps its out-neighbours, some of which may be path
+vertices. A rise of an out-neighbour's sorted slots in both coordinates is a
+chain of single-slot rises that keep the slots sorted (raise the larger slot
+step by step, then the smaller), and the out-neighbours can be treated one
+after the other. So by Lemma 7 the weight of a vertex off the path does not
+decrease. By Lemma 8 the path vertices together gain at least 3k. So Φ rises
+by at least 3k in a round of cost k.
+
+Φ starts at 0. So three times the total cost is at most Φ of the final
+tree, which by Lemma 6 is at most n − 1. The total cost is an integer, so
+rule L never pays more than ⌊(n − 1)/3⌋, and T(n) is at most that. ∎
+
+**A finer statement.** The same proof gives: the rounds of rule L that built
+a tree C cost at most (|C| − max_v γ(v))/3 ≤ (|C| − 1)/3 − H(C) in total,
+where H(C) is the largest h in C.
+
+**Checks by program.** None of these is needed for the proof, except that
+the finite cases of Lemma 8 were checked by program and not by hand; the
+Lean development (Section 7) proves (a) to (d) for all values without that
+reduction. The output of the runs below is in `upper/third_log.txt`.
+
+- `upper/third_check.py 30`: the table against the formula with the maximum;
+  Lemma 7; the inequalities (a) to (d).
+- `upper/third_paths.py 5 4`: for every flipped path of length at most 5 and
+  every combination of the α_i up to 4, of β up to 4, of the flags and of
+  the end vertex (with the height of its out-neighbour up to 4), the total gain of the path, computed from the definitions
+  without the carry, is at least 3k (11,244,432 profiles).
+- `upper/third_trees.py 8 14`: Lemma 6 on every directed tree with at most 8
+  vertices, and the inequality of a round for every pair of such trees with
+  at most 14 vertices together, every pair of endpoints allowed by rule L
+  and every shortest path (10,721,542 rounds). These trees are too small for a
+  flipped path longer than 2.
+- `upper/third_pool.cpp`, run as `third_pool 128 6`: trees of up to 128
+  vertices built by rule L, kept selectively and with one endpoint tried
+  per class of vertices with equal h and slots; the inequality of a round and
+  the finer statement on each of 136,196,918 rounds, of which 5,277,311 had a
+  flipped path of length 3 or more.
+
+**How the potential was found.** A search over tie-breaking rules for
+rule R found one (on a tie, flip in the smaller tree) for which the largest
+cost found equalled the pair-game lower bound on T(n) at every n from 26 to
+66. Linear programs then fitted vertex weights to
+recorded rounds. A first closed form passed every test and was false: a
+vertex above the flipped path lost weight, and there can be any number of
+such vertices (the example has 43 vertices and was found while trying to
+prove the inequality, not by the tests). Requiring the weights to be
+monotone (Lemma 7) and only the path to pay (Lemma 8) gave a feasible
+program whose values suggested the formula with γ; a second linear program
+gave the carry π. The proof above does not depend on any of that, and the
+programs of that search, including the 43-vertex example, are not in the
+repository.
+
+**The tie-break is needed for this potential.** If x is chosen with
+h(x) = h(y) but against rule L, a round can raise Φ by less than three times
+its cost: the Lean development contains an 8-vertex position where a round
+of cost 1 raises Φ by 2 (`lean/SPEC.md`). With the ties left to the
+Adversary the cost itself can be about n/2 (Theorem 4).
+
+## 7. Machine check
 
 `lean/` contains a Lean 4 development (toolchain 4.36.0, core library only,
-about 1,970 lines) proving
+about 4,000 lines) proving
 
     theorem T_lower_bound (n : Nat) (hn : 1 ≤ n) :
         n + 3 ≤ 3 * T n + 7 * Nat.log2 (n + 1)
 
-that is, T(n) ≥ n/3 + 1 − (7/3)·⌊log₂(n+1)⌋, which implies Theorem 1. The
-statement is about the full game, with every legal reply, not the game
-restricted to normal replies. It depends on an 89-line specification,
+    theorem upper_third : ∀ n : Nat, 1 ≤ n → 3 * FO.T n + 1 ≤ n
+
+The first says T(n) ≥ n/3 + 1 − (7/3)·⌊log₂(n+1)⌋, which implies Theorem 1.
+The second is Theorem 5: for n ≥ 1 it says 3·T(n) ≤ n − 1, and T(n) is an
+integer. Both are about the full game, with every legal reply, not the game
+restricted to normal replies. Both depend on the same 89-line specification,
 `lean/FO/Spec.lean`, in which a position is a list of directed edges on
 `Fin n`, the Algorithm's replies are all valid re-orientations, and `T n` is
-the max-min value over n − 1 rounds computed by backward induction. The
-proof follows Sections 2 to 4: Lemma 1 and the shadow play, the lemmas on
-slots and types, the potential. It uses only the axioms `propext`,
-`Classical.choice` and `Quot.sound`.
+the max-min value over n − 1 rounds computed by backward induction. Both use
+only the axioms `propext`, `Classical.choice` and `Quot.sound`.
+
+The proof of the first follows Sections 2 to 4: Lemma 1 and the shadow play,
+the lemmas on slots and types, the potential. The proof of the second
+(`lean/FO/Upper*.lean`, about 2,040 lines) follows Section 6, with these
+differences, listed in full in `lean/SPEC.md`:
+
+- The inequality of a round is proved for every endpoint x allowed by
+  rule L and every shortest path from x (`round_gain`). The reply that the
+  final induction plays is one of these, with a fixed choice of endpoint
+  when both qualify and a fixed path (`ruleL`).
+- Lemma 6 is proved in the form Φ ≤ number of edges, for forests, which is
+  what the final induction needs.
+- Inequalities (a) to (d) of Lemma 8 are proved for all values of the
+  parameters, not by reduction to finitely many cases.
+- The finer statement at the end of Section 6 is not formalised.
 
 What this does and does not give:
 
-- It removes the need to trust the hand proof of Theorem 1, including the
-  step from normal replies to all replies.
+- It removes the need to trust the hand proofs of Theorems 1 and 5,
+  including the step from normal replies to all replies in Theorem 1.
 - It does not check that the 89 lines say what Section 1 says. Five
   reviewing models read the specification against the game for that purpose
   and found no discrepancy; a human reader should still read it.
-- The inequality first forces T(n) ≥ 1 at n = 26 (it does so for n = 26 to
-  30, says nothing at 31 and 32, and does so again for every n from 33 on).
-  That is beyond any exhaustive computation of T, which stops at n = 16, so
-  there is no numerical test of the theorem itself. At n = 1000 it gives
-  T ≥ 314; Section 5 gives T ≤ f(1000) = 549.
+- The two statements are easy to compare with small cases: T(1) = T(2) =
+  T(3) = 0 = ⌊(n − 1)/3⌋, and the exact values for n ≤ 15 lie between the
+  two bounds. The lower bound first forces T(n) ≥ 1 at n = 26 (it does so
+  for n = 26 to 30, says nothing at 31 and 32, and does so again for every n
+  from 33 on), which is beyond any exhaustive computation of T. At n = 1000
+  the two theorems give 314 ≤ T ≤ 333.
 - That the backward-induction value equals the value under history-dependent
   strategies is standard for finite games of perfect information and is not
   formalised.
-- Nothing else in this note is formalised: not Theorems 2 to 4, the limit,
-  the small cases or the abstract game.
+- Nothing else in this note is formalised: not Theorems 2 to 4, the limit as
+  such, the small cases or the abstract game.
+- The files for Theorem 5 were written by one instance of the model and
+  rebuilt from clean by another; what the reviewing models read of them is
+  stated in the README.
 
-## 7. Related work
+## 8. Related work
 
 This section reports a literature search done by instances of the same AI
 model, not the judgement of someone who works in the area. Each item says
@@ -610,9 +927,13 @@ afterwards, for this note.
   lower bounds). Their Section 2 is this problem, stated for in-degree: edges
   of a forest arrive online, load at most 2 is maintained, and Theorem 2.1
   gives an algorithm with at most 2n flips in total, by flipping the shorter
-  of the two shortest directed paths to an unsaturated vertex. Theorems 2
-  and 3 above are tighter analyses of that algorithm, and Theorem 4 shows
-  that n/2 is its worst case up to lower-order terms (Section 5). They also
+  of the two shortest directed paths to an unsaturated vertex. Ozdayi [13]
+  (Sections 2 and 3 read, in the HTML version) sharpens their analysis to
+  n − log₂ n − 1 flips for n edges, from the same recurrence. Theorems 2
+  and 3 above are tighter analyses of that algorithm, Theorem 4 shows that
+  n/2 is its worst case up to lower-order terms when its ties are broken
+  against it (Section 5), and Theorem 5 shows that with the ties broken by
+  rule L it pays at most (n − 1)/3 (Section 6). They also
   recall that keeping load 1 can require Ω(n log n) flips, citing Grove et
   al. [12]. Section 2 states no lower bound on
   flips at load 2, and our scan of the rest of the paper found none.
@@ -629,8 +950,19 @@ afterwards, for this note.
   describe a random-walk rule for out-degree 2 on forests as folklore.
 
 **Lower bounds.** We found no lower bound on the total number of flips for
-insertion-only forests at out-degree 2, and none of the values of T(n). The
-nearest statements:
+insertion-only forests at out-degree 2 that holds for every algorithm, and
+none of the values of T(n). We
+also found no upper bound on the total better than the n − log₂ n − 1 of
+[13]. A separate search for upper bounds and for the constant 1/3 (18
+November 2026, one instance) found [13] and nothing closer. The nearest statements:
+
+- Ozdayi [13], Lemma 3.2 (read): every variant of the shortest-path
+  algorithm of [7], with ties broken in any way, can be forced to flip
+  (n − 3)/4 edges in n insertions, for suitable n. This is a lower bound on the total at
+  out-degree 2, but for that class of algorithms only; the bound B(n) of
+  Section 5, of the same order, and Theorem 1 hold for every algorithm. The
+  same source shows that such an algorithm can be forced to flip 2 edges in
+  one step. It states no tie-breaking rule and no bound of the form n/3.
 
 - [1], Theorem 4 (read): with deletions allowed and out-degree equal to the
   arboricity c, Ω(n/c²) flips can be forced even amortized. This needs
@@ -699,28 +1031,28 @@ we would like to hear of it.
     Maximal Matchings and Adjacency Queries. ISAAC 2014, LNCS 8889.
 12. E. F. Grove, M.-Y. Kao, P. Krishnan, J. S. Vitter. Online Perfect
     Matching and Mobile Computing. WADS 1995, LNCS 955, pp. 194–205.
+13. M. S. Ozdayi. Achieving Competitiveness in Online Problems. Semester
+    project, EPFL, supervised by O. Svensson and S. Huang. 2020.
+    arXiv:2001.03015
 
-## 8. Open questions
+## 9. Open questions
 
-1. The value of L. We have 1/3 ≤ L ≤ 1/2. By Theorem 4 the algorithm of [7]
-   pays n/2 up to lower-order terms when its ties are broken against it, so
-   an upper bound below 1/2 needs a different algorithm, or at least a
-   tie-breaking rule for this one that we have not analysed.
-2. Is L = 1/3? By Section 5 the pair game cannot force more than 1/3, and
-   the one candidate potential for an Algorithm does not transfer to real
-   trees. Neither settles the question.
-3. The least n with T(n) > B(n), and whether T(4^k) = (4^k − 1)/3 − k.
-4. The same question for out-degree bound c ≥ 3 on forests, and for graphs
+1. Is n/3 − T(n) unbounded? Theorems 1 and 5 give
+   1/3 ≤ n/3 − T(n) ≤ (7/3)·log₂(n+1) − 5/6.
+2. The least n with T(n) > B(n), and whether T(4^k) = (4^k − 1)/3 − k.
+3. The same question for out-degree bound c ≥ 3 on forests, and for graphs
    of arboricity α with bound α + 1.
+4. Whether Theorem 1 or Theorem 5 is already known (Section 8).
 
 ## How this was produced
 
 All of the mathematics here was produced by instances of one AI model (Claude,
 Anthropic) in an experiment on whether such models can pose and settle small
 checkable questions: one chain of instances posed the problem, two solved it
-independently, others refereed, and a further one wrote the Lean
-development. The claims were then reviewed by five models from four vendors
-reading the files; what each review covered is in the README. The record of that process, including the errors found on
-the way, is in [README.md](README.md). No human mathematician has yet checked
-the proofs; the Lean check of Theorem 1 is offered in place of that for the
-main result. Corrections are welcome as issues on the repository.
+independently, others refereed, and further ones found the upper bounds and
+wrote the Lean development. The claims were then reviewed by five models
+from four vendors reading the files; what each review covered is in the
+README. The record of that process, including the errors found on the way,
+is in [README.md](README.md). No human mathematician has yet checked the
+proofs; the Lean checks of Theorems 1 and 5 are offered in place of that for
+the two main results. Corrections are welcome as issues on the repository.
