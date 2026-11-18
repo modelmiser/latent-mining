@@ -130,4 +130,5 @@ raised about this document and the files around it:
   differs from the comment at the end of SpecCheck.lean, its last comment should read
   "n + 6 in place of n + 3", and that variant is "not derivable by that proof" rather than false.
 - `Main.lean`: `T_lower_bound_pow` is a weaker corollary of `T_lower_bound`, not equivalent.
-- The theorem first forces T(n) >= 1 at n = 33.
+- The theorem first forces T(n) >= 1 at n = 26 (also for n = 27..30; nothing at n = 31, 32;
+  every n >= 33). An earlier version of this note said "first at n = 33", which was wrong.

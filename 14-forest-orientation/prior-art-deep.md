@@ -44,3 +44,11 @@ Method: PDFs downloaded and text-extracted locally. "Scanned" means the whole ex
 ## Interest
 
 Kaplan–Naori–Sadeh prove an Ω(1/Δ) amortized recourse bound for incremental forest edge colouring, so constant amortized lower bounds on incremental forests are publishable next door. Here, a proof that out-degree 2 on incremental forests cannot have o(1) amortized flips, with a constant provably above the natural 1/4, would be a modest note; the exact limit would be the interesting part.
+
+## Added afterwards (17 November 2026), for NOTE.md
+
+- **Gupta, Kumar, Stein (SODA 2014) has now been read** (Section 2 in full, the rest scanned for lower bounds, tightness remarks and open problems). Section 2 is the insertion-only forest problem at load 2 (in-degree). Theorem 2.1: "there is an algorithm to maintain a load of at most 2 at all vertices that performs at most 2n edge flips", by flipping the shorter of the two shortest paths to an unsaturated node; Lemma 2.1 solves the recurrence T(n) ≤ max T(n₁) + T(n − n₁) + log₂ min(n₁, n − n₁) and notes T(n) ≤ 2n − log₂ n − 2. So verdict 4 changes: the linear upper bound for the shortest-path greedy is FOUND there with constant 2; ours has constant 1 by the same argument. The paper says load 1 can require Ω(n log n) flips "[GKKV95, Theorem 1]". It states no lower bound on flips at load 2. Verdict 1 stands: NOT FOUND.
+- Gupta's survey slides "A Little Change will do you Good" (cs.nyu.edu/~anupamg/talks/shonan-recourse.pptx), slides 21–25 read as extracted text: Brodal–Fagerberg for trees, competitive ratio 2 with 3 re-orientations amortized. No lower bound on flips.
+- Bender et al., abstract and introduction re-read: out-degree 3, O(log log n) flips per insertion worst-case, O(1) amortized.
+- Kaplan, Naori, Sadeh, abstract: "an Ω(1) lower bound for every constant c" (recourse for edge colouring).
+- Citations of all nine references in NOTE.md were checked against arXiv, Crossref or the authors' pages.

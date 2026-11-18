@@ -5,6 +5,8 @@ be given a direction, with at most two edges pointing out of any vertex, and
 reversing an edge that was oriented earlier costs one flip. How many flips
 can the adversary force over the whole sequence?
 
+A self-contained write-up with full proofs is in [NOTE.md](NOTE.md).
+
 **Short answer: at least about n/3, and at most about n.** A simple attack
 forces B(n) = max(0, ⌊n/4⌋ − 1) flips and is exactly optimal for up to 15
 vertices. It stops
@@ -40,12 +42,12 @@ L denotes the limit of T(n)/n, which exists.
 |---|---|---|
 | The Algorithm loses nothing by a normal form: reverse nothing and orient the new edge out of an endpoint with a free slot, or reverse one directed path from a saturated endpoint through saturated vertices to the first vertex with a free slot | proved by hand by solver B; referee read it and checked by program, for every position with n ≤ 11 and every Adversary move, that the best normal reply is as good as the best re-orientation of the merged tree (a one-round check); known as a repair move in the literature, where its optimality for the whole game was not found stated | `solver-b/proofs.txt` Lemma 1 |
 | T(n) ≥ B(n) for all n; T is monotone and superadditive, so L exists | proved by hand, twice; referee read both | `solver-a/proofs.txt` P3, P4; `solver-b/proofs.txt` Lemmas 2, 3, 5 |
-| T(n) ≤ n − log₂(n+1), by always reversing a shortest path in the smaller tree | proved by hand by solver B; referee read it | `solver-b/proofs.txt` Lemma 4 |
+| T(n) ≤ n − log₂(n+1), by always reversing a shortest path in the smaller tree | proved by hand by solver B; referee read it. **Not new in substance:** Gupta, Kumar and Stein (SODA 2014, Theorem 2.1) prove 2n for this problem by the same rule and recurrence; this is their argument with the path length counted more tightly | `solver-b/proofs.txt` Lemma 4 |
 | T(n) = B(n) for n ≤ 15 | computed exhaustively by both solvers and the referee, three programs | `reports/` |
 | T(16) = 3 = B(16) | the upper half rests on one solver's program | `solver-a/run_n16.txt` |
 | T(30) ≥ 7 > 6 = B(30) | two routes with different lemmas and certificates (both use a simulation argument of the same kind), each certificate checked by the referee's own checker | `solver-a/cert_W2_*.txt`, `solver-b/cert_n30_k7.txt` |
 | **T(n) ≥ n/3 − (7/3)·log₂(n+1) + 5/6 for every n, so L ≥ 1/3** | **machine-checked in Lean 4** in the slightly stronger integer form n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋, for the full game with every legal reply; before that, proved by hand by one follow-up instance and read line by line by a second | `lean/`; `open-limit/proofs.txt` Lemmas A, B, Type Lemma, Theorem 1; `reports/open-limit-referee.md` |
-| T(n) > B(n) for every n ≥ 30 | for 30 ≤ n ≤ 35 from the certificates for T(30) ≥ 7 and T(32) ≥ 8; for 36 ≤ n ≤ 63 only from a reduced game computed by the follow-up's program and the second reader's (the follow-up's own unpruned cross-check stops at 61); from 64 on from the certificate for T(64) ≥ 18 and superadditivity | `open-limit/proofs.txt` Theorem 2 |
+| T(n) > B(n) for every n ≥ 30 | for 30 ≤ n ≤ 35 from the certificates for T(30) ≥ 7 and T(32) ≥ 8; for 62 and 63 also from those two certificates by superadditivity (T(62) ≥ 7 + 8 = 15 > 14); for 36 ≤ n ≤ 61 only from a reduced game computed by the follow-up's program and the second reader's (the follow-up's own unpruned cross-check stops at 61); from 64 on from the certificate for T(64) ≥ 18 and superadditivity | `open-limit/proofs.txt` Theorem 2 |
 | This family of attacks (one tracked vertex per tree) cannot force more than (n − 1)/3 in its reduced game | proved by hand; read by the second instance | `open-limit/proofs.txt` Theorem 3 |
 | The least n with T(n) > B(n) | open; in 17 … 30 (16 … 30 without the single-program value at 16) | |
 | The exact value of L | open; 1/3 ≤ L ≤ 1 | |
@@ -163,7 +165,11 @@ logarithm).
   the comment in `SpecCheck.lean`, and one of them (the final inequality with
   n + 6) is better described as "not derivable by that proof" than as false.
 - **Where the theorem starts to say something.** It is trivially satisfied
-  for small n. It first forces T(n) ≥ 1 at n = 33, and no check evaluates T
+  for small n. It first forces T(n) ≥ 1 at n = 26 (it does so for n = 26 to
+  30, says nothing at 31 and 32 where the floor of the logarithm steps up,
+  and forces T(n) ≥ 1 for every n from 33 on; an earlier version of this page
+  said "first at n = 33", following two reviewers, which was wrong). No check
+  evaluates T
   anywhere near that size, so its content rests on the proof and not on a
   test. At n = 1000 it gives T ≥ 314, against the known upper bound of 990.
 - **How it follows the hand proof.** The same route: the counting argument in
@@ -218,7 +224,7 @@ Their findings were about the documentation around it:
   not use it.
 - **T(16)** has one program behind its upper bound; the referee could not
   fit the search in memory.
-- **The values for 36 ≤ n ≤ 63** come only from a reduced game solved by two
+- **The values for 36 ≤ n ≤ 61** come only from a reduced game solved by two
   programs, not from certificates.
 - **Nothing is known from above beyond the greedy bound.** The follow-up
   tried to turn its own potential into an Algorithm and found a 9-vertex
@@ -235,11 +241,18 @@ Their findings were about the documentation around it:
   keyword-scanned six more, found no lower bound on total flips for forests
   at out-degree 2 and none of the values here; one of the 2026 papers says
   that for update time no non-trivial lower bound is known even for dynamic
-  forests. Two cautions from that search: a constant
-  number of flips per insertion is what this literature would call a trivial
-  bound, so the interest is in the constant; and the paper most likely to
-  contain an earlier result (Gupta, Kumar, Stein, SODA 2014) was paywalled
-  and not read.
+  forests. A caution from that search: a constant number of flips per
+  insertion is what this literature would call a trivial bound, so the
+  interest is in the constant.
+- **The paper that search could not open has since been read** (Gupta,
+  Kumar, Stein, SODA 2014; the owner obtained a copy). Its Section 2 is this
+  problem. Theorem 2.1 there gives at most 2n flips by flipping the shorter
+  shortest path, so the upper bound here only improves their constant from 2
+  to 1 and should be credited to them. It states no lower bound on flips at
+  out-degree 2; its only one is the known n log n at out-degree 1, cited
+  from Grove et al. (1995). The lower bound of n/3 is still not found
+  anywhere. Details and the remaining unread sources are in Section 7 of
+  [NOTE.md](NOTE.md).
 - **Large certificates are left out** of this folder: the 10 MB certificate
   for T(64) ≥ 18 and several position tables for n = 11, 12, 13. The programs
   that generate them are included.
@@ -278,6 +291,20 @@ Loose statements in `solver-b/proofs.txt` and `open-limit/proofs.txt` are
 listed in a note at the top of each. The corrected wording has not been
 through a second round.
 
+[NOTE.md](NOTE.md) went to the same five reviewers as a referee's reading of
+the proofs as written there. All five confirmed Lemma 1 and the shadow play,
+the reply lemma, the types and potential, the proof of the n/3 bound with
+its constants, and every statement about the Lean development. Their
+findings were in what I wrote around the proofs: the last open question
+claimed that settling L "would need" arguments that see more than one vertex
+per tree, which nothing here proves (four of five); the related-work
+section misdescribed which sources had been read and cited one not in the
+recorded search; small steps were missing (why the flipped path is legal,
+that the second vertex keeps its type, a re-indexing in the final sum). All
+are applied. The related-work section was then rewritten again after the
+Gupta, Kumar and Stein paper was read, and that rewrite has not been
+reviewed.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -293,5 +320,6 @@ through a second round.
 - `open-limit-referee/`: the second reader's programs and logs.
 - `lean/`: the Lean 4 formalisation of the lower bound; `brief-lean.txt` is what its author was told.
 - `prior-art.md`, `prior-art-deep.md`: the two literature searches.
+- `NOTE.md`: the short note, with full proofs and related work.
 
 Binaries are left out.
