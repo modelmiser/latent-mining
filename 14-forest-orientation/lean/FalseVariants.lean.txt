@@ -1,0 +1,18 @@
+import FO.Full
+open FO
+#guard value 1 ([(0, 1), (0, 2), (3, 4), (3, 5)] : Pos 6) == 2
+example : cost ([(0, 1)] : Pos 3) [(1, 2), (1, 0)] = 0 := by decide
+-- the Type Lemma with "the index always goes up" (false: an R_k pair may stay R_k at cost k+1)
+example {n : Nat} {D : Pos n} {t hd : Fin n} {ws : List (Fin n)} (hF : Forest D)
+    (hc : ¬ Conn D t hd) (hp : NPath D t ws) {i : Nat} (ht : HasIdx D i t)
+    (hh : HasIdx D i hd) : HasIdx (nreply D t hd ws) (i + 1) t := by
+  rcases lemmaB hF hc hp ht hh.1 with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · exact TypeGe.mono h2 (by omega) (by omega)
+  · exact TypeGe.mono h2 (by omega) (by omega)
+-- the final theorem with constant 4 in place of 3 from the same forcing statement
+example (n : Nat) (hn : 1 ≤ n) (key : ∀ g, 3 * g + 7 * Nat.log2 (n + 1) ≤ n + 5 → g ≤ T n) :
+    n + 6 ≤ 3 * T n + 7 * Nat.log2 (n + 1) := by
+  by_cases h : 7 * Nat.log2 (n + 1) ≤ n + 5
+  · have := key ((n + 5 - 7 * Nat.log2 (n + 1)) / 3) (by omega)
+    omega
+  · omega

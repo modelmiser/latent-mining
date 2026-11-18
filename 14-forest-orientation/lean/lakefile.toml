@@ -1,0 +1,7 @@
+name = "forestorient"
+defaultTargets = ["FO"]
+
+[[lean_lib]]
+name = "FO"
+# two worker threads: the build runs under `ulimit -v 16000000` on two cores
+moreLeanArgs = ["-j", "2"]

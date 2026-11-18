@@ -1,0 +1,49 @@
+✔ [2/22] Built FO.Spec (298ms)
+✔ [4/22] Built FO.Graph (494ms)
+✔ [6/22] Built FO.Core (792ms)
+✔ [8/22] Built FO.SpecCheck (539ms)
+⚠ [10/22] Built FO.Normal (923ms)
+warning: FO/Normal.lean:35:31: This simp argument is unused:
+  List.filter_cons
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [h]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: FO/Normal.lean:78:44: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: FO/Normal.lean:88:48: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [12/22] Built FO.Reply (762ms)
+warning: FO/Reply.lean:138:9: Variable name `c` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _c
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: FO/Reply.lean:138:11: Variable name `o` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _o
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: FO/Reply.lean:139:9: Variable name `c` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _c
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [14/22] Built FO.Strategy (267ms)
+✔ [16/22] Built FO.Full (681ms)
+✔ [18/22] Built FO.Main (197ms)
+✔ [20/22] Built FO (128ms)
+Build completed successfully (22 jobs).
+build exit 0

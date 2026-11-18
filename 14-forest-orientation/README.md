@@ -11,7 +11,8 @@ vertices. It stops
 being optimal by n = 30, and a better attack forces
 n/3 − (7/3)·log₂(n+1) + 5/6 for every n. The best known algorithm pays at
 most n − log₂(n+1). The exact rate, somewhere from 1/3 to 1 flip per vertex,
-is open. The chain guessed the simple attack would fail somewhere between
+is open. The lower bound is machine-checked in Lean 4 (see "Machine check").
+The chain guessed the simple attack would fail somewhere between
 n = 16 and 24; it holds at least to 15, and the first failure is somewhere
 from 17 to 30 (from 16, if the single-program value at n = 16 is set aside).
 
@@ -43,7 +44,7 @@ L denotes the limit of T(n)/n, which exists.
 | T(n) = B(n) for n ≤ 15 | computed exhaustively by both solvers and the referee, three programs | `reports/` |
 | T(16) = 3 = B(16) | the upper half rests on one solver's program | `solver-a/run_n16.txt` |
 | T(30) ≥ 7 > 6 = B(30) | two routes with different lemmas and certificates (both use a simulation argument of the same kind), each certificate checked by the referee's own checker | `solver-a/cert_W2_*.txt`, `solver-b/cert_n30_k7.txt` |
-| **T(n) ≥ n/3 − (7/3)·log₂(n+1) + 5/6 for every n, so L ≥ 1/3** | proved by hand by one follow-up instance; read line by line by a second, which found one missing step and supplied it (see below); I followed the lemmas and the main argument | `open-limit/proofs.txt` Lemmas A, B, Type Lemma, Theorem 1; `reports/open-limit-referee.md` |
+| **T(n) ≥ n/3 − (7/3)·log₂(n+1) + 5/6 for every n, so L ≥ 1/3** | **machine-checked in Lean 4** in the slightly stronger integer form n + 3 ≤ 3·T(n) + 7·⌊log₂(n+1)⌋, for the full game with every legal reply; before that, proved by hand by one follow-up instance and read line by line by a second | `lean/`; `open-limit/proofs.txt` Lemmas A, B, Type Lemma, Theorem 1; `reports/open-limit-referee.md` |
 | T(n) > B(n) for every n ≥ 30 | for 30 ≤ n ≤ 35 from the certificates for T(30) ≥ 7 and T(32) ≥ 8; for 36 ≤ n ≤ 63 only from a reduced game computed by the follow-up's program and the second reader's (the follow-up's own unpruned cross-check stops at 61); from 64 on from the certificate for T(64) ≥ 18 and superadditivity | `open-limit/proofs.txt` Theorem 2 |
 | This family of attacks (one tracked vertex per tree) cannot force more than (n − 1)/3 in its reduced game | proved by hand; read by the second instance | `open-limit/proofs.txt` Theorem 3 |
 | The least n with T(n) > B(n) | open; in 17 … 30 (16 … 30 without the single-program value at 16) | |
@@ -119,10 +120,96 @@ reading types off the real position instead does fail.
 The reviewers split on whether this is a gap in the n/3 proof or only a
 statement that needed tightening. Either way the bound stands.
 
+## Machine check
+
+`lean/` is a Lean 4 project (toolchain 4.36.0, core library only, no Mathlib,
+about 1,900 lines) that defines the game and proves
+
+    theorem T_lower_bound (n : Nat) (hn : 1 ≤ n) :
+        n + 3 ≤ 3 * T n + 7 * Nat.log2 (n + 1)
+
+Dividing by 3, T(n) ≥ n/3 + 1 − (7/3)·⌊log₂(n+1)⌋, which implies the bound in
+the table (it has 1 where the hand proof has 5/6, and the floor of the
+logarithm).
+
+- **What to read.** `lean/FO/Spec.lean` is 89 lines and contains every
+  definition the theorem depends on and nothing else: a position is a list of
+  directed edges on `Fin n`; `valid` means out-degree at most 2; `moves` are
+  all pairs of vertices not yet connected; `replies` are all valid choices of
+  direction for every edge including the new one; `cost` counts old edges
+  whose direction changed; `value` is the max over moves of the min over
+  replies of cost plus the value of the rest; `T n` is the value of n − 1
+  rounds from the empty position. `lean/SPEC.md` maps each definition to the
+  sentence of the problem it encodes and lists ten places where the encoding
+  makes a choice. Trusting the theorem means trusting those 89 lines, the
+  core-library functions they use (`Nat.log2`, `List.finRange`, `countP`,
+  `flatMap`) and the Lean kernel, not the 1,900.
+- **What was checked.** The project was written by one instance in one
+  session. I copied the sources to a clean folder and rebuilt from nothing:
+  the build succeeds (`lean/BUILD.log`), a search for `sorry`, `admit`,
+  `axiom`, `native_decide` and similar finds none, no later file redefines a
+  name from the specification, and `#print axioms` for the final theorem and
+  fourteen supporting ones lists only `propext`, `Classical.choice` and
+  `Quot.sound` (`lean/AXIOMS.txt`). I read `Spec.lean` line by line against
+  the game.
+- **Sanity checks**, in `lean/FO/SpecCheck.lean`: T(3) = T(4) = 0 evaluated
+  from the definitions (T(0), T(1), T(2) are zero almost by definition and
+  test little); move lists and reply counts for small positions; a position
+  with two saturated vertices whose one-round value is exactly 1. The
+  connectivity function is proved equal to the closure of adjacency
+  (`conn_iff`, a lemma, not a test). The author also tried false variants
+  that Lean refused; their inputs are in `lean/FalseVariants.lean.txt`, but
+  the error output was not saved, the list there does not match the one in
+  the comment in `SpecCheck.lean`, and one of them (the final inequality with
+  n + 6) is better described as "not derivable by that proof" than as false.
+- **Where the theorem starts to say something.** It is trivially satisfied
+  for small n. It first forces T(n) ≥ 1 at n = 33, and no check evaluates T
+  anywhere near that size, so its content rests on the proof and not on a
+  test. At n = 1000 it gives T ≥ 314, against the known upper bound of 990.
+- **How it follows the hand proof.** The same route: the counting argument in
+  the abstract (`Core.lean`), the lemmas on real forests for normal-form
+  replies (`Normal.lean`, `Reply.lean`), the attack (`Strategy.lean`), and
+  the transfer to arbitrary replies by the shadow construction (`Full.lean`).
+  It found no error in the hand proof. Differences are listed in
+  `lean/SPEC.md` under "DEVIATIONS".
+- **Limits.** `value` is defined by backward induction over positions; that
+  this equals the value of the game played with history-dependent strategies
+  is standard for a finite game of perfect information and is not formalised.
+  An empty maximum or minimum is taken as 0, which can only lower T. "The
+  graph is a forest" is not part of a position; it holds because play starts
+  empty and only joins different components. Only this one theorem is
+  formalised: not the upper bound, not the small table, not T(30) ≥ 7.
+
+## Review of the specification
+
+The Lean specification went to the five-seat panel as a reading audit: do the
+definitions say what the game says, and is there any way the theorem could be
+true for a reason other than the intended one. All five confirmed all seven
+questions on that: connectivity, the Adversary's moves, the Algorithm's
+replies, the cost, the value and its conventions, the arithmetic of the final
+inequality, and the absence of loopholes (no other file redefines or
+overrides a specification name; `n − 1` truncation and `Fin 0` do no harm).
+Their findings were about the documentation around it:
+
+- The record of false variants is incomplete and inconsistent (described in
+  the bullet above).
+- `lean/SPEC.md` lists ten encoding choices and misses some harmless ones: a
+  position also records the order in which edges were added; `flips` on
+  lists of unequal length silently ignores the excess (never the case for a
+  generated reply); `value` is defined on arbitrary arc lists, not only
+  forests. These are appended to that file.
+- "An empty maximum or minimum can only lower T" is not quite right for the
+  maximum: 0 is simply the natural value there. An empty minimum scores that
+  one move as 0. Neither arises in play.
+- The log-free form `T_lower_bound_pow` is a weaker corollary, not an
+  equivalent restatement.
+
 ## What to distrust
 
-- **Everything is by one model family.** The n/3 bound was written by one
-  instance and read by one other. Nothing is machine-checked as a proof.
+- **Everything is by one model family.** The n/3 bound is machine-checked,
+  so it no longer rests on readers, but the 89-line specification it is
+  stated in was written by one instance and audited by me. Nothing else here
+  is machine-checked.
 - **Much of this rests on the normal form** (row one), proved by hand and
   checked by program for n ≤ 11 only: the n/3 bound, the reduced game, solver
   B's certificates for T(30), T(32) and T(64), and the table entries at
@@ -204,6 +291,7 @@ through a second round.
 - `verifier/`: the referee's solvers and certificate checker.
 - `open-limit/`: the n/3 bound, the reduced game and their tests.
 - `open-limit-referee/`: the second reader's programs and logs.
+- `lean/`: the Lean 4 formalisation of the lower bound; `brief-lean.txt` is what its author was told.
 - `prior-art.md`, `prior-art-deep.md`: the two literature searches.
 
 Binaries are left out.
