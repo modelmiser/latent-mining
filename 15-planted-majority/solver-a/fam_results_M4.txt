@@ -1,0 +1,2 @@
+wins up to N=15 ; FAILS at (a=7,b=9,x=0): bad terminal [0,0,0,0,0,0,0,0,0,0,0,0,0,16,1] ; maxR=1259677
+real	4m28.997s

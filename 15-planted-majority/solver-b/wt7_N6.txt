@@ -1,0 +1,1 @@
+s=7 N=6 Kmax=2 tried=170 hits=0 timeouts=66

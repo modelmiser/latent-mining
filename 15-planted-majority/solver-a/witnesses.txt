@@ -1,0 +1,33 @@
+WITNESSES (solver-a).  Protocol line format (read by check.cpp and slow.py):
+  s=<states> qA=<i> qB=<j> w=<one letter A/B per state> d: p,q->p2,q2 ...      (pairs not listed: identity)
+States are numbered from 0.  "check N < file" prints, per protocol, the largest n <= N such that every planted
+instance with 2 <= a+b <= n is won, and the first failing instance.  slow.py is the direct definition.
+
+G(2) = 1.   No 2-state protocol wins N = 2.  Exhaustive, no reduction: `search_ord 2 2` (668 search nodes, NONE);
+            also `search2 2 2`.
+G(3) = 3.   Wins N = 3 (file brief3.txt, the protocol of the problem statement):
+              s=3 qA=0 qB=1 w=ABA d: 0,1->2,2 1,0->2,2 0,2->0,0 2,0->0,0 1,2->1,1 2,1->1,1
+            It fails N = 4, e.g. on (1,3,x=qA): terminal configuration 5 x state 2 (output A, majority B),
+            and on (1,3,x=state 2): the initial configuration lies on a cycle.
+            No 3-state protocol wins N = 4: `search 3 4`, `search2 3 4` (exhaustive over unordered swap-free rules,
+            all 8 output maps; Lemma R of proofs.txt shows this loses nothing).
+G(4) = 3.   Wins N = 3 (file found.txt):
+              s=4 qA=0 qB=1 w=ABAA d: 0,1->1,2 0,3->0,0 1,0->1,2 1,2->3,3 1,3->1,1 2,1->3,3 2,3->0,0 3,0->0,0 3,1->1,1 3,2->0,0
+            (also the statement's 3-state protocol plus a duplicate state, Lemma M; also budget1.txt).
+            No 4-state protocol wins N = 4: `search2 4 4` -> s4N4.out / s4N4.err (638,017,216 search nodes, NONE,
+            six output maps up to the symmetries: mirror A<->B and renaming states 2,3).
+            Replication with the other checker (pp.h): s4N4_pp_masks.out, s4N4_pp_masks345.out (output maps 2,6,1 and
+            3,4,5; NONE each, same node counts as in s4N4.err: 99585471, 88820141, 108216641, 100530921, 133003801, 107860241).
+Lower bounds from explicit protocols (written by family.py, verified instance by instance by check.cpp;
+outputs in fam_results.txt, fam_results_small.txt, fam_results_oneweak.txt):
+   S={1,2,3}      two weightless states, s=8   wins exactly up to N=5   => G(8)  >= 5     (fam_1_2_3.txt)
+   S={1,2,3,4}    two weightless states, s=10  wins exactly up to N=7   => G(10) >= 7     (fam_1_2_3_4.txt)
+   S={1,2,4,5,10} one weightless state,  s=11  wins exactly up to N=9   => G(11) >= 9     (fam1w_1_2_4_5_10.txt)
+   S={1,2,4,5,10} two weightless states, s=12  wins exactly up to N=9
+General: G(2|S|+1) >= max(S) - 1 for every closed S (Theorems 1, 1').  Largest max K(m) of a closed set with m
+elements (closed.py, exhaustive, output closed_out.txt): m=1..13 : 1 2 4 6 10 14 18 24 32 42 50 62 75.
+Cubic family: sets.py (e=3) builds the sets of Corollary 1b and re-checks closedness for M=2..7.
+A set that is not closed is refused: `family.py 1 2 4 8` -> "S not closed: ('net', 8, 1)".
+HEADLINE witness: Corollaries 1a/1b (explicit protocols for every M) + Theorem 2.
+5 states: 770 random-restart searches (1.5 million nodes each) for a protocol winning N=4 found none
+(s5N4_rand.out).  This is NOT an exhaustion; G(5) >= 3 is all that is established.

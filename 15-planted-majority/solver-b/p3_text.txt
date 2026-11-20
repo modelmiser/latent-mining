@@ -1,0 +1,10 @@
+# the 3-state protocol from the problem text: 0=A 1=B 2=C
+3
+0 1
+ABA
+0 1 2 2
+1 0 2 2
+0 2 0 0
+2 0 0 0
+1 2 1 1
+2 1 1 1

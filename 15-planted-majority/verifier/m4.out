@@ -1,0 +1,3 @@
+FAIL n=16 (a=7,b=9,x=0): bad terminal {13x16 14x1 }
+RESULT wins all 2<=a+b<=15 (tested from 2 to 16) maxR=1259677
+exit 0

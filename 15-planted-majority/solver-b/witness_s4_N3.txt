@@ -1,0 +1,9 @@
+# 4-state protocol found by search3 (reduced model), wins all instances with a+b<=3.  0=qA 1=qB
+4
+0 1
+ABAA
+0 1 1 2
+0 3 0 0
+1 2 3 3
+1 3 1 1
+2 3 0 0

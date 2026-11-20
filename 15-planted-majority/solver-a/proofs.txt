@@ -1,0 +1,128 @@
+PROOFS (solver-a).  Each item is marked COMPLETE or SKETCH.
+
+Notation.  A protocol is (Q, qA, qB, w, d).  A configuration is a multiset over Q.  "Move on (p,q)" = a legal move
+whose two agents are in states p, q in that order.  For an instance I, R(I) is its reachable graph.
+SUB-POPULATION PRINCIPLE (used everywhere): if C0 is a sub-multiset of the initial configuration C0+E of an instance,
+every sequence of legal moves from C0 is also a sequence of legal moves from C0+E (never touching the agents E), so
+C in R-from-C0 implies C+E in R(I), and a directed cycle through C gives a directed cycle through C+E.  The scheduler
+is allowed to do this because it only has to pick *some* legal move.
+
+------------------------------------------------------------------------------------------------------------------
+LEMMA R (unordered, swap-free rules suffice).  COMPLETE.
+If P wins a set of instances, so does the protocol P' with the same Q, qA, qB, w and rule d' defined as follows.
+For p != q: if d(p,q) is neither (p,q) nor (q,p), put o = d(p,q); else if d(q,p) is neither (q,p) nor (p,q), put
+o = reverse of d(q,p); else o = (p,q).  Set d'(p,q) = o and d'(q,p) = reverse(o).  For p = q: d'(p,p) = d(p,p).
+So in P' both orders of a pair give the same multiset, and no move leaves the multiset unchanged.
+Proof.  Every P'-move from C leads to a multiset that some P-move from C also leads to, so R'(I) is a subgraph of
+R(I) and every cycle of R'(I) is a cycle of R(I), hence consists of good configurations.  Let C in R'(I) have no legal
+P'-move.  Then for every pair of states p != q present in C both d(p,q) and d(q,p) are the identity or the swap, and
+d(p,p) = (p,p) for every p present twice.  So in P the only legal moves from C are swaps, which are self-loops.  If
+there is none, C is terminal in R(I), hence good; if there is one, C lies on a cycle of R(I), hence good.  QED.
+Consequence: G(s) is attained by protocols given by one outcome multiset per unordered pair of states
+(the search space of search2.cpp).
+
+LEMMA M (G is non-decreasing).  COMPLETE.
+Let P be an s-state protocol.  Add a new state q*, let f: Q+{q*} -> Q be the identity on Q with f(q*) = qA, and put
+w(q*) = w(qA).  For a pair (p,q) containing q* let (p',q') = d(f(p), f(q)) and define d+(p,q) = (p'', q'') where
+p'' = p if p' = f(p) and p'' = p' otherwise, and likewise q''.  On Q x Q, d+ = d.  Then f(d+(p,q)) = d(f(p),f(q))
+and d+(p,q) = (p,q) iff d(f(p),f(q)) = (f(p),f(q)).  So f, applied agent by agent, maps legal moves to legal moves
+and illegal pairs to illegal pairs, preserves outputs, maps terminal configurations to terminal ones and closed
+walks to closed walks.  Hence the instance (a,b,x) of the new protocol is won iff (a,b,f(x)) is won by P, and the
+new protocol wins up to N whenever P does: G(s+1) >= G(s).  QED.
+
+------------------------------------------------------------------------------------------------------------------
+THEOREM 1 (weight protocols; lower bound).  COMPLETE.
+Call a finite set S of positive integers CLOSED if
+  (split) every u in S with u >= 2 is u = p + q with p, q in S;
+  (net)   for all u > v in S:  u - v in S,  or  u - v = p + q with p, q in S,  or  there is 0 < c < v with
+          u - c in S and v - c in S.
+Let K = max S.  Then G(2|S| + 2) >= K - 1.
+Protocol P_S: states +u, -u (u in S), wa, wb.  qA = +K, qB = -K.  Outputs: +u, wa -> A;  -u, wb -> B.
+Rules, in both orders:  (+u,-u) -> (wa,wb);  for u > v, (+u,-v) -> (+(u-v), wa), or (+p,+q), or (+(u-c),-(v-c)),
+whichever case of (net) applies;  (-u,+v) for u > v: the mirror image (signs and wa/wb exchanged);
+(+u, wb) with u >= 2 -> (+p,+q) from (split);  (-u, wa) with u >= 2 -> (-p,-q);  all other pairs: identity.
+Proof.  Give +u weight u, -u weight -u, wa and wb weight 0.
+(a) Every rule preserves the sum W of the weights.
+(b) Every legal move strictly decreases the pair (sum of |weights|, number of weightless agents) lexicographically:
+    a (+,-) move lowers the sum of absolute values (by 2v, 2v or 2c); a split keeps it and removes one weightless
+    agent.  So R has no cycle at all and every play is finite.
+(c) Let (a,b,x) have majority A and a + b <= K - 1.  W = K(a-b) + weight(x) >= 2K - K = K > 0.  Let C be terminal.
+    A +token and a -token always have a legal move, so C has tokens of one sign only; W > 0 makes them positive and
+    at least one exists.  If C contains wb, every +token has weight 1 (otherwise the split is legal), so
+    K <= W = number of tokens <= (a+b+1) - 1 <= K - 1, a contradiction.  So C has only +tokens and wa: good.
+    Majority B is the mirror image.  QED.
+Machine check: check.cpp on the protocols written by family.py (files fam_*.txt): S={1,2,4} wins exactly up to N=5,
+{1,2,3,6} up to 7, {1,2,4,5,10} up to 9, {1,2,3,6,9} up to 9 (first failing instances in fam_results.txt, fam_results_small.txt).
+
+THEOREM 1' (one state fewer).  COMPLETE.   G(2|S| + 1) >= K - 1 for closed S.
+Identify wa and wb into one weightless state n with output A; keep all netting rules (every weightless product is n),
+keep the split rule only for -tokens: (-u, n) -> (-p,-q) for u >= 2; (+u, n) is the identity.  (a), (b) hold as
+before.  (c): majority A: a terminal configuration has only +tokens and n: good.  Majority B: only -tokens and n;
+if n is present all -tokens have weight 1, so K <= |W| = number of tokens <= a+b <= K-1, contradiction.  QED.
+Machine check: fam1w_*.txt, fam_results_oneweak.txt (S={1,2,4,5,10}: 11 states, wins exactly up to N=9);
+fam1w_M4.txt, fam_results_M4.txt (Corollary 1a with M=4: 15 states, K=16, wins exactly up to N=15).
+
+COROLLARY 1a (quadratic).  COMPLETE.  S = {1..M} U {cM : 1<=c<=M} is closed (|S| = 2M-1, K = M^2):
+  split: j = (j-1)+1;  cM = (c-1)M + M.   net: small-small and multiple-multiple differences are in S;
+  cM - j = (c-1)M + (M-j) (both in S, or the first is 0 and M-j is in S).
+  Hence G(4M-1) >= M^2 - 1 (Theorem 1'), and by Lemma M G(s) >= floor((s+1)/4)^2 - 1 for all s.  So G(s)/s is unbounded.
+
+COROLLARY 1b (cubic).  COMPLETE (hand proof below; closedness also machine-checked for M = 2..7 by sets.py, e=3).
+S = {1..M} U {cM : c<=M} U {M^2 - j : 0<=j<=M} U {cM^2 : c<=M},  |S| = 4M-3,  K = M^3.
+  split: M^2 - j = (M-1)M + (M-j) for j < M;  (M-1)M = (M-2)M + M;  cM^2 = (c-1)M^2 + M^2;  M^2 = (M-1)M + M.
+  net (larger minus smaller, writing e_j = M^2 - j, 1<=j<M):
+   cM^2 - c'M^2 in S;  cM^2 - c'M = (c-1)M^2 + (M-c')M;  cM^2 - e_j = (c-1)M^2 + j;  cM^2 - j = (c-1)M^2 + e_j;
+   e_j - c'M (c' <= M-1) = (M-1-c')M + (M-j);  e_j - j' = e_{j+j'} if j+j' <= M, else (M-1)M + (2M-j-j');
+   e_j - e_j' = j'-j in S;  M^2 - e_j = j;  cM - c'M, cM - j as in 1a;  small - small in S.
+  (a zero summand just means the difference is itself in S.)
+  Hence G(8M-5) >= M^3 - 1 (Theorem 1').
+The same recursion one level further (sets.py, e=4) is closed for M = 2, 3 but NOT for M >= 4, so I have no
+super-cubic family.  NOT PROVED: any lower bound better than cubic.
+
+------------------------------------------------------------------------------------------------------------------
+THEOREM 2 (G(s) is finite for every s).  COMPLETE.
+There are finitely many s-state protocols up to renaming and winning up to N implies winning up to N' < N, so
+G(s) = infinity would give ONE protocol P that wins every planted instance.  Assume P is such a protocol.
+
+Step 1 (no cycles).  No R(I) contains a directed cycle (self-loops included).
+  Let I = (a,b,x) with a > b and let C in R(I) lie on a cycle.  I' = (a, a+2, x) is an instance with majority B whose
+  initial configuration is that of I plus E = (a+2-b) agents in qB.  By the sub-population principle C+E lies on a
+  cycle of R(I').  So C is good for I (all its agents output A) and C+E is good for I' (all output B); C is
+  non-empty: contradiction.  Same for a < b.
+Step 2.  Every multiset aA + bB (a agents in qA, b in qB) is a sub-multiset of some instance, so by Step 1 and the
+  sub-population principle the graph reachable from aA + bB has no cycle; all plays from it are finite.
+Step 3 (linear ranking).  Let Q0 be the set of states that occur in some configuration reachable from some aA + bB.
+  Let T be the set of ordered pairs (p,q), p,q in Q0, with d(p,q) != (p,q); for t in T let D_t in Z^Q be the change
+  of the multiset.  d(p,q) is again in Q0 x Q0, because configurations reachable from pure populations can be added
+  (run two disjoint populations side by side), so some reachable configuration contains an agent in p and another
+  agent in q.
+  Claim: there is no y in N^T, y != 0, with sum_t y_t D_t = 0.  Otherwise take, for each t = (p,q) and each of its
+  y_t copies, a private pure population run to a configuration containing agents in p and q; the disjoint union C of
+  all of them is reachable from some aA + bB; firing each copy of each t on its private pair is a sequence of legal
+  moves from C back to C: a cycle, contradicting Step 2.
+  By Gordan's theorem (the D_t are integer vectors, so a real solution y >= 0, y != 0 would give a rational and then
+  an integer one) there is r in R^Q with r.D_t < 0 for all t in T.  Put delta = min_t (-r.D_t) > 0 and
+  c = (max_{Q0} r - min_{Q0} r)/delta.  Then Phi(C) = sum over agents of r(state) drops by >= delta at every move,
+  so every play from a pure population of n agents has at most c*n moves.  c depends only on P.
+Step 4 (the scheduler forces k*m moves).  Fix k, m >= 1.  Population: k agents in qA, k in qB, and 2m+1 further
+  agents h_1..h_{2m+1} in states B, A, A, B, B, A, A, B, B, ... (h_1 = qB, then alternately two qA, two qB).
+  The scheduler keeps a set of "active" agents, initially the first 2k.  Stage j = 0..2m+1: play moves among active
+  agents until no two active agents have a legal move (finite by Step 2), then activate h_{j+1}.
+  After h_1..h_j are active and the active set is stuck, the active agents started as alpha_j qA's and beta_j qB's
+  with alpha_j - beta_j = 0, -1, 0, +1, 0, -1, 0, +1, ... (j = 0,1,2,3,...).  For odd j the active agents are
+  exactly the initial configuration of the instance (alpha_j, beta_j - 1, plant qB) (if alpha_j = beta_j + 1; note
+  beta_j >= k >= 1) or (alpha_j - 1, beta_j, plant qA) (if beta_j = alpha_j + 1); the stuck active configuration is a
+  terminal configuration of that instance, hence good: all active agents output B for j = 1, 5, 9, ..., and all
+  output A for j = 3, 7, 11, ...
+  So between the stuck configurations of stage j and stage j+2 (j odd, j+2 <= 2m+1) each of the >= 2k+1 agents
+  active at stage j changes its output, hence its state; a move changes at most two agents: at least k moves.
+  There are m such intervals: the play has at least k*m moves.
+Step 5.  The whole population is a pure population of n = 2k + 2m + 1 agents, so k*m <= c*(2k + 2m + 1) by Step 3.
+  With m = k this reads k^2 <= c(4k+1), false for k > 5c.  Contradiction.  QED.
+Remark: the proof is not quantitative (no explicit bound on G(s) in terms of s).  A finite-N version of Step 3
+would need the size of the smallest zero-sum combination, which can be exponential in s; I did not carry this out.
+
+------------------------------------------------------------------------------------------------------------------
+HEADLINE.  By Corollary 1a, G(s) >= floor((s+1)/4)^2 - 1, so there is NO constant C with G(s) <= C*s (COMPLETE).
+By Theorem 2 this is not because G is ever infinite: G(s) < infinity for all s (COMPLETE).
+The true growth rate (polynomial of which degree? faster?) is OPEN here: proved  s^3/512 - O(s^2) <= G(s) < infinity.

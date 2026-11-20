@@ -1,0 +1,6 @@
+# conservative protocol C(W), W=[1], K=1, max unsplittable U=1; proved to win all instances with (a+b)*U+1 <= K, i.e. a+b <= 0
+4
+0 1
+ABAB
+0 1 2 3
+1 0 3 2

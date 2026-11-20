@@ -1,0 +1,1 @@
+RESULT s=4 N=4 mode=0 sym=0 found=0 sols=0 nodes=121912 checks=76471461

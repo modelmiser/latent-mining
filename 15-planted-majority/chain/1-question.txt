@@ -1,0 +1,11 @@
+A *protocol* with s states consists of: a set Q with |Q| = s; two distinct states q_A, q_B in Q; an output map w: Q -> {A, B}; and a rule d: Q x Q -> Q x Q.
+
+A *configuration* is a multiset of states (one per agent; agents are anonymous). The *input* (a, b), with integers a, b >= 0 and a != b, is the configuration with a agents in q_A and b agents in q_B. Its *majority* is A if a > b, else B.
+
+Play is a one-player game for an adversary who knows the protocol and sees the whole configuration at all times. A *move*: the adversary picks two distinct agents and names one of them first; if their states are (p, q) in that order, the move is *legal* exactly when d(p, q) != (p, q), and the two agents then take the states d(p, q) (first agent gets the first component). The adversary must make a legal move whenever one exists; there is no other restriction. If no legal move exists, play stops. Otherwise play continues forever.
+
+A configuration is *good* if every agent's state has output equal to the input's majority. The protocol *wins* on input (a, b) if in every possible play from that input, finite or infinite, there is a point after which every configuration is good (for a finite play: the final configuration is good). Equivalently: every configuration reachable from the input that has no legal move, or that lies on a cycle of legal moves, is good.
+
+Define N(s) as the largest integer N such that some single s-state protocol wins on every input (a, b) with a != b and 1 <= a + b <= N; put N(s) = infinity if there is no largest such N.
+
+Determine N(s) for s = 2, 3, 4, 5, and determine the growth of N(s): is it finite for every s, and if so what is it as a function of s (exactly, or up to a constant factor)?

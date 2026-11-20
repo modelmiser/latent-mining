@@ -1,0 +1,5 @@
+S=1 2: wins up to N=3 ; FAILS at (a=1,b=3,x=0): bad terminal [0,0,0,2,1,2] ; maxR=8
+S=1 2 3: wins up to N=5 ; FAILS at (a=2,b=4,x=0): bad terminal [0,0,0,0,0,3,1,3] ; maxR=41
+S=1 2 4 5: wins up to N=5 ; FAILS at (a=2,b=4,x=0): bad terminal [0,0,0,0,0,0,0,5,1,1] ; maxR=296
+S=1 2 4 6: wins up to N=5 ; FAILS at (a=2,b=4,x=0): bad terminal [0,0,0,0,0,0,0,6,1,0] ; maxR=283
+S=1 2 3 4: wins up to N=7 ; FAILS at (a=3,b=5,x=0): bad terminal [0,0,0,0,0,0,0,4,1,4] ; maxR=160

@@ -1,0 +1,1 @@
+protocols 500 ; reduced never worse: True ; original wins>=2: 222 ; strictly improved by reduction: 159

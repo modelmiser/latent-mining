@@ -1,0 +1,6 @@
+S=1 2 3 states=8: wins up to N=5 ; FAILS at (a=2,b=4,x=0): bad terminal [0,0,0,0,0,3,1,3] ; maxR=41
+S=1 2 4 states=8: wins up to N=5 ; FAILS at (a=2,b=4,x=0): bad terminal [0,0,0,0,0,4,1,2] ; maxR=116
+S=1 2 3 4 states=10: wins up to N=7 ; FAILS at (a=3,b=5,x=0): bad terminal [0,0,0,0,0,0,0,4,1,4] ; maxR=160
+S=1 2 3 6 states=10: wins up to N=7 ; FAILS at (a=3,b=5,x=0): bad terminal [0,0,0,0,0,0,0,6,1,2] ; maxR=1238
+S=1 2 4 5 10 states=12: wins up to N=9 ; FAILS at (a=4,b=6,x=0): bad terminal [0,0,0,0,0,0,0,0,0,10,1,0] ; maxR=11978
+S=1 2 3 6 9 states=12: wins up to N=9 ; FAILS at (a=4,b=6,x=0): bad terminal [0,0,0,0,0,0,0,0,0,9,1,1] ; maxR=12444
