@@ -1,0 +1,46 @@
+excess0_nonpow2 n=3 G=2
+excess0_nonpow2 n=5 G=3
+excess0_nonpow2 n=6 G=3
+excess0_nonpow2 n=9 G=4
+excess0_nonpow2 n=10 G=4
+excess0_nonpow2 n=12 G=4
+excess0_nonpow2 n=17 G=5
+excess0_nonpow2 n=18 G=5
+excess0_nonpow2 n=20 G=5
+excess0_nonpow2 n=24 G=5
+excess0_nonpow2 n=33 G=6
+excess0_nonpow2 n=34 G=6
+excess0_nonpow2 n=36 G=6
+excess0_nonpow2 n=40 G=6
+excess0_nonpow2 n=48 G=6
+excess0_nonpow2 n=65 G=7
+excess0_nonpow2 n=66 G=7
+excess0_nonpow2 n=68 G=7
+excess0_nonpow2 n=72 G=7
+excess0_nonpow2 n=80 G=7
+excess0_nonpow2 n=96 G=7
+excess0_nonpow2 n=129 G=8
+excess0_nonpow2 n=130 G=8
+excess0_nonpow2 n=132 G=8
+excess0_nonpow2 n=136 G=8
+excess0_nonpow2 n=144 G=8
+excess0_nonpow2 n=160 G=8
+excess0_nonpow2 n=192 G=8
+excess0_nonpow2 n=257 G=9
+excess0_nonpow2 n=258 G=9
+excess0_nonpow2 n=260 G=9
+excess0_nonpow2 n=264 G=9
+excess0_nonpow2 n=272 G=9
+excess0_nonpow2 n=288 G=9
+excess0_nonpow2 n=320 G=9
+excess0_nonpow2 n=384 G=9
+excess0_nonpow2 n=513 G=10
+excess0_nonpow2 n=514 G=10
+excess0_nonpow2 n=516 G=10
+excess0_nonpow2 n=520 G=10
+excess 0 count 254
+excess 1 count 1855
+excess 2 count 22816
+excess 3 count 143524
+excess 4 count 138777
+excess 5 count 3630

@@ -1,0 +1,16 @@
+t 0 N 1 states 1
+t 1 N 2 states 1
+t 2 N 4 states 4
+t 3 N 7 states 11
+t 4 N 12 states 33
+t 5 N 20 states 90
+t 6 N 34 states 243
+t 7 N 57 states 645
+t 8 N 98 states 1686
+t 9 N 169 states 4364
+t 10 N 295 states 11265
+t 11 N 521 states 29025
+t 12 N 912 states 74670
+t 13 N 1614 states 191931
+t 14 N 2864 states 493138
+G1..64: 0 1 2 2 3 3 4 3 4 4 5 4 5 5 6 4 5 5 6 5 6 6 6 5 6 6 7 6 7 7 7 5 6 6 7 6 7 7 8 6 7 7 7 7 8 7 8 6 7 7 8 7 8 8 8 7 8 8 8 8 8 8 8 6

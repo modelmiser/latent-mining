@@ -1,0 +1,49 @@
+PROOFS (solver-b). log = log2 throughout.
+
+P0 [COMPLETE] Mod-m description = integer description.
+ The four moves commute with reduction mod m, so an integer path of t steps ending with register n gives a
+ Z_m path ending with n mod m; conversely a Z_m path, replayed with the same move letters on integers from (1,1),
+ ends in integers congruent to the Z_m values. Hence g_m(r) = least t with r in a register of the Z_m BFS.
+
+P1 [COMPLETE] ceil(log m) <= D(m) <= 2 floor(log m), and D(m) >= T(m) := min{t : N(t) >= m}.
+ Every register after t steps is <= 2^t (induction: max doubles at most). So N(t) <= 2^t.
+ For each residue r pick n_r = r (mod m) with G(n_r) = g_m(r) <= D(m): m distinct integers, so N(D(m)) >= m,
+ i.e. D(m) >= T(m) >= ceil(log m).
+ Upper: keep b = 1; a -> 2a and a -> a+1 build n from its binary digits in floor(log n) + popcount(n) - 1
+ <= 2 floor(log n) steps. Each residue has a representative n in 1..m, so D(m) <= max_{n<=m} G(n) <= 2 floor(log m).
+
+P2 [COMPLETE] MAIN THEOREM. N(t) <= 2^(0.956 t) for all large t (so lambda <= 2^0.956 < 1.9401), hence
+ D(m) >= (log m)/0.956 - O(1) and L >= 1/0.956 > 1.046 > 1.   HEADLINE ANSWER: YES.
+
+ Setup. Work with unordered states {x <= y}; M = y, r = x/y in (0,1]. Put c = 1/4, rho = 1/4,
+   f(r) = c*log(max(r, rho))   (so -1/2 <= f <= 0, f nondecreasing),   Phi = log M + f(r).   Phi(start) = 0.
+ From {x <= y} every move is (at least) one of four TYPES:
+   A: (x, 2y)    B: (2x, y)    C: (x, x+y)    D: (y, x+y)
+ (if x = y some types coincide; that only over-counts below).
+ Lemma. Type A changes Phi by at most 1; types B, C, D by at most 1 - c = 3/4.
+  A: M' = 2M, r' = r/2: dPhi = 1 + f(r/2) - f(r) <= 1.
+  B, r <= 1/2: M' = M, r' = 2r: dPhi = f(2r) - f(r) <= c <= 3/4   (max(2r,rho) <= 2 max(r,rho)).
+  B, r > 1/2: M' = 2rM, r' = 1/(2r) in [1/2,1): dPhi = 1 + log r - c(1 + log r) - c log r
+              = (1-c) + (1-2c) log r <= 1 - c    (log r <= 0, c < 1/2).
+  C: M' = (1+r)M, r' = r/(1+r) <= r. If r' >= rho: dPhi = (1-c) log(1+r) <= 1-c.
+     If r' < rho then r < 1/3 and dPhi <= log(1+r) < log(4/3) < 0.42.
+  D: M' = (1+r)M, r' = 1/(1+r) in [1/2,1): dPhi = h(r) := (1-c) log(1+r) - c log max(r,rho).
+     For r <= rho: h <= (3/4) log(5/4) + 1/2 < 0.7415. For r in [rho,1]: h'(r) has the sign of (1-2c) r - c = r/2 - 1/4,
+     negative then positive, so max h = max(h(1/4), h(1)) = max(0.7415, 3/4) = 3/4.     QED lemma.
+ Consequence. A state reached by a type-word of length j with k letters in {B,C,D} has
+     log M = Phi - f(r) <= j - k/4 + 1/2.                                           (*)
+ Counting. Fix t, eta = 0.044, X = 2^((1-eta) t). At most X integers n <= X. If n > X and G(n) = j <= t then n is a
+ register of the end state of some type-word of length j, and by (*) its k satisfies k < 4(j - log X) + 2 <= 4 eta t + 2.
+ Words of length j <= t with at most K := floor(4 eta t + 2) non-A letters number sum_{k<=K} C(j,k) 3^k
+ <= sum_{k<=K} C(t,k) 3^k <= (K+1) 2^(t H(K/t)) 3^K   (H binary entropy; K/t < 1/2). Each word gives <= 2 integers. So
+     N(t) <= 2^((1-eta) t) + 2 (t+1)(K+1) 2^(t H(K/t)) 3^K.
+ As t -> oo the exponent of the second term is t (H(0.176) + 0.176 log 3 + o(1)) = t (0.9502 + o(1)) < 0.956 t.
+ Hence N(t) <= 2 * 2^(0.956 t) for large t. With P1: m <= N(D(m)) <= 2^(0.956 D(m) + 1), D(m) >= (log m - 1)/0.956.  QED
+ (Numerical checks of the lemma, of (*) on all 5.6M words of length <= 11, and of the exponent: potential_check.py.
+  The constants are not optimised; the true lambda looks like ~1.8, see report.)
+
+P3 [COMPLETE, one direction] If popcount(n) <= 2 then G(n) = ceil(log n).
+ n = 2^j (2^i + 1): double b i times, C once, double a j times: i + j + 1 steps = ceil(log n) (i >= 1); n <= 2^G gives >=.
+ Converse (popcount >= 3 => G(n) > ceil(log n)): COMPUTED for n <= 2^15 only, not proved.
+
+NOT PROVED: any upper bound on L below 2; the value of L; existence of lim N(t)^(1/t).

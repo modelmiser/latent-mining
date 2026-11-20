@@ -1,0 +1,16 @@
+A two-address machine has exactly two registers, A and B, each holding a positive integer (the exponent of a power of x). Initially A = 1 and B = 1. The only instruction is "dst := dst * src", where dst and src are each one of A, B and may be the same register. In exponents, from state (a, b) one step leads to exactly one of four states:
+
+- (2a, b)   [A := A*A]
+- (a, 2b)   [B := B*B]
+- (a+b, b)  [A := A*B]
+- (a, a+b)  [B := B*A]
+
+So a result always overwrites one of its own operands; there is no way to copy a register, and no other instruction exists. Each step costs 1.
+
+For a positive integer n, let f(n) be the least number of steps after which at least one of the two registers holds n (f(1) = 0). f(n) is finite for every n: keep B = 1 and run the binary method in A, which gives f(n) <= floor(log2 n) + (number of ones in the binary expansion of n) - 1.
+
+For k >= 1 define the worst k-bit cost
+
+W(k) = max { f(n) : 2^(k-1) <= n < 2^k }.
+
+Question: determine W(k) for every k >= 1. Concretely: (i) give the exact values W(1), ..., W(12), and for each such k the smallest n attaining the maximum; (ii) give and prove a formula for W(k) valid for all k, or, if no exact formula is provable, determine the limit of W(k)/k as k goes to infinity (prove it exists and give its value). In particular decide whether that limit is 1 (as it is for unrestricted addition chains), 2 (the binary method is essentially optimal in the worst case), or strictly between.

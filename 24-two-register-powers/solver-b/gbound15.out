@@ -1,0 +1,37 @@
+cost 0 count_n<=2^15 1 cum 1
+cost 1 count_n<=2^15 1 cum 2
+cost 2 count_n<=2^15 2 cum 4
+cost 3 count_n<=2^15 3 cum 7
+cost 4 count_n<=2^15 5 cum 12
+cost 5 count_n<=2^15 8 cum 20
+cost 6 count_n<=2^15 14 cum 34
+cost 7 count_n<=2^15 23 cum 57
+cost 8 count_n<=2^15 41 cum 98
+cost 9 count_n<=2^15 71 cum 169
+cost 10 count_n<=2^15 126 cum 295
+cost 11 count_n<=2^15 226 cum 521
+cost 12 count_n<=2^15 391 cum 912
+cost 13 count_n<=2^15 702 cum 1614
+cost 14 count_n<=2^15 1250 cum 2864
+cost 15 count_n<=2^15 2229 cum 5093
+cost 16 count_n<=2^15 4006 cum 9099
+cost 17 count_n<=2^15 7058 cum 16157
+cost 18 count_n<=2^15 10714 cum 26871
+cost 19 count_n<=2^15 5841 cum 32712
+cost 20 count_n<=2^15 56 cum 32768
+G=ceil(log2 n): 1 2 3 4 5 6 8 9 10 12 16 17 18 20 24 32 33 34 36 40 48 64 65 66 68 72 80 96 128 129 130 132 136 144 160 192 256 257 258 260 264 272 288 320 384 512 513 514 516 520 528 544 576 640 768 1024 1025 1026 1028 1032 1040 1056 1088 1152 1280 1536 2048 2049 2050 2052 2056 2064 2080 2112 2176 2304 2560 3072 4096 4097 4098 4100 4104 4112 4128 4160 4224 4352 4608 5120 6144 8192 8193 8194 8196 8200 8208 8224 8256 8320 8448 8704 9216 10240 12288 16384 16385 16386 16388 16392 16400 16416 16448 16512 16640 16896 17408 18432 20480 24576 32768
+len 0 maxG 0 (first at 0) meanG 0.0000 mean/L 0.0000
+len 1 maxG 2 (first at 3) meanG 1.5000 mean/L 1.5000
+len 2 maxG 4 (first at 7) meanG 3.0000 mean/L 1.5000
+len 3 maxG 6 (first at 15) meanG 4.5000 mean/L 1.5000
+len 4 maxG 7 (first at 27) meanG 5.8750 mean/L 1.4688
+len 5 maxG 8 (first at 39) meanG 7.2188 mean/L 1.4438
+len 6 maxG 10 (first at 119) meanG 8.5156 mean/L 1.4193
+len 7 maxG 11 (first at 191) meanG 9.7891 mean/L 1.3984
+len 8 maxG 13 (first at 511) meanG 11.0195 mean/L 1.3774
+len 9 maxG 14 (first at 987) meanG 12.2539 mean/L 1.3615
+len 10 maxG 15 (first at 1647) meanG 13.4629 mean/L 1.3463
+len 11 maxG 16 (first at 2877) meanG 14.6743 mean/L 1.3340
+len 12 maxG 17 (first at 5199) meanG 15.8730 mean/L 1.3228
+len 13 maxG 19 (first at 15903) meanG 17.0642 mean/L 1.3126
+len 14 maxG 20 (first at 27195) meanG 18.2427 mean/L 1.3031

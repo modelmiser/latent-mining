@@ -1,0 +1,14 @@
+Prior-art search. I need to know whether some specific small results are already in the published literature, or are close corollaries of something that is. Use web search. Be skeptical in both directions: do not declare something novel because a quick search found nothing, and do not declare it known because a paper sounds similar. Never invent a citation: every paper you name must come from a search result you actually saw, with its URL.
+
+THE SETTING AND THE CLAIMS
+Read the problem statement in chain/3-question.txt and the two solver reports reports/solver-a.md and reports/solver-b.md. The claims to check are the headline answer, the general theorems the reports say are proved, and the small-instance values (integer sequences are worth searching for as sequences). Read no other files.
+
+WHAT TO DO
+ - Work out which research areas and which standard names the setting goes by, and run at least a dozen distinct searches across them. Follow up the most promising hits by reading the abstract or the page itself (use any fetch tool or agent available to you; if none is, say that you judged from search snippets only).
+ - For each integer sequence in the reports with at least four terms, say whether you could look it up (for example in the OEIS) and what you found.
+
+REPORT (under 650 words). Write it to prior-art.md and return the same text as your final message:
+ - CLOSEST PRIOR WORK: up to six items, each with title, authors, year, URL, one sentence on what it actually shows, and one sentence on how it differs from the setting here.
+ - VERDICT for each claim, one of: FOUND (already published, cite it), LIKELY FOLKLORE or EASY COROLLARY (of a named known result; say which and how), or NOT FOUND (with the list of search queries you ran).
+ - What a specialist in which field would be the right person to ask.
+ - State plainly what you could not check, and how many sources you read in full.

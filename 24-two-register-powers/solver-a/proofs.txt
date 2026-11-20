@@ -1,0 +1,46 @@
+PROOFS (solver-a).  Notation: moves A: a=2a, B: b=2b, C: a=a+b, D: b=a+b.  F_1=F_2=1 Fibonacci, phi=(1+sqrt5)/2.
+
+P1 [COMPLETE]  N(t) <= 2^t, and ceil(log2 m) <= D(m).
+ Each step at most doubles max(a,b), so every value held after <=t steps is in [1,2^t].
+ For each residue r pick n_r ≡ r with G(n_r)=g_m(r) <= D(m); the n_r are distinct, so m <= N(D(m)) <= 2^D(m).
+ (This also proves the general inequality D(m) >= min{t : N(t) >= m}.)
+
+P2 [COMPLETE]  D(m) <= 2 floor(log2 m).
+ Let k=floor(log2 m). Represent r by n=r (1<=r<m) or n=m (r=0); n < 2^(k+1). Keep a=1; b starts at 1 = leading bit of n;
+ for each lower bit do B, then D if the bit is 1. Cost = floor(log2 n) + popcount(n) - 1 <= 2 floor(log2 n) <= 2k.
+
+P3 [COMPLETE]  Mod-m formulation equals the integer formulation: a move sequence gives, mod m, the reduction of the
+ integer state it gives over Z; so "some register ≡ r after t steps" is the same event in both. Positive n is automatic.
+
+P4 [COMPLETE]  Size bound. If a move word has k doublings and j additions, every register value is <= 2^k F_{j+2}.
+ (i) Additions only: after j additions {min,max} <= {F_{j+1},F_{j+2}} entrywise. Induction: from x<=y the new pair is
+     {y,x+y} or {x,x+y}; min <= F_{j+2}, max <= F_{j+1}+F_{j+2}=F_{j+3}.
+ (ii) General word: let (a',b') be the state of the subword of additions. Then (a,b) <= 2^k (a',b') entrywise:
+     a doubling raises k by one and at most doubles; an addition preserves the inequality by linearity.
+
+P5 [COMPLETE]  Word-class bound. A and B commute (as maps on states). Hence the final state depends only on: the
+ sequence of j additions (2^j choices) and, for each of the j+1 gaps between/around them, the numbers (#A,#B) in the gap.
+ The number of such classes with k doublings in total is 2^j * [x^k] (1-x)^(-2(j+1)) = 2^j * C(k+2j+1, 2j+1).
+
+P6 [COMPLETE]  N(t) <= U(t) := sum_{s=0..t} sum_{j=0..s} min( 2^j C(s+j+1,2j+1), 2^(s-j) F_{j+2} ).
+ By the swap symmetry of the move set and of the start, the set of values of register a over words of length s equals
+ the set of values of either register. For fixed (s,j), k=s-j: the number of distinct a-values is at most the number of
+ classes (P5) and at most the size bound (P4, values are integers in [1, 2^k F_{j+2}]). Sum over s<=t, j.
+
+P7 [COMPLETE]  HEADLINE: L > 1; explicitly L >= 1/gamma >= 1.0383 where
+   gamma = max_{0<=d<=1} min( d + (1+d) H(2d/(1+d)),  1 - d(1 - log2 phi) ) = 0.963096... (attained d=0.1207),
+ H the binary entropy.  Proof: with j=d*s, C(s+j+1,2j+1) <= 2^((s+j+1)H((2j+1)/(s+j+1))) and F_{j+2} <= phi^(j+1), so each
+ of the <= (t+1)^2 terms of U(t) is <= 2^(gamma*s+O(log s)) <= 2^(gamma t + O(log t)).  (The shifts by 1 cost O(log s):
+ the function E(n,k) = n H(k/n) = k log2(n/k) + (n-k) log2(n/(n-k)) has |dE/dk| = |log2((n-k)/k)| <= log2 n and
+ 0 <= dE/dn = log2(n/(n-k)) <= log2 n for 1<=k<=n-1.)  Therefore
+ N(t) <= 2^(gamma t + o(t)), limsup N(t)^(1/t) <= 2^gamma = 1.9495 < 2.  By P1, m <= N(D(m)) <= 2^(gamma D(m)+o(D(m))),
+ and D(m)>=log2 m -> infinity, so D(m) >= (1/gamma - o(1)) log2 m for ALL m. Hence liminf D(m)/log2 m >= 1/gamma > 1.
+ Numerical support that is exact integer arithmetic: log2(U(t))/t = 0.99792, 0.98033, 0.97170, 0.96740, 0.96521 at
+ t = 100, 200, 400, 800, 1600 (analyze.py); and U(t) >= N(t) for all computed t<=22.
+ A fully finite variant: any eps with log2(U(t)) <= (1-eps) t for all t >= t0 suffices; the tail in t is the entropy bound.
+
+P8 [COMPLETE]  G(2^x + 2^y) = x+1 = ceil(log2 n) for x>y>=0: B^(x-y), C, then A^y gives a=2^y(2^(x-y)+1)... (x-y)+1+y steps;
+ lower bound from P1. So the statement "G(n)=ceil(log2 n) only for powers of 2" is FALSE (n=3 already).
+ Converse (popcount>=3 implies G(n)>ceil(log2 n)): only COMPUTED, for all n <= 2^22.
+
+NOT PROVED: the exact value of L; any upper bound on L below 2; existence of lim N(t)^(1/t).

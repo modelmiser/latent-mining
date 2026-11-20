@@ -1,0 +1,57 @@
+N: 1 2 4 7 12 20 34 57 98 169 295 521 912 1614 2864 5093 9115 16337 29401 52912 95363 171995 310856
+n<=32768 with G>22: 0
+D(2^1)=1
+D(2^2)=2
+D(2^3)=4
+D(2^4)=6
+D(2^5)=7
+D(2^6)=8
+D(2^7)=10
+D(2^8)=11
+D(2^9)=13
+D(2^10)=14
+D(2^11)=15
+D(2^12)=16
+D(2^13)=17
+D(2^14)=19
+D(2^15)=20
+uncovered m (D>22): 0
+gap 0 count 558
+gap 1 count 37268
+gap 2 count 2173
+m with gap>=2: 511 512 520 9069 9070 9071 9072 9073 9074 9075 9076 9077 9078 9079 9080 9081 9082 9083 9084 9085 9086 9087 9088 9089 9090 9091 9092 9093 9094 9095 9096 9097 9098 9099 9100 9101 9102 9103 9104 9105 9106 9107 9108 9109 9110 9111 9112 9113 9114 9115 15903 15904 15906 15907 15908 15910 15912 15914 15916 15918 (total 2173)
+D=1 first 2 last 2
+D=2 first 3 last 4
+D=3 first 5 last 6
+D=4 first 7 last 10
+D=5 first 11 last 17
+D=6 first 15 last 26
+D=7 first 27 last 41
+D=8 first 39 last 73
+D=9 first 71 last 131
+D=10 first 119 last 209
+D=11 first 191 last 389
+D=12 first 369 last 561
+D=13 first 511 last 1066
+D=14 first 987 last 1829
+D=15 first 1647 last 3137
+D=16 first 2877 last 5557
+D=17 first 5199 last 9651
+D=18 first 9069 last 16593
+D=19 first 15903 last 29677
+D=20 first 27195 last 40000
+octave 2^1 min ratio 1.0000 at m=2
+octave 2^2 min ratio 1.0000 at m=4
+octave 2^3 min ratio 1.2041 at m=10
+octave 2^4 min ratio 1.2233 at m=17
+octave 2^5 min ratio 1.3066 at m=41
+octave 2^6 min ratio 1.2924 at m=73
+octave 2^7 min ratio 1.2796 at m=131
+octave 2^8 min ratio 1.2785 at m=389
+octave 2^9 min ratio 1.3071 at m=986
+octave 2^10 min ratio 1.2919 at m=1829
+octave 2^11 min ratio 1.2914 at m=3137
+octave 2^12 min ratio 1.2862 at m=5557
+octave 2^13 min ratio 1.2843 at m=9651
+octave 2^14 min ratio 1.2789 at m=29677
+octave 2^15 min ratio 1.3082 at m=40000

@@ -1,0 +1,20 @@
+Fix an integer m >= 2. A two-address machine has exactly two registers, A and B, each holding an element of Z_m = {0, 1, ..., m-1} (think of it as the exponent of a power of x, where x generates a cyclic group of known order m). Initially A = 1 and B = 1. The only instruction is "dst := dst * src", where dst and src are each one of A, B and may be the same register. In exponents, with all arithmetic mod m, one step takes the state (a, b) to exactly one of four states:
+
+- (2a, b)    [A := A*A]
+- (a, 2b)    [B := B*B]
+- (a+b, b)   [A := A*B]
+- (a, a+b)   [B := B*A]
+
+A result always overwrites one of its own operands; a register cannot be copied, there is no inversion, no constant can be loaded, and no other instruction exists. Each step costs 1. The value 0 is an ordinary register content (from (0, b) the moves are still as listed).
+
+For r in Z_m let g_m(r) be the least number of steps after which at least one of the two registers holds r (so g_m(1) = 0). This is finite for every r: over the integers the binary method run in A with B = 1 reaches any positive integer congruent to r. Define the worst-case cost in the cyclic group of order m:
+
+D(m) = max { g_m(r) : r in Z_m }.
+
+Question: determine D(m) for every m >= 2. Concretely:
+
+(i) Give the exact values D(m) for 2 <= m <= 400, and for each such m the smallest residue r with g_m(r) = D(m).
+
+(ii) Give and prove a formula for D(2^k) for all k >= 1, and a formula or tight two-sided bound for D(p) over primes p. Note the structural split: for odd m all four moves are bijections of Z_m x Z_m, while for even m the two doubling moves lose information.
+
+(iii) Determine L_sup = limsup D(m)/log2(m) and L_inf = liminf D(m)/log2(m) as m goes to infinity (prove both are finite and give their values). In particular decide whether L_inf < 1, that is, whether wrap-around mod m lets the two-register machine beat, for infinitely many m and in the worst case over residues, the bound ceil(log2 n) that holds for every integer exponent n; and decide whether L_sup equals L_inf.
