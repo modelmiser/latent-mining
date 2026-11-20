@@ -1,0 +1,59 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+BOARD. Vertices are the integers; i is adjacent to i-1 and i+1. Each vertex holds a non-negative number of chips, initially 0 everywhere. A vertex is "ready" when it holds at least 2 chips. "Firing" a ready vertex i removes 2 chips from i and adds 1 chip to i-1 and 1 chip to i+1.
+
+GAME. Fix integers h >= 1 and m >= 1. Adder chooses a list a_1, ..., a_m of integers and commits to it before play. Firer is then told the whole list, and sees the whole position at all times. Rounds t = 1, ..., m are played in order; round t is:
+ (1) one chip is added to vertex a_t;
+ (2) Firer does exactly one of: pass (nothing changes), or fire exactly one ready vertex of its choice. Passing is always legal; if no vertex is ready, Firer must pass.
+The list WINS if, for every legal line of Firer play, some vertex holds at least h chips immediately after some step (1) or some step (2) of some round t <= m. Otherwise (Firer has a line of play in which every vertex holds at most h-1 chips after every step through the end of round m) the list loses.
+
+DEFINITIONS. G(h) = the least m for which a winning list of length m exists. C(h) = the least m for which the constant list 0, 0, ..., 0 (m zeros) wins.
+
+HEADLINE. Find the exact function G(h) for all h >= 1. As concrete deliverables: compute G(3), G(4), G(5) with one shortest winning list each, and determine the constant L = lim G(h)/h (prove the limit exists and give its exact value).
+
+SECONDARY (same computation). Compute C(3), C(4), C(5) and decide whether G(h) < C(h) for every h >= 3.
+
+UNVERIFIED beliefs, to be reproduced, not trusted:
+ - G(1) = 1, G(2) = 2, C(1) = 1, C(2) = 2.
+ - C(3) = 7.
+ - G(3) <= 5 via the list 0, 1, 0, 1, 0; probably G(3) = 5.
+ - h <= G(h) <= C(h) for all h.
+ - C(h) <= sqrt(24)*(h-1) + O(1), by the potential Q = sum over vertices x of x^2 * (chips on x): adding at 0 leaves Q unchanged, each firing raises Q by exactly 2, there are at most m firings, yet n chips with every height <= h-1 force Q >= about n^3 / (12 (h-1)^2). Hence G(h) is finite and Theta(h).
+
+GUESS (not a claim): G(h) = L*h + O(1) with 1 < L < sqrt(24) and L strictly below lim C(h)/h, because mixing two adjacent sites already beats the constant list at h = 3 and I expect that advantage to persist as a constant factor.
+
+NOTES FROM THE ORGANISER
+
+ - Timing rule for this machine: do not START any compute run between 04:50 and 05:45 local time, and make sure no run of yours is still going at 04:55 (check the time with `date` before each long run; shorten the timeout if needed). Reading, writing and thinking are fine in that window.
+ - Never have more than two of your own compute processes alive at once; before starting a run, make sure your previous ones have exited.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

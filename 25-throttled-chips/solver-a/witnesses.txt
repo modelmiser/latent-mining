@@ -1,0 +1,12 @@
+# winning lists
+LIST WINS (no surviving Firer line), length 5
+LIST WINS (no surviving Firer line), length 10
+LIST WINS (no surviving Firer line), length 15
+LIST WINS (no surviving Firer line), length 20
+LIST WINS (no surviving Firer line), length 7
+# deliberately wrong objects (must be rejected = LOSES)
+LIST LOSES; surviving Firer line (None=pass): [None, None, None, None]
+LIST LOSES; surviving Firer line (None=pass): [None, 0, None, 0, None, None]
+LIST LOSES; surviving Firer line (None=pass): [None, None, 0, None, 0, None, 0, None, None]
+LIST LOSES; surviving Firer line (None=pass): [None, None, None, 0, 0, -1, 0, 0, 1, 0, None, 0, None, None]
+LIST LOSES; surviving Firer line (None=pass): [None, None, None, 0, 0, -1, 0, 0, -1, 0, 1, 0, 0, 1, 0, None, 0, None, None]

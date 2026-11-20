@@ -1,0 +1,6 @@
+h=3 W=7 m=1 no nodes=1 memo=0 maxset=1
+h=3 W=7 m=2 no nodes=2 memo=0 maxset=1
+h=3 W=7 m=3 no nodes=38 memo=5 maxset=2
+h=3 W=7 m=4 no nodes=186 memo=27 maxset=3
+h=3 W=7 m=5 WIN nodes=249 memo=39 maxset=4
+G_W(h=3,W=7)=5 list: 0,1,0,1,0

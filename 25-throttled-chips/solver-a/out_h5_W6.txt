@@ -1,0 +1,16 @@
+h=5 W=6 m=1 no nodes=1 memo=0 maxset=1
+h=5 W=6 m=2 no nodes=2 memo=0 maxset=1
+h=5 W=6 m=3 no nodes=3 memo=0 maxset=1
+h=5 W=6 m=4 no nodes=4 memo=0 maxset=1
+h=5 W=6 m=5 no nodes=29 memo=4 maxset=2
+h=5 W=6 m=6 no nodes=156 memo=21 maxset=4
+h=5 W=6 m=7 no nodes=697 memo=90 maxset=8
+h=5 W=6 m=8 no nodes=2918 memo=370 maxset=13
+h=5 W=6 m=9 no nodes=11607 memo=1448 maxset=23
+h=5 W=6 m=10 no nodes=47236 memo=5938 maxset=38
+h=5 W=6 m=11 no nodes=198311 memo=25179 maxset=66
+h=5 W=6 m=12 no nodes=873570 memo=112543 maxset=112
+h=5 W=6 m=13 no nodes=4069465 memo=532652 maxset=195
+h=5 W=6 m=14 no nodes=20063180 memo=2665643 maxset=320
+h=5 W=6 m=15 WIN nodes=20063195 memo=2665643 maxset=320
+G_W(h=5,W=6)=15 list: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

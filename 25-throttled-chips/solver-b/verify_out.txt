@@ -1,0 +1,18 @@
+OK        WIN h=1 m=1 list=0
+OK        WIN h=2 m=2 list=0 0
+OK        WIN h=3 m=5 list=0 1 0 1 0
+OK        WIN h=3 m=6 list=0 -1 -1 -1 -1 -1
+OK        WIN h=3 m=7 list=0 0 0 0 0 0 0
+OK        WIN h=4 m=10 list=0 0 0 0 0 0 0 0 0 0
+OK        WIN h=4 m=10 list=0 0 0 0 0 0 0 0 -1 0
+OK        WIN h=4 m=10 list=0 -1 1 0 0 0 0 0 -1 0
+OK        WIN h=4 m=10 list=0 -2 -1 -1 -1 -1 -1 -1 -2 -1
+OK        WIN h=5 m=15 list=0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+OK        WIN h=6 m=20 list=0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+OK        LOSE h=3 m=6 list=0 0 0 0 0 0
+OK        LOSE h=4 m=9 list=0 0 0 0 0 0 0 0 0 line found: P P 0 P 0 P 0 P P
+OK        LOSE h=5 m=14 list=0 0 0 0 0 0 0 0 0 0 0 0 0 0 line found: P P P 0 0 0 -1 0 1 0 P 0 P P
+OK        LOSE h=6 m=19 list=0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 line found: P P P 0 0 0 -1 0 0 -1 1 0 0 1 0 P 0 P P
+MISMATCH (expected MISMATCH) WIN h=3 m=4 list=0 1 0 1
+MISMATCH (expected MISMATCH) LOSE h=3 m=5 list=0 1 0 1 0
+verify: ALL AS EXPECTED

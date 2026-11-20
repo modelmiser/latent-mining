@@ -1,0 +1,138 @@
+PROOFS (solver-b).  Each item is marked COMPLETE or SKETCH.
+
+Notation.  A "line" is a legal sequence of Firer choices.  A line "survives" a list if every vertex
+holds <= h-1 chips after every step.  A list wins iff no line survives.  c(v) = number of entries of
+the list equal to v ("adds at v").  f(v) = number of times a line fires v.
+
+------------------------------------------------------------------------------------------------
+P0 (COMPLETE).  If a line survives a list of length m, then some surviving line has at most
+max(0, m-2) firings.
+  Round 1 has one chip on the board, so nothing is ready.  A firing in round m can be replaced by a
+  pass: the position after step (1) of round m was already safe and nothing happens afterwards.
+
+------------------------------------------------------------------------------------------------
+P1 (COMPLETE).  h <= G(h) <= C(h) for all h >= 1.
+  After round t the board holds exactly t chips (firing conserves chips), so no vertex can hold h
+  chips before round h: G(h) >= h.  The constant list is one of the lists: G(h) <= C(h), and C(h)
+  is finite by P3 (h >= 2; C(1) = 1 trivially).
+
+------------------------------------------------------------------------------------------------
+P2 (COMPLETE).  G(h) >= 2h-1 for every h >= 3.          (tight at h = 3: G(3) = 5)
+  Let the list have length m <= 2h-2.  At most one vertex v has c(v) >= h (two would need 2h adds).
+  If there is none, Firer passes forever: every height is <= c(x) <= h-1.
+  Otherwise Firer's line: whenever step (1) brings v to exactly h-1 chips, fire v in step (2) of the
+  same round (legal: h-1 >= 2); otherwise pass.
+   * v: after a firing v holds h-3; it gains one chip per add at v and is fired as soon as it shows
+     h-1, so v never shows h.
+   * number of firings k: the first needs h-1 adds at v, each later one 2 more adds at v, so
+     k <= 1 + floor((c(v)-(h-1))/2).
+   * a neighbour w of v only ever holds its own adds plus one chip per firing:
+     height(w) <= c(w) + k <= (m - c(v)) + 1 + (c(v)-h+1)/2 = m + 3/2 - h/2 - c(v)/2
+               <= (2h-2) + 3/2 - h/2 - h/2 = h - 1/2,   hence <= h-1.
+   * every other vertex x holds only its own adds: c(x) <= m - c(v) <= h-2.
+  So this line survives; no list of length <= 2h-2 wins.
+
+------------------------------------------------------------------------------------------------
+P3 (COMPLETE).  C(h) <= 5h-6 for every h >= 2.  Hence G(h) <= 5h-6.
+  Constant list, m = 5h-6.  Suppose a line survives; by P0 take one with <= m-2 firings, and look
+  at the position right after step (1) of round m: m chips, every height <= h-1.
+  Q = sum over chips of (position)^2.  Adding at 0 leaves Q unchanged; a firing at x changes Q by
+  (x-1)^2 + (x+1)^2 - 2x^2 = 2.  So Q = 2*(number of firings) <= 2(m-2) = 10h-16.
+  On the other hand m chips with at most h-1 per vertex have Q at least the value of the greedy
+  filling (h-1 at 0, h-1 at each of +-1, the rest at +-2; note 3(h-1) <= m <= 5(h-1) for h >= 2):
+  Q >= 2(h-1) + 4(m-3(h-1)) = 4m - 10(h-1) = 10h-14 > 10h-16.  Contradiction.
+  REMARK.  The statement's "C(h) <= sqrt(24)(h-1)+O(1)" is not established by the argument given
+  there.  The game lives on O(1) sites, where the continuum estimate n^3/(12(h-1)^2) is not a valid
+  lower bound for Q: filling 2k+1 sites costs (h-1)k(k+1)(2k+1)/3 = (h-1)((2k+1)^3-(2k+1))/12,
+  which is smaller.  Done exactly (above) the same idea gives the constant 5, not sqrt(24) = 4.899.
+  If the computed pattern C(h) = 5h-10 (4 <= h <= 12) persists, the stated bound is false for
+  large h (5h-10 - sqrt(24)(h-1) is unbounded).
+
+------------------------------------------------------------------------------------------------
+P4 (COMPLETE).  Corollary: 2 <= liminf G(h)/h <= limsup G(h)/h <= 5.
+  NOT proved: that the limit exists, or its value.  See report for the conjecture L = 5.
+
+------------------------------------------------------------------------------------------------
+LEMMA C (cluster rule; COMPLETE).  Used by g2.cpp (MODE 1).
+  rho(F) = 0 for F <= 0; otherwise rho(F) = k+1 with k the largest integer with (k+1)(k+2)/2 <= F.
+  (a) Reach.  Let a line with <= F firings be played on a list whose rightmost add position is p.
+      For x > p no chip is ever added at x, and the final height at x is
+      f(x-1)+f(x+1)-2f(x) >= 0, so f is convex on [p, infinity) and eventually 0, hence
+      non-increasing there with f(p+j-1) >= f(p+j)+1 whenever f(p+j) >= 1.  If f(p+k) >= 1 then
+      f(p)+...+f(p+k) >= (k+1)(k+2)/2.  A chip can only be on p+k+1 if f(p+k) >= 1.  So no chip is
+      ever to the right of p + rho(F).  Mirror statement on the left.
+  (b) Let m be the least length of a winning list and L a winning list of length m.  Let p < q be
+      consecutive distinct add positions of L, A = the sublist of entries <= p, B = the entries >= q,
+      with lengths mA, mB (both >= 1).  Then q - p <= rho(mA-2) + rho(mB-2).
+      Proof.  A and B are shorter than m, so they lose; by P0 take surviving lines sA, sB with
+      <= max(0,mA-2) resp. <= max(0,mB-2) firings.  If q-p > rho(mA-2)+rho(mB-2), by (a) the two
+      plays never occupy a common vertex.  Firer answers each round of L with the move sA or sB
+      prescribes for that entry.  The position is the disjoint superposition of the two plays, all
+      moves stay legal, every height is a height of one of the two plays: Firer survives L.
+      Contradiction.
+  (c) Search consequence.  Searching, for M = 1, 2, ..., only lists of length M with a_1 = 0, all
+      of whose gaps obey (b), is exhaustive for "is there a winning list of length <= M": the
+      shortest winning list (if any of length <= M) obeys (b) with m = its own length.
+      Prefix test used: with r adds to come, a gap g with mL adds on its left and mR on its right
+      can only end up legal without new positions inside it if
+      g <= min(GMAX, rho(mL+r-2)+rho(mR+r-2)), GMAX = max over mA+mB=M of rho(mA-2)+rho(mB-2);
+      otherwise it needs >= max(1, ceil(g/GMAX)-1) new positions strictly inside; the total must be
+      <= r.  All positions lie within GMAX*(M-1) of a_1.
+
+------------------------------------------------------------------------------------------------
+LEMMA Z (zone rule; COMPLETE).  Used by g4.cpp (MODE 2); this is what makes h = 5 feasible.
+  Fix thresholds T1 = 2, T2 = 4.  rad(c) = 0 if c < 2, 1 if 2 <= c < 4, 2 if c >= 4.
+  At a given moment of a play let c_t(v) be the number of adds made so far at v, and
+  Z_t = union over add positions v so far of [v - rad(c_t(v)), v + rad(c_t(v))]   (the "zone").
+  Z_t only grows.  A "Z-line" is a line such that after every step every chip lies in the current
+  zone.  A list is "Z-losing" if some Z-line survives it, "Z-winning" otherwise.
+  (i)  Z-losing implies losing (a surviving Z-line is a surviving line).  So if no list of length
+       <= M is Z-winning, then G(h) > M.
+  (ii) Let L be a Z-winning list all of whose shorter lists... precisely: suppose every list
+       shorter than L is Z-losing and L is Z-winning.  Let I_v = [v-rad(c(v)), v+rad(c(v))] with the
+       FINAL counts of L.  Then the family {I_v} is overlap-connected (its intersection graph is
+       connected).
+       Proof.  Otherwise split the add positions into non-empty PA, PB with
+       (union of I_v, v in PA) disjoint from (union of I_v, v in PB).  The sublists A, B are shorter,
+       hence Z-losing: take surviving Z-lines sA, sB.  Firer answers each round of L by the move of
+       sA or sB for that entry.  A's chips always lie in A's zone, which is inside the union of the
+       final I_v (v in PA), and likewise for B: the two plays never share a vertex, the position is
+       their disjoint superposition, all moves are legal and all heights are safe.  The counts of L
+       at vertices of PA are A's counts, so L's zone contains A's zone and B's zone at every moment:
+       the composite line is a Z-line.  So L is Z-losing.  Contradiction.
+  (iii) Search consequence: for M = 1, 2, ..., search all lists of length M with a_1 = 0 whose final
+       interval family is overlap-connected, against Z-lines only.  If none is Z-winning for every
+       M <= M0, then by induction on length no list of length <= M0 is Z-winning, so G(h) > M0.
+       Prefix test used (necessary for a connected completion): sort the current intervals by left
+       end, sweep with R = largest right end so far, Gamma = sum of (left - R) over the intervals
+       with left > R.  One further add lowers Gamma by at most 2 (a radius grows by at most 1 on
+       each side, and an interval is the "R" of at most one break; a new position inside a gap
+       splits it without shrinking the total).  So ceil(Gamma/2) <= adds still to come is required.
+       All positions lie within M of a_1 (rad(c) <= c/2, so a chain of overlapping intervals from
+       a_1 to x has length <= sum of 2*rad <= M).
+  NOTE.  T1 = 2, T2 = 4 is a choice.  Other choices are equally sound but may be useless: with
+  T1 = 3 the restricted Firer already loses to a 14-list at h = 5 (he must be allowed to fire a
+  vertex that has received only 2 adds).
+
+------------------------------------------------------------------------------------------------
+PRUNINGS inside the searches (COMPLETE, elementary).  S = set of all positions Firer can have reached
+with every height <= h-1 so far (in MODE 2: by Z-lines).  r = adds still to come.
+  * S empty  <=> the prefix already wins.
+  * "pass forever": if some c in S has max(c)+r < h, Firer passes from c and survives: prune.
+    If max(c)+r = h, all r remaining adds must go to one vertex where c already holds max(c):
+    only those vertices are tried.
+  * "hitting": if r < h and no multiset of <= r further adds brings, for every c in S simultaneously,
+    some vertex to h under passing, prune.  (Unsafe direction of an error in any of these: a missed
+    winning list, i.e. a too-large G.  Cross-checks: runs with NOHB=1, MODE 0 window runs, slow.py.)
+  * memo of failed (S, r): failure with r adds left implies failure with fewer.  Keyed by a 122-bit
+    hash of S up to translation/reflection; a collision could only fake a failure (same direction).
+  * a_1 = 0 (translation), a_2 >= 0 (reflection).
+
+------------------------------------------------------------------------------------------------
+SKETCH (not a proof).  "G(h) = C(h) = 5h-10 for all h >= 4, so L = 5."
+  Supported only by: C(h) = 5h-10 computed for 4 <= h <= 12; G(4) = 10 and G(5) = 15 computed.
+  Heuristic: on the scale heights ~ h the game lives on O(1) sites.  For the constant list the
+  bound P3 is the fluid constraint "5 sites, Q budget 2 per round"; a fluid Firer schedule
+  F_0(t) = (t-1)/2 + F_1(t), F_1(t) = max(0,(t-3)/2) (in units of h) meets it exactly up to t = 5.
+  I have no argument that no other list beats time 5 in the fluid limit, and no proof of
+  C(h) >= 5h-10 either.

@@ -1,0 +1,11 @@
+h=4 W=7 m=1 no nodes=1 memo=0 maxset=1
+h=4 W=7 m=2 no nodes=2 memo=0 maxset=1
+h=4 W=7 m=3 no nodes=3 memo=0 maxset=1
+h=4 W=7 m=4 no nodes=39 memo=5 maxset=2
+h=4 W=7 m=5 no nodes=229 memo=27 maxset=4
+h=4 W=7 m=6 no nodes=1112 memo=126 maxset=8
+h=4 W=7 m=7 no nodes=4795 memo=526 maxset=13
+h=4 W=7 m=8 no nodes=19643 memo=2125 maxset=23
+h=4 W=7 m=9 no nodes=78731 memo=8473 maxset=38
+h=4 W=7 m=10 WIN nodes=78741 memo=8473 maxset=38
+G_W(h=4,W=7)=10 list: 0,0,0,0,0,0,0,0,0,0

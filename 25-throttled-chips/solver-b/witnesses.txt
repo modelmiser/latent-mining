@@ -1,0 +1,22 @@
+# format:  WIN h a_1 a_2 ... a_m        -> the list must win (no Firer line survives)
+#          LOSE h a_1 ... a_m | line    -> the Firer line (P = pass, integer = vertex fired, one entry per round) must survive
+# checked by verify.py (independent of the C++ search; uses slow.py's direct implementation)
+WIN 1 0
+WIN 2 0 0
+WIN 3 0 1 0 1 0
+WIN 3 0 -1 -1 -1 -1 -1
+WIN 3 0 0 0 0 0 0 0
+WIN 4 0 0 0 0 0 0 0 0 0 0
+WIN 4 0 0 0 0 0 0 0 0 -1 0
+WIN 4 0 -1 1 0 0 0 0 0 -1 0
+WIN 4 0 -2 -1 -1 -1 -1 -1 -1 -2 -1
+WIN 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+WIN 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+# constant lists one shorter lose (C(h) lower bounds), with an explicit surviving Firer line
+LOSE 3 0 0 0 0 0 0 | P 0 P 0 P P
+LOSE 4 0 0 0 0 0 0 0 0 0 | AUTO
+LOSE 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 | AUTO
+LOSE 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 | AUTO
+# deliberately wrong objects (verify.py must report MISMATCH for these two lines; they are marked EXPECTFAIL)
+EXPECTFAIL WIN 3 0 1 0 1
+EXPECTFAIL LOSE 3 0 1 0 1 0 | P P 0 P P

@@ -1,0 +1,65 @@
+### MODE 1 (cluster rule, Lemma C, unrestricted Firer): exhaustive over all lists
+h=1 m=1 mode=1 R=0 gmax=1 NOPASSIVE : WIN  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+list: 0
+h=2 m=1 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=2 m=2 mode=1 R=0 gmax=1 NOPASSIVE : WIN  nodes=2 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+list: 0 0
+h=3 m=1 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=3 m=2 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=3 m=3 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=2 hbprunes=0 memohits=0 memo=1 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=3 m=4 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=9 hbprunes=1 memohits=0 memo=4 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=3 m=5 mode=1 R=0 gmax=1 NOPASSIVE : WIN  nodes=27 hbprunes=2 memohits=2 memo=7 passprunes=0 passDP=0
+memo evictions=0 time=0s
+list: 0 1 0 1 0
+h=4 m=1 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=2 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=3 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=4 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=2 hbprunes=0 memohits=0 memo=1 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=5 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=12 hbprunes=1 memohits=0 memo=5 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=6 mode=1 R=0 gmax=2 NOPASSIVE : no winning list  nodes=214 hbprunes=2 memohits=120 memo=43 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=7 mode=1 R=0 gmax=2 NOPASSIVE : no winning list  nodes=1120 hbprunes=13 memohits=578 memo=237 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=8 mode=1 R=0 gmax=3 NOPASSIVE : no winning list  nodes=22845 hbprunes=125 memohits=13159 memo=4108 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=9 mode=1 R=0 gmax=3 NOPASSIVE : no winning list  nodes=169528 hbprunes=876 memohits=101536 memo=29407 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=4 m=10 mode=1 R=0 gmax=4 NOPASSIVE : WIN  nodes=2179642 hbprunes=8304 memohits=1273443 memo=396623 passprunes=0 passDP=0
+memo evictions=0 time=2s
+list: 0 0 0 0 0 0 0 0 -1 0
+h=5 m=1 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=2 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=3 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=4 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=1 hbprunes=0 memohits=0 memo=0 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=5 mode=1 R=0 gmax=1 NOPASSIVE : no winning list  nodes=2 hbprunes=0 memohits=0 memo=1 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=6 mode=1 R=0 gmax=2 NOPASSIVE : no winning list  nodes=28 hbprunes=1 memohits=0 memo=11 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=7 mode=1 R=0 gmax=2 NOPASSIVE : no winning list  nodes=310 hbprunes=2 memohits=175 memo=58 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=8 mode=1 R=0 gmax=3 NOPASSIVE : no winning list  nodes=4894 hbprunes=21 memohits=2457 memo=906 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=9 mode=1 R=0 gmax=3 NOPASSIVE : no winning list  nodes=42284 hbprunes=152 memohits=23492 memo=7082 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=10 mode=1 R=0 gmax=4 NOPASSIVE : no winning list  nodes=1142129 hbprunes=1523 memohits=668269 memo=168216 passprunes=0 passDP=0
+memo evictions=0 time=1s
+h=5 m=11 mode=1 R=0 gmax=4 NOPASSIVE : no winning list  nodes=11083785 hbprunes=13869 memohits=6866280 memo=1512698 passprunes=0 passDP=0
+memo evictions=0 time=7s
+h=5 m=12 mode=1 R=0 gmax=4 NOPASSIVE : no winning list  nodes=103442618 hbprunes=136505 memohits=66740148 memo=13379876 passprunes=0 passDP=0
+memo evictions=208 time=76s

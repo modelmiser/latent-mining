@@ -1,0 +1,1 @@
+Z h=5 M=14 : no Z-winning list  nodes=151044348 memo=19153041 memohits=20893443 time=1202s

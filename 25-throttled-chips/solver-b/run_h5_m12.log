@@ -1,0 +1,2 @@
+h=5 m=12 mode=1 R=0 gmax=4 NOPASSIVE : no winning list  nodes=103442476 hbprunes=136505 memohits=66740063 memo=13379885 passprunes=0 passDP=0
+memo evictions=181 time=167s

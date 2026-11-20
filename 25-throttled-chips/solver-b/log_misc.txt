@@ -1,0 +1,30 @@
+### cross-checks: hitting prune off (NOHB=1)
+h=5 m=12 mode=2 R=0 zone=1(T1=2,T2=4) gmax=4 NOHB NOPASSIVE : no winning list  nodes=1022137 hbprunes=0 memohits=236185 memo=120038 passprunes=0 passDP=0
+memo evictions=0 time=2s
+h=4 m=9 mode=2 R=0 zone=1(T1=2,T2=4) gmax=3 NOHB NOPASSIVE : no winning list  nodes=13609 hbprunes=0 memohits=4387 memo=2121 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=5 m=10 mode=1 R=0 gmax=4 NOHB NOPASSIVE : no winning list  nodes=3887235 hbprunes=0 memohits=669247 memo=169268 passprunes=0 passDP=0
+memo evictions=0 time=1s
+h=4 m=9 mode=1 R=0 gmax=3 NOHB NOPASSIVE : no winning list  nodes=436472 hbprunes=0 memohits=102104 memo=29984 passprunes=0 passDP=0
+memo evictions=0 time=0s
+### C(h): constant list = window R=0, MODE 0, unrestricted Firer; least m with WIN
+C(1) = 1
+C(2) = 2
+C(3) = 7
+C(4) = 10
+C(5) = 15
+C(6) = 20
+C(7) = 25
+C(8) = 30
+C(9) = 35
+C(10) = 40
+C(11) = 45
+C(12) = 50
+### window evidence, unrestricted Firer, MODE 0: all lists with a_1=0, a_i in [-R,R]
+h=5 m=14 mode=0 R=3 zone=0(T1=2,T2=4) gmax=5 NOPASSIVE : no winning list  nodes=1894864 hbprunes=1108976 memohits=176731 memo=426577 passprunes=0 passDP=0
+memo evictions=0 time=15s
+h=6 m=19 mode=0 R=1 zone=0(T1=2,T2=4) gmax=6 NOPASSIVE : no winning list  nodes=19363 hbprunes=4432 memohits=8460 memo=6471 passprunes=0 passDP=0
+memo evictions=0 time=0s
+h=7 m=24 mode=0 R=1 zone=0(T1=2,T2=4) gmax=8 NOPASSIVE : no winning list  nodes=111455 hbprunes=12444 memohits=61820 memo=37191 passprunes=0 passDP=0
+memo evictions=0 time=6s
+ALLDONE

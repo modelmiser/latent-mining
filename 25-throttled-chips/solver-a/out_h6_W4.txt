@@ -1,0 +1,21 @@
+h=6 W=4 m=1 no nodes=1 memo=0 maxset=1
+h=6 W=4 m=2 no nodes=2 memo=0 maxset=1
+h=6 W=4 m=3 no nodes=3 memo=0 maxset=1
+h=6 W=4 m=4 no nodes=4 memo=0 maxset=1
+h=6 W=4 m=5 no nodes=5 memo=0 maxset=1
+h=6 W=4 m=6 no nodes=18 memo=3 maxset=2
+h=6 W=4 m=7 no nodes=67 memo=12 maxset=4
+h=6 W=4 m=8 no nodes=228 memo=40 maxset=8
+h=6 W=4 m=9 no nodes=733 memo=126 maxset=13
+h=6 W=4 m=10 no nodes=2190 memo=364 maxset=21
+h=6 W=4 m=11 no nodes=6683 memo=1123 maxset=37
+h=6 W=4 m=12 no nodes=21512 memo=3707 maxset=66
+h=6 W=4 m=13 no nodes=77045 memo=13883 maxset=115
+h=6 W=4 m=14 no nodes=291134 memo=53522 maxset=200
+h=6 W=4 m=15 no nodes=957671 memo=166634 maxset=323
+h=6 W=4 m=16 no nodes=2518304 memo=390158 maxset=423
+h=6 W=4 m=17 no nodes=5458345 memo=735010 maxset=561
+h=6 W=4 m=18 no nodes=10407310 memo=1237243 maxset=712
+h=6 W=4 m=19 no nodes=17961983 memo=1888683 maxset=884
+h=6 W=4 m=20 WIN nodes=17962003 memo=1888683 maxset=884
+G_W(h=6,W=4)=20 list: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

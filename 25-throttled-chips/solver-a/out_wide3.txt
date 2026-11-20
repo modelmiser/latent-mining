@@ -1,0 +1,1 @@
+h=3: winning lists of length 4 in window 13: 0
