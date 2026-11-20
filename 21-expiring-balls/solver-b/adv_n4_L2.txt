@@ -1,0 +1,6 @@
+# ADVERSARY strategy n=4 L=2 mode=0. line: state rank move ; state = age-ordered balls 'ro' (receiver,other), canonical first-appearance labels; move E<j> = remove j-th oldest ball (FIFO: E0), O<a><b> = offer {a,b} (labels > used count = fresh bins), T = load>=L reached
+- 22 O12
+12 6 O34
+12,34 1 O13
+12,34,13 0 T
+12,34,31 0 T

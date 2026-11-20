@@ -1,0 +1,3 @@
+# Seed
+
+m balls are placed one at a time into n bins. For each ball two bins are offered and a rule, which sees the current loads, must choose one of them; a ball once placed stays where it is. When the two offered bins are chosen at random, always taking the emptier one keeps the fullest bin within about log log n of the average. Now let an adversary choose the two offered bins each time, and also let it remove balls: at any moment it may delete any ball already placed, as long as the total number of balls never exceeds a bound. For each n and each bound on the number of balls present: how full can the adversary make some bin against the best rule, what is the best rule, and how much does the answer change if the rule may move one old ball for every new one?

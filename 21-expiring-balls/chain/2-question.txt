@@ -1,0 +1,12 @@
+There are n bins, labelled 1..n, initially empty. A ball, once placed, is a record ({u,v}, w, t): the unordered pair of distinct bins that was offered, the bin w in {u,v} that received it, and its arrival time t (the number of balls offered before it, so present balls are totally ordered by age). The state is the set of balls currently present, together with their age order (only the relative order matters). The offer graph G of a state has the bins as vertices and one edge {u,v} for each present ball. The load of a bin is the number of present balls it received.
+
+Two players, Adversary and Rule, play with perfect information: both see the whole state at all times. Repeatedly, Adversary makes one of two moves:
+
+- Expire: legal only if at least one ball is present. The OLDEST present ball is removed (its edge leaves G and the load of its bin drops by one). Adversary has no choice of which ball leaves. Rule does nothing.
+- Offer: name two distinct bins u, v. This is legal only if u and v lie in different connected components of the current G (so G is always a forest and at most n-1 balls are present). Rule must answer immediately by choosing w in {u,v}; the ball ({u,v}, w, t) is added as the newest ball. Rule can never move or remove a ball. A pair may be offered again after its earlier ball has expired.
+
+Play may continue for any finite number of moves. Adversary achieves L if at some moment some bin has load L. Define g(n) as the largest L such that Adversary has a strategy achieving L against every Rule. (States are forests on n labelled vertices with a chosen endpoint per edge and a linear order on the edges, so this is a finite reachability game and g(n) is well defined.)
+
+For comparison, let h(n) be the same quantity when Expire is forbidden altogether, and f(n) the same quantity when Adversary may instead remove ANY present ball of its choice. Clearly h(n) <= g(n) <= f(n).
+
+Determine g(n) exactly for n = 2,...,7. Then, for every k >= 1, determine N(k), the least n with g(n) >= k, as a closed formula or exact characterisation, together with an optimal Rule. In particular decide: is g(n) = h(n) for every n (first-in-first-out deletion never helps Adversary), and if not, what is the least n with g(n) > h(n), and does N(k) grow exponentially, polynomially, or otherwise in k?

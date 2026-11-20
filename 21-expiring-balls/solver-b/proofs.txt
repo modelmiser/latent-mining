@@ -1,0 +1,53 @@
+PROOFS (solver-b).  Each is marked COMPLETE or SKETCH.
+
+Notation: load(x) = number of present balls received by x; comp(x) = connected component of x in the offer graph G.
+Fact F (COMPLETE): G is a forest, so present balls are distinct pairs; a bin of load j has j distinct
+neighbours, hence |comp(x)| >= load(x)+1.
+
+P1. N(k) >= 2k, i.e. g(n) <= floor(n/2).   COMPLETE.
+  Rule plays "give the ball to the endpoint of smaller load (ties arbitrary)". Suppose a ball offered on {u,v}
+  takes its receiver w to load k. Before the offer load(w) = k-1 and the other endpoint has load >= k-1.
+  u and v are in different components, each of size >= k by Fact F, so n >= 2k. Expire moves never raise a load.
+  Hence on n < 2k bins this Rule never lets a load reach k.
+  (Consequences: g(2)=g(3)=1 given N(1)=2; g(5) <= 2; g(7) <= 3; N(3) >= 6.)
+
+P2. N(k) <= 2^k, i.e. g(n) >= floor(log2 n).   COMPLETE.
+  Claim C(j): given 2^j bins that are isolated and empty, Adversary, using only offers inside that set and no
+  Expire, forces a bin of load >= j in that set. C(0) is trivial. For C(j) split the set into two halves, apply
+  C(j-1) to each half in turn (the second half is untouched by the first run, and no ball is removed), obtaining
+  x, y of load >= j-1 in different halves, hence in different components; offer {x,y}; the receiver has load >= j.
+  N(1)=2 exactly (one bin admits no offer). N(2)=4 exactly by P1 and P2.
+
+P3. Without Expire the value is exactly floor(log2 n).   COMPLETE (for the no-Expire game only).
+  Rule gives the ball to the endpoint whose component is smaller (ties arbitrary). Invariant:
+  load(x) <= log2 |comp(x)|. Receiver w has |comp| = a <= b = other side; new component a+b >= 2a, so
+  load(w)+1 <= log2(a)+1 = log2(2a) <= log2(a+b). Other bins: load unchanged, component not smaller.
+  With P2 this gives floor(log2 n). The invariant is destroyed by Expire (components shrink), which is exactly
+  why the FIFO game differs: computed g(7)=3 with FIFO expiry versus 2 without.
+
+P4. Free-removal variant (Adversary removes any present ball of its choice): N_free(k) <= 1 + k(k+1)/2.   COMPLETE.
+  Let W(j) = 1 + j(j+1)/2. Claim S(j): given W(j) isolated empty bins, Adversary forces a state in which those
+  bins carry exactly a star: a centre of load j with j leaves, all its balls received by the centre, the other
+  W(j)-j-1 bins isolated. S(1): offer any pair (W(1)=2). S(j) from S(j-1): run S(j-1) on W(j-1) of the bins; the
+  star occupies j bins, leaving W(j)-j = W(j-1) isolated empty bins; run S(j-1) on those. Offer the two centres
+  (different components). The receiver has load j; remove the j-1 balls of the other star. The receiver now has
+  j leaves (its own j-1 plus the other centre) and everything else is isolated.
+  This is 2,4,7,11,... ; computed N_free(2)=4, N_free(3)=7 agree, and computed g_free(8) < 4.
+  No matching lower bound is proved.
+
+P5. N(3) = 7 in the FIFO game.   COMPUTER-ASSISTED, COMPLETE given the two certificates:
+  adv_n7_L3.txt  (33 states, ranked Adversary strategy; rank strictly decreases along every Rule answer)
+  rule_n6_L3.txt (3843 states: contains the empty state, all loads <= 2, closed under Expire, and for every legal
+                  offer at least one answer stays inside)
+  Both are verified by check.py, which shares no code with the generator.
+  N(3) >= 6 also follows from P1; the certificate is needed only for n = 6.
+
+P6. Why 6 bins fail although the last move needs only 6 bins (two load-2 stars {1;2,3} and {4;5,6}).   SKETCH / observation.
+  On 6 bins the only "seed" shapes are two disjoint 2-stars (3 canonical age orders). The backward Adversary
+  attractor from them has only 39 states and does not contain the empty state (computed, back.cpp).
+  I have no human-readable Rule strategy for n=6; the certificate is the proof.
+
+GENERAL FORM: not proved. Known: 2k <= N(k) <= 2^k (P1, P2), N(3)=7, 12 <= N(4) <= 16.
+  The lower bound 12 is COMPUTED only (g(8),g(9) < 4 by backward attractor AND an independent forward Rule-closure
+  pass; g(10), g(11) < 4 by backward attractor alone, two implementations agreeing at n=10, one at n=11).
+  In particular the triangular value 1+k(k+1)/2 = 11 that P4 gives for free removal is NOT enough under FIFO at k=4.

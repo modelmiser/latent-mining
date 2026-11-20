@@ -1,0 +1,5 @@
+# RULE safe set n=3 L=2 mode=0. Each line a state (age-ordered balls 'ro' receiver,other; canonical first-appearance labels). Claim: contains '-', all loads < L, closed under every removal, and for every legal offer at least one answer stays in the set.
+-
+12
+12,31
+12,23

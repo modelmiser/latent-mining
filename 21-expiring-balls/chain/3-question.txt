@@ -1,0 +1,20 @@
+SETTING. There are n >= 2 bins labelled 1..n, initially empty. A ball is a record ({u,v}, w, t): the unordered pair of distinct bins offered, the bin w in {u,v} that received it, and its arrival index t (the number of balls offered earlier in the play). A state is the set of balls currently present; only the relative order of their arrival indices matters. The offer graph G of a state has the bins as vertices and one edge {u,v} per present ball. The load of a bin is the number of present balls it received.
+
+PLAY. Two players, Adversary and Rule, both see the whole state at all times (perfect information, no randomness). Starting from the empty state, Adversary repeatedly makes one move of one of two kinds:
+- Expire: legal iff at least one ball is present. The present ball with the smallest arrival index is removed. Adversary does not choose which ball leaves; Rule does nothing.
+- Offer {u,v}: legal iff u != v and u, v lie in different connected components of the current G. Rule must answer at once by choosing w in {u,v}; the ball ({u,v}, w, t) is added as the newest ball. Rule never moves or removes a ball.
+Hence G is always a forest with at most n-1 edges. A pair may be offered again once its earlier ball has expired. Play lasts any finite number of moves.
+
+VALUE. Adversary achieves L if at some moment some bin has load L. g(n) is the largest L that Adversary can achieve against every Rule strategy. For k >= 1 let N(k) be the least n with g(n) >= k. (g is non-decreasing in n, since Adversary may ignore bins.)
+
+HEADLINE. Find the exact value of N(3): the least number of bins on which Adversary, with first-in-first-out expiry, can force some bin to hold three balls. Equivalently, decide g(6) and g(7).
+
+GENERAL FORM. Determine N(k) for all k as a closed formula, with an optimal Rule strategy. The headline is its first undecided case: N(3) = 8 is what holds if expiry never helps (N(k) = 2^k), and N(3) in {6,7} shows that it does.
+
+UNVERIFIED beliefs (do not rely on them):
+- Without Expire the value is floor(log2 n): Adversary merges two components whose maxima have equal load; Rule gives the ball to the endpoint in the smaller component, keeping load(x) <= log2(size of x's component). So N(k) <= 2^k.
+- N(k) >= 2k: the ball that creates load k is offered between two bins of load k-1 in different components, each component having at least k vertices. So N(3) is 6, 7 or 8.
+- N(1) = 2, N(2) = 4, g(3) = 1, g(5) = 2.
+- If Adversary could remove any present ball of its choice, about k^2/2 bins would suffice for load k.
+
+GUESS (a bet, not a result): N(3) = 8, because Rule sees the age order and can give each contested ball to the endpoint whose existing balls are older, so that expiry strips the leader before it strips the junk edges Adversary needs gone.

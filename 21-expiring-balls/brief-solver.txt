@@ -1,0 +1,58 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+SETTING. There are n >= 2 bins labelled 1..n, initially empty. A ball is a record ({u,v}, w, t): the unordered pair of distinct bins offered, the bin w in {u,v} that received it, and its arrival index t (the number of balls offered earlier in the play). A state is the set of balls currently present; only the relative order of their arrival indices matters. The offer graph G of a state has the bins as vertices and one edge {u,v} per present ball. The load of a bin is the number of present balls it received.
+
+PLAY. Two players, Adversary and Rule, both see the whole state at all times (perfect information, no randomness). Starting from the empty state, Adversary repeatedly makes one move of one of two kinds:
+- Expire: legal iff at least one ball is present. The present ball with the smallest arrival index is removed. Adversary does not choose which ball leaves; Rule does nothing.
+- Offer {u,v}: legal iff u != v and u, v lie in different connected components of the current G. Rule must answer at once by choosing w in {u,v}; the ball ({u,v}, w, t) is added as the newest ball. Rule never moves or removes a ball.
+Hence G is always a forest with at most n-1 edges. A pair may be offered again once its earlier ball has expired. Play lasts any finite number of moves.
+
+VALUE. Adversary achieves L if at some moment some bin has load L. g(n) is the largest L that Adversary can achieve against every Rule strategy. For k >= 1 let N(k) be the least n with g(n) >= k. (g is non-decreasing in n, since Adversary may ignore bins.)
+
+HEADLINE. Find the exact value of N(3): the least number of bins on which Adversary, with first-in-first-out expiry, can force some bin to hold three balls. Equivalently, decide g(6) and g(7).
+
+GENERAL FORM. Determine N(k) for all k as a closed formula, with an optimal Rule strategy. The headline is its first undecided case: N(3) = 8 is what holds if expiry never helps (N(k) = 2^k), and N(3) in {6,7} shows that it does.
+
+UNVERIFIED beliefs (do not rely on them):
+- Without Expire the value is floor(log2 n): Adversary merges two components whose maxima have equal load; Rule gives the ball to the endpoint in the smaller component, keeping load(x) <= log2(size of x's component). So N(k) <= 2^k.
+- N(k) >= 2k: the ball that creates load k is offered between two bins of load k-1 in different components, each component having at least k vertices. So N(3) is 6, 7 or 8.
+- N(1) = 2, N(2) = 4, g(3) = 1, g(5) = 2.
+- If Adversary could remove any present ball of its choice, about k^2/2 bins would suffice for load k.
+
+GUESS (a bet, not a result): N(3) = 8, because Rule sees the age order and can give each contested ball to the endpoint whose existing balls are older, so that expiry strips the leader before it strips the junk edges Adversary needs gone.
+
+NOTES FROM THE ORGANISER
+
+ - Timing rule for this machine: do not START any compute run between 04:50 and 05:45 local time, and make sure no run of yours is still going at 04:55 (check the time with `date` before each long run; shorten the timeout if needed). Reading, writing and thinking are fine in that window.
+ - Never have more than two of your own compute processes alive at once; before starting a run, make sure your previous ones have exited.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

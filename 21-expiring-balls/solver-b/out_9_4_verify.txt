@@ -1,0 +1,4 @@
+seeds=990
+n=9 L=4 seeds=990 attractor_nonterminal=34970 RESULT: Adversary CANNOT force load 4
+VERIFIED forward: Rule safe closure of 73593200 states, never load 4: g(9) < 4
+51.55s 2626764kB

@@ -1,0 +1,10 @@
+n=2 L=1 mode=0 RESULT: Adversary CAN force load 1
+n=2 L=2 mode=0 RESULT: Adversary CANNOT force load 2
+n=3 L=2 mode=0 RESULT: Adversary CANNOT force load 2
+n=4 L=2 mode=0 RESULT: Adversary CAN force load 2
+n=5 L=2 mode=0 RESULT: Adversary CAN force load 2
+n=5 L=3 mode=0 RESULT: Adversary CANNOT force load 3
+n=6 L=3 mode=0 RESULT: Adversary CANNOT force load 3
+n=7 L=3 mode=0 RESULT: Adversary CAN force load 3
+n=7 L=4 mode=0 RESULT: Adversary CANNOT force load 4
+n=8 L=4 mode=0 RESULT: Adversary CANNOT force load 4

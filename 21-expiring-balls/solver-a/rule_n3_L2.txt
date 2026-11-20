@@ -1,0 +1,5 @@
+# RULE safe set n=3 L=2 mode=fifo. one state per line (balls oldest first as receiver:other, bins labelled by first appearance; empty line = empty state). Claim: contains the empty state, every load < L, closed under removal, and for every legal offer at least one answer stays in the set.
+
+0:1
+0:1 2:0
+0:1 1:2

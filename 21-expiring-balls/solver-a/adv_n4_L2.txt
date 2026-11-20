@@ -1,0 +1,6 @@
+# ADVERSARY strategy n=4 L=2 mode=fifo. line: rank|move|state ; state = balls oldest first as receiver:other, bins labelled by first appearance; move E=expire, R j=remove ball j, O a b=offer {a,b} (labels >= #used bins are fresh bins); rank 0 = some load >= L
+3|O 0 1|
+2|O 2 3|0:1
+1|O 0 2|0:1 2:3
+0|T|0:1 2:3 0:2
+0|T|0:1 2:3 2:0

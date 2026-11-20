@@ -1,0 +1,76 @@
+PROOFS (solver-a).  N(k) = FIFO game of the problem text.  A(k) = same game where Adversary
+may remove ANY present ball (the "other reading").  T(k) = 1 + k(k+1)/2.
+"star" = a bin c together with the balls it received; "clean j-star" = state whose only balls
+are j balls received by one bin.
+
+P1  COMPLETE.  N(k) <= 2^k (no Expire used).
+    Induction on j: on 2^j untouched bins Adversary forces a bin of load >= j whose component
+    lies inside those bins. j=0 trivial. Split the bins in two halves, get x, y of load >= j-1 in
+    different components, offer {x,y}; the receiver has load >= j.
+
+P2  COMPLETE.  N(k) >= 2k.
+    Rule gives each ball to the endpoint of smaller load. The first ball that creates load k was
+    offered on {u,v} with both loads >= k-1 (receiver k-1, other >= k-1) in different components.
+    The present balls received by a bin have pairwise different other endpoints (G is a forest),
+    so each of the two components has >= k bins.
+
+P3  COMPLETE.  N(k) >= A(k).
+    A Rule strategy that keeps loads < k in the any-removal game also does so in the FIFO game:
+    it ignores arrival order, and Expire is one of the removals available there.
+
+P4  COMPLETE.  A(k) <= T(k).
+    Claim C(j): from any state in which a set B of T(j) bins is untouched, Adversary, using only
+    offers inside B and removals of balls inside B, forces a bin of B to load j.
+    C(1): one offer inside B (T(1)=2). C(j), j>=2: apply C(j-1) to T(j-1) bins of B, getting x of
+    load j-1. Remove every ball inside B not received by x. x keeps j-1 balls; they touch x and j-1
+    other bins, so T(j)-j = T(j-1) bins of B are untouched. Apply C(j-1) to them, getting y of load
+    j-1 in a component that does not contain x. Offer {x,y}. The receiver has load j.
+
+P5  COMPUTED, with certificates (no hand proof).  N(3) = 7.
+    g(7) >= 3: adv_n7_L3.txt (32 states, at most 12 Adversary moves), checked by check.py.
+    g(6) <= 2: rule_n6_L3.txt (3843 states closed under Expire, with a safe answer to every legal
+    offer), checked by check.py. Also: the plain rule "give the ball to the endpoint of smaller
+    load; on a tie to the endpoint that occurs earlier in the age-ordered list of present balls"
+    is safe on 6 bins (rules.py, greedy.cpp: 2871 reachable states).
+    In words, the 7-bin strategy (names a..g):
+      1. a|b, c|d, then {receiver, receiver}: some bin x has load 2 (4 bins, 3 balls). If the two
+         youngest balls are x's, expire once: clean 2-star.
+      2. Otherwise take two untouched bins, offer them (f receives), offer {x,f}: x would reach 3,
+         so Rule must give f the ball; f now holds the two youngest balls. Expire everything
+         older: clean 2-star at f (3 bins), 4 bins untouched.
+      3. Build a load-2 bin z on the 4 untouched bins as in step 1 (no Expire). Offer {f,z}.
+    (The stored certificate differs in move order: it places one ball early to save moves.)
+
+P6  COMPLETE given the certificate of P5; every branch replayed by verify12.py
+    (3,662,464 Rule lines, at most 11 balls present).   N(4) <= 12.
+    Ia.  On 7 bins force a bin x of load 3 (P5). 5 bins untouched.
+    Ib.  On 4 untouched bins, no Expire: p|q, r|s, then {receiver, receiver}: Y has load 2.
+         Offer {x,Y}: x would reach 4, so Y receives. Y has load 3 and its ball from x is the youngest.
+         Expire all balls of Ia (all older). Left: the 3 balls of Ib and Y<-x, on 5 bins.
+         If the oldest of them is not Y's, expire it: clean 3-star, go to II.
+    I'.  Otherwise Y has load 3 inside a 5-bin component and 7 bins are untouched. On 4 of them
+         build a of load 2 (no Expire); on 2 more offer once (f receives). Offer {a,f}.
+         If a receives, a and Y both have load 3 in different components: offer {a,Y}, done.
+         If f receives, offer {f,Y}: Y would reach 4, so f receives. f now holds the 3 youngest balls.
+         Expire everything older: clean 3-star at f.
+    II.  Clean 3-star (4 bins), 8 bins untouched. By P1 build z of load 3 on them without Expire.
+         Offer {z, centre of the star}.
+
+OPEN / NOT PROVED
+    * N(4): 11 <= N(4) <= 12. Lower bound = P3 + certificate rule_any_n10_L4.txt (a Rule safe set
+      for the any-removal game on 10 bins, 32844 isomorphism classes, produced by anyiso.cpp and
+      checked by check_any.py, which uses a different canonical form). I could not decide n = 11:
+      the full FIFO state space there is ~10^11; Adversary restricted to offering only while
+      <= 7 balls are present does not win on 11, 12 or 13 bins (capfifo.cpp; proves nothing).
+    * Rule strategy GREEDY = "give the ball to the endpoint of smaller load; on a tie to the endpoint
+      that occurs earlier in the age-ordered list of present balls (untouched bins last)".
+      COMPUTED (greedy.cpp, exhaustive over reachable states): it is optimal for every n <= 9
+      (safe for (n,L) = (3,2), (5,3), (6,3), (8,4), (9,4); 45,439,595 states at n = 9).
+      The tie-break matters: "later bin" and "smaller component" lose at (6,3). Not tested at 10, 11.
+    * SKETCH (not a proof): the pattern of P5/P6 is "force a clean (k-1)-star, then build a second
+      load-(k-1) bin on untouched bins without Expire", which needs k + 2^(k-1) bins once the clean
+      star is available. I have not proved that the clean (k-1)-star can always be forced inside
+      k + 2^(k-1) bins for k >= 5.
+    * CONJECTURE A: A(k) = T(k) for all k (true for k <= 4; A(5) >= 14 computed).
+    * CONJECTURE N (weaker evidence): N(k) = k + 2^(k-1) (= 2, 4, 7 for k <= 3; would give N(4) = 12).
+      The alternative N(k) = T(k) fits the same three values and would give N(4) = 11.

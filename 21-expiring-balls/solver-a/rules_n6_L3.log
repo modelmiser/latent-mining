@@ -1,0 +1,5 @@
+SAFE 6 3 min load reachable_states= 2871
+SAFE 6 3 min deg then min load reachable_states= 2898
+SAFE 6 3 min deg then max csize then min load reachable_states= 2876
+SAFE 6 3 min deg then max csize then max newcomp reachable_states= 2936
+done; safe minimal rules: 4

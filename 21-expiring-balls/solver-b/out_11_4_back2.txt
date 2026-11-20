@@ -1,0 +1,7 @@
+Fri Nov 20 12:09:55 AM PST 2026
+core seeds=3183950 t=44.8s
+n=11 L=4 core_seeds=3183950 core=3723730 attractor_nonterminal_visited=974272116 RESULT: Adversary CANNOT force load 4
+786.29s 331628kB
+Fri Nov 20 12:23:01 AM PST 2026
+
+[exited with code 0]
