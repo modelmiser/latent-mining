@@ -1,0 +1,16 @@
+Destructive-read counters. Fix integers r >= 1 and 0 <= w <= r. Memory is a string s in {0,1}^d, for any finite d you like.
+
+An (r,w)-destructive incrementer is a rooted binary tree T in which every internal node carries a bit index in {1..d} and has a 0-child and a 1-child; no index occurs twice on one root-to-leaf path; every root-to-leaf path has at most r internal nodes (paths may be shorter and of different lengths). Each leaf carries a set R of at most w indices, all occurring on that leaf's own root-to-leaf path.
+
+T defines a map f: {0,1}^d -> {0,1}^d. To compute f(s): start at the root; at an internal node with index i go to the s_i-child; at the leaf reached, let P be the set of indices on the path followed. Then f(s)_i = 1 for i in R, f(s)_i = 0 for i in P \ R, and f(s)_i = s_i for i not in P. In words: reading a bit erases it; the increment may then set at most w of the bits it read to 1 (the choice may depend on everything read); unread bits are untouched. No other state exists. f need not be a bijection.
+
+A cycle of length N is a state s with f^N(s) = s and f^k(s) != s for 0 < k < N. Let
+
+D(r,w) = the largest N such that some (r,w)-destructive incrementer, on some d, has a cycle of length N.
+
+T mentions at most 2^r - 1 indices, so d = 2^r - 1 suffices and D(r,w) <= 2^(2^r - 1). Anchors: D(r,0) = 1 (the number of 1s never increases, so on a cycle no 1 is ever read and the state never changes); D(r,r) is the unrestricted case where the leaf may give the read bits any values.
+
+Questions.
+1. Compute the table D(r,w) for all 0 <= w <= r <= 3.
+2. Determine D(r,1) for every r as a formula. In particular decide which holds: log2 D(r,1) is bounded by a polynomial in r, or log2 D(r,1) >= c * 2^r for some constant c > 0 and all r.
+3. Determine, as a formula in r, the least w = w(r) with D(r,w) = D(r,r).

@@ -1,0 +1,16 @@
+r=4 w=0 best_cycle=1806 nodes=48725926 complete
+r=4 w=1 best_cycle=1764 nodes=1120213456 complete
+r=4 w=2 best_cycle=1272 nodes=1766932267 complete
+r=4 w=3 best_cycle=900 nodes=1881126971 complete
+r=4 w=4 best_cycle=610 nodes=1884105993 complete
+r=4 w=5 best_cycle=400 nodes=1847692511 complete
+r=4 w=6 best_cycle=262 nodes=1696726043 complete
+r=4 w=7 best_cycle=172 nodes=1321670000 complete
+r=4 w=8 best_cycle=100 nodes=763068021 complete
+r=4 w=9 best_cycle=64 nodes=281970521 complete
+r=4 w=10 best_cycle=39 nodes=57770726 complete
+r=4 w=11 best_cycle=23 nodes=5723434 complete
+r=4 w=12 best_cycle=15 nodes=186243 complete
+r=4 w=13 best_cycle=7 nodes=1468 complete
+r=4 w=14 best_cycle=3 nodes=51 complete
+r=4 w=15 best_cycle=1 nodes=5 complete

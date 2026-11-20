@@ -1,0 +1,36 @@
+NOTATION. a_1 = 2, a_r = a_{r-1}(a_{r-1}+1): 2, 6, 42, 1806, 3263442, ... (= Sylvester's sequence minus 1).
+
+THEOREM 1 (COMPLETE).  D(r) >= a_r for all r >= 1.  Hence log2 D(r) >= 2^(r-1): not polynomially bounded in r.
+Construction. W_1 = (1 [1] []).  W_r = (1  W'  W'') where W'' is a copy of W_{r-1} on positions 2^(r-1)+1 .. 2^r-1 and W' is a
+copy of W_{r-1} on positions 2 .. 2^(r-1) in which the unique empty leaf is replaced by the leaf [1] (write the root).
+(mkwit.py prints them; witness_r1..r5.txt.)
+Inductive claim C(r): W_r is a valid depth-r tree on 2^r-1 positions, has exactly one empty leaf E, uses each position at exactly
+one node, and the orbit of the all-zero state is a cycle of length exactly a_r on which E is used exactly once.
+r=1: 0 -> 1 -> 0, leaf [] used once.  Step r-1 -> r.  Validity: depths grow by one; the new leaf [1] lies under the root, so 1 is on
+its path; W' and W'' use disjoint positions, so W_r has one empty leaf (that of W'').  Write a state as (x, u, v): x the root bit, u the
+bits of W', v the bits of W''.  Let g be the map of W_{r-1}.  If x=0 the step is (0,u,v) -> (e,g(u),v), with e=1 exactly when u uses the
+replaced leaf (an empty leaf of g, so the u-part still becomes g(u); x was read as 0 and is rewritten only by that leaf).  If x=1 the step
+is (1,u,v) -> (0,u,g(v)) (x is read hence erased, no leaf of W'' writes it).  Start at (0,0,0).  By C(r-1) the u-orbit of 0 under g
+has period exactly a:=a_{r-1} and uses the replaced leaf exactly once per period.  So the run is: a x=0-steps per round, one of them
+followed immediately by a single x=1-step; after k full rounds the state is (0,0,g^k(0)), reached after k(a+1) steps.  A return to
+(0,0,0) needs: u=0 with x=0, which happens only when the number of x=0-steps is a multiple of a and the pending x=1 step (if any) has
+been done, i.e. only at the round boundaries (inside a round the u-part is g^i(0) != 0 for 0<i<a, or i=a.. then the round is over); and
+v=0, i.e. a | k by C(r-1).  First return: k=a, after a(a+1)=a_r steps.  E (in W'') is used once per a x=1-steps, i.e. once.  QED.
+Lower bound on growth: a_r >= a_{r-1}^2 and a_1=2 give a_r >= 2^(2^(r-1)).
+
+THEOREM 2 (COMPLETE, trivial).  D(r) <= 2^d = 2^(2^r-1), so 2^(r-1) <= log2 D(r) <= 2^r - 1:  log2 D(r) = Theta(2^r).
+
+REMARK 3 (the problem's claim "for r>=2 the all-ones state has no preimage" is FALSE as stated).  Counterexample, any r>=2: the tree
+(1 [1] []) (one internal node, allowed since paths may be shorter than r).  0111..1 -> 1111..1 -> 0111..1: all-ones has a preimage
+and lies on a 2-cycle.  The claim is true if every root-to-leaf path has >= 2 internal nodes.
+SKETCH (not needed for any number reported): D(r) <= 2^d - 1 still holds for r>=2, because a cycle of length 2^d makes f a bijection,
+all-ones then needs a preimage, forcing the root's 0-child to be the leaf [root]; then the 1-subtree must be a bijection on the other
+bits, recursively a binary counter on <= r bits, period <= 2^r < 2^d.
+
+REMARK 4 (the weight claims in the problem are TRUE, COMPLETE): a step reading k ones erases k ones and writes at most one; a step that
+raises the weight read no one, so it followed the all-zero path, whose leaf is fixed.
+
+CONJECTURE (NOT PROVED): D(r) = a_r for all r.  Evidence: exhaustive computation for r = 1,2,3,4 (see report).  I have no proof of an
+upper bound better than 2^d - 1 for general r.
+OBSERVATION (COMPUTED for r<=3 only, not proved): on every cycle of length >= 2 of every depth-<=3 tree, at most one step uses an
+empty leaf (prod3.cpp).  Consequence (COMPUTED): among depth-4 trees whose two root subtrees use disjoint positions, the best is 1806.

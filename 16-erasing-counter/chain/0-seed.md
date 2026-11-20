@@ -1,0 +1,3 @@
+# Seed
+
+A counter holds a number from 0 to 2^n - 1 in d >= n bits of memory. To add one, an algorithm may inspect bits one at a time, choosing each next bit to inspect from what it has seen, and then overwrite some of the bits it inspected; it remembers nothing between increments. The ordinary binary counter may read and write all n bits. A Gray code writes one bit per increment but has to read every bit to find which. With a little extra memory, counters are known that read about log n bits and write a constant number. For each n and d: what is the least worst-case number of bits an increment must read, the least it must write, how do the two trade off, and what changes if the counter must also be able to subtract one?

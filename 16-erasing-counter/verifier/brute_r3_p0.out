@@ -1,0 +1,6 @@
+r=3 part 0/2 subtrees=41336 pairs=142443856
+hist 1:382238648 2:259202298 3:106605270 4:60511860 5:13907130 6:20686290 7:3360720 8:3324120 9:1612920 10:1466400 11:258840 12:875880 13:70920 14:17280 15:84960 16:138240 18:47520 20:32760 21:5040 24:5040 26:2160 30:2160
+bestW(min weight exactly w) 30 30 26 16 9 4 2 1
+bestM(exactly m indices in tree) 0 1 2 6 10 20 30 30
+max empty-leaf steps on a cycle of length>=2: 1 (cycles with >=2: 0)
+mixed cycles: max root=1 states 6, max run of root=0 6, max root=0 states 24

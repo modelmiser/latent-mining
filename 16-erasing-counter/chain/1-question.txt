@@ -1,0 +1,16 @@
+Fix integers r >= 1 and 1 <= w <= r. Memory is a string s in {0,1}^d, for any finite d you like.
+
+An (r,w)-incrementer is a rooted binary tree T in which every internal node carries a bit index in {1..d} and has a 0-child and a 1-child; no index occurs twice on one root-to-leaf path; every root-to-leaf path has at most r internal nodes. Each leaf carries a list of new values for some of the indices on its own path, such that at most w of those indices receive a value different from the value implied by the path (the branch taken at that index).
+
+T defines a map f: {0,1}^d -> {0,1}^d. To compute f(s): start at the root; at an internal node with index i go to the s_i-child; at the leaf, overwrite the listed bits with the listed values; all other bits are unchanged. The map uses no other state. Note that f need not be a bijection.
+
+A cycle of length N is a state s with f^N(s) = s and f^k(s) != s for 0 < k < N. Let
+
+L(r,w) = the largest N such that some (r,w)-incrementer, on some d, has a cycle of length N.
+
+(Since T touches at most 2^r - 1 indices, d = 2^r - 1 suffices and L(r,w) <= 2^(2^r - 1).) So L(r,w) is the largest modulus of a wrapping counter whose increment reads at most r bits and changes at most w, with memory free.
+
+Questions.
+1. Compute the table L(r,w) for all 1 <= w <= r <= 3.
+2. Determine L(r,r) and L(r,1) for every r, as formulas. In particular: for which r, if any, does L(r,r) = 2^(2^r - 1) hold, and is L(r,1) = L(r,r) for all r, for no r >= 2, or for some?
+3. Determine the least w = w(r) with L(r,w) = L(r,r).

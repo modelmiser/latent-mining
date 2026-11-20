@@ -1,0 +1,82 @@
+PROOFS (solver-a).  Notation: W_0 = 1, W_r = W_{r-1} (W_{r-1} + 1): 2, 6, 42, 1806, 3263442, ...
+(W_r = s_{r+1} - 1 with Sylvester's sequence s_1 = 2, s_{n+1} = s_n^2 - s_n + 1.)
+
+------------------------------------------------------------------------------------------
+THEOREM 1 (lower bound).  D(r) >= W_r for every r >= 1.                         COMPLETE
+------------------------------------------------------------------------------------------
+Induction hypothesis H(r): there is a tree M_r of depth <= r on exactly 2^r - 1 distinct
+indices, a cycle C_r of f of length W_r, and a leaf L_r ("free leaf") with R = empty such
+that exactly one state of C_r is routed to L_r.
+
+r = 0: M_0 is a single leaf with R = empty on 0 indices; f = identity, the cycle is the
+single (empty) state, W_0 = 1, the leaf is the free leaf.
+
+Step.  Take two copies of M_{r-1} on disjoint index sets X and Y and a new index a.
+M_r: root a; 0-child = the X-copy in which the free leaf's R is changed from empty to {a}
+(a is on that leaf's path, so this is legal); 1-child = the unchanged Y-copy.
+Depth <= 1 + (r-1); indices 1 + 2(2^{r-1} - 1) = 2^r - 1; no index repeats on a path.
+Write a state as (a, x, y), g = the map of M_{r-1}.
+  (0, x, y) -> (0, g(x), y)   if x is not routed to the free leaf of the X-copy
+               (reading a = 0 leaves a = 0; the rest is exactly a step of M_{r-1} on x);
+  (0, x, y) -> (1, g(x), y)   if x is routed to the free leaf (that leaf erased everything
+               it read on X both before and after the change; it now also sets a);
+  (1, x, y) -> (0, x, g(y))   (a is read and erased; the Y-copy acts on y, never writes a).
+Let x_0, ..., x_{W-1} (W = W_{r-1}) be C_{r-1} listed so that x_{W-1} is the state routed
+to the free leaf, and y_0, ..., y_{W-1} be C_{r-1} in order.  From (0, x_0, y_k) the orbit is
+(0,x_0,y_k), (0,x_1,y_k), ..., (0,x_{W-1},y_k), (1,x_0,y_k), (0,x_0,y_{k+1}), ...
+The W^2 + W states (0,x_j,y_k), (1,x_0,y_k) (0 <= j,k < W) are pairwise distinct and are
+visited in this order, returning to the start after exactly W(W+1) = W_r steps.
+The free leaf of the Y-copy has R = empty in M_r and is used by exactly one state of this
+cycle, namely (1, x_0, y*) with y* the state of C_{r-1} routed to it.  So H(r) holds.  QED
+(For r = 2 this is exactly the 6-cycle in the problem statement.)
+Machine-checkable: sylvester_r1..r5.txt, checked by verify.py (direct simulation).
+
+COROLLARY.  W_r >= W_{r-1}^2 and W_1 = 2 give W_r >= 2^(2^(r-1)), so
+     2^(r-1) <= log2 D(r) <= 2^r - 1,
+(the upper bound because a cycle has at most 2^d states).  Hence log2 D(r) is NOT bounded
+by any polynomial in r.                                                          COMPLETE
+(Numerically log2 W_r = 0.6762... * 2^r - o(1).)
+
+------------------------------------------------------------------------------------------
+LEMMA 2 (structure of cycles).                                                   COMPLETE
+------------------------------------------------------------------------------------------
+Let Z = (z_1 = root index, z_2, ..., z_k) be the indices on the all-zero path, and call a
+step a "creation" if it follows the whole all-zero path and its leaf writes.
+(a) A step whose path reads c ones changes the weight by 1 - c or -c; only a creation
+    raises the weight, by exactly 1, always at the same position p0 in Z.
+(b) Every non-creation step with at least one 1 read reads z_1, z_2, ... up to the first
+    i with s_{z_i} = 1 (it follows the all-zero path until then), erases it, and writes at
+    most one bit; so |s ∩ Z| never increases except from 0 to 1 by a creation.
+(c) Hence on a cycle that contains a creation, every state has at most one 1 inside Z.
+    On a cycle with no creation the weight is constant, every step reads exactly one 1
+    (the first one in Z) and writes one; by (b) the count inside Z is then constant, so
+    the write is inside Z; only bits of Z ever change, so such a cycle has length <= 2^k
+    <= 2^r <= W_r (r >= 2; and <= 2 = W_1 for r = 1).
+Proof of (a): all read bits are erased and at most one is written.  (b): the walk follows
+0-children while it reads zeros, i.e. it stays on the all-zero path until its first 1.
+(c): the count in (b) is non-increasing between creations, equals 0 just before one.  QED
+
+------------------------------------------------------------------------------------------
+REMARK 3 (the problem's upper-bound claim is wrongly argued).                    COMPLETE
+------------------------------------------------------------------------------------------
+"For r >= 2 the all-ones state has no preimage" is FALSE for some trees: let the 0-child
+of the root be a leaf writing the root; then 0 1 1 ... 1 -> 1 1 ... 1.  (With r = 3 and a
+3-index caterpillar "binary counter" all 8 states of those 3 bits lie on one cycle.)
+The conclusion D(r) <= 2^d - 1 (r >= 2) is nevertheless true: if all-ones is on a cycle of
+length > 1, its predecessor's leaf has a 1-index path, so the 0-child of the root is a leaf
+writing the root; then steps alternate / or stay in the 1-subtree T1, the states with
+root = 1 have pairwise distinct remaining bits which form a cycle of the depth-(r-1) tree
+T1 (leaves writing the root replaced by empty), at most 2^(2^(r-1) - 1) of them, and at
+most as many states with root = 0, so N <= 2^(2^(r-1)) < 2^d - 1 for r >= 2.
+
+------------------------------------------------------------------------------------------
+CONJECTURE 4.  D(r) = W_r for all r (equivalently D(r) = D(r-1)^2 + D(r-1)).   NOT PROVED
+------------------------------------------------------------------------------------------
+Status: exhaustively verified for r = 1, 2, 3 (two independent programs for r = 3).
+No proof, not even a sketch I trust.  The obstacle: in the decomposition "steps with
+root = 0 use T0, steps with root = 1 use T1" the two subtrees may share indices, so the
+root=1 steps are not a cycle of a depth-(r-1) machine on their own memory, and a run of
+root=0 steps may be a transient (not a cycle) of T0.  For r = 3 sharing does not help
+(the 24 optimal trees in the symmetry-reduced enumeration are exactly the relabelings of
+M_3), and annealing at r = 4 never exceeded 1806, but for large r the conjecture is a guess:
+W_r uses only about 0.676 * 2^r of the 2^r - 1 available bits.

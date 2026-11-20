@@ -1,0 +1,43 @@
+N=2 j: 0 1
+N=3 j: 0 1
+N=4 j: 0 1
+N=5 j: 0 1
+N=6 j: 0 1
+N=7 j: 0 1
+N=8 j: 0 1
+N=9 j: 0 1
+N=10 j: 0 1
+N=11 j: 0 1
+N=12 j: 0 1
+N=13 j: 0
+N=14 j: 0 1
+N=15 j: 0 1
+N=16 j: 0 1
+N=18 j: 0 1
+N=19 j: 0
+N=20 j: 0 1
+N=21 j: 0 1
+N=22 j: 0
+N=24 j: 0 1
+N=26 j: 0
+N=28 j: 0 1
+N=30 j: 0 1
+N=36 j: 0
+N=42 j: 0 1
+period 1806 N=42 j=1 M=42 k=42
+period 1764 N=42 j=1 M=42 k=41
+period 1548 N=42 j=1 M=36 k=36
+period 1302 N=30 j=1 M=42 k=42
+period 1290 N=42 j=1 M=30 k=30
+period 1272 N=30 j=1 M=42 k=41
+period 1248 N=42 j=1 M=30 k=29
+period 1218 N=28 j=1 M=42 k=42
+period 1204 N=42 j=1 M=28 k=28
+period 1190 N=28 j=1 M=42 k=41
+period 1162 N=42 j=1 M=28 k=27
+period 1118 N=42 j=1 M=26 k=26
+period 1116 N=30 j=1 M=36 k=36
+period 1050 N=24 j=1 M=42 k=42
+period 1044 N=28 j=1 M=36 k=36
+T0 witness (N=42,j=1): (1 (2 (3 [3] [2]) (4 [4] [1])) (5 (6 [6] [5]) (7 [7] []))) start=0 mask=1
+T1 witness (M=42,stays=0): (1 (2 (3 [3] [2]) (4 [4] [1])) (5 (6 [6] [5]) (7 [7] []))) start=0 mask=0

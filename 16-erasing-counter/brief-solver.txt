@@ -1,0 +1,57 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Fix an integer r >= 1 and put d = 2^r - 1. Memory is a string s in {0,1}^d with positions 1..d.
+
+A destructive single-write incrementer of depth r is a finite rooted binary tree T such that:
+- every internal node carries an index in {1..d} and has exactly two children, a 0-child and a 1-child;
+- no index occurs twice on one root-to-leaf path (the same index may occur in different branches);
+- every root-to-leaf path has at most r internal nodes (paths may be shorter, and of different lengths; T may be a single leaf);
+- every leaf carries a set R that is either empty or one index occurring on that leaf's own root-to-leaf path.
+
+T defines f: {0,1}^d -> {0,1}^d. To compute f(s): start at the root; at an internal node with index i move to the s_i-child; stop at a leaf. Let P be the set of indices on the path followed and R that leaf's set. Then f(s)_i = 1 if i is in R, f(s)_i = 0 if i is in P \ R, and f(s)_i = s_i if i is not in P. In words: every bit read is erased; the step may then set one of the bits it just read to 1, chosen as a function of everything read; unread bits keep their value. There is no state other than s. f need not be injective.
+
+A cycle of length N >= 1 is a state s with f^N(s) = s and f^k(s) != s for 0 < k < N. Define
+
+D(r) = the largest N such that some destructive single-write incrementer of depth r has a cycle of length N.
+
+(Larger d gives nothing: T mentions at most 2^r - 1 indices and never changes the others.)
+
+HEADLINE: find the exact function D(r) for all r >= 1. An answer must include the values D(2) and D(3), and must settle whether log2 D(r) is bounded above by a polynomial in r.
+
+UNVERIFIED:
+- D(1) = 2 (toggle the single bit).
+- 6 <= D(2) <= 7. Lower bound: root a, 0-child b, 1-child c; on (a,b)=(0,0) write b; on (0,1) write a; on (a,c)=(1,0) write c; on (1,1) write nothing; this gives abc = 000, 010, 100, 001, 011, 101, back to 000. Upper bound: for r >= 2 the all-ones state has no preimage, so D(r) <= 2^d - 1.
+- For r >= 2 a step whose path reads k ones lowers the weight by at least k - 1, and only the unique all-zero path can raise it, always by writing the same position.
+
+GUESS: I would bet log2 D(r) is polynomial in r, because after each step the bits just read hold at most one 1, so only about log2(r+1) bits of control pass from one step to the next and the stock of unread 1s can be reached only through that channel.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.
