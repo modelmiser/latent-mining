@@ -1,0 +1,25 @@
+# top-scheme witness (sat.cpp): n=3 t=2 mode=S init=010. Q <config> <EMPTY|0|1>; E <config> <op> <config>; config = n chars, cell 1 first. Unlisted E = identity, unlisted Q = EMPTY.
+n 3
+t 2
+init 010
+Q 000 0
+Q 100 0
+Q 010 1
+Q 101 0
+Q 011 0
+Q 111 1
+E 000 PUSH0 100
+E 000 PUSH1 010
+E 000 POP 010
+E 100 PUSH0 101
+E 100 PUSH1 111
+E 100 POP 101
+E 010 PUSH0 011
+E 010 PUSH1 111
+E 010 POP 011
+E 101 PUSH0 111
+E 101 PUSH1 111
+E 101 POP 111
+E 011 PUSH0 111
+E 011 PUSH1 111
+E 011 POP 111

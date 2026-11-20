@@ -1,0 +1,48 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Objects. Fix an integer n >= 1. A configuration is an element of {0,1}^n; write c <= c' when every coordinate that is 1 in c is 1 in c'. The start configuration is 0^n. A stack is a finite binary string, initially empty. The operations are PUSH0 and PUSH1 (append that bit to the end; always legal) and POP (delete the last bit; legal only when the string is non-empty). The top of a non-empty stack is its last bit.
+
+Scheme. A top-scheme is a pair (Q, E). Q maps each configuration to one of the three symbols EMPTY, 0, 1. E maps each pair (configuration c, operation in {PUSH0, PUSH1, POP}) to a configuration c' with c <= c' (c' = c allowed). Both are deterministic functions of their stated arguments only; they see neither the stack, nor the history, nor the number of operations performed.
+
+Play, for an integer t >= 0. First the scheme is fixed (it may depend on n and t). Then an adversary who knows the scheme, n and t chooses a sequence of at most t operations, each legal for the stack at the moment it is applied. The memory starts at 0^n; each operation op replaces the current configuration c by E(c, op) and updates the stack. The scheme survives the sequence if, after every operation, Q of the current configuration is the top of the current stack when the stack is non-empty, and EMPTY when it is empty. (Nothing is checked before the first operation.) The scheme survives t if it survives every such sequence. R(n) is the largest t that some top-scheme survives; survival of t implies survival of t - 1, and R(n) <= n - 1 (below), so R(n) is well defined.
+
+Headline question. Is R(n) = n - 1 for every n >= 1? Answer YES with a proof (a scheme on n cells surviving n - 1 operations, for every n), or NO by giving the least n0 with R(n0) <= n0 - 2. In either case determine R(n) for n = 1, ..., 7.
+
+UNVERIFIED claims (previous thinker's and mine, by hand only).
+- Upper bound R(n) <= n - 1: the sequences PUSH0, PUSH1, PUSH0, ... and PUSH1, PUSH0, PUSH1, ... change the top at every step, so each step sets at least one new cell; after n steps both sit at 1^n with different tops.
+- Lower bound R(n) >= floor(n/2): use cells in pairs, write 01 or 10 into the first untouched pair on a push, overwrite the rightmost pair equal to 01 or 10 with 11 on a pop; Q reads the rightmost such pair.
+- Every operation that is not the last allowed one must change the configuration (a later POP would otherwise expose the difference), so in a scheme surviving t = n - 1 the number of 1-cells after s operations is s or slightly more.
+- R(1) = 0, R(2) = 1, R(3) = 2, R(4) = 3. Example for n = 3, t = 2: PUSH0 -> 001, PUSH1 -> 010; from 001: POP -> 011, PUSH0 -> 001, PUSH1 -> 101; from 010: POP -> 011, PUSH1 -> 010, PUSH0 -> 110; Q(011) = EMPTY, Q(001) = Q(110) = 0, Q(010) = Q(101) = 1.
+
+Guess (a bet, not a result): YES, R(n) = n - 1 for all n, because the number of weight-s configurations outgrows the number of stacks that remain distinguishable within the remaining budget, so the single spare cell should suffice; my doubt is whether the superset constraint can be met simultaneously for all stacks in the middle of the game.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

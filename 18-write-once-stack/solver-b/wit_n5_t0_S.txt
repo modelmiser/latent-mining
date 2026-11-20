@@ -1,0 +1,4 @@
+# top-scheme witness: n=5 t=0 mode=S. Lines: Q <config> <EMPTY|0|1> ; E <config> <PUSH0|PUSH1|POP> <config>. Config = n chars, cell 1 first. Unlisted E = identity, unlisted Q = EMPTY.
+n 5
+t 0
+Q 00000 EMPTY

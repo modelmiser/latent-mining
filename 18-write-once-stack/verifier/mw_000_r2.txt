@@ -1,0 +1,13 @@
+# referee witness
+n 2
+t 2
+init 000
+Q 00 0
+E 00 PUSH0 00
+E 00 PUSH1 10
+E 00 POP 00
+Q 10 1
+E 10 PUSH0 11
+E 10 PUSH1 10
+E 10 POP 11
+Q 11 0

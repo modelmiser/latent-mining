@@ -1,0 +1,10 @@
+# top-scheme n=5 surviving t=2 with Q(0^n)=EMPTY. Config = n-char binary string, cell 1 first.
+# line: config Q E(PUSH0) E(PUSH1) E(POP); unlisted configs: Q=EMPTY, all E = stay
+n 5 t 2
+00000 EMPTY 10000 01000 00000
+10000 0 11011 10111 11111
+01000 1 11011 01111 11111
+11011 0 11011 11011 11011
+10111 1 10111 10111 10111
+01111 1 01111 01111 01111
+11111 EMPTY 11111 11111 11111

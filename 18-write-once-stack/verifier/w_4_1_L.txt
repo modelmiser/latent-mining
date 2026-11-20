@@ -1,0 +1,8 @@
+# referee witness
+n 4
+t 1
+init -
+Q 0000 0
+E 0000 PUSH0 0000
+E 0000 PUSH1 1000
+Q 1000 1

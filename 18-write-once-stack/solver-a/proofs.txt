@@ -1,0 +1,89 @@
+PROOFS (solver-a).  Each item is marked COMPLETE or SKETCH.
+
+Notation: t = number of operations allowed, c(h) = configuration after the operation sequence h,
+|c| = number of 1-cells. "Literal reading": Q(0^n) is not checked before the first operation.
+"Root-empty reading": Q(0^n) = EMPTY is additionally required.
+
+----------------------------------------------------------------------------------------------
+1. Upper bound.  COMPLETE.
+   (a) Literal reading:   for every n >= 2 no scheme survives t = n, so R(n) <= n - 1.
+       For n = 1 the bound is FALSE: R(1) = 1 (witness_n1_t1.txt: Q(0)=0, PUSH0 stays, PUSH1 -> 1).
+   (b) Root-empty reading: for every n >= 1 no scheme survives t = n.
+
+   Fact F. If two consecutive positions of a play (both after at least one operation) have
+   different tops, their configurations differ (Q is a function of the configuration and was
+   checked at both), and since E is monotone the second has strictly more 1-cells.
+
+   The statement's own argument is incomplete under the literal reading: the FIRST operation
+   need not set a cell, because Q(0^n) is unchecked (this is exactly what makes R(1) = 1).
+
+   Proof of (a). Suppose a scheme survives t = n >= 2.
+   Case A: E(0^n,PUSH0) != 0^n and E(0^n,PUSH1) != 0^n. Play s = PUSH0,PUSH1,PUSH0,... and
+     s' = PUSH1,PUSH0,PUSH1,..., n operations each. The first operation sets a cell by assumption,
+     every later one by Fact F (the top alternates). So after n operations both plays are at 1^n,
+     but their tops differ. Contradiction.
+   Case B: E(0^n,PUSHb) = 0^n for some b. Then Q(0^n) = b (checked after that PUSHb).
+     n >= 3: the plays PUSHb,POP and PUSHb,PUSHb,POP (length <= 3 <= t) both end in E(0^n,POP);
+       the first needs Q = EMPTY, the second Q = b. Contradiction.
+     n = 2 (t = 2): let b' = 1-b, x = E(00,PUSHb'). Q(x) = b' so x != 00. PUSHb',PUSHb ends in
+       y >= x with Q(y) = b, so y > x strictly; PUSHb',POP ends in z >= x with Q(z) = EMPTY, so
+       z > x strictly and z != y. If |x| = 2 no such y exists; if |x| = 1 then y = z = 11.
+       Contradiction.
+   Proof of (b). Now Q(0^n) = EMPTY, so E(0^n,PUSHb) != 0^n for both b; Case A applies verbatim.
+
+   Consequence: with the witnesses of section 3, R(n) = n - 1 exactly for 2 <= n <= 8 (both readings),
+   R(1) = 1 (literal) or 0 (root-empty). No SAT/search "impossible" verdict is needed for these values;
+   the search verdicts at t = n (and t = n + 1) merely agree with this proof.
+   R(1) <= 1 literal: slow.py enumerates all 72 schemes on one cell for t = 2 (none survives);
+   by hand: a scheme surviving t = 2 on one cell would, by Fact F applied to PUSH0,PUSH1 and
+   PUSH1,PUSH0 (second step must set the cell in both), end both plays in configuration 1 with
+   different tops.
+
+----------------------------------------------------------------------------------------------
+2. Exactness of the type abstraction used by sat.cpp, search.cpp, search2.cpp.  COMPLETE.
+   Claim: with r operations to go, only the last min(len, r+1) bits of the stack can influence
+   any future top (and whether POP is legal).  Proof: within r operations at most r POPs occur,
+   so the deepest stack element that can become the top is the (r+1)-th from the top; a stack
+   with at least r+1 elements cannot be emptied (after r POPs one element remains).  Pushed bits
+   are known. Hence the set of legal continuations of length <= r and all tops along them are the
+   same for a stack and for its last r+1 bits.
+   Consequence: a scheme (Q,E) survives t iff the least family of sets L[(s,d)] of configurations
+   closed under  "0^n in L[(empty,0)]"  and  "c in L[(s,d)], d < t, op legal => E(c,op) in
+   L[(trunc(s.op, t-d), d+1)]"  has Q(c) = top(s) for all c in L[(s,d)], d >= 1.  The SAT encoding
+   (header of sat.cpp) states exactly this, with E relaxed to a relation: any model restricted to
+   one chosen successor per (c,op) is a scheme whose reachable sets are inside the model's L, and
+   conversely a scheme gives a model.  Symmetry breaking (sym=1) only fixes the cell names of
+   E(0^n,PUSH0), E(0^n,PUSH1) up to a permutation of cells, which maps schemes to schemes.
+   (Independent of this argument, every SURVIVES verdict is re-checked by check.py from the definition.)
+
+----------------------------------------------------------------------------------------------
+3. Lower bounds R(n) >= n - 1 for n <= 8.  COMPLETE (by witness).  n = 9: two 1500 s runs timed out, R(9) in {7,8}.
+   witness_n{n}_t{n-1}.txt, verified by check.py over every legal sequence of length <= n - 1.
+   witness_n{n}_t{n-1}_rootempty.txt: same with Q(0^n) = EMPTY (check.py --root-empty).
+
+----------------------------------------------------------------------------------------------
+4. The statement's third UNVERIFIED claim ("every operation that is not the last allowed one must
+   change the configuration") is FALSE.  COMPLETE (by witness): stays.py lists, in surviving
+   schemes with t = n - 1, non-last operations that leave the configuration unchanged
+   (e.g. n = 5, t = 4: the third PUSH1 of PUSH1,PUSH1,PUSH1).  What is true (COMPLETE, from section 2):
+   for a history of length >= 1 with r operations to go BEFORE the operation, PUSHb can leave the
+   configuration unchanged only if the stack has at least r elements and its top r elements all
+   equal b; POP only if the stack has at least r+1 elements and its top r+1 elements are all equal.
+   (Reason: the histories before and after then share a configuration, so they must have equal tops
+   now and after every common continuation of length <= r - 1, i.e. after up to r - 1 POPs.)
+
+----------------------------------------------------------------------------------------------
+5. The pair scheme (R(n) >= floor(n/2)).  COMPLETE (elementary; also checked: pairs_n*.txt for n <= 8).
+   It fails at floor(n/2)+1 (pairs_n6_t4_SHOULD_FAIL.txt is rejected), so it is far from optimal.
+
+----------------------------------------------------------------------------------------------
+6. Why the pair scheme cannot simply be continued to n - 1.  SKETCH (not needed for any table entry).
+   If the first phase is the pair scheme, at the moment the fresh pairs run out with l live pairs
+   there are exactly r + 1 = l zero cells and all l live bits are still needed; a PUSH must then set
+   the free cell of one of the two BOTTOM live pairs. Three reachable states that differ only in which
+   two of three low pairs are live would need three pairwise different Q-values among two symbols.
+   So optimal schemes for larger n must treat popped pairs differently; I found no general construction.
+
+----------------------------------------------------------------------------------------------
+7. General statement "R(n) = n - 1 for all n >= 2".  NOT PROVED.  Upper bound: proved (section 1).
+   Lower bound: only by computed witnesses for n <= 8. R(n) is nondecreasing in n (ignore a cell), so R(9) >= 7.

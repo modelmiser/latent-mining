@@ -1,0 +1,10 @@
+# top-scheme n=3 surviving t=2 with Q(0^n)=EMPTY. Config = n-char binary string, cell 1 first.
+# line: config Q E(PUSH0) E(PUSH1) E(POP); unlisted configs: Q=EMPTY, all E = stay
+n 3 t 2
+000 EMPTY 100 010 000
+100 0 110 101 111
+010 1 110 011 111
+110 0 110 110 110
+101 1 101 101 101
+011 1 011 011 011
+111 EMPTY 111 111 111

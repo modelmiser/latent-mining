@@ -1,0 +1,4 @@
+# top-scheme n=6 surviving t=0 with Q(0^n)=EMPTY. Config = n-char binary string, cell 1 first.
+# line: config Q E(PUSH0) E(PUSH1) E(POP); unlisted configs: Q=EMPTY, all E = stay
+n 6 t 0
+000000 EMPTY 000000 000000 000000

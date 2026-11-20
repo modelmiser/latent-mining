@@ -1,0 +1,3 @@
+# Seed
+
+A memory consists of cells that start at 0 and can be changed to 1 but never back. Rivest and Shamir showed that three such cells can hold a two-bit value and allow it to be changed once to any other value, where the obvious method needs four cells. Storing one value several times is well studied. Suppose instead that the memory must hold a small data structure that changes many times under an adversary's choice of operations: a counter that is incremented and decremented, a stack with pushes and pops, a pointer that moves along a line. Reading must recover the current contents from the cells alone. For each structure and each number t of operations: how many cells are needed in the worst case, and what do the best encodings look like?

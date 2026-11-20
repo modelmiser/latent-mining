@@ -1,0 +1,5 @@
+# referee witness
+n 0
+t 0
+init 1
+Q  1

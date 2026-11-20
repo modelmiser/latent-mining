@@ -1,0 +1,8 @@
+# the n=3, t=2 example from the problem statement, transcribed
+n 3 t 2
+000 EMPTY 001 010 000
+001 0 001 101 011
+010 1 110 010 011
+011 EMPTY 011 011 011
+110 0 110 110 110
+101 1 101 101 101

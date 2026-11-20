@@ -1,0 +1,15 @@
+A memory has n cells, each 0 or 1, all initially 0. A cell may be changed from 0 to 1, never back. A configuration is an element of {0,1}^n; write c <= c' when every cell that is 1 in c is 1 in c'.
+
+The data is a stack of bits: a finite binary string, initially the empty string. Three operations exist: PUSH0 and PUSH1 append the given bit to the end of the string; POP deletes the last bit and is legal only when the string is non-empty.
+
+A scheme is a pair (D, E). D maps each configuration to a binary string or to the symbol "invalid", with D(0^n) = the empty string. E maps a pair (configuration c, operation) to a configuration c' with c <= c'. E is deterministic and sees only the current configuration and the requested operation; D sees only the configuration.
+
+Play: an adversary who knows the scheme chooses a sequence of operations, each legal for the current stack. After each operation the memory is changed from its configuration c to E(c, operation). The scheme survives the sequence if after every operation D of the memory's configuration equals the current stack exactly (the whole string, in order).
+
+Let T(n) be the largest t such that some scheme survives every legal sequence of at most t operations.
+
+(Spending two fresh cells per operation - 01 for a pushed 0, 10 for a pushed 1, and overwriting the last live pair with 11 on a pop - gives T(n) >= floor(n/2). Since each operation changes the stack, each must set at least one cell, and all strings of length at most t need distinct configurations, so T(n) <= n - 1.)
+
+Questions:
+1. Determine T(n) exactly for n = 1, 2, ..., 8.
+2. Determine T(n) for all n, or at least the constant lambda = lim T(n)/n (prove the limit exists and give its value, which lies in [1/2, 1]).

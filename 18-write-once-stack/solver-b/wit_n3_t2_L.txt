@@ -1,0 +1,14 @@
+# top-scheme witness: n=3 t=2 mode=L. Lines: Q <config> <EMPTY|0|1> ; E <config> <PUSH0|PUSH1|POP> <config>. Config = n chars, cell 1 first. Unlisted E = identity, unlisted Q = EMPTY.
+n 3
+t 2
+Q 000 0
+Q 100 1
+Q 010 EMPTY
+Q 110 0
+Q 101 EMPTY
+E 000 PUSH0 000
+E 000 PUSH1 100
+E 000 POP 010
+E 100 PUSH0 110
+E 100 PUSH1 100
+E 100 POP 101

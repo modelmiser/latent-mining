@@ -1,0 +1,89 @@
+PROOFS (solver-b).  Each item is marked COMPLETE or SKETCH.
+
+Notation. A "situation" is a pair (S, r): current stack S, r operations still allowed. top(S) in {0,1,EMPTY}.
+Reading L (literal text): nothing is checked before the first operation, so Q(0^n) is unconstrained.
+Reading S (strict): additionally Q(0^n) = EMPTY is required.  R_L, R_S are the two versions of R.
+
+----------------------------------------------------------------------
+P0. Reduction used by all programs.                                COMPLETE
+A scheme survives t iff there is a relation "config c hosts situation x" with
+ (a) 0^n hosts (empty, t);
+ (b) if c hosts (S,r), r>=1 and op is legal for S, then E(c,op) hosts (S op, r-1);
+ (c) if c hosts (S,r) and (S,r) is not the start situation, then Q(c)=top(S)   [reading S: also for the start].
+(=>) take "hosts" = reachability by a legal sequence of length <= t.  (<=) induction on the sequence.
+Unreached configs carry no constraint, so E = identity and Q arbitrary there.
+Only the top r+1 entries of S (with the bottom mark if S is shorter) matter for (S,r): r operations can
+expose nothing deeper, and legality of POP within r steps depends only on whether |S| <= r.
+
+----------------------------------------------------------------------
+P1. Upper bound.                                                   COMPLETE
+Claim: R_S(n) <= n-1 for all n >= 1;  R_L(n) <= n-1 for all n >= 2;  R_L(1) = 1.
+
+Let A = PUSH0,PUSH1,PUSH0,... and B = PUSH1,PUSH0,PUSH1,... (n operations each).  In both, the top after step
+k+1 differs from the top after step k (k>=1), so Q differs, so the configuration differs, so (monotonicity) at
+least one new cell is set at every step from the second on.
+Reading S: Q(0^n)=EMPTY, so the first step also sets a cell.  After n steps both runs are at 1^n with different
+tops.  Contradiction; so no scheme survives t = n.
+Reading L, n >= 3, t = n: if E(0^n,PUSH0) != 0^n and E(0^n,PUSH1) != 0^n the same argument applies.  Otherwise
+say E(0^n,PUSHb) = 0^n.  Then PUSHb,PUSHb ends at 0^n, so PUSHb,PUSHb,POP (legal, length 3 <= t) ends at
+e = E(0^n,POP) with top b, while PUSHb,POP ends at the same e with top EMPTY.  Contradiction.
+Reading L, n = 2, t = 2: if neither push fixes 00, argue as before.  Else say E(00,PUSH0)=00, so Q(00)=0, so
+c1 = E(00,PUSH1) != 00.  PUSH1,POP and PUSH1,PUSH0 end at configs containing c1 with Q = EMPTY and Q = 0, both
+different from Q(c1) = 1, hence both strictly above c1; the only such config is 11 (none if c1 = 11).
+Contradiction.  (b=1 symmetric.)
+n = 1: reading L, t = 1 is survived by E(0,PUSH0)=0, Q(0)=0, E(0,PUSH1)=1, Q(1)=1 (POP is illegal, nothing is
+checked on the empty sequence).  t = 2 is impossible: PUSH0, PUSH1 and PUSH0,POP need three different Q values
+on two configurations.  So R_L(1) = 1, R_S(1) = 0.
+NOTE: the problem's own proof of "R(n) <= n-1" silently assumes the first push changes the configuration; under
+the literal text that is false, and the bound itself is false for n = 1.
+
+----------------------------------------------------------------------
+P2. Readings agree for t >= 3.                                     COMPLETE
+If a scheme survives t >= 3 under reading L then (argument in P1) E(0^n,PUSH0) != 0^n != E(0^n,PUSH1), so 0^n is
+never re-entered (monotonicity); resetting Q(0^n) := EMPTY gives a scheme valid under reading S.  The converse
+is trivial.  Hence R_L(n) = R_S(n) whenever either is >= 3 (and for n = 2,3 by the computed table).
+
+----------------------------------------------------------------------
+P3. Lower bound R(n) >= floor(n/2) (pair scheme).                  COMPLETE
+p = floor(n/2) pairs of cells (an odd last cell unused).  Pair 10 = "bit 0", 01 = "bit 1", 00 = untouched,
+11 = dead.  PUSH b: write b's pattern into the leftmost untouched pair.  POP: turn the rightmost pair equal to
+01 or 10 into 11.  Q: the bit of the rightmost 01/10 pair, EMPTY if there is none.
+Invariant (induction over the sequence, while #pushes <= p): touched pairs form a prefix; reading the 01/10
+pairs left to right gives the stack bottom-to-top.  PUSH: the new pair is right of all touched pairs, so it
+becomes the rightmost live pair.  POP (stack non-empty): removes the rightmost live pair = the top.  Every
+transition only sets cells.  A sequence of <= p operations has <= p pushes, so an untouched pair is always
+available.  Both readings.  Machine check: pairscheme.py + check.py, n = 2..10.
+
+----------------------------------------------------------------------
+P4. Lower bound R(n) >= floor(n/2) + 2 for all n >= 6.             COMPLETE, relying on a finite computed table
+Table fact T5 (computed by sat.cpp, every witness re-checked by check.py, files mwit/w_<w>_r<r>.txt, 246 files):
+ for every r <= 5 and every stack w with |w| <= r+1 there is a scheme on r+1 cells, started at 0^(r+1) with
+ stack w and Q(0^(r+1)) = top(w), surviving r operations.
+Construction for n = 2p+6 (+1 unused cell if n is odd), t = p+5.  Run the pair scheme of P3 on the p pairs as
+long as an untouched pair exists.  Once none exists (this is a function of the configuration), the pairs are
+frozen; they determine the whole stack w and the number d of dead pairs, hence the number of operations done,
+p+d, hence a bound r = t-p-d <= 5 on the operations left.  From then on apply to the first r+1 of the six extra
+cells the T5 scheme for (top r+1 entries of w, r).  Its start config is all-zero with Q = top(w), which is
+what the pair reading gave, so Q is well defined; E and Q are functions of the configuration; cells are only
+set.  By P0 (only the top r+1 entries matter within r steps) the T5 scheme answers correctly for the r
+remaining operations.  Sequences that never exhaust the pairs are handled by P3.
+t = p+5 = floor(n/2)+2.  Machine check of the assembled scheme: hybrid.py + check.py for n = 6, 8, 10, 12.
+(With the r = 6 table the same argument would give floor((n+5)/2); that table was not completed/stored.)
+
+----------------------------------------------------------------------
+P5. The problem's third UNVERIFIED claim is false.                 COMPLETE (explicit counterexample)
+"Every operation that is not the last allowed one must change the configuration": in wit_n5_t4_L.txt (n=5,
+t=4, verified) E(00000,PUSH0)=10000, E(10000,PUSH0)=11000, E(11000,PUSH0)=11000: the third operation of
+PUSH0,PUSH0,PUSH0 is not the last allowed one and changes nothing.  What is true: a step from (S,r) to
+(S op, r-1) may leave the configuration unchanged only if the two situations agree on every common legal
+continuation of length <= r-1.  For a push of b from (S,r), r >= 1, that holds iff |S| >= r and the top r
+entries of S are all b, i.e. only inside a constant run at least as long as the remaining budget.
+
+----------------------------------------------------------------------
+S1. Headline R(n) = n-1 for all n.                                 NOT PROVED (no sketch offered as proof)
+Equivalent strengthened statement G(r): "for every initial stack w, r+1 cells suffice for r operations"
+(the headline is the case w = empty).  G(r) is COMPUTED true for r <= 5, all w (table T5) and for w = empty up
+to r = 7.  Observed and computed: for r >= 3 every type needs exactly r+1 cells, so every situation on a path
+whose steps are all forced sits at weight exactly = number of steps; any general construction must spend
+exactly one cell per forced operation.  The obvious induction (three sub-schemes above three singletons) fails
+because the three sub-cubes overlap pairwise; I found no invariant that repairs it.
