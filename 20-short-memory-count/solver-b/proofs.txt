@@ -1,0 +1,134 @@
+PROOFS (solver-b).  Each item is tagged COMPLETE or SKETCH.  Nothing here is needed for the COMPUTED table
+except Lemma 1 (which the programs use as the definition of g) and Lemma 2 (which justifies the pruning).
+
+Notation: w window, s a target spread, "lit" = reachable state with spread <= s, "unlit" = reachable state
+with spread > s.  q.x = state reached from q by reading x.  All states mentioned are reachable.
+
+------------------------------------------------------------------------------------------------------------
+Lemma 0 (COMPLETE).  Every reachable state on a cycle has non-empty C; a state has empty C only if it is
+unreachable or reachable only by strings shorter than w.
+Proof.  A state on a cycle reachable from q0 is reached by arbitrarily long strings (go round the cycle). []
+
+Lemma 1 (COMPLETE).  g(M) <= s  iff  the directed graph induced by M on the unlit states has no cycle.
+Hence g(M) = least s for which the unlit states induce an acyclic graph.
+Proof.  If the unlit states induce a cycle (closed walk), that walk contains a simple cycle all of whose
+states are unlit, so its min spread is > s and g(M) > s.  Conversely a simple cycle with min spread > s is
+a cycle inside the unlit states. []
+(The game reading is the same statement: F = lit states; "every infinite stream visits F infinitely often"
+ iff the complement of F among reachable states has no cycle.)
+
+Lemma 2 (COMPLETE; safety of the pruning).  Let M' be a partial machine (some transitions undefined) and M
+any completion.  Then C_{M'}(q) is a subset of C_M(q) for every q (C_{M'} uses only strings whose whole run
+is defined), so spread_{M'}(q) <= spread_M(q) whenever C_{M'}(q) is non-empty, and every edge of M' is an
+edge of M.  So a cycle among states with spread_{M'} > s is a cycle among unlit states of M, and g(M) > s.
+Pruning a partial machine with such a cycle therefore never removes a machine with g <= s.  (If the pruning
+were unsafe it could only make the programs report NONE wrongly, i.e. bias f upwards; every reported value
+f(w) = v is additionally backed by an explicit witness with g = v checked by the literal checker, so the
+only thing resting on the pruning is the lower bound "no machine with g <= v-1".) []
+
+Lemma 3 (COMPLETE; numbering).  Every machine whose reachable part has m <= w+1 states is isomorphic, on its
+reachable part, to exactly one machine whose states are numbered 0..m-1 in order of first discovery by a
+fixed deterministic traversal from q0 (breadth-first, or depth-first with a fixed bit order).  Unreachable
+states affect neither C nor the set of simple cycles (cycles must consist of reachable states), so
+f(w) = min of g over initially-connected machines with at most w+1 states.  The programs enumerate exactly
+those numberings (a new state may only receive the next unused number). []
+
+------------------------------------------------------------------------------------------------------------
+Theorem A (COMPLETE).  f(w) <= floor(w/2) for all w >= 1.  Witness: the saturating counter with states
+0..K, K = floor(w/2)+1 (bit 1: k -> min(k+1,K); bit 0: k -> max(k-1,0)), start state 0, padded with
+unreachable states up to w+1 states (K+1 <= w+1 for all w >= 1).  In it EVERY state has spread <= floor(w/2).
+Proof.  Let x have length >= w and end in state k; let a be the number of 1s among the last w bits, and
+look at the run during those w steps (the "window").
+ Lower bound on a.  (i) If the counter is at 0 at some time in the window (start of window included), then
+ after the last such time it must climb from 0 to k, which needs >= k ones: a >= k.  (ii) Otherwise no 0-bit
+ in the window is wasted, so k <= h + a - (w-a) where h <= K is the state at the start of the window, i.e.
+ a >= (k + w - K)/2.  So a >= L(k) := min(k, ceil((k+w-K)/2)).
+ Upper bound on a.  Complementing all bits maps the counter to itself with k <-> K-k and a <-> w-a, so
+ w - a >= L(K-k), i.e. a <= w - L(K-k).
+ Case w = 2t+1, K = t+1: L(k) = k for all 0<=k<=K (k <= (k+t)/2 for k<=t; for k=t+1, ceil((2t+1)/2)=t+1).
+   So k <= a <= w-(K-k) = k+t: spread <= t = floor(w/2).
+ Case w = 2t, K = t+1: L(k) = k for k <= t and L(t+1) = t.  So C(0) in [0, w-t] = [0,t];
+   C(k) in [k, w-(K-k)] = [k, k+t-1] for 1 <= k <= t;  C(t+1) in [t, 2t].  Spread <= t = w/2. []
+Remark (COMPLETE): the bounds a >= L(k), a <= w - L(K-k) hold for every K >= 1.  For the author's machine
+(K = w) they give L(k) = ceil(k/2) and spread(k) <= w - ceil((w-k)/2) - ceil(k/2) <= floor(w/2): the author's
+belief "every state of the 0..w saturating counter has spread <= floor(w/2)" is true.
+(counter.py tabulates the max spread for all 1 <= K <= w <= 12; it is floor(w/2) for K >= floor(w/2)+1.)
+
+Theorem B (COMPLETE).  If g(M) <= s then M has at least w-s+1 reachable states.  (So with n states
+g >= w+1-n; for n = w+1 this says nothing, but it shows the odd-w counter of Theorem A, with
+(w-1)/2 + 2 = w - s + 1 states, is state-optimal for s = (w-1)/2.)
+Proof.  The run on 0^infinity is eventually periodic; its cycle Z0 contains a lit state a.  a is reached by
+0^n for arbitrarily large n, so 0 is in C(a), hence C(a) is inside [0,s].  Put p_j = a.1^j.  Since a is
+reached by 0^n with n >= w, j is in C(p_j) for 0 <= j <= w, and w is in C(p_j) for j >= w.  The sequence
+p_0,p_1,... is eventually periodic; let J be the first index with p_J equal to an earlier p_I; then
+p_0..p_{J-1} are distinct and the cycle is {p_I..p_{J-1}}.  It contains a lit state p_k, I <= k < J.  p_k is
+visited at arbitrarily large indices, so w is in C(p_k); if k <= w then also k is in C(p_k), so w-k <= s.
+Either way k >= w-s, and p_0..p_k are >= w-s+1 distinct states. []
+
+Theorem C (COMPLETE).  f(w) >= 1 for every w >= 2.  (f(1) = 0: two states, state = last bit.)
+Proof.  Suppose g(M) = 0 with at most w+1 reachable states; lit states have |C| = 1.
+ Step 1.  As in Theorem B with s = 0: a lit, C(a) = {0}; the lit state p_k on the 1-cycle from a has
+ C = {w}, so k >= w and p_0..p_w are distinct; these are all the states.  b := p_k has C(b) = {w} and is
+ reached by strings ending in 1^n for arbitrarily large n.
+ Step 2 (mirror image from b).  r_m := b.0^m has w-m in C(r_m) for 0 <= m <= w.  The lit state r_k' on the
+ 0-cycle reached from b contains 0, so C = {0}, so k' >= w and r_0..r_w are distinct: again all the states.
+ So the 0-transitions form a single path r_0 -> r_1 -> ... -> r_w through all w+1 states (followed by one
+ more edge from r_w to somewhere).
+ Step 3.  Take x_t := p_1.0^t (p_1 exists as w >= 1).  Reading 0^n 1 0^t, the window contains the single 1
+ iff t <= w-1, so 1 is in C(x_t) for t <= w-1.  The lit state y on the 0-cycle reached from p_1 has
+ C(y) = {0}, so its first index in the sequence x_0,x_1,... is >= w, so x_0..x_w are distinct: a 0-path
+ through all w+1 states starting at p_1.  By step 2 the 0-map is r_0 -> r_1 -> ... -> r_w -> r_i for some i.
+ i = 0 is impossible: then b = r_0 would lie on a 0-cycle, giving 0 in C(b) = {w}.  So i >= 1, and the
+ 0-path starting at r_m visits exactly the states r_min(m,i)..r_w, i.e. w+1-min(m,i) states; this equals
+ w+1 only for m = 0.  Hence p_1 = r_0 = b = p_k with k >= w, and since p_0..p_w are distinct, k = 1 and
+ w = 1. []
+
+Theorem D (COMPLETE).  For even w = 2t >= 4:  f(w) <= t-1 = w/2 - 1.  Witness: the "bouncy counter" B_w with
+states 0..K, K = w (exactly w+1 states), start 0:
+    bit 1:  0 -> 2,   k -> k+1 (1 <= k <= K-1),   K -> K
+    bit 0:  K -> K-2, k -> k-1 (1 <= k <= K-1),   0 -> 0
+(the saturating counter, except that leaving an end state by the "inward" bit jumps two levels).
+Claim: states 0, K and all odd states have spread <= t-1; the remaining states (even k, 2 <= k <= K-2) step
+only to k-1 or k+1, which are odd, so the unlit states induce no edge at all and g(B_w) <= t-1 by Lemma 1.
+Proof of the claim.  Fix a run of length >= w ending in state k; h = state at the start of the last w steps
+("window"), a = number of 1s in the window, e0 (eK) = number of window steps taken FROM state 0 (from K).
+ (1) Accounting.  A step moves the position by +1 on bit 1 and -1 on bit 0, except: from 0 the move is
+     one more than that (0 instead of -1, +2 instead of +1), from K one less (0 instead of +1, -2 instead of
+     -1).  Hence  k = h + a - (w-a) + e0 - eK,  i.e.   a = t + (k - h - e0 + eK)/2.
+ (2) Parity.  Every step flips the parity of the position, except steps from 0 or from K, which keep it
+     (and 0, K are even).
+ (3) Symmetry.  Complementing bits and mapping k -> K-k is an automorphism of B_w fixing nothing but the
+     roles; it maps a -> w-a.  The start state changes from 0 to K, but only the facts (1),(2) and the
+     transition table are used below, never the start state, so every bound below holds for runs from any
+     start state and therefore transfers under the symmetry.
+ State 0:  we show a <= t-1, i.e. h + e0 - eK >= 2, for every run ending in 0.
+   - eK >= 1: the last step from K in the window is a 0-step K -> K-2 (a 1-step stays at K and would be
+     followed by another step from K, or end the run in K).  From K-2 the run descends to 0 without leaving
+     from K again; each 0-step now lowers the position by at most 1, so at least K-2 more zeros follow.
+     So the window has >= K-1 = 2t-1 zeros, a <= 1 <= t-1 (t >= 2).
+   - eK = 0, h >= 2 : immediate.
+   - eK = 0, h = 1 : if e0 = 0 the window never leaves from 0 or K, so parity flips at each of the w steps
+     and the end state has the parity of h + w = odd; but it is 0.  So e0 >= 1 and h + e0 >= 2.
+   - eK = 0, h = 0 : the first window step is from 0.  If it is the only step from 0, it must be bit 1
+     (bit 0 stays at 0 and the next step, which exists as w >= 2, is again from 0), leading to 2, and the
+     remaining w-1 steps flip parity each time, ending at parity 2 + (w-1) = odd; contradiction.  So e0 >= 2.
+   Hence C(0) is inside [0, t-1].  By (3), C(K) is inside [t+1, 2t].
+ Odd k:  we show a >= (k+1)/2.
+   - e0 = 0: a = t + (k - h + eK)/2.  If eK = 0, parity gives h = k + w = odd (mod 2), so h <= K-1 and
+     a >= t + (k-K+1)/2 = (k+1)/2.  If eK >= 1, a >= t + (k-K+1)/2 = (k+1)/2 as h <= K.
+   - e0 >= 1: the last step from 0 inside the window is a 1 (to state 2; a 0 would be followed by another
+     step from 0, or would end the run in 0, not k).  After it the run goes from 2 to k without leaving from
+     0; applying (1) to that final segment (length m, a' ones, e0 = 0): k = 2 + a' - (m - a') - eK', so
+     a' = (k - 2 + m + eK')/2 >= (k-2)/2, hence a' >= (k-1)/2 as a' is an integer and k is odd, and
+     a >= 1 + a' >= (k+1)/2.
+   By (3) applied to state K-k (also odd): w - a >= (K-k+1)/2, i.e. a <= t + (k-1)/2.
+   So C(k) is inside [(k+1)/2, t + (k-1)/2], spread <= t-1. []
+(Checked numerically by bouncy.py for even w <= 16: g(B_w) = w/2 - 1 exactly.)
+
+Corollary E (COMPLETE).  f(w) <= floor((w-1)/2) for every w >= 3   (Theorem A for odd w, Theorem D for even w),
+f(2) <= 1, f(1) = 0.
+
+------------------------------------------------------------------------------------------------------------
+NOT PROVED (stated as conjecture/observation only, see report):
+ * f(w) for w >= 10 and any closed formula.
+ * Any lower bound for general w beyond Theorem C.

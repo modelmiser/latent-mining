@@ -1,0 +1,29 @@
+Referee runs (ref.cpp built with g++ -O2 -mbmi2 -DW=w [-DN=n]; "refW MODE S ORDER"). Transcribed from the session.
+"nodes" counts surviving partial machines only (pruned children are not counted), so it is not comparable to the solvers' node counts.
+
+hist (unpruned, all machines with <= w+1 reachable states):
+W=1 leaves=13       histg 0:2 1:11                              histe 0:2 1:11
+W=2 leaves=229      histg 1:61 2:168                            histe 1:49 2:180
+W=3 leaves=5477     histg 1:77 2:1741 3:3659                    histe 1:45 2:1265 3:4167
+W=4 leaves=166152   histg 1:5 2:4595 3:57939 4:103613           histe 2:2299 3:39655 4:124198
+W=5 leaves=6097692  histg 2:3573 3:237360 4:2257271 5:3599488   histe 2:1450 3:110912 4:1478239 5:4507091
+W=6 leaves=262279982 histg 2:91 3:308425 4:12406657 5:101717728 6:147847081  histe 2:7 3:108463 4:5296526 5:64537840 6:192337146  (hist6.log, 76 s)
+
+find (pruned: g <= S), found = number of machines:
+W=5 S=1 found=0 (orders 0,1,2)      W=5 S=2 found=3573 (orders 0,1,2)
+W=6 S=1 found=0 (orders 0,1,2)      W=6 S=2 found=91 (orders 0,1,2)
+W=7 S=2 ORDER=0 nodes=2296711 found=0     W=7 S=2 ORDER=1 nodes=96073 found=0
+W=7 S=3 ORDER=0 nodes=8850754 found=143863  W=7 S=3 ORDER=1 nodes=2240012 found=143863
+W=8 S=2 ORDER=0 nodes=28772934 found=0 (3m55)   W=8 S=2 ORDER=1 nodes=179406 found=0
+W=9 S=3 ORDER=1 nodes=7948253 found=0 (5m37)
+W=10 S=3 ORDER=1 nodes=13891314 found=0 (24m44)
+
+finde (pruned: every spread <= S), ORDER=1:
+W=4 S=1 0; S=2 2299.  W=5 S=1 0; S=2 1450.  W=6 S=1 0; S=2 7.  W=7 S=2 0; S=3 45339.  W=8 S=2 0.  W=9 S=3 0.
+W=10 S=3: timed out at 170 s, no result.
+
+N* spot checks (find S, ORDER=1, N states), all found=0:
+(W,N,S) = (2,3,0) (3,6,0) (4,9,0) (5,7,1) (5,3,2) (6,6,2) (6,3,3) (8,7,3) (8,4,4) (9,5,4) (5,11,0) (6,9,1) (7,10,1)
+
+lemmas.py: 8 "FAIL" lines at w=3 for B1/T1 are the test's own over-strict bound (hi <= floor(w/2)); proof P1 treats w=3 separately
+with C(B1) in [1,2], which is what was observed. No other failures. Raw labelled brute force w=1..3: min g = 0,1,1; min e = 0,1,1.

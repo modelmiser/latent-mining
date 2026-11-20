@@ -1,0 +1,9 @@
+Fix an integer w >= 1. A machine is a deterministic finite automaton M = (Q, q0, d) with exactly w+1 states: Q is a set of size w+1, q0 in Q is the start state, and d : Q x {0,1} -> Q is the transition function. There is no output function and no other memory. M reads a binary stream x_1 x_2 x_3 ... one bit at a time; after reading x_1...x_t it is in state d*(q0, x_1...x_t).
+
+For a binary string x of length t >= w, let c(x) be the number of 1s among its last w bits, x_{t-w+1} ... x_t. So c(x) is one of the w+1 values 0, 1, ..., w: the machine has exactly as many states as there are possible answers.
+
+For each state q, let C(q) be the set of all values c(x) taken over every binary string x of length at least w (every length, with no upper limit) such that d*(q0, x) = q. If C(q) is non-empty, the spread of q is max C(q) - min C(q); states with empty C(q) are ignored. The spread of M is the largest spread of any of its states. (Half the spread is the best worst-case absolute error M can guarantee when it must name the count of 1s in the last w bits at every moment from time w onward, against an adversary who chooses the whole stream and the stopping time, knowing M.)
+
+Define e(w) as the minimum spread of M over all machines with w+1 states (all choices of d and q0).
+
+Determine e(w): compute it exactly for w = 1, 2, 3, 4, 5, and give a closed formula for e(w) valid for all w, with proof, together with a description of a family of machines achieving it. If no exact formula is reached, determine the limit of e(w)/w as w grows, and prove it exists.

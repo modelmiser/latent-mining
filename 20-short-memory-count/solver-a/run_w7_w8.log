@@ -1,0 +1,13 @@
+w=7 target=1 found=0 nodes=7411314 leaves=0
+real	0m5.740s
+w=7 target=2 found=0 nodes=18357815 leaves=0
+real	0m14.904s
+WITNESS w=7 s=3 n=5 : 0,1 0,2 1,3 2,4 3,4  spreads: 3 3 3 3 3
+w=7 target=3 found=143863 nodes=69618141 leaves=143863
+real	1m4.106s
+w=8 target=1 found=0 nodes=112120249 leaves=0
+real	3m0.254s
+w=8 target=2 found=0 nodes=258801970 leaves=0
+real	8m27.035s
+
+[killed]

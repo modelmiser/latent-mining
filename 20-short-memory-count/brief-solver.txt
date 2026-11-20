@@ -1,0 +1,55 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Fix an integer w >= 1. A machine is a deterministic finite automaton M = (Q, q0, d) with |Q| = w+1, start state q0 in Q and transition function d : Q x {0,1} -> Q. There is no output and no acceptance condition. Write d*(q0, x) for the state M is in after reading the binary string x from q0.
+
+For a binary string x of length at least w, c(x) is the number of 1s among its last w bits. For a state q, C(q) is the set of all values c(x) over binary strings x of length at least w (no upper limit on length) with d*(q0, x) = q. When C(q) is non-empty, spread(q) = max C(q) - min C(q).
+
+A simple cycle of M is a sequence of m >= 1 distinct states q_1, ..., q_m, each reachable from q0, with bits b_1, ..., b_m such that d(q_i, b_i) = q_{i+1} for i < m and d(q_m, b_m) = q_1 (m = 1 is a self-loop). Every state on a cycle has non-empty C.
+
+Define
+  g(M) = max over simple cycles Z of M of ( min over states q on Z of spread(q) ),
+  f(w) = min of g(M) over all machines M with w+1 states.
+
+Game reading (equivalent, not a second definition). The designer moves first and publishes M together with a set F of "lit" states and an integer s. The adversary, knowing all three, then picks one infinite binary stream. The designer's choice is legal if (1) on every infinite stream M is in a lit state at infinitely many times, and (2) every lit state q with non-empty C(q) has spread(q) <= s. f(w) is the least s admitting a legal choice. The machine may fall silent when confused, but never forever.
+
+HEADLINE: find the exact function f(w) for all w >= 1, as a closed formula with proof and an explicit family of optimal machines. Finite part of the same question: the exact values f(1), ..., f(6).
+
+UNVERIFIED beliefs of the author:
+- f(1) = 0, f(2) = 1, and f(3) <= 1.
+- f(w) <= floor(w/2) for all w, from the saturating up/down counter (states 0..w, bit 1 moves up and stops at w, bit 0 moves down and stops at 0), in which every state seems to have spread at most floor(w/2).
+- f(w) <= w-1 from the machine that counts trailing 1s up to w.
+- f(w) >= 1 for w >= 2.
+- If lit states are forced to be all of Q (maximum spread over all states with non-empty C, minimised over M), call the value e(w); then f(w) <= e(w), and e(2) = 1.
+
+GUESS (clearly a guess): I would bet f(w) = floor(w/2) for all w, because a lit state is needed on both the all-0 loop and the all-1 loop and w+1 states look too few to do better than one saturating counter; my confidence is low, and a counterexample at w = 4, 5 or 6 would not surprise me.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

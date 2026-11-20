@@ -1,0 +1,49 @@
+PROOFS (solver-a).  k := floor((w-1)/2).
+
+P1. UPPER BOUND  f(w) <= floor((w-1)/2) for all w >= 3.            STATUS: COMPLETE
+Machine S_w ("split-end counter", built by family.py split(w); files witness_w*.txt):
+levels 0..T with T = w-2, bit 1 moves the level up (stays at T), bit 0 moves it down (stays at 0).
+The level-0 position is two states: B1 = "just arrived from level 1", B0 = "a 0 was read while at level 0";
+likewise T1/T0 at level T.  Levels 1..T-1 are one state each.  Total (w-3)+4 = w+1 states. Start B0.
+(B0,B1 have the same outgoing transitions: 0->B0, 1->level 1; similarly T0,T1.)
+Take any string of length >= w and look at its last w bits; u = #ones, z = #zeros, u+z = w,
+h_0 = level before the window, h_w = level after; a = # of 1s read at level T ("wasted"), b = # of 0s
+read at level 0.  Then h_w - h_0 = (u-a) - (z-b).  Nothing below uses the start state.
+ (i) interior level j (1<=j<=T-1), bound on z: if a = 0 then u = j-h_0+z-b <= j+z so z >= (w-j)/2;
+     if a > 0 then after the last wasted 1 the level is T and no later 1 is wasted, so z >= T-j.
+     Hence z >= min(T-j, ceil((w-j)/2)); with j' = T-j this is m(j') where
+     m(x) = min(x, 1+ceil(x/2))   (because w-j = j'+2).  By symmetry u >= m(j).
+     So spread(level j) <= w - m(j) - m(j').  m(1) = 1, and m(x) >= (x+2)/2 for x >= 2.
+     Thus m(j)+m(j') >= (j+j'+2)/2 = w/2, with equality only if j = j' = 1 (i.e. w = 4).
+     => spread <= floor(w/2) for odd w, i.e. <= k;  spread <= w/2 - 1 = k for even w except (w=4, level 1).
+ (ii) B0: the last bit is a wasted 0 (b >= 1), h_w = 0.  If a = 0: z = u+b+h_0 >= u+1 so u <= (w-1)/2.
+     If a > 0: z >= T+1 = w-1 so u <= 1 <= k.  So C(B0) inside [0,k].
+ (iii) B1: last bit is a 0 read at level 1.  u >= 1 (w zeros from level <= w-2 would end with a wasted 0).
+     If a = 0: z = u+b+h_0 >= u so u <= floor(w/2); if a > 0: z >= T, u <= 2 <= floor(w/2) (w>=4; for w=3
+     T=1, z>=1, u<=2: here use directly C(B1) inside [1,2], spread 1 = k).  So spread(B1) <= floor(w/2)-1 <= k.
+ (iv) T0, T1: mirror image (swap 0/1 and reverse levels).
+For w != 4 every state has spread <= k, so g(S_w) <= k.  For w = 4 the only state with spread > 1 is level 1,
+which has no self-loop, so every cycle contains another state: g(S_4) <= 1.                         QED
+Machine-checked for w = 3..15 by family.py and (independent slow code) slow.py check witness_w*.txt.
+
+P2. f(w) >= 1 for all w >= 2.                                       STATUS: COMPLETE
+Suppose g(M) = 0.  Reading 0s forever ends in a cycle of 0-transitions; it has a state p with spread 0,
+and p is reached with window 0^w, so C(p) = {0}.  Likewise a state r on a 1-cycle with C(r) = {w}.
+From p read 1^a: the state x_a has a in C(x_a) for a <= w.  The 1-path from p is rho-shaped with at most
+w+1 distinct states, so each state on it first occurs at a step <= w.  Its cycle contains a spread-0 state r,
+necessarily C(r) = {w}; if r first occurs at step a then a in C(r), so a = w: x_0..x_w are distinct and are
+all w+1 states, r = x_w.  By the mirror argument started at r, the 0-path y_0 = r, y_1, ..., y_w consists of
+all w+1 states, distinct, and y_w =: p' lies on a 0-cycle with C(p') = {0}.  Now x_1 = d(p,1) = y_b for some
+b; b = 0 would give x_1 = x_w, impossible for w >= 2.  So b >= 1 and x_1 0^(w-b) = p' with w-b <= w-1.
+Since p is reached by strings ending in 0^w, the string ... 0^w 1 0^(w-b) reaches p' with a window
+containing exactly one 1, so 1 in C(p'): contradiction.                                             QED
+
+P3. Lemma (valid for any legal (M,F,s), any number of states).       STATUS: COMPLETE
+If q is reached by a string of length >= w ending in at least s+1 zeros, then the first lit state of the
+1-cycle met on the 1-path from q is met at step >= w-s; in particular q, q1, ..., q1^(w-s) are distinct.
+(After e ones the window ends 0^b 1^e with b >= s+1: for e <= w-b the count is <= w-b <= w-s-1; for
+e > w-b it equals e.  A lit state on a 1-cycle has C inside [w-s, w].)  Symmetric for 0/1.
+With w+1 states this forces long simple 1-paths and 0-paths, but I did NOT turn it into the general bound.
+
+P4. LOWER BOUND f(w) >= floor((w-1)/2) for all w.                    STATUS: NOT PROVED (conjecture)
+Established only by exhaustive search for w <= 8 (fast.cpp).  No sketch is offered as a proof.

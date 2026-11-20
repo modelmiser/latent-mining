@@ -1,0 +1,40 @@
+RESULTS (solver-b)   -- machine line format everywhere:  w n  d(0,0) d(0,1) d(1,0) d(1,1) ... d(n-1,0) d(n-1,1)  g
+                        (n = number of states listed, start state 0; pad with unreachable states to w+1)
+
+f(w)  (min over machines with w+1 states of g)
+ w   f(w)  witness (witnesses.txt)             "no machine with g <= f(w)-1": exhaustive search
+ 1    0    state = last bit                     -
+ 2    1    2-state                              slow.py 2 (all 729 raw machines) ; fast, fast2, fast3
+ 3    1    counter, 3 states                    slow.py 3 (all 65536 raw machines) ; fast, fast2, fast3
+ 4    1    bouncy counter B_4                   fast hist (all 166152 numbered machines, no pruning) ; fast2 ; fast3
+ 5    2    counter, 4 states                    fast hist (all 6097692, no pruning) ; fast2 BFS (56955 nodes) ; fast3 DFS
+ 6    2    bouncy counter B_6                   fast/fast2 BFS (572420 nodes) ; fast3 DFS (48937 nodes)
+ 7    3    counter, 5 states                    fast2 BFS (18357815 nodes) ; fast3 DFS (3883022 nodes)
+ 8    3    bouncy counter B_8                   fast2 BFS (258801970 nodes) ; fast3 DFS (16682611 nodes)
+ 9    4    counter, 6 states                    fast3 DFS only, split in 5525 prefixes (1703509895 nodes), split_w9s3.*
+                                                (g<=2: also exhaustive, 2304 prefixes, split_w9s2.*)
+ 10   <=4  bouncy counter B_10 (Theorem D)      NOT searched (lower bound proved: only f >= 1)
+
+unpruned histograms of g over all numbered machines with <= w+1 states (fast ... hist):
+ w=1: 0:2 1:11              w=2: 1:61 2:168            w=3: 1:77 2:1741 3:3659
+ w=4: 1:5 2:4595 3:57939 4:103613                      w=5: 2:3573 3:237360 4:2257271 5:3599488
+ pruned exhaustive counts agree: w=4 g<=1: 5 ; w=5 g<=2: 3573 ; w=6 g<=2: 91 (BFS and DFS numbering both).
+
+e(w) (all states lit; max spread minimised):  e(1..5) = 0,1,1,2,2 from the unpruned histograms
+ (e-hist w=4: 2:2299 3:39655 4:124198 ; w=5: 2:1450 ...).  e(6)=2, e(7)=3, e(8)=3: squeezed between f(w) and
+ machines with all spreads <= f(w) (B_6, 5-state counter, B_8; spreads printed by bouncy.py / counter.py).
+ e(9)=4 likewise (>= f(9) = 4, 6-state counter).   So e(4) = 2 > f(4) = 1 is the only gap seen.
+
+N*(w,s) = least number of states of a machine with g <= s for window w  (nstar_2_8.txt; fast3 DFS; every
+ smaller N from w-s+1 upward searched exhaustively; N < w-s+1 impossible by Theorem B)
+        s=0   s=1   s=2   s=3   s=4   s=5   s=6   s=7
+ w=2     4     2
+ w=3     7     3     2
+ w=4    10     5     3     2
+ w=5   >=12    8     4     3     2
+ w=6          >=10   7     4     3     2
+ w=7          >=11   9     5     4     3     2
+ w=8                >=10   8     5     4     3     2
+ w=9                      >=11   6
+ w=10                            >=9 (<=11)
+ f(w) = least s with N*(w,s) <= w+1.

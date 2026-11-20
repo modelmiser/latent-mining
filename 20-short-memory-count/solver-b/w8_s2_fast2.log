@@ -1,0 +1,4 @@
+w=8 N=9 find S=1: NONE (found=0, nodes=112120249, exhaustive=yes)
+real	2m37.608s
+w=8 N=9 find S=2: NONE (found=0, nodes=258801970, exhaustive=yes)
+real	6m9.296s
