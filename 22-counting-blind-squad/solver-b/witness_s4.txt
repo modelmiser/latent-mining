@@ -1,0 +1,13 @@
+# s=4 rule attaining L(4)=3. Lines: state k next. Q 0 Q is implicit. Then TIMES: n firing-time (or FAIL)
+Q 1 G
+Q 2 Q
+G 0 A
+G 1 G
+G 2 A
+A 0 F
+A 1 Q
+A 2 G
+TIMES
+2 3
+3 7
+4 FAIL

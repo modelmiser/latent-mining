@@ -1,0 +1,2 @@
+s=6 L=8  (sym=0, search nodes=8039424, dead leaves=6699521, partial rules reaching L=96)
+total rules attaining L implied by those partial rules (meaningful with nosym): 336

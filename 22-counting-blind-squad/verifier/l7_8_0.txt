@@ -1,0 +1,16 @@
+lazy S=7 asc chunk 0/8 leaves=1472472901
+  longest prefix 2..1 : 22054820016173 rules
+  longest prefix 2..2 : 10962640332368 rules
+  longest prefix 2..3 : 205427142072 rules
+  longest prefix 2..4 : 8928404460 rules
+  longest prefix 2..5 : 1067992656 rules
+  longest prefix 2..6 : 44130384 rules
+  longest prefix 2..7 : 2366640 rules
+  longest prefix 2..8 : 183000 rules
+  longest prefix 2..9 : 1824 rules
+  longest prefix 2..10 : 24 rules
+  weight total: 33232930569601  (S^(3S-4) = 232630513987207)
+  a best rule (unassigned shown as -1), order d(x,0..2) for x=Q,G,U1..: 0 3 5 6 3 6 4 5 5 2 0 3 1 5 0 3 5 4
+  times: 3 14 17 11 15 37 42 22 25
+elapsed 536.44 s
+exit 0

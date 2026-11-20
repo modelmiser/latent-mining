@@ -1,0 +1,25 @@
+Counting-blind firing squad with five states.
+
+Objects. Fix an integer s >= 3 and a state set S of size s containing three distinct named states Q (asleep), G (general), F (fire); the other s - 3 states are unnamed. Cells 1..n stand in a line, n >= 2. Cell i has neighbours i-1 and i+1 where those exist, so cells 1 and n have exactly one neighbour and every other cell has two.
+
+What a cell sees. At each tick a cell sees only its own current state x and one number k in {0, 1, 2}: the number of its existing neighbours whose current state differs from x. It never sees a neighbour's state, cannot tell left from right, has no end-of-line marker and no access to n. An end cell therefore always has k in {0, 1}.
+
+Rule. A rule is a function d: (S \ {F}) x {0, 1, 2} -> S, taking (own state, k) to the next state, subject to d(Q, 0) = Q. There are s^(3(s-1)-1) rules. All cells use the same d and update simultaneously, each k being computed from the configuration before the update.
+
+Run. At time 0 cell 1 is in G and cells 2..n are in Q. Apply d at ticks 1, 2, 3, ... The rule d synchronises length n if there is a time t >= 1 at which every cell is in F and no cell is in F at any time before t. If some cell is in F at a time when some other cell is not, d fails on n (the run stops there, so d is never evaluated at F). If no cell ever enters F, d fails on n.
+
+Definition. L(s) is the largest N such that a single rule d on s states synchronises every n with 2 <= n <= N; L(s) = infinity if some rule on s states synchronises every n >= 2. L(s) >= 2 always (take d(G,1) = d(Q,1) = F), and L is non-decreasing in s.
+
+HEADLINE. Find the exact value of L(5): an integer, or infinity.
+
+A complete answer also reports L(3) and L(4) as calibration, and for s = 5 one rule d (its full table of 12 entries) attaining L(5), together with its firing times on n = 2..L(5).
+
+General form (not the headline): is L(s) = infinity for some s, and if so what is the least such s; otherwise, what is L(s) as a function of s.
+
+UNVERIFIED beliefs, hand-derived, not machine-checked:
+- For any rule synchronising n = 3, d(Q,1) is neither Q nor F.
+- L(3) = 2: with states Q, G, F only, n = 3 forces d(Q,1) = G and d(G,1) = Q, and then n = 2 oscillates between (G,Q) and (Q,G) for ever.
+- Any counting-blind rule is a restriction of an ordinary radius-1 cellular automaton, so a rule synchronising n fires at a time >= 2n - 2.
+- I do not know whether L(4) >= 3.
+
+GUESS (clearly a guess): L(5) is finite and at most 6, because two unnamed states leave too few distinguishable (state, k) situations to run both a wake-up wave and a returning wave whose meeting point depends on n.

@@ -1,0 +1,81 @@
+s=3 L=2  (sym=1, search nodes=15, dead leaves=11, partial rules reaching L=2)
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 G
+Q 2 ?
+G 0 F
+G 1 G
+G 2 ?
+s=4 L=3  (sym=1, search nodes=208, dead leaves=157, partial rules reaching L=22)
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 A
+Q 2 G
+G 0 F
+G 1 Q
+G 2 A
+A 0 G
+A 1 A
+A 2 Q
+s=5 L=5  (sym=1, search nodes=11900, dead leaves=9520, partial rules reaching L=86)
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 A
+Q 2 G
+G 0 F
+G 1 Q
+G 2 B
+A 0 G
+A 1 B
+A 2 Q
+B 0 A
+B 1 B
+B 2 G
+s=4 L=3  (sym=0, search nodes=208, dead leaves=157, partial rules reaching L=22)
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 A
+Q 2 G
+G 0 F
+G 1 Q
+G 2 A
+A 0 G
+A 1 A
+A 2 Q
+s=5 L=5  (sym=0, search nodes=23785, dead leaves=19029, partial rules reaching L=172)
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 A
+Q 2 G
+G 0 F
+G 1 Q
+G 2 B
+A 0 G
+A 1 B
+A 2 Q
+B 0 A
+B 1 B
+B 2 G
+Fri Nov 20 12:36:22 AM PST 2026
+best=2 nodes=14
+best=3 nodes=21
+best=4 nodes=235
+best=5 nodes=7047
+best=6 nodes=7802
+best=7 nodes=19575
+best=8 nodes=263339
+s=6 L=8  (sym=1, search nodes=1340013, dead leaves=1116669, partial rules reaching L=16)
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 A
+Q 2 G
+G 0 A
+G 1 G
+G 2 Q
+A 0 C
+A 1 B
+A 2 G
+B 0 F
+B 1 G
+B 2 G
+C 0 B
+C 1 G
+C 2 G
+
+real	0m0.806s
+user	0m0.803s
+sys	0m0.003s

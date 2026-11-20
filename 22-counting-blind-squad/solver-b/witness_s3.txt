@@ -1,0 +1,9 @@
+# s=3 rule attaining L(3)=2. Lines: state k next. Q 0 Q is implicit. Then TIMES: n firing-time (or FAIL)
+Q 1 G
+Q 2 Q
+G 0 F
+G 1 G
+G 2 Q
+TIMES
+2 2
+3 FAIL

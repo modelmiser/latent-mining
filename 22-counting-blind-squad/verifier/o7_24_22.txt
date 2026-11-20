@@ -1,0 +1,8 @@
+order: 3 2 5 4 7 6 9 8 11 10 12 scan=rtl
+lazy S=7 desc chunk 22/24 leaves=576016268
+  rules syncing every listed n (max 12) : 0
+  rules syncing all but the LAST listed n : 2
+  rules failing earlier in the list: 5425784582790
+  weight total: 5425784582792  (S^(3S-4) = 232630513987207)
+elapsed 272.00 s
+exit 0

@@ -1,0 +1,24 @@
+Fact 0 (COMPLETE). Cell j is in Q at every time tau < j-1.
+ Induction on tau: at time 0 true. If cells j with j > tau+1 are Q at time tau, then a cell j > tau+2 is Q with
+ all existing neighbours (j-1 > tau+1, j+1) in Q, so k=0 and d(Q,0)=Q.
+ Consequence: any firing time on length n is >= n-1.
+
+Lemma 1 (COMPLETE). If d synchronises n=3 then d(Q,1) is not Q and not F.
+ At time 0 cell 2 is Q with k=1, cell 3 is Q with k=0. If d(Q,1)=F, at time 1 cell 2 is F and cell 3 is Q: fail.
+ If d(Q,1)=Q: cells 2,3 are Q at time 1. Inductively, while cells 2,3 are both Q, cell 3 has k=0 and cell 2 has
+ k in {0,1}, so both stay Q; cell 3 never fires.
+
+Lemma 2 (COMPLETE) - corrected timing bound. Let d synchronise n at time t(n) and also some m > n at time t(m).
+ Then t(n) >= 2n-1, or t(n) = t(m) (and then m-1 <= t(n) <= 2n-2).
+ Proof. A = run on n, B = run on m. Claim: A and B agree on cell i at time tau whenever i <= n and i+tau <= 2n-1,
+ as long as neither run has stopped. tau=0: clear. Step: let i+tau+1 <= 2n-1. Own state and left neighbour agree
+ at tau by induction. If i<n the right neighbour i+1 has (i+1)+tau <= 2n-1, agrees. If i=n then tau <= n-2, so by
+ Fact 0 cell n is Q at tau in both runs, and in B cell n+1 is Q too, so it contributes 0 to k: same k in both.
+ Hence cell 1 agrees for all tau <= 2n-2. If t(n) <= 2n-2: B cannot have fired earlier (cell 1 of B would be F
+ at a time when cell 1 of A is not), so B's cell 1 is F at t(n), so B fires exactly then. QED.
+ The problem's belief "a rule synchronising n fires at time >= 2n-2" is FALSE as stated: n=2 fires at time 1
+ with d(Q,1)=d(G,1)=F; s=4 has a rule firing n=4 at time 5; s=5 fires n=4 at 4, n=7 at 9 (mintime.py, exhaustive).
+ Only the bound of Fact 0 (>= n-1) and Lemma 2 hold.
+
+L(3)=2, L(4)=3, L(5)=5, L(6)=8, L(7)=11: NOT proved by hand; exhaustive computation only.
+General question (is L(s) ever infinite): OPEN here, no proof, no sketch worth the name.

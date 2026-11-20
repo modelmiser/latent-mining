@@ -1,0 +1,20 @@
+  rules syncing every listed n (max 9) : 0
+  rules syncing all but the LAST listed n : 82
+  rules failing earlier in the list: 38456487854
+  weight total: 38456487936  (S^(3S-4) = 78364164096)
+  rules syncing every listed n (max 9) : 0
+  rules syncing all but the LAST listed n : 82
+  rules failing earlier in the list: 9795520430
+  weight total: 9795520512  (S^(3S-4) = 78364164096)
+  rules syncing every listed n (max 9) : 0
+  rules syncing all but the LAST listed n : 30
+  rules failing earlier in the list: 9432723426
+  weight total: 9432723456  (S^(3S-4) = 78364164096)
+  rules syncing every listed n (max 9) : 0
+  rules syncing all but the LAST listed n : 82
+  rules failing earlier in the list: 10158317486
+  weight total: 10158317568  (S^(3S-4) = 78364164096)
+  rules syncing every listed n (max 9) : 0
+  rules syncing all but the LAST listed n : 60
+  rules failing earlier in the list: 10521114564
+  weight total: 10521114624  (S^(3S-4) = 78364164096)

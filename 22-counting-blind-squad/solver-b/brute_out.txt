@@ -1,0 +1,64 @@
+s=3 rules=243 L=2  rules attaining it: 36
+histogram longest prefix N (1 = fails n=2): 1:207 2:36
+single n=2: rules synchronising it=36 min_t=1 max_t=2 (2n-2=2)
+single n=3: rules synchronising it=3 min_t=3 max_t=3 (2n-2=4)
+single n=4: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=6)
+single n=5: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=8)
+single n=6: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=10)
+single n=7: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=12)
+single n=8: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=14)
+first best rule (idx 102):
+Q 1 G
+Q 2 Q
+G 0 F
+G 1 G
+G 2 Q
+TIMES
+2 2
+3 FAIL
+s=4 rules=65536 L=3  rules attaining it: 232
+histogram longest prefix N (1 = fails n=2): 1:57920 2:7384 3:232
+single n=2: rules synchronising it=7616 min_t=1 max_t=4 (2n-2=2)
+single n=3: rules synchronising it=1181 min_t=3 max_t=10 (2n-2=4)
+single n=4: rules synchronising it=264 min_t=5 max_t=8 (2n-2=6)
+single n=5: rules synchronising it=21 min_t=6 max_t=11 (2n-2=8)
+single n=6: rules synchronising it=1 min_t=7 max_t=7 (2n-2=10)
+single n=7: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=12)
+single n=8: rules synchronising it=0 min_t=-1 max_t=-1 (2n-2=14)
+first best rule (idx 19937):
+Q 1 G
+Q 2 Q
+G 0 A
+G 1 G
+G 2 A
+A 0 F
+A 1 Q
+A 2 G
+TIMES
+2 3
+3 7
+4 FAIL
+s=5 rules=48828125 L=5  rules attaining it: 1244
+histogram longest prefix N (1 = fails n=2): 1:43920625 2:4663756 3:239212 4:3288 5:1244
+first best rule (idx 10858168):
+Q 1 G
+Q 2 Q
+G 0 F
+G 1 A
+G 2 B
+A 0 B
+A 1 A
+A 2 Q
+B 0 G
+B 1 A
+B 2 A
+TIMES
+2 5
+3 6
+4 10
+5 8
+6 FAIL
+
+real	0m2.895s
+user	0m2.890s
+sys	0m0.004s

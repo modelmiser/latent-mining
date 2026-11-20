@@ -1,0 +1,23 @@
+P1 (COMPLETE). If d synchronises some n >= 3 then d(Q,1) is neither Q nor F.
+  Time 0 is G Q Q ... ; cell 2 has k=1, cells 3..n have k=0 (cell n has one neighbour, a Q).
+  If d(Q,1)=F: at time 1 cell 2 is F and cell 3 = d(Q,0) = Q: partial fire, fail.
+  If d(Q,1)=Q: cells 2..n are Q at time 1. Cell 1 is then some state a. If a=F fail. If a=Q the line is
+  all Q for ever. Otherwise cells 2..n again see k=1,0,..,0 and stay Q; by induction cells 2..n are Q at
+  every time, so the line never fires.
+
+P2 (COMPLETE). Any rule synchronising n fires at a time t >= n-1.
+  Claim: at time tau every cell j >= tau+2 is Q. True at 0. If true at tau, a cell j >= tau+3 is Q with
+  all existing neighbours (j-1 >= tau+2, and j+1 if present) Q, so k=0 and it stays Q. Hence cell n is Q
+  at time n-2, so not all cells are F before time n-1.
+  (The problem's belief "t >= 2n-2" is FALSE in this model: see report; e.g. witness_s4-type rules fire
+  n=3 at t=3, and 5-state rules attaining L(5) fire n=5 at t=6.)
+
+P3 (COMPLETE). L(3) = 2.
+  >= 2: d(G,1)=d(Q,1)=F. Suppose d on {Q,G,F} synchronises n=3. By P1 d(Q,1)=G. Let a=d(G,1).
+  Time 1 = (a,G,Q). a=F: partial fire. a=G: (G,G,Q) -> (b,G,G) with b=d(G,0) [cell 2: G,k=1 -> G;
+  cell 3: Q,k=1 -> G]. b=F partial fire; b=G: all G for ever (d(G,0)=G); b=Q: (Q,G,G) -> (G,G,Q)
+  [cell 1: Q,k=1 -> G; cell 2: G,k=1 -> G; cell 3: G,k=0 -> Q], a repeat. So a=Q, i.e. d(G,1)=Q.
+  Then on n=2: (G,Q) -> (Q,G) -> (G,Q) for ever. So no rule synchronises both 2 and 3.
+
+L(4)=3, L(5)=5, L(6)=8, L(7)=11: NO hand proof; exhaustive computation only.
+General question (L(s) infinite for some s?): NOT settled; no proof, no sketch offered.

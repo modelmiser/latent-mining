@@ -1,0 +1,23 @@
+# State numbering: 0=Q 1=G 2=F 3,4,..=unnamed U1,U2,..
+# Rule line = d(x,k) for x in order Q,G,U1,U2,.. (F omitted), k=0,1,2 within each x.
+# Check: python3 check.py witness <s> <L> "<rule line>"   (prints ACCEPT iff rule synchronises exactly n=2..L and fails n=L+1)
+s=3 L=2 rule: 0 2 1 1 2 2                               times n=2..2: 1
+s=4 L=3 rule: 0 3 3 0 0 1 2 3 0                         times n=2..3: 3 4
+s=5 L=5 rule: 0 3 3 3 1 0 2 4 1 2 1 0                   times n=2..5: 5 8 7 10
+s=6 L=8 rule: 0 4 3 2 3 0 5 3 0 1 5 0 4 1 3             times n=2..8: 8 10 10 19 21 20 20
+s=7 L=11 rule: 0 3 1 6 1 0 5 4 1 2 5 3 4 1 0 3 5 1      times n=2..11: 9 10 17 19 14 23 43 39 24 38
+# s=5 witness as a table (next state):
+#        k=0  k=1  k=2
+#   Q     Q    U1   U1
+#   G     U1   G    Q
+#   U1    F    U2   G
+#   U2    F    G    Q
+# Deliberately wrong object (rejected): s=5 "0 1 3 3 1 0 2 4 1 2 1 0" -> synchronises only n=2..3.
+# Upper bounds (no rule does better) are exhaustive enumerations, reproducible by:
+#   ./fsq brute s (s=3,4,5: every rule)      python3 check.py lazy s (s=3..6, independent, weights sum to s^(3s-4))
+#   ./fsq dfs s   (s=3..7, lazy with relabelling of unnamed states pruned)
+# Histogram, number of rules whose largest all-synchronised prefix is 2..L (L=1 means fails n=2):
+#  s=3: L1 207, L2 36
+#  s=4: L1 57920, L2 7384, L3 232
+#  s=5: L1 43920625, L2 4663756, L3 239212, L4 3288, L5 1244
+#  s=6: L1 71265267072, L2 6666570006, L3 418310088, L4 10046130, L5 3939300, L6 28998, L7 2166, L8 336

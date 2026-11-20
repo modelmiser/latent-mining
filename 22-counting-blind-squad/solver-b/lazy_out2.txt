@@ -1,0 +1,43 @@
+s=3 L=2  (sym=0, search nodes=15, dead leaves=11, partial rules reaching L=2)
+total rules attaining L implied by those partial rules (meaningful with nosym): 36
+s=4 L=3  (sym=0, search nodes=208, dead leaves=157, partial rules reaching L=22)
+total rules attaining L implied by those partial rules (meaningful with nosym): 232
+s=5 L=5  (sym=0, search nodes=23785, dead leaves=19029, partial rules reaching L=172)
+total rules attaining L implied by those partial rules (meaningful with nosym): 1244
+s=6 L=8  (sym=1, search nodes=1340013, dead leaves=1116669, partial rules reaching L=16)
+total rules attaining L implied by those partial rules (meaningful with nosym): 56
+Fri Nov 20 12:36:35 AM PST 2026
+best=2 nodes=14
+best=3 nodes=21
+best=4 nodes=457
+best=5 nodes=206100
+best=6 nodes=218515
+best=7 nodes=233135
+best=8 nodes=331488
+best=9 nodes=596515
+best=10 nodes=6967437
+best=11 nodes=35763134
+s=7 L=11  (sym=1, search nodes=189565801, dead leaves=162484625, partial rules reaching L=4)
+total rules attaining L implied by those partial rules (meaningful with nosym): 4
+one best partial rule ('?' = never consulted on n<=L+1 before failure... fill arbitrarily for n<=L):
+Q 1 A
+Q 2 G
+G 0 D
+G 1 G
+G 2 Q
+A 0 C
+A 1 B
+A 2 G
+B 0 F
+B 1 C
+B 2 A
+C 0 B
+C 1 G
+C 2 Q
+D 0 A
+D 1 C
+D 2 G
+
+real	2m44.305s
+user	2m44.261s
+sys	0m0.021s

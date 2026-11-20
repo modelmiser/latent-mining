@@ -1,0 +1,18 @@
+# s=5 rule attaining L(5)=5. Lines: state k next. Q 0 Q is implicit. Then TIMES: n firing-time (or FAIL)
+Q 1 G
+Q 2 Q
+G 0 F
+G 1 A
+G 2 B
+A 0 B
+A 1 A
+A 2 Q
+B 0 G
+B 1 A
+B 2 A
+TIMES
+2 5
+3 6
+4 10
+5 8
+6 12
