@@ -1,0 +1,20 @@
+# Burns' algorithm, flags weighted 1,1,2 mod 4.  states: 0 rem, 1 crit
+n 3 b 4 s 7
+p 1 q 0 add 1 2
+p 1 q 1 add 3 0
+p 1 q 2 read 2 1 2 2
+# p2: 2=A(poised to raise) 3=B(wait p1 down) 4=C(check) 5=Dn(lower) 6=Wt(wait p3)
+p 2 q 0 read 2 3 2 3
+p 2 q 1 add 3 0
+p 2 q 2 add 1 4
+p 2 q 3 read 2 3 2 3
+p 2 q 4 read 5 1 5 6
+p 2 q 5 add 3 3
+p 2 q 6 read 6 1 1 6
+# p3: 2=A 3=B 4=C 5=Dn
+p 3 q 0 read 2 3 3 3
+p 3 q 1 add 2 0
+p 3 q 2 add 2 4
+p 3 q 3 read 2 3 3 3
+p 3 q 4 read 5 5 1 5
+p 3 q 5 add 2 3

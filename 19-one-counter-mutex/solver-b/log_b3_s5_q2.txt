@@ -1,0 +1,6 @@
+b=3 s<=5: 257472 canonical automata pass the solo filters
+part 2/4: full model checks 827293273, 2-process solutions 0
+
+real	13m33.381s
+user	13m32.715s
+sys	0m0.493s

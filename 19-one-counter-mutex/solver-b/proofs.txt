@@ -1,0 +1,115 @@
+PROOFS (solver-b).  Each item is marked COMPLETE or SKETCH.
+
+Notation.  sigma_p(v): the solo run of process p from rem_p with R = v (only p moves).
+E_p = { v : sigma_p(v) reaches crit_p }.  "Solution" = safety + progress as in the problem.
+
+----------------------------------------------------------------------
+L0 (monotone in n and s).  COMPLETE.
+Deleting processes from a solution leaves a solution: a deleted process is one that stays
+in rem forever, which every schedule set already allows; safety and progress quantify over
+schedules, so they are inherited.  Hence g_s(n) <= g_s(n+1), g(n) <= g(n+1).  More states
+never hurt (unused states), so g_s(n) is non-increasing in s.
+
+----------------------------------------------------------------------
+L1 (basic facts, any b, n >= 2).  COMPLETE.
+(a) 0 in E_p.  Schedule p,p,p,... from the start: p is active from time 1 and moves forever,
+    nobody else is ever active, so by progress somebody (only p can) is in crit.
+(b) Let e_p = value of R when sigma_p(0) first reaches crit.  For q != p: e_p not in E_q.
+    Run p solo to crit, leave it there, run q solo: q's run is sigma_q(e_p); if it reached
+    crit safety would fail.  With (a): e_p != 0, so sigma_p(0) contains a nonzero add before
+    crit; let a_p be the first one.
+(c) n >= 3, i,j,k distinct: e_i + a_j not in E_k.  Run j solo up to just before its first
+    nonzero add (R is still 0).  Run i solo from rem: it sees what it sees in sigma_i(0),
+    reaches crit, R = e_i.  Let j take one step: R = e_i + a_j.  Now k solo from rem performs
+    sigma_k(e_i + a_j) while i sits in crit.
+(d) If v is the value of R in a reachable configuration with every process in rem, then
+    v in E_p for all p (schedule p,p,p,... from there and apply progress).
+
+----------------------------------------------------------------------
+T1.  g(2) = 2.  COMPLETE (given the model-checked witness w_n2_b2_s6.txt; b >= 2 by definition).
+
+----------------------------------------------------------------------
+T2.  No solution for b = 2, n >= 3 (any s).  COMPLETE.
+By L0 take n = 3.  By L1(a),(b): E_k = {0}, e_i = 1, a_j = 1.  Then e_i + a_j = 0 in E_k,
+contradicting L1(c).
+
+----------------------------------------------------------------------
+T3.  No solution for b = 3, n >= 3 (any s).  COMPLETE.
+By L0 take n = 3, processes {1,2,3}; assume a solution.
+
+Step 1.  For distinct i,j,k, L1(b),(c) give e_i, e_i+a_j not in E_k, a_j != 0, 0 in E_k.
+In Z_3 this forces E_k = {0} and a_j = e_i.  Over all ordered pairs: all a_j and all e_i are
+one common value u in {1,2}.  Multiplying every add constant by 2 and permuting read branches
+accordingly is an automorphism of the problem, so assume u = 1.
+By L1(d), every reachable all-in-rem configuration has R = 0.  After sigma_p(0) reaches crit
+(R = 1) the exit step leads to an all-rem configuration, so the action of crit_p is "add 2".
+
+Step 2 (the chain of a process).  For each process p define, as long as possible, local
+states P_m(p), F_m(p), L_m(p), D_m(p), m = 0,1,2,..., with the invariants
+  (I1) the configuration [p in P_m(p), both others in rem, R = 0] is reachable;
+  (I2) the action of P_m(p) is "add 1", with successor F_m(p).
+m = 0: P_0(p) is the state of sigma_p(0) just before its first nonzero add.  (I1),(I2) hold.
+Given P_m(p):
+  (i) From [p in F_m(p), R = 2] the solo run tau of p never reaches crit and keeps R in {1,2}.
+      Proof: from the configuration of (I1) let another process h run sigma_h(0) to crit
+      (R = 1), then p steps (R = 2).  Now h is in crit and the third process q is in rem.
+      p alone must not reach crit; and if R became 0, q would run sigma_q(0) into crit.
+  (ii) Call level m a HOLD level of p if tau contains no nonzero add; then the chain of p
+      stops at m.  Otherwise the first nonzero add of tau is "add 2" (R: 2 -> 1; "add 1"
+      would give 0, excluded by (i)); L_m(p) is the state just before it, D_m(p) the state
+      after it.  Call m a YIELD level.
+  (iii) At a yield level, [p in D_m(p), others in rem, R = 0] is reachable ("pumping"):
+      start from (I1); a helper h runs sigma_h(0) up to P_0(h) (R = 0); p steps (R = 1);
+      h steps (R = 2); p runs tau up to L_m(p) (it reads only 2) and steps (R = 1), now in
+      D_m(p); h has so far seen exactly what it sees in sigma_h(0) and R = 1 is the value
+      sigma_h(0) has after its first add, so h continues as in sigma_h(0): reaches crit with
+      R = 1, exits with add 2 (R = 0), is back in rem.
+  (iv) From that configuration the solo run rho of p must reach crit (progress), and R != 0
+      there (else another process runs sigma(0) into crit), so rho has a first nonzero add
+      "add a"; P_{m+1}(p) is the state before it.  (I1) holds for m+1 (R is still 0 there).
+      a = 1: from (I1) for m+1 let h run sigma_h(0) to crit (R = 1), let p step: R = 1 + a,
+      h in crit, q in rem, so R != 0, a != 2.  So (I2) holds for m+1.
+So every process has a chain that is either infinite (all levels yield) or finite, ending in
+a hold level.
+
+Step 3 (joint reachability).  For p != q and levels r, t of their chains,
+[p in P_r(p), q in P_t(q), third process h in rem, R = 0] is reachable: reach
+[P_r(p), rem, rem, R=0] by (I1); then repeat the constructions of Step 2 for q, with h as the
+helper, while p stands still.  p's presence changes nothing: it has contributed 0 to R and
+takes no step, and the constructions only use the values of R.
+
+Step 4 (two finite chains are impossible).  Let r, t be the hold levels of p, q.  From the
+configuration of Step 3 let p and q each take one step (R = 2), then alternate p,q forever.
+By induction each reads only 2, hence follows its tau, which changes nothing and never
+reaches crit.  p and q are active and move forever, h is never active, nobody is ever in
+crit: progress is violated.
+
+Step 5 (two infinite chains are impossible).  From [P_0(p), P_0(q), h in rem, R = 0] repeat
+forever: p steps, q steps (R = 2); p runs to L_m(p) reading only 2; q runs to L_m(q) reading
+only 2; p steps, q steps (R = 0); p runs from D_m(p) to P_{m+1}(p) reading only 0 (the prefix
+of rho before its first nonzero add); q likewise.  No crit ever occurs (tau has none; rho has
+none before its first nonzero add), both move infinitely often, h is never active: progress
+is violated.
+
+Step 6.  Three processes, two chain types: two processes share a type, contradicting Step 4
+or Step 5.  QED.
+
+----------------------------------------------------------------------
+T4.  g(3) = 4.  COMPLETE = T3 (lower bound, proof) + witness w_n3_b4_s7.txt (upper bound,
+model-checked by two independent checkers).
+
+----------------------------------------------------------------------
+T5.  g(n) >= 4 for all n >= 3.  COMPLETE (T2, T3, L0).
+
+----------------------------------------------------------------------
+T6.  g(n) <= 2^(n-1) for n >= 2.  SKETCH (model-checked for n = 2,3,4,5 only).
+Weights w_1 = 1, w_i = 2^(i-2) (i >= 2), modulus 2^(n-1); flag of process i = summand w_i.
+A process knows its own flag, so the others' weights sum to at most 2^(n-1) - 1 and the
+integer sum s is read exactly.  For i >= 3: the lower-index weights sum to at most 2^(i-2)
+and the higher ones are multiples of 2^(i-1), so "some lower flag up" <=> s mod 2^(i-1) != 0
+and "some higher flag up" <=> s >= 2^(i-1); for i = 1, 2 the decode is immediate.  Then run
+Burns' algorithm (gen_burns.py).  What is missing for a proof: a written correctness proof of
+this single-read variant of Burns' algorithm for all n; I only cite the classical argument.
+The weight condition is not optimal: n = 5 already works with modulus 14 (weights 1,1,2,5,5).
+
+OPEN: the exact g(n) for n >= 4.  Known here: 4 <= g(4) <= 8, 4 <= g(5) <= 14.

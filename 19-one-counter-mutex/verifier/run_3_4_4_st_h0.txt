@@ -1,0 +1,2 @@
+RESULT n=3 b=4 s=4 staged=1 split=0/2 NONE nodes=12862120
+exit 0

@@ -1,0 +1,62 @@
+You are solving a precisely defined problem, alone. Another solver is working on the same problem independently; you will not see their work, and your results will be compared and then attacked by a verifier. What counts is exact, reproducible answers and an honest separation of "computed", "proved" and "guessed". Do not search the web: work from your own reasoning and your own code.
+
+THE PROBLEM (written by someone else; every claim marked UNVERIFIED, every guess and every "I believe" in it is to be checked, not assumed)
+
+Fix integers n ≥ 2, b ≥ 2, s ≥ 3. One shared counter R holds an element of Z_b (integers mod b), initially 0. Process i (i = 1..n) is a deterministic automaton with at most s states, including distinct states rem_i (initial) and crit_i. Programs may differ between processes. Every state carries exactly one action:
+
+- read, with successors q_0, ..., q_{b-1} (not necessarily distinct): a step moves the process to q_v, where v is the value of R at that moment; R is unchanged.
+- add c, for a fixed c in Z_b, with one successor q': a step replaces R by R + c mod b and moves the process to q'; the process learns nothing.
+
+Structural rules: every successor of rem_i differs from rem_i; every successor of crit_i is rem_i; no other state has rem_i as a successor.
+
+A schedule is an infinite sequence over {1..n}; the t-th step is taken, atomically, by the named process. "Time t" means after t steps. A process is active when its state is not rem_i.
+
+The automata solve mutual exclusion if:
+
+- Safety: under no schedule are two processes in their crit states at the same time.
+- Progress: there is no schedule and time T such that (i) some process is active at time T, (ii) no process is in its crit state at any time ≥ T, and (iii) every process active at some time ≥ T takes infinitely many steps.
+
+(So a process may stay in rem_i or stall in crit_i forever, and individual starvation is allowed.)
+
+Let g_s(n) be the least b admitting a solution with at most s states per process (infinity if none), and g(n) = min over s of g_s(n).
+
+HEADLINE: find the exact value of g(3). General form: g(n) as a function of n.
+
+Finite instances: for n = 2, s ≤ 4, b ≤ 3, and for n = 3, s = 3, b ≤ 4, decide whether a solution exists.
+
+UNVERIFIED beliefs:
+- g(2) = 2: R is the XOR of two flags; a Burns-style asymmetric algorithm, about 6 states.
+- g(n) ≥ 3 for n ≥ 3: with b = 2, a process whose own net contribution is nonzero cannot tell "a critical process plus a cancelling one" from "nobody", and a third process in rem then enters.
+- g(n) ≤ 2^n − 1: process i toggles a flag by adding ±2^(i−1) mod 2^n − 1, decodes the others' flags from one read, and runs Burns' one-bit-per-process deadlock-free algorithm.
+- So 3 ≤ g(3) ≤ 7; weights 1, 1, 2 mod 5 suggest g(3) ≤ 5.
+
+GUESS (not a result): g(3) = 4, because three values seem too few to keep "someone is critical" apart from "nobody is here" under every interleaving, while contenders' identities are not needed.
+
+WHAT TO FIND
+
+ A. The small instances the problem asks for, computed exactly, as far as is cheap. Go one size beyond what is asked if you can.
+ B. The HEADLINE answer. If you cannot settle it, say exactly how far you got: what is proved, what is only computed, what is a guess.
+ C. Witnesses: for each value or yes/no, an explicit object or strategy that shows it and a reason the next better value is impossible, written so that a program other than yours could check it (plain-text files).
+ D. Any proof you can actually complete for the general statement. Mark each COMPLETE or SKETCH. A sketch presented as a proof is worse than no proof.
+ E. If the problem statement is ambiguous, degenerate or wrong somewhere, say so, choose the reading closest to the text, state it, and if cheap also report the answer under the other reading.
+
+METHOD NOTES (suggestions, not requirements)
+ - Implement the definition directly first, slowly and obviously; only then optimise, and check the fast program against the slow one on every case the slow one can reach.
+ - Say what you pruned and why the pruning is safe, and which direction an unsafe pruning would bias the answer.
+ - Run sanity checks that could expose a wrong model (trivial parameter values, monotonicity, symmetries, the easy bounds stated in the problem).
+ - Watch a check fail on purpose at least once (a deliberately wrong object must be rejected by your checker).
+
+RULES FOR RUNNING CODE (this is someone's live workstation)
+ - Work only inside @@DIR@@/ . Write your code and outputs there. Do not read any other folder under . except the file you were told to read.
+ - Every compute run: prefix with `nice -n 15`, use at most 2 CPU cores, cap memory (`ulimit -v 8000000` in the same shell command), and wrap in `timeout 1500`. No background daemons. Use TMPDIR=@@DIR@@ ; never put large files in /tmp (it is RAM).
+ - Never use pkill/killall, and do not use `ps` or `pgrep` to look at other processes. Kill only your own PIDs, which you record when you start a run. Do not delete files. Do not install system packages; python3 and g++ are available.
+ - Keep output files small: no single file over 300 kB unless it is a certificate someone must check.
+
+REPORT
+ Write your full report (under 900 words) to reports/@@DIR@@.md and return the same text as your final message:
+ 1. The tables, each entry tagged COMPUTED (exhaustive, with the method) or not, and the sizes reached.
+ 2. The witnesses, compactly, with file names.
+ 3. The headline answer with your confidence, and any conjectured formula.
+ 4. Proofs: complete ones stated fully (or pointed to in a proofs.txt you wrote); sketches labelled as sketches.
+ 5. Anything about the problem statement you had to interpret, and the interpretation you chose.
+ 6. File names of the code that produced each number.

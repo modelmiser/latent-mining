@@ -1,0 +1,108 @@
+PROOFS (solver-a).  Notation: C0 = all processes in rem, R = 0.  c_i = sum (mod b) of the adds
+process i has made so far, so R = c_1 + ... + c_n.  "p runs alone" = only p is scheduled.
+A process is deterministic, so two runs in which it starts in the same state and reads the same
+values are identical for it.  "X" marks a contradiction with Safety or Progress.
+
+Reading of Progress used throughout: a violation is a schedule and T with someone active at T, no
+crit at any time >= T, and every process that is ever active after T stepping infinitely often.
+
+------------------------------------------------------------------------------------------------
+LEMMA 0 (solo facts; any b >= 2, n >= 2).  COMPLETE.
+ (a) From any reachable all-rem configuration, each process running alone reaches crit
+     (otherwise it alone is active for ever, steps for ever, nobody is ever critical: X).
+     Let sigma_i be the run of p_i alone from C0.
+ (b) R != 0 when sigma_i reaches crit.  (Else any other p_j, run alone from that configuration,
+     reads exactly what it reads in sigma_j, and enters crit too: X.)
+     So sigma_i contains a first nonzero add a_i; before it p_i has read only 0.  Let u_i be the
+     state just before that add ("poised") and q_i the state just after.  r_i := R at crit in sigma_i.
+ (c) MATCHING PRINCIPLE.  If a reachable configuration has p_j in a state that occurs at some point
+     of sigma_j, the value of R equals the value at that point of sigma_j, and nobody else moves,
+     then p_j alone continues exactly as in sigma_j and enters crit.
+
+------------------------------------------------------------------------------------------------
+THEOREM 1.  For b = 2 and n >= 3 there is no solution (any number of states).  COMPLETE.
+ a_i = 1 and r_i = 1 for all i (Lemma 0b).  Schedule p_1 to u_1, then p_2 to u_2 (both read only
+ 0), then both add: configuration (q_1, q_2, rem, ..), R = 0.  Run p_3 alone: it reads what it
+ reads in sigma_3, so it reaches crit with R = r_3 = 1.  Now p_1 is in q_1 with R = 1, exactly
+ as just after its first add in sigma_1; by (c) p_1 alone enters crit while p_3 is critical.  X
+
+------------------------------------------------------------------------------------------------
+THEOREM 2.  For b = 3 and n >= 3 there is no solution (any number of states).  COMPLETE.
+ Only p_1, p_2, p_3 are ever scheduled; i, j, k always denote the three of them in some order.
+ Suppose a solution exists.
+
+ Step 1: all a_i are equal.  If a_1 = 1, a_2 = 2: bring p_1, p_2 to u_1, u_2, let both add
+   (R = 0), run p_3 alone to crit (it follows sigma_3), R = r_3 in {1,2}.  If r_3 = 1 then p_1 is
+   in q_1 with R = 1 = a_1; if r_3 = 2 then p_2 is in q_2 with R = 2 = a_2.  Since the other two
+   contributions sum to 0, (c) applies and a second process enters crit.  X
+   Negating every add and permuting read successors accordingly maps solutions to solutions, so
+   WLOG a_i = 1 for all i.
+ Step 2: r_j = 1 for all j.  Else r_j = 2: bring the other two, p_a and p_b, to u_a, u_b; run p_j
+   alone to crit (R = 2); let p_a, p_b add (R = 1).  p_a is in q_a with R = 1 and the others sum
+   to 0: by (c) it enters crit.  X
+ Step 3: every crit action is "add 2" (after sigma_j and the exit, R = 0).  Let e_j be the add.
+   e_j = 0: all-rem with R = 1 is reachable, so p_k alone from it reaches crit (Lemma 0a); p_k
+     reads the same from (p_j critical after sigma_j, rest rem, R = 1).  X
+   e_j = 1: C2 := all-rem with R = 2 is reachable.  Let tau_k be p_k alone from C2; it reaches
+     crit with some R = rho.  rho != 0 (else another process p_m follows sigma_m from there: X),
+     rho != 2 (else another process p_m follows tau_m from there: X), so rho = 1 for every k.  Now from C0 bring p_1, p_2 to
+     u_1, u_2 and let them add (R = 2); p_3, in rem, alone follows tau_3 and becomes critical with
+     R = 1; p_1 is in q_1 with R = 1 and the others sum to 0: (c).  X
+
+ Step 4 (stages).  For a process i call a state u a STAGE STATE if its action is "add 1" and the
+ configuration K(u) = (p_i in u, others rem, R = 0) is reachable.  u_i is one.
+   The 1-RUN of u: p_i alone, started in u with R = 1 (so it sees R = 1 + c_i throughout).
+   Claim A: the 1-run never enters crit.  From K(u) run p_j through sigma_j into crit (R = 1, it
+     sees R = c_j).  p_i alone from there sees R = 1 + c_i, the same as in the 1-run.  X if it enters.
+   Claim B: after the initial add 1, the next nonzero add in the 1-run, if any, is add 2 (c_i back
+     to 0).  From K(u) run p_j to q_j (R = 1); p_i alone now performs its 1-run.  If its next
+     nonzero add were add 1 then c_i = 2, R = 0, p_j still in q_j, p_k in rem: p_k alone follows
+     sigma_k into crit (R = 1), and p_j in q_j with R = 1, others summing to 0, enters by (c).  X
+   So u is of type H (after the add 1 the 1-run never changes R and never enters crit: it runs
+   for ever) or of type L (it reaches an add 2; let v be the state after it, c_i = 0).
+   Claim C (type L): N(v) = (p_i in v, others rem, R = 0) is reachable.  From K(u): p_j to q_j,
+     p_i performs its 1-run up to v (R = 1), then p_j, in q_j with R = 1, finishes sigma_j by (c)
+     and exits (Step 3): R = 0, p_j in rem.
+   Claim D (type L): p_i alone from N(v) (it sees R = c_i) makes a nonzero add before any crit,
+     and the first one is add 1.  It must reach crit (else X as in Lemma 0a), and not with R = 0
+     (else p_j follows sigma_j: X); so a first nonzero add exists, preceded only by reads of 0.
+     If it were add 2, let w be the state before it.  From (w, rem, rem, 0): p_j to u_j; p_k
+     through sigma_k into crit (R = 1); p_i adds 2 (R = 0); p_j adds 1 (R = 1) and is in q_j with
+     the others summing to 0: (c).  X
+   Let u' be the state before that add 1.  K(u') is reachable (Claims C, D), so u' is a stage
+   state: the SUCCESSOR of u.
+   Define u_i^1 = u_i, u_i^{t+1} = successor of u_i^t while u_i^t is of type L.  Let f_i be the
+   first t with u_i^t of type H (infinity if none).
+
+ Step 5 (joint reachability).  For finite a <= f_i and b <= f_j the configuration
+   J(a,b) = (p_i in u_i^a, p_j in u_j^b, p_k rem, R = 0) is reachable: first walk p_i up its
+   stages as in Claims C, D, using p_j as the partner (p_j returns to rem each time); then,
+   never scheduling p_i again (c_i = 0), walk p_j up its stages using p_k as the partner.  The
+   1-run and the continuation from v depend only on the process's own automaton and the values
+   it reads, which are the same whoever the partner is.
+ Step 6 (duel).  From J(a,b) let both add 1 (R = 2).  Each now sees R = 1 + (own c) as long as the
+   other's contribution stays 1, i.e. each performs its 1-run.
+   - both of type H: both read for ever, both step infinitely often, no crit (Claim A), p_k in
+     rem: Progress is violated.  X
+   - both of type L: run each to just before its add 2, let both add 2 (R = 0), then run each
+     (reading 0, as in Claim D) to its successor stage state: J(a+1, b+1) is reached, and no
+     process was critical on the way.
+ Step 7.  If f_i <= f_j are both finite: start from J(1, f_j - f_i + 1); all stages passed are of
+   type L, so f_i - 1 duels lead to J(f_i, f_j), both of type H.  X
+   Hence at most one of p_1, p_2, p_3 has finite f.  Take i, j with f_i = f_j = infinity: from
+   J(1,1) the duels of Step 6 can be repeated for ever.  In that infinite run p_i and p_j both
+   step infinitely often, nobody is ever critical, p_k stays in rem.  Progress is violated.  X  QED
+
+ Where b = 3 is used: Step 1 (two nonzero residues), Claim B and Claim D (the only alternative
+ to the "flag-like" add is the one that makes R = 0 behind a hidden process).  The argument does
+ NOT extend as written to b >= 4.
+
+------------------------------------------------------------------------------------------------
+THEOREM 3.  g(3) <= 4.  COMPUTED witness w_n3_b4_burns.txt (7 states), accepted by checker.py:
+ Burns' one-flag algorithm with flag weights 1, 1, 2 mod 4 (p_2 needs to tell "p_1 up" from
+ "p_3 up": sums 0,1,2,3 are distinct; p_1 and p_3 only need "anybody up").
+ Hence g(3) = 4 (Theorems 1-3), and g(n) >= 4 for every n >= 3.
+
+SKETCH (not a proof): g(n) <= 2^n - 1 by Burns with weights 2^(i-1); I did not re-prove Burns'
+algorithm for general n.  Machine-checked instances only: n=3 b=4, n=4 b=8, n=5 b=14 (weights found
+by burnsmin.py; these are the least moduli for THIS construction, not lower bounds for g).

@@ -1,0 +1,43 @@
+flag-like automata: s<=4 exhaustive: hold-type 940, infinite-type 0; random s 5..8: hold 2032, infinite 77
+judge self-test: 1500 damaged lassos, 1270 rejected
+refutations attempted: 312000
+schedules rejected by the judge or builder stuck: 0
+  A  0a solo never critical                        ok 41632
+  A  0b solo crit with R=0                         ok 24471
+  A  4A 1-run enters crit                          ok 3512
+  A  4B second add is +1                           ok 370
+  A  4D crit with R=0                              ok 7
+  A  4D first add from v is +2                     ok 189
+  A  4D no crit from N(v): progress                ok 34
+  A  6 hold/hold deadlock f=1,1                    ok 51767
+  A  6 hold/hold deadlock f=1,2                    ok 429
+  A  6 hold/hold deadlock f=2,2                    ok 2
+  A  7 lockstep livelock                           ok 8095
+  A  A1 first adds differ                          ok 17091
+  A  A2 r=2                                        ok 1423
+  A  A3 e=0 progress                               ok 2638
+  A  A3 e=0 safety                                 ok 512
+  A  A3 e=1 rho=0                                  ok 400
+  A  A3 e=1 rho=1                                  ok 1
+  A  A3 e=1 rho=2                                  ok 93
+  A  A3 e=1 tau progress                           ok 2694
+  A  T1                                            ok 640
+  B  0a solo never critical                        ok 41632
+  B  0b solo crit with R=0                         ok 24471
+  B  4A 1-run enters crit                          ok 3508
+  B  4B(i) R becomes 0                             ok 354
+  B  4B(i) R becomes 0 (later add)                 ok 580
+  B  4D crit with R=0                              ok 6
+  B  4D first add from v is +2                     ok 12
+  B  4D no crit from N(v): progress                ok 22
+  B  6 hold/hold deadlock f=1,1                    ok 51677
+  B  6 hold/hold deadlock f=1,2                    ok 428
+  B  6 hold/hold deadlock f=2,2                    ok 2
+  B  7 lockstep livelock                           ok 7816
+  B  B1 a_j != e_i                                 ok 18514
+  B  B1 exit: 1 in E_k                             ok 512
+  B  B1 exit: 2 in E_k                             ok 1522
+  B  B1 exit: progress from all-rem R=1            ok 2638
+  B  B1 exit: progress from all-rem R=2            ok 1666
+  B  T2                                            ok 640
+exit 0

@@ -1,0 +1,22 @@
+n 3 b 7 s 7
+p 1 q 0 read 2 -1 2 -1 2 -1 2
+p 1 q 1 add 6 0
+p 1 q 2 add 1 4
+p 1 q 3 read 2 -1 2 -1 2 -1 2
+p 1 q 4 read 6 1 -1 6 -1 6 -1
+p 1 q 5 add 6 3
+p 1 q 6 read 6 1 -1 6 -1 6 -1
+p 2 q 0 read 2 3 -1 -1 2 3 -1
+p 2 q 1 add 5 0
+p 2 q 2 add 2 4
+p 2 q 3 read 2 3 -1 -1 2 3 -1
+p 2 q 4 read 5 -1 1 5 -1 -1 6
+p 2 q 5 add 5 3
+p 2 q 6 read 6 -1 1 1 -1 -1 6
+p 3 q 0 read 2 3 3 3 -1 -1 -1
+p 3 q 1 add 3 0
+p 3 q 2 add 4 4
+p 3 q 3 read 2 3 3 3 -1 -1 -1
+p 3 q 4 read 5 -1 -1 -1 1 5 5
+p 3 q 5 add 3 3
+p 3 q 6 read 1 -1 -1 -1 1 1 1

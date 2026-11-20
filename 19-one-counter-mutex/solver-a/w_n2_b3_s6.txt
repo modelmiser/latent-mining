@@ -1,0 +1,14 @@
+# found by synthfam 2 3 2 2 ; -1 = branch never reached
+n 2 b 3 s 6
+p 1 q 0 read 2 2 -1
+p 1 q 1 add 2 0
+p 1 q 2 read 3 2 -1
+p 1 q 3 add 1 4
+p 1 q 4 read -1 1 4
+p 1 q 5 unreached
+p 2 q 0 read 2 2 -1
+p 2 q 1 add 2 0
+p 2 q 2 read 3 2 -1
+p 2 q 3 add 1 4
+p 2 q 4 read -1 1 5
+p 2 q 5 add 2 2

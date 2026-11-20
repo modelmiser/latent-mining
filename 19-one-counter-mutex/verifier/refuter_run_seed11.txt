@@ -1,0 +1,40 @@
+flag-like automata: s<=4 exhaustive: hold-type 940, infinite-type 0; random s 5..8: hold 1562, infinite 67
+judge self-test: 1200 damaged lassos, 976 rejected
+refutations attempted: 249600
+schedules rejected by the judge or builder stuck: 0
+  A  0a solo never critical                        ok 33217
+  A  0b solo crit with R=0                         ok 19760
+  A  4A 1-run enters crit                          ok 2799
+  A  4B second add is +1                           ok 308
+  A  4D crit with R=0                              ok 5
+  A  4D first add from v is +2                     ok 162
+  A  4D no crit from N(v): progress                ok 18
+  A  6 hold/hold deadlock f=1,1                    ok 41307
+  A  6 hold/hold deadlock f=1,2                    ok 295
+  A  7 lockstep livelock                           ok 6473
+  A  A1 first adds differ                          ok 13641
+  A  A2 r=2                                        ok 1205
+  A  A3 e=0 progress                               ok 2160
+  A  A3 e=0 safety                                 ok 405
+  A  A3 e=1 rho=0                                  ok 309
+  A  A3 e=1 rho=2                                  ok 70
+  A  A3 e=1 tau progress                           ok 2126
+  A  T1                                            ok 540
+  B  0a solo never critical                        ok 33217
+  B  0b solo crit with R=0                         ok 19760
+  B  4A 1-run enters crit                          ok 2799
+  B  4B(i) R becomes 0                             ok 296
+  B  4B(i) R becomes 0 (later add)                 ok 176
+  B  4D crit with R=0                              ok 5
+  B  4D first add from v is +2                     ok 7
+  B  4D no crit from N(v): progress                ok 10
+  B  6 hold/hold deadlock f=1,1                    ok 41306
+  B  6 hold/hold deadlock f=1,2                    ok 295
+  B  7 lockstep livelock                           ok 6473
+  B  B1 a_j != e_i                                 ok 14846
+  B  B1 exit: 1 in E_k                             ok 405
+  B  B1 exit: 2 in E_k                             ok 1164
+  B  B1 exit: progress from all-rem R=1            ok 2160
+  B  B1 exit: progress from all-rem R=2            ok 1341
+  B  T2                                            ok 540
+exit 0

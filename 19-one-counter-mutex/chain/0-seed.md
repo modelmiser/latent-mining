@@ -1,0 +1,3 @@
+# Seed
+
+n processes run asynchronously and communicate only through shared registers, each holding one of b values; in one step a process reads one register or writes one register, and an adversarial scheduler decides whose step comes next. They must achieve mutual exclusion: never two in the critical section, and if some process is trying then eventually some process enters. With read and write steps only, n registers are necessary and n one-bit registers suffice; with a stronger step such as test-and-set, one bit suffices. For each n and b, and for step types in between (for example a write that reports whether it changed the register): how many registers are needed, and how many steps must a process take to enter when it runs alone?

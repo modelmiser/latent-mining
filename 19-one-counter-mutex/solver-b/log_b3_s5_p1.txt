@@ -1,0 +1,5 @@
+b=3 s<=5: 257472 canonical automata pass the solo filters
+
+real	25m0.009s
+user	24m59.024s
+sys	0m0.726s
