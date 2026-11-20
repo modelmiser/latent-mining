@@ -1,0 +1,9 @@
+ACCEPT n=4 side=D strategy guarantees >= 6 ; claim >= 6 ; positions used 8
+ACCEPT n=4 side=H strategy guarantees <= 6 ; claim <= 6 ; positions used 11
+ACCEPT n=5 side=D strategy guarantees >= 9 ; claim >= 9 ; positions used 24
+ACCEPT n=5 side=H strategy guarantees <= 9 ; claim <= 9 ; positions used 62
+ACCEPT n=6 side=D strategy guarantees >= 12 ; claim >= 12 ; positions used 92
+ACCEPT n=6 side=H strategy guarantees <= 12 ; claim <= 12 ; positions used 622
+ACCEPT n=7 side=D strategy guarantees >= 16 ; claim >= 16 ; positions used 958
+ACCEPT n=7 side=H strategy guarantees <= 16 ; claim <= 16 ; positions used 15167
+ACCEPT n=8 side=D strategy guarantees >= 19 ; claim >= 19 ; positions used 21850

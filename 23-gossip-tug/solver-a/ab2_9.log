@@ -1,0 +1,3 @@
+n=9  A(n)>=23 ? YES   (TT entries 295682, nodes 399293)
+n=9  A(n)>=24 ? NO   (TT entries 4629015, nodes 5758223)
+exit 0

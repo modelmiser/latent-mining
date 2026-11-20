@@ -1,0 +1,4 @@
+n=9 [nolem] >=21 ? YES  (tt 17090 nodes 23563, 0.4s)
+n=9 [nolem] >=22 ? YES  (tt 90745 nodes 121904, 2.0s)
+n=9 [nolem] >=23 ? YES  (tt 706674 nodes 915948, 13.6s)
+n=9 [nolem] >=24 ? NO  (tt 10795237 nodes 13288499, 193.6s)

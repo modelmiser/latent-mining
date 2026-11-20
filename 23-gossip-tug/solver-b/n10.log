@@ -1,0 +1,3 @@
+n=10  A>=25 ? YES   (tt entries 161745, nodes 2089840, 8.1s)
+n=10  A>=26 ? YES   (tt entries 432914, nodes 5543367, 6.9s)
+n=10  A>=27 ? YES   (tt entries 4708957, nodes 59789125, 87.9s)

@@ -1,0 +1,25 @@
+You are one link in a chain of independent thinkers. You receive a research question in computer science. Your job is to push it one step further away from well-known territory while keeping it sharp. Work from thought alone: do not run code, do not search the web. The only tool use allowed is: Read the one file named below, and Write the two output files named at the end. Do not read anything else (in particular no other file in that folder). Do not try to solve the question.
+
+THE QUESTION YOU RECEIVE
+Read it from chain/1-question.txt (the whole file). It was written by the previous thinker; any claim in it is unverified.
+
+WHAT TO PRODUCE
+
+1. KNOWN (at most 150 words): what you believe is already established or easy about the question as given, including any flaw you found (ill-posed, degenerate, answer trivially unbounded or trivial). Name results or fields only if you are confident; write "unsure" rather than inventing a citation.
+
+2. SUCCESSOR QUESTION: one new question that
+   (a) would NOT be settled by a textbook or by a theorem you can name;
+   (b) is fully formal: every object is defined, and a unique correct answer exists;
+   (c) has small instances whose exact answer can be established by exhaustive computation in a few minutes on one laptop core, AND a general form whose answer would be a formula or a theorem;
+   (d) keeps the heart of the original (how many pairwise exchanges are needed before everyone knows everything when the calls cannot be freely planned) rather than changing the subject;
+   (e) is self-contained: a reader who never saw the original must be able to work on it from your text alone.
+   If the question you received is flawed, repair it first; otherwise make it harder and stranger, but not vaguer. Prefer a twist that makes the easy answers stop applying. Keep the number of parameters small: one integer parameter whose answer is a sequence is better than four. Avoid real-valued parameters; prefer integer quantities so that small cases are finite games or finite searches. State every rule exactly: the order of play and who knows what at every point, what a move is and when it is legal.
+
+3. WHY IT IS PROBABLY UNCHARTED (at most 100 words): your honest reasons, including your doubts.
+
+4. HOW TO CHECK AN ANSWER (at most 100 words): what computation or proof would confirm or refute a claimed answer.
+
+Keep the whole reply under 650 words. Use exactly those four headings.
+
+OUTPUT
+Write your whole reply verbatim to chain/2-link.md, and write ONLY the text of section 2 (the successor question, without the heading) to chain/2-question.txt. Then reply with one line saying both files are written.

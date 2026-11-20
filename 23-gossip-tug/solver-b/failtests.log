@@ -1,0 +1,9 @@
+== deliberate failures (each must print FAIL) ==
+FAIL: entry 4 has 6, recomputed 5
+FAIL: child missing (entry 6)
+FAIL entry 0: referenced entry claims too little
+FAIL entry 2: wrong number of replies
+FAIL entry 0: root claims less than T
+== and the genuine ones ==
+OK n=5 entries=96 A(n)=9
+OK: n=5: Delayer forces >= 9 calls; 26 entries checked

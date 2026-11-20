@@ -1,0 +1,15 @@
+# n=4 ; each line: value then K_1..K_n as hex bitmasks (bit j-1 set = knows secret j); value = calls remaining under optimal play; terminal state omitted (value 0)
+6 1 2 4 8
+5 3 3 4 8
+3 9 6 6 9
+2 f f d 9
+4 9 b 4 b
+3 b 7 7 b
+1 f f f c
+2 f f e d
+3 1 e e e
+2 5 f 7 f
+2 f b e f
+2 9 6 f f
+2 7 7 f f
+1 d f f f

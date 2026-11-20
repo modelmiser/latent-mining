@@ -1,0 +1,5 @@
+n=2 shortest play=1 (2n-4=0) longest play=1 (n(n-1)/2=1)
+n=3 shortest play=3 (2n-4=2) longest play=3 (n(n-1)/2=3)
+n=4 shortest play=4 (2n-4=4) longest play=6 (n(n-1)/2=6)
+n=5 shortest play=6 (2n-4=6) longest play=10 (n(n-1)/2=10)
+n=6 shortest play=8 (2n-4=8) longest play=15 (n(n-1)/2=15)

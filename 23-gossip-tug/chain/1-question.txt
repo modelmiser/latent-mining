@@ -1,0 +1,7 @@
+There are n >= 2 agents, numbered 1..n. Agent i starts knowing exactly the set K_i = {i} (its own secret). A call is an unordered pair {a,b} of distinct agents. A call {a,b} is LEGAL in the current position if and only if a is not in K_b or b is not in K_a (at least one of the two does not yet know the other's secret). Making the call replaces both K_a and K_b by their union K_a ∪ K_b; nothing else changes. The position is TERMINAL when every K_i = {1..n}. (Facts that follow from the rules: a non-terminal position always has a legal call, no pair can ever be called twice, so every play lasts at most n(n-1)/2 calls.)
+
+Two players, Hastener and Delayer, both see the whole position (all the sets K_i) at all times. They move alternately; a move consists of choosing any one legal call, which is then made. Passing is not allowed. Play stops when the position is terminal. The outcome is the total number of calls made by both players together. Hastener wants this number as small as possible, Delayer as large as possible.
+
+Let h(n) be the outcome under optimal play by both when Hastener makes the first move, and d(n) the outcome under optimal play when Delayer makes the first move.
+
+Question: determine h(n) and d(n) exactly for every n. In particular: (1) give the exact values for n = 2, ..., 7 (as far as exhaustive search reaches); (2) decide the growth order of h(n): is h(n) = O(n), or is it of order n log n, or of order n^2, and what is the limit of h(n)/n or h(n)/n^2 if it exists; (3) decide whether |h(n) - d(n)| is bounded by a constant for all n.

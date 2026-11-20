@@ -1,0 +1,9 @@
+Fri Nov 20 02:58:01 AM PST 2026
+progress: calls 268435456 nodes 32169424 tt 23986290 222s
+progress: calls 536870912 nodes 63334288 tt 47128708 451s
+progress: calls 805306368 nodes 93234922 tt 69886175 679s
+progress: calls 1073741824 nodes 123325180 tt 93039784 907s
+progress: calls 1342177280 nodes 152843727 tt 115629235 1140s
+n=10 >=28 ? NO  (tt 127226345 nodes 167928180, 1260.8s)
+exit 0
+Fri Nov 20 03:19:03 AM PST 2026

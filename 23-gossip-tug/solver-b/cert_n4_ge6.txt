@@ -1,0 +1,8 @@
+# Delayer certificate: n=4, root entry 0 claims >=6 calls. Line k (0-based, comments excluded): t a K_0..K_{n-1} (hex masks, agents 0-based, bit j = knows j) then for each legal partner b of a (ascending): b:L (leaf: t-1<=0 or ceil(nonfull(child)/2)>=t-1) or b:j:perm (child relabelled x->perm[x] equals state of line j, which claims >= t-1). Digits base 12 (a=10,b=11).
+6 0 1 2 4 8 1:1:0123 2:1:0213 3:1:0231
+5 0 3 3 4 8 2:2:0213 3:2:0231
+4 2 7 7 5 8 1:3:1230 3:5:1203
+3 0 1 e e e 1:4:3201 2:4:3021 3:4:3012
+2 0 7 7 f f 3:L
+3 0 b 7 7 b 2:6:0231
+2 3 f 7 d f 1:L

@@ -1,0 +1,8 @@
+1 2 4 8 0
+1 2 c c 2
+b a 4 b 1
+1 e e e 0
+b b f f 0
+7 f f f 0
+b 7 7 b 0
+d b f f 2

@@ -1,0 +1,16 @@
+V(7,2):
+n=9 >=15 ? YES  (tt 65 nodes 116, 0.0s)
+n=9 >=16 ? NO  (tt 65 nodes 116, 0.0s)
+V(6,3):
+n=9 >=17 ? YES  (tt 966 nodes 1375, 0.0s)
+n=9 >=18 ? NO  (tt 1260 nodes 1827, 0.0s)
+V(5,4):
+n=9 >=19 ? YES  (tt 16473 nodes 21522, 0.4s)
+n=9 >=20 ? NO  (tt 27194 nodes 35715, 0.6s)
+V(4,5):
+n=9 >=20 ? YES  (tt 161284 nodes 202852, 3.0s)
+n=9 >=21 ? NO  (tt 358721 nodes 450942, 6.5s)
+V(3,6):
+n=9 >=21 ? YES  (tt 532543 nodes 659432, 9.1s)
+n=9 >=22 ? NO  (tt 2679114 nodes 3275671, 46.2s)
+done

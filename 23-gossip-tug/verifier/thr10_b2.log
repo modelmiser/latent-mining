@@ -1,0 +1,5 @@
+Fri Nov 20 02:04:01 AM PST 2026
+n=10 >=26 ? YES  (tt 3414851 nodes 4548015, 69.0s)
+n=10 >=27 ? YES  (tt 20006590 nodes 26529152, 421.7s)
+exit 124
+Fri Nov 20 02:29:01 AM PST 2026

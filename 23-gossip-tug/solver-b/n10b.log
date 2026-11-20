@@ -1,0 +1,1 @@
+HRULE=0 n=10  val>=27 ? YES   (tt entries 4687816, nodes 60413128, 130.3s)

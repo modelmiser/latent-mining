@@ -1,0 +1,3 @@
+# Seed
+
+n people each know one secret. In a telephone call the two speakers tell each other every secret they know. The gossip problem asks for the least number of calls after which everybody knows everything; the answer is 2n - 4 for n >= 4. If calls are one-way (the caller tells, the listener only hears), 2n - 2 calls are needed. Now suppose the calls are not planned centrally: before each call an adversary chooses who is on the line with whom from the pairs that the callers' own knowledge permits, or one call may fail silently, or each person can take part in at most k calls. For each n: how many calls are needed in the worst case, which protocols achieve it, and what do the people have to know about the plan?

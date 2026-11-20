@@ -1,0 +1,37 @@
+PROOFS (solver-a).  Each item is marked COMPLETE or SKETCH.
+
+P0 (COMPLETE, trivial).  Facts stated in the problem.
+ (i) A non-terminal position has an active agent: if j is not in K_i then {i,j} is legal.
+ (ii) After a call {a,b} both know both secrets for ever (sets only grow), so {a,b} is never
+      legal again; hence every play has at most n(n-1)/2 calls, A(n) <= n(n-1)/2.
+ (iii) A non-expert (K_i != {1..n}) is always active, by (i).
+
+P1 (COMPLETE).  A(n) >= 2n-3 for every n >= 2.
+ Delayer's strategy: name agent 1 as long as agent 1 is active (phase 1); afterwards name any
+ active agent (phase 2; the bound holds whatever Delayer does in phase 2).
+ Phase 1.  Every call contains agent 1; by P0(ii) the partners p_1, p_2, ... are distinct.
+ By induction on j, after j calls: K_1 = P_j := {1,p_1,...,p_j}, K_{p_i} = P_i for i <= j, and
+ every other agent still holds only its own secret.  (Call j+1 is {1,p_{j+1}} with p_{j+1} new,
+ so both get P_j ∪ {p_{j+1}} = P_{j+1}.)  While P_j != {1..n}, some b is not in K_1, so {1,b}
+ is legal and agent 1 is active.  Hence phase 1 lasts exactly n-1 calls, whatever Hastener does.
+ At its end K_{p_i} = P_i for all i, the sets form a chain P_1 < P_2 < ... < P_{n-1} = {1..n},
+ and exactly two agents (1 and p_{n-1}) are experts (for n = 2 these are all agents).
+ Phase 2.  Every K_i is a member of the chain, and the union of two members of a chain is the
+ larger one, so this stays true for ever.  Therefore a call {a,b} makes an agent newly expert only
+ if the other one already was an expert: each call raises the number of experts by at most 1.
+ Going from 2 experts to n experts needs at least n-2 calls.
+ Total: at least (n-1) + (n-2) = 2n-3 calls.  QED.
+ Remark: this is only a lower bound.  The exhaustive computations show it is NOT tight for
+ 4 <= n <= 10 (values 6,9,12,16,19,23,>=27 against 5,7,9,11,13,15,17).
+
+P2 (COMPLETE, by exhaustive computation + certificates).  A(4) = 6 = 4*3/2, so the headline
+ statement "A(n) = 2n-3 for every n >= 4" is false, first failing at n = 4.
+ Human-readable Delayer strategy for n = 4 (file cert_n4_D.txt is the machine version, 8 lines):
+ after the forced first call {1,2}, name 1.  Whatever Hastener answers, Delayer always names an
+ agent all of whose legal replies keep the position among the 8 listed ones; check.py verifies
+ that every one of Hastener's replies from every listed position leads to exactly 6 calls.
+ Since 6 is also the trivial maximum, A(4) = 6.  The problem's hand argument ("Hastener then seems
+ able to finish in 5") is wrong.
+
+NOT PROVED (no sketch offered as proof): any general formula for A(n); whether A(n)/n is bounded;
+ A(n) > 2n-3 for all n >= 4 (true for n = 4..10 by computation only).

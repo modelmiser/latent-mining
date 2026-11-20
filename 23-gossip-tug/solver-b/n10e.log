@@ -1,0 +1,5 @@
+HRULE=0 n=10  val>=24 ? YES   (tt entries 16599, nodes 127311, 0.3s)
+HRULE=0 n=10  val>=25 ? YES   (tt entries 113171, nodes 881924, 1.2s)
+HRULE=0 n=10  val>=26 ? YES   (tt entries 308008, nodes 2514364, 2.5s)
+HRULE=0 n=10  val>=27 ? YES   (tt entries 2850461, nodes 23679276, 29.2s)
+HRULE=0 n=10  val>=28 ? NO   (tt entries 73511686, nodes 648357026, 789.5s)
