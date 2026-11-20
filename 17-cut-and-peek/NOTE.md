@@ -179,7 +179,8 @@ Two things the theorem does not settle.
   cyclically equalizable, that is, can be made cyclically equal by inserting
   the same additional words at the same places in all of them. Lemma 1 shows only that whenever additional cards
   make those seven words cyclically equal, the eighth word becomes cyclically
-  equal to them too.
+  equal to them too. The analogous question in [2] about fourteen words for
+  four-bit equality is likewise not decided.
 - Functions with no restriction of the kind in the hypothesis. In
   particular it does not address the other classes of three-variable
   functions treated in [3].
@@ -269,9 +270,13 @@ Mizuki [7], who asked whether n-bit equality has an SCFO protocol for n ≥ 4
 
 Shinagawa and Nuida [2] study when words can be made cyclically equal by
 inserting letters, prove that an SCFO protocol for f needs at least
-max(N_0(f), N_1(f)) cards, where N_b is the number of inputs with value b,
-and list as open problems the existence of SCFO protocols for three-bit AND
-and for four-bit equality. Their note [4] gives SCFO protocols for
+max(N_0(f), N_1(f)) cards, where N_b is the number of inputs with value b.
+The list of open problems in their Conclusion ends with two items: "Is there
+a single-cut full-open protocol for the three-bit AND function?" and "Is
+there a single-cut full-open protocol for the four-bit equality function?",
+each followed by a more specific question about the cyclic equalizability of
+the words π(x₁ x̄₁ … ) over the inputs where the function is 0 (seven words
+for AND, fourteen for equality). Their note [4] gives SCFO protocols for
 x ⊕ y ⊕ z, for a four-variable function and for a three-variable function
 obtained from it.
 
