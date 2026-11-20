@@ -1,0 +1,3 @@
+1. privacy: True | distinct words, AND 0: 33 | distinct words, AND 1: 16 | disjoint: True
+2. cases satisfying (*): 1011693 | violations of the conclusion: 0
+3. ones among the 8 inputs of each three-variable restriction: [4] | published rows cyclically equal iff outputs equal: True

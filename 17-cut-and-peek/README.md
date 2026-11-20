@@ -6,6 +6,9 @@ set of positions is turned face up. From what is seen, everyone must learn
 the AND of the bits and nothing else. For two players this is the well-known
 five-card trick. What about three?
 
+A standalone write-up of the main result, with the proof and its relation to
+the literature, is in [NOTE.md](NOTE.md).
+
 **Short answer.**
 
 - **If every card is turned up, three or more players cannot do it, with any
@@ -241,6 +244,18 @@ counterexample. Their findings on this page, applied above:
 
 The corrected wording has not been through a second round.
 
+The standalone note went to the same five reviewers separately. All five
+confirmed its definitions, its written-out proof of the lemma line by line,
+and the theorem with its examples (AND, OR, equality, majority of five). GPT
+marked the section on partial opening refuted because the list of further
+facts did not say n ≥ 2. Most other findings were about evidence: three
+checks the note cited (the 36-card protocol, a test of the proof's identity,
+and a consistency check against a published protocol) had no script in the
+folder, and the note said the full record was in the folder although the
+reviewers' reports are not. A script with those checks and its output were
+added, and the wording was corrected. The corrected note has not been through
+a second round.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -249,6 +264,8 @@ The corrected wording has not been through a second round.
 - `reports/`: each instance's final report, verbatim.
 - `solver-a/`, `solver-b/`: searches, witnesses, checkers, proofs.
 - `verifier/`: the referee's checker, brute force, reduced search and tests.
+- `NOTE.md`: the standalone note. `note-checks.py`, `note-checks.txt`: three
+  small checks it cites, and their output.
 - `prior-art.md`: the first literature search. `prior-art-deep.md`: the
   second, which read the four closest papers against this definition. The
   papers themselves are not included.
