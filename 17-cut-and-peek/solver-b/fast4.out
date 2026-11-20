@@ -1,0 +1,7 @@
+FAST4 part=0/1 n=2 m=5 E=1 F=1 leaves=48 valid_pairs=40 valid_cfgs=8 cfgs_fullR=8 minR=4 m   T5_violations_among_valid=0
+FAST4 part=0/1 n=2 m=6 E=1 F=1 leaves=330 valid_pairs=94 valid_cfgs=16 cfgs_fullR=6 minR=3   T5_violations_among_valid=0
+FAST4 part=0/1 n=2 m=7 E=1 F=1 leaves=2040 valid_pairs=648 valid_cfgs=60 cfgs_fullR=60 min   T5_violations_among_valid=0
+FAST4 part=0/1 n=2 m=8 E=1 F=1 leaves=12110 valid_pairs=1848 valid_cfgs=200 cfgs_fullR=56    T5_violations_among_valid=0
+FAST4 part=0/1 n=2 m=9 E=1 F=1 leaves=70112 valid_pairs=7212 valid_cfgs=180 cfgs_fullR=180   T5_violations_among_valid=0
+FAST4 part=0/1 n=2 m=10 E=1 F=1 leaves=400806 valid_pairs=51264 valid_cfgs=2184 cfgs_fullR   T5_violations_among_valid=0
+FAST4 part=0/1 n=2 m=11 E=1 F=1 leaves=2275320 valid_pairs=154540 valid_cfgs=900 cfgs_full   T5_violations_among_valid=0

@@ -1,0 +1,13 @@
+Ra=000011[::-1 bits] classes=11 usable=0: infeasible for every b
+Ra=000101[::-1 bits] classes=10 usable=0: infeasible for every b
+Ra=000111 (bit q = position a-1-q) classes=13 usable=2
+Ra=001001[::-1 bits] classes=10 usable=0: infeasible for every b
+Ra=001011[::-1 bits] classes=14 usable=0: infeasible for every b
+Ra=001101[::-1 bits] classes=14 usable=0: infeasible for every b
+Ra=001111 (bit q = position a-1-q) classes=14 usable=8
+Ra=010101 (bit q = position a-1-q) classes=10 usable=2
+Ra=010111 (bit q = position a-1-q) classes=14 usable=10
+Ra=011011 (bit q = position a-1-q) classes=14 usable=8
+Ra=011111 (bit q = position a-1-q) classes=14 usable=106
+Ra=111111 (bit q = position a-1-q) classes=14 usable=11246
+n=3 a=6: total feasible (Ra,Z) = 0

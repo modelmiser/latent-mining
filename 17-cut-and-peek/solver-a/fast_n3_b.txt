@@ -1,0 +1,4 @@
+fast n=3 m=12 mode=0 sym=1 part=0/1 leaves=35592480 withA=5351440 privR=15365360 valid=0 E=0
+18.34s
+fast n=3 m=13 mode=0 sym=1 part=0/1 leaves=273968640 withA=10917024 privR=22750560 valid=0 E=0
+64.50s

@@ -1,0 +1,4 @@
+# deliberately wrong objects: must be rejected
+n=2 m=5 owner=H0101 c0=00110 c1=01001 R=11100
+n=2 m=4 owner=0011 c0=0101 c1=1010 R=1111
+n=2 m=5 owner=H0101 c0=00110 c1=00101 R=11111

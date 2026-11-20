@@ -1,0 +1,12 @@
+Ra=000011[::-1 bits] classes=11 usable=0: infeasible for every b
+Ra=000101[::-1 bits] classes=10 usable=0: infeasible for every b
+Ra=111000 classes=13 usable=2 LP-feasible Z sets=0
+Ra=001001[::-1 bits] classes=10 usable=0: infeasible for every b
+Ra=001011[::-1 bits] classes=14 usable=0: infeasible for every b
+Ra=001101[::-1 bits] classes=14 usable=0: infeasible for every b
+Ra=111100 classes=14 usable=8 LP-feasible Z sets=0
+Ra=101010 classes=10 usable=2 LP-feasible Z sets=0
+Ra=111010 classes=14 usable=10 LP-feasible Z sets=0
+Ra=110110 classes=14 usable=8 LP-feasible Z sets=0
+Ra=111110 classes=14 usable=106 LP-feasible Z sets=0
+n=3 a=6: total feasible (Ra,Z) = 0

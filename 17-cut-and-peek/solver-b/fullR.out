@@ -1,0 +1,14 @@
+FULLR m=5 n2_valid(W,s,t)=10 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=6 n2_valid(W,s,t)=9 rot_pairs=6 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=7 n2_valid(W,s,t)=84 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=8 n2_valid(W,s,t)=88 rot_pairs=40 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=9 n2_valid(W,s,t)=270 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=10 n2_valid(W,s,t)=520 rot_pairs=60 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=11 n2_valid(W,s,t)=1265 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=12 n2_valid(W,s,t)=1158 rot_pairs=312 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=13 n2_valid(W,s,t)=4056 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=14 n2_valid(W,s,t)=6342 rot_pairs=378 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=15 n2_valid(W,s,t)=9660 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=16 n2_valid(W,s,t)=15648 rot_pairs=1632 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=17 n2_valid(W,s,t)=33320 rot_pairs=0 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0
+FULLR m=18 n2_valid(W,s,t)=46089 rot_pairs=2934 n3_triples_with_7_rotations=0 of_which_row111_not_rotation=0

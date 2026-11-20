@@ -1,0 +1,1 @@
+RED n=3 m=13 sym=1 part=0/2 configs=125568960 private=135996300 weak=528 valid=0 minR=0 maxR=0

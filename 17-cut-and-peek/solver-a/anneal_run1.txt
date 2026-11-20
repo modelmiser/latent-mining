@@ -1,0 +1,2 @@
+anneal n=3 m=16: no hit, best cost 16, iters 123952256
+anneal n=3 m=18: no hit, best cost 17, iters 108572032

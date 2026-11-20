@@ -1,0 +1,2 @@
+n=3 a=6 b=5 gadgets enumerated=36480 kept signatures=3794
+RESULT n=3 a=6 b=5 found=0

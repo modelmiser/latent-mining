@@ -1,0 +1,34 @@
+slow n=2 m=2 validAll=0 validReduced0inR=0 E=0
+fast n=2 m=2 mode=0 sym=0 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+fast n=2 m=2 mode=0 sym=1 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+slow n=2 m=3 validAll=0 validReduced0inR=0 E=0
+fast n=2 m=3 mode=0 sym=0 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+fast n=2 m=3 mode=0 sym=1 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+slow n=2 m=4 validAll=0 validReduced0inR=0 E=0
+fast n=2 m=4 mode=0 sym=0 part=0/1 leaves=24 withA=8 privR=56 valid=0 E=0
+fast n=2 m=4 mode=0 sym=1 part=0/1 leaves=6 withA=2 privR=14 valid=0 E=0
+witness: owner=01212 u0=00110 u1=01001 R=0,1,2,3,
+slow n=2 m=5 validAll=720 validReduced0inR=200 E=1
+WITNESS n=2 m=5 owner=01212 u0=00110 R=0,1,2,3
+WITNESS n=2 m=5 owner=01212 u0=00110 R=0,1,2,3,4
+WITNESS n=2 m=5 owner=01212 u0=00110 R=0,1,2,4
+fast n=2 m=5 mode=0 sym=0 part=0/1 leaves=240 withA=40 privR=600 valid=200 E=1
+WITNESS n=2 m=5 owner=10212 u0=00011 R=0,1,2,3
+fast n=2 m=5 mode=0 sym=1 part=0/1 leaves=3 withA=1 privR=3 valid=1 E=1 (stopped at first)
+witness: owner=001212 u0=000110 u1=001001 R=0,1,2,3,
+slow n=2 m=6 validAll=7452 validReduced0inR=564 E=1
+WITNESS n=2 m=6 owner=001212 u0=000110 R=0,1,2,3
+WITNESS n=2 m=6 owner=001212 u0=000110 R=0,1,2,3,4
+WITNESS n=2 m=6 owner=001212 u0=000110 R=0,1,2,3,4,5
+fast n=2 m=6 mode=0 sym=0 part=0/1 leaves=1800 withA=1428 privR=6396 valid=564 E=1
+WITNESS n=2 m=6 owner=100212 u0=000011 R=0,1,2,3
+fast n=2 m=6 mode=0 sym=1 part=0/1 leaves=3 withA=3 privR=5 valid=1 E=1 (stopped at first)
+fast n=3 m=3 mode=0 sym=0 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+fast n=3 m=4 mode=0 sym=0 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+fast n=3 m=5 mode=0 sym=0 part=0/1 leaves=0 withA=0 privR=0 valid=0 E=0
+fast n=3 m=6 mode=0 sym=0 part=0/1 leaves=720 withA=480 privR=1344 valid=0 E=0
+slow n=3 m=5 validAll=0 validReduced0inR=0 E=0
+
+real	0m13.483s
+user	0m13.470s
+sys	0m0.007s

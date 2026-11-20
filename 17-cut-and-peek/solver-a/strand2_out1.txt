@@ -1,0 +1,15 @@
+n=2 a=3 b=2 gadgets enumerated=40 kept signatures=4
+FOUND n=2 a=3 b=2
+010 102
+101 102
+RESULT n=2 a=3 b=2 found=1
+n=3 a=6 b=4 gadgets enumerated=36480 kept signatures=572
+RESULT n=3 a=6 b=4 found=0
+n=3 a=7 b=2 gadgets enumerated=345856 kept signatures=0
+RESULT n=3 a=7 b=2 found=0
+n=3 a=8 b=2 gadgets enumerated=3107328 kept signatures=0
+RESULT n=3 a=8 b=2 found=0
+n=3 a=9 b=2 gadgets enumerated=26967040 kept signatures=0
+RESULT n=3 a=9 b=2 found=0
+n=3 a=7 b=3 gadgets enumerated=345856 kept signatures=156
+RESULT n=3 a=7 b=3 found=0

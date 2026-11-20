@@ -1,0 +1,16 @@
+RAW n=2 m=2 private=24 weak=0 valid=0 minR=0 fullR=0
+RAW n=2 m=3 private=840 weak=0 valid=0 minR=0 fullR=0
+RAW n=2 m=4 private=17624 weak=0 valid=0 minR=0 fullR=0
+RAW n=2 m=5 private=297400 weak=3120 valid=720 minR=4 fullR=1
+RAW n=2 m=6 private=4421664 weak=39528 valid=7452 minR=3 fullR=1
+RAW n=3 m=5 private=546000 weak=0 valid=0 minR=0 fullR=0
+RAW n=3 m=6 private=13164336 weak=0 valid=0 minR=0 fullR=0
+RED n=2 m=2 sym=0 part=0/1 configs=0 private=0 weak=0 valid=0 minR=0 maxR=0 rawequiv: private=0 weak=0 valid=0
+RED n=2 m=3 sym=0 part=0/1 configs=0 private=0 weak=0 valid=0 minR=0 maxR=0 rawequiv: private=0 weak=0 valid=0
+RED n=2 m=4 sym=0 part=0/1 configs=24 private=184 weak=0 valid=0 minR=0 maxR=0 rawequiv: private=184 weak=0 valid=0
+FIRST VALID n=2 m=5 owner=01212 c=00110 R=0,1,2,3,
+RED n=2 m=5 sym=0 part=0/1 configs=240 private=2240 weak=1040 valid=240 minR=4 maxR=5 rawequiv: private=6720 weak=3120 valid=720
+FIRST VALID n=2 m=6 owner=001212 c=000110 R=0,1,2,3,
+RED n=2 m=6 sym=0 part=0/1 configs=1800 private=26304 weak=4392 valid=828 minR=3 maxR=6 rawequiv: private=176640 weak=39528 valid=7452
+RED n=3 m=5 sym=0 part=0/1 configs=0 private=0 weak=0 valid=0 minR=0 maxR=0 rawequiv: private=0 weak=0 valid=0
+RED n=3 m=6 sym=0 part=0/1 configs=720 private=7920 weak=0 valid=0 minR=0 maxR=0 rawequiv: private=7920 weak=0 valid=0

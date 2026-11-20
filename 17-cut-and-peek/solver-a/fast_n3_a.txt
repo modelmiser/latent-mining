@@ -1,0 +1,12 @@
+fast n=3 m=6 mode=0 sym=1 part=0/1 leaves=60 withA=40 privR=112 valid=0 E=0
+0.00s
+fast n=3 m=7 mode=0 sym=1 part=0/1 leaves=720 withA=0 privR=0 valid=0 E=0
+0.00s
+fast n=3 m=8 mode=0 sym=1 part=0/1 leaves=7560 withA=1328 privR=4824 valid=0 E=0
+0.00s
+fast n=3 m=9 mode=0 sym=1 part=0/1 leaves=67200 withA=9216 privR=28224 valid=0 E=0
+0.04s
+fast n=3 m=10 mode=0 sym=1 part=0/1 leaves=565740 withA=58132 privR=117932 valid=0 E=0
+0.16s
+fast n=3 m=11 mode=0 sym=1 part=0/1 leaves=4541040 withA=201520 privR=424240 valid=0 E=0
+1.04s

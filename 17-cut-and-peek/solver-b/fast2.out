@@ -1,0 +1,17 @@
+FAST2 part=0/1 n=2 m=4 E=0 F=0 leaves=6 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+FAST2 part=0/1 n=2 m=5 E=1 F=1 leaves=48 valid_pairs=40 valid_cfgs=8 cfgs_fullR=8 minR=4 maxR=5
+FAST2 part=0/1 n=2 m=6 E=1 F=1 leaves=330 valid_pairs=94 valid_cfgs=16 cfgs_fullR=6 minR=3 maxR=6
+FAST2 part=0/1 n=2 m=7 E=1 F=1 leaves=2040 valid_pairs=648 valid_cfgs=60 cfgs_fullR=60 minR=4 maxR=7
+FAST2 part=0/1 n=2 m=8 E=1 F=1 leaves=12110 valid_pairs=1848 valid_cfgs=200 cfgs_fullR=56 minR=4 maxR=8
+FAST2 part=0/1 n=2 m=9 E=1 F=1 leaves=70112 valid_pairs=7212 valid_cfgs=180 cfgs_fullR=180 minR=5 maxR=9
+FAST2 part=0/1 n=2 m=10 E=1 F=1 leaves=400806 valid_pairs=51264 valid_cfgs=2184 cfgs_fullR=328 minR=4 maxR=10
+FAST2 part=0/1 n=2 m=11 E=1 F=1 leaves=2275320 valid_pairs=154540 valid_cfgs=900 cfgs_fullR=820 minR=4 maxR=11
+FAST2 part=0/1 n=2 m=12 E=1 F=1 leaves=12875742 valid_pairs=559744 valid_cfgs=24936 cfgs_fullR=718 minR=3 maxR=12
+FAST2 part=0/1 n=3 m=12 E=0 F=0 leaves=35592480 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+real	0m7.243s
+FAST2 part=0/1 n=3 m=13 E=0 F=0 leaves=273968640 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+real	0m49.028s
+FAST2 part=0/2 n=3 m=14 E=0 F=0 leaves=963196344 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+real	3m6.950s
+FAST2 part=1/2 n=3 m=14 E=0 F=0 leaves=1123729068 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+real	3m57.233s

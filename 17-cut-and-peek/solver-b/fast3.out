@@ -1,0 +1,36 @@
+FAST3 part=0/1 n=2 m=5 E=1 F=1 leaves=48 valid_pairs=40 valid_cfgs=8 cfgs_fullR=8 minR=4 maxR=5
+  WEAK valid_pairs=120 n=2 m=5 owner=0H101 c0=00011 c1=10100 R=11000
+FAST3 part=0/1 n=2 m=6 E=1 F=1 leaves=330 valid_pairs=94 valid_cfgs=16 cfgs_fullR=6 minR=3 maxR=6
+  WEAK valid_pairs=334 n=2 m=6 owner=0HH101 c0=000011 c1=100100 R=110000
+FAST3 part=0/1 n=2 m=8 E=1 F=1 leaves=12110 valid_pairs=1848 valid_cfgs=200 cfgs_fullR=56 minR=4 maxR=8
+  WEAK valid_pairs=20976 n=2 m=8 owner=0HHHH101 c0=00000011 c1=10000100 R=11000000
+FAST3 part=0/1 n=2 m=10 E=1 F=1 leaves=400806 valid_pairs=51264 valid_cfgs=2184 cfgs_fullR=328 minR=4 maxR=10
+  WEAK valid_pairs=754524 n=2 m=10 owner=0HHHHHH101 c0=0000000011 c1=1000000100 R=1100000000
+FAST3 part=0/1 n=2 m=12 E=1 F=1 leaves=12875742 valid_pairs=559744 valid_cfgs=24936 cfgs_fullR=718 minR=3 maxR=12
+  WEAK valid_pairs=20151244 n=2 m=12 owner=0HHHHHHHH101 c0=000000000011 c1=100000000100 R=110000000000
+FAST3 part=0/1 n=3 m=6 E=0 F=0 leaves=60 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=3 m=7 E=0 F=0 leaves=720 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=3 m=8 E=0 F=0 leaves=7560 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=3 m=9 E=0 F=0 leaves=67200 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=3 m=10 E=0 F=0 leaves=565740 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=3 m=11 E=0 F=0 leaves=4541040 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=3 m=12 E=0 F=0 leaves=35592480 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=216 n=3 m=12 owner=0H0H121H0H02 c0=000010001011 c1=101001100000 R=110000000100
+FAST3 part=0/1 n=3 m=13 E=0 F=0 leaves=273968640 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=1152 n=3 m=13 owner=0HHHH122H10HH c0=0000101001100 c1=1000110100000 R=1010000010000
+FAST3 part=0/1 n=4 m=8 E=0 F=0 leaves=840 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=4 m=9 E=0 F=0 leaves=13440 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=4 m=10 E=0 F=0 leaves=196560 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=4 m=11 E=0 F=0 leaves=2318400 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 
+FAST3 part=0/1 n=4 m=12 E=0 F=0 leaves=25918200 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=0 

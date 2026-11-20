@@ -1,0 +1,8 @@
+FAST3 part=1/8 n=3 m=15 E=0 F=0 leaves=2066513592 valid_pairs=0 valid_cfgs=0 cfgs_fullR=0 minR=0 maxR=0
+  WEAK valid_pairs=4632 n=3 m=15 owner=0HHHHH110222002 c0=000011101100101 c1=100011010011010 R=100010001000000
+  by|R|:
+
+real	5m42.451s
+user	5m42.350s
+sys	0m0.038s
+exit=0

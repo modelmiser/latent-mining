@@ -1,0 +1,1 @@
+slow n=3 m=6 validAll=0 validReduced0inR=0 E=0

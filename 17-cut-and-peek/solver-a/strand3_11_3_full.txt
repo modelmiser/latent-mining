@@ -1,0 +1,3 @@
+n=3 a=11 b<=3: Ra sets (up to translation)=1 gadgets enumerated=1907716096
+33.30s
+RESULT n=3 a=11 b<=3 total found=0

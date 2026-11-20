@@ -1,0 +1,82 @@
+PROOFS (solver-a).  Notation: cards 0 = club, 1 = heart.  w(x) = row for input x.  T = rotation.
+Window of a row w at shift j: the word (w_{q-j})_{q in R}.  M(x) = multiset of the m windows of w(x).
+"AND-0 input" = any x != 1^n.
+
+L1 (reduction to complement form).  COMPLETE.
+  If u_i^0 = u_i^1 as words, w(x) does not depend on x_i, so M(1^n) = M(1^n - e_i) = M(0^n) (privacy; n >= 2),
+  and correctness fails (M is non-empty).  So in a valid protocol each player has a non-empty set
+  D_i = {p in P_i : u_i^0(p) != u_i^1(p)}.  Moving the positions of P_i \ D_i to H (with their constant card)
+  changes no row w(x), hence no M(x), and keeps m.  So E(n,m) = 1 iff there is a valid protocol in which
+  u_i^1 is the complement of u_i^0 on P_i = D_i.  Then w(x) = c XOR (union of D_i over i with x_i = 1), c = w(0^n).
+
+L2 (balance; r(n) >= 2n).  COMPLETE.
+  Summing the number of hearts over the m windows gives |R| * (hearts in w(x)).  Privacy applied to 0^n and e_i
+  (both AND-0 since n >= 2) gives hearts(w(e_i)) = hearts(w(0^n)), i.e. D_i has as many c=0 as c=1 positions.
+  So |D_i| is even and >= 2, and m >= 2n.  (Consequently all 2^n rows have the same number of hearts.)
+
+L3 (every window sees every player).  COMPLETE.
+  Claim: in a valid protocol, for every j in Z_m and every player i, (R - j) meets D_i.
+  Proof: if (R - j) misses D_i then w(1^n) and w(1^n - e_i) agree on R - j, so the window of w(1^n) at shift j
+  equals the window of w(1^n - e_i) at shift j, a word of M(1^n - e_i) = M(0^n).  That word is in both M(1^n) and
+  M(0^n), contradicting correctness.
+  Consequences: D_i - R = Z_m, so |R| * |D_i| >= m for every i; with sum |D_i| <= m this gives |R| >= n
+  (this contains belief (b)); the complement of R contains no translate of any D_i.
+
+L4 (n = 2).  COMPLETE given the m = 4 computation.
+  E(2,m) = 0 for m <= 3 by L2.  E(2,4) = 0: exhaustive, straight from the definition (slow.cpp).
+  E(2,m) = 1 for every m >= 5, with R = Z_m: P_1 = {0, m-2}, P_2 = {m-3, m-1}, H = the rest (all clubs),
+  u_1^0 = (club at 0, heart at m-2), u_2^0 = (club at m-3, heart at m-1), u_i^1 = complements.
+  Hearts of w(00) = {m-2, m-1}; w(10) = {0, m-1}; w(01) = {m-3, m-2}; w(11) = {0, m-3}.
+  The first three are pairs of cyclically adjacent positions, i.e. rotations of one word, so M is the same.
+  {0, m-3} is adjacent only if m-3 = 1 or 3 = m-1, i.e. m = 4.  For m >= 5 w(11) is not a rotation of w(00),
+  and with R = Z_m distinct necklaces have disjoint window sets.  Hence r(2) = f(2) = 5 and E(2,m)=1 iff m>=5.
+
+L5 (strand decomposition; this is why the witnesses work, the witnesses themselves are checked directly).  COMPLETE.
+  Let m = a*b and R = b*Ra = {b*k : k in Ra}, Ra a subset of Z_a.  Strand s (0 <= s < b) of a row w is the cyclic
+  word (w_{s + b*k})_{k in Z_a}.  The window at shift j reads positions b*k - j, k in Ra, all in the residue class
+  -j mod b, i.e. inside one strand, and it is an Ra-window of that strand; as j runs over Z_m each strand gets each
+  of its a rotations exactly once.  Hence M(x) = disjoint union over strands of (the multiset of the a Ra-windows
+  of the strand).  So a protocol of this shape is valid iff (privacy) the multiset of the b strand classes
+  (class = multiset of Ra-windows; for Ra = Z_a: the necklace) is the same for all AND-0 inputs and
+  (correctness) no Ra-window of a strand at input 1^n is an Ra-window of a strand at an AND-0 input.
+  By L3 every strand must contain a card of every player.
+  Privacy is linear in the multiplicities of strand types, so for a fixed set Z of "1^n-only" classes existence
+  for SOME b is a rational LP (strands.py / zscan.py); a rational solution scales to an integer one.
+
+L6 (structure of an R = Z_m protocol for n = 3; partial, does NOT settle f(3)).  COMPLETE as stated.
+  With R = Z_m privacy says w(x) = T^{s(x)} W for the 7 AND-0 inputs, W = w(000).  Write a_i = s(e_i),
+  a_ij = s(e_i+e_j).  As integer vectors w(e_i+e_j) = w(e_i) + w(e_j) - W, i.e. in Z[Z_m]
+      (X^{a_i} + X^{a_j} - 1 - X^{a_ij}) W = 0.
+  For a frequency k with What(k) != 0 and z = exp(2 pi i k/m): z^{a_i} + z^{a_j} = 1 + z^{a_ij}.  Two unit complex
+  numbers are determined as a set by their sum when it is non-zero, so z^{a_i} = 1, or z^{a_j} = 1, or
+  z^{a_j} = -z^{a_i}.  Applying this to the three pairs: at every such k at least one z^{a_i} is 1, and either
+  (A) two of them are 1, and then w(111)^(k) = z^{a_1+a_2+a_3} What(k), or
+  (B) exactly one is 1 and the other two are opposite, and then w(111)^(k) = -What(k).
+  So w(111) is always homometric to W (belief (e) for k = 2), and if no frequency of type (B) exists then
+  w(111) = T^{a_1+a_2+a_3} W and correctness fails (this contains belief (f) for n = 3, R = Z_m).
+  Whether type (B) can occur with 0/1 rows is not decided here.
+
+NOT PROVED (conjectures / recalled results, labelled as such in the report):
+  - f(3) = infinity (no R = Z_m protocol for n = 3).  Evidence only: exhaustive for m <= 14(15); no strand word of
+    length <= 10 takes at most two necklace classes on the AND-0 inputs.
+  - f(n) = infinity for n >= 7 via "the 6-deck determines a subset of Z_m up to translation": I recall this as a
+    theorem of Pebody (reconstruction number of cyclic groups <= 6; Radcliffe-Scott: 3 for prime m), not re-derived.
+  - the exact value of r(3).
+
+L5' (multiples).  COMPLETE.  If E(n,a) = 1 then E(n,a*b) = 1 for every b >= 1: take b strands all equal to a valid
+  protocol (P, Ra) on Z_a and R = b*Ra.  By L5, M(x) is b copies of M_P(x), so privacy and correctness carry over.
+  (So E(2,m) = 1 for m >= 5 is consistent, and E(3,36k) = 1 for all k >= 1.)
+
+SAFETY OF THE PRUNING IN fast.cpp (each step is one of the lemmas or an exact symmetry):
+  - complement form: L1.   - balanced D_i: L2 (necessary for privacy with any non-empty R).
+  - position 0 is a card of player 1 with u^0 = club, players numbered by first occurrence: rotation of all
+    positions, renaming players, and swapping club/heart everywhere are bijections on valid protocols.
+  - 0 in R: R and R+k give the same multisets M(x).
+  - R grown in increasing order, branch cut when privacy fails: privacy is inherited by subsets of R
+    (the windows on R' are projections of the windows on R); correctness is tested at every private R.
+  - difference filter: for d in R-R the pair {0,d} must be private, i.e. the number of p with w_p = w_{p+d} = 1 is the
+    same for all AND-0 rows (given equal heart counts this is equivalent to equal 2-window multisets).
+  An unsafe cut could only lose protocols, i.e. bias towards E = 0; the E = 0 entries are the ones that depend on it.
+  Cross-checks against slow.cpp (definition, no reduction): number of valid (protocol,R) pairs in complement form with
+  0 in R: n=2,m=5: 200 = 200; n=2,m=6: 564 = 564; number of private (config,R) pairs: n=2,m=6: 6396 = 6396;
+  n=3,m=6: 1344 = 1344.

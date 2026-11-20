@@ -1,0 +1,7 @@
+# deliberately wrong: one card of player 2 changed; must be rejected
+n 2
+m 5
+owner 10212
+u0 00011
+u1 10110
+R 0,1,2,3

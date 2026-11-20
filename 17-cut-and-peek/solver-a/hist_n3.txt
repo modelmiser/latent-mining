@@ -1,0 +1,52 @@
+WITNESS n=3 m=8 owner=10021332 u0=00001011 R=0,2,4
+WITNESS n=3 m=8 owner=10021332 u0=00001011 R=0,2,4,6
+WITNESS n=3 m=8 owner=10021332 u0=00001011 R=0,2,6
+WITNESS n=3 m=8 owner=10021332 u0=00001011 R=0,4,6
+WITNESS n=3 m=8 owner=10021332 u0=00001101 R=0,2,4
+WITNESS n=3 m=8 owner=10021332 u0=00001101 R=0,2,4,6
+privacy-R of size 2: 3096
+privacy-R of size 3: 1320
+privacy-R of size 4: 408
+fast n=3 m=8 mode=0 sym=1 part=0/1 leaves=7560 withA=1328 privR=4824 valid=0 E=0
+WITNESS n=3 m=9 owner=100023123 u0=000000111 R=0,3,6
+WITNESS n=3 m=9 owner=100023123 u0=000001110 R=0,3,6
+WITNESS n=3 m=9 owner=100023123 u0=000010101 R=0,3,6
+WITNESS n=3 m=9 owner=100023123 u0=000011100 R=0,3,6
+WITNESS n=3 m=9 owner=100023123 u0=000100111 R=0,3,6
+WITNESS n=3 m=9 owner=100023123 u0=000101110 R=0,3,6
+privacy-R of size 2: 19584
+privacy-R of size 3: 8640
+fast n=3 m=9 mode=0 sym=1 part=0/1 leaves=67200 withA=9216 privR=28224 valid=0 E=0
+WITNESS n=3 m=10 owner=1000021332 u0=0000001011 R=0,2,4
+WITNESS n=3 m=10 owner=1000021332 u0=0000001011 R=0,2,4,6
+WITNESS n=3 m=10 owner=1000021332 u0=0000001011 R=0,2,4,6,8
+WITNESS n=3 m=10 owner=1000021332 u0=0000001011 R=0,2,4,8
+WITNESS n=3 m=10 owner=1000021332 u0=0000001011 R=0,2,6
+WITNESS n=3 m=10 owner=1000021332 u0=0000001011 R=0,2,6,8
+privacy-R of size 2: 95804
+privacy-R of size 3: 13008
+privacy-R of size 4: 7360
+privacy-R of size 5: 1760
+fast n=3 m=10 mode=0 sym=1 part=0/1 leaves=565740 withA=58132 privR=117932 valid=0 E=0
+WITNESS n=3 m=11 owner=10000021332 u0=00000001011 R=0,2,4
+WITNESS n=3 m=11 owner=10000021332 u0=00000001011 R=0,2,9
+WITNESS n=3 m=11 owner=10000021332 u0=00000001011 R=0,7,9
+WITNESS n=3 m=11 owner=10000021332 u0=00000001101 R=0,2,4
+WITNESS n=3 m=11 owner=10000021332 u0=00000001101 R=0,2,9
+WITNESS n=3 m=11 owner=10000021332 u0=00000001101 R=0,7,9
+privacy-R of size 2: 416320
+privacy-R of size 3: 7920
+fast n=3 m=11 mode=0 sym=1 part=0/1 leaves=4541040 withA=201520 privR=424240 valid=0 E=0
+WITNESS n=3 m=12 owner=100000021332 u0=000000001011 R=0,2,4
+WITNESS n=3 m=12 owner=100000021332 u0=000000001011 R=0,2,4,6
+WITNESS n=3 m=12 owner=100000021332 u0=000000001011 R=0,2,4,6,8
+WITNESS n=3 m=12 owner=100000021332 u0=000000001011 R=0,2,4,6,8,10
+WITNESS n=3 m=12 owner=100000021332 u0=000000001011 R=0,2,4,6,10
+WITNESS n=3 m=12 owner=100000021332 u0=000000001011 R=0,2,4,8
+WITNESS n=3 m=12 owner=101023201013 u0=000010001011 R=0,1,9
+privacy-R of size 2: 283480
+privacy-R of size 3: 101375
+privacy-R of size 4: 13839
+privacy-R of size 5: 820
+privacy-R of size 6: 164
+fast n=3 m=12 mode=0 sym=1 part=0/1 leaves=1158327 withA=145563 privR=399678 valid=1 E=1 (stopped at first)

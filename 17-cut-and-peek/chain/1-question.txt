@@ -1,0 +1,9 @@
+Fix n ≥ 2. A one-shuffle open protocol with m cards consists of public data: a partition of the positions {1,…,m} into sets P_1,…,P_n,H (each P_i non-empty, H possibly empty); for each player i two words u_i^0, u_i^1 in {♣,♥}^{P_i}; a helper word h in {♣,♥}^H; and a permutation π of {1,…,m}. Cards with the same face are indistinguishable, all backs are identical, and any number of cards of each face is available.
+
+Play. Each player i holds a secret bit x_i and, unseen by the others, lays the word u_i^{x_i} face down on the positions P_i; the word h is laid face down on H. This gives a row w(x) in {♣,♥}^m. Then exactly one shuffle happens: an integer j is drawn uniformly from {0,…,ord(π)−1}, nobody learns j, and the row is rearranged by π^j (the card at position p moves to position π^j(p)). Then all m cards are turned face up and everyone sees the resulting row s. Nothing else happens.
+
+The protocol securely computes AND if (correctness) there is a function g with g(s) = x_1 ∧ … ∧ x_n for every input x and every j, and (privacy) for any two inputs x, x′ with the same AND, the probability distributions of s are identical.
+
+Example: π the 5-cycle p → p+1 mod 5 is a random cut; with P_1={1,2}, H={3}, P_2={4,5}, u_1^0=♥♣, u_1^1=♣♥, h=♥, u_2^0=♣♥, u_2^1=♥♣ one gets the classical five-card trick, a valid protocol for n=2.
+
+Let c(n) be the least m for which a one-shuffle open protocol securely computing the n-bit AND exists, and c(n)=∞ if none exists for any m. Determine c(n): give the exact values of c(2), c(3) and c(4), and for general n either a formula for c(n) or a proof that c(n)=∞ from some n onward.

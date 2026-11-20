@@ -1,0 +1,6 @@
+n=3 a=6 b<=4: Ra sets (up to translation)=12 gadgets enumerated=36480
+RESULT n=3 a=6 b<=4 total found=0
+n=3 a=7 b<=4: Ra sets (up to translation)=18 gadgets enumerated=345856
+RESULT n=3 a=7 b<=4 total found=0
+n=3 a=8 b<=4: Ra sets (up to translation)=34 gadgets enumerated=3107328
+RESULT n=3 a=8 b<=4 total found=0

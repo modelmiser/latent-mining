@@ -1,0 +1,7 @@
+# five-card trick, found by fast.cpp
+n 2
+m 5
+owner 10212
+u0 00011
+u1 10100
+R 0,1,2,3

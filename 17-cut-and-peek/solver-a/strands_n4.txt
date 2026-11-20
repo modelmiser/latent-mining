@@ -1,0 +1,6 @@
+n=4 a=5 gadget signatures=1152 usable=144 classes=8
+status 2 The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)
+RESULT infeasible
+n=4 a=6 gadget signatures=34528 usable=10496 classes=14
+status 2 The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)
+RESULT infeasible

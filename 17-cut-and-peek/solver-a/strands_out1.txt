@@ -1,0 +1,33 @@
+n=3 a=3 gadget signatures=8 usable=2 classes=4
+status 2 The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)
+RESULT infeasible
+n=3 a=3 gadget signatures=8 usable=8 classes=4
+WEAK infeasible
+n=3 a=4 gadget signatures=132 usable=30 classes=6
+status 2 The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)
+RESULT infeasible
+n=3 a=4 gadget signatures=132 usable=132 classes=6
+WEAK feasible class 0 b= 10
+ mult 1  c= 0011  D= ['1100', '0010', '0001']
+ mult 1  c= 0000  D= ['1000', '0100', '0001']
+ mult 1  c= 0001  D= ['1000', '0110', '0001']
+ mult 1  c= 0100  D= ['1010', '0100', '0001']
+ mult 1  c= 1010  D= ['1000', '0101', '0010']
+ mult 1  c= 1101  D= ['1000', '0100', '0001']
+ mult 1  c= 1100  D= ['1000', '0100', '0011']
+ mult 1  c= 1111  D= ['1000', '0100', '0011']
+ mult 1  c= 1000  D= ['1000', '0010', '0101']
+ mult 1  c= 1011  D= ['1000', '0010', '0101']
+n=3 a=5 gadget signatures=1132 usable=460 classes=8
+status 2 The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)
+RESULT infeasible
+n=3 a=5 gadget signatures=1132 usable=1132 classes=8
+WEAK feasible class 0 b= 8
+ mult 1  c= 00010  D= ['10000', '00110', '00001']
+ mult 1  c= 00001  D= ['10000', '00100', '00011']
+ mult 1  c= 00011  D= ['10000', '00010', '00100']
+ mult 1  c= 00111  D= ['10000', '01001', '00110']
+ mult 1  c= 10101  D= ['10000', '00100', '00001']
+ mult 1  c= 10100  D= ['10000', '00001', '00110']
+ mult 1  c= 11011  D= ['10000', '01100', '00001']
+ mult 1  c= 10010  D= ['10000', '00110', '01001']

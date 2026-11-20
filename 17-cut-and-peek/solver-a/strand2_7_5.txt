@@ -1,0 +1,1 @@
+n=3 a=7 b=5 gadgets enumerated=345856 kept signatures=24840

@@ -1,0 +1,126 @@
+PROOFS (solver-b).  Each item is tagged COMPLETE or SKETCH.
+
+Notation. Cards as signs: heart = -1, club = +1.  s(x) in {+1,-1}^{Z_m} is the row for input x.
+P_i' = positions of P_i where u_i^0 and u_i^1 differ.  1 = 1^n, 0 = 0^n.  "AND-0" = any x != 1.
+N_t(x) = multiplicity of the word t in M(x).  For S subset of Z_m:
+     C_S(x) = sum_{j in Z_m} prod_{q in S} s(x)_{q+j}.
+For S subset of R, C_S(x) = sum_t N_t(x) prod_{q in S} t_q  (re-index j -> -j), so C_S(x) is a function of M(x).
+Conversely N_t(x) = 2^{-|R|} sum_{S subset R} (prod_{q in S} t_q) C_S(x), so M(x) is a function of (C_S(x))_{S subset R}.
+
+L0 (belief (a), first half)  COMPLETE.
+  In a valid protocol every P_i' is non-empty, and moving P_i \ P_i' into H gives a valid protocol with the
+  same rows.  Proof: rows do not change when a position whose card does not depend on x_i is called a helper.
+  If P_i' were empty, w(1) = w(1 - e_i), so M(1) = M(1-e_i) = M(0) (privacy, n >= 2), a non-empty multiset;
+  correctness fails.
+
+L1 (belief (a), second half)  COMPLETE.
+  |P_i'| is even, u_i^0 restricted to P_i' is half hearts, all 2^n rows (including w(1)) have the same number
+  of hearts, and m >= 2n.  Proof: fix q in R (R non-empty).  #{j : t_q = heart} = number of hearts of w(x), so
+  it is determined by M(x), hence equal for x = 0 and x = e_i (both AND-0 as n >= 2).  Passing from 0 to e_i
+  complements the cards on P_i', so hearts = clubs there.  Flipping any player's bit never changes the count.
+
+T1 (belief (b), and a new bound)  COMPLETE.
+  In a valid protocol there is S subset R such that EVERY non-zero v in F_2^n occurs as the parity vector
+       v_j = ( |(S+j) cap P_i'| mod 2 )_{i=1..n}   of some translate S+j.
+  Consequences: (i) m >= 2^n - 1, so r(n) >= max(2n, 2^n - 1);  (ii) some translate of R meets every P_i
+  (take v = 1), so |R| >= n;  (iii) every subset S of R with fewer than n elements has C_S(1) = C_S(0), i.e.
+  w(1) has the same k-point pattern counts inside R as the AND-0 rows for k < n.
+  Proof: if C_S(1) = C_S(0) for all S subset R then N_t(1) = N_t(0) for all t, M(1) = M(0), and correctness
+  fails.  So pick S with delta := C_S(1) - C_S(0) != 0; C_S(x) = c for all x != 1 by privacy.
+  prod_{q in S+j} s(x)_q = b_j (-1)^{x . v_j} with b_j = prod_{q in S+j} s(0)_q = +-1.  Hence
+       C_S(x) = sum_{v in F_2^n} B_v (-1)^{x.v},   B_v = sum_{j : v_j = v} b_j.
+  Fourier inversion on F_2^n:  B_v = 2^{-n} sum_x C_S(x) (-1)^{x.v} = c [v=0] + 2^{-n} delta (-1)^{|v|}.
+  So B_v != 0 for every v != 0, so the class {j : v_j = v} is non-empty; classes are disjoint, giving
+  2^n - 1 <= m.  (Also 2^n divides delta and every class has at least |delta|/2^n members.)
+
+T2 (settles R = Z_m; replaces beliefs (d),(e),(f))  COMPLETE.
+  Let n >= 3.  If, for some three players (say 1,2,3) and the other players' bits fixed to 1, the seven rows
+  w(x1,x2,x3,1,..,1), (x1,x2,x3) != (1,1,1), are all rotations of one word, then w(1) is a rotation of it too,
+  hence M(1) = M(0) for every R and the protocol is not valid.  In particular f(n) = infinity for all n >= 3
+  (with R = Z_m, M(x) is the multiset of rotations of w(x), so privacy says exactly that the AND-0 rows are
+  rotations of each other).  No reconstruction theorem (Pebody / Radcliffe-Scott) is needed.
+  Proof: work in the group ring Z[z]/(z^m - 1); W = s(0,0,0,1..1).  Put a_i = (W - s(e_i,1..))/2, supported on
+  P_i.  Since supports are disjoint, s(x) = W - 2 sum_i x_i a_i for x in {0,1}^3.  Hypothesis: there are shifts
+  s_i, s_ik with  W - 2a_i = z^{s_i} W  and  W - 2a_i - 2a_k = z^{s_ik} W.  Therefore
+        (z^{s_i} + z^{s_k} - 1 - z^{s_ik}) W = 0         for the three pairs,          (*)
+        s(1,1,1) = (z^{s_1} + z^{s_2} + z^{s_3} - 2) W.
+  Let w be a primitive m-th root of unity, r in Z_m with W^(r) := sum_p W_p w^{rp} != 0, th_i := r s_i mod m.
+  (*) gives  w^{th_i} + w^{th_k} = 1 + w^{r s_ik}.  Two unit complex numbers with a given non-zero sum are
+  determined as a set, so either
+     (N) {w^{th_i}, w^{th_k}} = {1, w^{r s_ik}}: then th_i = 0 or th_k = 0, and r s_ik = th_i + th_k; or
+     (X) both sums are 0:  th_i = th_k + m/2  and  r s_ik = m/2  (m even).  If here th_i = 0 or th_k = 0 then
+         again r s_ik = th_i + th_k; call the pair EXCEPTIONAL if (X) holds with th_i, th_k both non-zero;
+         then r(s_ik - s_i - s_k) = m/2 - th_i - th_k = -2 th_k.
+  Two pairs cannot both be exceptional for the same r: (1,2),(1,3) exceptional gives th_2 = th_3 != 0, and then
+  pair (2,3) satisfies neither (N) nor (X).  Let t := s_12 + s_13 + s_23 - s_1 - s_2 - s_3.
+   Case A, no exceptional pair: at least two of th_1,th_2,th_3 vanish (two non-zero ones would form an
+     exceptional pair or violate (*)), so w^{th_1}+w^{th_2}+w^{th_3}-2 = w^{th_1+th_2+th_3}, and
+     r t = sum_pairs 0 + th_1+th_2+th_3.  So s(1,1,1)^(r) = w^{rt} W^(r).
+   Case B, (k,l) exceptional: the pairs (i,k),(i,l) are type (N) with th_k,th_l != 0, so th_i = 0;
+     w^{th_i}+w^{th_k}+w^{th_l}-2 = 1 + 0 - 2 = -1 = w^{m/2};  r t = -2 th_l + th_k + th_l = th_k - th_l = m/2.
+     Again s(1,1,1)^(r) = w^{rt} W^(r).
+  For r with W^(r) = 0 both sides vanish.  So s(1,1,1) and z^t W have the same Fourier transform:
+  s(1,1,1) = z^t W, a rotation (the inclusion-exclusion shift).  QED.
+  Machine test of the statement (not of the proof): fullR.cpp, all W, all shift triples, m <= 18: no such triple exists at all (0 of 0), so this test is weak; the n=2 column confirms the program sees real protocols.
+
+C3  COMPLETE (from L1, T2).  For n >= 3 a valid protocol has n <= |R| <= m-2.
+  Proof: all 2^n rows have the same heart count (L1), so a word on Z_m minus one point extends uniquely to the
+  full word; M_{Z_m}(x) is the image of M_R(x) under a fixed injection, so R = Z_m \ {p} is valid iff R = Z_m is.
+
+Remark on belief (f): for n = 2 it is false as worded (the five-card trick has rows W, z^{a1}W, z^{a2}W on the
+three AND-0 inputs, and any function on {00,10,01} vanishing at 00 is of the form a1 x1 + a2 x2).  For n >= 3
+it is true and T2 is stronger (no linearity needed).
+
+NOT PROVED: E(3,m) = 0 for all m with general R.  Only computed (m <= 15, see report).  No sketch offered.
+
+Safety of the prunings in fast*.cpp (each could only bias towards E = 0 if wrong; they were cross-checked
+against slow.cpp, which uses none of them, and fast2/fast3 reproduce fast's n=2 counts exactly):
+  - complement / balanced words: L0, L1.
+  - position 0 owned by player 0 with a club; players numbered by first appearance: rotation of all data
+    (M is invariant under translating the layout and R together), relabelling, global colour swap.
+  - R contains 0: M depends on R only up to translation.
+  - R-R inside D u {0}, D = {d : pair privacy holds for {0,d}}: privacy is inherited by subsets of R and is
+    translation invariant; given equal heart counts, pair privacy for {0,d} <=> equal counts of heart-heart
+    pairs at distance d.  DFS over R adds elements in increasing order and only continues from private R,
+    so every private R containing 0 is visited (privacy is downward closed).
+  - one position per player with pairwise differences in D: T1(ii) plus the previous item.
+
+T4 (sign lemma; bounds |R| from below)  COMPLETE.
+  For n = 3 a valid protocol has |R| >= 5; for n = 2 it has |R| >= 3 (in general |R| >= n+1).
+  Setup (any n): put c_t = N_t(1) - N_t(0).  By T1's computation C_S(1) - C_S(0) = 2^n k_S with k_S = 0 when
+  |S| < n, so  c_t = 2^{n-|R|} sum_{S subset R, |S| >= n} k_S prod_{q in S} t_q.  Correctness says
+  N_t(0) N_t(1) = 0, so every word seen on an AND-0 row has c_t < 0 and every word seen on w(1) has c_t > 0.
+  Take a translate R-j meeting every P_i' (T1(ii)), and let t(x) be the word seen there on input x.
+  Then c_{t(x)} < 0 for the 2^n - 1 inputs x != 1 and c_{t(1)} > 0.  Write y_i = (-1)^{x_i}.
+  |R| = n: the window has one cell of each player, c_t = k prod t_q = const * y_1...y_n, whose sign
+     alternates along cube edges; 0 and e_1 are both AND-0 (n >= 2): contradiction.
+  n = 3, |R| = 4:  c_t = (1/2) (prod_q t_q) (k_R + sum_q k_{R\q} t_q).
+     (a) fourth cell fixed (helper or a non-flipping card): c_{t(x)} = e y1y2y3 (A + B1y1 + B2y2 + B3y3),
+         e = +-1.  So y1y2y3 (A+B.y) has one sign s on the 7 points y != (-,-,-) and sign -s at (-,-,-).
+         Replacing (A,B) by s(A,B) we need  A+B1+B2+B3 > 0;  A-B1+B2+B3 < 0, A+B1-B2+B3 < 0, A+B1+B2-B3 < 0;
+         A-B1-B2+B3 > 0 (and its two permutations);  A-B1-B2-B3 > 0.   With a := A-B1-B2-B3 > 0 and
+         T := B1+B2+B3: the first gives a + 2T > 0; adding the three "< 0" lines gives 3a + 4T < 0.
+         So T > -a/2 and T < -3a/4, impossible for a > 0.
+     (b) fourth cell is a second flipping cell of one player, say player 1: prod_q t_q = const * y2y3 and
+         c_{t(x)} = e y2y3 (A + B1y1 + B2y2 + B3y3).  Same sign s on y != (-,-,-), opposite at (-,-,-):
+         y=(+,-,-) gives s(A+B1-B2-B3) > 0 and y=(+,+,+) gives s(A+B1+B2+B3) > 0, sum: s(A+B1) > 0;
+         y=(+,+,-) gives s(A+B1+B2-B3) < 0 and y=(+,-,+) gives s(A+B1-B2+B3) < 0, sum: s(A+B1) < 0.
+         Contradiction.
+  n = 2, |R| = 2 is the first case.  (General |R| >= n+1 is exactly the first case.)
+  This local method stops at |R| = n+2: there the restricted function is parity times a quadratic, which can
+  realise the required sign pattern.  Not machine-tested separately (no valid n=3 object exists to test on);
+  consistent with the n=2 table (min |R| = 3).
+
+OBSERVATION (computed, fast3.cpp): for n = 3 there ARE protocols at m = 12 and m = 13 that are perfectly
+private and have M(1) != M(0) with overlapping supports ("weak" correctness; files weak_n3.txt, check.py prints
+the two multisets).  None for m <= 11.  So privacy alone is not the obstruction for n = 3; zero-error
+correctness is.  T1 and T2 hold verbatim under the weak reading (they only use M(1) != M(0)); T4 does not.
+
+T5 (covering lemma)  COMPLETE.
+  In a valid protocol EVERY translate of R meets EVERY P_i' (not just one translate, as in T1(ii)).
+  Hence |R| * |P_i'| >= m for each i.
+  Proof: if R-j misses P_i', the word seen at shift j is the same on inputs 1 and 1 - e_i; it then lies in
+  M(1) and in M(1 - e_i) = M(0), contradicting correctness.
+  Machine test: t5test.py checks it on every n=2 witness in witnesses_n2.txt; fast4.cpp counts violations over
+  all valid (layout, R) pairs found for n = 2, m <= 11 (expected 0).
+  T5 fails under the weak reading (the weak n=3 examples violate it).

@@ -1,0 +1,10 @@
+n=3 a=8 b=3 gadgets enumerated=3107328 kept signatures=152
+RESULT n=3 a=8 b=3 found=0
+n=3 a=9 b=3 gadgets enumerated=26967040 kept signatures=316
+RESULT n=3 a=9 b=3 found=0
+n=3 a=10 b=3 gadgets enumerated=228648960 kept signatures=752
+RESULT n=3 a=10 b=3 found=0
+n=3 a=7 b=4 gadgets enumerated=345856 kept signatures=2760
+RESULT n=3 a=7 b=4 found=0
+n=3 a=8 b=4 gadgets enumerated=3107328 kept signatures=6188
+RESULT n=3 a=8 b=4 found=0

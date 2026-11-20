@@ -1,0 +1,32 @@
+witness m36: (True, 'valid')
+  broken [u1 card flipped at 0]: ok=False (privacy fails at x=(1, 0, 0))
+  broken [house card (pos 6) flipped in u0 only]: ok=False (house card depends on a bit at 6)
+  broken [house card (pos 6) flipped in both]: ok=False (privacy fails at x=(0, 0, 1))
+  broken [R missing 30]: ok=False (correctness fails: 10 common words, e.g. 00000)
+  broken [R shifted one element 6->7]: ok=False (privacy fails at x=(0, 0, 1))
+  broken [R = Z_36]: ok=False (privacy fails at x=(0, 0, 1))
+  broken [owner of pos 7 changed 1->2]: ok=False (privacy fails at x=(0, 1, 0))
+  broken [two positions swapped (0,1) in u0,u1,owner]: ok=True (valid)
+  broken [player 3 made constant]: ok=False (correctness fails: 33 common words, e.g. 000001)
+  broken [empty R]: ok=False (empty R)
+rejected 9 of 10 broken
+rotated by 5 (cards, owners and R): (True, 'valid')
+R translated by 1 only: (True, 'valid')
+u0<->u1 swapped (should FAIL: computes NOR-like, privacy on wrong set): (False, 'privacy fails at x=(0, 0, 1)')
+|P_i| {'1': 12, '2': 10, '3': 6} |D_i| {'1': 12, '2': 10, '3': 6} H 8
+hearts u0 on D_i {'1': 6, '2': 5, '3': 3}
+heart counts all 8 rows: [17, 17, 17, 17, 17, 17, 17, 17]
+every translate of R meets every D_i: True
+  x (0, 0, 0) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (0, 0, 1) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (0, 1, 0) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (0, 1, 1) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (1, 0, 0) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (1, 0, 1) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (1, 1, 0) strand necklaces: ['000001', '000011', '001001', '001011', '001111', '011111']
+  x (1, 1, 1) strand necklaces: ['000000', '000111', '000111', '001101', '011011', '011011']
+AND-0 rows that are rotations of w(000): [(0, 0, 0)]
+T1: private C_S violations: []  (|S|,delta) histogram: {(0, 0): 1, (1, 0): 6, (2, 0): 15, (3, 24): 8, (3, -8): 6, (3, 8): 6, (4, 0): 6, (4, 16): 6, (4, 32): 3, (5, 0): 6, (6, 0): 1}
+L4 m=4: False; L4 m=5: True; L4 m=6: True; L4 m=7: True; L4 m=8: True; L4 m=9: True; L4 m=10: True; L4 m=11: True; L4 m=12: True; L4 m=13: True; L4 m=14: True; L4 m=15: True; L4 m=16: True; L4 m=17: True; L4 m=18: True; L4 m=19: True; L4 m=20: True; L4 m=21: True; L4 m=22: True; L4 m=23: True; L4 m=24: True; L4 m=25: True; 
+L5' b=1: True; L5' b=2: True; L5' b=3: True; L5' b=4: True; L5' b=5: True; 
+T2 frequency identity: 3519 solution tuples (of which 1140 'antipodal/type B'), violations: 0

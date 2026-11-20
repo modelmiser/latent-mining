@@ -1,0 +1,4 @@
+RED n=4 m=8 sym=1 part=0/1 configs=840 private=1024 weak=0 valid=0 minR=0 maxR=0
+RED n=4 m=9 sym=1 part=0/1 configs=13440 private=16896 weak=0 valid=0 minR=0 maxR=0
+RED n=4 m=10 sym=1 part=0/1 configs=196560 private=202080 weak=0 valid=0 minR=0 maxR=0
+RED n=4 m=11 sym=1 part=0/1 configs=2318400 private=2329280 weak=0 valid=0 minR=0 maxR=0

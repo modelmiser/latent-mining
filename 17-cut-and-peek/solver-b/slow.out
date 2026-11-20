@@ -1,0 +1,13 @@
+SLOW n=2 m=2 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0
+SLOW n=2 m=3 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0
+SLOW n=2 m=4 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0
+WITNESS n=2 m=5 owner=H0101 c0=00110 c1=01001 R=11110
+SLOW n=2 m=5 E=1 valid_pairs=720 valid_cfgs=120 minR=4 maxR=5 fullR=1
+WITNESS n=2 m=6 owner=HH0101 c0=000110 c1=001001 R=111100
+SLOW n=2 m=6 E=1 valid_pairs=7452 valid_cfgs=864 minR=3 maxR=6 fullR=1
+WITNESS n=2 m=7 owner=HHH0101 c0=0000110 c1=0001001 R=1111100
+SLOW n=2 m=7 E=1 valid_pairs=103824 valid_cfgs=5040 minR=4 maxR=7 fullR=1
+SLOW n=3 m=3 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0
+SLOW n=3 m=4 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0
+SLOW n=3 m=5 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0
+SLOW n=3 m=6 E=0 valid_pairs=0 valid_cfgs=0 minR=0 maxR=0 fullR=0

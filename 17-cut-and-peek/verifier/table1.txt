@@ -1,0 +1,31 @@
+RED n=2 m=4 sym=1 part=0/1 configs=6 private=20 weak=0 valid=0 minR=0 maxR=0
+FIRST VALID n=2 m=5 owner=10212 c=00011 R=0,1,2,3,
+RED n=2 m=5 sym=1 part=0/1 configs=48 private=168 weak=120 valid=40 minR=4 maxR=5
+FIRST VALID n=2 m=6 owner=100212 c=000011 R=0,1,2,3,
+RED n=2 m=6 sym=1 part=0/1 configs=330 private=1586 weak=334 valid=94 minR=3 maxR=6
+FIRST VALID n=2 m=7 owner=1000212 c=0000011 R=0,1,2,3,4,
+RED n=2 m=7 sym=1 part=0/1 configs=2040 private=8760 weak=5376 valid=648 minR=4 maxR=7
+FIRST VALID n=2 m=8 owner=10000212 c=00000011 R=0,1,2,3,4,5,
+RED n=2 m=8 sym=1 part=0/1 configs=12110 private=58952 weak=20976 valid=1848 minR=4 maxR=8
+FIRST VALID n=2 m=9 owner=100000212 c=000000011 R=0,1,2,3,4,5,6,
+RED n=2 m=9 sym=1 part=0/1 configs=70112 private=290132 weak=129516 valid=7212 minR=5 maxR=9
+FIRST VALID n=2 m=10 owner=1000000212 c=0000000011 R=0,1,2,3,4,5,6,7,
+RED n=2 m=10 sym=1 part=0/1 configs=400806 private=1705240 weak=754524 valid=51264 minR=4 maxR=10
+FIRST VALID n=2 m=11 owner=10000000212 c=00000000011 R=0,1,2,3,4,5,6,7,8,
+RED n=2 m=11 sym=1 part=0/1 configs=2275320 private=7768600 weak=3698520 valid=154540 minR=4 maxR=11
+FIRST VALID n=2 m=12 owner=100000000212 c=000000000011 R=0,1,2,3,4,5,6,7,8,9,
+RED n=2 m=12 sym=1 part=0/1 configs=12875742 private=53356556 weak=20151244 valid=559744 minR=3 maxR=12
+RED n=3 m=6 sym=1 part=0/1 configs=60 private=172 weak=0 valid=0 minR=0 maxR=0
+0.00s
+RED n=3 m=7 sym=1 part=0/1 configs=720 private=720 weak=0 valid=0 minR=0 maxR=0
+0.00s
+RED n=3 m=8 sym=1 part=0/1 configs=7560 private=12384 weak=0 valid=0 minR=0 maxR=0
+0.02s
+RED n=3 m=9 sym=1 part=0/1 configs=67200 private=95424 weak=0 valid=0 minR=0 maxR=0
+0.13s
+RED n=3 m=10 sym=1 part=0/1 configs=565740 private=683672 weak=0 valid=0 minR=0 maxR=0
+1.10s
+RED n=3 m=11 sym=1 part=0/1 configs=4541040 private=4965280 weak=0 valid=0 minR=0 maxR=0
+8.83s
+RED n=3 m=12 sym=1 part=0/1 configs=35592480 private=50957840 weak=216 valid=0 minR=0 maxR=0
+87.76s

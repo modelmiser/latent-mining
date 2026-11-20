@@ -1,0 +1,1 @@
+fast n=3 m=15 mode=0 sym=1 part=1/8 leaves=1966592892 withA=105975252 privR=274789486 valid=0 E=0

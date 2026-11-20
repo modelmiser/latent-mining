@@ -1,0 +1,4 @@
+fast n=2 m=7 mode=0 sym=0 part=0/1 leaves=11760 withA=6468 privR=37800 valid=3948 E=1
+fast n=2 m=8 mode=0 sym=0 part=0/1 leaves=71960 withA=41656 privR=268904 valid=11648 E=1
+fast n=2 m=9 mode=0 sym=0 part=0/1 leaves=424368 withA=246924 privR=1327752 valid=44928 E=1
+fast n=2 m=10 mode=0 sym=0 part=0/1 leaves=2451960 withA=1503980 privR=7864040 valid=280600 E=1

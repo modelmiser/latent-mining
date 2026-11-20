@@ -1,0 +1,3 @@
+# Seed
+
+Two players each hold a secret bit and want to learn the AND of the two bits and nothing more. They have a deck of cards with identical backs and two kinds of face, lay cards face down in a row according to their bits, and may then apply publicly visible operations: rearranging the row, a shuffle that applies a random permutation from a publicly known set so that no one learns which, and turning cards face up. Five cards with a single random cut suffice, and four with a different kind of shuffle. For a given set of allowed shuffles (for example only random cuts) and a given function of two or three secret bits: what is the least number of cards, the least number of shuffles, and which functions cannot be computed at all without revealing more than the answer?

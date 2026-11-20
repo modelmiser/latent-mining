@@ -1,0 +1,8 @@
+fast n=3 m=6 mode=1 sym=1 part=0/1 leaves=60 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=7 mode=1 sym=1 part=0/1 leaves=720 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=8 mode=1 sym=1 part=0/1 leaves=7560 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=9 mode=1 sym=1 part=0/1 leaves=67200 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=10 mode=1 sym=1 part=0/1 leaves=565740 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=11 mode=1 sym=1 part=0/1 leaves=4541040 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=12 mode=1 sym=1 part=0/1 leaves=35592480 withA=0 privR=0 valid=0 Efull=0
+fast n=3 m=13 mode=1 sym=1 part=0/1 leaves=273968640 withA=0 privR=0 valid=0 Efull=0
