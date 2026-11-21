@@ -1,4 +1,4 @@
-# Lean check of the full-opening impossibility
+# Lean check of the full-opening impossibility and of two partial-opening results
 
 Lean 4.33.1 with Mathlib (commit `0df444a360`, pinned in `lake-manifest.json`).
 
@@ -26,7 +26,7 @@ each position either a fixed card or a card that is `base` or its opposite accor
 `IsSCFO` asks that two inputs give cyclically equal rows exactly when `f` agrees on them); that
 the four statements say what the note claims; that the two layouts are the tricks they are named
 after; and that the build log belongs to these files. The partial-opening results of the note
-(Section 4) are not formalised.
+(Section 4) are not formalised, except the two in the section "Partial opening" below.
 
 Who wrote what: the specification, the four statements and the two layouts were written first,
 by the organising instance; a second instance wrote the proofs and was not allowed to change
@@ -36,6 +36,33 @@ Files: `Unit.lean` (complex numbers of modulus 1), `Fourier.lean` (the lemma ove
 numbers, by the discrete Fourier transform on `ZMod m`), `Rows.lean` (from cards to ±1 and back;
 hearts are +1 there, clubs in the note, which changes nothing),
 `Cube.lean` and `Odd.lean` (restriction to a cube, Theorem 2 and the two corollaries).
+
+## Partial opening (added 21 November)
+
+`CutPeek/PartialSpec.lean` (33 lines) defines `seen R w j` (the cards of the row `w`, cut by `j`,
+at the opened positions `R`), `views R w` (the multiset of these over all `m` cuts) and
+`IsPartialAnd e R`: `R` is not empty, any two inputs with AND false have the same views, and no
+view of the all-true input is a view of the all-false input. `CutPeek/PartialMain.lean` states
+
+- `partial_and_card_bound`: `IsPartialAnd e R` implies `2 ^ n - 1 ≤ m` (natural-number
+  subtraction; Proposition 3 of the note);
+- `thirty_six_cards`: the note's 36-card layout, retyped there as two lists of digits, with
+  `R` the multiples of 6, satisfies `IsPartialAnd`.
+
+`PartialBound.lean` proves the first along the note's proof; `PartialCheck.lean` reduces the second
+to finite checks that `decide` performs, using six permutations of the cuts found by a search
+outside Lean (a certificate that Lean checks). `AXIOMS-partial.txt`: the three standard axioms.
+`BUILD-partial.log`: a build by the organising instance after moving the project's build directory away, so that all 14 of its modules are compiled again (Mathlib's compiled files are reused); no warnings. `MutantPartial.lean` and
+`MUTANT-partial.txt`: the same proof term is rejected in two tried cases: with the first digit of
+`u0_36` changed from 0 to 1, and with the opened position 30 replaced by 31. (A reviewer's own
+program finds that each of the 36 single-digit changes of `u0_36` gives an invalid layout.) The search for the forbidden words listed above finds nothing in the new
+files either. As before, the definitions, the two statements and the retyped layout were written
+by the organising instance first (it compared the digits with the note's strings by program), and
+a second instance wrote the proofs; by its log it changed nothing in the two given files except to
+replace `sorry` and add imports (the organising instance reread both files afterwards; the
+repository has no earlier version of them to compare). The six permutations in `PartialCheck.lean` come
+from a search by the proving instance whose program is not included; Lean checks them. To be trusted in addition: that `PartialSpec.lean` says what Section 4 of
+the note means, and that the digits are the note's layout.
 
 To build: `lake exe cache get` (downloads Mathlib's compiled files), then `lake build`.
 `b.sh` is the wrapper used on the machine where this was produced (two cores, a cap on virtual

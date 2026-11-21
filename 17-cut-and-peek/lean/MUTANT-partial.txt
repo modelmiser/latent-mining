@@ -1,0 +1,16 @@
+MutantPartial.lean:9:70: error: Tactic `decide` proved that the proposition
+  ∀ (a b c : Bool),
+    (a && b && c) = false →
+      ∀ (j p : ZMod 36), p ∈ R36 → encBad.row (bits a b c) (p - perm36 a b c j) = encBad.row (fun x => false) (p - j)
+is false
+MutantPartial.lean:9:82: error: Tactic `decide` proved that the proposition
+  ∀ (j k : ZMod 36), ∃ p ∈ R36, encBad.row (fun x => true) (p - j) ≠ encBad.row (fun x => false) (p - k)
+is false
+MutantPartial.lean:13:70: error: Tactic `decide` proved that the proposition
+  ∀ (a b c : Bool),
+    (a && b && c) = false →
+      ∀ (j p : ZMod 36), p ∈ RBad → enc36.row (bits a b c) (p - perm36 a b c j) = enc36.row (fun x => false) (p - j)
+is false
+MutantPartial.lean:13:82: error: Tactic `decide` proved that the proposition
+  ∀ (j k : ZMod 36), ∃ p ∈ RBad, enc36.row (fun x => true) (p - j) ≠ enc36.row (fun x => false) (p - k)
+is false

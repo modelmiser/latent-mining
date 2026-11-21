@@ -1,0 +1,2 @@
+'CutPeek.partial_and_card_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CutPeek.thirty_six_cards' depends on axioms: [propext, Classical.choice, Quot.sound]

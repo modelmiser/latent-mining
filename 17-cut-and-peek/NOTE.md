@@ -342,12 +342,27 @@ search was by web queries only.
   files; and that those 53 lines, the four statements at the end of
   `lean/CutPeek/Main.lean` and the two layouts say what this note means. So
   far only AI models have read them. The statements for OR and for the
-  majority of five bits, and everything in Section 4, are not formalised.
+  majority of five bits are not formalised. Two results of Section 4 are formalised (added on
+  21 November): Proposition 3, and that the 36-card layout is a
+  valid protocol, as statements about a further 33-line file of definitions,
+  `lean/CutPeek/PartialSpec.lean` (the word seen at R after a cut; the
+  multiset of the m words; validity as privacy and correctness above). The
+  statements are in `lean/CutPeek/PartialMain.lean`, where the layout is
+  retyped as lists of digits. For the layout Lean checks a certificate found
+  outside it: for each input with AND 0, a permutation of the 36 cuts that
+  matches its views with those of 0…0, and, for correctness, that for every
+  pair of cuts some opened position tells 1…1 from 0…0. The same proof is
+  rejected in the two cases tried, one digit of the layout changed and one
+  opened position changed (`lean/MutantPartial.lean`). For these two
+  results one must trust, in addition, that the 33 lines say what Section 4
+  means and that the retyped digits are the layout printed there. The search result for m ≤ 15 and the other
+  facts of Section 4 are not formalised.
   The specification, the four statements and the two layouts were written by
   the organising AI instance; the proofs by a second instance, which was
   given the specification and statements and not allowed to change them (two
-  comments in the specification were clarified afterwards). The builds were
-  run by AI instances.
+  comments in the specification were clarified afterwards). The same
+  division holds for the partial-opening files. The builds were run by AI
+  instances.
 - A direct numerical test of Lemma 1 on card words is not available:
   searching all words and all shifts for m ≤ 18, solver B found no encoding
   in which all three bits control cards and seven rows of the cube are

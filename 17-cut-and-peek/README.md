@@ -60,11 +60,11 @@ positions per player and R everything.
 | **f(n) = ∞ for every n ≥ 3:** with all cards revealed there is no valid protocol, for any m | proved by hand by solver B; read by the referee, by the instance that did the deep literature read, and by the organiser, with no gap found; the referee tested the key identity numerically. Solver A did not find it and left f(3) as a conjecture. Machine-checked in Lean 4 since 21 November, in the formulation of NOTE.md Section 1 (rows cyclically equal exactly when the outputs agree), which is equivalent to the one above by a short hand argument | `solver-b/proofs.txt` T2; written out below; `lean/` |
 | If the rows for three players' inputs other than 1, 1, 1 (everything else fixed) are rotations of one word, the row for 1, 1, 1 is a rotation of it too | this is what T2's proof shows | `solver-b/proofs.txt` T2 |
 | The same with any one of the eight inputs in place of 1, 1, 1, and its consequence for the equality function | restatement by the organiser; confirmed by all five seats of the review panel; machine-checked in Lean 4 for any corner, for AND of n ≥ 3 bits and for equality of n ≥ 4 bits | below; `lean/` |
-| r(3) ≤ 36 | an explicit protocol, checked from the definition by solver A's checker and by the referee's own, which also rejected nine broken variants | `solver-a/w_n3_m36.txt` |
+| r(3) ≤ 36 | an explicit protocol, checked from the definition by solver A's checker and by the referee's own, which also rejected nine broken variants; also machine-checked in Lean 4 against the definition in `lean/CutPeek/PartialSpec.lean` | `solver-a/w_n3_m36.txt`, `lean/CutPeek/PartialMain.lean` |
 | No valid three-player protocol with m ≤ 13 | computed exhaustively by both solvers and recomputed by the referee | `verifier/table_m13.txt` |
 | None with m = 14, 15, so r(3) ≥ 16 | computed by both solvers, independently written but with the same normalisation; not rerun by the referee | `solver-a/fast_3_14_p*.txt`, `solver-a/fast_3_15_p*.txt`, `solver-b/fast2.out`, `solver-b/m15.part*.out` |
 | r(2) = f(2) = 5, and a valid two-player protocol exists for every m ≥ 5 | the five-card trick; m ≤ 4 excluded by exhaustive search (three programs); the family for m ≥ 5 proved by solver A and checked to m = 25 by the referee | `solver-a/proofs.txt` L4 |
-| r(n) ≥ max(2n, 2^n − 1) | proved by hand by solver B; read by the referee | `solver-b/proofs.txt` L1, T1 |
+| r(n) ≥ max(2n, 2^n − 1) | proved by hand by solver B; read by the referee; the part 2^n − 1 is machine-checked in Lean 4 (`lean/CutPeek/PartialMain.lean`) | `solver-b/proofs.txt` L1, T1 |
 | For n = 3 a valid protocol has 5 ≤ \|R\| ≤ m − 2, and every shifted copy of R contains a card of every player that depends on that player's bit | proved by hand (solver B; the covering statement by both solvers); read by the referee | `solver-b/proofs.txt` T4, C3, T5 |
 | If a valid protocol exists with a cards, one exists with a·b cards for every b | proved by hand by solver A; read by the referee | `solver-a/proofs.txt` L5′ |
 | If correctness only asks that the all-ones input be distinguishable in distribution, three players need exactly 12 cards | computed by both solvers and the referee | `solver-b/weak_n3.txt` |
@@ -184,8 +184,10 @@ of their construction (its strands have no delimiter cards).
   general theorem and its consequences for AND and for equality, as
   statements about a 53-line specification. That removes the risk of an
   error in the algebra; it leaves the question whether the specification and
-  the four statements say what is meant, which only models have judged, and
-  it does not cover the partial-opening results.
+  the four statements say what is meant, which only models have judged. Of
+  the partial-opening results it covers only the bound 2^n − 1 and the
+  validity of the 36-card protocol, as statements about a further 33-line
+  specification; the search for m ≤ 15 is not machine-checked.
   Solver B's own machine test of the statement cannot fail for three players
   (it finds no configuration that satisfies the hypothesis for m ≤ 18); the
   referee's numerical test of the identity over frequencies is a real test.
@@ -276,6 +278,21 @@ pre-existing sentence about a search finding "no encoding at all" was wrong
 as worded. A reviewer suggested the six-card check, which was added. The
 changes made after the round have not been reviewed again.
 
+The partial-opening formalisation (21 November) went to the same five
+reviewers with the same kind of question. All five confirmed that the 33
+lines of definitions say what Section 4 of the note means, neither weaker
+nor stronger, that the bound is stated as in the note, and that the digits
+in the Lean file are the note's layout; both Claude seats recomputed the
+layout's validity with their own programs. Their findings, applied: two
+sentences still said the partial-opening results were not formalised (all
+five); "a clean full build" rested on a one-line log, so the project's
+modules were rebuilt from scratch and that log kept; the failure-test log
+named a different file; the note's account left out the correctness check
+and the added trust assumptions. Not changed: two inaccurate remarks in the
+proving instance's own files (a comment in `PartialCheck.lean` that also
+covers the unused all-true case, and "three" for four uses of `decide` in
+its log). These edits have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -286,8 +303,10 @@ changes made after the round have not been reviewed again.
 - `verifier/`: the referee's checker, brute force, reduced search and tests.
 - `NOTE.md`: the standalone note. `note-checks.py`, `note-checks.txt`: three
   small checks it cites, and their output.
-- `lean/`: the Lean 4 formalisation of the full-opening results, with its own
-  README, build log and axiom list.
+- `lean/`: the Lean 4 formalisation of the full-opening results and, since
+  21 November, of two partial-opening results (the bound 2^n − 1 and the
+  validity of the 36-card protocol), with its own README, build logs and
+  axiom lists.
 - `prior-art.md`: the first literature search. `prior-art-deep.md`: the
   second, which read the four closest papers against this definition. The
   papers themselves are not included.
