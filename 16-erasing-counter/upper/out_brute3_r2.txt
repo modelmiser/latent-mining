@@ -1,0 +1,21 @@
+TIGHT . readonce=1 tree []
+TIGHT (..) readonce=1 tree (1 [1] [])
+WITNESS X1(new max, informational): tree (1 [1] []) state 0 : 1 vs 1
+TIGHT (.(..)) readonce=1 tree (1 [1] (2 [2] []))
+WITNESS X1(new max, informational): tree (1 [1] (2 [2] [])) state 2 : 2 vs 1
+TIGHT ((..).) readonce=1 tree (1 (2 [2] [1]) [])
+TIGHT ((..)(..)) readonce=1 tree (1 (2 [2] [1]) (3 [3] []))
+WITNESS RD_SHARED(informational): tree (1 (2 [1] []) (2 [2] [2])) state 2 : 3 vs 2
+R=2 MAXI=3 MUT=0 trees(up to relabelling)=203
+longest cycle by exact depth: 1 2 6
+longest empty-free path by exact depth: 1 2 6
+E: max empty steps on a cycle of length>=2: 1 (cycles with >=2: 0)
+P1 violations (N > L(T)): 0 ; cycles with N == L(T): 5
+P2 violations (#root=1 states > L(T1), mixed cycles): 0 ; (> W_depth(T1)): 0
+INJ violations (two states of one cycle with the same exploration signature): 0
+RD: trees with index-disjoint root subtrees: 121 ; their cycles longer than M(T1o)(M(T0o)+1): 0 ; root=1 states disagreeing on idx(T0): 0
+RD product bound violated by cycles of trees whose root subtrees SHARE an index: 1
+P3 violations (leaf use > cap): 0
+RUN violations (root=0 run > W_depth(T0)): 0
+X1 max distinct memories at entry to root=1: 2
+PC violations: path > W_depth: 0 ; path > L(T): 0

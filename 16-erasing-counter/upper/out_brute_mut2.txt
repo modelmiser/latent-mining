@@ -1,0 +1,9 @@
+longest cycle by exact depth: 1 2 6 12
+longest empty-free path by exact depth: 1 1 3 7
+E: max empty steps on a cycle of length>=2: 7 (cycles with >=2: 489121)
+P1 violations (N > L(T)): 0 ; cycles with N == L(T): 15
+P2 violations (#root=1 states > L(T1), mixed cycles): 6 ; (> W_depth(T1)): 0
+P3 violations (leaf use > cap): 430
+RUN violations (root=0 run > W_depth(T0)): 0
+X1 max distinct memories at entry to root=1: 6
+PC violations: path > W_depth: 0 ; path > L(T): 0

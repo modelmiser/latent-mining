@@ -10,9 +10,12 @@ have?
 t(t + 1), for r = 1, 2, 3, 4, 5, …, and exactly that for r ≤ 4.** So the
 longest cycle D(r) is at least 2^(2^(r−1)): doubly exponential in the number
 of bits read, although a step carries almost nothing forward in the bits it
-touched. Whether D(r) equals the sequence for every r is open; we found no
-upper bound better than 2^(2^r − 1) − 1, one less than the number of memory
-states. The chain bet the other way, on a cycle
+touched. Whether D(r) equals the sequence for every r is open. A follow-up
+on 21 November proved that it does for every r when no position may be read
+at two places in the tree, so a longer cycle would have to come from reusing
+a position in different branches; for all trees the best upper bound is
+still within a factor 2^r/(r + 1) of the number of memory states (see
+"Towards an upper bound"). The chain bet the other way, on a cycle
 length whose logarithm is polynomial in r, and was wrong.
 
 The sequence is Sylvester's sequence minus one (OEIS A007018).
@@ -54,7 +57,12 @@ Write W_1 = 2 and W_r = W_(r−1)·(W_(r−1) + 1), so W = 2, 6, 42, 1806,
 | A cycle containing no step that raises the number of 1s has length at most 2^r | proved by hand by solver A; the referee found one misstated detail that does not affect the conclusion | `solver-a/proofs.txt` Lemma 2 |
 | At r = 3 the trees reaching 42 are exactly the relabellings of the construction | computed by both solvers and the referee | `solver-a/naive3.out`, `solver-b/ex3_full0.out`, `reports/referee.md` |
 | With at most m distinct positions allowed, the longest cycle B(r, m) obeys B(r, m) = max over m₁ + m₂ = m − 1 of B(r−1, m₂)·(B(r−1, m₁) + 1) | computed for r ≤ 3 and for r = 4 (the referee completed the r = 4 row exhaustively); not proved | `reports/referee.md` |
-| On every cycle of length at least 2, at most one step uses a leaf that writes nothing | computed for r ≤ 3 over all trees up to relabelling of positions; not proved, not tested at r = 4 | `solver-b/prod3.cpp` |
+| On every cycle, at most one step uses a leaf that writes nothing (Theorem E) | at first computed for r ≤ 3 (solver B); since 21 November proved by hand for every tree by one follow-up instance, tested on all trees of depth ≤ 4; five reviewers traced the proof and found no gap, and two of them tested the theorem and the construction with their own programs (see Review) | `upper/PROOFS.md` §1, `solver-b/prod3.cpp` |
+| If the two subtrees below the root share no position, the longest cycle is at most M₁·(M₀ + 1), where M₀, M₁ are the longest cycles of the two subtrees with the leaves that write the root's position made empty (Theorem RD) | proved by hand by the follow-up instance, using Theorem E; tested on 383,161 trees of depth ≤ 3 | `upper/PROOFS.md` §2 |
+| **For trees in which no position labels two nodes, every cycle has length at most L of the tree, and every shape has such a labelling that attains it; so the longest cycle over these trees of depth at most r is exactly W_r, for every r** (Theorem RO; L(leaf) = 1, L(node) = L(1-child)·(L(0-child) + 1)) | proved by hand by the follow-up instance, from Theorem RD and the construction of the lower bound | `upper/PROOFS.md` §3 |
+| For r ≥ 5, a tree of depth r with a cycle longer than W_r must reuse a position at two nodes whose lowest common ancestor has depth at most r − 5 (the root has depth 0); at depth 5 that ancestor is the root | follows from Theorem RD and the computed D(ρ) = W_ρ for ρ ≤ 4 | `upper/PROOFS.md` §2 |
+| D(r) ≤ (r + 1)·2^(2^r − 1 − r) for every r ≥ 1: 6, 64, 10240, about 4.03 × 10⁸ for r = 2, …, 5 (Theorem G) | proved by hand by the follow-up instance | `upper/PROOFS.md` §4 |
+| Every cycle of every tree has length at most L(T) (this would give D(r) = W_r) | conjecture; computed for all 5,478,539 trees of depth ≤ 3 up to relabelling and for every cycle of every tree of depth ≤ 4; not proved | `upper/out_brute3_r3.txt`, `upper/out_lazy2_r4.txt` |
 | D(r) = W_r for every r | conjecture; computed for r ≤ 4 only | |
 
 ## Why the cycle can be so long
@@ -92,8 +100,59 @@ The construction uses each of the 2^r − 1 positions at exactly one internal
 node, and its cycle
 length is about 2^(0.676·2^r).
 
+## Towards an upper bound
+
+This section follows `upper/PROOFS.md`, the work of one follow-up instance on
+21 November.
+
+*One empty step per cycle.* Call a leaf that writes nothing empty. Look at
+the positions on the all-zero path of the tree. A step that reads a 1 never
+raises the number of 1s; only the all-zero leaf can. If a cycle never visits
+a state with zeros on that whole path, its weight is constant and it has no
+empty step. Otherwise every state of the cycle has at most one 1 on the
+path, and the cycle splits into excursions between consecutive states that
+are zero on it. Each excursion ends with exactly one step that writes off
+the path or writes nothing. The proof builds a tree on fewer positions (those off the path only; it may
+be deeper than the original), one step of which reproduces a whole excursion
+and is empty exactly when the excursion ends with an empty step; induction
+on the number of positions finishes.
+
+*Disjoint subtrees multiply.* If the subtrees T₀ and T₁ below the root share
+no position, then while the root bit is 0 only T₀'s memory moves, and while
+it is 1 only T₁'s. A change of the root bit from 0 to 1 is an empty step of
+T₀ (with its leaves that write the root made empty), and T₀'s cycle has only
+one of those. So every state with root bit 1 sees the same memory of T₀: at
+most M₁ such states, and at most M₀·M₁ with root bit 0.
+
+*Consequences.* For trees that read every position at one node only, the
+recursion t → t(t + 1) is therefore forced, shape by shape, and the
+construction of the lower bound attains it. The conjecture D(r) = W_r is
+now equivalent to: reusing a position in different branches never helps.
+Sharing does break the product bound: the tree
+`(1 (2 [1] []) (2 [2] [2]))` of depth 2 (root reads position 1, both
+children read position 2; brackets are what a leaf writes) has a cycle of
+length 3, where the product bound would give 2. It is still below
+L = 6. The follow-up lists five natural strengthenings (the product bound
+for all trees among them) of "length ≤ L(T)"
+that would allow an induction and are false at depth 3.
+
 ## What to distrust
 
+- **The upper-bound results are one day old and have one author.** Theorem
+  E's proof builds an auxiliary tree by a recursive rule with a special case
+  for repeated modes; that construction was tested by program on 40,000
+  trees and the theorem on all trees of depth ≤ 4, which is evidence and not
+  a check of the proof. Theorems RD and RO depend on it. By its own account the organiser
+  read the proofs and traced the depth-2 example by hand. Reviewers asked
+  for three clarifications inside `upper/PROOFS.md`, which is left as the
+  instance wrote it: the rule that puts a dummy leaf should say "if this
+  mode has already been entered with the same set K on the way from the root
+  of F (the first mode counts)"; the reason a dummy is never reached is that
+  T's state at a stage is determined by the mode and K, so a repeat means
+  the orbit never returns home; and in case II of Theorem RD every step is
+  empty in T₁° because a step that keeps the root bit at 1 must rewrite it. The depth-4 program
+  of the follow-up follows the referee's search design, so it is not an
+  independent confirmation of D(4) = 1806. Nothing is machine-checked.
 - **Everything is by one model family.** Nothing is machine-checked as a
   proof.
 - **D(4) = 1806 rests on one idea of search.** Solver B's program and the
@@ -159,6 +218,29 @@ single leaf. Their findings on this page, applied above:
 
 The corrected wording has not been through a second round.
 
+The upper-bound results of 21 November went to the same five reviewers.
+All five confirmed every proof: the two facts about weights, both cases of
+Theorem E including the construction of the auxiliary tree and its
+finiteness, Theorem RD and its corollaries, Theorem RO, Theorem G and its
+values, and both small examples, which they replayed. Both Claude seats
+also wrote their own programs: over 8,000 and 18,500 random trees with
+heavy reuse of positions they found no cycle with two empty steps, no
+violation of the product bound for disjoint subtrees, and no cycle longer
+than L; one built the auxiliary tree from the proof's text for 1,934 cycles
+and found it to behave as claimed each time. Their findings, applied above:
+
+- I stated Theorem RO as "the longest cycle is exactly L", which is false
+  for an individual tree (GPT, a Claude seat).
+- "Separate at depth r − 5 or higher" read the wrong way round (Grok, both
+  Claude seats).
+- "Four" strengthenings for five; "a smaller tree" for one that can be
+  deeper; "far below" for 3 against 6; "close to the number of states".
+- I wrote that I had traced both small examples; I traced one.
+- Three places where the proof file is terse, now listed under "What to
+  distrust".
+
+These edits have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -167,6 +249,8 @@ The corrected wording has not been through a second round.
 - `reports/`: each instance's final report, verbatim.
 - `solver-a/`, `solver-b/`: searches, witnesses (`sylvester_r*.txt`,
   `witness_r*.txt`), checkers, proofs.
+- `upper/`: the follow-up of 21 November: `PROOFS.md`, its programs and
+  outputs, its brief and report.
 - `verifier/`: the referee's brute force, search, witness checker and lemma
   tests.
 - `prior-art.md`: the literature search.

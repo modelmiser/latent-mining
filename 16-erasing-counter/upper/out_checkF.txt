@@ -1,0 +1,4 @@
+OK trees=20000 cycles(len>=2)=40601 of which with >=2 home states=9980 (max 12) home states checked=71093 max empty steps on a cycle=1 MUT=0
+OK trees=20000 cycles(len>=2)=39859 of which with >=2 home states=10029 (max 12) home states checked=70636 max empty steps on a cycle=1 MUT=0
+FAIL (1): construction of F does not terminate MUT=1
+FAIL (2): f_F(home) != next home ('n', 3, ('n', 4, ('n', 1, ('n', 2, ('n', 5, ('l', 3), ('l', 5)), ('n', 5, ('l', 4), ('l', None))), ('n', 5, ('n', 0, ('l', 3), ('l', 0)), ('n', 2, ('l', None), ('l', 

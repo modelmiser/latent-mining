@@ -1,0 +1,55 @@
+r=1 MUT=0 COMPLETE decision nodes=4 closed cycles=4 longest=2
+E: max empty-leaf steps on a cycle of length>=2: 1 ; cycles with >=2: 0
+P1: cycles longer than L(T'): 0 ; cycles with length == L(T'): 2
+r=2 MUT=0 COMPLETE decision nodes=42 closed cycles=30 longest=6
+E: max empty-leaf steps on a cycle of length>=2: 1 ; cycles with >=2: 0
+P1: cycles longer than L(T'): 0 ; cycles with length == L(T'): 5
+r=3 MUT=0 COMPLETE decision nodes=10103 closed cycles=4600 longest=42
+E: max empty-leaf steps on a cycle of length>=2: 1 ; cycles with >=2: 0
+P1: cycles longer than L(T'): 0 ; cycles with length == L(T'): 26
+WITNESS P1: len=2 value=1 tree (1 [1] []) start 0
+WITNESS P1: len=2 value=1 tree (1 [1] (2 [] ?)) start 00
+WITNESS P1: len=4 value=1 tree (1 [1] (2 [2] [])) start 00
+WITNESS P1: len=4 value=1 tree (1 [1] (2 [2] (3 [] ?))) start 000
+WITNESS P1: len=8 value=1 tree (1 [1] (2 [2] (3 [3] []))) start 000
+WITNESS P1: len=7 value=1 tree (1 [1] (2 [2] (3 [3] [1]))) start 001
+WITNESS P1: len=6 value=1 tree (1 [1] (2 [2] (3 [3] [2]))) start 001
+WITNESS P1: len=4 value=1 tree (1 [1] (2 [2] (3 ? [3]))) start 001
+WITNESS P1: len=2 value=1 tree (1 [1] (2 (3 [] ?) ?)) start 000
+WITNESS P1: len=4 value=1 tree (1 [1] (2 (3 [2] ?) [])) start 000
+WITNESS P1: len=4 value=1 tree (1 [1] (2 (3 [2] ?) (3 [] ?))) start 000
+WITNESS P1: len=6 value=1 tree (1 [1] (2 (3 [2] []) (3 [3] ?))) start 000
+WITNESS P1: len=4 value=1 tree (1 [1] (2 (3 [2] ?) (4 [] ?))) start 0000
+WITNESS P1: len=8 value=1 tree (1 [1] (2 (3 [2] ?) (4 [4] []))) start 0000
+WITNESS P1: len=7 value=1 tree (1 [1] (2 (3 [2] ?) (4 [4] [1]))) start 0001
+WITNESS P1: len=6 value=1 tree (1 [1] (2 (3 [2] ?) (4 [4] [2]))) start 0001
+WITNESS P1: len=4 value=1 tree (1 [1] (2 (3 [2] ?) (4 ? [4]))) start 0001
+WITNESS P1: len=4 value=1 tree (1 [1] (2 (3 [3] []) ?)) start 000
+WITNESS P1: len=6 value=1 tree (1 [1] (2 (3 [3] [2]) [])) start 000
+WITNESS P1: len=6 value=1 tree (1 [1] (2 (3 [3] [2]) (3 [] ?))) start 000
+r=3 MUT=1 COMPLETE decision nodes=10103 closed cycles=4600 longest=42
+E: max empty-leaf steps on a cycle of length>=2: 1 ; cycles with >=2: 0
+P1: cycles longer than L(T'): 4590 ; cycles with length == L(T'): 10
+WITNESS E: len=2 value=2 tree (1 [1] []) start 0
+WITNESS E: len=2 value=2 tree (1 [1] (2 [] ?)) start 00
+WITNESS E: len=4 value=3 tree (1 [1] (2 [2] [])) start 00
+WITNESS E: len=4 value=3 tree (1 [1] (2 [2] (3 [] ?))) start 000
+WITNESS E: len=8 value=5 tree (1 [1] (2 [2] (3 [3] []))) start 000
+WITNESS E: len=7 value=4 tree (1 [1] (2 [2] (3 [3] [1]))) start 001
+WITNESS E: len=6 value=3 tree (1 [1] (2 [2] (3 [3] [2]))) start 001
+WITNESS E: len=4 value=2 tree (1 [1] (2 [2] (3 ? [3]))) start 001
+WITNESS E: len=2 value=2 tree (1 [1] (2 (3 [] ?) ?)) start 000
+WITNESS E: len=4 value=3 tree (1 [1] (2 (3 [2] ?) [])) start 000
+WITNESS E: len=4 value=3 tree (1 [1] (2 (3 [2] ?) (3 [] ?))) start 000
+WITNESS E: len=6 value=4 tree (1 [1] (2 (3 [2] []) (3 [3] ?))) start 000
+WITNESS E: len=4 value=3 tree (1 [1] (2 (3 [2] ?) (4 [] ?))) start 0000
+WITNESS E: len=8 value=5 tree (1 [1] (2 (3 [2] ?) (4 [4] []))) start 0000
+WITNESS E: len=7 value=4 tree (1 [1] (2 (3 [2] ?) (4 [4] [1]))) start 0001
+WITNESS E: len=6 value=3 tree (1 [1] (2 (3 [2] ?) (4 [4] [2]))) start 0001
+WITNESS E: len=4 value=2 tree (1 [1] (2 (3 [2] ?) (4 ? [4]))) start 0001
+WITNESS E: len=4 value=3 tree (1 [1] (2 (3 [3] []) ?)) start 000
+WITNESS E: len=6 value=4 tree (1 [1] (2 (3 [3] [2]) [])) start 000
+WITNESS E: len=6 value=4 tree (1 [1] (2 (3 [3] [2]) (3 [] ?))) start 000
+r=3 MUT=2 COMPLETE decision nodes=10103 closed cycles=4600 longest=42
+E: max empty-leaf steps on a cycle of length>=2: 7 ; cycles with >=2: 4082
+P1: cycles longer than L(T'): 0 ; cycles with length == L(T'): 26
