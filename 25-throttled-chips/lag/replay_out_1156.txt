@@ -1,0 +1,32 @@
+length 26482 tie L  max lag after a round 2.0  after an add 2.2  final max lag 2.0 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -3712.6   passes 18572  negative lags seen 0
+  Theorem U: n = 18574, bound 2 + H_n = 12.407, largest lag after a round 2.0 : ok
+  expected level 10 after a round: reached
+exit 0
+length 26482 tie R  max lag after a round 2.0  after an add 2.2  final max lag 2.0 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -3712.6   passes 18572  negative lags seen 0
+  Theorem U: n = 18574, bound 2 + H_n = 12.407, largest lag after a round 2.0 : ok
+  expected level 10 after a round: reached
+exit 0
+length 26482 tie H  max lag after a round 2.0  after an add 2.4  final max lag 2.0 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -3712.6   passes 18572  negative lags seen 0
+  Theorem U: n = 18574, bound 2 + H_n = 12.407, largest lag after a round 2.0 : ok
+  expected level 10 after a round: reached
+exit 0
+length 35374 tie L  max lag after a round 2.6  after an add 2.6  final max lag 2.6 at 11 vertices
+  max height - t/5: after an add 0.8, after a firing -3712.6   passes 18572  negative lags seen 0
+  Theorem U: n = 18574, bound 2 + H_n = 12.407, largest lag after a round 2.6 : ok
+  expected level 13 after a round: reached
+exit 0
+--- expected to fail but did not: L-list replayed under R
+length 35374 tie R  max lag after a round 2.6  after an add 3.0  final max lag 2.6 at 11 vertices
+  max height - t/5: after an add 0.8, after a firing -3712.6   passes 18572  negative lags seen 0
+  Theorem U: n = 18574, bound 2 + H_n = 12.407, largest lag after a round 2.6 : ok
+  expected level 13 after a round: reached
+exit 0
+--- NEG: expecting one level too many
+length 26482 tie L  max lag after a round 2.0  after an add 2.2  final max lag 2.0 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -3712.6   passes 18572  negative lags seen 0
+  Theorem U: n = 18574, bound 2 + H_n = 12.407, largest lag after a round 2.0 : ok
+  expected level 11 after a round: NOT REACHED
+exit 1

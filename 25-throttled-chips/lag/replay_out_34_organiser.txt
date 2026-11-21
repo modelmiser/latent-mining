@@ -1,0 +1,13 @@
+# organiser, 2026-11-21: replay.cpp recompiled (g++ -O2); the three N = 34 lists replayed under their own tie rule
+$ replay list_34_L.txt L
+length 859 tie L  max lag after a round 1.8  after an add 2.0  final max lag 1.8 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -122.2   passes 620  negative lags seen 0
+  Theorem U: n = 622, bound 2 + H_n = 9.011, largest lag after a round 1.8 : ok
+$ replay list_34_R.txt R
+length 859 tie R  max lag after a round 1.8  after an add 2.0  final max lag 1.8 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -122.2   passes 620  negative lags seen 0
+  Theorem U: n = 622, bound 2 + H_n = 9.011, largest lag after a round 1.8 : ok
+$ replay list_34_H.txt H
+length 859 tie H  max lag after a round 1.8  after an add 2.0  final max lag 1.8 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -122.2   passes 620  negative lags seen 0
+  Theorem U: n = 622, bound 2 + H_n = 9.011, largest lag after a round 1.8 : ok

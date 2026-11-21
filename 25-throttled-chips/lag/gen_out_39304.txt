@@ -1,0 +1,43 @@
+tie L  N 1156  board 18576
+S(8,1156) holds after round 25516: 1156 vertices with lag 1.6
+S(9,570) holds after round 31216: 570 vertices with lag 1.8
+S(10,277) holds after round 33986: 277 vertices with lag 2.0
+S(11,66) holds after round 34646: 66 vertices with lag 2.2
+S(12,57) holds after round 35264: 57 vertices with lag 2.4
+S(13,11) holds after round 35374: 11 vertices with lag 2.6
+length 35374  largest lag after a round 2.6  after an add 2.6  passes 18572  pads used 48
+0.09s 21948kB
+tie L  N 39304  board 628944
+S(8,39304) holds after round 864772: 39304 vertices with lag 1.6
+S(9,1228) holds after round 896704: 1228 vertices with lag 1.8
+S(10,38) holds after round 897698: 38 vertices with lag 2.0
+S(11,1) holds after round 897727: 1 vertices with lag 2.2
+length 897727  largest lag after a round 2.2  after an add 2.2  passes 628940  pads used 20285
+1.59s 193076kB
+tie L  N 39304  board 628944
+S(8,39304) holds after round 864772: 39304 vertices with lag 1.6
+S(9,19644) holds after round 1061212: 19644 vertices with lag 1.8
+S(10,9814) holds after round 1159352: 9814 vertices with lag 2.0
+S(11,2450) holds after round 1183852: 2450 vertices with lag 2.2
+S(12,2441) holds after round 1210694: 2441 vertices with lag 2.4
+S(13,607) holds after round 1216764: 607 vertices with lag 2.6
+S(14,296) holds after round 1219724: 296 vertices with lag 2.8
+S(15,140) holds after round 1221124: 140 vertices with lag 3.0
+S(16,31) holds after round 1221434: 31 vertices with lag 3.2
+S(17,22) holds after round 1221667: 22 vertices with lag 3.4
+S(18,2) holds after round 1221687: 2 vertices with lag 3.6
+length 1221687  largest lag after a round 3.6  after an add 3.6  passes 628940  pads used 2445
+3.05s 372596kB
+tie H  N 39304  board 628944
+S(8,39304) holds after round 864772: 39304 vertices with lag 1.6
+S(9,19644) holds after round 1061212: 19644 vertices with lag 1.8
+S(10,9808) holds after round 1159292: 9808 vertices with lag 2.0
+S(11,2449) holds after round 1183782: 2449 vertices with lag 2.2
+S(12,2432) holds after round 1210523: 2432 vertices with lag 2.4
+S(13,605) holds after round 1216573: 605 vertices with lag 2.6
+S(14,295) holds after round 1219523: 295 vertices with lag 2.8
+S(15,128) holds after round 1220803: 128 vertices with lag 3.0
+S(16,30) holds after round 1221103: 30 vertices with lag 3.2
+S(17,12) holds after round 1221224: 12 vertices with lag 3.4
+length 1221224  largest lag after a round 3.4  after an add 3.6  passes 628940  pads used 2422
+3.81s 429388kB

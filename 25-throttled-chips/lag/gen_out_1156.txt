@@ -1,0 +1,35 @@
+tie L  N 34  board 624
+S(8,34) holds after round 832: 34 vertices with lag 1.6
+S(9,1) holds after round 859: 1 vertices with lag 1.8
+length 859  largest lag after a round 1.8  after an add 2.0  passes 620  pads used 17
+tie R  N 34  board 624
+S(8,34) holds after round 832: 34 vertices with lag 1.6
+S(9,1) holds after round 859: 1 vertices with lag 1.8
+length 859  largest lag after a round 1.8  after an add 2.0  passes 620  pads used 17
+tie H  N 34  board 624
+S(8,34) holds after round 832: 34 vertices with lag 1.6
+S(9,1) holds after round 859: 1 vertices with lag 1.8
+length 859  largest lag after a round 1.8  after an add 2.0  passes 620  pads used 17
+tie L  N 1156  board 18576
+S(8,1156) holds after round 25516: 1156 vertices with lag 1.6
+S(9,36) holds after round 26454: 36 vertices with lag 1.8
+S(10,1) holds after round 26482: 1 vertices with lag 2.0
+length 26482  largest lag after a round 2.0  after an add 2.2  passes 18572  pads used 596
+tie R  N 1156  board 18576
+S(8,1156) holds after round 25516: 1156 vertices with lag 1.6
+S(9,36) holds after round 26454: 36 vertices with lag 1.8
+S(10,1) holds after round 26482: 1 vertices with lag 2.0
+length 26482  largest lag after a round 2.0  after an add 2.2  passes 18572  pads used 596
+tie H  N 1156  board 18576
+S(8,1156) holds after round 25516: 1156 vertices with lag 1.6
+S(9,36) holds after round 26454: 36 vertices with lag 1.8
+S(10,1) holds after round 26482: 1 vertices with lag 2.0
+length 26482  largest lag after a round 2.0  after an add 2.4  passes 18572  pads used 596
+tie L  N 1156  board 18576
+S(8,1156) holds after round 25516: 1156 vertices with lag 1.6
+S(9,570) holds after round 31216: 570 vertices with lag 1.8
+S(10,277) holds after round 33986: 277 vertices with lag 2.0
+S(11,66) holds after round 34646: 66 vertices with lag 2.2
+S(12,57) holds after round 35264: 57 vertices with lag 2.4
+S(13,11) holds after round 35374: 11 vertices with lag 2.6
+length 35374  largest lag after a round 2.6  after an add 2.6  passes 18572  pads used 48

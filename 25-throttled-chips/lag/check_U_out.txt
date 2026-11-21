@@ -1,0 +1,25 @@
+ok: 4656 rounds, n=514, tie L, C=3: all 514 prefix sums within the bound every round; largest lag 3.8 <= 8.820; closest approach (sum - bound) -5.020; fact (d) checked in 13 rounds
+exit 0
+ok: 4656 rounds, n=514, tie R, C=3: all 514 prefix sums within the bound every round; largest lag 1.8 <= 8.820; closest approach (sum - bound) -7.020; fact (d) checked in 0 rounds
+exit 0
+ok: 859 rounds, n=622, tie H, C=3: all 622 prefix sums within the bound every round; largest lag 1.8 <= 9.011; closest approach (sum - bound) -7.211; fact (d) checked in 0 rounds
+exit 0
+ok: 3000 rounds, n=14, tie L, C=3: all 14 prefix sums within the bound every round; largest lag 1.6 <= 5.252; closest approach (sum - bound) -3.652; fact (d) checked in 0 rounds
+ok: 3000 rounds, n=14, tie L, C=3: all 14 prefix sums within the bound every round; largest lag 1.6 <= 5.252; closest approach (sum - bound) -3.652; fact (d) checked in 0 rounds
+ok: 3000 rounds, n=14, tie L, C=3: all 14 prefix sums within the bound every round; largest lag 1.8 <= 5.252; closest approach (sum - bound) -3.452; fact (d) checked in 0 rounds
+ok: 3000 rounds, n=14, tie L, C=3: all 14 prefix sums within the bound every round; largest lag 1.6 <= 5.252; closest approach (sum - bound) -3.652; fact (d) checked in 0 rounds
+ok: 3000 rounds, n=14, tie L, C=3: all 14 prefix sums within the bound every round; largest lag 1.6 <= 5.252; closest approach (sum - bound) -3.652; fact (d) checked in 0 rounds
+ok: 3000 rounds, n=14, tie L, C=3: all 14 prefix sums within the bound every round; largest lag 1.8 <= 5.252; closest approach (sum - bound) -3.452; fact (d) checked in 0 rounds
+ok: 4000 rounds, n=62, tie H, C=3: all 62 prefix sums within the bound every round; largest lag 1.4 <= 6.712; closest approach (sum - bound) -5.312; fact (d) checked in 0 rounds
+ok: 4000 rounds, n=62, tie H, C=3: all 62 prefix sums within the bound every round; largest lag 1.6 <= 6.712; closest approach (sum - bound) -5.112; fact (d) checked in 0 rounds
+--- NEG
+FAIL Theorem U: round 1, k=513: sum of 513 largest lags 1.0 > bound 0.998 (C=0, n=514)
+exit 1
+ok: 4656 rounds, n=514, tie L, C=1: all 514 prefix sums within the bound every round; largest lag 3.8 <= 6.820; closest approach (sum - bound) -1.994; fact (d) checked in 13 rounds
+exit 0
+FAIL fact (d): round 1878, largest lag 3.2, fired vertex has lag 1.0
+exit 1
+length 4656 tie L  max lag after a round 3.8  after an add 3.8  final max lag 3.8 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -100.6   passes 512  negative lags seen 0
+  Theorem U: n = 514, bound 2 + H_n = 8.820, largest lag after a round 3.8 : ok
+  expected level 19 after a round: reached

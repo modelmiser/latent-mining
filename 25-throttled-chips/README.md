@@ -44,7 +44,9 @@ with G(3), G(4), G(5) and the limit of G(h)/h.
 | **Every list of length m loses whenever m/5 + 2√m + 13.2 ≤ h − 1**, so G(h) ≥ 5h − 10√(5h) − 72 | proved by hand by solver A only; referee read it step by step, found no gap, and ran the strategy against every short list confined to 4 to 7 neighbouring points and against lists searched for to make it fail | `solver-a/proofs.txt` Theorem 2, `verifier/strat.cpp` |
 | So G(h)/h and C(h)/h both tend to 5 | from the two rows above | |
 | **Under the same firing rule every height stays at most t/5 + 35.2 after t rounds, so every list of length at most 5h − 177 loses and G(h) ≥ 5h − 176** | proved by hand by one follow-up instance; the organiser checked every line; the lemmas were tested by program on variants of the rule where they actually come into play; five reviewers then traced the proof and found no gap (see Review) | `constant/proofs.txt` Lemmas 1, 2, Theorem A |
-| The shortfall (lag) of that rule is probably not bounded by a constant, although the heights are | evidence only: lists found by a search over n neighbouring points on which the largest lag rises from 2.4 at n = 16 to 6.6 at n = 32,768, by 0.2 to 0.8 per doubling of n and with differences of up to 0.6 between runs with the same printed settings (the search's seed is not printed); the lists for n = 512 (lag 3.8) and n = 16,384 (lag 6.4) were replayed by a separate exact program, the one for 6.6 was not | `constant/lagadv2_out.txt`, `constant/lagadv2_big.txt`, `constant/replay_n512.txt`, `constant/replay_n16384.txt` |
+| **The worst-case shortfall (lag) of that rule grows like the logarithm of the list length.** Upper bound, for every list and every way of breaking ties: after a round every lag is at most 2 + H_n, where n ≤ 3t is the number of points within distance 1 of the list and H_n = 1 + 1/2 + … + 1/n (Theorem U). Lower bound, for each deterministic tie-breaking that depends only on the play so far: for every j there is a list, built against that tie-breaking, of length at most 24·34^j + 84 after which some lag is (8 + j)/5 (Theorem L). A firer that breaks ties knowing the rest of the list, or at random, is not covered by the lower bound | both proved by hand by a second follow-up instance on 21 November; the organiser checked Theorem U line by line; the construction of Theorem L was run against the game with the claims of its proof asserted, for 3 stages (lag 2.2; the proof's "flush" step never arose in these runs), and a greedier variant for 12 stages (lag 4.0); the lists from N = 1156 up were replayed by a separate program by the instance, and the three smallest by the organiser; five reviewers traced both proofs and found no gap, and one rebuilt the construction from the proof's text in its own simulator against five tie rules (see Review) | `lag/PROOFS.md`, `lag/gen.py`, `lag/replay.cpp`, `lag/replay_out_34_organiser.txt` |
+| G(h) ≥ 5h − 26 − 10·H_15h; the exact condition behind it (a list of length m loses if m/5 + 5.2 + 2·H_3m < h) gives G(59) ≥ 200, G(100) ≥ 398, G(1000) ≥ 4873; better than 5h − 176 for h up to somewhere near 10⁵ (not computed exactly) and better than 2h − 1 from h = 28 (Corollary U2) | proved by hand from Theorem U by the same instance; values computed | `lag/PROOFS.md`, `lag/corollary_out.txt` |
+| Earlier search evidence for the same thing | lists found by a search over n neighbouring points on which the largest lag rises from 2.4 at n = 16 to 6.6 at n = 32,768, by 0 to 0.8 per doubling of n and with differences of up to 0.6 between runs with the same printed settings (the search's seed is not printed); the lists for n = 512 (lag 3.8) and n = 16,384 (lag 6.4) were replayed by a separate exact program, the one for 6.6 was not | `constant/lagadv2_out.txt`, `constant/lagadv2_big.txt`, `constant/replay_n512.txt`, `constant/replay_n16384.txt` |
 | G(h) ≥ 2h − 1 for h ≥ 3 | proved by hand by solver B; read by the referee | `solver-b/proofs.txt` P2 |
 | G(1), G(2), G(3) = 1, 2, 5 | computed by all three instances; G(3) also follows from the row above and the list 0, 1, 0, 1, 0 | `reports/` |
 | **G(4) = 10 and G(5) = 15, over all lists** | upper bounds by explicit lists; lower bounds by exhaustive search made finite by a lemma of solver B, which the referee read and then re-ran with its own program | `solver-b/proofs.txt` Lemma Z, `verifier/v.cpp` |
@@ -130,9 +132,21 @@ most t/5 + 35.2 just after an add. The two terms in e cancel exactly.
 In the referee's and two reviewers' experiments the lag never exceeded 2.4.
 The follow-up instance searched harder and found lists, for one tie-breaking
 rule, on which the lag reaches 6.6 and grows slowly with the length of the
-list, while the heights stay within 0.8 of t/5. So the lag itself is
-probably unbounded, and bounding the heights by a constant needed an
-argument that does not go through a uniform bound on the lag. The constant
+list, while the heights stay within 0.8 of t/5. So the lag itself looked
+unbounded, and bounding the heights by a constant needed an
+argument that does not go through a uniform bound on the lag. A second
+follow-up then proved both halves (`lag/PROOFS.md`). Upper: the sum of the
+k largest lags never exceeds k(3 + H_n − H_k), by the argument known for
+the greedy player in the "cup game" (no reference was looked up), so no lag
+exceeds 2 + H_n after a round. Lower: an explicit adaptive construction. Small groups of
+seven points are prepared so that one add at the centre lifts both
+neighbours and makes the centre the single largest lag, which the firer is
+forced to relieve; a second add lifts both neighbours above everything
+else and the firer can relieve only one. Groups whose neighbours were both
+fired are then refilled to one level higher, paid for by spending
+surviving top points as decoys. That costs a factor of 34 per level in the
+proof (between 1 and 5, about 2.5 on average, in the greedy runs), which is
+where the logarithm comes from. The constant
 35.2 is not optimised, and the conjecture G(h) = 5h − 10 remains open.
 
 ## The small values
@@ -168,9 +182,25 @@ h = 4 and h = 5.
   11), not on the rule itself, where a lag of 6 was reached only by the
   searched lists and never in the lemma tests. The tests of the final height
   bound are far from binding (largest excess 15.2 against 34). It is not
-  machine-checked. The evidence that the lag is unbounded is a search result
-  for one tie-breaking rule, with no construction and no proof, and it cannot
-  be regenerated exactly because the seed was not recorded.
+  machine-checked. The first evidence that the lag is unbounded was a search
+  result for one tie-breaking rule that cannot be regenerated exactly because
+  the seed was not recorded; it is superseded by the proof below.
+- **The logarithmic bounds on the lag are hours old and have one author.**
+  Theorem U is a ten-line induction that the organiser checked. Theorem L is
+  a two-page construction; its claims are asserted in runs of the proof's
+  own construction (3 stages; its flush step and one sub-case of its
+  rebuilding step never arose there) and of a greedier variant (12 stages),
+  which tests the bookkeeping and not the proof. `lag/PROOFS.md` is left as
+  the instance wrote it; reviewers noted that its summary sentence drops the
+  additive constant of the upper bound (it is about ln t + 4.1, not ln t),
+  that the lower-bound formula needs t ≥ 108, and that one step uses without
+  saying so that a number of chips is an integer. It does not cover a
+  firer whose tie-breaking looks at the rest of the list. The gap between
+  the two bounds is a factor of about 18 in the coefficient of ln t. Two
+  checks the instance expected to fail did not (a list built against one
+  tie rule still reached its level when replayed under another), so the
+  replays do not show that a list depends on its tie rule. Four lists
+  (6 MB to 73 MB) are left out; `lag/gen.py` regenerates them.
 - **Slips in the follow-up's files.** `constant/proofs.txt` states the chain
   5h − 176 ≤ G(h) ≤ C(h) ≤ 5h − 6 "for all h"; the upper bound needs h ≥ 2.
   One line of Lemma 2 reads "Φ < |Z|" before noting that Z is not empty. It
@@ -253,7 +283,36 @@ search list with its own script. Their findings, applied above:
 
 These edits have not been reviewed again.
 
+The lag results of 21 November went to the same five reviewers. All five
+confirmed Theorem U (base, the three cases and the algebra), the two rules
+on forced firings, the base and the stage of Theorem L with its counting,
+and the corollary, whose sample values two of them recomputed. None found a
+move by the firer that the lower-bound proof misses; one Claude seat rebuilt
+the construction from the proof's text in its own simulator and ran it
+against five tie rules, two chosen to be awkward. Their findings, applied
+above:
+
+- The headline and the top-level row stated "grows like log t" without the
+  quantifiers: the upper bound is for every list and tie rule, the lower
+  bound is one list per deterministic, history-only tie rule (GPT, Grok,
+  both Claude seats).
+- "2 to 4" per level in the greedy runs was wrong (four seats); my sentence
+  about "rebuilding the survivors" misdescribed the construction (Gemini,
+  both Claude seats).
+- "Every claim asserted in runs that reach 12 stages" mixed up the proof's
+  construction with the greedy variant, and one step of the proof was never
+  exercised (a Claude seat).
+- "Each list replayed" was untrue of the three smallest; the organiser
+  replayed them.
+- An older row said 0.2 to 0.8 per doubling where one step is 0 (GPT).
+
+These edits have not been reviewed again.
+
 ## Files
+
+- `lag/`: the second follow-up of 21 November (the lag is logarithmic):
+  `PROOFS.md`, the generator of the lists, a separate replay program, tests
+  and outputs.
 
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each

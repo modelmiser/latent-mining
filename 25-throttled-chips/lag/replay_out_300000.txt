@@ -1,0 +1,4 @@
+length 9331937 tie L  max lag after a round 4.0  after an add 4.2  final max lag 4.0 at 5 vertices
+  max height - t/5: after an add 0.8, after a firing -960013.4   passes 4800076  negative lags seen 0
+  Theorem U: n = 4800078, bound 2 + H_n = 17.961, largest lag after a round 4.0 : ok
+  expected level 20 after a round: reached

@@ -1,0 +1,21 @@
+length 897727 tie L  max lag after a round 2.2  after an add 2.2  final max lag 2.2 at 1 vertices
+  max height - t/5: after an add 0.8, after a firing -125786.2   passes 628940  negative lags seen 0
+  Theorem U: n = 628942, bound 2 + H_n = 15.929, largest lag after a round 2.2 : ok
+  expected level 11 after a round: reached
+exit 0
+length 1221687 tie L  max lag after a round 3.6  after an add 3.6  final max lag 3.6 at 2 vertices
+  max height - t/5: after an add 0.8, after a firing -125786.2   passes 628940  negative lags seen 0
+  Theorem U: n = 628942, bound 2 + H_n = 15.929, largest lag after a round 3.6 : ok
+  expected level 18 after a round: reached
+exit 0
+length 1221224 tie H  max lag after a round 3.4  after an add 3.6  final max lag 3.4 at 12 vertices
+  max height - t/5: after an add 0.8, after a firing -125786.2   passes 628940  negative lags seen 0
+  Theorem U: n = 628942, bound 2 + H_n = 15.929, largest lag after a round 3.4 : ok
+  expected level 17 after a round: reached
+exit 0
+--- NEG: H-list under L
+length 1221224 tie L  max lag after a round 3.4  after an add 4.0  final max lag 3.4 at 12 vertices
+  max height - t/5: after an add 0.8, after a firing -125786.2   passes 628940  negative lags seen 0
+  Theorem U: n = 628942, bound 2 + H_n = 15.929, largest lag after a round 3.4 : ok
+  expected level 17 after a round: reached
+exit 0

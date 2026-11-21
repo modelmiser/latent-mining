@@ -1,0 +1,19 @@
+tie L  N 1000000  board 16000080
+S(8,1000000) holds after round 22000084: 1000000 vertices with lag 1.6
+S(9,499992) holds after round 27000004: 499992 vertices with lag 1.8
+Traceback (most recent call last):
+  File "gen.py", line 167, in <module>
+    done.add(x); n0 = len(lst); rebuild(x); sel.append(x)
+                                ^^^^^^^^^^
+  File "gen.py", line 136, in rebuild
+    f = add(x + 2 * s)
+        ^^^^^^^^^^^^^^
+  File "gen.py", line 55, in add
+    push(x - 1); push(x); push(x + 1)
+                 ^^^^^^^
+  File "gen.py", line 47, in push
+    if chips[x] >= 2 and lev[x] >= 5: heapq.heappush(heap, (-lev[x], key(x), x))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+MemoryError
+Command exited with non-zero status 1
+66.61s 5885832kB

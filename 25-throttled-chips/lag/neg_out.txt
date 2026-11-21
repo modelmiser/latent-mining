@@ -1,0 +1,6 @@
+== gen.py 34 L /dev/null --no-reservoir
+AssertionError: pad: centre not fired
+== gen.py 1156 L /dev/null --overdraw
+AssertionError: rebuild: max level is not W before a B-add
+== gen.py 1156 H /dev/null --overdraw
+AssertionError: rebuild: max level is not W before a B-add
