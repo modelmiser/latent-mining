@@ -1,0 +1,16 @@
+round 1 lag record 0.2 at vertex 7
+round 1 lag record 0.6 at vertex 8
+round 2 lag record 0.8 at vertex 8
+round 3 lag record 1.0 at vertex 9
+round 513 lag record 1.4 at vertex 8
+round 514 lag record 1.8 at vertex 9
+round 4350 lag record 2.0 at vertex 475
+round 4532 lag record 2.2 at vertex 441
+round 4554 lag record 2.4 at vertex 487
+round 4609 lag record 2.6 at vertex 487
+round 4637 lag record 2.8 at vertex 493
+round 4644 lag record 3.2 at vertex 500
+round 4646 lag record 3.4 at vertex 506
+round 4653 lag record 3.6 at vertex 511
+round 4656 lag record 3.8 at vertex 511
+length 4656 tie L max lag 3.8 max height - t/5 0.8 passes 512

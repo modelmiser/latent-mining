@@ -1,0 +1,17 @@
+== wrong 1
+           ^^^^^^^^^^^^^
+AssertionError: ('Lemma 1 monotone', 1, -6, 3, 0, 23)
+== wrong 2
+           ^^^^^^^^^^^^^^^
+AssertionError: ('chain 3', 9, 25, 0, 1, 0)
+== wrong 3
+theta=11 lists=42 maxlag=12.0 max(height-t/5)=15.2 exercised: (d) 7431, Lemma1 17912, chain 41422, static 250707
+ALL CHECKS PASSED (wrong=3)
+== wrong 4
+           ^^^^^^^^^^^^^^^
+AssertionError: ('Theorem A after add', 2, 2)
+== full
+theta=1 lists=126 maxlag=2.6 max(height-t/5)=3.0 exercised: (d) 0, Lemma1 0, chain 0, static 4325351
+theta=6 lists=126 maxlag=7.4 max(height-t/5)=8.0 exercised: (d) 130848, Lemma1 344260, chain 3054414, static 8118804
+theta=11 lists=126 maxlag=12.4 max(height-t/5)=15.2 exercised: (d) 124026, Lemma1 322048, chain 2448680, static 8124357
+ALL CHECKS PASSED (wrong=0)

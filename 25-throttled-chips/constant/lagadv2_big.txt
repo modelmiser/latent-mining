@@ -1,0 +1,11 @@
+FINAL n=8192 K=8 R=100000000 base=1.5 maxlag=5.6 maxexc=0.8
+FINAL n=16384 K=8 R=100000000 base=1.5 maxlag=6.4 maxexc=0.8
+FINAL n=32768 K=8 R=100000000 base=1.5 maxlag=6.6 maxexc=0.8
+FINAL n=128 K=8 R=100000000 base=1.5 maxlag=3.4 maxexc=0.8
+FINAL n=1024 K=8 R=100000000 base=1.5 maxlag=4.4 maxexc=0.8
+FINAL n=4096 K=8 R=100000000 base=1.5 maxlag=4.8 maxexc=0.8
+FINAL n=128 K=8 R=100000000 base=1.5 maxlag=2.8 maxexc=0.8
+FINAL n=1024 K=8 R=100000000 base=1.5 maxlag=4.4 maxexc=0.8
+FINAL n=4096 K=8 R=100000000 base=1.5 maxlag=4.8 maxexc=0.8
+FINAL n=128 K=3 R=100000000 base=1.5 maxlag=3.4 maxexc=0.8
+FINAL n=1024 K=3 R=100000000 base=1.5 maxlag=4.4 maxexc=0.8

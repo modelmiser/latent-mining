@@ -1,0 +1,8 @@
+== wrong 3 (corrected: e_y outside [y-4,y+4])
+           ^^^^^^^^^
+AssertionError: ('static S', 7, 3, 1, 1, 0)
+== correct, n=600 reps 1
+theta=1 lists=42 maxlag=2.4 max(height-t/5)=3.0 exercised: (d) 0, Lemma1 0, chain 0, static 411947
+theta=6 lists=42 maxlag=7.2 max(height-t/5)=8.0 exercised: (d) 20580, Lemma1 52195, chain 393062, static 795249
+theta=11 lists=42 maxlag=12.2 max(height-t/5)=15.2 exercised: (d) 18378, Lemma1 46322, chain 256171, static 797871
+ALL CHECKS PASSED (wrong=0)

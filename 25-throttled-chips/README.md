@@ -6,13 +6,15 @@ neighbour. An opponent who knows the whole list decides the firing, but may
 fire at most one point per round. How short a list forces some point to hold
 h chips, whatever the opponent does?
 
-**Short answer: about 5h rounds, and to first order nothing beats dropping
-every chip on the same point.** If G(h) is the length of the shortest winning
-list, then G(h)/h tends to 5; more exactly
-5h − 10√(5h) − 72 ≤ G(h) ≤ 5h − 6 for every h ≥ 2 (the lower bound says
-nothing until h is about 45). So no list beats the single-point list by more
-than about 10√(5h) rounds; whether any list beats it at all for h ≥ 6 is
-open. The small values are G(1), …, G(5) = 1, 2, 5, 10, 15. The chain guessed
+**Short answer: 5h rounds minus a constant, and no list beats dropping every
+chip on the same point by more than a fixed number of rounds.** If G(h) is
+the length of the shortest winning list, then
+5h − 176 ≤ G(h) ≤ 5h − 6 for every h ≥ 2 (proved by hand, the lower bound
+by one instance on 21 November; not machine-checked; it is weaker than
+the simple bound 2h − 1 below until h reaches 59). So no list beats the single-point list by more than 170
+rounds, whatever h is; whether any list beats it at all for h ≥ 6 is open.
+The lower bound with a constant was found on 21 November by a follow-up
+instance; the first version of this page had 5h − 10√(5h) − 72. The small values are G(1), …, G(5) = 1, 2, 5, 10, 15. The chain guessed
 that the limit would be below √24 ≈ 4.9 and that mixing two neighbouring
 points would keep a constant-factor advantage over a single point; both
 guesses are wrong. Mixing helps at h = 3 and not at h = 4 or 5.
@@ -41,6 +43,8 @@ with G(3), G(4), G(5) and the limit of G(h)/h.
 | **C(h) ≤ 5h − 6 for h ≥ 2**, so G(h) ≤ 5h − 6 | proved by hand by solver B; solver A proves 5h − 5 the same way; referee read both | `solver-b/proofs.txt` P3, `solver-a/proofs.txt` Theorem 1 |
 | **Every list of length m loses whenever m/5 + 2√m + 13.2 ≤ h − 1**, so G(h) ≥ 5h − 10√(5h) − 72 | proved by hand by solver A only; referee read it step by step, found no gap, and ran the strategy against every short list confined to 4 to 7 neighbouring points and against lists searched for to make it fail | `solver-a/proofs.txt` Theorem 2, `verifier/strat.cpp` |
 | So G(h)/h and C(h)/h both tend to 5 | from the two rows above | |
+| **Under the same firing rule every height stays at most t/5 + 35.2 after t rounds, so every list of length at most 5h − 177 loses and G(h) ≥ 5h − 176** | proved by hand by one follow-up instance; the organiser checked every line; the lemmas were tested by program on variants of the rule where they actually come into play; five reviewers then traced the proof and found no gap (see Review) | `constant/proofs.txt` Lemmas 1, 2, Theorem A |
+| The shortfall (lag) of that rule is probably not bounded by a constant, although the heights are | evidence only: lists found by a search over n neighbouring points on which the largest lag rises from 2.4 at n = 16 to 6.6 at n = 32,768, by 0.2 to 0.8 per doubling of n and with differences of up to 0.6 between runs with the same printed settings (the search's seed is not printed); the lists for n = 512 (lag 3.8) and n = 16,384 (lag 6.4) were replayed by a separate exact program, the one for 6.6 was not | `constant/lagadv2_out.txt`, `constant/lagadv2_big.txt`, `constant/replay_n512.txt`, `constant/replay_n16384.txt` |
 | G(h) ≥ 2h − 1 for h ≥ 3 | proved by hand by solver B; read by the referee | `solver-b/proofs.txt` P2 |
 | G(1), G(2), G(3) = 1, 2, 5 | computed by all three instances; G(3) also follows from the row above and the list 0, 1, 0, 1, 0 | `reports/` |
 | **G(4) = 10 and G(5) = 15, over all lists** | upper bounds by explicit lists; lower bounds by exhaustive search made finite by a lemma of solver B, which the referee read and then re-ran with its own program | `solver-b/proofs.txt` Lemma Z, `verifier/v.cpp` |
@@ -95,9 +99,41 @@ is never stuck, and a potential (the sum of squares of the excess of each lag
 over 6) grows by at most 1 per round. That bounds every lag by 6.6 + √t, and
 the height by t/5 + 2√t + 13.2.
 
-In the referee's and two reviewers' experiments the lag never exceeded 2.4, against the proved
-bound of 6.6 + √t. So the √h term in the lower bound is probably an artefact
-of the proof, and nobody has proved a bound of the form 5h minus a constant.
+## From √h to a constant
+
+This follows `constant/proofs.txt`. The argument above bounds every lag by
+the same quantity, which grows with t. The sharper argument notices where
+the cost of a large lag falls.
+
+Fix a level a ≥ 5 and add up, over all points, the amount by which the lag
+exceeds a. An add raises this sum by at most 1. In a round where the largest
+lag is at least a + 1, the point fired has that largest lag (this is the
+readiness fact above, which needs a lag of at least 6), and firing it lowers
+the sum by exactly 1. So the sum never grows during a stretch of such
+rounds, and just before the stretch began every lag was below a + 1, so each
+point contributed less than 1.
+
+Now suppose the lag at a point y is L, much larger than a. Then the sum is at
+least L − a, so just before the stretch more than L − a points had lag above
+a. Leave out the seven points nearest y. Each of the others has a target
+above a, and its target counts only chips added at distance 3 or more from
+y; one chip counts towards at most three targets, with total weight 1. So
+more than a·(L − a − 7) chips were added at distance 3 or more from y.
+Writing e for the number of chips added at distance 3 or more from y, this
+says L < a + 7 + e/a.
+
+Those chips are exactly what the height at y has to spare: the average of k
+over the five points around y is (t − e)/5, not t/5. With a = 10 the height
+at y is at most (t − e)/5 + 2·(17 + e/10) = t/5 + 34 after a round, and at
+most t/5 + 35.2 just after an add. The two terms in e cancel exactly.
+
+In the referee's and two reviewers' experiments the lag never exceeded 2.4.
+The follow-up instance searched harder and found lists, for one tie-breaking
+rule, on which the lag reaches 6.6 and grows slowly with the length of the
+list, while the heights stay within 0.8 of t/5. So the lag itself is
+probably unbounded, and bounding the heights by a constant needed an
+argument that does not go through a uniform bound on the lag. The constant
+35.2 is not optimised, and the conjecture G(h) = 5h − 10 remains open.
 
 ## The small values
 
@@ -124,6 +160,26 @@ h = 4 and h = 5.
   is about (lags of 6 and more never occurred in any test); it tested that regime
   only through a deliberately lazy variant of the rule covered by the same
   argument.
+- **The constant bound has one author and is new.** It was written on 21
+  November by a single follow-up instance. The organiser checked each step of
+  its two lemmas and the theorem by hand, and it builds only on three facts
+  of solver A's proof that the first review round confirmed. Its tests
+  exercise the lemmas on lazy variants of the rule (fire only at lag 6 or
+  11), not on the rule itself, where a lag of 6 was reached only by the
+  searched lists and never in the lemma tests. The tests of the final height
+  bound are far from binding (largest excess 15.2 against 34). It is not
+  machine-checked. The evidence that the lag is unbounded is a search result
+  for one tie-breaking rule, with no construction and no proof, and it cannot
+  be regenerated exactly because the seed was not recorded.
+- **Slips in the follow-up's files.** `constant/proofs.txt` states the chain
+  5h − 176 ≤ G(h) ≤ C(h) ≤ 5h − 6 "for all h"; the upper bound needs h ≥ 2.
+  One line of Lemma 2 reads "Φ < |Z|" before noting that Z is not empty. It
+  refers to a `REPORT.md` that is not in the folder (the numbers are in
+  `lagadv2_out.txt` and `lagadv2_big.txt`) and quotes lag maxima of "7.2 and
+  12" where the output has 7.2 and 12.2. `test_out_superseded.txt` is the
+  output of an earlier version of the test script, in which one deliberately
+  wrong variant still passed; `test_out2.txt` is the corrected run. Two
+  assertions in `test_lemmas.py` are strict where the lemma has "at most".
 - **G(4) and G(5) depend on Lemma Z and on searches that key their memory by
   a hash.** A collision or a wrong pruning could only hide a winning list,
   which would make the reported value too large; the upper bounds are
@@ -180,6 +236,23 @@ lists did not break the strategy. Their findings on this page, applied above:
 
 The corrected wording has not been through a second round.
 
+The constant bound of 21 November went to the same five reviewers. All five
+traced Lemma 1, Lemma 2, Theorem A and the corollary line by line and found
+no gap; none found a list that breaks the accounting, and one replayed a
+search list with its own script. Their findings, applied above:
+
+- A status cell said the review panel had read the proof before it had (both
+  Claude seats, Grok).
+- "For all h" on the two-sided bound is false at h = 1, where the upper bound
+  does not hold (all five).
+- The search evidence was described too neatly: one replay output was in the
+  folder where the page said two (the second has been added), the trend per
+  doubling is irregular, and identically labelled runs differ.
+- A stale test output showed a wrong variant passing; it is now labelled.
+- The headline stated the constant with no status.
+
+These edits have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -189,6 +262,10 @@ The corrected wording has not been through a second round.
 - `solver-a/`, `solver-b/`: searches, witnesses, checkers, proofs.
 - `verifier/`: the referee's reference implementation, search, and the
   program that plays the survival rule.
+- `constant/`: the follow-up that proves the constant bound: its brief,
+  `proofs.txt`, the lemma tests with their outputs, and the search for lists
+  with large lag (one list of 150,161 entries is left out; `lagadv2.cpp`
+  produces lists of this kind but its seed was not recorded).
 - `prior-art.md`: the literature search. The downloaded papers are not
   included.
 

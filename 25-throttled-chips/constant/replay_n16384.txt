@@ -1,0 +1,5 @@
+FINAL n=16384 K=8 R=100000000 base=1.5 maxlag=6.4 maxexc=0.8
+round 150154 lag record 5.6 at vertex 16381
+round 150159 lag record 5.8 at vertex 16381
+round 150161 lag record 6.4 at vertex 16388
+length 150161 tie L max lag 6.4 max height - t/5 0.8 passes 16384

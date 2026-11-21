@@ -1,0 +1,9 @@
+r=1728 maxlag_ever=2.0 cur_max=1.8 maxexc=0.8 top-levels: 1.8:1 1.6:0 1.4:0 1.2:2 1.0:49 0.8:11
+r=1920 maxlag_ever=2.0 cur_max=1.8 maxexc=0.8 top-levels: 1.8:1 1.6:0 1.4:0 1.2:2 1.0:48 0.8:12
+FINAL n=64 K=8 R=1920 base=2.718 maxlag=2.0 maxexc=0.8
+r=6912 maxlag_ever=2.0 cur_max=1.8 maxexc=0.8 top-levels: 1.8:1 1.6:0 1.4:0 1.2:2 1.0:242 0.8:10
+r=7680 maxlag_ever=2.0 cur_max=1.8 maxexc=0.8 top-levels: 1.8:1 1.6:0 1.4:0 1.2:2 1.0:242 0.8:10
+FINAL n=256 K=8 R=7680 base=2.718 maxlag=2.0 maxexc=0.8
+r=27648 maxlag_ever=2.0 cur_max=1.8 maxexc=0.8 top-levels: 1.8:1 1.6:0 1.4:0 1.2:2 1.0:1010 0.8:10
+r=30720 maxlag_ever=2.0 cur_max=1.8 maxexc=0.8 top-levels: 1.8:1 1.6:0 1.4:0 1.2:2 1.0:1010 0.8:10
+FINAL n=1024 K=8 R=30720 base=2.718 maxlag=2.0 maxexc=0.8
