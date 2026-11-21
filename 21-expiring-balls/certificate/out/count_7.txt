@@ -1,0 +1,7 @@
+n=7 k=0 states=1 labelled=1
+n=7 k=1 states=1 labelled=42
+n=7 k=2 states=5 labelled=1680
+n=7 k=3 states=45 labelled=62160
+n=7 k=4 states=600 labelled=2016000
+n=7 k=5 states=10192 labelled=51367680
+n=7 k=6 states=153664 labelled=774466560

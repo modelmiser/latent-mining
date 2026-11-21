@@ -1,0 +1,17 @@
+# organiser reruns, 2026-11-21: checker recompiled from check.cpp (g++ -O2 -std=c++17)
+$ check min 11 4 vb_11_4.cert
+ACCEPT n=11 L=4 mode=min part=0/1: lines=3334554 seeds_checked=3183950 states_walked=22716542 tests=4294591 tests_fired=2172471
+exit=0
+$ check min 7 3 vb_7_3.cert
+REJECT n=7 L=3: property (1) fails: the empty state is in C, so it is in A
+exit=1
+$ check min 6 3 vb_6_3.cert
+ACCEPT n=6 L=3 mode=min part=0/1: lines=3 seeds_checked=3 states_walked=3 tests=3 tests_fired=0
+exit=0
+$ check min 9 4 vb_9_4.cert
+ACCEPT n=9 L=4 mode=min part=0/1: lines=850 seeds_checked=850 states_walked=850 tests=850 tests_fired=140
+exit=0
+$ check min 9 4 damaged_9_4.cert
+REJECT n=9 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 02 34 05 36 37
+exit=1
+(damaged_9_4.cert = vb_9_4.cert with its second line removed)

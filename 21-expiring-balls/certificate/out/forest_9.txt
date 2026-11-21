@@ -1,0 +1,9 @@
+n=9 k=0 labelled=1
+n=9 k=1 labelled=72
+n=9 k=2 labelled=5040
+n=9 k=3 labelled=338688
+n=9 k=4 labelled=21409920
+n=9 k=5 labelled=1230888960
+n=9 k=6 labelled=60667729920
+n=9 k=7 labelled=2285621452800
+n=9 k=8 labelled=49369423380480

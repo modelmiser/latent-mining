@@ -1,0 +1,2 @@
+ACCEPT n=9 L=4 mode=brute: lines=850 nonfinal_states=139229839 in_S=139194869 in_A=34970
+50.85s 3940kB

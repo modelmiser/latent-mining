@@ -1,0 +1,2 @@
+ACCEPT n=11 L=4 mode=full part=0/1: lines=3334554 seeds_checked=3183950 states_walked=974272116 tests=974272116 tests_fired=193386814
+566.79s 564104kB

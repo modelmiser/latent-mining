@@ -44,7 +44,7 @@ formal text in [chain/3-question.txt](chain/3-question.txt)): find N(3).
 |---|---|---|
 | g(n) = 1, 1, 2, 2, 2, 3, 3 for n = 2, …, 8; so N(1) = 2, N(2) = 4, **N(3) = 7** | computed by both solvers and three ways by the referee (forward search, backward search, and a direct implementation up to n = 5); for N(3), each solver produced small certificates for both directions, accepted by its own checker and by the referee's | `solver-a/adv_n7_L3.txt`, `solver-a/rule_n6_L3.txt`, `reports/referee.md` |
 | g(9) = g(10) = 3 | computed by solver B and the referee, with equal sizes of the adversary's winning set; also by solver A through the any-removal game, where the rule already keeps loads below 4 on 10 bins | `reports/referee.md` |
-| **g(11) = 3, so N(4) ≥ 12** | computed only: by solver B's program (run by solver B and rerun by the referee) and by the referee's separately written program, which finds a winning set of the same size (974,272,116 non-final states, the empty position outside it) from the same 3,183,950 starting positions. Only these counts were compared, not the sets | `solver-b/back2.cpp`, `verifier/vb.cpp` |
+| **g(11) = 3, so N(4) ≥ 12** | computed by solver B's program (run by solver B and rerun by the referee) and by the referee's separately written program, which find a winning set of 974,272,116 non-final states from 3,183,950 starting positions. Since 21 November there is also a certificate: a list of 3,334,554 positions that defines a safe set for the rule, and a separate checker that accepts it by examining a family of positions shown, in a two-page hand proof, to be enough. The two programs' winning sets reduce to the same certificate byte for byte | `solver-b/back2.cpp`, `verifier/vb.cpp`, `certificate/` |
 | **N(4) ≤ 12** | an explicit strategy written out by solver A; replayed against every answer of the rule by solver A's program and by a program the referee wrote from the prose | `solver-a/proofs.txt` P6, `verifier/replay12.py` |
 | So N(4) = 12 | from the two rows above; stated by neither solver | |
 | N(k) ≥ 2k and N(k) ≤ 2^k for all k | proved by hand by both solvers; read by the referee | `solver-a/proofs.txt` P1, P2 |
@@ -87,24 +87,64 @@ clean (k−1)-star can always be forced within that many bins, nor that the
 adversary cannot do better.
 
 If the adversary may remove any ball it likes, it needs no threat to tidy
-up, and 11 bins suffice for load 4. So for k = 4, if the computed value for
-11 bins is right, the order of expiry costs the adversary one bin (12 against
-11); for k ≤ 3 it costs nothing.
+up, and 11 bins suffice for load 4. So for k = 4 the order of expiry costs
+the adversary one bin: 12 against 11. The 12 rests on solver A's explicit
+strategy (12 suffice) and on the certificate described below (11 do not).
+The 11 rests on the hand-proved bound 1 + k(k+1)/2 (11 suffice when any
+ball may be removed) and on a safe set for 10 bins in that game, produced by
+solver A and accepted by the referee's checker (10 do not). For k ≤ 3 the
+order of expiry costs nothing.
 
 ## What to distrust
 
 - **Everything is by one model family.** The upper bounds (7 and 12 bins)
   are explicit strategies that can be followed by hand; the lower bounds (6
   and 11 bins are not enough) are computations.
-- **N(4) ≥ 12 has no certificate.** It rests on two programs whose counts
-  agree exactly. They were written separately, but both store the winning
-  set in the same compressed way and use the same bound to prune their
-  starting states. The compressed sets they store differ in size (3,722,933
-  and 3,723,730 entries); the reviewers who read the code say that is
-  expected, because what is stored depends on the order of the search, but
-  it also means the two sets were never compared state by state. The referee read solver B's program line by line and
-  found no error, and showed its own program can also report a win where one
-  exists. It puts its confidence in N(4) = 12 at about 97 per cent.
+- **N(4) ≥ 12 now has a certificate, of a compressed kind.** At first it
+  rested on two programs whose counts agreed; they store the winning set in
+  the same compressed way, and what they stored differed in size (3,722,933
+  and 3,723,730 entries), so the sets had never been compared. A follow-up
+  instance reduced both to their minimal positions, which do not depend on
+  the order of the search: the two files are identical (3,334,554 lines
+  each, with the same sha256; the checksums are in
+  `certificate/out/organiser_sha256_and_lines.txt`, recorded by the
+  organiser, and the same holds at 10 bins). Reviewers reduced the small
+  cases themselves and got the same. It then wrote a checker, sharing no code with the
+  two programs, that takes such a list as untrusted input and accepts only
+  if the positions with none of the listed positions among their newest
+  balls form a safe set for the rule. The full set is far too large to walk,
+  so the checker examines three finite families of positions, and
+  `certificate/PROOF.md` proves that these are enough. On 11 bins it accepts
+  in 40 seconds; a second mode that walks all 974,272,116 winning positions
+  without that proof also accepts. It rejects every certificate tried for
+  7 bins and load 3 (where the adversary wins), and every damaged 11-bin
+  certificate tried except one in which a redundant line was added, which it
+  rightly accepts. What is still trusted: the two-page proof, which so far
+  only models have read; that the 218-line checker implements it; and two
+  pruning bounds proved in the same file, one of them shared with the two
+  programs, switched off for comparison only up to 9 bins. The checker was
+  tested against literal checks of the definition: its own literal mode,
+  which shares its state-handling code, on 1,560 damaged certificates up to
+  8 bins and on the intact one at 9; and a separate Python program sharing
+  nothing with it, which the organiser ran on 6 bins (accept), on a bad
+  7-bin certificate (reject) and on 8 bins (accept, all 4,358,193 safe
+  positions checked directly); see
+  `certificate/out/organiser_explicit.log`. None of this is a proof that the
+  checker is right, and no literal check reaches 10 or 11 bins. By the
+  organiser's own account, with the output in
+  `certificate/out/organiser_rerun.log`, it recompiled the checker and reran
+  it on the 11-bin certificate and on a certificate it damaged itself.
+- **Rough edges in the follow-up's files.** `certificate/out/difftest.log`
+  contains 30 lines marked MISMATCH from a first comparison script that
+  compared differently formatted lines; the valid comparison is
+  `count_check.txt`, which reviewers recomputed. `PROOF.md` refers to a
+  `REPORT.md` that is not in the folder and says the separate Python program
+  took part in the damaged-certificate tests, which it did not. The checker
+  can be run in parts; each part prints ACCEPT on its own and only the first
+  checks the starting positions, so a split run is valid only if every part
+  accepts (the runs recorded here use a single part). It crashes if asked
+  for zero parts, and any value of its `NOPRUNE` switch turns pruning off. The 90 MB certificate is not in the repository; the folder
+  says how to regenerate it.
 - **N(3) = 7 is on firmer ground:** each direction has a certificate of a few
   dozen or a few thousand states that a short separate program checks.
 - **What is known.** The literature search read the relevant sections of
@@ -141,6 +181,9 @@ up, and 11 bins suffice for load 4. So for k = 4, if the computed value for
 
 ## Review
 
+This section's first part predates `certificate/`; "the certificate checker"
+in it is the referee's checker for the small explicit certificates.
+
 Before publication the claims went to five reviewers from four model
 families: GPT, Grok and Gemini, and two Claude instances (one of them Claude
 Opus). All five confirmed the 7-bin strategy and the 12-bin strategy after
@@ -161,6 +204,33 @@ agree. Their findings on this page, applied above:
 
 The corrected wording has not been through a second round.
 
+The certificate for 11 bins went to the same five reviewers, with most of
+the brief on the two-page proof that the reduced check is enough. All five
+confirmed every step of it (the three cases, their exhaustiveness, the two
+pruning bounds, the edge cases); the four who read the checker closely
+found no place where it departs from the proof in substance. One Claude
+seat tested the theorem itself on about 7,500 random lists for small sizes
+and found no case where the three families pass and the literal properties
+fail; the other reduced the programs' small outputs with its own tool and
+checked a certificate with its own literal checker. Their findings, applied
+above:
+
+- I wrote that "the 12" rests on the certificate and dropped a hedge; the
+  certificate covers one half of the 12, and each number in that sentence
+  now has its sources (both Claude seats, Grok, Gemini).
+- The byte-for-byte identity and the checksum had no log in the folder
+  (four seats); added.
+- "Rejects damaged 11-bin certificates" hid one rightly accepted case.
+- A log with spurious MISMATCH lines, a reference to a missing file, and a
+  claim about the separate literal checker that no log supported (all
+  five); the first two are now explained and the third replaced by actual
+  runs.
+- GPT rated a crash on a zero "parts" argument critical; it is a
+  command-line edge case that no recorded run uses, listed above with the
+  split-run caveat.
+
+These edits have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -170,6 +240,12 @@ The corrected wording has not been through a second round.
 - `solver-a/`, `solver-b/`: game solvers, certificates, checkers, proofs.
 - `verifier/`: the referee's three solvers, certificate checker and the
   replay of the 12-bin strategy.
+- `certificate/`: the follow-up for 11 bins: `PROOF.md`, the checker
+  `check.cpp`, the tools that reduce a program's output to a certificate and
+  test the checker, small certificates for 6, 8 and 9 bins, and logs. The
+  11-bin certificate (90 MB) and the 10-bin one (1.3 MB) are left out;
+  `gen/` holds copies of the two search programs with a dump statement
+  added, from which `certtool.py minimize` regenerates them.
 - `prior-art.md`: the literature search. The downloaded papers are not
   included.
 

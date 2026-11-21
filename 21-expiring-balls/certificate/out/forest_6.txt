@@ -1,0 +1,6 @@
+n=6 k=0 labelled=1
+n=6 k=1 labelled=30
+n=6 k=2 labelled=840
+n=6 k=3 labelled=20880
+n=6 k=4 labelled=414720
+n=6 k=5 labelled=4976640

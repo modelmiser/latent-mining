@@ -1,0 +1,84 @@
+n=6 L=3 add      ACCEPT  12
+n=6 L=3 add      REJECT  85
+n=6 L=3 addext   ACCEPT  16
+n=6 L=3 addext   REJECT  68
+n=6 L=3 drop     REJECT  90
+n=6 L=3 dropadd  REJECT  91
+n=6 L=3 intact   ACCEPT  73
+n=6 L=3 random   REJECT  81
+n=6 L=3 subset   ACCEPT  62
+n=6 L=3 subset   REJECT  22
+all modes agreed on 600 certificates
+n=7 L=3 add      REJECT  41
+n=7 L=3 addext   REJECT  43
+n=7 L=3 drop     REJECT  49
+n=7 L=3 dropadd  REJECT  42
+n=7 L=3 intact   REJECT  52
+n=7 L=3 random   REJECT  39
+n=7 L=3 subset   REJECT  34
+all modes agreed on 300 certificates
+n=8 L=4 add      ACCEPT  2
+n=8 L=4 add      REJECT  8
+n=8 L=4 addext   ACCEPT  4
+n=8 L=4 addext   REJECT  7
+n=8 L=4 drop     REJECT  13
+n=8 L=4 dropadd  REJECT  5
+n=8 L=4 intact   ACCEPT  4
+n=8 L=4 random   REJECT  9
+n=8 L=4 subset   ACCEPT  3
+n=8 L=4 subset   REJECT  5
+all modes agreed on 60 certificates
+n=5 L=3 add      ACCEPT  8
+n=5 L=3 add      REJECT  30
+n=5 L=3 addext   ACCEPT  51
+n=5 L=3 drop     ACCEPT  44
+n=5 L=3 dropadd  ACCEPT  6
+n=5 L=3 dropadd  REJECT  26
+n=5 L=3 intact   ACCEPT  45
+n=5 L=3 random   ACCEPT  3
+n=5 L=3 random   REJECT  39
+n=5 L=3 subset   ACCEPT  48
+all modes agreed on 300 certificates
+n=4 L=2 add      REJECT  42
+n=4 L=2 addext   REJECT  37
+n=4 L=2 drop     REJECT  46
+n=4 L=2 dropadd  REJECT  44
+n=4 L=2 intact   REJECT  38
+n=4 L=2 random   REJECT  53
+n=4 L=2 subset   REJECT  40
+all modes agreed on 300 certificates
+n=6 k=0 states=1 MISMATCH
+n=6 k=1 states=1 MISMATCH
+n=6 k=2 states=5 MISMATCH
+n=6 k=3 states=45 MISMATCH
+n=6 k=4 states=576 MISMATCH
+n=6 k=5 states=6912 MISMATCH
+n=7 k=0 states=1 MISMATCH
+n=7 k=1 states=1 MISMATCH
+n=7 k=2 states=5 MISMATCH
+n=7 k=3 states=45 MISMATCH
+n=7 k=4 states=600 MISMATCH
+n=7 k=5 states=10192 MISMATCH
+n=7 k=6 states=153664 MISMATCH
+n=8 k=0 states=1 MISMATCH
+n=8 k=1 states=1 MISMATCH
+n=8 k=2 states=5 MISMATCH
+n=8 k=3 states=45 MISMATCH
+n=8 k=4 states=601 MISMATCH
+n=8 k=5 states=10752 MISMATCH
+n=8 k=6 states=229376 MISMATCH
+n=8 k=7 states=4194304 MISMATCH
+n=9 k=0 states=1 MISMATCH
+n=9 k=1 states=1 MISMATCH
+n=9 k=2 states=5 MISMATCH
+n=9 k=3 states=45 MISMATCH
+n=9 k=4 states=601 MISMATCH
+n=9 k=5 states=10792 MISMATCH
+n=9 k=6 states=244016 MISMATCH
+n=9 k=7 states=6298560 MISMATCH
+n=9 k=8 states=136048896 MISMATCH
+ACCEPT n=6 L=3 mode=min part=0/1 NOPRUNE: lines=3 seeds_checked=3 states_walked=39 tests=3 tests_fired=0
+REJECT n=7 L=3: property (1) fails: the empty state is in C, so it is in A
+ACCEPT n=8 L=4 mode=min part=0/1 NOPRUNE: lines=10 seeds_checked=10 states_walked=250 tests=10 tests_fired=0
+ACCEPT n=9 L=4 mode=min part=0/1 NOPRUNE: lines=850 seeds_checked=850 states_walked=34350 tests=850 tests_fired=140
+REJECT n=7 L=3: an offer has two bad answers but the state before it is not in A; the state after one answer is at state [newest first] 01

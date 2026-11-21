@@ -1,0 +1,8 @@
+n=8 k=0 labelled=1
+n=8 k=1 labelled=56
+n=8 k=2 labelled=3024
+n=8 k=3 labelled=154560
+n=8 k=4 labelled=7244160
+n=8 k=5 labelled=294174720
+n=8 k=6 labelled=9248440320
+n=8 k=7 labelled=169114337280

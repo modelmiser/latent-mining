@@ -1,0 +1,33 @@
+dropped line: 01 02 03 45 46
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 02 03 45 46 14 78 79 7a
+dropped line: 01 02 34 05 67 38
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 02 34 05 67 38 13 69 6a
+dropped line: 01 23 04 05 67 89 8a
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 23 04 05 67 89 8a 12 86
+dropped line: 01 23 04 56 07 68 26 29
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 23 04 56 07 68 26 29
+dropped line: 01 21 34 56 78 53 79 51 7a
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 21 34 56 78 53 79 51 7a
+dropped line: 01 23 45 16 27 48 02 09 4a
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 23 45 16 27 48 02 09 4a
+dropped line: 01 23 45 67 89 8a 87 43 41
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 23 45 67 89 8a 87 43 41
+added line: -
+REJECT n=11 L=4: property (1) fails: the empty state is in C, so it is in A
+added line: 01
+REJECT n=11 L=4: an offer has two bad answers but the state before it is not in A; the state after one answer is at state [newest first] 01
+added line: 01 02
+REJECT n=11 L=4: an offer has two bad answers but the state before it is not in A; the state after one answer is at state [newest first] 01 12 03 04 25 67 68 69
+added line: 01 23 24 05
+REJECT n=11 L=4: an offer has two bad answers but the state before it is not in A; the state after one answer is at state [newest first] 01 23 24 15 06 07 38 29
+added line: 01 02 03 45 46 47 58
+ACCEPT n=11 L=4 mode=min part=0/1: lines=3334555 seeds_checked=3183950 states_walked=22716542 tests=4294592 tests_fired=2172471
+added line: 01 23 45 67 89
+REJECT n=11 L=4: an offer has two bad answers but the state before it is not in A; the state after one answer is at state [newest first] 01 23 45 67 89 02 04 68 6a
+intact certificate, wrong n or L:
+REJECT n=12 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 02 03 14 15 16 27 89 8a 8b
+REJECT n=10 L=4: certificate line uses more than n bins at state [newest first] 01 02 03 45 67 89 4a
+REJECT n=11 L=5: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 02 03 04 15 67 68 69 6a
+REJECT n=11 L=3: certificate line has a load >= L at state [newest first] 01 02 03 45 46
+n=10 certificate at n=11:
+REJECT n=11 L=4: a state with two bins of load L-1 in different components is not in A at state [newest first] 01 02 03 14 15 16 78 79 7a

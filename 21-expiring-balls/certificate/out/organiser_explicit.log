@@ -1,0 +1,13 @@
+# explicit.py (independent of check.cpp), run by the organiser 2026-11-21
+$ explicit.py 6 3 vb_6_3.cert
+n=6 L=3: non-final states 6690, in A 39, S 6651
+EXPLICIT ACCEPT: S has properties (1)-(4), 6651 states
+exit=0
+$ explicit.py 7 3 bad_7_3_core_without_empty.cert
+n=7 L=3: non-final states 138141, in A 138140, S 1
+EXPLICIT REJECT: (4) offer 0,1 has no answer in S at ()
+exit=1
+$ explicit.py 8 4 vb_8_4.cert
+n=8 L=4: non-final states 4358443, in A 250, S 4358193
+EXPLICIT ACCEPT: S has properties (1)-(4), 4358193 states
+exit=0

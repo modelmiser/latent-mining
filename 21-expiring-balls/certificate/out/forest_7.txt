@@ -1,0 +1,7 @@
+n=7 k=0 labelled=1
+n=7 k=1 labelled=42
+n=7 k=2 labelled=1680
+n=7 k=3 labelled=62160
+n=7 k=4 labelled=2016000
+n=7 k=5 labelled=51367680
+n=7 k=6 labelled=774466560
