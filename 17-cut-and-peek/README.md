@@ -57,9 +57,9 @@ positions per player and R everything.
 
 | Claim | Status | Where |
 |---|---|---|
-| **f(n) = ∞ for every n ≥ 3:** with all cards revealed there is no valid protocol, for any m | proved by hand by solver B; read by the referee, by the instance that did the deep literature read, and by the organiser, with no gap found; the referee tested the key identity numerically. Solver A did not find it and left f(3) as a conjecture | `solver-b/proofs.txt` T2; written out below |
+| **f(n) = ∞ for every n ≥ 3:** with all cards revealed there is no valid protocol, for any m | proved by hand by solver B; read by the referee, by the instance that did the deep literature read, and by the organiser, with no gap found; the referee tested the key identity numerically. Solver A did not find it and left f(3) as a conjecture. Machine-checked in Lean 4 since 21 November, in the formulation of NOTE.md Section 1 (rows cyclically equal exactly when the outputs agree), which is equivalent to the one above by a short hand argument | `solver-b/proofs.txt` T2; written out below; `lean/` |
 | If the rows for three players' inputs other than 1, 1, 1 (everything else fixed) are rotations of one word, the row for 1, 1, 1 is a rotation of it too | this is what T2's proof shows | `solver-b/proofs.txt` T2 |
-| The same with any one of the eight inputs in place of 1, 1, 1, and its consequence for the equality function | restatement by the organiser; read only by the review panel, all five seats of which confirmed it | below |
+| The same with any one of the eight inputs in place of 1, 1, 1, and its consequence for the equality function | restatement by the organiser; confirmed by all five seats of the review panel; machine-checked in Lean 4 for any corner, for AND of n ≥ 3 bits and for equality of n ≥ 4 bits | below; `lean/` |
 | r(3) ≤ 36 | an explicit protocol, checked from the definition by solver A's checker and by the referee's own, which also rejected nine broken variants | `solver-a/w_n3_m36.txt` |
 | No valid three-player protocol with m ≤ 13 | computed exhaustively by both solvers and recomputed by the referee | `verifier/table_m13.txt` |
 | None with m = 14, 15, so r(3) ≥ 16 | computed by both solvers, independently written but with the same normalisation; not rerun by the referee | `solver-a/fast_3_14_p*.txt`, `solver-a/fast_3_15_p*.txt`, `solver-b/fast2.out`, `solver-b/m15.part*.out` |
@@ -179,7 +179,13 @@ of their construction (its strands have no delimiter cards).
 
 - **Everything is by one model family, and no mathematician has checked the
   full-opening proof.** It is short and uses only the discrete Fourier
-  transform, but it has been read only by models. It is not machine-checked.
+  transform, but it has been read only by models. Since 21 November it is
+  machine-checked in Lean 4 with Mathlib (folder `lean/`), together with the
+  general theorem and its consequences for AND and for equality, as
+  statements about a 53-line specification. That removes the risk of an
+  error in the algebra; it leaves the question whether the specification and
+  the four statements say what is meant, which only models have judged, and
+  it does not cover the partial-opening results.
   Solver B's own machine test of the statement cannot fail for three players
   (it finds no configuration that satisfies the hypothesis for m ≤ 18); the
   referee's numerical test of the identity over frequencies is a real test.
@@ -256,6 +262,20 @@ reviewers' reports are not. A script with those checks and its output were
 added, and the wording was corrected. The corrected note has not been through
 a second round.
 
+The Lean formalisation went to the same five reviewers with a different
+question: not whether the proofs are right, which Lean checks, but whether
+the definitions and the four statements say what the note means. All five
+confirmed that they do, including the handling of m = 0, the meaning of the
+protocol definition when the function is constant, and the five-card layout,
+which several worked out by hand. Their findings, applied: the note credited
+"an AI model instance" with the Lean files, hiding that the specification
+was written first and separately from the proofs; the list of what must be
+trusted was incomplete; the proof and the note use opposite sign
+conventions; a comment in the specification needed "for injective i"; and a
+pre-existing sentence about a search finding "no encoding at all" was wrong
+as worded. A reviewer suggested the six-card check, which was added. The
+changes made after the round have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -266,6 +286,8 @@ a second round.
 - `verifier/`: the referee's checker, brute force, reduced search and tests.
 - `NOTE.md`: the standalone note. `note-checks.py`, `note-checks.txt`: three
   small checks it cites, and their output.
+- `lean/`: the Lean 4 formalisation of the full-opening results, with its own
+  README, build log and axiom list.
 - `prior-art.md`: the first literature search. `prior-art-deep.md`: the
   second, which read the four closest papers against this definition. The
   papers themselves are not included.

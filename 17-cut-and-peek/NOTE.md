@@ -1,8 +1,9 @@
 # No single-cut full-open protocol for three-input AND or four-input equality
 
 *A short note, produced by AI models and not read by any mathematician; see
-Section 6 and "How this was produced" before relying on it. Draft of 19
-November 2026. Supporting files: this folder; overview in
+Section 6 and "How this was produced" before relying on it. The main lemma
+and theorem are machine-checked in Lean 4 (Section 6). Draft of 19 November
+2026, revised 21 November. Supporting files: this folder; overview in
 [README.md](README.md).*
 
 ## Summary
@@ -27,12 +28,16 @@ value at exactly seven of the eight remaining inputs. Then f has no SCFO
 protocol, with additional cards of both colours in any numbers, and with any
 way of encoding the bits in which each card depends on at most one bit.
 
-In particular, if Lemma 1 is right, there is no SCFO protocol for the AND or the OR of n ≥ 3 bits,
+In particular there is no SCFO protocol for the AND or the OR of n ≥ 3 bits,
 none for the equality of n ≥ 4 bits, and none for the majority of five bits.
+(The cases of AND and equality are machine-checked; OR and majority follow
+from Theorem 2 by hand.)
 
 The proof of Lemma 1 is one page: it takes the discrete Fourier transform
-along the row. It is not machine-checked and has not been read by a
-mathematician (Section 6).
+along the row. Lemma 1, Theorem 2 and the statements for AND and for
+equality are machine-checked in Lean 4 with Mathlib, as statements about a
+53-line specification (Section 6). No mathematician has read the proof or
+the specification.
 
 Section 4 records what the same experiment found when only a fixed subset of
 the cards is opened: the bound m ≥ 2^n − 1 on the number of cards for n-bit
@@ -312,11 +317,43 @@ search was by web queries only.
   models from four vendors that were asked to find a counterexample (their
   reports are not in this folder; the README's Review section summarises
   them). The version above adds to solver B's the remark on the choice of two
-  pairs and the reduction of an arbitrary corner. **No mathematician has read it and it is not
-  machine-checked.**
+  pairs and the reduction of an arbitrary corner. **No mathematician has read
+  it.**
+- **Machine check.** Lemma 1 (for an arbitrary corner), Theorem 2, and its
+  consequences for the AND of n ≥ 3 bits and the equality of n ≥ 4 bits are
+  proved in Lean 4.33.1 with Mathlib, in the folder `lean/` (about 410 lines
+  of proof; the build log and the list of axioms used, which are Lean's three
+  standard ones, are there). The proof follows Section 2: the discrete
+  Fourier transform on the integers modulo m, with the case analysis
+  shortened, and with ♥ as +1 where Section 2 takes ♣, which changes
+  nothing. The statements are about the definitions in
+  `lean/CutPeek/Spec.lean`: a row is a function from positions modulo m to
+  two kinds of card; an encoding gives each position either a fixed card or
+  a card that is one of the two kinds or the other according to a single
+  bit; a protocol for f is an encoding whose rows for two inputs are
+  rotations of one another exactly when f agrees on them. This is Section
+  1's definition. As a check that the definitions do not exclude everything,
+  Lean also confirms, by direct computation, that the five-card trick is a
+  protocol for the AND of two bits and that the six-card trick is one for
+  the equality of three bits (`lean/CutPeek/FiveCard.lean`, `SixCard.lean`);
+  the second shows that "n ≥ 4" in the statement for equality cannot be
+  lowered. What still has to be trusted: Lean's kernel and the Mathlib
+  definitions the specification uses; that the build log belongs to these
+  files; and that those 53 lines, the four statements at the end of
+  `lean/CutPeek/Main.lean` and the two layouts say what this note means. So
+  far only AI models have read them. The statements for OR and for the
+  majority of five bits, and everything in Section 4, are not formalised.
+  The specification, the four statements and the two layouts were written by
+  the organising AI instance; the proofs by a second instance, which was
+  given the specification and statements and not allowed to change them (two
+  comments in the specification were clarified afterwards). The builds were
+  run by AI instances.
 - A direct numerical test of Lemma 1 on card words is not available:
   searching all words and all shifts for m ≤ 18, solver B found no encoding
-  at all in which seven rows of a three-bit cube are rotations of one word.
+  in which all three bits control cards and seven rows of the cube are
+  rotations of one word. (If some bit controls no card the hypothesis holds
+  trivially, so the only instances of it known so far are degenerate, and
+  the content of Lemma 1 is carried by Theorem 2.)
   The referee instead tested the identity behind the proof at the level of
   frequencies (all solutions of the three equations (∗) for m ≤ 40) and found
   no violation. The organising instance repeated that test with its own code

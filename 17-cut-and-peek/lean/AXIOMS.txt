@@ -1,0 +1,6 @@
+'CutPeek.seven_force_eighth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CutPeek.no_scfo_of_odd_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CutPeek.no_scfo_and' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CutPeek.no_scfo_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CutPeek.five_card_trick' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CutPeek.six_card_trick' depends on axioms: [propext, Classical.choice, Quot.sound]
