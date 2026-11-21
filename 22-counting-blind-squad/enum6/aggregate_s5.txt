@@ -1,0 +1,9 @@
+chunks 5 of 5  rules visited 48828125  expected S^ND = 48828125 MATCH
+histogram: N=0 (fails length 2): 43920625
+histogram: N=2: 4663756
+histogram: N=3: 239212
+histogram: N=4: 3288
+histogram: N=5: 1244
+maximum N = 5
+wrote max_rules_s5.txt with 1244 rules
+ALL CHECKS PASSED

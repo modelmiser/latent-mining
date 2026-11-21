@@ -1,0 +1,12 @@
+chunks 216 of 216  rules visited 78364164096  expected S^ND = 78364164096 MATCH
+histogram: N=0 (fails length 2): 71265267072
+histogram: N=2: 6666570006
+histogram: N=3: 418310088
+histogram: N=4: 10046130
+histogram: N=5: 3939300
+histogram: N=6: 28998
+histogram: N=7: 2166
+histogram: N=8: 336
+maximum N = 8
+wrote max_rules_s6.txt with 336 rules
+ALL CHECKS PASSED

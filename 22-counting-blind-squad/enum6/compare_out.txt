@@ -1,0 +1,4 @@
+s=5: mine 1244 theirs 1244 identical sets: True
+s=6 witness as digits 31310541211411 in my 336: True
+s=6: my list size 336 closed under renaming: True classes: 56
+COMPARE OK

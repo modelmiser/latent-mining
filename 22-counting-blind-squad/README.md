@@ -12,8 +12,11 @@ up to what length can one rule synchronise every line?
 **Short answer: 2, 3, 5, 8 and 11 for s = 3, 4, 5, 6 and 7 states.** The
 chain asked for five states and guessed "at most 6"; the answer is 5. These
 are computed values: for five states every one of the 48,828,125 rules was
-tried; for six and seven states the values come from backtracking searches,
-not full enumeration, and an error there could only make them too small.
+tried, and since 21 November so was every one of the 78,364,164,096
+six-state rules; for seven states the value comes from backtracking
+searches, not full enumeration: a rule missed by a search could only make
+that value too small, while an error in the simulator the searches share
+could move it either way.
 Whether some number of states synchronises every length is open, and
 nothing here bears on it either way.
 
@@ -44,7 +47,7 @@ formal text in [chain/3-question.txt](chain/3-question.txt)): find L(5).
 | L(3) = 2 | computed by all three instances over every rule; also proved by hand by solver B | `solver-b/proofs.txt` P3 |
 | L(4) = 3 | computed by all three instances over all 65,536 rules | `reports/` |
 | **L(5) = 5**, attained by exactly 1,244 rules | computed by all three instances, each enumerating all 48,828,125 rules with no pruning; the referee also checked solver B's list of the 1,244 rules one by one | `solver-b/all_L5_rules_s5.txt`, `reports/referee.md` |
-| L(6) = 8, attained by 336 rules | computed by backtracking searches: both solvers', and the referee's without symmetry breaking, ascending and descending in the line length. No full enumeration (7.8 × 10¹⁰ rules) | `reports/referee.md` |
+| L(6) = 8, attained by 336 rules | computed by backtracking searches: both solvers', and the referee's without symmetry breaking, ascending and descending in the line length; and, since 21 November, by a follow-up instance's separate program that simulates every one of the 6¹⁴ = 78,364,164,096 rules with nothing skipped (`enum6/`), which finds the same value and the same count | `reports/referee.md`, `enum6/aggregate_s6.txt` |
 | L(7) = 11, attained by 96 rules (4 up to renaming the unnamed states) | computed by backtracking searches: both solvers' (the same search tree, with symmetry breaking) and the referee's two without symmetry breaking, in different orders | `verifier/` |
 | A rule that synchronises length n fires at time n − 1 or later; a rule that synchronises length 3 or more must send a sleeping cell with exactly one differing neighbour to a state that is neither asleep nor fire | proved by hand by both solvers (the second statement for length 3 only by solver A, for every length from 3 by solver B); no violation over all rules with s ≤ 5 | `solver-a/proofs.txt` Fact 0, Lemma 1; `solver-b/proofs.txt` P1, P2 |
 | If a rule synchronises lengths n < m, it fires length n at time 2n − 1 or later, or at the same time as length m | proved by hand by solver A; read by the referee; tested over all five-state rules | `solver-a/proofs.txt` Lemma 2 |
@@ -72,7 +75,31 @@ It fires lines of 2, 3, 4 and 5 cells at times 5, 8, 7 and 10, and fails on
 - **L(5) = 5 is the solid one:** three separately written programs tried
   every rule and agree on the number of rules reaching each length, and on
   the 1,244 optimal rules one by one.
-- **L(6) and L(7) rest on backtracking searches that share one idea** (fix an
+- **L(6) no longer rests on the backtracking idea alone.** A follow-up
+  instance wrote a plain enumerator from the definition (it was told not to
+  read the earlier programs, and reports that it did not): an odometer over all 14 free entries, each rule run on
+  lengths 2, 3, … until it first fails, with "never fires" decided only when
+  a configuration exactly repeats. Its 216 chunks add up to 6¹⁴ rules; the
+  histogram of how far each rule gets is in `enum6/aggregate_s6.txt`; no rule
+  reaches 9. The same program reproduces the five-state result rule for rule
+  (1,244 rules) and the four- and three-state values (232 rules reach 3;
+  36 reach 2; outputs of the organiser's runs in `enum6/out/`). Its histogram
+  equals, at every length, the one in solver A's original report, which
+  came from a search; the 336 rules themselves could be compared only
+  through one witness, because the searches kept no list. Limits: the full
+  run went through each chunk once; the follow-up's second simulator
+  rechecked only the 2,502 rules that reach 7 or more, not the rejections (a
+  reviewer's own simulator then redid four whole chunks, rejections
+  included, and agreed); the program does not validate its command-line
+  arguments, which matters only if it is run with malformed ones; its
+  aggregation script labels "fails at length 2" as N=0 where the program's
+  internal score is 1; and it is again one model family. The organiser recompiled the program and reran two
+  of the 216 chunks, one of them containing optimal rules, with identical
+  output (`enum6/organiser_rerun.txt`). All 336 rules are in
+  `enum6/max_rules_s6.txt`; 312 of them fire lengths 2 to 8 at times 7, 9,
+  9, 15, 17, 13, 13 and the other 24 at 8, 10, 10, 19, 21, 20, 20.
+- **L(7), and the earlier evidence for L(6), rest on backtracking searches
+  that share one idea** (fix an
   entry of the rule only when a run first needs it). The solvers' two
   programs explore the same tree, with identical counts. The referee removed
   the symmetry shortcut and changed the order in which lengths, cells and
@@ -143,6 +170,20 @@ applied above:
 
 The corrected wording has not been through a second round.
 
+The six-state enumeration of 21 November went to four reviewers (GPT, Grok,
+Gemini, one Claude seat). All four confirmed the simulator against the
+definition, the cycle detection, the coverage of all 6¹⁴ rules and the
+reading of the histogram. The Claude seat wrote its own simulator with a
+different cycle detection: it agrees with the program on every rule with
+three, four and five states, on four whole six-state chunks (1.45 × 10⁹
+rules) and on all 2,502 recorded rules. GPT rated two command-line
+validation gaps critical; they cannot affect the recorded runs and are
+listed above. Other findings, applied: the agreement with solver A's
+histogram was understated; the three- and four-state runs had no output in
+the folder (added); "without reading the earlier programs" was stated as
+fact; "an error could only make it too small" was wrong for seven states
+(Grok). These edits have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -151,6 +192,9 @@ The corrected wording has not been through a second round.
 - `reports/`: each instance's final report, verbatim.
 - `solver-a/`, `solver-b/`: enumeration and search programs, witnesses, the
   list of all 1,244 five-state rules, proofs.
+- `enum6/`: the follow-up of 21 November: the complete enumeration of
+  six-state rules (program, chunk outputs, checks, the list of all 336
+  optimal rules).
 - `verifier/`: the referee's enumeration, its searches without symmetry
   breaking, and its checker.
 - `prior-art.md`: the literature search. The downloaded papers are not
