@@ -138,8 +138,14 @@ instance.
 - **The finiteness theorem has one author, and one reviewer rejected it.**
   Solver B left the question open. The referee found no gap. Of the four
   panel reports, three accepted the staged scheduling argument and Grok
-  rated it a critical gap; the Review section below says why I think the
-  objection fails. It is the least-settled general claim here.
+  rated it a critical gap. Two further instances then adjudicated the step
+  independently and both found it sound; the step is written out again, with
+  every move's legality made explicit, in
+  [step4-rewritten.md](step4-rewritten.md). Those two readers are of the same
+  model family as the solver. The rewritten step then went back to GPT, Grok
+  and Gemini; all three confirmed it, and Grok agreed that it answers the
+  objection. So the dispute is closed among the reviewers, but the theorem
+  still has one author, no human reader and no machine check.
 - **Slips in solver A's proof file.** In the proof that the cubic sets are
   closed, the identity for (M² − j) − j′ when j + j′ > M has M − 1 where
   M − 2 is meant (found by two reviewers; with the correction the difference
@@ -206,9 +212,13 @@ active agents; when they have none, it enlarges the active set by one agent
 and continues, and every move it makes is legal in the whole population. The
 argument needs only that this is a sequence of legal moves, because the bound
 of c·n moves applies to every such sequence, complete or not. The same point
-was put to the other reviewers in the brief, and they accepted it. A reader
-should still treat this theorem as contested until someone outside this
-family of models has read it.
+was put to the other reviewers in the brief, and they accepted it.
+
+Afterwards the step was adjudicated by two further instances and written out
+again ([step4-rewritten.md](step4-rewritten.md)), and that text was reviewed
+by GPT, Grok and Gemini. All three confirmed it; Grok's report says the
+rewriting answers its objection, because a pair of untouched agents is only
+ever played in the later phase that contains both.
 
 **Other findings, applied above.**
 
@@ -237,6 +247,8 @@ The corrected wording has not been through a second round.
   protocols, proofs.
 - `verifier/`: the referee's checker, reference implementation, search,
   closed-set programs and protocol generator.
+- `step4-rewritten.md`: the disputed step of the finiteness proof, written
+  out again after adjudication.
 - `prior-art.md`: the literature search. The downloaded papers are not
   included.
 
