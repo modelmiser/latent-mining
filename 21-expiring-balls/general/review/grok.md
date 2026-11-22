@@ -1,0 +1,23 @@
+<!-- Archived by the organiser on 2026-11-21. Report of the Grok seat. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# cursor:grok-4.7-medium
+
+Q1: CONFIRMED — `check_adv.py:96-124` and `:127-147` match `chain/3-question.txt:5-8`: Expire on empty is rejected (`:97-98`), otherwise the last ball (oldest; newest-first) is dropped, both Rule replies are taken, an offer is rejected if the bins coincide, the endpoints are in one component, or more than `n` bins are used, a reached non-win must be a table line, and load `≥ L` ends the branch. Acyclicity is required because an infinite play never posts load `L`; the grey/black search is a correct directed-cycle test. Canonical names (`:39-48`) match `gen.py:24-33` (newest first, receiver before other); untouched bins are exactly the ids `≥ m` and are interchangeable because a state is only the present balls. No accepting path for a non-winning table. — none
+
+Q2: CONFIRMED — `out_check_k5_n21.txt:1` is ACCEPT, 3676 positions, 21 bins; `organiser_check.txt:1-18` accepts 21, rejects 20, rejects target 6, rejects the table with line 40 removed; `out_solve_small.txt:1-6` gives N(1)=2, N(2)=4, no win for load 3 on 6 bins, win on 7. `out_damage2.txt:2` (400 offers: 103 accepts, all an unnamed bin renamed, 0 genuinely different) supports the README remark; `out_damage.txt:12` says the same for every k=4 bump. — none
+
+Q3: CONFIRMED — Lemma T (`PROOFS.md:19-25`) and Lemma C (`:27-38`, equal-load redirect included) match the rounds. Expiry counts are suffixes: Round 1 drops the `p` Round-0 balls (`:49-50`); Round 2’s `q` is taken before B3 and the two feeds (`:56-60`); Round 3’s `q'` is taken before D1 and the feeds (`:68-72`), so the kept balls are the newest and are all on `f`. Counts: k=5 max(20,21,20,21)=21 (`:83`); k=6 gives 41; for k≥6, Round 1 is `9·2^{k-4}+1` and the final merge is `≤ b_k` because `k-1 ≤ 2^{k-3}` (`:84-85`). Bases P(1), P(2) and the k=3,4 counts close the induction. — none
+
+Q4: CONFIRMED — `PROOFS.md:96-126`: (F) is the forest bound (`:10`, used at `:112` and `:121`); (a)(b)(c) give load `≤ k-1` whenever `n ≤ r(k-r+1)`, including any removal. r=1 and r=k are the same algebra (at r=k and `n≤k`, (a) forbids a rich bin). k=1 yields 2; k=2 yields 3. It beats 2k at k=6 (13>12) and thereafter. A(k) sits between that and `1+k(k+1)/2` (`solver-a/proofs.txt:21-27`), i.e. about `k²/4` and `k²/2`. — none
+
+Q5: REFUTED — the bounds, “12” (N is non-decreasing: a play that hits load 5 already hit load 4; `README.md:46-48`), 21/41/81, 28/60/124, “41 against 38”, and the top-level “about k²/4 … (5/8)·2^k” (`README.md:52`) hold, and the fit is not claimed proved. `README.md:106` says “150-line”; `check_adv.py` is 155 lines. `README.md:55`’s “510 MB” is not in the tree. Short answer, the recursion row, and “How the adversary uses expiry” are still true (a clean star inside `k+2^{k-1}` is still unproved for every k). — “the 155-line checker”; drop “510 MB” or mark it unstored.
+
+F: LOW — `21-expiring-balls/README.md:106` — “150-line checker”, file is 155 lines — high — say 155
+F: LOW — `21-expiring-balls/README.md:55` — “510 MB” cannot be checked; the table is absent (2,689,236 positions is in `out_check_k6_n41.txt:1`) — high — cite the count only
+F: LOW — `21-expiring-balls/README.md:109` — “every deleted line and every swapped move” is exhaustive only for the 101-line k=4 table (`out_damage.txt:1-6`); k=5 is a 150-line sample plus one organiser deletion — high — say “every deletion tried (all 101 lines of the k=4 table; 150 of the k=5 table)”
+F: LOW — `21-expiring-balls/README.md:57` — “between quadratic and (5/8)·2^k” drops the +1; the proof is `≤ 5·2^{k-3}+1` — high — “about (5/8)·2^k, precisely 5·2^{k-3}+1”
+F: LOW — `21-expiring-balls/general/PROOFS.md:93` and `:131` — both point at `REPORT.md`, which is not in the folder; `out_rh_test.txt:5-6` shows two assertion failures with no parameters, so the “reversed tie-break” label is not in the log — high — cite `out_rh_test.txt` and record the command
+F: LOW — `21-expiring-balls/general/out_damage.txt:12` — the “21 unnamed, 0 other” line is not printed by `damage.py:27-28` — medium — generate it from `damage2.py`’s classifier
+F: LOW — `21-expiring-balls/general/check_adv.py:79` — comment says the position is parsed again; only the move string is reread — high — delete the comment
+
+The k=6 table is not in the repository, so that ACCEPT cannot be rerun from the tree. The page already says so.

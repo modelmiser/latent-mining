@@ -1,0 +1,43 @@
+<!-- Archived by the organiser on 2026-11-21. Report of the second Claude seat. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Claude seat 2: experiment 21 certificate (PROOF.md, check.cpp, README edits)
+
+Paths are relative to `21-expiring-balls/`. I read the whole of 3-question.txt, PROOF.md and check.cpp, the tools and the logs. My own checks, all written outside the repo: (a) I wrote my own minimizer and ran it on the raw dumps `out/{b2,vb}_{6_3,7_3,8_4,9_4}.txt`. In each case the two programs reduce to the same file, and that file equals the one in `cert/`. (b) I wrote my own literal checker, which plays forward with concrete bins and applies properties 1 to 4 directly. It gives ACCEPT for `cert/vb_6_3.cert` (6,690 non-final states, 6,651 in S) and REJECT for `cert/bad_7_3_core_without_empty.cert`, where the empty state has no answer in S. (c) The `states=` columns of `out/count_*.txt` match `out/forest_*.txt` for n = 6 to 9. I also recomputed 9^7·8!·2^8 = 49,369,423,380,480 by hand, and it matches.
+
+## Verdicts
+
+**Q1 CONFIRMED.** Expire drops the oldest ball, which is the last ball when states are written newest first (PROOF.md:13; check.cpp:144). Answering an offer puts a new ball in front (addNewest, :62). Prefixes of non-final states are non-final. Labels are assigned by first appearance, so the labels in the first j balls are exactly 0..m_j−1 in order of appearance. The prefix of a canonical state is therefore canonical, and `inA` can use masked low bytes of a single key (:72-75). Reachable states are exactly the forests: each offer joins two components of the graph of older present balls, and a sequence of edges does this in every order exactly when the edges form a forest. The induction at PROOF.md:36-37 is correct. Property 1 covers the start, property 3 covers the Adversary's Expire, property 4 covers offers, and property 2 means no load ever reaches L.
+
+**Q2 CONFIRMED** (PROOF.md:41-44). The empty state is in S only because the reader refuses "-" (check.cpp:194), and `inA` never tests j = 0, which is consistent with that.
+
+**Q3 CONFIRMED.** The prefix of length j of q+u is (u,v)·q[1..j−1], so flipping its newest ball gives the prefix of length j of q+v. That prefix contains c2 (length ≤ j), so it is in A. It is non-final unless load(v) + 1 ≥ L, and the code tests that disjunct first (:100-101). Case j = 1: every single-ball state is canonically `01`, so its flip is in C, T+ fires, and inA(empty) returns false. The checker therefore rejects any certificate that contains `01`, which is correct because S would then fail at the empty state (damage_11.log, "added line: 01"). Equal lengths: the flipped state is c2 itself. No gap.
+
+**Q4 CONFIRMED.** F2, sub-case 1: c contains f, so bin 1 already has load L−1 in c and T+ fires at the root. Sub-case 2: along the chain from c up to f, no state is in C because c is the longest such prefix, and bin 1 stays below L−1 because f is the shortest. Pruning P2 cannot cut the chain, because f is a forest with at least k + (L−1−ld(1)) and at most n−1 balls. At f, the non-root branch `ld[1]==L-1` applies T (:127). F3: a forest on n bins whose witnesses x and y lie in different components has at most n−2 edges, and the components of e refine those of d. q0 is reached, and q0 ∈ A implies q ∈ A by the extension fact. The cases are exhaustive: each answer is bad for one of two reasons, and the possible combinations of reasons are (A,A), (A,load) and its mirror, and (load,load). A ∩ final = ∅, so nothing falls between them.
+
+**Q5 CONFIRMED.** Both bounds hold. Each added ball has exactly one receiver, so the deficits of x and y are paid by disjoint balls. The code's minimum over pairs (:114-119) covers untouched/untouched (needs ≥2 untouched), touched/untouched and touched/touched in different components. Pairs in the same component cannot be witnesses, so neither pruning skips a needed state.
+
+**Q6 CONFIRMED; I found no divergence between code and proof.** The reader refuses "-" (:194), loads of L or more (:199), non-forests (:197), m > n (:198) and non-canonical lines (:200). `testOffer` is T or T+ exactly. `older` runs through all (m+1)² choices of ends, skips a==b and pairs in the same component, names new bins m and m+1 with the receiver first (canonical because the new ball is the last one), and applies the n-bin and load limits. Keys are always built from canonical states. `inA` tries j = 1..k. The key cannot collide with NONE because k ≤ 15 leaves the top byte zero.
+
+**Q7 CONFIRMED.** The evidence means something. All 300 certificates at 7,3 and all 300 at 4,2 were rejected, which is right because the Adversary wins both. min, full and brute agree on 1,560 damaged certificates (difftest.log). The `full` mode walks 974,272,116 states, exactly |A| as computed by both search programs (check_full_11_4.log vs b2_11_4.log and vb_11_4.log), which independently confirms that C generates the programs' attractor. I found no way for the checker to accept a certificate when the Adversary wins, short of a compiler fault, a hash fault, or one of the parts not running when `parts > 1`.
+
+**Q8 mostly CONFIRMED.** The confirmed figures: 3,334,554 lines (check_min log), 40.27 s, 974,272,116, and a 218-line checker. The byte-for-byte claim holds on the small cases I reproduced. For n = 11 it rests only on the sha256 quoted in the README, because the files are not in the repository. The defects are listed below.
+
+## Findings
+
+1. **MODERATE (confidence 0.8). README.md:90-93: "the 12 resting on the certificate".** The certificate covers only N(4) ≥ 12. N(4) ≤ 12 rests on solver A's explicit strategy (README row "N(4) ≤ 12"). The old hedge "if the computed value … is right" is gone, but the 11 still rests on a single computation by solver A, and the 12 on a hand proof that only one author has read. Replacement: "So for k = 4 the order of expiry appears to cost the adversary one bin (12 against 11). The lower half of the 12 rests on the certificate below, its upper half on solver A's explicit strategy, and the 11 on solver A's computation alone for the any-removal game."
+
+2. **LOW (0.9). certificate/PROOF.md:108 cites "(REPORT.md)", which does not exist anywhere in the repository.** Replacement: "…compared with and without on n = 6 to 9 (`out/difftest.log`, last five lines)."
+
+3. **LOW (0.9). certificate/out/difftest.log contains 30 lines like "n=6 k=0 states=1 MISMATCH".** These look like a broken comparison script: the lines have no `labelled=` field. They contradict count_check.txt, which shows MATCH everywhere and which I confirmed. Anyone checking the evidence will see "MISMATCH" in a cited log. Either remove the block or add a note: "the MISMATCH lines are from a comparison script that misread its input; the corrected comparison is count_check.txt."
+
+4. **LOW (0.8). README "What to distrust": "It rejects … damaged 11-bin certificates".** damage_11.log shows one damaged certificate accepted, the added line `01 02 03 45 46 47 58`. The acceptance is correct, because that line extends the existing line `01 02 03 45 46`, so A does not change (states_walked is the same). But the sentence as written implies every damaged certificate was rejected. Replacement: "…and every damaged 11-bin certificate that changes the set A (one added line that already lay in A was rightly accepted)."
+
+5. **LOW (0.7). README: "tested against a literal check of the definition up to 9 bins".** The damaged certificates were brute-checked only up to n = 8 (difftest.log). At n = 9 only the intact certificate was brute-checked (check_brute_9_4.log). Replacement: "…tested against a literal check on damaged certificates up to 8 bins and on the intact 9-bin certificate".
+
+6. **LOW (0.6). README: "The organiser recompiled the checker and reran it…".** Nothing in `certificate/out/` records this, and the sentence is not worded as the organiser's own statement. Replacement: "The organiser reports that it recompiled the checker and reran it… (no log of that rerun is included)."
+
+7. **LOW (0.5). README: "sha256 `35f5203d…e99d`".** The hash is truncated and the file is not in the repository, so a reader cannot use it to check a regenerated file. Give the full hash, for both programs' minimized outputs.
+
+## Summary
+
+I did not find a CRITICAL defect. The soundness argument in PROOF.md held at every step I traced, and check.cpp implements it faithfully. The remaining defects are in the README's wording and in the evidence files.

@@ -1,0 +1,4 @@
+<!-- Archived by the organiser on 2026-11-21. The organiser's note of what was done with the findings. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Dispositions, six-state enumeration (experiment 22), round 1 (2026-11-21)
+Seats: GPT, Grok, Gemini; one Claude seat. Q1-Q3 confirmed 4/4. GPT CRITICAL x2 (argument validation in enum.c): cannot affect the recorded runs (valid arguments); disclosed, file left verbatim. Applied: solver A histogram agreement; s=3,4 outputs added (organiser runs); "without reading" as report; L(7) error direction; Where cell; stray line in organiser log; N=0 label noted. Checked by me: recompiled, chunks 39 and 77 identical. Not reviewed again.

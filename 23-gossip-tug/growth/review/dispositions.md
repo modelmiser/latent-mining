@@ -1,0 +1,4 @@
+<!-- Archived by the organiser on 2026-11-21. The organiser's note of what was done with the findings. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Dispositions, A(n) >= 3n - 6 (experiment 23), round 1 (2026-11-21)
+Seats: GPT, Grok, Gemini; Claude seat 1, Claude seat 2 (Opus). 0 CRITICAL. Q1-Q5 (the proof) confirmed 5/5. Applied: checker evidence described precisely; variant 1 control explained; conjecture attribution; chain wording; heading; Hastener-rule wording; Lemma 2 and "exact for 3..6" in PROOFS.md disclosed (file verbatim); literature search predates the bound; top-level row. Checked by me: read the proof. Not reviewed again.

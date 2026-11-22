@@ -286,6 +286,7 @@ sentence still generalised from a single example) are applied.
 
 ## Files
 
+- Reviewers' reports of 21 November, archived verbatim with absolute paths shortened: `upper/review/`, `shape/review/`, `shape2/review/`. Each `review*/` folder holds the brief the reviewers were given, the reports of the GPT, Grok and Gemini seats with a machine-made summary, the reports of the Claude seats (one of the two ran on Claude Opus), and the organiser's note of what was done with the findings; `review-second-round-1.md` and `-2.md` are the two later rechecks of this page by single Claude instances. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - Each follow-up folder (`upper/`, `shape/`, `shape2/`) holds its instance's final report as `REPORT.md`; those of `shape/` and `shape2/` were archived from the session transcript on 21 November, verbatim with paths shortened, because the instances could not write report files.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each

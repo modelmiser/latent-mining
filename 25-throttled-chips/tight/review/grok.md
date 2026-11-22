@@ -1,0 +1,27 @@
+<!-- Archived by the organiser on 2026-11-21. Report of the Grok seat. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# cursor:grok-4.7-medium
+
+Q1: CONFIRMED — `chain/3-question.txt:6-7` (wins only if every Firer line hits height ≥ h after a step; pass is always legal); firings before P are step (2) of rounds 1..m−1, round 1 is a forced pass, and f = m−2−p (`tight/PROOFS.md:22-26`); an add at 0 leaves Q unchanged and a firing raises it by 2 (`:28-29`); the square identity holds for every integer x (`:30-31`); (A) is `2p+4d_0+3D+E=6` (`:36-39`) — none
+
+Q2: CONFIRMED — the only solutions of (A) with E=0 are (I)–(III) (`tight/PROOFS.md:41-46`); only −1,0,1 fire and `f_1+f_{-1}=2H−5+d_0+D` (`:48-57`); rounds 2 and 3 cannot both fire, so p≥1 and a unique pass sits in {2,3} (`:59-62`); (III) and (I) die, and (II) traces m−1 then m−2 back to height H+1, using m−2≥4 (`:64-79`); so 5h−10 zeros win for h≥4. `tight/out_C.txt:2-11` has C(h)=5h−10 for h=4..12 and C(3)=7 — none
+
+Q3: CONFIRMED — every branch of `tight/PROOFS.md:106-126` produces a ready vertex of lag M (s≥6 by integrality; s≤5 by the F,k split; the two neighbour switches are F=1,k=3 and F=0,k=1); the rule then fires some ready vertex of lag M. The same 6/5 is the cutoff in B2 (`:132`, `:144`, `:153`) and in 5T≥6 inside B3 (`:161`). No multiple of 1/5 lies strictly between 1 and 6/5 — none
+
+Q4: CONFIRMED — Wset is fixed at t0 (`tight/PROOFS.md:132`) and used earlier only through T non-decreasing (`:138`, `:145`); (i) is l<6/5 and 5l integral, hence l≤1 (`:138-139`); (ii) case 0 caps every lag by 1, case 1 fires j with T_j(t0)≥6/5 so j∈Wset, and 1a/1b close (`:143-152`); cases 0 and 1 exhaust the 1/5 grid (`:153`); every lag is ≤ max(1,H_n) (`:137`, `:153-154`) — none
+
+Q5: CONFIRMED — one far add contributes at most 1+3+1, so 6j≤5e (`tight/PROOFS.md:158-162`); j=2,e≤3 and j=4,e≤5 both contradict (`:165-172`); at most the seven sites |z−y|≤3 lie in Wset (`:177`); lam_j is the 1/5 floor of H_{7+j}. Rows j=0,1,2,4,6 match `tight/out_arith.txt:1-7` (2.4, 2.6, 2.8, 3.0, 3.0 and 4.8, 4.8, 4.8, 4.8, 4.4); g(10)≈4.479 and g decreases for j≥10 (`PROOFS.md:188-190`, `out_arith.txt:12-14`) — none
+
+Q6: CONFIRMED — `tight/PROOFS.md:193-200`: η≤η*+2l with η*=(t−e)/5, after an add ≤ t/5+28/5, and m≤5h−29 forces η≤h−1/5 so η≤h−1. The rule uses only adds so far, its own firings, and the list at most for ties (`:90-93`); the Firer is told the list (`chain/3-question.txt:4`). 5h−28>0 for h≥6, beats h for h≥8, and beats 2h−1 exactly for h≥10. At h=9 both lower bounds equal 17, so “better for h≤9” is the weak comparison 2h−1≥5h−28 — “2h−1 is strictly stronger for h≤8, equal at h=9, and weaker for h≥10”
+
+Q7: REFUTED — `tight/out_rule_main.txt:7` is 89,243 plays, max 5η−t = 12 after a round and 16 after an add (t/5+2.4 and t/5+3.2), top-k slack 0, largest unready top lag 1. B3 and B4 are not in `tight/test_rule.py`. The height bound is asserted on every play (`test_rule.py:47`, `:70`; control `out_rule_controls.txt:7-8`), so `README.md:51` and `:188` are wrong that it was not exercised. `out_arith.txt` and `out_C.txt` match Part A/B4 as in Q2 and Q5 — “B1 and B2 were checked (top-k met with equality); B3 and B4 were not; the height inequality was asserted but the largest excess was t/5+3.2 against 5.6”
+
+Q8: REFUTED — the inequalities, the 18-round gap, the history sentence (`README.md:13-23`), the superseded 5h−6 row (`solver-b/proofs.txt:36-43`, still true for h≥2), and the top-level row (`README.md:56`) match Parts A and B. No stale “170” or “best”. “176” and “5h−6” that remain are older theorems or quotations. The new Part A row says the organiser checked every step (`README.md:50`); `tight/PROOFS.md:5` and `tight/REPORT.md:58` say nobody else has read it — “drop the organiser-check clause; say 2h−1 is strictly stronger only for h≤8”
+
+F: MODERATE — `README.md:50` — claims the organiser checked Part A, while `tight/PROOFS.md:5` and `tight/REPORT.md:58` say the proofs are unread and `@@TREVIEW@@` is still a placeholder — high — delete the organiser-check sentence
+F: MODERATE — `README.md:51` and `:188` — say the height bound was not exercised; `tight/test_rule.py:47` and `:70` assert 5η≤t+28 after adds and ≤t+24 after rounds on all 89,243 plays (observed maxima 16 and 12) — high — say the inequality was asserted and was not tight
+F: LOW — `README.md:15` — “2h−1 is better for h≤9” is false as a strict comparison at h=9, where both bounds are 17 — high — “strictly better for h≤8, equal at h=9”
+F: LOW — `tight/test_rule.py:2` — docstring says the tests target G(h)≥5h−32; the code and `REPORT.md:42` show that constant was abandoned for 5h−28 — high — change the docstring to 5h−28
+F: LOW — `tight/PROOFS.md:41-42` — “≤1, so it is 0” does not say why the left side of (A) cannot be 1; it is even or at least 3 — high — add that one line
+F: LOW — `README.md:53` and `:55` — the √h and 5h−176 rows are still the right theorems but, unlike the 5h−6 row, are not marked superseded, which the short answer (`:23`) says they are for h≥4 — medium — mark them superseded for h≥4
+F: LOW — `README.md:179` — the limit bullet still leads with solver A’s proof and never says 5h−28 and 5h−10 already force the limit 5 — medium — add that sentence

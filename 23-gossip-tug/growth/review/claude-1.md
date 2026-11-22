@@ -1,0 +1,27 @@
+<!-- Archived by the organiser on 2026-11-21. Report of the first Claude seat. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Claude seat 1: A(n) >= 3n - 6 (experiment 23, growth)
+
+Paths are relative to `23-gossip-tug/`. I traced Theorem 1 by hand and wrote my own checker (Python, outside the repository; nothing in the repository was run).
+
+## Verdicts
+
+- **Q1 CONFIRMED.** `growth/PROOFS.md:3-6` matches `chain/3-question.txt:1,3`: legal iff the pair is not mutually known; Delayer names any active agent, Hastener picks any legal partner; play ends when all sets are full. Two experts are a dead pair; a non-expert is always active. R3 names experts, which the definition allows provided they are active (that is Lemma B).
+- **Q2 CONFIRMED.** `PROOFS.md:16-27`. Every phase-1 call contains c, so any touched agent other than c is an earlier partner and mutually known with c; hence each partner is untouched. c lacks a secret while j < n − 1, so it is active for all n − 2 rounds. Closure under union, level = max, flag = or: correct.
+- **Q3 CONFIRMED.** `PROOFS.md:29-38`. T = (m non-top) + (n − 1 unflagged) = 2n − 3. Both cannot gain a level (equal levels: nobody moves; otherwise only the lower one), both cannot gain the flag (only an unflagged one facing a flagged one). So Δ ≤ 2, and Δ = 2 splits exactly into (i) and (ii).
+- **Q4 CONFIRMED.** `PROOFS.md:47-87`. R1: z is neither party of (i), and (ii) needs an expert; no expert results. R2: p active via {c, p}; y top gives the double and two experts, y non-top gives Δ = 0. "Neither top nor flagged" is monotone, so R1 never returns. Lemma B: the "first later call in which someone becomes top" argument is sound (its partner is top now and flagged, so a current expert, so the pair is dead). R3: partner is a non-expert of one of the two remaining kinds, Δ = 1. I found no unconsidered Hastener reply.
+- **Q5 CONFIRMED.** `PROOFS.md:89-95`. n = 3 by hand: 1 + double + 1 = 3. n = 4 by hand: both replies to naming l_1 (l_2, or p) give 2 + 1 + 1 + 2 = 6.
+- **Q6 CONFIRMED for n ≤ 9.** My checker explores every Hastener reply and also EVERY rule-consistent Delayer choice (any z in R1, any active expert in R3; `dcheck.cpp:24,29-30` tries only one). Guaranteed calls: 3, 6, 9, 12, 15 for n = 3..7 with all phase-1 replies explored, 18 and 21 for n = 8, 9 with phase-1 partners taken in order. Assertions that held at every position: partners untouched in phase 1; T = 2n − 3; chain form; R1 gives Δ ≤ 1 and no expert; R2 gives (Δ = 2, two experts) or (Δ = 0, none); R3 gives Δ = 1; an active expert always exists. Agrees with `growth/dcheck.log:1-7`. n = 10, 11 not reproduced by me.
+- **Q7 mostly CONFIRMED; two sentences UNSUPPORTED** (findings 1, 2). "Allows exactly one call that completes two", "n = 3, …, 11", the n(n − 1)/2 remark and the top-level row are supported. The 2n − 3 section (`README.md:79-95`), the Review paragraph (`:180`) and "proved by hand only up to four people" (`:11`) remain true (the upper side at n = 5, 6 is computed).
+
+## Findings
+
+1. **MODERATE (confidence high).** `README.md:116-119` attributes the conjecture A(n) = 4n − 13 to the follow-up, but no file under `growth/` contains it (searched; only the README does). The arithmetic fits (19, 23, 27). Repair: add the conjecture, labelled as a guess, to `growth/PROOFS.md`, or write "the organiser notes that 4n − 13 fits the three values n = 8, 9, 10; a guess, not a result".
+2. **MODERATE (high).** `growth/dcheck.log:18-21`: under the header "deliberately wrong rules (must print BELOW)", variant 1 prints OK (9, 15, 21). The negative control did not fail and the log says it must. (It is no evidence against the proof: naming c in R2 forces the partner p, the same double.) Also `:10-13` shows an unlabelled crash (bad_alloc, presumably n = 12) and `:14-17` an unlabelled second block (presumably FULLPH1). Repair: header "variant 1 is NOT a wrong rule (prints OK); variants 2 and 3 must print BELOW"; label the other two blocks.
+3. **LOW (high).** `README.md:102-103`: "a chain of sets (what c knew after 0, 1, 2, … calls)" makes the bottom set {c}, but p holds {p}, which is not {c} with or without p. Same slip at `PROOFS.md:18` (P_j := {c, l_1, …, l_j} gives P_0 = {c}) against `:21` (P_0 = ∅). Replacement: "a chain of sets (the empty set, then what c knew after 1, 2, … calls)"; in PROOFS, "P_j for j ≥ 1, and P_0 = ∅".
+4. **LOW (medium).** `README.md:115-116` "or are far from optimal": `hast.log` shows 13 against 12, 17/18 against 16, 26 against 23. `PROOFS.md:128` says only "neither is optimal". Replacement: "or are not optimal (too few values to tell whether they are linear)".
+5. **LOW (high).** `README.md:126-127` "checked without that shortcut for n ≤ 8": the log's full block covers n = 5..8 only. Fine in substance (I checked 3..7 in full), but say "n = 5, …, 8" or add the two runs.
+6. **LOW (medium).** `README.md:79` heading "Why at least 2n − 3 in general" is now the weaker bound. Replacement: "Why at least 2n − 3 (the first version's bound)".
+7. **LOW (medium).** `PROOFS.md:10,99` "exact value for n = 3..6" and "exceeds from n = 7 on" rest on computed A(n); mark "(computed)" and "for n = 7, …, 10".
+
+No CRITICAL finding. The proof of Theorem 1 is complete as far as I can trace it.

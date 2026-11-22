@@ -1,0 +1,4 @@
+<!-- Archived by the organiser on 2026-11-21. The organiser's note of what was done with the findings. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Dispositions, general bounds and N(5) <= 21 (experiment 21), round 1 (2026-11-21)
+Seats: GPT, Grok, Gemini; Claude seat 1, Claude seat 2 (Opus). 0 CRITICAL. Q1 (checker), Q3 (Theorem U), Q4 (Theorem L) confirmed 5/5. Applied: organiser line-removed run added to the log; damage tests described exactly; stale clean-star sentence; source of the 12; "known argument" hedged; 510 MB dropped; 155 lines; +1 in the general row; PROOFS.md's REPORT.md reference and unlabelled REJECT lines disclosed. Files verbatim. Checked by me: checker reruns; read Theorem L. Not reviewed again.

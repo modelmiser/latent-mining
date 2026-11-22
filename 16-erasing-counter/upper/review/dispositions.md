@@ -1,0 +1,5 @@
+<!-- Archived by the organiser on 2026-11-21. The organiser's note of what was done with the findings. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Dispositions, upper bounds for experiment 16, round 1 (2026-11-21)
+Seats: GPT, Grok, Gemini; Claude seat 1, Claude seat 2 (Opus). 0 CRITICAL. Q1-Q8 (all proofs, examples) confirmed 5/5. Q9 wording: RO statement, "r - 5 or higher", four->five, smaller tree, far below, close to states, organiser's claim (one example traced, worded as own account) -- all applied. PROOFS.md left verbatim; three clarifications listed on the page. Not applied: Gemini "r = 1: 2" in the proof file's list (verbatim file).
+Checked by me: read PROOFS.md, traced example (a), Theorem G arithmetic. Not reviewed again after edits.

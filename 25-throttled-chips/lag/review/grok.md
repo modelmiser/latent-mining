@@ -1,0 +1,25 @@
+<!-- Archived by the organiser on 2026-11-21. Report of the Grok seat. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# cursor:grok-4.7-medium
+
+Q1: CONFIRMED — `solver-a/proofs.txt:25-29` and `constant/proofs.txt:12-18` give (a)–(c); an add changes lags by 1/5, 3/5, 1/5 (`PROOFS.md:13-14`). For a max-lag vertex the neighbour term is ≥ 0, so η ≥ η* ≥ M/3 > 1, and an integer chip count is ≥ 2 (`PROOFS.md:16-18`) — none
+Q2: CONFIRMED — Case 0 uses M ≤ 3 and B_k ≥ 3k (`PROOFS.md:32`). Case 1a cancels the +1 from the add against the firing (`PROOFS.md:35`). Case 1b’s algebra is an identity: (k/(k+1))(B_{k+1}+1) = k(3+H_n−H_{k+1}+1/(k+1)) = B_k (`PROOFS.md:36-39`). After a round the k=1 bound is 2+H_n; an add adds at most 3/5, hence 2.6+H_n (`PROOFS.md:28`). n ≤ 3m and lags outside V are 0 (`PROOFS.md:22-23`). Any tie-break still fires some vertex of lag M — none
+Q3: CONFIRMED — η ≤ η*+2l ≤ t/5+5.2+2H_{3m} (`PROOFS.md:46-48`). Own check: at h=59, m=199 gives 45+2H_597 ≈ 58.94 < 59 and m=200 gives ≈ 59.15, so G ≥ 200; at h=100, m=397 gives ≈ 99.92 and m=398 gives ≈ 100.13, so G ≥ 398 (`corollary_out.txt:8-9`). H_n ≤ 1+ln n makes 2+H_{3t} ≤ ln t+4.1. From h=28, f(m+2)−f(m) < 1 for m ≥ 56, so the gap over 2h−1 never shrinks (57 > 55 at h=28, `corollary_out.txt:17`). The 5h−176 comparison is explicitly an uncomputed estimate of order 10^5 (`PROOFS.md:50-52`) — none
+Q4: CONFIRMED — one chip on each point of an interval never readies a vertex; an interior point has T=1 and η*=1, and η* only rises (`PROOFS.md:69-72`). R1 is the unique-maximum case of R2; a strictly lower neighbour gives η ≥ 6/5, hence ≥ 2 once chips are integral (`PROOFS.md:74-81`) — none
+Q5: CONFIRMED — reservoir level 5, then a centre add makes a unique 8 and R1 yields (6,3,6) (`PROOFS.md:84-87,100`). Two B-adds give (6,3,6,5,6,3,6); two C-adds give flanks at 8 and centre at 6 (`PROOFS.md:101-106`). Only those last N firings are ties, and every choice leaves N flanks at 8 with centres at 6: S(8,N) — none
+Q6: CONFIRMED — the three phase-2 branches cover the only vertices that can exceed W (the buffer and the outer), and R1/R2 fire one of the maxima, never the rebuilt flank (≤ W−1) or a centre (W−2) (`PROOFS.md:118-126`). Flushes clear the single survivor (`PROOFS.md:127-128`). 16m′ ≤ ⌊m/2⌋−1, so one flank stays alive (`PROOFS.md:129-130`). Phases 3–4 force the centre, then leave m′ flanks at W+1 (`PROOFS.md:134-141`). If m ≥ 34q then m′ ≥ q, so N=34^j reaches lag (8+j)/5; stage length ≤ m+2m′ and the geometric sum is < 1.1N, hence length ≤ 24N+84 (`PROOFS.md:145-149`) — none
+Q7: CONFIRMED — the game shows the firer the whole list (`chain/3-question.txt:5-6`), and the list is built from past firings only (`PROOFS.md:56-65`). Inside that scope the enclosure is 1.6+0.2⌊log_34((t−84)/24)⌋ ≤ lag ≤ 2+H_{3t}, i.e. about 0.056 ln t up to ln t+4.1 (`lag/REPORT.md:7`) — none
+Q8: CONFIRMED — non-greedy runs reach lag 2.2 (`gen_out_39304.txt:14`); greedy reaches 2.6, 3.6, 4.0 (`gen_out_1156.txt:34`, `gen_out_39304.txt:28`, `gen_out_300000.txt:14`); `replay.cpp` matches those figures (`replay_out_39304.txt:1-10`, `replay_out_300000.txt:1-4`). `neg_out.txt:1-6` is two assertions failing on purpose. The factor ~18 is 1/0.0567 from the two theorems, not a log line; greedy step ratios also hit ~1 and ~5 (`gen_out_300000.txt:4-14`) — none
+
+F: MODERATE — `25-throttled-chips/lag/PROOFS.md:60` — the same sentence that proves the upper bound 2+H_{3t} then says the lag lies between 0.056 ln t and ln t; 2+H_{3t} ∼ ln t+3.7, so “≤ ln t” is false — high — replace with “about 0.056 ln t, up to ln t + 4.1”
+F: LOW — `25-throttled-chips/lag/PROOFS.md:59` — log_34((t−84)/24) is undefined for t ≤ 84, but the two-sided bound is stated for every t — high — restrict the sentence to t ≥ 108
+F: LOW — `25-throttled-chips/lag/PROOFS.md:79` — “η ≥ 6/5, so η ≥ 2” skips integrality of the chip count (used explicitly only at line 18) — high — add “η is an integer, so η ≥ 2”
+F: LOW — `25-throttled-chips/README.md:141` — “no lag exceeds 2+H_n” omits “after a round”; right after an add the proved bound is 2.6+H_n — high — insert “after a round”
+F: LOW — `README.md:56` — “the firing rule’s shortfall grows like log t” drops the history-only tie-break limit that Theorem L actually has — medium — add “against tie-breaks that ignore the rest of the list”
+F: LOW — `25-throttled-chips/README.md:146` — “2 to 4 in the greedy runs” is only a typical ratio; the N=300000 log has steps near 1 and near 5 — medium — say “typically 2 to 4 per level in the greedy runs”
+F: LOW — `25-throttled-chips/lag/PROOFS.md:148` — “stages … under 1.1N in total” never writes the sum; it does hold, since each stage costs ≤ (17/16)m and m shrinks by 32, total < (34/31)N — high — add that one-line sum
+
+
+<!-- stderr: Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 1)...
+Retry attempt 1...
+ -->

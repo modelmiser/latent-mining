@@ -1,0 +1,6 @@
+<!-- Archived by the organiser on 2026-11-21. The organiser's note of what was done with the findings. Verbatim except that absolute paths are shortened ((staging)/ = a working folder outside the repository, (scratch)/ = a temporary folder). It was written about the working tree BEFORE the organiser applied the findings, so line numbers and quoted sentences may no longer match the files. -->
+
+# Dispositions, Lean partial opening (experiment 17), round 1 (2026-11-21)
+Seats: GPT, Grok, Gemini (panel.py); Claude seat 1, Claude seat 2 (Opus). 0 CRITICAL. Q1-Q3, Q5 confirmed 5/5 (spec = Section 4, statement = Prop. 3, digits = note). Applied: stale "not formalised" sentences (lean/README, experiment README); clean rebuild of the 14 modules (build dir moved to old/), log replaced; mutant log regenerated from MutantPartial.lean; NOTE: correctness check and added trust assumptions, authorship; provenance of "changed nothing" and of the certificate labelled; top-level row wording.
+Not applied: edits to the prover's PartialCheck.lean comment and PROGRESS-partial.md (verbatim; noted on the page).
+Checked by me: full build, axioms, statements reread, digits vs note by program, two mutants rejected. Not reviewed again after edits.
