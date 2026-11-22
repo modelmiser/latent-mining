@@ -1,0 +1,12 @@
+('E->O 0 1', 'REJECT') 44 e.g. line 10
+('O->E', 'REJECT') 57 e.g. line 1
+('bin+1', 'ACCEPT') 21 e.g. line 1
+('bin+1', 'REJECT') 36 e.g. line 3
+('delete', 'REJECT') 101 e.g. line 1
+---
+('E->O 0 1', 'REJECT') 84 e.g. line 551
+('O->E', 'REJECT') 66 e.g. line 2332
+('bin+1', 'ACCEPT') 15 e.g. line 2332
+('bin+1', 'REJECT') 51 e.g. line 3472
+('delete', 'REJECT') 150 e.g. line 551
+k=4 table: accepted bin+1 damages that only rename an unnamed bin: 21; others: 0

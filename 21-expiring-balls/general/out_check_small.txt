@@ -1,0 +1,21 @@
+ACCEPT L=2 n=4: reachable positions=3 (table lines=3), winning answers=2, most bins in use=4
+ACCEPT L=3 n=7: reachable positions=13 (table lines=13), winning answers=5, most bins in use=7
+ACCEPT L=4 n=12: reachable positions=101 (table lines=101), winning answers=28, most bins in use=12
+ACCEPT L=5 n=21: reachable positions=3676 (table lines=3676), winning answers=944, most bins in use=21
+REJECT: offer needs more than n bins at ((0, 1), (2, 3), (2, 4))
+REJECT: position not in table: ((0, 1), (1, 2), (0, 3), (3, 4), (0, 5))
+REJECT: position not in table: ((0, 1), (1, 2), (2, 3), (1, 4), (0, 5), (5, 6), (0, 7), (7, 8), (0, 9))
+REJECT: offer needs more than n bins at ((0, 1), (2, 3), (3, 4), (2, 5), (6, 7), (6, 8), (6, 9))
+REJECT: offer needs more than n bins at ((0, 1), (2, 3), (3, 4), (4, 5), (3, 6), (2, 7), (7, 8), (2, 9), (10, 11), (10, 12), (12, 13), (13, 14), (12, 
+REJECT: position not in table: ((0, 1), (1, 2), (2, 3), (3, 4), (2, 5), (1, 6), (6, 7), (1, 8), (0, 9), (9, 10), (10, 11), (9, 12), (0, 13), (13, 14),
+('E->O 0 1', 'REJECT') 44 e.g. line 10
+('O->E', 'REJECT') 57 e.g. line 1
+('bin+1', 'ACCEPT') 21 e.g. line 1
+('bin+1', 'REJECT') 36 e.g. line 3
+('delete', 'REJECT') 101 e.g. line 1
+---
+('E->O 0 1', 'REJECT') 84 e.g. line 551
+('O->E', 'REJECT') 66 e.g. line 2332
+('bin+1', 'ACCEPT') 15 e.g. line 2332
+('bin+1', 'REJECT') 51 e.g. line 3472
+('delete', 'REJECT') 150 e.g. line 551

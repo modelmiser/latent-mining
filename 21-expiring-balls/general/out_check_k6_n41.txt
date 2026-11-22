@@ -1,0 +1,2 @@
+ACCEPT L=6 n=41: reachable positions=2689236 (table lines=2689236), winning answers=821248, most bins in use=41
+REJECT: offer needs more than n bins at ((0, 1), (2, 3), (3, 4), (2, 5), (6, 7), (7, 8), (8, 9), (9, 10), (8, 11), (7, 12), (12, 13), (7, 14), (6, 15), (15, 16), (16, 17), (15, 18), (6, 19), (19, 20),

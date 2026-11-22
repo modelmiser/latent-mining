@@ -1,0 +1,6 @@
+n=30 r=3 steps=20000 seed=1 wrong=False: all checks passed; max load seen 6, max rich bins 7, bound r+floor((n-1)/r)-1 = 11
+n=13 r=3 steps=20000 seed=1 wrong=False: all checks passed; max load seen 4, max rich bins 3, bound r+floor((n-1)/r)-1 = 6
+n=20 r=4 steps=20000 seed=1 wrong=False: all checks passed; max load seen 5, max rich bins 3, bound r+floor((n-1)/r)-1 = 7
+n=12 r=2 steps=20000 seed=1 wrong=False: all checks passed; max load seen 4, max rich bins 5, bound r+floor((n-1)/r)-1 = 6
+AssertionError: check (b) failed at step 296
+AssertionError: check (b) failed at step 2706

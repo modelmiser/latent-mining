@@ -1,0 +1,18 @@
+$ check_adv.py 5 21 adv_k5_n21.txt
+ACCEPT L=5 n=21: reachable positions=3676 (table lines=3676), winning answers=944, most bins in use=21
+exit=0
+$ check_adv.py 5 20 adv_k5_n21.txt
+REJECT: offer needs more than n bins at ((0, 1), (2, 3), (3, 4), (4, 5), (3, 6), (2, 7), (7, 8), (2, 9), (10, 11), (10, 12), (12, 13), (13, 14), (12, 15), (10, 16), (16, 17), (10, 18))
+exit=1
+$ check_adv.py 6 21 adv_k5_n21.txt
+REJECT: position not in table: ((0, 1), (1, 2), (2, 3), (3, 4), (2, 5), (1, 6), (6, 7), (1, 8), (0, 9), (9, 10), (10, 11), (9, 12), (0, 13), (13, 14), (0, 15), (15, 16), (0, 17))
+exit=1
+$ check_adv.py 4 12 adv_k4_n12.txt
+ACCEPT L=4 n=12: reachable positions=101 (table lines=101), winning answers=28, most bins in use=12
+exit=0
+$ check_adv.py 4 11 adv_k4_n12.txt
+REJECT: offer needs more than n bins at ((0, 1), (2, 3), (3, 4), (2, 5), (6, 7), (6, 8), (6, 9))
+exit=1
+$ sed 40d adv_k5_n21.txt > damaged.txt; check_adv.py 5 21 damaged.txt   (the table with its 40th line removed)
+REJECT: position not in table: ((0, 1), (0, 2), (0, 3), (3, 4), (0, 5), (2, 6), (6, 7), (7, 8), (6, 9), (2, 10), (10, 11), (2, 12), (1, 13), (1, 14), (14, 15), (15, 16), (14, 17), (1, 18), (18, 19))
+exit=1

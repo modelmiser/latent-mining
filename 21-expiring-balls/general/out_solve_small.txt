@@ -1,0 +1,6 @@
+L=1 n=2 positions=1 adversary_wins_from_empty=True
+L=2 n=3 positions=5 adversary_wins_from_empty=False
+L=2 n=4 positions=22 adversary_wins_from_empty=True
+L=3 n=5 positions=421 adversary_wins_from_empty=False
+L=3 n=6 positions=6690 adversary_wins_from_empty=False
+L=3 n=7 positions=138141 adversary_wins_from_empty=True

@@ -11,8 +11,7 @@ answer is 2^k (2, 4, 8, 16), which is known. So letting the oldest ball
 expire helps the adversary, for every k from 3 on (N(k) ≤ 2^k − 1; see
 below). The chain asked for the case
 k = 3 and bet on 8; the answer is 7. The value 12 for k = 4 was not asked
-for and comes from putting the two solvers' results together. No formula is
-proved; k + 2^(k−1) fits the four values.
+for and comes from putting the two solvers' results together. No formula is proved; k + 2^(k−1) fits the four values. For k = 5 a follow-up of 21 November shows that 21 bins suffice (the value the fit predicts; the earlier bound was 28), so N(5) is between 12 (N(4) = 12, and N cannot decrease as k grows) and 21; in general it proves ⌊(k+1)²/4⌋ + 1 ≤ N(k) ≤ 5·2^(k−3) + 1 for k ≥ 5. The gap between quadratic and exponential is open.
 
 This is a relative of [experiment 14](../14-forest-orientation/): placing a
 ball offered to bins u and v is orienting the edge {u, v} of a growing
@@ -52,7 +51,10 @@ formal text in [chain/3-question.txt](chain/3-question.txt)): find N(3).
 | Without expiry the value is ⌊log₂ n⌋ | proved by hand by solver B; known (see below) | `solver-b/proofs.txt` P3 |
 | If the adversary may remove any ball it likes, 1 + k(k+1)/2 bins suffice for load k, and the least number is 2, 4, 7, 11 for k = 1, …, 4 | upper bound proved by hand by both solvers; the values computed by solver A and, up to 10 bins, by the referee | `solver-a/proofs.txt` P4 |
 | The rule "give the ball to the bin with the smaller load; on a tie, to the bin that appears earlier in the age-ordered list of balls, untouched bins last" is optimal for n ≤ 8 | computed by solver A and the referee; solver A also reports n = 9, not rerun | `solver-a/greedy.cpp` |
-| N(k) in general | open; k + 2^(k−1) fits k ≤ 4 and is a guess | |
+| **N(5) ≤ 21** | an explicit Adversary strategy as a table of 3,676 positions with one move each, accepted by a checker written from the definition that shares no code with the generator (it follows every answer of the rule and verifies that no position can repeat); also proved by hand (Theorem U). One follow-up instance, 21 November; the organiser reran the checker (accept on 21 bins; reject on 20 bins, with target 6, and with one line removed); five reviewers confirmed the checker against the definition, and two replayed the table with their own programs, reaching the same 3,676 positions (see Review) | `general/adv_k5_n21.txt`, `general/check_adv.py`, `general/organiser_check.txt` |
+| **N(k) ≤ 5·2^(k−3) + 1 for every k ≥ 5** (21, 41, 81, …; the recursion above gives 28, 60, 124, …) | proved by hand by the same instance (three rounds of "feeding" a bin from bins of loads j, …, k − 1 standing in separate components, then a merge on fresh bins); for k = 6 the strategy was written out on 41 bins and accepted by the checker (a table of 2,689,236 positions, not included, so this run can be repeated only by regenerating it with `general/gen.py`) | `general/PROOFS.md` Theorem U, `general/out_check_k6_n41.txt` |
+| **N(k) ≥ ⌊(k+1)²/4⌋ + 1 for every k** (13, 17, 21 for k = 6, 7, 8; better than 2k from k = 6). The same rule is safe even if the adversary may remove any ball, so the any-removal number is between about k²/4 and k²/2 | proved by hand by the same instance; the method is, according to the instance, the "Robin Hood" argument known from load balancing with departures, adapted to forests (no source was checked for this, and the exact constant was not looked for in the literature); it does not use the order of expiry; five reviewers traced it and found no gap | `general/PROOFS.md` Theorem L |
+| N(k) in general | open: between ⌊(k+1)²/4⌋ + 1 and 5·2^(k−3) + 1, that is, between quadratic and about (5/8)·2^k. k + 2^(k−1) fits k ≤ 4, is attained as an upper bound at k = 5, and is not reached by the new strategy for k ≥ 6 (41 against 38); a lower bound that uses the order of expiry is missing | |
 
 ## How the adversary uses expiry
 
@@ -82,9 +84,7 @@ exactly the clutter. (If x already holds the two youngest balls after step
 too.) The 12-bin strategy for load 4 uses the same threat once or twice more,
 depending on the rule's answers, to obtain a clean 3-star on 4 bins, then builds load 3 on the 8
 untouched bins by plain merging. That is where k + 2^(k−1) comes from: a
-clean (k−1)-star on k bins plus 2^(k−1) fresh ones. Nobody has shown that a
-clean (k−1)-star can always be forced within that many bins, nor that the
-adversary cannot do better.
+clean (k−1)-star on k bins plus 2^(k−1) fresh ones. For k = 5 the follow-up of 21 November forces a clean 4-star within 21 bins; for k ≥ 6 nobody has shown that a clean (k−1)-star can be forced within k + 2^(k−1) bins, nor that the adversary cannot do better.
 
 If the adversary may remove any ball it likes, it needs no threat to tidy
 up, and 11 bins suffice for load 4. So for k = 4 the order of expiry costs
@@ -97,9 +97,16 @@ order of expiry costs nothing.
 
 ## What to distrust
 
-- **Everything is by one model family.** The upper bounds (7 and 12 bins)
-  are explicit strategies that can be followed by hand; the lower bounds (6
+- **Everything is by one model family.** The upper bounds (7 and 12 bins, and since 21 November 21 bins for k = 5, as a table) are explicit strategies, the first two short enough to follow by hand; the lower bounds (6
   and 11 bins are not enough) are computations.
+- **The general bounds are hours old and have one author.** N(5) ≤ 21
+  does not depend on the hand proof: the table and the 155-line checker suffice, if the checker is right. It treats positions that differ by
+  renaming bins as the same and untouched bins as interchangeable, which
+  its header justifies; it was tested on damaged tables (for the 12-bin table every one of its 101 lines: every deletion and every swapped move rejected, and the 21 accepted altered offers all only rename an untouched bin; for the 21-bin table random samples of 150 lines and 400 offers, with the same outcome) and reproduces N(1), N(2), N(3) through a small
+  exhaustive solver that shares its conventions. It was not compared with
+  the repository's other checkers, which use another file format. For
+  k ≥ 7 the upper bound is the hand proof alone. The lower bound says
+  nothing specific to first-in-first-out expiry, so it cannot explain the fast growth of the first four values. `general/PROOFS.md` refers to a `REPORT.md` that is not in the folder, and two of its output files contain REJECT lines without the command that produced them.
 - **N(4) ≥ 12 now has a certificate, of a compressed kind.** At first it
   rested on two programs whose counts agreed; they store the winning set in
   the same compressed way, and what they stored differed in size (3,722,933
@@ -239,6 +246,20 @@ itself. It found no false claim; its corrections (what the second mode
 still relies on, the make-up of the 1,560 test certificates, which
 certificate the organiser damaged, the regeneration recipe) are applied.
 
+The general bounds went to the same five reviewers. All five confirmed
+the strategy checker against the definition (legality of offers, expiry of
+the oldest ball, both answers followed, the test that no position repeats
+and why it is needed, the identification of positions up to renaming),
+Theorem U with its bin counts (21 at k = 5, 41 at k = 6) and Theorem L.
+Both Claude seats replayed the 21-bin table with their own programs, with
+different state representations: 3,676 positions, always ending in load 5,
+failing on 20 bins. Their findings, applied above: my "line removed" rerun
+was not in the log (added); the damage tests were exhaustive only for the
+12-bin table (all five); a sentence about clean stars was stale; where the
+lower end 12 comes from; "known argument" claimed more than was checked
+(GPT); the size of the omitted table could not be verified. These edits
+have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -248,6 +269,9 @@ certificate the organiser damaged, the regeneration recipe) are applied.
 - `solver-a/`, `solver-b/`: game solvers, certificates, checkers, proofs.
 - `verifier/`: the referee's three solvers, certificate checker and the
   replay of the 12-bin strategy.
+- `general/`: the second follow-up of 21 November (bounds for general k and
+  N(5) ≤ 21): proofs, the strategy generator, the checker, tables for k ≤ 5,
+  tests.
 - `certificate/`: the follow-up for 11 bins: `PROOF.md`, the checker
   `check.cpp`, the tools that reduce a program's output to a certificate and
   test the checker, small certificates for 6, 8 and 9 bins, two 7-bin files

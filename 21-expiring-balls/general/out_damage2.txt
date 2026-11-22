@@ -1,0 +1,1 @@
+k=5 sample of 400 offers: rejected 297; accepted as the same move (unnamed bin renamed) 103; accepted with a different move 0
