@@ -1,0 +1,27 @@
+N=3 variant=0 guaranteed_calls=3  3N-6=3  OK  positions=4
+N=4 variant=0 guaranteed_calls=6  3N-6=6  OK  positions=14
+N=5 variant=0 guaranteed_calls=9  3N-6=9  OK  positions=56
+N=6 variant=0 guaranteed_calls=12  3N-6=12  OK  positions=270
+N=7 variant=0 guaranteed_calls=15  3N-6=15  OK  positions=1529
+N=8 variant=0 guaranteed_calls=18  3N-6=18  OK  positions=10032
+N=9 variant=0 guaranteed_calls=21  3N-6=21  OK  positions=75777
+N=10 variant=0 guaranteed_calls=24  3N-6=24  OK  positions=653647
+N=11 variant=0 guaranteed_calls=27  3N-6=27  OK  positions=6368840
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+/bin/bash: line 1: 3996822 Aborted                 nice -n 15 taskset -c 11 timeout 600 ./dcheck $n 0
+N=5 variant=0 guaranteed_calls=9  3N-6=9  OK  positions=565
+N=6 variant=0 guaranteed_calls=12  3N-6=12  OK  positions=7606
+N=7 variant=0 guaranteed_calls=15  3N-6=15  OK  positions=132877
+N=8 variant=0 guaranteed_calls=18  3N-6=18  OK  positions=2973321
+--- deliberately wrong rules (must print BELOW) ---
+N=5 variant=1 guaranteed_calls=9  3N-6=9  OK  positions=38
+N=7 variant=1 guaranteed_calls=15  3N-6=15  OK  positions=971
+N=9 variant=1 guaranteed_calls=21  3N-6=21  OK  positions=46972
+N=5 variant=2 guaranteed_calls=8  3N-6=9  BELOW  positions=46
+N=7 variant=2 guaranteed_calls=13  3N-6=15  BELOW  positions=1010
+N=9 variant=2 guaranteed_calls=18  3N-6=21  BELOW  positions=43818
+N=5 variant=3 guaranteed_calls=7  3N-6=9  BELOW  positions=10
+N=7 variant=3 guaranteed_calls=11  3N-6=15  BELOW  positions=21
+N=9 variant=3 guaranteed_calls=15  3N-6=21  BELOW  positions=36
