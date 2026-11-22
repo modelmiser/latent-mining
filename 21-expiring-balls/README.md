@@ -106,7 +106,7 @@ order of expiry costs nothing.
   exhaustive solver that shares its conventions. It was not compared with
   the repository's other checkers, which use another file format. For
   k ≥ 7 the upper bound is the hand proof alone. The lower bound says
-  nothing specific to first-in-first-out expiry, so it cannot explain the fast growth of the first four values. `general/PROOFS.md` refers to a `REPORT.md` that is not in the folder, and two output files in `general/` (`out_check_small.txt`, `out_check_k6_n41.txt`) contain REJECT lines, and `out_rh_test.txt` two assertion failures, without the commands that produced them.
+  nothing specific to first-in-first-out expiry, so it cannot explain the fast growth of the first four values. `general/PROOFS.md` refers to a `REPORT.md` that was not in the folder at the time of review (the instance's report, archived since as `general/REPORT.md`), and two output files in `general/` (`out_check_small.txt`, `out_check_k6_n41.txt`) contain REJECT lines, and `out_rh_test.txt` two assertion failures, without the commands that produced them.
 - **N(4) ≥ 12 now has a certificate, of a compressed kind.** At first it
   rested on two programs whose counts agreed; they store the winning set in
   the same compressed way, and what they stored differed in size (3,722,933
@@ -148,7 +148,7 @@ order of expiry costs nothing.
   contains 30 lines marked MISMATCH from a first comparison script that
   compared differently formatted lines; the valid comparison is
   `count_check.txt`, which reviewers recomputed. `PROOF.md` refers to a
-  `REPORT.md` that is not in the folder and says the separate Python program
+  `REPORT.md` that was not in the folder at the time of review (archived since as `certificate/REPORT.md`) and says the separate Python program
   took part in the damaged-certificate tests, which it did not. The checker
   can be run in parts; each part prints ACCEPT on its own and only the first
   checks the starting positions, so a split run is valid only if every part
@@ -264,6 +264,7 @@ three wording points are applied.
 
 ## Files
 
+- `certificate/REPORT.md`, `general/REPORT.md`: the two follow-up instances' final reports, archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

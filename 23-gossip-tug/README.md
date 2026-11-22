@@ -109,7 +109,7 @@ person who can still call) allows exactly one call that completes two. So
 the second phase has at least 2n − 4 calls, and the game at least
 (n − 2) + (2n − 4) = 3n − 6.
 
-The same follow-up tried to bound the game from above and failed: the natural Hastener rules it tested either reach the trivial n(n − 1)/2 or are not optimal (3 or 4 calls above A(n) at n = 8; 3 above at n = 9 for the one rule run there), with too few values to tell whether the latter grow linearly. Its computations (`growth/star.log`, n ≤ 8) show that after the Delayer's opening the full value A(n) is still reachable as long as at least two people are left out, while leaving exactly one out gives 3n − 6. In its report, which came back as text and is not in the folder, it conjectures A(n) = 4n − 13 for n ≥ 8 (so A(11) = 31) on the strength of the three computed values 19, 23, 27, the last of which rests on a pruned search; that is a guess, not a result.
+The same follow-up tried to bound the game from above and failed: the natural Hastener rules it tested either reach the trivial n(n − 1)/2 or are not optimal (3 or 4 calls above A(n) at n = 8; 3 above at n = 9 for the one rule run there), with too few values to tell whether the latter grow linearly. Its computations (`growth/star.log`, n ≤ 8) show that after the Delayer's opening the full value A(n) is still reachable as long as at least two people are left out, while leaving exactly one out gives 3n − 6. In its report (`growth/REPORT.md`, archived afterwards from the session transcript) it conjectures A(n) = 4n − 13 for n ≥ 8 (so A(11) = 31) on the strength of the three computed values 19, 23, 27, the last of which rests on a pruned search; that is a guess, not a result.
 
 ## What to distrust
 
@@ -201,6 +201,7 @@ slip in my account of the chain; the older section heading. A second-round revie
 
 ## Files
 
+- `growth/REPORT.md`: the follow-up instance's final report, archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

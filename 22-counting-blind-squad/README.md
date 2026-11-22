@@ -74,7 +74,7 @@ It fires lines of 2, 3, 4 and 5 cells at times 5, 8, 7 and 10, and fails on
 - **L(5) = 5 is the most checked:** four separately written programs (the three original ones and, since 21 November, the follow-up's) tried every rule and agree on the number of rules reaching each length, and on
   the 1,244 optimal rules one by one.
 - **L(6) no longer rests on the backtracking idea alone.** A follow-up
-  instance wrote a plain enumerator from the definition (it was told not to read the earlier programs; its source header says it was written from the question text only; its report came back as text and is not included here): all 14 free entries enumerated (three fixed per chunk, an odometer over the other eleven), each rule run on
+  instance wrote a plain enumerator from the definition (it was told not to read the earlier programs; its source header says it was written from the question text only; its report came back as text and was archived afterwards as `enum6/REPORT.md`): all 14 free entries enumerated (three fixed per chunk, an odometer over the other eleven), each rule run on
   lengths 2, 3, … until it first fails, with "never fires" decided only when
   a configuration exactly repeats. Its 216 chunks add up to 6¹⁴ rules; the
   histogram of how far each rule gets is in `enum6/aggregate_s6.txt`; no rule
@@ -182,6 +182,7 @@ fact; "an error could only make it too small" was wrong for seven states
 
 ## Files
 
+- `enum6/REPORT.md`: the follow-up instance's final report, archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

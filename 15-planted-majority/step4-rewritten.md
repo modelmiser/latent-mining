@@ -10,8 +10,7 @@ without seeing the other's answer. Both concluded that the step is sound and
 that the objection does not apply to what the proof uses. Both are instances
 of the same model family as the solver, so this is a second and third reading
 within one family, not an outside check. Their reports came back to the
-organiser as text and are not archived in this folder; this paragraph is the
-organiser's account of them.
+organiser as text; they were archived afterwards, verbatim, as `adjudication-1.md` and `adjudication-2.md`. This paragraph is the organiser's account of them.
 
 The rewritten step below then went to three reviewers from other model
 families (GPT, Grok, Gemini), among them the one that had raised the

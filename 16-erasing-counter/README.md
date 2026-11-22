@@ -286,6 +286,7 @@ sentence still generalised from a single example) are applied.
 
 ## Files
 
+- Each follow-up folder (`upper/`, `shape/`, `shape2/`) holds its instance's final report as `REPORT.md`; those of `shape/` and `shape2/` were archived from the session transcript on 21 November, verbatim with paths shortened, because the instances could not write report files.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

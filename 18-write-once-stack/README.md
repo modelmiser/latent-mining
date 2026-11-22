@@ -110,7 +110,7 @@ the stack that can still be read, and w the number of quads wasted; with w ≤ q
 The instance could not push the idea further: with more levels, a half-dead
 quad from the first phase looks like a second-level element, and an
 adversary can place long runs of them at a cost of 3 operations per 4
-cells, which gives the same ratio again. That is its sketch, not a result. It reports that its attempt to compute R(9) with solver B's program ran out of time; no log of that run was kept. (Both statements are from the instance's report, which came back as text and is not stored in this folder.)
+cells, which gives the same ratio again. That is its sketch, not a result. It reports that its attempt to compute R(9) with solver B's program ran out of time; no log of that run was kept. (Both statements are from the instance's report, archived afterwards as `quad/REPORT.md`.)
 
 ## What to distrust
 
@@ -204,9 +204,10 @@ step (Grok, Gemini). A second-round reviewer (one Claude instance) then rechecke
 
 ## Files
 
+- `quad/REPORT.md`: the follow-up instance's final report, archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each instance of the first version was told.
-- `reports/`: the final reports of the two solvers and the referee, verbatim (the follow-up instance's report is not stored).
+- `reports/`: the final reports of the two solvers and the referee, verbatim (the follow-up instance's report is `quad/REPORT.md`).
 - `solver-a/`, `solver-b/`: searches (backtracking and SAT), schemes,
   checkers, proofs; `solver-b/mwit/` holds the 246 small schemes.
 - `quad/`: the follow-up of 21 November: the brief, the proof of R(4q + 1) ≥ 3q − 1, the scheme, a checker written from the definition (and `check_qe.py`, an unused reader for another file format), the instance's log and the organiser's rerun.

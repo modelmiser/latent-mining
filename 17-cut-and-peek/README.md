@@ -295,6 +295,7 @@ first) are applied.
 
 ## Files
 
+- `lean/REPORT-full-opening.md`, `lean/REPORT-partial.md`: the final reports of the two proving instances, archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

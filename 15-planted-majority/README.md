@@ -239,6 +239,7 @@ The corrected wording has not been through a second round.
 
 ## Files
 
+- `adjudication-1.md`, `adjudication-2.md`: the reports of the two instances that adjudicated Step 4 of Theorem 2 (see `step4-rewritten.md`), archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

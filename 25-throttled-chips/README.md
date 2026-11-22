@@ -217,7 +217,7 @@ h = 4 and h = 5.
 - **Slips in the files of `constant/`.** `constant/proofs.txt` states the chain
   5h − 176 ≤ G(h) ≤ C(h) ≤ 5h − 6 "for all h"; the upper bound needs h ≥ 2.
   One line of Lemma 2 reads "Φ < |Z|" before noting that Z is not empty. It
-  refers to a `REPORT.md` that is not in the folder (the numbers are in
+  refers to a `REPORT.md` that was not in the folder at the time (the instance's report, archived since as `constant/REPORT.md`; the numbers are in
   `lagadv2_out.txt` and `lagadv2_big.txt`) and quotes lag maxima of "7.2 and
   12" where the output has 7.2 and 12.2. `test_out_superseded.txt` is the
   output of an earlier version of the test script, in which one deliberately
@@ -339,6 +339,7 @@ reviewed again.
 
 ## Files
 
+- Each follow-up folder (`constant/`, `lag/`, `tight/`) holds its instance's final report as `REPORT.md`; that of `constant/` was archived from the session transcript on 21 November, verbatim with paths shortened.
 - `tight/`: the third follow-up of 21 November (5h − 28 ≤ G(h) ≤ 5h − 10):
   `PROOFS.md`, a solver (single-point lists, arbitrary lists, a random search), tests and outputs.
 - `lag/`: the second follow-up of 21 November (the lag is logarithmic):
