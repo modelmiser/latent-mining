@@ -109,14 +109,15 @@ order of expiry costs nothing.
   each, with the same sha256; the checksums are in
   `certificate/out/organiser_sha256_and_lines.txt`, recorded by the
   organiser, and the same holds at 10 bins). Reviewers reduced the small
-  cases themselves and got the same. It then wrote a checker, sharing no code with the
+  cases themselves and got the same. The follow-up instance then wrote a checker, sharing no code with the
   two programs, that takes such a list as untrusted input and accepts only
   if the positions with none of the listed positions among their newest
   balls form a safe set for the rule. The full set is far too large to walk,
   so the checker examines three finite families of positions, and
   `certificate/PROOF.md` proves that these are enough. On 11 bins it accepts
-  in 40 seconds; a second mode that walks all 974,272,116 winning positions
-  without that proof also accepts. It rejects every certificate tried for
+  in 40 seconds; a second mode that walks all 974,272,116 winning positions,
+  and needs only the short argument of the proof's section 5 in place of the
+  reduction to three families, also accepts (in 9.5 minutes). It rejects every certificate tried for
   7 bins and load 3 (where the adversary wins), and every damaged 11-bin
   certificate tried except one in which a redundant line was added, which it
   rightly accepts. What is still trusted: the two-page proof, which so far
@@ -124,8 +125,9 @@ order of expiry costs nothing.
   pruning bounds proved in the same file, one of them shared with the two
   programs, switched off for comparison only up to 9 bins. The checker was
   tested against literal checks of the definition: its own literal mode,
-  which shares its state-handling code, on 1,560 damaged certificates up to
-  8 bins and on the intact one at 9; and a separate Python program sharing
+  which shares its state-handling code, on 1,560 certificates (intact,
+  damaged and random) up to 8 bins by the follow-up's account (the log does
+  not record which modes ran on each batch) and on the intact one at 9; and a separate Python program sharing
   nothing with it, which the organiser ran on 6 bins (accept), on a bad
   7-bin certificate (reject) and on 8 bins (accept, all 4,358,193 safe
   positions checked directly); see
@@ -133,7 +135,8 @@ order of expiry costs nothing.
   checker is right, and no literal check reaches 10 or 11 bins. By the
   organiser's own account, with the output in
   `certificate/out/organiser_rerun.log`, it recompiled the checker and reran
-  it on the 11-bin certificate and on a certificate it damaged itself.
+  it on the 11-bin certificate (accepted) and on a 9-bin certificate it
+  damaged itself (rejected).
 - **Rough edges in the follow-up's files.** `certificate/out/difftest.log`
   contains 30 lines marked MISMATCH from a first comparison script that
   compared differently formatted lines; the valid comparison is
@@ -143,8 +146,9 @@ order of expiry costs nothing.
   can be run in parts; each part prints ACCEPT on its own and only the first
   checks the starting positions, so a split run is valid only if every part
   accepts (the runs recorded here use a single part). It crashes if asked
-  for zero parts, and any value of its `NOPRUNE` switch turns pruning off. The 90 MB certificate is not in the repository; the folder
-  says how to regenerate it.
+  for zero parts, and any value of its `NOPRUNE` switch turns pruning off. The 90 MB certificate is not in the repository; it can be
+  regenerated from `certificate/gen/` (run with `DUMP=file`, then
+  `certtool.py minimize`), though no command line is recorded.
 - **N(3) = 7 is on firmer ground:** each direction has a certificate of a few
   dozen or a few thousand states that a short separate program checks.
 - **What is known.** The literature search read the relevant sections of
@@ -229,7 +233,11 @@ above:
   command-line edge case that no recorded run uses, listed above with the
   split-run caveat.
 
-These edits have not been reviewed again.
+A second-round reviewer (one Claude instance) then checked the edited page
+against the files, recomputing the figures and reducing the small outputs
+itself. It found no false claim; its corrections (what the second mode
+still relies on, the make-up of the 1,560 test certificates, which
+certificate the organiser damaged, the regeneration recipe) are applied.
 
 ## Files
 
@@ -242,7 +250,8 @@ These edits have not been reviewed again.
   replay of the 12-bin strategy.
 - `certificate/`: the follow-up for 11 bins: `PROOF.md`, the checker
   `check.cpp`, the tools that reduce a program's output to a certificate and
-  test the checker, small certificates for 6, 8 and 9 bins, and logs. The
+  test the checker, small certificates for 6, 8 and 9 bins, two 7-bin files
+  that must be rejected, the follow-up's brief, and logs. The
   11-bin certificate (90 MB) and the 10-bin one (1.3 MB) are left out;
   `gen/` holds copies of the two search programs with a dump statement
   added, from which `certtool.py minimize` regenerates them.
