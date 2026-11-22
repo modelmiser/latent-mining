@@ -1,0 +1,10 @@
+depth 5 indices 7 L(T) 50
+OK: cycle of length exactly 52
+VIOLATES_P1 (N > L(T))
+rc=0
+depth 5 indices 9 L(T) 98
+OK: cycle of length exactly 114
+VIOLATES_P1 (N > L(T))
+rc=0
+depth 5 indices 7 L(T) 50 longest cycle 52 VIOLATES_P1 cycle lengths [(52, 1)]
+depth 5 indices 9 L(T) 98 longest cycle 114 VIOLATES_P1 cycle lengths [(114, 1)]

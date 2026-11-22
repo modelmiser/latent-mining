@@ -1,0 +1,3 @@
+depth 5 L 50 cycle through the first repeated state has length 52 (tail 0 )
+depth 5 L 98 cycle through the first repeated state has length 114 (tail 0 )
+depth 5 L 602 cycle through the first repeated state has length 762 (tail 0 )

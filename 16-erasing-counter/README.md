@@ -62,7 +62,9 @@ Write W_1 = 2 and W_r = W_(r−1)·(W_(r−1) + 1), so W = 2, 6, 42, 1806,
 | **For trees in which no position labels two nodes, every cycle has length at most L of the tree, and every shape has such a labelling that attains it; so the longest cycle over these trees of depth at most r is exactly W_r, for every r** (Theorem RO; L(leaf) = 1, L(node) = L(1-child)·(L(0-child) + 1)) | proved by hand by the follow-up instance, from Theorem RD and the construction of the lower bound | `upper/PROOFS.md` §3 |
 | For r ≥ 5, a tree of depth r with a cycle longer than W_r must reuse a position at two nodes whose lowest common ancestor has depth at most r − 5 (the root has depth 0); at depth 5 that ancestor is the root | follows from Theorem RD and the computed D(ρ) = W_ρ for ρ ≤ 4 | `upper/PROOFS.md` §2 |
 | D(r) ≤ (r + 1)·2^(2^r − 1 − r) for every r ≥ 1: 6, 64, 10240, about 4.03 × 10⁸ for r = 2, …, 5 (Theorem G) | proved by hand by the follow-up instance | `upper/PROOFS.md` §4 |
-| Every cycle of every tree has length at most L(T) (this would give D(r) = W_r) | conjecture; computed for all 5,478,539 trees of depth ≤ 3 up to relabelling and for every cycle of every tree of depth ≤ 4; not proved | `upper/out_brute3_r3.txt`, `upper/out_lazy2_r4.txt` |
+| ~~Every cycle of every tree has length at most L(T)~~ **False.** It holds for every tree of depth ≤ 4 (computed), but the depth-5 tree `(1 (2 (3 [2] (4 [4] (5 [5] []))) [1]) (3 (6 [6] (7 [7] [3])) []))` has L = 50 and a cycle of length 52; two larger trees of the same family give 114 against 98 and 762 against 602. All are far below W_5, so D(r) = W_r is not affected | this page carried the statement as a conjecture (from `upper/PROOFS.md`) for about an hour on 21 November (commit `70f0c0d`); a further instance, asked to prove it, refuted it. The three cycles are checked by its two programs, by the organiser's own simulator, and by the separate simulators of two reviewers (see Review) | `shape/PROOFS.md` §1, `shape/cex_*.txt`, `shape/organiser_check_out.txt` |
+| A cycle that never visits a state with zeros on the whole all-zero path has length at most the length of that path (Lemma A) | proved by hand by that instance | `shape/PROOFS.md` §2 |
+| If the subtrees hanging off the all-zero path share no position other than those on that path, and the same holds recursively inside each of them once the nodes reading path positions are removed, then every cycle has length at most W_r at depth r (Theorem Z). This class contains the trees that read each position once, the two small examples of `upper/PROOFS.md` §5 (the first is shown below), and the counterexample above | proved by hand by that instance, using Theorem E; its counting bound, Lemma A and the bound by W_depth were tested on 6,000 random trees satisfying the top-level condition (not necessarily in the whole recursive class) and on three fixed examples, which checks the bookkeeping and is not strong evidence; five reviewers traced the proofs and found no gap (see Review) | `shape/PROOFS.md` §3, `shape/out_testZ.txt` |
 | D(r) = W_r for every r | conjecture; computed for r ≤ 4 only | |
 
 ## Why the cycle can be so long
@@ -102,8 +104,7 @@ length is about 2^(0.676·2^r).
 
 ## Towards an upper bound
 
-This section follows `upper/PROOFS.md`, the work of one follow-up instance on
-21 November.
+This section follows `upper/PROOFS.md`, the work of one follow-up instance on 21 November; its last paragraph follows `shape/PROOFS.md`.
 
 *One empty step per cycle.* Call a leaf that writes nothing empty. Look at
 the positions on the all-zero path of the tree. A step that reads a 1 never
@@ -132,12 +133,25 @@ Sharing does break the product bound: the tree
 `(1 (2 [1] []) (2 [2] [2]))` of depth 2 (root reads position 1, both
 children read position 2; brackets are what a leaf writes) has a cycle of
 length 3, where the product bound would give 2. It is still below
-L = 6. The follow-up lists five natural strengthenings (the product bound
-for all trees among them) of "length ≤ L(T)"
-that would allow an induction and are false at depth 3.
+L = 6. The follow-up lists five natural strengthenings (the product bound for all trees among them) of "length ≤ L(T)" that would allow an induction and are false at depth 3.
+
+*The shape bound itself is false.* The first follow-up conjectured that
+every cycle of every tree is at most L(T). A later instance found the
+depth-5 tree in the Results table: its all-zero path reads positions 1, 2,
+3, the leaf at its end writes 2, and the 1-child of the node reading 2 is a
+single leaf that writes 1. Every return to the all-zero path therefore
+costs three states before the counter under the root's 1-child moves. That
+relay leaf counts 1 in L, but its real cost is one level of depth for
+everything further down, which L does not see and the Sylvester value for
+the depth does. So the right target is the bound by depth, W_r, not by
+shape. The same instance proved that bound for trees whose subtrees off the
+all-zero path share no position except those on the path (recursively);
+positions shared between two of those subtrees, at any level of that recursion, are the case still open (at depth 5, only at the top level).
 
 ## What to distrust
 
+- **A conjecture printed here was false.** "Length ≤ L(T)" was computed for
+  depth ≤ 4 and stated as a conjecture; it fails at depth 5. Agreement up to depth 4 said nothing about depth 5; in this family of trees, depth 4 leaves no room for the relay to pay. `upper/PROOFS.md` still states it as Conjecture P1. The new theorems in `shape/PROOFS.md` are by one instance and hours old; reviewers noted that its formula for the family of counterexamples leaves one hypothesis unstated (the counter under the root's 1-child must use its empty exit once per cycle), which the three printed trees satisfy, and that its output file prints the witness lines of a deliberately broken run directly under the summary of the clean run.
 - **The upper-bound results date from 21 November and have one author.** Theorem
   E's proof builds an auxiliary tree by a recursive rule with a special case
   for repeated modes; that construction was tested by program on 40,000
@@ -239,6 +253,18 @@ and found it to behave as claimed each time. Their findings, applied above:
 
 A second-round reviewer (one Claude instance) then checked the edited page against the files and the reviewers' reports; its corrections, to how much of the evidence came from which reviewer, are applied.
 
+The counterexample and Theorem Z went to the same five reviewers. All five
+confirmed the counterexample from the definition (legal, depth 5, L = 50,
+cycle 52), Lemma A, Theorem Z1 and Theorem Z, and that the new class is
+strictly larger than the read-once trees. Both Claude seats wrote their own
+simulators and found the same three cycles; one tested every step of
+Theorem Z1's proof on 485,059 cycles of 147,992 trees satisfying its
+hypothesis, with no violation, and saw the checks fail when the hypothesis
+is dropped. Their findings, applied above: the test corpus was misdescribed
+(four seats); "the two small examples below" where one is on the page; the
+recursion is on pruned subtrees; "a few hours" for about one. These edits
+have not been reviewed again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -247,6 +273,8 @@ A second-round reviewer (one Claude instance) then checked the edited page again
 - `reports/`: each instance's final report, verbatim.
 - `solver-a/`, `solver-b/`: searches, witnesses (`sylvester_r*.txt`,
   `witness_r*.txt`), checkers, proofs.
+- `shape/`: a second follow-up of 21 November: the counterexample to the
+  shape bound, Lemma A and Theorem Z, programs and outputs.
 - `upper/`: the follow-up of 21 November: `PROOFS.md`, its programs and
   outputs, its brief and report.
 - `verifier/`: the referee's brute force, search, witness checker and lemma

@@ -1,0 +1,30 @@
+== cex_big
+depth 5 indices 13 L(T) 602
+OK: cycle of length exactly 762
+VIOLATES_P1 (N > L(T))
+rc=0
+== known_b
+depth 3 indices 4 L(T) 15
+OK: cycle of length exactly 10
+consistent with P1 (N <= L(T))
+rc=0
+== bad_len51
+FAIL: no return to the start after 51 steps
+depth 5 indices 7 L(T) 50
+rc=1
+== bad_len104
+FAIL: state repeats after 52 steps (claimed first return at 104)
+depth 5 indices 7 L(T) 50
+rc=1
+== bad_L
+depth 5 indices 7 L(T) 50
+FAIL: claimed L 49 but L(T) = 50
+rc=1
+== bad_repeat
+ILLEGAL TREE: index 6 twice on a path
+rc=1
+== bad_leaf
+ILLEGAL TREE: leaf writes 3, not on its path (1, 6, 7)
+rc=1
+depth 5 indices 13 L(T) 602 longest cycle 762 VIOLATES_P1 cycle lengths [(762, 1)]
+depth 3 indices 4 L(T) 15 longest cycle 10 ok cycle lengths [(10, 1)]
