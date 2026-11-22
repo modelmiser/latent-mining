@@ -1,0 +1,92 @@
+quad scheme Qn=3 n=13 t=8 mutant=nowaste: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'POP', 'P0', 'P0', 'P1'))
+quad scheme Qn=4 n=17 t=11 mutant=nowaste: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'POP', 'P0', 'P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=3 n=13 t=8 mutant=nofreezeclean: SURVIVES 5353
+quad scheme Qn=4 n=17 t=11 mutant=nofreezeclean: FAILS ('Q=0, top=1', ('P0', 'P0', 'POP', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1', 'P0', 'POP'))
+quad scheme Qn=5 n=21 t=14 mutant=None: SURVIVES 3715049
+
+real	0m1.358s
+user	0m1.315s
+sys	0m0.043s
+quad scheme Qn=5 n=21 t=15 mutant=None: SURVIVES 11080169
+
+real	0m2.956s
+user	0m2.884s
+sys	0m0.071s
+quad scheme Qn=5 n=21 t=16 mutant=None: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=6 n=25 t=17 mutant=None: SURVIVES 99095529
+quad scheme Qn=6 n=25 t=18 mutant=None: SURVIVES 296855529
+quad scheme Qn=6 n=25 t=19 mutant=None: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1'))
+Traceback (most recent call last):
+  File "quad.py", line 110, in <module>
+    ok, info = check(n, t, Qf, Ef, strict=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "checker.py", line 35, in check
+    st2 = st + (0 if op == 'P0' else 1,)
+          ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MemoryError
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 56, in apport_excepthook
+    if not enabled():
+           ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 24, in enabled
+    import re
+  File "/usr/lib/python3.12/re/__init__.py", line 124, in <module>
+    import enum
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 991, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1087, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1187, in get_data
+MemoryError
+
+Original exception was:
+Traceback (most recent call last):
+  File "quad.py", line 110, in <module>
+    ok, info = check(n, t, Qf, Ef, strict=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "checker.py", line 35, in check
+    st2 = st + (0 if op == 'P0' else 1,)
+          ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MemoryError
+Traceback (most recent call last):
+  File "quad.py", line 110, in <module>
+    ok, info = check(n, t, Qf, Ef, strict=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "checker.py", line 35, in check
+    st2 = st + (0 if op == 'P0' else 1,)
+          ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MemoryError
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 56, in apport_excepthook
+    if not enabled():
+           ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 24, in enabled
+    import re
+  File "/usr/lib/python3.12/re/__init__.py", line 124, in <module>
+    import enum
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 991, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1087, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1187, in get_data
+MemoryError
+
+Original exception was:
+Traceback (most recent call last):
+  File "quad.py", line 110, in <module>
+    ok, info = check(n, t, Qf, Ef, strict=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "checker.py", line 35, in check
+    st2 = st + (0 if op == 'P0' else 1,)
+          ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MemoryError

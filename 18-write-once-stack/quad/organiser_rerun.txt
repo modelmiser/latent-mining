@@ -1,0 +1,17 @@
+# organiser reruns 2026-11-21: python3 quad.py Q T [mutant]  (n = 4Q + 1). For each Q = 1..4: T = 3Q - 1 (proved), 3Q (survives, not proved), 3Q + 1 (fails); then two mutants.
+quad scheme Qn=1 n=5 t=2 mutant=None: SURVIVES 9
+quad scheme Qn=1 n=5 t=3 mutant=None: SURVIVES 25
+quad scheme Qn=1 n=5 t=4 mutant=None: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=2 n=9 t=5 mutant=None: SURVIVES 209
+quad scheme Qn=2 n=9 t=6 mutant=None: SURVIVES 617
+quad scheme Qn=2 n=9 t=7 mutant=None: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=3 n=13 t=8 mutant=None: SURVIVES 5353
+quad scheme Qn=3 n=13 t=9 mutant=None: SURVIVES 15785
+quad scheme Qn=3 n=13 t=10 mutant=None: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=4 n=17 t=11 mutant=None: SURVIVES 139625
+quad scheme Qn=4 n=17 t=12 mutant=None: SURVIVES 417257
+quad scheme Qn=4 n=17 t=13 mutant=None: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=3 n=13 t=8 mutant=nowaste: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'POP', 'P0', 'P0', 'P1'))
+quad scheme Qn=4 n=17 t=11 mutant=nowaste: FAILS ('Q=0, top=1', ('P0', 'P0', 'P0', 'P0', 'POP', 'P0', 'P0', 'P0', 'P0', 'P1'))
+quad scheme Qn=3 n=13 t=8 mutant=nofreezeclean: SURVIVES 5353
+quad scheme Qn=4 n=17 t=11 mutant=nofreezeclean: FAILS ('Q=0, top=1', ('P0', 'P0', 'POP', 'P0', 'P0', 'P0', 'P0', 'P0', 'P1', 'P0', 'POP'))
