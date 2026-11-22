@@ -104,21 +104,19 @@ set and the pairs are reused at a second level: a quad whose two pairs are both 
 they are the bottom-most readable ones, and the proof shows they lie deeper
 than the remaining operations can reach. Half-dead quads left behind by
 earlier pops are killed, without costing an operation, when the frontier
-passes them. Charging every operation to a quad gives
-s = 4q − |R| − w, where s is the number of operations so far, R the part of
+passes them. Charging every operation to a quad gives, once the flag is set, s = 4q − |R| − w (the proof needs only ≥), where s is the number of operations so far, R the part of
 the stack that can still be read, and w the number of quads wasted; with w ≤ q − 1 the readable part has, once the flag is set, at least two more entries than there are operations left.
 
 The instance could not push the idea further: with more levels, a half-dead
 quad from the first phase looks like a second-level element, and an
 adversary can place long runs of them at a cost of 3 operations per 4
-cells, which gives the same ratio again. That is its sketch, not a result.
-It reports that its attempt to compute R(9) with solver B's program ran out of time; no log of that run was kept.
+cells, which gives the same ratio again. That is its sketch, not a result. It reports that its attempt to compute R(9) with solver B's program ran out of time; no log of that run was kept. (Both statements are from the instance's report, which came back as text and is not stored in this folder.)
 
 ## What to distrust
 
 - **The three-quarters bound is hours old and has one author.** The delicate steps
   of its proof are the table of charges per quad and the claim that a pop
-  never hits the first intact quad. The machine check covers n ≤ 25 only (the log ends with two out-of-memory errors that the instance says are the runs for n = 29; the log does not record their commands) and tests the scheme, not the proof for general q. It checks that the configuration only grows along reachable plays, not for every configuration. `quad/PROOF.md` is left as written; reviewers noted that one sentence gives a wrong reason at the freeze (it misstates the order of the destroyed entries, though the set destroyed is the bottom of the stack as needed), that its "equality" in the charging equation holds as long as no operation is a no-op, which the budget guarantees, that it cites `run_quad.log` for small cases that are in the organiser's file, and that the update is specified only for configurations that can be reached. One of its two deliberately broken variants is caught at
+  never hits the first intact quad. The machine check covers n = 4q + 1 up to 25 (q ≤ 6) only (the log ends with two out-of-memory errors that the instance says are the runs for n = 29; the log does not record their commands) and tests the scheme, not the proof for general q. It checks that the configuration only grows along reachable plays, not for every configuration. `quad/PROOF.md` is left as written; reviewers noted that one sentence gives a wrong reason at the freeze (it misstates the order of the destroyed entries, though the set destroyed is the bottom of the stack as needed), that its "equality" in the charging equation holds as long as no operation is a no-op, which the budget guarantees, that it cites `run_quad.log` for small cases that are in the organiser's file, and that the update is specified only for configurations that can be reached. One of its two deliberately broken variants is caught at
   q = 4 but not at q = 3.
 - **Everything is by one model family.** Nothing is machine-checked as a
   proof.
@@ -201,19 +199,17 @@ organiser ran and stored them); the Short answer and the lower-bounds
 section still gave ⌊n/2⌋ + 2 as the best bound (all five); the count
 296,855,529 belongs to the unproved length 3q; two statements about failed
 runs had no log; one sentence of the proof gives a wrong reason for a true
-step (Grok, Gemini). These edits have not been reviewed again.
+step (Grok, Gemini). A second-round reviewer (one Claude instance) then rechecked the edited page, recomputing the list of n, the sequence counts and rerunning q ≤ 5; every number held, and its wording corrections are applied.
 
 
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
-- `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
-  instance was told.
-- `reports/`: each instance's final report, verbatim.
+- `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each instance of the first version was told.
+- `reports/`: the final reports of the two solvers and the referee, verbatim (the follow-up instance's report is not stored).
 - `solver-a/`, `solver-b/`: searches (backtracking and SAT), schemes,
   checkers, proofs; `solver-b/mwit/` holds the 246 small schemes.
-- `quad/`: the follow-up of 21 November: the proof of R(4q + 1) ≥ 3q − 1,
-  the scheme, a checker written from the definition, logs.
+- `quad/`: the follow-up of 21 November: the brief, the proof of R(4q + 1) ≥ 3q − 1, the scheme, a checker written from the definition (and `check_qe.py`, an unused reader for another file format), the instance's log and the organiser's rerun.
 - `verifier/`: the referee's checker and solver, and `m6/` with the 255
   schemes for r = 6.
 - `prior-art.md`: the literature search.
