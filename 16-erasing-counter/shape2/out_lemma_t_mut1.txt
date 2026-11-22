@@ -1,0 +1,3 @@
+lemma_t SEED=1 MUT=1: exhaustive cases 35387, random cases 165080, violations 4405, max X/W_r 2.000000
+first violation (r, i, chain, c, c_T, H_T, X, W_r): (3, 1, [1, 'T'], {1: 6}, 6, 5, 61, 42)
+RESULT: CHECK FAILED

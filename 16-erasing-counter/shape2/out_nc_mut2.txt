@@ -1,0 +1,5 @@
+nccheck NT=3000 SEED=3 MUT=2
+{'trees': 3000, 'cyclesB': 6307, 'NC': 6107, 'NC_with_shared_read': 218, 'NC_trees_not_MD': 4549, 'tight': 5460, 'chain>=2': 1014, 'FAILS': 46}
+first failure: too many mode-m_j states 
+  tree (1 (2 (3 [3] [2]) (4 (3 [4] (5 [1] [2])) (3 (5 [] [3]) (5 [2] [2])))) (5 (4 (2 [1] [1]) (2 [1] [2])) (4 (2 [2] [1]) (2 [2] [5]))))
+RESULT: CHECK FAILED

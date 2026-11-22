@@ -1,0 +1,5 @@
+tailcheck NT=3000 SEED=3 MUT=3
+{'trees': 2992, 'cyclesB': 12052, 'EC': 12047, 'tail_in_chain': 6191, 'prefix_before_tail': 404, 'tail_shares_data': 1770, 'tight': 10956, 'maxlen': 20, 'FAILS': 31}
+first failure: (4) too many states in unit 1 
+  split i = 2  tree (1 (2 (3 [1] (5 [5] (7 (4 [7] []) (6 [] [5])))) [2]) (3 (2 (8 [3] [2]) (8 [2] [2])) (2 [2] [2])))
+RESULT: CHECK FAILED

@@ -1,0 +1,5 @@
+mdcheck NT=3000 SEED=7 MUT=3
+{'trees': 3000, 'cycles': 6982, 'caseA': 1271, 'caseB': 5487, 'tight': 4199, 'chain>=2': 1025, 'chain>=3': 124, 'ascent': 468, 'P1viol': 0, 'maxlen': 16, 'FAILS': 224}
+first failure: (6) too many mode-m_j states 
+  tree (1 (2 (3 [2] [2]) [1]) (4 [4] (3 [3] [])))
+RESULT: CHECK FAILED

@@ -61,6 +61,10 @@ Write W_1 = 2 and W_r = W_(r−1)·(W_(r−1) + 1), so W = 2, 6, 42, 1806,
 | If the two subtrees below the root share no position, the longest cycle is at most M₁·(M₀ + 1), where M₀, M₁ are the longest cycles of the two subtrees with the leaves that write the root's position made empty (Theorem RD) | proved by hand by the follow-up instance, using Theorem E; tested on 383,161 trees of depth ≤ 3 | `upper/PROOFS.md` §2 |
 | **For trees in which no position labels two nodes, every cycle has length at most L of the tree, and every shape has such a labelling that attains it; so the longest cycle over these trees of depth at most r is exactly W_r, for every r** (Theorem RO; L(leaf) = 1, L(node) = L(1-child)·(L(0-child) + 1)) | proved by hand by the follow-up instance, from Theorem RD and the construction of the lower bound | `upper/PROOFS.md` §3 |
 | For r ≥ 5, a tree of depth r with a cycle longer than W_r must reuse a position at two nodes whose lowest common ancestor has depth at most r − 5 (the root has depth 0); at depth 5 that ancestor is the root | follows from Theorem RD and the computed D(ρ) = W_ρ for ρ ≤ 4 | `upper/PROOFS.md` §2 |
+| The ratio of cycle length to L(T) is unbounded: for any tree K with a cycle of length c and any q ≥ 1 there is a tree with a cycle of length (q + 2)·c and L = 2q + 4·L(K) | proved by hand by a third follow-up instance of 21 November, which found the failure of the shape bound independently; depth-5 examples 60 against 56 and 52 against 50 checked by its simulator and by two reviewers' own | `shape2/PROOFS.md` §1, `shape2/out_cex.txt` |
+| For any tree, the bound of Theorem Z's counting holds on every cycle that passes through a state that is zero on the all-zero path and on which no mode changes a memory position off the all-zero path that another mode reads, however positions are shared (Theorem NC). So, given the computed values for depth ≤ 4, a cycle longer than W_5 in a depth-5 tree must pass through a state that is zero on the all-zero path and have two modes that communicate through such a position | proved by hand by that instance; its structural steps tested on 20,592 qualifying cycles; five reviewers traced the proof and found no gap | `shape2/PROOFS.md` §4, `shape2/out_nc.txt` |
+| Split the all-zero path after its i-th node. If the first i subtrees have private positions, and all entries into the rest of the path on the cycle (jumps from those subtrees and the write of the all-zero leaf) land on one mode, the rest ("the tail") may share positions internally in any way and still acts as one more digit, and the cycle is at most W_r provided the pieces obey their own bounds (Theorem T, Lemma T). This gives a recursive class of trees with the bound W_r that strictly contains the class of Theorem Z; apart from trees whose tail is never entered, the enlargement relies on the computed values for depth ≤ 4 | proved by hand by that instance; tested on 82,420 cycles, and the numerical lemma on 35,387 systematic boundary cases and 165,091 random ones; five reviewers traced the proofs and found no gap, and one checked the numerical lemma on 1.3 million further cases | `shape2/PROOFS.md` §5, `shape2/out_tail.txt`, `shape2/out_lemma_t.txt` |
+| "The states with the root bit set number at most W_(r−1)" is false at depth 4: a tree with a cycle of 258 has 126 such states, against 42 | computed by that instance; the cycle length 258 reproduced by the organiser's simulator, and both numbers by two reviewers' own (the instance's original output file was not produced from `root1.txt` alone and ends in an error trace; it is kept as `out_root1_instance_stale.txt`, and `out_root1.txt` is the organiser's rerun) | `shape2/root1.txt`, `shape2/out_root1.txt` |
 | D(r) ≤ (r + 1)·2^(2^r − 1 − r) for every r ≥ 1: 6, 64, 10240, about 4.03 × 10⁸ for r = 2, …, 5 (Theorem G) | proved by hand by the follow-up instance | `upper/PROOFS.md` §4 |
 | ~~Every cycle of every tree has length at most L(T)~~ **False.** It holds for every tree of depth ≤ 4 (computed), but the depth-5 tree `(1 (2 (3 [2] (4 [4] (5 [5] []))) [1]) (3 (6 [6] (7 [7] [3])) []))` has L = 50 and a cycle of length 52; two larger trees of the same family give 114 against 98 and 762 against 602. All are far below W_5, so D(r) = W_r is not affected | this page carried the statement as a conjecture (from `upper/PROOFS.md`) for about an hour on 21 November (commit `70f0c0d`); a further instance, asked to prove it, refuted it. The three cycles are checked by its two programs, by the organiser's own simulator, and by the separate simulators of two reviewers (see Review) | `shape/PROOFS.md` §1, `shape/cex_*.txt`, `shape/organiser_check_out.txt` |
 | A cycle that never visits a state with zeros on the whole all-zero path has length at most the length of that path (Lemma A) | proved by hand by that instance | `shape/PROOFS.md` §2 |
@@ -146,12 +150,12 @@ everything further down, which L does not see and the Sylvester value for
 the depth does. So the right target is the bound by depth, W_r, not by
 shape. The same instance proved that bound for trees whose subtrees off the
 all-zero path share no position except those on the path (recursively);
-positions shared between two of those subtrees, at any level of that recursion, are the case still open (at depth 5, only at the top level).
+positions shared between two of those subtrees, at any level of that recursion, are the case still open (at depth 5, only at the top level). A third instance, working in parallel, narrowed the open case further (`shape2/PROOFS.md`): what is proved is that a cycle longer than W_r must, for every way of splitting the path, either have one of the upper subtrees share a position (in the tree) with another upper subtree or with the lower part, or enter the lower part at two different modes; and, separately, that on such a cycle some two modes must exchange information through a shared position. A statement combining the two (sharing in the tree without exchange on the cycle is harmless) is not proved; reviewers think it is true and one tested it. The instance also showed that the natural bound charged to the root fails: the number of states with the root bit set can exceed the Sylvester value of the next depth (126 against 42 at depth 4), so a bound, if there is one, can only be on the total, and an induction through the root needs a joint statement that nobody has found.
 
 ## What to distrust
 
 - **A conjecture printed here was false.** "Length ≤ L(T)" was computed for
-  depth ≤ 4 and stated as a conjecture; it fails at depth 5. Agreement up to depth 4 said nothing about depth 5; in this family of trees, depth 4 leaves no room for the relay to pay. `upper/PROOFS.md` still states it as Conjecture P1. The new theorems in `shape/PROOFS.md` are by one instance and hours old; reviewers noted that its formula for the family of counterexamples leaves one hypothesis unstated (the counter under the root's 1-child must use its empty exit once per cycle), which the three printed trees satisfy, and that its output file prints the witness lines of a deliberately broken run directly under the summary of the clean run.
+  depth ≤ 4 and stated as a conjecture; it fails at depth 5. Agreement up to depth 4 said nothing about depth 5; in this family of trees, depth 4 leaves no room for the relay to pay. `upper/PROOFS.md` still states it as Conjecture P1. The theorems in `shape2/PROOFS.md` (NC, T) are by another single instance, equally new, and longer; the through-home case of its Theorem MD is the same counting statement as Theorem Z1 of `shape/`, found independently; its summary of the uncovered cases (`shape2/PROOFS.md` §6) is stated more narrowly than what is proved, as explained above; "unconditionally for r = 5" there means "given the computed values for depth ≤ 4"; and its candidate replacement for the shape bound (sort the subtree values before multiplying) is only a computation on narrow random families. The new theorems in `shape/PROOFS.md` are by one instance and hours old; reviewers noted that its formula for the family of counterexamples leaves one hypothesis unstated (the counter under the root's 1-child must use its empty exit once per cycle), which the three printed trees satisfy, and that its output file prints the witness lines of a deliberately broken run directly under the summary of the clean run.
 - **The upper-bound results date from 21 November and have one author.** Theorem
   E's proof builds an auxiliary tree by a recursive rule with a special case
   for repeated modes; that construction was tested by program on 40,000
@@ -265,6 +269,19 @@ is dropped. Their findings, applied above: the test corpus was misdescribed
 recursion is on pruned subtrees; "a few hours" for about one. These edits
 have not been reviewed again.
 
+Theorems NC and T went to the same five reviewers. All five confirmed
+Proposition X, Theorem NC and Theorem T; both Claude seats tested each with
+their own programs on about 8,000 qualifying cycles, with no failure, and
+saw failures appear when a hypothesis is dropped. The findings were about
+overstatement, applied above: the description of the uncovered cases, in
+the instance's file and on this page, mixed a condition on the tree with a
+condition on the cycle (GPT, Grok, both Claude seats); "no bound charged
+node by node can work" and "only the total is bounded" generalised one
+example and asserted the open statement (four seats); the row for Theorem
+NC omitted that the cycle passes through home; the output file for the
+depth-4 example was not a clean run. These edits have not been reviewed
+again.
+
 ## Files
 
 - `chain/`: the seed, the three links and the brief each link was given.
@@ -273,6 +290,8 @@ have not been reviewed again.
 - `reports/`: each instance's final report, verbatim.
 - `solver-a/`, `solver-b/`: searches, witnesses (`sylvester_r*.txt`,
   `witness_r*.txt`), checkers, proofs.
+- `shape2/`: a third follow-up of 21 November, working in parallel with the
+  second: Theorems NC and T, their tests, the depth-4 example.
 - `shape/`: a second follow-up of 21 November: the counterexample to the
   shape bound, Lemma A and Theorem Z, programs and outputs.
 - `upper/`: the follow-up of 21 November: `PROOFS.md`, its programs and

@@ -1,0 +1,3 @@
+nccheck NT=10000 SEED=3 MUT=0
+{'trees': 10000, 'cyclesB': 21334, 'NC': 20592, 'NC_with_shared_read': 784, 'NC_trees_not_MD': 15121, 'tight': 18644, 'chain>=2': 3936, 'FAILS': 0}
+RESULT: ALL CHECKS PASSED

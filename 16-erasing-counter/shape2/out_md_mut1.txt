@@ -1,0 +1,5 @@
+mdcheck NT=3000 SEED=7 MUT=1
+{'trees': 3000, 'cycles': 3207, 'caseA': 507, 'caseB': 2406, 'tight': 1910, 'chain>=2': 391, 'chain>=3': 48, 'ascent': 165, 'P1viol': 0, 'maxlen': 22, 'FAILS': 294}
+first failure: (4) two overflow targets 
+  tree (1 (2 (3 (4 [3] (7 (5 [5] [7]) (6 [6] [2]))) (7 [1] (6 (5 [3] [2]) (5 [6] [1])))) (7 [7] (6 [6] [1]))) (4 [4] []))
+RESULT: CHECK FAILED

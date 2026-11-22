@@ -1,0 +1,9 @@
+# Counterexamples to Conjecture P1 (each line one tree). Expected: VIOLATED.
+# A: depth 5, 9 nodes, 8 indices. chain home->2->1->3, counters 3 (idx 4,5) and 6 (idx 6,7,8). 60 > 56
+(1 (2 (3 [2] (6 (7 [7] [6]) (8 [8] []))) [1]) (3 (4 (5 [5] [4]) [3]) []))
+# B: depth 5, 8 nodes, 7 indices. counters 4 (idx 4,5) and 4 (idx 6,7). 52 > 50
+(1 (2 (3 [2] (6 [6] (7 [7] []))) [1]) (3 (4 [4] (5 [5] [3])) []))
+# C: depth 6, 8 nodes: two pass-through modes, counters 2 and 4. 36 > 33
+(1 (2 (3 (4 [3] (6 [6] (7 [7] []))) [2]) [1]) (4 (5 [5] [4]) []))
+# D: depth 7, 9 nodes, pass-through modes 2,3,4, mode 1 = bare jump, counter 6: expected 36 > 32
+(1 (2 (3 (4 (5 [4] (6 (7 [7] [6]) (8 [8] []))) [3]) [2]) [1]) (5 [5] []))

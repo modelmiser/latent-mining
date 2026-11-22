@@ -1,0 +1,6 @@
+mdcheck NT=20000 SEED=7 MUT=0
+{'trees': 20000, 'cycles': 49480, 'caseA': 8155, 'caseB': 41325, 'tight': 31825, 'chain>=2': 10841, 'chain>=3': 1864, 'ascent': 4975, 'P1viol': 0, 'maxlen': 234, 'FAILS': 0}
+RESULT: ALL CHECKS PASSED
+mdcheck NT=20000 SEED=8 MUT=0
+{'trees': 20000, 'cycles': 50208, 'caseA': 8528, 'caseB': 41680, 'tight': 31704, 'chain>=2': 10587, 'chain>=3': 2016, 'ascent': 5411, 'P1viol': 0, 'maxlen': 212, 'FAILS': 0}
+RESULT: ALL CHECKS PASSED

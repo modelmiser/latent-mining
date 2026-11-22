@@ -1,0 +1,21 @@
+tree   : (1 (2 (3 [1] (6 (7 [7] [6]) (8 [8] []))) [1]) (3 (4 (5 [5] [4]) [3]) []))
+legal  : True  depth 5  internal nodes 9  indices 8
+L(T)   : 56
+cycles : 1  longest 42  lengths>1: [42]
+P1     : HOLDS (longest 42 <= L 56)
+
+tree   : (1 (2 (3 [2] (6 [6] [])) [1]) (3 (4 (5 [5] [4]) [3]) []))
+legal  : True  depth 4  internal nodes 7  indices 6
+L(T)   : 24
+cycles : 1  longest 20  lengths>1: [20]
+P1     : HOLDS (longest 20 <= L 24)
+
+tree   : (1 (2 [1] (3 [3] [])) (2 (4 [4] [2]) []))
+legal  : True  depth 3  internal nodes 5  indices 4
+L(T)   : 15
+cycles : 1  longest 10  lengths>1: [10]
+P1     : HOLDS (longest 10 <= L 15)
+
+tree   : (1 (2 (3 [2] (6 (7 [7] [6]) (8 [8] []))) [1]) (4 (5 [5] [4]) [3]))
+legal  : False  depth 5  internal nodes 8  indices 8
+exit 1

@@ -1,0 +1,2 @@
+lemma_t SEED=1 MUT=0: exhaustive cases 35387, random cases 165091, violations 0, max X/W_r 1.000000
+RESULT: ALL CHECKS PASSED

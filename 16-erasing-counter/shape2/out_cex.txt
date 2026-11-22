@@ -1,0 +1,25 @@
+tree   : (1 (2 (3 [2] (6 (7 [7] [6]) (8 [8] []))) [1]) (3 (4 (5 [5] [4]) [3]) []))
+legal  : True  depth 5  internal nodes 9  indices 8
+L(T)   : 56
+cycles : 1  longest 60  lengths>1: [60]
+P1     : VIOLATED (longest 60 > L 56)
+
+tree   : (1 (2 (3 [2] (6 [6] (7 [7] []))) [1]) (3 (4 [4] (5 [5] [3])) []))
+legal  : True  depth 5  internal nodes 8  indices 7
+L(T)   : 50
+cycles : 1  longest 52  lengths>1: [52]
+P1     : VIOLATED (longest 52 > L 50)
+
+tree   : (1 (2 (3 (4 [3] (6 [6] (7 [7] []))) [2]) [1]) (4 (5 [5] [4]) []))
+legal  : True  depth 6  internal nodes 8  indices 7
+L(T)   : 33
+cycles : 1  longest 36  lengths>1: [36]
+P1     : VIOLATED (longest 36 > L 33)
+
+tree   : (1 (2 (3 (4 (5 [4] (6 (7 [7] [6]) (8 [8] []))) [3]) [2]) [1]) (5 [5] []))
+legal  : True  depth 7  internal nodes 9  indices 8
+L(T)   : 32
+cycles : 1  longest 36  lengths>1: [36]
+P1     : VIOLATED (longest 36 > L 32)
+
+exit 0

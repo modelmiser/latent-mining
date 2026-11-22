@@ -1,0 +1,5 @@
+VIOLATION cycle 36 > L 32  depth 7  (1 (2 (3 (4 (5 [4] (6 (8 [8] [6]) (7 [7] []))) [3]) [2]) [1]) (5 [5] []))
+VIOLATION cycle 36 > L 32  depth 7  (1 (2 (3 (4 (5 [4] (6 (8 [8] [6]) (7 [7] []))) [3]) [2]) [1]) (5 [5] []))
+VIOLATION cycle 36 > L 32  depth 7  (1 (2 (3 (4 (5 [4] (6 (8 [8] [6]) (7 [7] []))) [3]) [2]) [1]) (5 [5] []))
+lhat_rand NT=150000 SEED=5 POOLS=disjoint MEASURE=L
+violations: 111   tight: 9211   best ratio 1.1250  cycle 36 L 32 depth 7 (1 (2 (3 (4 (5 [4] (6 (8 [8] [6]) (7 [7] []))) [3]) [2]) [1]) (5 [5] []))

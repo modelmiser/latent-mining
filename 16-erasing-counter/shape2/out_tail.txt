@@ -1,0 +1,3 @@
+tailcheck NT=20000 SEED=3 MUT=0
+{'trees': 19934, 'cyclesB': 82563, 'EC': 82420, 'tail_in_chain': 39896, 'prefix_before_tail': 3862, 'tail_shares_data': 11294, 'tight': 75500, 'maxlen': 42, 'FAILS': 0}
+RESULT: ALL CHECKS PASSED

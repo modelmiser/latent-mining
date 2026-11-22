@@ -1,0 +1,5 @@
+mdcheck NT=3000 SEED=7 MUT=2
+{'trees': 3000, 'cycles': 2429, 'caseA': 990, 'caseB': 133, 'tight': 114, 'chain>=2': 133, 'chain>=3': 44, 'ascent': 65, 'P1viol': 0, 'maxlen': 54, 'FAILS': 1306}
+first failure: (7) cycle longer than bound 
+  tree (1 (2 (3 [2] [2]) [1]) (4 [4] (3 [3] [])))
+RESULT: CHECK FAILED

@@ -1,0 +1,5 @@
+tailcheck NT=3000 SEED=3 MUT=2
+{'trees': 2993, 'cyclesB': 10199, 'EC': 10174, 'tail_in_chain': 4575, 'prefix_before_tail': 483, 'tail_shares_data': 1292, 'tight': 9241, 'maxlen': 18, 'FAILS': 289}
+first failure: (2) y_m moved outside mode m 
+  split i = 1  tree (1 (2 [2] (6 (5 (3 [3] []) (4 [5] [5])) (5 (3 [1] []) (4 [5] [6])))) (2 [2] (3 [1] [1])))
+RESULT: CHECK FAILED

@@ -1,0 +1,2 @@
+# depth 4; chain 1 -> 2 with a 21-state counter in S_1 and a 6-state counter in S_2: expected cycle 258, of which 126 states have bit 1 set (> W_3 = 42)
+(1 (2 [1] (10 (11 [11] [10]) (12 [12] []))) (4 (7 (8 [8] [7]) (9 [9] [4])) (5 (6 [6] [5]) (2 [2] []))))

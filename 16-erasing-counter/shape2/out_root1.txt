@@ -1,0 +1,5 @@
+# organiser, 2026-11-21: python3 root1.py root1.txt (the instance's program on root1.txt alone)
+depth 4  longest cycle 258  states with root bit = 1: 126  with root bit = 0: 132   (1 (2 [1] (10 (11 [11] [10]) (12 [12] []))) (4 (7 (8 [8] [7]) (9 [9] [4])) (5 (6 [6] [5]) (2 [2] []))))
+exit=0
+# organiser's own simulator (../shape/organiser_check.py) on the same tree:
+depth 4 L 546 cycle through the first repeated state has length 258 (tail 0 )

@@ -1,0 +1,2 @@
+lhat_rand NT=150000 SEED=5 POOLS=disjoint MEASURE=Lhat
+violations: 0   tight: 5825   best ratio 1.0000  cycle 3 Lhat 3 depth 2 (1 (2 [2] [1]) [])
