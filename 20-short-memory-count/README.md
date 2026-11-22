@@ -131,6 +131,7 @@ The corrected wording has not been through a second round.
 
 ## Files
 
+- `review/`: the review of this experiment before publication (16 to 20 November), archived on 21 November verbatim with absolute paths shortened: the brief given to the reviewers, each seat's report, the machine-made summary, and the organiser's note of what was done with the findings. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`: what each
   instance was told.

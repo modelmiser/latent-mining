@@ -21,6 +21,10 @@ means a model wrote the proof and other instances of the same model checked it.
    the computation from the definition, and runs checks that are able to fail.
 5. **Prior art.** A separate instance searches the literature.
 6. **Follow-up.** Open ends go to further instances, and short proofs into Lean.
+7. **Archive.** Each experiment's folder holds the reviewers' reports (`review*/`
+   folders) and, for follow-ups, each instance's own report, verbatim with
+   absolute paths shortened. Reviews of emails sent to papers' authors are not
+   archived.
 
 The checkability rule in step 2 is what makes the rest possible. Without it the
 chain produces prose that nothing can test.

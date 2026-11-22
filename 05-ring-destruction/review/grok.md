@@ -1,0 +1,23 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. Report of one reviewer seat (or, for summary.md, the machine-made summary of the round). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# cursor:grok-4.7-medium
+
+Q1: CONFIRMED — `solver-a/proofs.txt:16-22,25-33,40-41` (arc recursion holds; D=2t−n+2 is the integer form of a+b≤n−2; the piece update is min(v_p, v_{p−1}+1) / v_{p−1}+1; A-events on p at t and p−1 at t−1 are the link into p−t, and the B pair is q at t with q+1 at t−1) — none
+Q2: CONFIRMED — `solver-a/proofs.txt:44-52` (one hit adds at most one pair; the first hit that sets y reads v_{p−1}=y−1; L2 pushes that pair back by two rounds, so y appears only at time ≥2y−1; for odd t, H meets 2H−1=t, hence ≤k such pairs) — none
+Q3: CONFIRMED — `solver-a/proofs.txt:76-84` (closure fills each diagonal to h_c; c(x)=x+t−f(x) and f(x)≡x−c force distinct f-values in [1,h_c]; (1) is g(x*)≥D−(h_c−δ_c+1) rewritten with D′=D−1; every x has an f≥1 so the δ_c sum to n) — none
+Q4: CONFIRMED — `solver-a/proofs.txt:86-99` (even: δ≤h_c−s and δ≤w=n−t−1 give (E); odd: s=D′−H₁, w=n−t−2, and (1) plus h,g≤H give the two summed bounds; E equals the number of value-H pairs, so E≤k, and the x* positions inject those pairs into the other direction, so B≤E) — none
+Q5: CONFIRMED — `solver-a/proofs.txt:103-113` (with n=kq−r both parities make (E) or (O) fail: even side reduces to q(k−3)+2k+2−3r≥(q−1)(k−3)+2>0; odd side has D′≥H except k=3,r=2, which is even, and q=2 gives w=0; the (O) right-hand side is minimized at B=E=k and that point is still above kt) — none
+Q6: CONFIRMED — `solver-a/proofs.txt:55-70` (m=min(k,n) distinct links, A-rounds opposite B-rounds; at T=n−⌈n/m⌉−1 the ramp bounds sum to at least D for every gap ≤⌈n/m⌉, including m=n and unequal gaps) — none
+Q7: CONFIRMED — `solver-a/proofs.txt:117-124` and `solver-b/proofs.txt:71-85,119-127` (both parities: odd is n pairs versus ≤n−1 hits; even forces a descent to a deficit of 1; B’s (E,D,Φ) inequality 2nh≤kT(2h+1−m) and the strict corollary hold for n>k) — none
+Q8: CONFIRMED — it does overstate: `README.md:65-67` is false for the written strategy at n=7,k=3 (delay sums are 1 or 2, not one common total); `README.md:74` and `README.md:81-83` misstate the invariant and the odd-only last-round cut (`solver-a/proofs.txt:32-33,51-52`) — see fixes
+
+F: MODERATE — `README.md:65-67` — “same total” / “same margin” fails for the comb strategy: n=7,k=3, gaps 3,2,2, T=3, the eight-position delay sums are 1,2,2,2,2,2,1 — high — say the two delays sum to at least 2T−n+2 everywhere, not to one common value
+F: MODERATE — `README.md:74` — one hit sets v_p to v_{p−1}+1 and can raise that delay by more than 1, so the sum of delays need not be ≤kt; the kt bound is on pairs — high — “each destruction adds at most one (piece, value) pair; after t rounds there are at most kt pairs”
+F: MODERATE — `README.md:81-83` — value H is created only in round t when t is odd (2H−1=t); for even t it can appear in round t−1, and that is not why the even case is tight — high — restrict the “at most k of them” sentence to odd t, and point the even case at (E)
+F: LOW — `solver-a/proofs.txt:17-18` — the writeup of b_{i+1}(s)≤b_i(s−1)+1 uses b_i(s−2) at s=1 — high — check s=1 directly (the value is 0 or 1); the arc claim itself is true
+F: LOW — `solver-a/proofs.txt:80` — “H<n” is not proved and fails for large t (t=2n gives H=n) — high — drop it; distinct f-values and |P_A|=Σ h_c do not need it
+F: LOW — `README.md:11` — “exhaustive search agrees for n≤12” covers cells A marked as strategy-plus-NO only (`reports/solver-a.md:28`, stars on (11,4),(12,3),(12,4)) and B has no n=12 search row (`solver-b/results.txt:1-11`) — high — say the printed k≤4 table matches A’s logs, B through n=11, and the referee’s recomputation
+F: LOW — `README.md:39` — B’s corollary is stated for k≥3, but the proof assumes n>k (`solver-b/proofs.txt:71,82`) — high — add “for n>k”
+F: LOW — `reports/referee.md:26` — “hence F=2⌊n/2⌋ for k≥2n” does not contain the achieving play; destroying every link on odd rounds does attain it, but that argument is only named in `solver-a/proofs.txt:128` — medium — cite that strategy in the same paragraph
+
+Status cells for the two hand proofs, the k≤2 row, B’s strict inequality, the F(5,4) correction, the k≥n caveat, and the prior-art paragraph match `reports/referee.md:9-35` and `prior-art.md:7-50`. The equality F(n,k)=n−⌈n/k⌉ for n>k≥3 is proved in the files above; the false sentences are in the prose, not in Theorems L and U.

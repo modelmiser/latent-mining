@@ -1,0 +1,20 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. Report of one reviewer seat (or, for summary.md, the machine-made summary of the round). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# cursor:grok-4.7-medium
+
+Q1: CONFIRMED — `solver-b/proofs.txt:12-18` and `chain/3-question.txt:5-12` — none
+Q2: CONFIRMED — `solver-b/proofs.txt:42-49` (L(k) is the min of the two cases; for w=2t+1, K=t+1, L(k)=k so k≤a≤k+t; K+1=t+2≤w+1; symmetry is window-local) — none
+Q3: CONFIRMED — `solver-b/proofs.txt:94-125`; `solver-b/witnesses.txt:4` is B₄ (0 —1→ 2, 4 —0→ 2) and line 6 is B₆ — none
+Q4: CONFIRMED — `solver-b/proofs.txt:57-84` (0ⁿ, n≥w, puts 0 in C(a); p₀..p_k are k+1≥w−s+1 distinct states; with ≤w+1 states the Theorem C index is k=w, and the w=1 contradiction still follows) — none
+Q5: CONFIRMED — `solver-b/proofs.txt:20-27`; an over-prune can only drop completions, so a reported f moves up, and a checked witness stops it moving down. Who searched what matches `reports/referee.md:9-11,21`, `verifier/runs.log:8-19`, `solver-a/run_w7_w8.log:3,10`, `solver-b/final_lb.log:9-14` — none
+Q6: CONFIRMED — `20-short-memory-count/README.md:50-66` matches Theorems A and D and `solver-a/proofs.txt:4-26`; `witness_w4.txt`, `witness_w6.txt`, and `witness_w8.txt` are the same tables as `solver-b/witnesses.txt:4,6,8`; `verifier/lemmas.py:113-116` checks even w=4..12 — none
+Q7: REFUTED — `20-short-memory-count/README.md:43` says both solvers proved “≥ w−s+1 reachable states,” but `solver-a/proofs.txt:46` says that step was not made; `README.md:40` says “25 minutes” while `verifier/runs.log:19` says 24m44s; `README.md:94-95` says N*(9,3)=11 is right, but `solver-b/results.txt:38` has ≥11 and no log shows w=9, N=10, s=3 fails — “Proved by solver B (Theorem B); solver A’s P3 is only the conditional path lemma. f(10) took 24m44s. N*(9,3)≤11 is witnessed; =11 is not in the logs.”
+Q8: REFUTED — `README.md:49` says the values through w=6 were exhaustive three times, but solver B’s w=6 run is pruned (`solver-b/final_lb.log:9-10`; unpruned w=6 is only A and the referee). The same cell’s “no general lower bound” drops the proved f(w)≥1 (`solver-b/proofs.txt:68`). The closed formula is still marked open at `20-short-memory-count/README.md:46` and `README.md:49` — “upper bound proved by hand, not machine-checked; unpruned search by A and the referee through w=6 (B unpruned through w=5, pruned at w=6), pruned searches after that, w=10 one run; proved f≥1, no matching general lower bound.”
+
+F: MODERATE — `20-short-memory-count/README.md:43` — attributes the w−s+1 state bound to both solvers; A stops at a conditional lemma (`solver-a/proofs.txt:41-46`) — high — credit only Theorem B.
+F: MODERATE — `README.md:49` — “exhaustive search three times” through w=6; B’s w=6 search is pruned (`solver-b/final_lb.log:9-10`) — high — say two unpruned searches at w=6, three only for w≤5.
+F: MODERATE — `20-short-memory-count/README.md:94-95` — treats N*(9,3)=11 as settled; the tree shows an 11-state witness and `results.txt:38` “≥11,” not a 10-state failure — medium — write “≤11 (11-state witness); results.txt’s ≥11 is the recorded lower claim.”
+F: LOW — `20-short-memory-count/README.md:40` — “25 minutes” vs `verifier/runs.log:19` 24m44s — high — write 24m44s.
+F: LOW — `README.md:49` — “no general lower bound” omits proved f(w)≥1 for w≥2 — high — “no lower bound matching the upper bound; f≥1 is proved.”
+F: LOW — `solver-a/proofs.txt:16-17` — “Thus m(j)+m(j′)≥w/2” is not implied by m(x)≥(x+2)/2 when one of j,j′ is 1 and the other is not (that bound fails at x=1); the sum still holds, including equality only at w=4 — medium — add the j=1 case: 1+m(w−3)≥(w+1)/2.
+F: LOW — `solver-a/proofs.txt:23` — “spread(B1)≤⌊w/2⌋−1” is false at w=3, where the same proof gives C(B1)⊆[1,2] (`verifier/runs.log:27-28`) — high — scope that sentence to w≥4.

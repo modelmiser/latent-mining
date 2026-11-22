@@ -1,0 +1,25 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. Report of one reviewer seat (or, for summary.md, the machine-made summary of the round). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# cursor:gemini-3.8-flash-high
+
+Q1: CONFIRMED — `20-short-memory-count/solver-b/proofs.txt:12-20`, `20-short-memory-count/chain/3-question.txt:6-14`, `20-short-memory-count/README.md:24-29` — none
+Q2: CONFIRMED — `20-short-memory-count/solver-b/proofs.txt:38-55` — none
+Q3: CONFIRMED — `20-short-memory-count/solver-b/proofs.txt:87-127`, `20-short-memory-count/solver-b/witnesses.txt:4,6` — none
+Q4: CONFIRMED — `20-short-memory-count/solver-b/proofs.txt:58-85`, `20-short-memory-count/solver-a/proofs.txt:29-44` — none
+Q5: CONFIRMED — `20-short-memory-count/solver-b/proofs.txt:20-27`, `20-short-memory-count/reports/referee.md:8-22,53`, `20-short-memory-count/README.md:33-46` — none
+Q6: CONFIRMED — `20-short-memory-count/README.md:49-67`, `20-short-memory-count/solver-a/proofs.txt:4-9`, `20-short-memory-count/solver-b/proofs.txt:87-94`, `20-short-memory-count/solver-a/family.py:9-25`, `20-short-memory-count/verifier/lemmas.py:113-116` — none
+Q7: CONFIRMED — `20-short-memory-count/README.md:33-47,70-100`, `20-short-memory-count/reports/referee.md:8-22,28-33,37,42,50-55`, `20-short-memory-count/reports/solver-a.md:8-28,49`, `20-short-memory-count/reports/solver-b.md:8-25,36`, `20-short-memory-count/prior-art.md:5-32` — none
+Q8: REFUTED — `README.md:49` states values to \(w=6\) were done by exhaustive search three times and beyond that by pruned searches, but `20-short-memory-count/README.md:35` and `20-short-memory-count/reports/solver-b.md:13-14` show solver B used pruned search at \(w=6\) (unpruned only for \(w \le 5\)) — values to w = 5 by unpruned exhaustive search three times, w = 6 unpruned twice and pruned once, beyond that by pruned searches, w = 10 by one run; no general lower bound
+
+F: LOW — README.md:49 — claims values to w = 6 were computed by exhaustive search three times, but solver B used pruned search at w = 6 (unpruned only up to w = 5) — confidence: high — replace with "values to w = 5 by unpruned search three times, w = 6 unpruned twice and pruned once, beyond that by pruned searches"
+F: LOW — 20-short-memory-count/verifier/lemmas.py:65 — test harness asserts hi <= w // 2 for B1 which evaluates to 1 for w = 3, causing 8 spurious FAIL reports because P1 treats w = 3 separately with C(B1) in [1, 2] — confidence: high — change check to allow hi <= 2 when w == 3
+F: LOW — 20-short-memory-count/solver-b/results.txt:38 — table gives N*(9,3) as ">=11" whereas an explicit 11-state witness exists in w9n11_s3.txt establishing N*(9,3) = 11 (as reported in solver-b.md:23) — confidence: high — replace ">=11" with "11"
+F: LOW — 20-short-memory-count/solver-a/proofs.txt:41 — in P3 lemma proof "for e > w-b it equals e" is invalid when e > w because the sliding window length is w — confidence: high — replace "it equals e" with "it equals min(e, w)"
+F: LOW — 20-short-memory-count/solver-b/proofs.txt:71 — in Theorem C proof "k >= w" is imprecise since there are only w+1 states total and p_0..p_w are distinct, forcing k = w — confidence: high — replace "k >= w" with "k = w"
+F: LOW — 20-short-memory-count/verifier/bad/a3_w4_unlit_cycle.txt:1 — negative test file a3 was intended to test unlit-cycle detection but was rejected earlier by chk.py:65 for marking a spread-2 state lit — confidence: high — mark state 1 unlit and remove state 0 from the cycle so the unlit-cycle branch triggers
+
+### Important issues not covered by the questions (most severe first)
+
+1. **Lower bound vacuum and conjecture fragility:** The headline formula \(f(w) = \lfloor(w-1)/2\rfloor\) is only a conjecture supported up to \(w=10\). No general lower bound exists beyond \(f(w) \ge 1\) for \(w \ge 2\). The bound is acutely sensitive to state count: relaxing \(|Q|\) from \(w+1\) to \(w+2\) states immediately beats the bound at \(w=7\) (\(s=2\) with 9 states) and \(w=9\) (\(s=3\) with 11 states). Any general lower bound proof must tightly exploit the exact \(w+1\) state restriction.
+2. **Pruned search dependence and single-program verification at large \(w\):** For \(w \ge 7\), all lower-bound results depend entirely on branch-and-bound pruning without unpruned baselines. Solvers A and B report identical node counts at \(w=7\) and \(w=8\), meaning they searched the identical tree structure. Solver B's \(w=9\) partition relies on prefixes emitted by the code under test, leaving the referee's single pruned run as independent confirmation. For \(w=10\), there is only one run of one program by the referee with no second confirmation.
+3. **Incomplete \(e(w)\) determination for \(w=10\):** While \(e(1..9)\) was settled, \(e(10)\) timed out in `verifier/ref.cpp` after 170 seconds (`verifier/runs.log:22`) and remains uncomputed.

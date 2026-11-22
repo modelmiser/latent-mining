@@ -1,0 +1,26 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. Report of one reviewer seat (or, for summary.md, the machine-made summary of the round). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# cursor:grok-4.7-medium
+
+Q1: CONFIRMED — `solver-b/proofs.txt:14-24`: on any shared pair, cost(L)+d≤cost(A); outside-component flips and non-path flip sets stay inside d by the triangle inequality, and the walk still yields one valid path (`:18-23`). Legality depends only on G (`:14`), so the coupling is a strategy against an adaptive Adversary and the value is unchanged — none
+
+Q2: CONFIRMED — `reports/open-limit-referee.md:16-17`: the named pair is legal on the real forest (same G); the shadow update is the Lemma 1 reply, so it is a legal normal move; the same invariant gives cost(A)≥cost(L)≥c. Lemma 1 already applies to whatever pairs are named, so this is that coupling written for a type-reading Adversary, which the Lemma 1 writeup never spells out — none
+
+Q3: CONFIRMED — `open-limit/proofs.txt:24-49`. (b) `:31-34`: the other out-neighbour’s reachable set misses the flipped path, so its h is unchanged. A free reply exists only when there is a hole (P=−1=p, `:46-47`); a saturated vertex has only the two path cases. An unavailable reply only removes an option — none
+
+Q4: CONFIRMED — `open-limit/proofs.txt:52-71`. A_k costs ≥k and leaves R_k, and k+(k+2/3)=2(k+1/3). R_k leaves A_{k+1} at cost ≥k or R_k at cost ≥k+1, both ≥2(k+2/3) (`:60-62`). P(new)≥P(X)+P(Y) at `:70`. A singleton is A_0 with P=0 (`:67-68`). The induction is over positions that already carry paid and a witness — none
+
+Q5: CONFIRMED — `open-limit/proofs.txt:72-80`. A higher-index witness is legal for M(i_r) by nesting (`:54-55`, `:73`). The telescope matches (**); i_m≤2·log₂(n+1)−1, m≤i_m+1, F(i)≤i/2+1/3, and n/3−(7/6)i_m−1/3 equals the stated bound. Recomputed: n=16,64,256 give about −3.37, 8.11, 67.49. Positive from n=34 (n=33 is about −0.04); above B(n) from n=189 (188 is about 45.85<46, 189 about 46.17>46), and the gap keeps growing — none
+
+Q6: CONFIRMED — `solver-b/proofs.txt:26-54`, `solver-a/proofs.txt:36-87`. The block potential and both superadditivity proofs hold; a vertex with h≥k roots a full binary out-tree of size ≥2^{k+1}−1, and 2(b+1)≥a+b+1 closes the induction. P6 is sound: min(p,q)≥min(j,p)+min(j,q)−j and the ψ terms cancel. `solver-a/cert_W2_14_ge4.txt`, `solver-a/cert_W2_16_ge5.txt`, and `solver-b/cert_n30_k7.txt` are in the folder — none
+
+Q7: CONFIRMED — `open-limit/proofs.txt:94-97`, `:109-127`. The merged tree contains both the new tail and the other endpoint (Lemma A), so keeping either pair is a real one-witness state. The g cases, including exceptional Y1, give V_pair(n)≤(n−1)/3. `README.md:47` states that ceiling only for the reduced game — none
+
+Q8: REFUTED — `README.md:57-60` and `:81-82` do not match the proofs. k blocks force k−1 flips, not one per block (`solver-b/proofs.txt:39`), and a saturated vertex at no cost is only the no-flip branch. Cleanup merges do not preserve paid+F≥|C|/3 (`open-limit/proofs.txt:74-77`). The checked numbers do match: n≤15 in `reports/referee.md:11`, T(16)=3 in `solver-a/run_n16.txt:5`, T(30)≥7, 30…66 in `open-limit/pairdp_25_48.txt` and `pairdp_49_66.txt`, 1/3≤L≤1, and 17…30 — see the replacement lines below
+
+F: MODERATE — `README.md:57-60` — the simple attack is told as if the block join is free and the total is one flip per block; for two blocks the proved total is 1, not 2, and a flip inside the block leaves no saturated vertex to name — high — "k blocks force k−1 flips. If the block join is free it creates a saturated vertex; if not, that flip is already the payment the invariant charges."
+F: MODERATE — `README.md:81-82` — "each merge preserves" paid+F≥|C|/3 is false for cleanup: merging a high-index tree with a singleton at index 0 can make P negative (the log term is exactly that drop) — high — "Same-type merges preserve the potential. Cleanup merges can lower it by at most 2/3 each."
+F: MODERATE — `open-limit/proofs.txt:111-113` — "no one-witness strategy proves more than 1/3" is stronger than Theorem 3, which bounds only the pair game; a witness that is not one of the two endpoints is outside that game (`:142-146`) — high — "No strategy in this pair game proves more than L≥1/3."
+F: LOW — `open-limit/proofs.txt:136` — "an optimal Algorithm must let h grow" drops the normal-reply hypothesis of Corollary 7 (`:130`) — medium — "An optimal normal-form Algorithm must let h grow."
+F: LOW — `solver-b/proofs.txt:14` — "the same Adversary sequence" is easy to read as non-adaptive only; the invariant itself does not use that restriction — medium — "on the pairs named in the coupled game, which may depend on D_L."
+F: LOW — `README.md:110` — "everything above the small table" reads as if the n≤15 row does not rest on the normal form, but n=14 and 15 were budget-searched with normal replies only (`reports/referee.md:11`) — medium — "The n=14 and n=15 entries use normal-form search plus Lemma 1; the machine check of Lemma 1 stops at n=11."

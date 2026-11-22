@@ -239,6 +239,7 @@ The corrected wording has not been through a second round.
 
 ## Files
 
+- `review/`: the review of this experiment before publication (16 to 20 November), archived on 21 November verbatim with absolute paths shortened: the brief given to the reviewers, each seat's report, the machine-made summary, and the organiser's note of what was done with the findings. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - Reviewers' reports of 21 November, archived verbatim with absolute paths shortened: `review-step4/` (the round on the rewritten Step 4; three non-Anthropic seats only, and no dispositions note was written). Each `review*/` folder holds the brief the reviewers were given, the reports of the GPT, Grok and Gemini seats with a machine-made summary, the reports of the Claude seats (one of the two ran on Claude Opus), and the organiser's note of what was done with the findings. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - `adjudication-1.md`, `adjudication-2.md`: the reports of the two instances that adjudicated Step 4 of Theorem 2 (see `step4-rewritten.md`), archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.

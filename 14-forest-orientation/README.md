@@ -467,6 +467,7 @@ cite it, have not been through the panel.
 
 ## Files
 
+- `review/`: the review of this experiment before publication (16 to 20 November), archived on 21 November verbatim with absolute paths shortened: the brief given to the reviewers, each seat's report, the machine-made summary, and the organiser's note of what was done with the findings; `review-lean/` is the same for the Lean formalisation, and `review-note/` holds rounds 1 and 5 to 8 of the review of `NOTE.md` (rounds 2 to 4, 9 and 10 and the note of dispositions are left out because they also review the draft of an email to the authors of a paper). The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - `chain/`: the seed, the three links and the brief each link was given.
 - `brief-solver.txt`, `brief-verifier.txt`, `brief-prior-art.txt`,
   `brief-open-limit.txt`: what each instance was told. The reader of the

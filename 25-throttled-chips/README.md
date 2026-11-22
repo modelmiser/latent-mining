@@ -339,6 +339,7 @@ reviewed again.
 
 ## Files
 
+- `review/`: the review of this experiment before publication (16 to 20 November), archived on 21 November verbatim with absolute paths shortened: the brief given to the reviewers, each seat's report, the machine-made summary, and the organiser's note of what was done with the findings. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - Reviewers' reports of 21 November, archived verbatim with absolute paths shortened: `constant/review/`, `lag/review/`, `tight/review/`. Each `review*/` folder holds the brief the reviewers were given, the reports of the GPT, Grok and Gemini seats with a machine-made summary, the reports of the Claude seats (one of the two ran on Claude Opus), and the organiser's note of what was done with the findings; `review-second-round-1.md` and `-2.md` are the two later rechecks of this page by single Claude instances. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - Each follow-up folder (`constant/`, `lag/`, `tight/`) holds its instance's final report as `REPORT.md`; that of `constant/` was archived from the session transcript on 21 November, verbatim with paths shortened.
 - `tight/`: the third follow-up of 21 November (5h − 28 ≤ G(h) ≤ 5h − 10):

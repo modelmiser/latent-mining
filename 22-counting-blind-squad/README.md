@@ -182,6 +182,7 @@ fact; "an error could only make it too small" was wrong for seven states
 
 ## Files
 
+- `review/`: the review of this experiment before publication (16 to 20 November), archived on 21 November verbatim with absolute paths shortened: the brief given to the reviewers, each seat's report, the machine-made summary, and the organiser's note of what was done with the findings (the Grok seat failed twice; `round1-grok-rerun/` is its second attempt). The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - Reviewers' reports of 21 November, archived verbatim with absolute paths shortened: `enum6/review/` (four seats: one Claude seat). Each `review*/` folder holds the brief the reviewers were given, the reports of the GPT, Grok and Gemini seats with a machine-made summary, the reports of the Claude seats (one of the two ran on Claude Opus), and the organiser's note of what was done with the findings; `review-second-round-1.md` is the later recheck of this page by a single Claude instance. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
 - `enum6/REPORT.md`: the follow-up instance's final report, archived from the session transcript on 21 November, verbatim with paths shortened.
 - `chain/`: the seed, the three links and the brief each link was given.

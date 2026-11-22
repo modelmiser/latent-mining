@@ -1,0 +1,29 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. Report of one reviewer seat (or, for summary.md, the machine-made summary of the round). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# claude:claude-fable-5-1
+
+**Q1: CONFIRMED** — `chain/3-question.txt:8,12` (a schedule is any infinite sequence; safety quantifies over all); `solver-b/proofs.txt:15-26`. (a) p active from time 1 (rem's successors ≠ rem, `3-question.txt:6`), moves forever, nobody else active ⇒ crit forced. (b) p^k q^ω is a legal schedule; p stalling in crit is explicitly allowed (`3-question.txt:15`). (c) j parked at an "add a_j" state is harmless: the claimed violation is i and k both in crit, a safety fact independent of j. (d) same as (a) from a reachable all-rem configuration. — none
+
+**Q2: CONFIRMED** — `solver-b/proofs.txt:40-45`. In Z_3: 0∈E_k, e_i≠0, e_i+a_j∉E_k and 0∈E_k ⇒ a_j≠−e_i, a_j≠0 ⇒ a_j=e_i; E_k then excludes e_i and 2e_i, so E_k={0}. Six ordered triples chain all a's and e's to one u. Multiplication by 2 is an automorphism of Z_3; relabelling read branches v→2v gives an isomorphic system. Exit: crit's successor is rem (`3-question.txt:6`); a read would leave an all-rem configuration with R=1∉E_p, contradicting L1(d), so crit is "add 2". — none
+
+**Q3: CONFIRMED** — `solver-b/proofs.txt:53-71`. (i) h's run from (I1) is literally σ_h(0); R=0 at any point of τ lets q (in rem) run σ_q(0) into crit while h is critical. (iii) values 0→1(p)→2(h)→2(τ prefix: zero adds)→1(p add 2); h resumes from F_0(h) with R=1, exactly σ_h(0) after its first add, ends at R=e_h=1, exits add 2 → 0. (iv) ρ must reach crit with R≠0 (else a rem process enters); then from (I1)_{m+1} with h in crit, R=1+a must not be 0 ⇒ a=1. Helper always sees its solo view and leaves via crit; the third process stays in rem. — none
+
+**Q4: CONFIRMED** — `solver-b/proofs.txt:74-95`. Step 3: the pumping only schedules q and h and depends only on R values; p never steps, so R is identical. Step 4: τ at a hold level has only zero adds, so R stays 2 under any interleaving; p,q never reach crit (hence never rem); h never steps. Step 5: both chains infinite ⇒ every level is yield; segments are sequential (p's τ-prefix, q's, p add 2, q add 2, p's ρ-prefix, q's), so differing lengths need no care. Step 6: each chain is finite-ending-in-hold or infinite; pigeonhole on 3. — none
+
+**Q5: CONFIRMED (no evasion found)** — (1) symmetric "add 1; read 2→add 2→reread; read 1→crit": all chains infinite, Step 5 livelocks. (2) one holder + two yielders: Step 5 on the yielders. (3) yield-once-then-hold vs immediate hold: Step 3 reaches (P_2, P_1), Step 4 deadlocks. Multiple reads/add 0 are absorbed by "first nonzero add" (`proofs.txt:51,58,68`); unreachable states are never consulted; a read at crit is killed by L1(d). — none
+
+**Q6: CONFIRMED** — `verifier/vcheck.py:155-167` BFS of all reachable configurations, rejects ≥2 crit; `:169-189` per active set M, SCC over crit-free configurations with active set exactly M, violation iff every member of M has an internal edge — equivalent to the definition since the active set is monotone after T. Structure: `:87-92`. I cross-checked progress with an independent cycle search on both b=4 witnesses and two hand-mutated files (agreed). Both witness files parse legally; ran all three checkers: OK, 182/104 configurations. — none
+
+**Q7: REFUTED (one sentence)** — `README.md:93-94` "not written out by either solver": `solver-a/proofs.txt:102-103` gives the decode reason (p_2 distinguishes sums 0..3), and `solver-b/proofs.txt:106-110` proves the decode for its family, which at n=3 is 1,1,2 mod 4. The b=3 section otherwise tracks L1/T3 sentence by sentence; `README.md:85` "first paragraph" should be "first two paragraphs". — "Solver A gives a one-line reason and solver B proves the decoding for its weight family; neither proves the algorithm, which is checked by model checking only."
+
+**Q8: CONFIRMED with slips** — Counts 569,600 (`refuter_run_seed7.txt:3` 312,000 + `seed11:3` 249,600 + `chains.py` 4000×2), 104/182, 30 states (`referee.md:42`), small-errors list (`referee.md:54-57,71`), prior-art wording (`prior-art.md:41-43`) all match. `README.md:45` "by the solvers": n=3,b=4,s=4 was computed by B only (`solver-a.md:28` t/o). `README.md:47` "checked by program for n ≤ 5" holds for B only; A's 2^n−1 was checked for n=3,4 (`solver-a.md:57`). Top-level `README.md:49` is consistent. — see fixes below
+
+F: MODERATE — README.md:93-94 — claims no solver wrote why amounts 1,1,2 mod 4 decode; solver-a/proofs.txt:102-103 and solver-b/proofs.txt:106-110 do — high — replace per Q7
+F: LOW — README.md:45 — "exhaustive search by the solvers": n=3,b=4,s=4 only solver B finished (solver-a.md:28) — high — "by solver B (A timed out) and recomputed by the referee"
+F: LOW — README.md:47 — "checked by program for n ≤ 5" true only of B's 2^(n−1); A's 2^n−1 checked for n=3,4 — high — "B's for n ≤ 5, A's for n = 3, 4"
+F: LOW — README.md:85 — "first paragraph" but e_i+a_j∉E_k is in the second — high — "first two paragraphs"
+F: LOW — README.md:73-74 — "with R back at 0" omits that R returns to 0 only via the helper's crit/exit (proofs.txt:61-66) — medium — "after the helper has gone through crit and left, R is 0"
+F: LOW — verifier/ — the 8,000 hand-built trials (chains.py) have no saved output, unlike the two seeded runs — medium — note "chains.py output not saved" in What to distrust
+F: LOW — README.md:43 — "automata with 6 states": w_n2_b2_s6 has 3 and 6 states — high — "at most 6 states"
+
+Not asked: none more severe than the above. The impossibility proof survives my tracing; the headline g(3)=4 stands on the files.

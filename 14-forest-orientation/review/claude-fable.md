@@ -1,0 +1,33 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. Report of one reviewer seat (or, for summary.md, the machine-made summary of the round). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# claude:claude-fable-5-1
+
+**Q1: CONFIRMED** — `solver-b/proofs.txt:14-24`. The invariant cost(L)+d(D_L,D_A) ≤ cost(A) is traced round by round: Case 1 is the triangle inequality on old edges (flips anywhere in the forest are absorbed in p); Case 2's walk exists because x has two D_L out-edges but ≤1 old out-edge in D_A′, each saturated w_i likewise; the walk is a directed path in D_L, so it is a legal normal reply, and all k edges are disagreements so d drops by exactly k. What is literally proved is per fixed pair sequence; the statement "against every Adversary strategy" (line 12) is not what the proof compares. The conclusion still holds: L is a function of pair history, so the sequence an adaptive S produces against L is a legal oblivious sequence against A, giving max_S cost(L,S) ≤ max_S cost(A,S). — Replace line 12 with "for every sequence of named pairs … ; since L is a function of the pair history, T(n) is unchanged against adaptive Adversaries."
+
+**Q2: CONFIRMED** — `reports/open-limit-referee.md:16`; implementation `open-limit-referee/t2_sim.py:161-172`. Shadow reply = Lemma 1 Case 1/2 reply, always available (walk exists, terminates, is normal); named pair legal since G is shared; invariant is the Lemma 1 invariant, which holds whatever is named; shadow play is a normal play against S, so cost(A) ≥ cost(L) ≥ c. Not strictly needed: Lemma 1's L-as-history-function argument above already yields T = T_normal, and Theorem 1 is a T_normal bound. — "a constructive form of the omitted last step of Lemma 1".
+
+**Q3: CONFIRMED** — `open-limit/proofs.txt:12-13` (h = P+1 in all cases, holes = −1), Lemma A(b) `:31-35` (R reachable from o′ excludes x and all w_i since the o′→w_i tree path starts with the arc x→o′; no flipped edge touches R), Lemma B `:45-49` (free ⇒ P = −1 = p, cost 0 = p+1; path via P ⇒ X1; via Q ⇒ X2; y by A(c)); unavailable replies only shrink Algorithm's options. — none.
+
+**Q4: CONFIRMED** — `:60-62`: A_k: both options give cost ≥ k, sort(k−1,k)=R_k; R_k: X1 cost ≥ k, (k,k)=A_{k+1}; X2 cost ≥ k+1, R_k. (*) arithmetic verified: k+(k+2/3)=2(k+1/3), k+(k+4/3)=2(k+2/3), (k+1)+(k+2/3)>2(k+2/3). Singleton P = 0+1/3−1/3 = 0 (`:68`). P(new) ≥ P(X)+P(Y) is (*) exactly. "From every position" holds only for the step, in the normal/shadow game. — none.
+
+**Q5: CONFIRMED** — `:72-80`. Nesting makes M(i_r) legal; I rederived (**) (−ΣF(b_r)+Σ_{r<m}F(i_r) with b_m = i_m); F steps are 1/3 or 2/3; h ≥ k ⇒ 2^{k+1}−1 vertices; i_m ≤ 2log₂(n+1)−1; m ≤ i_m+1; F(i) ≤ i/2+1/3; final: −(7/6)(2log₂(n+1)−1)−1/3 = −(7/3)log₂(n+1)+5/6. Recomputed: n=16: −3.37; 64: 8.11; 256: 67.49. Positive from n = 34 (f(33) = −0.04). But f(n) > B(n) first at n = 179 (43.02 > 43), then dips; it is above B(n) for all n ≥ 189. — "exceeds B(n) for every n ≥ 189 (first at n = 179)".
+
+**Q6: CONFIRMED** — `solver-a/proofs.txt:36-54` invariant I(C) checked in all merge cases; `solver-b/proofs.txt:26-39` P drops ≤ payment in (a)–(c); Lemma 3/P4 superadditivity sound; Lemma 4 `:49-52` size count (2^j vertices at directed distance j ≤ k since directed paths from u end at distinct vertices) and induction 2(b+1) ≥ a+b+1 hold; P6 `:74-83` inequality min(p,q) ≥ min(j,p)+min(j,q)−j and xA ≥ dist traced; P2's ≥ direction traced. Certificates present; I ran `verifier/certcheck.py`: `cert_W2_14_ge4` (280 claims), `cert_W2_16_ge5`, `cert_n30_k7` (140 entries) all ACCEPTED. — none.
+
+**Q7: CONFIRMED** — `open-limit/proofs.txt:93-97`: after a real reply the merged tree contains both the replying endpoint (new type) and the other witness (old type, A(c)), so both successor states are represented; Algorithm's extra abstract options only lower V_pair. Theorem 3 `:114-127`: g ≥ p+4/3, g ≥ q+1/3, exceptional case and (a)–(c) all re-derived (case (b) needs only d+1/3+φ(d) ≥ 7/3). README:47 scopes to "its reduced game", correctly; `proofs.txt:111-113` overstates. — none for README.
+
+**Q8: CONFIRMED (with LOW wording issues)** — n ≤ 15 three programs `reports/referee.md:11`; T(16) `solver-a/run_n16.txt:4-5`; T(30),T(32) certs; T(64) certificate absent but disclosed (README:137); 30…66 `run_t3_true.txt`; prior-art paragraph matches `prior-art-deep.md:7-20,26,36`. Issues listed below.
+
+F: LOW — `solver-b/proofs.txt:12` — Lemma 1 stated "against every Adversary strategy" but proved per fixed pair sequence; conclusion holds via L being a function of pair history, unstated — high — restate as per-sequence plus one-line history argument.
+F: LOW — `README.md:93-104`, `reports/open-limit-referee.md:15` — the "missing step" belongs to Lemma 1's last sentence and is closable without any shadow; README presents the shadow as required — high — "one way to close the omitted step".
+F: LOW — `README.md:52` — "exceeds B(n) only from n = 189": first exceedance is n = 179; 189 is the permanent threshold — high — see Q5 wording.
+F: LOW — `README.md:60-61` — "one flip per block": k blocks give k−1 flips — high — "one flip per block after the first".
+F: LOW — `README.md:116-117` and `:46` — 30 ≤ n ≤ 35 also follow from certificates (T(30) ≥ 7, T(32) ≥ 8 + monotonicity); only 36–63 rest solely on the pair DP — high — narrow the range.
+F: LOW — `README.md:44` — "two routes sharing no lemma": both rest on a simulation lemma (P1 / Lemma 1) with identical proof idea and the same adaptive-Adversary subtlety — medium — "sharing no stated lemma, though both use a simulation reduction".
+F: LOW — `open-limit/proofs.txt:111-113` — "no strategy that tracks one witness … proves more than 1/3" overstates Theorem 3 (abstract game with Lemma B's cost bounds only) — high — scope to the pair game.
+F: LOW — `open-limit/proofs.txt:81` — Remark (i) "inductive from every position": only the step is position-free, and only under normal replies — medium — qualify.
+
+Not asked: the T(64) ≥ 18 certificate used for n ≥ 64 is absent from the folder (disclosed), so that leg is independently supported only by the pair DP (two programs); Theorem 2 values 62–66 depend on `pairdp.py` plus the referee's DP, not the author's cross-check. No CRITICAL or MODERATE defects found; the headline bounds stand.
+
+<!-- stderr: Warning: no stdin data received in 3s, proceeding without it. If piping from a slow command, redirect stdin explicitly: < /dev/null to skip, or wait longer.
+ -->

@@ -1,0 +1,26 @@
+<!-- Archived by the organiser on 2026-11-21 from the review of this experiment before its publication. The brief given to every reviewer of this round (attachments, if any, are not archived). Verbatim except that absolute paths are shortened. It was written about the files BEFORE the findings were applied, so line numbers and quoted sentences may not match the current files. -->
+
+# Review brief: latent-mining experiment 15 (majority with a planted agent and no fairness)
+
+Repository folder under review: `15-planted-majority/` (present in the working tree; it is not committed yet). Read the files, not this summary. Assume the authors (instances of one AI model) are competent and wrong until you have traced each claim yourself. The game is defined in `15-planted-majority/chain/3-question.txt` (formal) and `README.md` ("The game").
+
+Claims made in `15-planted-majority/README.md`:
+
+- C1. For a closed set S with maximum K, G(2|S| + 1) >= K - 1 (`solver-a/proofs.txt` Theorems 1 and 1').
+- C2. The explicit sets of Corollaries 1a and 1b are closed, giving G(4M - 1) >= M^2 - 1 and G(8M - 5) >= M^3 - 1.
+- C3. G(s) is finite for every s (`solver-a/proofs.txt` Theorem 2). This has a single author and is the least-checked claim: spend the most effort here.
+- C4. Lemma R (the reduced model loses nothing), Lemma M (monotone), and the small values G(2), G(3), G(4) = 1, 3, 3.
+- C5. The README's status wording, its two explanatory sections and "What to distrust" match what the files support.
+
+Questions. Verdict for each: CONFIRMED / REFUTED / UNSUPPORTED, with file:line evidence.
+
+- Q1. C1: check the protocol P_S and steps (a), (b), (c) of Theorem 1 against the game as defined. Are all rules well defined for a closed S (every (+u, -v) pair has a rule; splits exist for u >= 2)? Is the pair (sum of absolute weights, number of weightless agents) really decreased lexicographically by every legal move, including the third "net" option (+(u-c), -(v-c))? In (c): is W >= K right when the plant is any state, including -K, a weightless state, or +K? Why can a terminal configuration not contain tokens of both signs? Is the count "number of tokens <= (a+b+1) - 1" right? Does the argument cover the requirement that the PLANT also ends with the right output? Then check Theorem 1' (one weightless state with output A; splits only for negative tokens): redo (c) for both majorities, including a terminal configuration with +tokens and the weightless state when the majority is B.
+- Q2. C2: verify by hand that the sets of Corollary 1a and 1b are closed for a small M (say M = 3), and check the listed identities for general M, including boundary cases (j = M, c' = M, differences equal to elements).
+- Q3. C3, Steps 1-3 of Theorem 2: is the sub-population principle valid under this scheduler (it must pick SOME legal move whenever one exists, so it may ignore agents)? Step 1: is I' = (a, a+2, x) a legal instance and does the cycle survive in it? Step 3: is the set Q0 closed under the rule as claimed; does a non-negative integer combination of moves with zero net change really yield a cycle reachable from a pure population; is Gordan's theorem applied correctly (strict inequality for all t simultaneously); is the bound c*n on the number of moves right for populations whose states lie in Q0?
+- Q4. C3, Steps 4-5: is the staged play legal for this scheduler (may it refuse to activate agents while active agents still have legal moves among themselves, and are moves between active and inactive agents avoidable)? When the active counts differ by one, is the active population exactly the initial configuration of a planted instance with |a - b| >= 2 (check both cases and that a + b >= 2), and is a configuration in which no two ACTIVE agents have a legal move a terminal configuration of that instance? Does "every active agent changes its output between stage j and stage j+2" follow, and the count of at least k moves? Is the final inequality a contradiction?
+- Q5. C4: is Lemma R's proof sound (in particular, that a P'-terminal configuration is good because in P it is terminal or lies on a swap self-loop)? Is the README right about what was computed in which model and about the non-independence of the searches (compare `reports/referee.md`)?
+- Q6. Does the README's section "How a protocol can handle a population much larger than its state count" say anything more than, or different from, Theorems 1 and 1'? Check every sentence, including which closure condition is used where and the claim about the planted agent. Same for "Why no protocol handles every size" against Theorem 2.
+- Q7. Check each Status cell and each bullet of "What to distrust" against `reports/referee.md`, `reports/solver-a.md`, `reports/solver-b.md` and `prior-art.md`; flag any number, count or attribution that differs from its source. Is the README's definition of "closed" (two conditions) consistent with what the proofs use?
+- Q8. Is the top-level `README.md` row for experiment 15 consistent with the folder, and is the README's "The game" the same game as `chain/3-question.txt`?
+
+For each defect give severity (CRITICAL: a headline claim is false or unproved; MODERATE: a stated claim is wrong or unsupported but the headline stands; LOW: wording), file:line, and the replacement wording you would use.

@@ -96,3 +96,7 @@ four model families (two Claude, one GPT, one Grok, one Gemini), each reading
 the repository. All five confirmed the proofs of Theorems 1 to 3 and A and the
 faithfulness of the Lean statement; the corrections they asked for are the
 errata and the status wording above.
+
+## Review archive
+
+`review/`: the review of this experiment before publication (16 to 20 November), archived on 21 November verbatim with absolute paths shortened: the brief given to the reviewers, each seat's report, the machine-made summary, and the organiser's note of what was done with the findings. The reports were written about the files as they stood before the findings were applied, so their line numbers and quotations may not match the current files.
