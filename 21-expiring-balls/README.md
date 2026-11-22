@@ -102,11 +102,11 @@ order of expiry costs nothing.
 - **The general bounds are hours old and have one author.** N(5) ≤ 21
   does not depend on the hand proof: the table and the checker of about 150 lines suffice, if the checker is right. It treats positions that differ by
   renaming bins as the same and untouched bins as interchangeable, which
-  its header justifies; it was tested on damaged tables (for the 12-bin table every one of its 101 lines: every deletion and every swapped move rejected, and the 21 accepted altered offers all only rename an untouched bin; for the 21-bin table random samples of 150 lines and 400 offers, with the same outcome) and reproduces N(1), N(2), N(3) through a small
+  its header justifies; it was tested on damaged tables (for the 12-bin table every one of its 101 lines: every deletion and every swapped move rejected, and the 21 accepted altered offers all only rename an untouched bin; for the 21-bin table a random sample of 150 lines, with every deletion and swap rejected, and a sample of 400 altered offers, of which 297 were rejected and the 103 accepted all rename an untouched bin) and reproduces N(1), N(2), N(3) through a small
   exhaustive solver that shares its conventions. It was not compared with
   the repository's other checkers, which use another file format. For
   k ≥ 7 the upper bound is the hand proof alone. The lower bound says
-  nothing specific to first-in-first-out expiry, so it cannot explain the fast growth of the first four values. `general/PROOFS.md` refers to a `REPORT.md` that is not in the folder, and two of its output files contain REJECT lines without the command that produced them.
+  nothing specific to first-in-first-out expiry, so it cannot explain the fast growth of the first four values. `general/PROOFS.md` refers to a `REPORT.md` that is not in the folder, and two output files in `general/` (`out_check_small.txt`, `out_check_k6_n41.txt`) contain REJECT lines, and `out_rh_test.txt` two assertion failures, without the commands that produced them.
 - **N(4) ≥ 12 now has a certificate, of a compressed kind.** At first it
   rested on two programs whose counts agreed; they store the winning set in
   the same compressed way, and what they stored differed in size (3,722,933
@@ -198,7 +198,7 @@ in it is the referee's checker for the small explicit certificates.
 Before publication the claims went to five reviewers from four model
 families: GPT, Grok and Gemini, and two Claude instances (one of them Claude
 Opus). All five confirmed the 7-bin strategy and the 12-bin strategy after
-following them by hand, the certificate checker, and the general bounds. On
+following them by hand, the certificate checker, and the bounds 2k ≤ N(k) ≤ 2^k. On
 the 11-bin computation four accepted the method; Grok marked it refuted
 because the two programs' stored sets differ in size although their counts
 agree. Their findings on this page, applied above:
@@ -257,8 +257,10 @@ failing on 20 bins. Their findings, applied above: my "line removed" rerun
 was not in the log (added); the damage tests were exhaustive only for the
 12-bin table (all five); a sentence about clean stars was stale; where the
 lower end 12 comes from; "known argument" claimed more than was checked
-(GPT); the size of the omitted table could not be verified. These edits
-have not been reviewed again.
+(GPT); the size of the omitted table could not be verified. A second-round reviewer (one
+Claude instance) then rechecked the edited sections against the files, rerunning the
+checker and recomputing the numbers; it found no false or unsupported claim, and its
+three wording points are applied.
 
 ## Files
 
