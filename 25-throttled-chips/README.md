@@ -10,9 +10,7 @@ h chips, whatever the opponent does?
 chip on the same point by more than a fixed number of rounds.** If G(h) is
 the length of the shortest winning list, then
 5h − 176 ≤ G(h) ≤ 5h − 6 for every h ≥ 2 (proved by hand, the lower bound
-by one instance on 21 November; not machine-checked; it is weaker than
-the simple bound 2h − 1 below until h reaches 59). So no list beats the single-point list by more than 170
-rounds, whatever h is; whether any list beats it at all for h ≥ 6 is open.
+by one instance on 21 November; not machine-checked). For moderate h a second lower bound from the same day is stronger: a list of length m loses if m/5 + 5.2 + 2·H_3m < h (H the harmonic numbers), which gives for example G(100) ≥ 398 and is the best of the three bounds from h = 28 to somewhere near 10⁵; below h = 28 the simple bound 2h − 1 is the best. So no list beats the single-point list by more than 170 rounds, whatever h is; whether any list beats it at all for h ≥ 6 is open.
 The lower bound with a constant was found on 21 November by a follow-up
 instance; the first version of this page had 5h − 10√(5h) − 72. The small values are G(1), …, G(5) = 1, 2, 5, 10, 15. The chain guessed
 that the limit would be below √24 ≈ 4.9 and that mixing two neighbouring
@@ -45,7 +43,7 @@ with G(3), G(4), G(5) and the limit of G(h)/h.
 | So G(h)/h and C(h)/h both tend to 5 | from the two rows above | |
 | **Under the same firing rule every height stays at most t/5 + 35.2 after t rounds, so every list of length at most 5h − 177 loses and G(h) ≥ 5h − 176** | proved by hand by one follow-up instance; the organiser checked every line; the lemmas were tested by program on variants of the rule where they actually come into play; five reviewers then traced the proof and found no gap (see Review) | `constant/proofs.txt` Lemmas 1, 2, Theorem A |
 | **The worst-case shortfall (lag) of that rule grows like the logarithm of the list length.** Upper bound, for every list and every way of breaking ties: after a round every lag is at most 2 + H_n, where n ≤ 3t is the number of points within distance 1 of the list and H_n = 1 + 1/2 + … + 1/n (Theorem U). Lower bound, for each deterministic tie-breaking that depends only on the play so far: for every j there is a list, built against that tie-breaking, of length at most 24·34^j + 84 after which some lag is (8 + j)/5 (Theorem L). A firer that breaks ties knowing the rest of the list, or at random, is not covered by the lower bound | both proved by hand by a second follow-up instance on 21 November; the organiser checked Theorem U line by line; the construction of Theorem L was run against the game with the claims of its proof asserted, for 3 stages (lag 2.2; the proof's "flush" step never arose in these runs), and a greedier variant for 12 stages (lag 4.0); the lists from N = 1156 up were replayed by a separate program by the instance, and the three smallest by the organiser; five reviewers traced both proofs and found no gap, and one rebuilt the construction from the proof's text in its own simulator against five tie rules (see Review) | `lag/PROOFS.md`, `lag/gen.py`, `lag/replay.cpp`, `lag/replay_out_34_organiser.txt` |
-| G(h) ≥ 5h − 26 − 10·H_15h; the exact condition behind it (a list of length m loses if m/5 + 5.2 + 2·H_3m < h) gives G(59) ≥ 200, G(100) ≥ 398, G(1000) ≥ 4873; better than 5h − 176 for h up to somewhere near 10⁵ (not computed exactly) and better than 2h − 1 from h = 28 (Corollary U2) | proved by hand from Theorem U by the same instance; values computed | `lag/PROOFS.md`, `lag/corollary_out.txt` |
+| G(h) ≥ 5h − 26 − 10·H_15h; the exact condition behind it (a list of length m loses if m/5 + 5.2 + 2·H_3m < h) gives G(59) ≥ 200, G(100) ≥ 398, G(1000) ≥ 4873; better than 5h − 176 for h up to somewhere near 10⁵ (not computed exactly) and, in its exact form, better than 2h − 1 from h = 28 (the closed form from h = 31) (Corollary U2) | proved by hand from Theorem U by the same instance; values computed | `lag/PROOFS.md`, `lag/corollary_out.txt` |
 | Earlier search evidence for the same thing | lists found by a search over n neighbouring points on which the largest lag rises from 2.4 at n = 16 to 6.6 at n = 32,768, by 0 to 0.8 per doubling of n and with differences of up to 0.6 between runs with the same printed settings (the search's seed is not printed); the lists for n = 512 (lag 3.8) and n = 16,384 (lag 6.4) were replayed by a separate exact program, the one for 6.6 was not | `constant/lagadv2_out.txt`, `constant/lagadv2_big.txt`, `constant/replay_n512.txt`, `constant/replay_n16384.txt` |
 | G(h) ≥ 2h − 1 for h ≥ 3 | proved by hand by solver B; read by the referee | `solver-b/proofs.txt` P2 |
 | G(1), G(2), G(3) = 1, 2, 5 | computed by all three instances; G(3) also follows from the row above and the list 0, 1, 0, 1, 0 | `reports/` |
@@ -98,8 +96,7 @@ lags stay small.
 A point whose lag is the largest of all, and at least 6, is always ready
 (its height is at least a third of its lag). So once lags are large the rule
 is never stuck, and a potential (the sum of squares of the excess of each lag
-over 6) grows by at most 1 per round. That bounds every lag by 6.6 + √t, and
-the height by t/5 + 2√t + 13.2.
+over 6) grows by at most 1 per round. That bounds every lag by 6.6 + √t, and the height by t/5 + 2√t + 13.2. (Both are superseded below: the lag is at most 2 + H_3t.)
 
 ## From √h to a constant
 
@@ -145,7 +142,7 @@ forced to relieve; a second add lifts both neighbours above everything
 else and the firer can relieve only one. Groups whose neighbours were both
 fired are then refilled to one level higher, paid for by spending
 surviving top points as decoys. That costs a factor of 34 per level in the
-proof (between 1 and 5, about 2.5 on average, in the greedy runs), which is
+proof (about 2.5 on average in the greedy runs; single steps range from 1 to 5, and one last step of a run is 11), which is
 where the logarithm comes from. The constant
 35.2 is not optimised, and the conjecture G(h) = 5h − 10 remains open.
 
@@ -172,8 +169,7 @@ h = 4 and h = 5.
   reported the limit as unsettled. The referee's reading and tests support
   solver A's proof, but its program tests cannot reach the regime the proof
   is about (lags of 6 and more never occurred in any test); it tested that regime
-  only through a deliberately lazy variant of the rule covered by the same
-  argument.
+  only through a deliberately lazy variant of the rule covered by the same argument. Since 21 November the limit also follows from Corollary U2 in `lag/PROOFS.md`, which uses the same rule and three of solver A's facts and needs readiness only at lags above 3, a regime the tests did reach.
 - **The constant bound has one author and is new.** It was written on 21
   November by a single follow-up instance. The organiser checked each step of
   its two lemmas and the theorem by hand, and it builds only on three facts
@@ -194,7 +190,7 @@ h = 4 and h = 5.
   the instance wrote it; reviewers noted that its summary sentence drops the
   additive constant of the upper bound (it is about ln t + 4.1, not ln t),
   that the lower-bound formula needs t ≥ 108, and that one step uses without
-  saying so that a number of chips is an integer. It does not cover a
+  saying so that a number of chips is an integer. `lag/PROOFS.md` and `lag/REPORT.md` also still carry "2 to 4", "0.2 to 0.8", "every list replayed" and "unreviewed", which this page corrects. It does not cover a
   firer whose tie-breaking looks at the rest of the list. The gap between
   the two bounds is a factor of about 18 in the coefficient of ln t. Two
   checks the instance expected to fail did not (a list built against one
@@ -306,7 +302,10 @@ above:
   replayed them.
 - An older row said 0.2 to 0.8 per doubling where one step is 0 (GPT).
 
-These edits have not been reviewed again.
+A second-round reviewer (one Claude instance) then checked the edited page
+against the files. It found the Short answer stale (it did not mention the
+stronger bound for moderate h), one more wrong range for the greedy factor,
+and older sentences not marked as superseded; all applied.
 
 ## Files
 

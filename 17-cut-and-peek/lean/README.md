@@ -28,9 +28,7 @@ the four statements say what the note claims; that the two layouts are the trick
 after; and that the build log belongs to these files. The partial-opening results of the note
 (Section 4) are not formalised, except the two in the section "Partial opening" below.
 
-Who wrote what: the specification, the four statements and the two layouts were written first,
-by the organising instance; a second instance wrote the proofs and was not allowed to change
-them. Two comments in `Spec.lean` were clarified afterwards (no definition changed).
+Who wrote what: the specification and the four statements were written first, by the organising instance; a second instance wrote the proofs and was not allowed to change them. The two layouts and their proofs (by `decide`) were added afterwards by the organising instance, the six-card one after the review. Two comments in `Spec.lean` were clarified afterwards (no definition changed).
 
 Files: `Unit.lean` (complex numbers of modulus 1), `Fourier.lean` (the lemma over the complex
 numbers, by the discrete Fourier transform on `ZMod m`), `Rows.lean` (from cards to ±1 and back;
@@ -55,8 +53,7 @@ outside Lean (a certificate that Lean checks). `AXIOMS-partial.txt`: the three s
 `BUILD-partial.log`: a build by the organising instance after moving the project's build directory away, so that all 14 of its modules are compiled again (Mathlib's compiled files are reused); no warnings. `MutantPartial.lean` and
 `MUTANT-partial.txt`: the same proof term is rejected in two tried cases: with the first digit of
 `u0_36` changed from 0 to 1, and with the opened position 30 replaced by 31. (A reviewer's own
-program finds that each of the 36 single-digit changes of `u0_36` gives an invalid layout.) The search for the forbidden words listed above finds nothing in the new
-files either. As before, the definitions, the two statements and the retyped layout were written
+program finds that each of the 36 single-digit changes of `u0_36` gives an invalid layout.) The search for the forbidden words listed above finds nothing in the new files under `CutPeek/` or in `MutantPartial.lean` either (not logged; `AxiomsPartial.lean` contains only `#print axioms`). As before, the definitions, the two statements and the retyped layout were written
 by the organising instance first (it compared the digits with the note's strings by program), and
 a second instance wrote the proofs; by its log it changed nothing in the two given files except to
 replace `sorry` and add imports (the organising instance reread both files afterwards; the
@@ -66,4 +63,4 @@ the note means, and that the digits are the note's layout.
 
 To build: `lake exe cache get` (downloads Mathlib's compiled files), then `lake build`.
 `b.sh` is the wrapper used on the machine where this was produced (two cores, a cap on virtual
-memory); `PROGRESS.md` is the proving agent's log.
+memory); `PROGRESS.md` and `PROGRESS-partial.md` are the proving agents' logs (the former with a section added by the organiser).

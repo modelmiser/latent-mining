@@ -15,8 +15,7 @@ are computed values: for five states every one of the 48,828,125 rules was
 tried, and since 21 November so was every one of the 78,364,164,096
 six-state rules; for seven states the value comes from backtracking
 searches, not full enumeration: a rule missed by a search could only make
-that value too small, while an error in the simulator the searches share
-could move it either way.
+that value too small, while an error common to the searches' simulators could move it either way.
 Whether some number of states synchronises every length is open, and
 nothing here bears on it either way.
 
@@ -72,12 +71,10 @@ It fires lines of 2, 3, 4 and 5 cells at times 5, 8, 7 and 10, and fails on
 - **Everything is by one model family, and nearly everything is
   computation.** Except for three states, there is no argument for why the
   values are what they are.
-- **L(5) = 5 is the solid one:** three separately written programs tried
-  every rule and agree on the number of rules reaching each length, and on
+- **L(5) = 5 is the most checked:** four separately written programs (the three original ones and, since 21 November, the follow-up's) tried every rule and agree on the number of rules reaching each length, and on
   the 1,244 optimal rules one by one.
 - **L(6) no longer rests on the backtracking idea alone.** A follow-up
-  instance wrote a plain enumerator from the definition (it was told not to
-  read the earlier programs, and reports that it did not): an odometer over all 14 free entries, each rule run on
+  instance wrote a plain enumerator from the definition (it was told not to read the earlier programs; its source header says it was written from the question text only; its report came back as text and is not included here): all 14 free entries enumerated (three fixed per chunk, an odometer over the other eleven), each rule run on
   lengths 2, 3, … until it first fails, with "never fires" decided only when
   a configuration exactly repeats. Its 216 chunks add up to 6¹⁴ rules; the
   histogram of how far each rule gets is in `enum6/aggregate_s6.txt`; no rule
@@ -85,8 +82,7 @@ It fires lines of 2, 3, 4 and 5 cells at times 5, 8, 7 and 10, and fails on
   (1,244 rules) and the four- and three-state values (232 rules reach 3;
   36 reach 2; outputs of the organiser's runs in `enum6/out/`). Its histogram
   equals, at every length, the one in solver A's original report, which
-  came from a search; the 336 rules themselves could be compared only
-  through one witness, because the searches kept no list. Limits: the full
+  came from a search; the follow-up compared the 336 rules with the earlier work only through solver B's witness, but solver A's search output (`solver-a/dfs6.txt`) lists the 16 optimal partial rules up to renaming, and expanding them gives exactly the same 336 rules (found by a second-round reviewer; `enum6/compare_solver_a.py`, rerun by the organiser, output in `enum6/compare_solver_a_out.txt`). Limits: the full
   run went through each chunk once; the follow-up's second simulator
   rechecked only the 2,502 rules that reach 7 or more, not the rejections (a
   reviewer's own simulator then redid four whole chunks, rejections
@@ -182,7 +178,7 @@ listed above. Other findings, applied: the agreement with solver A's
 histogram was understated; the three- and four-state runs had no output in
 the folder (added); "without reading the earlier programs" was stated as
 fact; "an error could only make it too small" was wrong for seven states
-(Grok). These edits have not been reviewed again.
+(Grok). A second-round reviewer (one Claude instance) then checked the edited page against the files. It found that the page understated the agreement with the earlier work (the list comparison above) and three smaller points, now applied.
 
 ## Files
 
@@ -192,8 +188,7 @@ fact; "an error could only make it too small" was wrong for seven states
 - `reports/`: each instance's final report, verbatim.
 - `solver-a/`, `solver-b/`: enumeration and search programs, witnesses, the
   list of all 1,244 five-state rules, proofs.
-- `enum6/`: the follow-up of 21 November: the complete enumeration of
-  six-state rules (program, chunk outputs, checks, the list of all 336
+- `enum6/`: the follow-up of 21 November: the complete enumeration of six-state rules (brief, program, chunk outputs, checks, the list of all 336
   optimal rules).
 - `verifier/`: the referee's enumeration, its searches without symmetry
   breaking, and its checker.

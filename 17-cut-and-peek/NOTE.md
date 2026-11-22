@@ -358,8 +358,7 @@ search was by web queries only.
   means and that the retyped digits are the layout printed there. The search result for m ≤ 15 and the other
   facts of Section 4 are not formalised.
   The specification, the four statements and the two layouts were written by
-  the organising AI instance; the proofs by a second instance, which was
-  given the specification and statements and not allowed to change them (two
+  the organising AI instance; the proofs by a second instance (the two layout checks, added later, are entirely the organising instance's), which was given the specification and statements and not allowed to change them (two
   comments in the specification were clarified afterwards). The same
   division holds for the partial-opening files. The builds were run by AI
   instances.

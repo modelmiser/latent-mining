@@ -57,7 +57,7 @@ Write W_1 = 2 and W_r = W_(r−1)·(W_(r−1) + 1), so W = 2, 6, 42, 1806,
 | A cycle containing no step that raises the number of 1s has length at most 2^r | proved by hand by solver A; the referee found one misstated detail that does not affect the conclusion | `solver-a/proofs.txt` Lemma 2 |
 | At r = 3 the trees reaching 42 are exactly the relabellings of the construction | computed by both solvers and the referee | `solver-a/naive3.out`, `solver-b/ex3_full0.out`, `reports/referee.md` |
 | With at most m distinct positions allowed, the longest cycle B(r, m) obeys B(r, m) = max over m₁ + m₂ = m − 1 of B(r−1, m₂)·(B(r−1, m₁) + 1) | computed for r ≤ 3 and for r = 4 (the referee completed the r = 4 row exhaustively); not proved | `reports/referee.md` |
-| On every cycle, at most one step uses a leaf that writes nothing (Theorem E) | at first computed for r ≤ 3 (solver B); since 21 November proved by hand for every tree by one follow-up instance, tested on all trees of depth ≤ 4; five reviewers traced the proof and found no gap, and two of them tested the theorem and the construction with their own programs (see Review) | `upper/PROOFS.md` §1, `solver-b/prod3.cpp` |
+| On every cycle, at most one step uses a leaf that writes nothing (Theorem E) | at first computed for r ≤ 3 (solver B); since 21 November proved by hand for every tree by one follow-up instance, tested on all trees of depth ≤ 4; five reviewers traced the proof and found no gap, and two of them tested the theorem with their own programs, one of those also the construction of the auxiliary tree (see Review) | `upper/PROOFS.md` §1, `solver-b/prod3.cpp` |
 | If the two subtrees below the root share no position, the longest cycle is at most M₁·(M₀ + 1), where M₀, M₁ are the longest cycles of the two subtrees with the leaves that write the root's position made empty (Theorem RD) | proved by hand by the follow-up instance, using Theorem E; tested on 383,161 trees of depth ≤ 3 | `upper/PROOFS.md` §2 |
 | **For trees in which no position labels two nodes, every cycle has length at most L of the tree, and every shape has such a labelling that attains it; so the longest cycle over these trees of depth at most r is exactly W_r, for every r** (Theorem RO; L(leaf) = 1, L(node) = L(1-child)·(L(0-child) + 1)) | proved by hand by the follow-up instance, from Theorem RD and the construction of the lower bound | `upper/PROOFS.md` §3 |
 | For r ≥ 5, a tree of depth r with a cycle longer than W_r must reuse a position at two nodes whose lowest common ancestor has depth at most r − 5 (the root has depth 0); at depth 5 that ancestor is the root | follows from Theorem RD and the computed D(ρ) = W_ρ for ρ ≤ 4 | `upper/PROOFS.md` §2 |
@@ -138,7 +138,7 @@ that would allow an induction and are false at depth 3.
 
 ## What to distrust
 
-- **The upper-bound results are one day old and have one author.** Theorem
+- **The upper-bound results date from 21 November and have one author.** Theorem
   E's proof builds an auxiliary tree by a recursive rule with a special case
   for repeated modes; that construction was tested by program on 40,000
   trees and the theorem on all trees of depth ≤ 4, which is evidence and not
@@ -224,9 +224,7 @@ Theorem E including the construction of the auxiliary tree and its
 finiteness, Theorem RD and its corollaries, Theorem RO, Theorem G and its
 values, and both small examples, which they replayed. Both Claude seats
 also wrote their own programs: over 8,000 and 18,500 random trees with
-heavy reuse of positions they found no cycle with two empty steps, no
-violation of the product bound for disjoint subtrees, and no cycle longer
-than L; one built the auxiliary tree from the proof's text for 1,934 cycles
+heavy reuse of positions they found no cycle with two empty steps and no violation of the product bound for disjoint subtrees; the seat with 8,000 trees also found no cycle longer than L; the other built the auxiliary tree from the proof's text for 1,934 cycles
 and found it to behave as claimed each time. Their findings, applied above:
 
 - I stated Theorem RO as "the longest cycle is exactly L", which is false
@@ -239,7 +237,7 @@ and found it to behave as claimed each time. Their findings, applied above:
 - Three places where the proof file is terse, now listed under "What to
   distrust".
 
-These edits have not been reviewed again.
+A second-round reviewer (one Claude instance) then checked the edited page against the files and the reviewers' reports; its corrections, to how much of the evidence came from which reviewer, are applied.
 
 ## Files
 

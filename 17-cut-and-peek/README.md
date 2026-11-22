@@ -288,10 +288,10 @@ sentences still said the partial-opening results were not formalised (all
 five); "a clean full build" rested on a one-line log, so the project's
 modules were rebuilt from scratch and that log kept; the failure-test log
 named a different file; the note's account left out the correctness check
-and the added trust assumptions. Not changed: two inaccurate remarks in the
-proving instance's own files (a comment in `PartialCheck.lean` that also
-covers the unused all-true case, and "three" for four uses of `decide` in
-its log). These edits have not been reviewed again.
+and the added trust assumptions. Not changed: three inaccurate remarks in the proving instance's own files (a comment in `PartialCheck.lean` that also covers the unused all-true case, "three" for four uses of `decide` in its log, and that log's reference to `BUILD-partial.log`, which is now the organiser's rebuild). A second-round reviewer (one Claude instance) then checked every sentence
+about Lean in this page, the note and the Lean README against the files;
+its corrections (the two layouts were added after the proofs, not written
+first) are applied.
 
 ## Files
 
