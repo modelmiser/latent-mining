@@ -51,7 +51,7 @@ A(n) = 2n − 3 for every n ≥ 4?
 | A(9) = 23 | computed by all three instances by threshold searches ("can the Delayer force t?"), yes at 23 and no at 24; no strategy files | `reports/referee.md` |
 | A(10) = 27 | computed by solver B and the referee by threshold searches; every "no at 28" run uses a hand-proved upper bound (solver B's Lemma 3) to cut the search, alongside two lower bounds, and skips moves that differ only by swapping two interchangeable agents. Solver A has only A(10) ≥ 27 | `reports/referee.md` |
 | A(11) ≥ 29 (≥ 30 by solver B's run) | the referee's program confirms 29; its attempts at 30 ran out of time | |
-| **A(n) ≥ 3n − 6 for every n ≥ 3** (the exact value for n = 3, …, 6; from n = 7 the computed values are larger: 16, 19, 23, 27 against 15, 18, 21, 24) | proved by hand by one follow-up instance on 21 November: a Delayer rule and a count of "tasks"; by its own account the organiser read the proof; the instance's program played one fixed version of the rule (where the rule leaves a choice it takes the lowest-numbered agent) against every reply of the Hastener in the second phase for n = 3, …, 11, taking the first-phase partners in one order (all orders for n = 5, …, 8), and found exactly 3n − 6 each time; five reviewers traced the proof and found no gap, and two wrote their own checkers that explore every choice the rule permits, for n up to 7 and 9 (see Review) | `growth/PROOFS.md` Theorem 1, `growth/dcheck.log` |
+| **A(n) ≥ 3n − 6 for every n ≥ 3** (the exact value for n = 3, …, 6; from n = 7 the computed values are larger: 16, 19, 23, 27 against 15, 18, 21, 24) | proved by hand by one follow-up instance on 21 November: a Delayer rule and a count of "tasks"; read by the organiser; the instance's program played one fixed version of the rule (where the rule leaves a choice it takes the lowest-numbered candidate in the first stage and, once someone knows everything, p if possible and otherwise the lowest-numbered such agent) against every reply of the Hastener in the second phase for n = 3, …, 11, taking the first-phase partners in one order (all orders for n = 5, …, 8), and found exactly 3n − 6 each time; five reviewers traced the proof and found no gap, and two wrote their own checkers that explore every choice the rule permits, for n up to 7 and 9 (see Review) | `growth/PROOFS.md` Theorem 1, `growth/dcheck.log` |
 | A(n) ≥ 2n − 3 for every n ≥ 2 (superseded by the row above for n ≥ 4) | proved by hand by solver A only; read by the referee | `solver-a/proofs.txt` P1 |
 | The exact A(n); whether A(n)/n is bounded | open | |
 
@@ -99,8 +99,7 @@ larger computed values need cleverer play.
 This follows `growth/PROOFS.md` Theorem 1.
 
 The Delayer names one agent c for the first n − 2 rounds, so that exactly
-one person p is left out. Now everybody's knowledge is one of a chain of
-sets (what c knew after 0, 1, 2, … calls), with or without p's secret (the chain starts with the empty set, so p's own knowledge counts as its bottom member plus p's secret), and this stays true for the rest of the game. Each person then has two tasks:
+one person p is left out. Now everybody's knowledge is one of a chain of sets (the empty set, then what c knew after 1, 2, … calls), with or without p's secret (so p's own knowledge counts as the bottom member plus p's secret), and this stays true for the rest of the game. Each person then has two tasks:
 to reach the top of the chain, and to learn p's secret. That makes 2n − 3
 tasks outstanding. A call completes at most two tasks, and it completes two
 only in two specific ways. The Delayer's rule for the second phase (while
@@ -110,13 +109,13 @@ person who can still call) allows exactly one call that completes two. So
 the second phase has at least 2n − 4 calls, and the game at least
 (n − 2) + (2n − 4) = 3n − 6.
 
-The same follow-up tried to bound the game from above and failed: the natural Hastener rules it tested either reach the trivial n(n − 1)/2 or are not optimal (3 calls above A(n) at n = 8 and 9), with too few values to tell whether the latter grow linearly. Its computations (`growth/star.log`, n ≤ 8) show that after the Delayer's opening the full value A(n) is still reachable as long as at least two people are left out, while leaving exactly one out gives 3n − 6. In its report, which came back as text and is not in the folder, it conjectures A(n) = 4n − 13 for n ≥ 8 (so A(11) = 31) on the strength of the three computed values 19, 23, 27, the last of which rests on a pruned search; that is a guess, not a result.
+The same follow-up tried to bound the game from above and failed: the natural Hastener rules it tested either reach the trivial n(n − 1)/2 or are not optimal (3 or 4 calls above A(n) at n = 8; 3 above at n = 9 for the one rule run there), with too few values to tell whether the latter grow linearly. Its computations (`growth/star.log`, n ≤ 8) show that after the Delayer's opening the full value A(n) is still reachable as long as at least two people are left out, while leaving exactly one out gives 3n − 6. In its report, which came back as text and is not in the folder, it conjectures A(n) = 4n − 13 for n ≥ 8 (so A(11) = 31) on the strength of the three computed values 19, 23, 27, the last of which rests on a pruned search; that is a guess, not a result.
 
 ## What to distrust
 
 - **The bound 3n − 6 is hours old and has one author.** The program
   check shows that the stated rule guarantees 3n − 6 for n ≤ 11 against
-  every Hastener, which tests the rule and not the proof for general n; it treats the first-phase partners as interchangeable (checked without that shortcut for n = 5, …, 8) and fixes the rule's free choices. Its log has a block headed "deliberately wrong rules (must print BELOW)" in which the first variant prints OK: that variant names c where the rule names p, and c's only legal partner is then p, so it is the same call and not a wrong rule; the other two variants do fall below. The log also contains an unlabelled crash (out of memory at n = 12). `growth/PROOFS.md` is left as written: its "Lemma 2" is stated as a restatement of solver B's Lemma 3 but is a different statement with no proof, and plays no part in the bound; "exact for n = 3..6" there relies on computed values for 5 and 6. The literature search on this page predates the bound 3n − 6. The conjecture 4n − 13 and the remarks on Hastener
+  every Hastener, which tests the rule and not the proof for general n; it treats the first-phase partners as interchangeable (checked without that shortcut for n = 5, …, 8) and fixes the rule's free choices. Its log has a block headed "deliberately wrong rules (must print BELOW)" in which the first variant prints OK: that variant names c where the rule names p, and c's only legal partner is then p, so it forces the call {c, p}, which is one of the replies the Hastener has when p is named; it narrows the Hastener's choice and cannot fall below, so it is not a wrong rule; the other two variants do fall below. The log also contains an unlabelled crash (out of memory, presumably at n = 12), and the four lines after it, also unlabelled, are the runs with all first-phase orders. `growth/PROOFS.md` is left as written: its "Lemma 2" is stated as a restatement of solver B's Lemma 3 but is a different statement with only a one-line justification, and plays no part in the bound; "exact for n = 3..6" there relies on computed values for 5 and 6. The literature search on this page predates the bound 3n − 6. The conjecture 4n − 13 and the remarks on Hastener
   rules are sketches. Whether A(n)/n is bounded is still open.
 - **Everything is by one model family, and the values beyond n = 4 are computations.**
 - **The larger values have less behind them.** For n = 4 to 7 there are
@@ -198,8 +197,7 @@ and 9, and exactly one double call on every complete play. Their findings,
 applied above: the program evidence was described too strongly (four
 seats); a negative control in the log did not fail (four seats); the
 conjecture 4n − 13 was attributed to a file that does not contain it; a
-slip in my account of the chain; the older section heading. These edits
-have not been reviewed again.
+slip in my account of the chain; the older section heading. A second-round reviewer (one Claude instance) then checked the edited page against the files, recompiling the checker and rerunning small cases; its corrections (two of my sentences about the chain and about the control that did not fail were wrong as written) are applied.
 
 ## Files
 
