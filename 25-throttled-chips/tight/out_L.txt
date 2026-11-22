@@ -1,0 +1,6 @@
+== zeros, h=6: length 20 must WIN, length 19 must LOSE (control)
+h=6 length 20: WINS, every line dead at the add of round 20
+h=6 length 19: LOSES, surviving line (vertex fired per round, . = pass): . 0 . 0 1 0 0 -1 0 -1 0 0 1 0 . . 0 . .
+== h=3: 0 1 0 1 0 must WIN; 0 0 0 0 0 must LOSE (control)
+h=3 length 5: WINS, every line dead at the add of round 5
+h=3 length 5: LOSES, surviving line (vertex fired per round, . = pass): . 0 . 0 1

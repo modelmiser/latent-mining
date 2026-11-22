@@ -1,0 +1,22 @@
+search h=6 m=19 w=3 seed=7 restarts=400 evaluations=120400 winning lists found=0
+search h=6 m=19 w=5 seed=7 restarts=400 evaluations=120400 winning lists found=0
+search h=6 m=19 w=6 seed=7 restarts=400 evaluations=120400 winning lists found=0
+== control: the search must FIND winners where they exist (h=3 m=5 w=2; h=6 m=20 w=3; h=4 m=10 w=3)
+WINNING list h=3 m=5: 0 1 1 0 1
+WINNING list h=3 m=5: 1 0 1 0 0
+WINNING list h=3 m=5: 0 1 1 0 1
+search h=3 m=5 w=2 seed=7 restarts=400 evaluations=43 winning lists found=3
+WINNING list h=6 m=20: 2 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+WINNING list h=6 m=20: 2 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+WINNING list h=6 m=20: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+search h=6 m=20 w=3 seed=7 restarts=400 evaluations=4249 winning lists found=3
+WINNING list h=4 m=10: 1 1 1 1 1 1 1 1 0 1
+WINNING list h=4 m=10: 1 2 0 1 1 1 1 1 1 1
+WINNING list h=4 m=10: 0 1 2 1 1 1 1 1 0 1
+search h=4 m=10 w=3 seed=7 restarts=400 evaluations=189 winning lists found=3
+== and must find none below G: h=4 m=9 w=3; h=5 m=14 w=3
+search h=4 m=9 w=3 seed=7 restarts=400 evaluations=120400 winning lists found=0
+search h=5 m=14 w=3 seed=7 restarts=400 evaluations=120400 winning lists found=0
+== h=7 m=24 w=3 and w=5
+search h=7 m=24 w=3 seed=7 restarts=200 evaluations=60200 winning lists found=0
+search h=7 m=24 w=5 seed=7 restarts=200 evaluations=60200 winning lists found=0

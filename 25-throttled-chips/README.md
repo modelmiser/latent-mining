@@ -9,10 +9,19 @@ h chips, whatever the opponent does?
 **Short answer: 5h rounds minus a constant, and no list beats dropping every
 chip on the same point by more than a fixed number of rounds.** If G(h) is
 the length of the shortest winning list, then
-5h − 176 ≤ G(h) ≤ 5h − 6 for every h ≥ 2 (proved by hand, the lower bound
-by one instance on 21 November; not machine-checked). For moderate h a second lower bound from the same day is stronger: a list of length m loses if m/5 + 5.2 + 2·H_3m < h (H the harmonic numbers), which gives for example G(100) ≥ 398 and is the best of the three bounds from h = 28 to somewhere near 10⁵; below h = 28 the simple bound 2h − 1 is the best. So no list beats the single-point list by more than 170 rounds, whatever h is; whether any list beats it at all for h ≥ 6 is open.
-The lower bound with a constant was found on 21 November by a follow-up
-instance; the first version of this page had 5h − 10√(5h) − 72. The small values are G(1), …, G(5) = 1, 2, 5, 10, 15. The chain guessed
+
+**5h − 28 ≤ G(h) ≤ 5h − 10 for every h ≥ 4**
+
+(2h − 1 is the better lower bound for h ≤ 8, and the two agree at h = 9). So no list beats the
+single-point list, which needs at most 5h − 10 chips, by more than 18
+rounds, whatever h is; whether any list beats it at all for h ≥ 6 is open.
+Both bounds in this form were proved by hand on 21 November by one
+follow-up instance and are not machine-checked. The page's history that
+day: the first version had 5h − 10√(5h) − 72 ≤ G(h) ≤ 5h − 6; a first
+follow-up proved 5h − 176; a second gave a bound with a logarithmic loss
+that was better for moderate h; the third gave the bounds above, which
+supersede all of them for h ≥ 4.
+The small values are G(1), …, G(5) = 1, 2, 5, 10, 15. The chain guessed
 that the limit would be below √24 ≈ 4.9 and that mixing two neighbouring
 points would keep a constant-factor advantage over a single point; both
 guesses are wrong. Mixing helps at h = 3 and not at h = 4 or 5.
@@ -38,12 +47,14 @@ with G(3), G(4), G(5) and the limit of G(h)/h.
 
 | Claim | Status | Where |
 |---|---|---|
-| **C(h) ≤ 5h − 6 for h ≥ 2**, so G(h) ≤ 5h − 6 | proved by hand by solver B; solver A proves 5h − 5 the same way; referee read both | `solver-b/proofs.txt` P3, `solver-a/proofs.txt` Theorem 1 |
-| **Every list of length m loses whenever m/5 + 2√m + 13.2 ≤ h − 1**, so G(h) ≥ 5h − 10√(5h) − 72 | proved by hand by solver A only; referee read it step by step, found no gap, and ran the strategy against every short list confined to 4 to 7 neighbouring points and against lists searched for to make it fail | `solver-a/proofs.txt` Theorem 2, `verifier/strat.cpp` |
+| **C(h) ≤ 5h − 10 for every h ≥ 4**, so G(h) ≤ 5h − 10: the list of 5h − 10 zeros wins | proved by hand by a third follow-up instance on 21 November (the sum of squared positions is twice the number of firings, which leaves a slack of exactly 6 to distribute, and each of the three ways of distributing it is impossible); by its own account the organiser checked every step; five reviewers traced it and found no gap, and one confirmed C(h) = 5h − 10 for h = 4, …, 9 with its own brute force (see Review); agrees with the computed C(h) = 5h − 10 for 4 ≤ h ≤ 14 | `tight/PROOFS.md` Part A |
+| **Under solver A's firing rule every height is at most t/5 + 5.6 at every step of round t, so every list of length at most 5h − 29 loses and G(h) ≥ 5h − 28** | proved by hand by the same instance, by sharpening the two earlier follow-ups: some point of largest lag is ready as soon as that lag is 6/5; the top-k argument is run only on points whose target is at least 6/5; and each such point far from y costs chips far from y. The lemmas on readiness and on top-k sums were asserted along 89,243 plays; the height bound was asserted on every play too and was never close to tight (largest height seen t/5 + 3.2), so the last two lemmas, which produce the constant, rest on the argument; five reviewers traced all of it and found no gap (see Review) | `tight/PROOFS.md` Part B, `tight/out_rule_main.txt` |
+| C(h) ≤ 5h − 6 for h ≥ 2, so G(h) ≤ 5h − 6 (superseded for h ≥ 4 by the first row) | proved by hand by solver B; solver A proves 5h − 5 the same way; referee read both | `solver-b/proofs.txt` P3, `solver-a/proofs.txt` Theorem 1 |
+| Every list of length m loses whenever m/5 + 2√m + 13.2 ≤ h − 1, so G(h) ≥ 5h − 10√(5h) − 72 (the first version's bound; superseded by G(h) ≥ 5h − 28) | proved by hand by solver A only; referee read it step by step, found no gap, and ran the strategy against every short list confined to 4 to 7 neighbouring points and against lists searched for to make it fail | `solver-a/proofs.txt` Theorem 2, `verifier/strat.cpp` |
 | So G(h)/h and C(h)/h both tend to 5 | from the two rows above | |
-| **Under the same firing rule every height stays at most t/5 + 35.2 after t rounds, so every list of length at most 5h − 177 loses and G(h) ≥ 5h − 176** | proved by hand by one follow-up instance; the organiser checked every line; the lemmas were tested by program on variants of the rule where they actually come into play; five reviewers then traced the proof and found no gap (see Review) | `constant/proofs.txt` Lemmas 1, 2, Theorem A |
+| Under the same firing rule every height stays at most t/5 + 35.2 after t rounds, so every list of length at most 5h − 177 loses and G(h) ≥ 5h − 176 (superseded for every h by G(h) ≥ 5h − 28) | proved by hand by one follow-up instance; the organiser checked every line; the lemmas were tested by program on variants of the rule where they actually come into play; five reviewers then traced the proof and found no gap (see Review) | `constant/proofs.txt` Lemmas 1, 2, Theorem A |
 | **The worst-case shortfall (lag) of that rule grows like the logarithm of the list length.** Upper bound, for every list and every way of breaking ties: after a round every lag is at most 2 + H_n, where n ≤ 3t is the number of points within distance 1 of the list and H_n = 1 + 1/2 + … + 1/n (Theorem U). Lower bound, for each deterministic tie-breaking that depends only on the play so far: for every j there is a list, built against that tie-breaking, of length at most 24·34^j + 84 after which some lag is (8 + j)/5 (Theorem L). A firer that breaks ties knowing the rest of the list, or at random, is not covered by the lower bound | both proved by hand by a second follow-up instance on 21 November; the organiser checked Theorem U line by line; the construction of Theorem L was run against the game with the claims of its proof asserted, for 3 stages (lag 2.2; the proof's "flush" step never arose in these runs), and a greedier variant for 12 stages (lag 4.0); the lists from N = 1156 up were replayed by a separate program by the instance, and the three smallest by the organiser; five reviewers traced both proofs and found no gap, and one rebuilt the construction from the proof's text in its own simulator against five tie rules (see Review) | `lag/PROOFS.md`, `lag/gen.py`, `lag/replay.cpp`, `lag/replay_out_34_organiser.txt` |
-| G(h) ≥ 5h − 26 − 10·H_15h; the exact condition behind it (a list of length m loses if m/5 + 5.2 + 2·H_3m < h) gives G(59) ≥ 200, G(100) ≥ 398, G(1000) ≥ 4873; better than 5h − 176 for h up to somewhere near 10⁵ (not computed exactly) and, in its exact form, better than 2h − 1 from h = 28 (the closed form from h = 31) (Corollary U2) | proved by hand from Theorem U by the same instance; values computed | `lag/PROOFS.md`, `lag/corollary_out.txt` |
+| (Superseded for every h by G(h) ≥ 5h − 28.) G(h) ≥ 5h − 26 − 10·H_15h; the exact condition behind it (a list of length m loses if m/5 + 5.2 + 2·H_3m < h) gives G(59) ≥ 200, G(100) ≥ 398, G(1000) ≥ 4873; better than 5h − 176 for h up to somewhere near 10⁵ (not computed exactly) and, in its exact form, better than 2h − 1 from h = 28 (the closed form from h = 31) (Corollary U2) | proved by hand from Theorem U by the same instance; values computed | `lag/PROOFS.md`, `lag/corollary_out.txt` |
 | Earlier search evidence for the same thing | lists found by a search over n neighbouring points on which the largest lag rises from 2.4 at n = 16 to 6.6 at n = 32,768, by 0 to 0.8 per doubling of n and with differences of up to 0.6 between runs with the same printed settings (the search's seed is not printed); the lists for n = 512 (lag 3.8) and n = 16,384 (lag 6.4) were replayed by a separate exact program, the one for 6.6 was not | `constant/lagadv2_out.txt`, `constant/lagadv2_big.txt`, `constant/replay_n512.txt`, `constant/replay_n16384.txt` |
 | G(h) ≥ 2h − 1 for h ≥ 3 | proved by hand by solver B; read by the referee | `solver-b/proofs.txt` P2 |
 | G(1), G(2), G(3) = 1, 2, 5 | computed by all three instances; G(3) also follows from the row above and the list 0, 1, 0, 1, 0 | `reports/` |
@@ -144,7 +155,7 @@ fired are then refilled to one level higher, paid for by spending
 surviving top points as decoys. That costs a factor of 34 per level in the
 proof (about 2.5 on average in the greedy runs; single steps range from 1 to 5, and one last step of a run is 11), which is
 where the logarithm comes from. The constant
-35.2 is not optimised, and the conjecture G(h) = 5h − 10 remains open.
+35.2 is not optimised, and the conjecture G(h) = 5h − 10 remains open. (A third follow-up the same day brought the constant down to 28 and proved the upper bound 5h − 10; see the Results table and `tight/PROOFS.md`.)
 
 ## The small values
 
@@ -165,11 +176,19 @@ h = 4 and h = 5.
 
 - **Everything is by one model family.** Nothing is machine-checked as a
   proof.
+- **The limit 5 no longer rests on one proof.** It now follows from 5h − 28 ≤ G(h) ≤ 5h − 10 as well, though that lower bound uses the same firing rule. The bullet below describes the first version.
 - **The limit rests on one solver's proof.** Solver B did not find it and
   reported the limit as unsettled. The referee's reading and tests support
   solver A's proof, but its program tests cannot reach the regime the proof
   is about (lags of 6 and more never occurred in any test); it tested that regime
   only through a deliberately lazy variant of the rule covered by the same argument. Since 21 November the limit also follows from Corollary U2 in `lag/PROOFS.md`, which uses the same rule and three of solver A's facts and needs readiness only at lags above 3, a regime the tests did reach.
+- **The bounds 5h − 28 and 5h − 10 are hours old and have one author.**
+  The upper bound is a one-page argument. The lower bound has two case
+  analyses (readiness at lag 6/5; the count of far chips for two and four
+  far points) that need careful reading, and a table of ten small cases
+  whose arithmetic a script recomputes. Its tests exercise the first two
+  lemmas only. The instance did not obtain any exact value of G(h) for
+  h ≥ 6; its random search for a winning list of length 5h − 11 at h = 6 and 7, on 3 to 6 neighbouring points, found none, which is weak evidence. Reviewers noted leftovers in its files: a test script's header still says 5h − 32 (an earlier version of the bound); `run_all.sh` mixes paths relative to two different folders and does not record every run; the remark that the readiness threshold 6/5 cannot be lowered should read "a largest lag of 1 is not enough" (lags are multiples of 1/5); and "the constant c" there means the deficit 5h − G(h), which is not known to be the same for every h.
 - **The constant bound has one author and is new.** It was written on 21
   November by a single follow-up instance. The organiser checked each step of
   its two lemmas and the theorem by hand, and it builds only on three facts
@@ -303,12 +322,27 @@ above:
 - An older row said 0.2 to 0.8 per doubling where one step is 0 (GPT).
 
 A second-round reviewer (one Claude instance) then checked the edited page
-against the files. It found the Short answer stale (it did not mention the
-stronger bound for moderate h), one more wrong range for the greedy factor,
-and older sentences not marked as superseded; all applied.
+against the files. It found the Short answer stale (it did not mention the stronger bound for moderate h), one more wrong range for the greedy factor, and older sentences not marked as superseded; all applied.
+
+The bounds 5h − 28 and 5h − 10 went to the same five reviewers. All five
+confirmed the upper-bound proof (the slack equation, its three solutions and
+the three contradictions) and the four lemmas of the lower bound with the
+final count; the table of ten small cases was recomputed by hand by three
+of them. One Claude seat wrote its own brute force for the single-point
+list (5h − 10 for h = 4, …, 9); the other tested the lemmas over 72,113
+exhaustive plays with every tie-break and 12,137 random ones, including
+the form of the top-k lemma that the instance's own test does not cover,
+with no violation. Their findings, applied above: three older lower-bound
+rows were not marked superseded (all five); "2h − 1 is better for h ≤ 9"
+is a tie at 9 (four seats); "the height bound was not exercised" should be
+"asserted and never tight" (GPT, Grok); the random search was described
+too broadly; leftovers in the instance's files. These edits have not been
+reviewed again.
 
 ## Files
 
+- `tight/`: the third follow-up of 21 November (5h − 28 ≤ G(h) ≤ 5h − 10):
+  `PROOFS.md`, a solver for the single-point list, tests and outputs.
 - `lag/`: the second follow-up of 21 November (the lag is logarithmic):
   `PROOFS.md`, the generator of the lists, a separate replay program, tests
   and outputs.

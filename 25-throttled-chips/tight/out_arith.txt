@@ -1,0 +1,26 @@
+j=0 n=7 H_n=2.59286 lam=12/5 e_j=0 2lam-e/5=24/5 = 4.8
+j=1 n=8 H_n=2.71786 lam=13/5 e_j=2 2lam-e/5=24/5 = 4.8
+j=2 n=9 H_n=2.82897 lam=14/5 e_j=4 2lam-e/5=24/5 = 4.8
+j=3 n=10 H_n=2.92897 lam=14/5 e_j=4 2lam-e/5=24/5 = 4.8
+j=4 n=11 H_n=3.01988 lam=3 e_j=6 2lam-e/5=24/5 = 4.8
+j=5 n=12 H_n=3.10321 lam=3 e_j=6 2lam-e/5=24/5 = 4.8
+j=6 n=13 H_n=3.18013 lam=3 e_j=8 2lam-e/5=22/5 = 4.4
+j=7 n=14 H_n=3.25156 lam=16/5 e_j=9 2lam-e/5=23/5 = 4.6
+j=8 n=15 H_n=3.31823 lam=16/5 e_j=10 2lam-e/5=22/5 = 4.4
+j=9 n=16 H_n=3.38073 lam=16/5 e_j=11 2lam-e/5=21/5 = 4.2
+j=10 n=17 H_n=3.43955 lam=17/5 e_j=12 2lam-e/5=22/5 = 4.4
+g(10) = 4.479105045281516
+maximum over j <= 2000: 24/5 at j = 0 ; cap 24/5
+PASS
+exit 0
+== control: cap 23 (must FAIL)
+g(10) = 4.479105045281516
+maximum over j <= 2000: 24/5 at j = 0 ; cap 23/5
+FAIL
+exit 1
+== control: without the special cases j=2, j=4 (must FAIL)
+j=10 n=17 H_n=3.43955 lam=17/5 e_j=12 2lam-e/5=22/5 = 4.4
+g(10) = 4.479105045281516
+maximum over j <= 2000: 5 at j = 2 ; cap 24/5
+FAIL
+exit 1

@@ -1,0 +1,12 @@
+== control --D 5 (must end in VIOLATION, exit 1)
+VIOLATION: (D) max lag5 5 >= 5 but no vertex of that lag is ready, t=3
+exit 1
+== control --c 4 (must end in VIOLATION, exit 1)
+VIOLATION: top-k bound fails: k=1 n=1 S_k=1.0 t=3
+exit 1
+== control --hb 11 (must end in VIOLATION, exit 1)
+VIOLATION: height after round: 5eta - t = 12 > 11 at t=193
+exit 1
+== control --th 15 (must end in VIOLATION, exit 1)
+VIOLATION: top-k bound fails: k=1 n=1 S_k=1.2 t=2
+exit 1

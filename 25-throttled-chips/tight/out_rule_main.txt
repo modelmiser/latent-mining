@@ -1,0 +1,8 @@
+exhaustive windows done {'maxlag': 7, 'exc_r': 10, 'exc_a': 14, 'unready': 5, 'sk': 343598, 'n': 4, 'slack': -8.881784197001252e-16, 'lists': 86180}
+random done {'maxlag': 9, 'exc_r': 12, 'exc_a': 16, 'unready': 5, 'sk': 800578, 'n': 42, 'slack': -8.881784197001252e-16, 'lists': 89180}
+greedy done {'maxlag': 9, 'exc_r': 12, 'exc_a': 16, 'unready': 5, 'sk': 809690, 'n': 42, 'slack': -8.881784197001252e-16, 'lists': 89240}
+lag/list_34_L.txt len 859 maxlag5 9 5eta-t round/add 4 4 n 466 min slack -0.0
+lag/list_34_R.txt len 859 maxlag5 9 5eta-t round/add 4 4 n 466 min slack -0.0
+constant/list_n512.txt len 4656 maxlag5 19 5eta-t round/add 4 4 n 514 min slack 0.4
+PASS  D=6 c=5 th=5 hb=24: lists=89243 max lag5=19 max 5eta-t after round=12 after add=16 largest max-lag5 with no ready top vertex=5 top-k checks=810997 max n=514 min slack of top-k bound=-0.0000
+exit 0

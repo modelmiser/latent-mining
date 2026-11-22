@@ -1,0 +1,12 @@
+h=3  C(h)=7  5h-10=5  (zeros of length 6 lose, of length 7 win; max set 3)
+h=4  C(h)=10  5h-10=10  (zeros of length 9 lose, of length 10 win; max set 6)
+h=5  C(h)=15  5h-10=15  (zeros of length 14 lose, of length 15 win; max set 14)
+h=6  C(h)=20  5h-10=20  (zeros of length 19 lose, of length 20 win; max set 29)
+h=7  C(h)=25  5h-10=25  (zeros of length 24 lose, of length 25 win; max set 57)
+h=8  C(h)=30  5h-10=30  (zeros of length 29 lose, of length 30 win; max set 106)
+h=9  C(h)=35  5h-10=35  (zeros of length 34 lose, of length 35 win; max set 191)
+exit 0
+h=10  C(h)=40  5h-10=40  (zeros of length 39 lose, of length 40 win; max set 321)
+h=11  C(h)=45  5h-10=45  (zeros of length 44 lose, of length 45 win; max set 530)
+h=12  C(h)=50  5h-10=50  (zeros of length 49 lose, of length 50 win; max set 847)
+exit 0
