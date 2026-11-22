@@ -100,7 +100,7 @@ order of expiry costs nothing.
 - **Everything is by one model family.** The upper bounds (7 and 12 bins, and since 21 November 21 bins for k = 5, as a table) are explicit strategies, the first two short enough to follow by hand; the lower bounds (6
   and 11 bins are not enough) are computations.
 - **The general bounds are hours old and have one author.** N(5) ≤ 21
-  does not depend on the hand proof: the table and the 155-line checker suffice, if the checker is right. It treats positions that differ by
+  does not depend on the hand proof: the table and the checker of about 150 lines suffice, if the checker is right. It treats positions that differ by
   renaming bins as the same and untouched bins as interchangeable, which
   its header justifies; it was tested on damaged tables (for the 12-bin table every one of its 101 lines: every deletion and every swapped move rejected, and the 21 accepted altered offers all only rename an untouched bin; for the 21-bin table random samples of 150 lines and 400 offers, with the same outcome) and reproduces N(1), N(2), N(3) through a small
   exhaustive solver that shares its conventions. It was not compared with
