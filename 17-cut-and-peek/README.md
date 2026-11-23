@@ -12,10 +12,12 @@ the literature, is in [NOTE.md](NOTE.md).
 **Short answer.**
 
 - **If every card is turned up, three or more players cannot do it, with any
-  number of cards.** This is proved by hand below. According to an instance
-  that read them, recent papers on these "single-cut full-open" protocols
-  list the three-player case as an open question; the proof here was written
-  by a model and checked by other models, and no person has checked it.
+  number of cards.** This is proved by hand below. Papers of 2025 on these
+  "single-cut full-open" protocols list the three-player case as an open
+  question; it is settled, with stronger results in their one-pair-per-bit
+  model, by Nuida, Shinagawa and Numata (see Prior work below). The proof
+  here was written by a model and checked by other models and in Lean 4; no
+  person has checked it.
 - **If only some cards are turned up, three players can do it with 36
   cards, and not with 15 or fewer.** That some number of cards suffices was
   already known (Eriguchi and Shinagawa, 2025, as read by the same instance);
@@ -23,6 +25,48 @@ the literature, is in [NOTE.md](NOTE.md).
 
 The chain bet that three players can never do it. That is wrong for partial
 opening and right for full opening.
+
+**Prior work (added 23 November 2026).** For protocols that encode each
+input bit by one pair of cards, the impossibility results on this page for
+full opening are contained in stronger results of Koji Nuida, Kazumasa
+Shinagawa and Yasuhide Numata: "Impossibility Results for Single-Cut Full-Open
+Card-Based Protocols with Any Number of Cards", Cryptology ePrint Archive,
+Paper 2026/2960 (https://eprint.iacr.org/2026/2960), posted on 20 November
+2026. According to one of the authors, who wrote to us on 23 November 2026,
+their result for symmetric functions was obtained in January 2026, and it
+includes the cases we had described to them (AND of three or more bits,
+equality of four or more). Their work has priority. This page was written
+before we knew of it and is kept as a record of the experiment; where it says
+that a question is open, or that an answer "would settle" it, read that as
+the state of our knowledge on 19 November.
+
+In their model, their Theorem 1 says that a function of three or more bits
+has no single-cut full-open protocol, with any number of helping cards, as
+soon as some input and three of its neighbours have the same value. That
+hypothesis is weaker than the seven-of-eight hypothesis used here, and their
+functions may have more than two output values. Their proof also shows that
+the words in question cannot be made cyclically equal by inserting helping
+cards, which answers the more specific questions of the 2025 papers as well.
+They then determine, in that model, exactly which symmetric Boolean
+functions, and which Boolean functions depending on all their variables, have
+such a protocol.
+
+How the two relate, as read by AI models from the paper's text and not
+confirmed by its authors. Their protocols encode each input bit by one pair
+of cards; multiple pairs per bit are, in their words, "outside the scope of
+this paper". The definition on this page allows a bit to control any number
+of cards. For those wider encodings the statements here (for functions with a
+seven-of-eight restriction only) are not stated in their paper. Their
+Theorem 1 as stated does not carry over to the definition here: a bit that
+controls no card gives a trivial counterexample (the five-card trick, read as
+a function of four bits). Whether it holds when every bit controls at least
+one card, we have not checked. In their model the hypothesis of the seven-rows statement here (second row of the table under Results)
+(seven rows that are rotations of one word) cannot occur. Their proof of
+Theorem 1 uses polynomials over the two-element field. The proof here uses
+the discrete Fourier transform (evaluation at all m-th roots of unity); their
+paper evaluates at one root of unity for its Theorems 2 and 3. The
+partial-opening results on this page and the Lean 4 formalisation have no
+counterpart there.
 
 ## The protocol
 
@@ -130,21 +174,25 @@ replacing some xᵢ by 1 − xᵢ changes W and the sign of aᵢ and keeps the f
 of the rows. So for any three players and any fixing of the rest, seven rows
 that are rotations of one word force the eighth.
 
-**What this would settle, if the proof and the reading of the papers are
-right.**
+**The 2025 papers' open questions (answered by Nuida, Shinagawa and Numata;
+see Prior work).**
 
 - The conclusion of Shinagawa and Nuida (arXiv:2507.04916) asks: "Is there a
   single-cut full-open protocol for the three-bit AND function?" The answer
-  would be no, in their model and in the wider one here. Their more specific
-  question, whether a certain seven words can be made cyclically equal by
-  inserting helper words, is not answered: the argument only shows that
-  whenever they are, the eighth word is cyclically equal to them too.
+  is no: in their model by Theorem 1 of Nuida, Shinagawa and Numata, and in
+  the wider one, if the proof here is right, by the argument on this page.
+  Their more specific question, whether a certain seven words can be made
+  cyclically equal by inserting helper words, is not answered by the argument
+  here, which only shows that whenever they are, the eighth word is
+  cyclically equal to them too. The proof of that Theorem 1 answers it:
+  already four of the seven words cannot be made cyclically equal.
 - The same conclusion asks the question for four-bit equality. For n-bit
   equality with n ≥ 4, fix x₄ = … = xₙ = 0: among the eight inputs for x₁,
   x₂, x₃ only the all-zero one has all bits equal, so the
   other seven rows must be rotations of one word, the eighth then is too, and
   correctness fails. So no single-cut full-open protocol for n-bit equality
-  with n ≥ 4 would exist either. Three-bit equality is not covered (two of
+  with n ≥ 4 exists either; in the one-pair-per-bit model this is Corollary 2
+  of Nuida, Shinagawa and Numata. Three-bit equality is not covered (two of
   its eight inputs have all bits equal), and a protocol for it is known. This consequence was noticed by the instance
   doing the deep read; it is not in either solver's report and the referee
   did not see it.
@@ -152,7 +200,9 @@ right.**
   by integer programming that
   three-input AND has no such protocol when all helper cards have one colour,
   and state the case of both colours as open. For AND the argument here
-  covers both colours.
+  covers both colours. Theorem 3 of Nuida, Shinagawa and Numata settles, in
+  their model, every three-variable function that depends on all three
+  variables; functions with redundant variables are left open there.
 
 According to the deep read, Eriguchi and Shinagawa do build a full-open
 protocol for n-input AND, but
@@ -191,12 +241,13 @@ of their construction (its strands have no delimiter cards).
   Solver B's own machine test of the statement cannot fail for three players
   (it finds no configuration that satisfies the hypothesis for m ≤ 18); the
   referee's numerical test of the identity over frequencies is a real test.
-- **The claim to answer open questions rests on reading four preprints.**
+- **The account of the 2025 papers' open questions rests on reading four
+  preprints.**
   The deep-read instance read them from the PDF text and quotes the
   definitions; I checked the wording of the open questions in the second
-  paper's text myself. Whether a later paper has already answered them was
-  checked only by web search. The authors of those papers are the people who
-  could say.
+  paper's text myself. They had been answered: one of the authors told us so
+  on 23 November 2026 (see Prior work). The paper's ePrint record is dated
+  20 November, the day after the web search.
 - **The lower bound 16 rests on pruned searches that share a
   normalisation.** The referee's recomputation stops at 13 cards and uses the
   same normalisation as the solvers' programs. An error in it would produce
