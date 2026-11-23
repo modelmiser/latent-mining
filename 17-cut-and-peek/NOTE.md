@@ -3,22 +3,21 @@
 *A short note, produced by AI models and not read by any mathematician; see
 Section 6 and "How this was produced" before relying on it. The main lemma
 and theorem are machine-checked in Lean 4 (Section 6). Draft of 19 November
-2026, revised 21 November. Its main results were obtained earlier, and
+2026, revised 21 November; prior work added 23 November. Its main results were obtained earlier, and
 stronger ones in the one-pair-per-bit model, by Nuida, Shinagawa and Numata
 [8]; see the next paragraph. Supporting files: this folder; overview in
 [README.md](README.md).*
 
 **Prior work (added 23 November 2026).** For protocols that encode each
-input bit by one pair of cards, the impossibility results on this page for
-full opening are contained in stronger results of Koji Nuida, Kazumasa
+input bit by one pair of cards, the impossibility statements on this page
+for full opening (though not the seven-rows lemma, see below) are contained
+in stronger results of Koji Nuida, Kazumasa
 Shinagawa and Yasuhide Numata: "Impossibility Results for Single-Cut Full-Open
 Card-Based Protocols with Any Number of Cards", Cryptology ePrint Archive,
-Paper 2026/2960 (https://eprint.iacr.org/2026/2960) [8], posted on 20 November
-2026. According to one of the authors, who wrote to us on 23 November 2026,
-their result for symmetric functions was obtained in January 2026, and it
-includes the cases we had described to them (AND of three or more bits,
-equality of four or more). Their work has priority. This page was written
-before we knew of it and is kept as a record of the experiment; where it says
+Paper 2026/2960 (https://eprint.iacr.org/2026/2960) [8], dated 20 November
+2026. Its authors have said that their results predate this experiment.
+Their work has priority. This page was written without knowledge of it and
+is kept as a record of the experiment; where it says
 that a question is open, or that an answer "would settle" it, read that as
 the state of our knowledge on 19 November.
 
@@ -26,9 +25,10 @@ In their model, their Theorem 1 says that a function of three or more bits
 has no single-cut full-open protocol, with any number of helping cards, as
 soon as some input and three of its neighbours have the same value. That
 hypothesis is weaker than the seven-of-eight hypothesis used here, and their
-functions may have more than two output values. Their proof also shows that
-the words in question cannot be made cyclically equal by inserting helping
-cards, which answers the more specific questions of the 2025 papers as well.
+functions may have more than two output values. Their proof, as read here,
+also shows that four of the words in question cannot be made cyclically
+equal by inserting helping cards, for any permutation, which answers the
+more specific questions of Shinagawa and Nuida (2025) as well.
 They then determine, in that model, exactly which symmetric Boolean
 functions, and which Boolean functions depending on all their variables, have
 such a protocol.
@@ -36,14 +36,16 @@ such a protocol.
 How the two relate, as read by AI models from the paper's text and not
 confirmed by its authors. Their protocols encode each input bit by one pair
 of cards; multiple pairs per bit are, in their words, "outside the scope of
-this paper". The definition on this page allows a bit to control any number
+this paper". The definition in Section 1 allows a bit to control any number
 of cards. For those wider encodings the statements here (for functions with a
 seven-of-eight restriction only) are not stated in their paper. Their
-Theorem 1 as stated does not carry over to the definition here: a bit that
-controls no card gives a trivial counterexample (the five-card trick, read as
-a function of four bits). Whether it holds when every bit controls at least
-one card, we have not checked. In their model the hypothesis of Lemma 1 here
-(seven rows that are rotations of one word) cannot occur. Their proof of
+Theorem 1 does not extend as stated to the definition of Section 1 and the
+Lean specification, which allow a bit that controls no card: the five-card
+trick, read as a function of three or more bits of which two control cards,
+satisfies their hypothesis (an observation by hand, not machine-checked).
+Whether it extends when every bit controls at least one card, we have not
+checked. In their model the hypothesis of Lemma 1 here (seven rows that are
+rotations of one word) cannot occur. Their proof of
 Theorem 1 uses polynomials over the two-element field. The proof here uses
 the discrete Fourier transform (evaluation at all m-th roots of unity); their
 paper evaluates at one root of unity for its Theorems 2 and 3. The
@@ -59,8 +61,9 @@ trick [1] computes the AND of two bits this way, and the six-card trick
 SCFO protocol for three-bit AND, and whether there is one for four-bit
 equality; Ikeda and Shinagawa [3] show that three-bit AND has none when all
 additional cards have the same colour and leave the case of both colours
-open. Both questions were answered by Nuida, Shinagawa and Numata [8]; see
-Prior work above.
+open. The two questions of [2] were answered by Nuida, Shinagawa and Numata
+[8], as was the question of [3] for functions depending on all three
+variables; see Prior work above.
 
 **Lemma 1.** Let a row of cards, each ♣ or ♥, depend on three input bits in
 such a way that each card is determined by at most one of the bits (precise
@@ -341,7 +344,8 @@ under the condition that all additional cards have the same color"; they
 state that the impossibility of
 SCFO protocols "that use any number of both ♣ and ♥ as additional cards
 remains an open problem". For the class of three-bit AND, Theorem 2 settles
-that case; for the other classes it does not. In the one-pair-per-bit
+that case (as [8] did earlier in the one-pair-per-bit model); for the other
+classes it does not. In the one-pair-per-bit
 model, [8] (Theorem 3 there) settles every three-variable function that
 depends on all three variables.
 

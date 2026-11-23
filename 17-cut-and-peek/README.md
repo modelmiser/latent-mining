@@ -27,16 +27,15 @@ The chain bet that three players can never do it. That is wrong for partial
 opening and right for full opening.
 
 **Prior work (added 23 November 2026).** For protocols that encode each
-input bit by one pair of cards, the impossibility results on this page for
-full opening are contained in stronger results of Koji Nuida, Kazumasa
+input bit by one pair of cards, the impossibility statements on this page
+for full opening (though not the seven-rows lemma, see below) are contained
+in stronger results of Koji Nuida, Kazumasa
 Shinagawa and Yasuhide Numata: "Impossibility Results for Single-Cut Full-Open
 Card-Based Protocols with Any Number of Cards", Cryptology ePrint Archive,
-Paper 2026/2960 (https://eprint.iacr.org/2026/2960), posted on 20 November
-2026. According to one of the authors, who wrote to us on 23 November 2026,
-their result for symmetric functions was obtained in January 2026, and it
-includes the cases we had described to them (AND of three or more bits,
-equality of four or more). Their work has priority. This page was written
-before we knew of it and is kept as a record of the experiment; where it says
+Paper 2026/2960 (https://eprint.iacr.org/2026/2960), dated 20 November
+2026. Its authors have said that their results predate this experiment.
+Their work has priority. This page was written without knowledge of it and
+is kept as a record of the experiment; where it says
 that a question is open, or that an answer "would settle" it, read that as
 the state of our knowledge on 19 November.
 
@@ -44,9 +43,10 @@ In their model, their Theorem 1 says that a function of three or more bits
 has no single-cut full-open protocol, with any number of helping cards, as
 soon as some input and three of its neighbours have the same value. That
 hypothesis is weaker than the seven-of-eight hypothesis used here, and their
-functions may have more than two output values. Their proof also shows that
-the words in question cannot be made cyclically equal by inserting helping
-cards, which answers the more specific questions of the 2025 papers as well.
+functions may have more than two output values. Their proof, as read here,
+also shows that four of the words in question cannot be made cyclically
+equal by inserting helping cards, for any permutation, which answers the
+more specific questions of Shinagawa and Nuida (2025) as well.
 They then determine, in that model, exactly which symmetric Boolean
 functions, and which Boolean functions depending on all their variables, have
 such a protocol.
@@ -54,14 +54,19 @@ such a protocol.
 How the two relate, as read by AI models from the paper's text and not
 confirmed by its authors. Their protocols encode each input bit by one pair
 of cards; multiple pairs per bit are, in their words, "outside the scope of
-this paper". The definition on this page allows a bit to control any number
-of cards. For those wider encodings the statements here (for functions with a
+this paper". The definitions here allow a bit to control any number of
+cards. For those wider encodings the statements here (for functions with a
 seven-of-eight restriction only) are not stated in their paper. Their
-Theorem 1 as stated does not carry over to the definition here: a bit that
-controls no card gives a trivial counterexample (the five-card trick, read as
-a function of four bits). Whether it holds when every bit controls at least
-one card, we have not checked. In their model the hypothesis of the seven-rows statement here (second row of the table under Results)
-(seven rows that are rotations of one word) cannot occur. Their proof of
+Theorem 1 does not extend as stated to the definition of NOTE.md Section 1
+and the Lean specification, which allow a bit that controls no card: the
+five-card trick, read as a function of three or more bits of which two
+control cards, satisfies their hypothesis (an observation by hand, not
+machine-checked). The protocol definition below gives every player a
+position and treats AND only, so this does not arise there; whether their
+theorem extends when every bit has at least one card that changes with it
+has not been checked. In their model the hypothesis of the seven-rows
+statement here (second row of the Results table: seven rows that are
+rotations of one word) cannot occur. Their proof of
 Theorem 1 uses polynomials over the two-element field. The proof here uses
 the discrete Fourier transform (evaluation at all m-th roots of unity); their
 paper evaluates at one root of unity for its Theorems 2 and 3. The
@@ -101,7 +106,7 @@ positions per player and R everything.
 
 | Claim | Status | Where |
 |---|---|---|
-| **f(n) = ∞ for every n ≥ 3:** with all cards revealed there is no valid protocol, for any m | proved by hand by solver B; read by the referee, by the instance that did the deep literature read, and by the organiser, with no gap found; the referee tested the key identity numerically. Solver A did not find it and left f(3) as a conjecture. Machine-checked in Lean 4 since 21 November, in the formulation of NOTE.md Section 1 (rows cyclically equal exactly when the outputs agree), which is equivalent to the one above by a short hand argument | `solver-b/proofs.txt` T2; written out below; `lean/` |
+| **f(n) = ∞ for every n ≥ 3:** with all cards revealed there is no valid protocol, for any m | proved by hand by solver B; read by the referee, by the instance that did the deep literature read, and by the organiser, with no gap found; the referee tested the key identity numerically. Solver A did not find it and left f(3) as a conjecture. Machine-checked in Lean 4 since 21 November, in the formulation of NOTE.md Section 1 (rows cyclically equal exactly when the outputs agree), which is equivalent to the one above by a short hand argument. In the one-pair-per-bit model this was obtained earlier by Nuida, Shinagawa and Numata (see Prior work) | `solver-b/proofs.txt` T2; written out below; `lean/` |
 | If the rows for three players' inputs other than 1, 1, 1 (everything else fixed) are rotations of one word, the row for 1, 1, 1 is a rotation of it too | this is what T2's proof shows | `solver-b/proofs.txt` T2 |
 | The same with any one of the eight inputs in place of 1, 1, 1, and its consequence for the equality function | restatement by the organiser; confirmed by all five seats of the review panel; machine-checked in Lean 4 for any corner, for AND of n ≥ 3 bits and for equality of n ≥ 4 bits | below; `lean/` |
 | r(3) ≤ 36 | an explicit protocol, checked from the definition by solver A's checker and by the referee's own, which also rejected nine broken variants; also machine-checked in Lean 4 against the definition in `lean/CutPeek/PartialSpec.lean` | `solver-a/w_n3_m36.txt`, `lean/CutPeek/PartialMain.lean` |
@@ -202,7 +207,8 @@ see Prior work).**
   and state the case of both colours as open. For AND the argument here
   covers both colours. Theorem 3 of Nuida, Shinagawa and Numata settles, in
   their model, every three-variable function that depends on all three
-  variables; functions with redundant variables are left open there.
+  variables; functions with redundant variables are outside that theorem
+  (their Theorem 1 excludes some of them).
 
 According to the deep read, Eriguchi and Shinagawa do build a full-open
 protocol for n-input AND, but
@@ -245,9 +251,8 @@ of their construction (its strands have no delimiter cards).
   preprints.**
   The deep-read instance read them from the PDF text and quotes the
   definitions; I checked the wording of the open questions in the second
-  paper's text myself. They had been answered: one of the authors told us so
-  on 23 November 2026 (see Prior work). The paper's ePrint record is dated
-  20 November, the day after the web search.
+  paper's text myself. They had been answered (see Prior work). The paper is dated 20 November, the day after
+  the web search; according to its authors the results are older.
 - **The lower bound 16 rests on pruned searches that share a
   normalisation.** The referee's recomputation stops at 13 cards and uses the
   same normalisation as the solvers' programs. An error in it would produce
@@ -302,6 +307,17 @@ counterexample. Their findings on this page, applied above:
 - The weaknesses of the referee's test script (GPT).
 
 The corrected wording has not been through a second round.
+
+The prior-work text of 23 November went to three reviewers from three model
+families (Grok, Composer, Claude) with the paper's text, in two rounds. All
+three confirmed that the paper's Theorem 1 contains the theorem here in the
+one-pair-per-bit model and that wider encodings are outside the paper. Their
+findings, applied: a first draft credited the paper's Theorem 3 with
+functions it excludes; it left standing that the "more specific" question
+was unanswered; "in greater generality" was unqualified; the example against
+extending Theorem 1 does not fit this page's own protocol definition; and
+details of a private email were removed. The final wording has not been
+reviewed again.
 
 The standalone note went to the same five reviewers separately. All five
 confirmed its definitions, its written-out proof of the lemma line by line,
